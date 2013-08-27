@@ -8,14 +8,14 @@ cd OpenChords\
 call build.bat
 cd ..
 
-xcopy  /Y .\OpenChords\bin\OpenChords\App\OpenChords.exe ".\build\OpenChords\App\Bin" 
+xcopy  /Y .\OpenChords\bin\Release\OpenChords\App\OpenChords.exe ".\build\OpenChords\App\Bin" 
 
-xcopy  /Y .\OpenChords\bin\OpenChords\App\*.dll ".\build\OpenChords\App\Bin" 
+xcopy  /Y .\OpenChords\bin\Release\OpenChords\App\*.dll ".\build\OpenChords\App\Bin" 
 
-xcopy  /Y .\OpenChords\bin\OpenChords\App\*.config ".\build\OpenChords\App\Bin" 
+xcopy  /Y .\OpenChords\bin\Release\OpenChords\App\*.config ".\build\OpenChords\App\Bin" 
 
 
-xcopy  /Y .\OpenChords\bin\OpenChords\App\UpgradeScript.bat ".\build\OpenChords\App\Bin" 
+xcopy  /Y .\OpenChords\bin\Release\OpenChords\App\UpgradeScript.bat ".\build\OpenChords\App\Bin" 
 
 xcopy  /Y .\OpenChords\manual\manual.pdf ".\build\OpenChords\App\Bin" 
 
