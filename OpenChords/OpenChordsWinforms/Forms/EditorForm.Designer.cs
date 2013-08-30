@@ -28,8 +28,6 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(EditorForm));
-            this.Icon = Properties.Resources.guitar;
             this.menuStrip1 = new System.Windows.Forms.MenuStrip();
             this.fileToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.newToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -55,9 +53,9 @@
             this.exportAllSetsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.launchOpenSongToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.pdfToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.exportToPDFToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.exportSetToPDFToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
             this.exportSetToPDFToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.exportToPDFToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.fileSyncUtilityToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.helpToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.manualToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -65,49 +63,58 @@
             this.splitMainForm = new System.Windows.Forms.SplitContainer();
             this.panel1 = new System.Windows.Forms.Panel();
             this.splitSetsAndSongs = new System.Windows.Forms.SplitContainer();
-            this.pnlSet = new System.Windows.Forms.Panel();
-            this.imgUp = new System.Windows.Forms.PictureBox();
+            this.splitContainerPresentationSetList = new System.Windows.Forms.SplitContainer();
+            this.grpPresentation = new System.Windows.Forms.GroupBox();
             this.listSet = new System.Windows.Forms.ListBox();
+            this.imgUp = new System.Windows.Forms.PictureBox();
             this.imgDown = new System.Windows.Forms.PictureBox();
-            this.cmboSets = new System.Windows.Forms.ComboBox();
-            this.lblSongCount = new System.Windows.Forms.Label();
             this.BtnPresentSet = new System.Windows.Forms.PictureBox();
             this.BtnClear = new System.Windows.Forms.PictureBox();
+            this.grpSetList = new System.Windows.Forms.GroupBox();
+            this.cmboSets = new System.Windows.Forms.ComboBox();
+            this.lblSongCount = new System.Windows.Forms.Label();
+            this.splitContainerSongListSearchBar = new System.Windows.Forms.SplitContainer();
+            this.grpSongList = new System.Windows.Forms.GroupBox();
             this.listSongs = new System.Windows.Forms.ListBox();
-            this.BtnSearch = new System.Windows.Forms.PictureBox();
+            this.grpSearchBar = new System.Windows.Forms.GroupBox();
             this.txtSearch = new System.Windows.Forms.TextBox();
+            this.BtnSearch = new System.Windows.Forms.PictureBox();
             this.panel2 = new System.Windows.Forms.Panel();
-            this.splitLyricsAndNotes = new System.Windows.Forms.SplitContainer();
-            this.label3 = new System.Windows.Forms.Label();
-            this.txtLyrics = new System.Windows.Forms.RichTextBox();
-            this.label9 = new System.Windows.Forms.Label();
-            this.txtNotes = new System.Windows.Forms.RichTextBox();
-            this.grpSongMeta = new System.Windows.Forms.Panel();
+            this.splitContainerMetaLyrics = new System.Windows.Forms.SplitContainer();
+            this.grpSongMetadata = new System.Windows.Forms.GroupBox();
             this.pnlSharpsFlats = new System.Windows.Forms.Panel();
             this.rdoFlats = new System.Windows.Forms.RadioButton();
             this.rdoSharps = new System.Windows.Forms.RadioButton();
+            this.label1 = new System.Windows.Forms.Label();
             this.panel4 = new System.Windows.Forms.Panel();
             this.txtCapo = new System.Windows.Forms.TextBox();
+            this.txtOrder = new System.Windows.Forms.TextBox();
             this.panel3 = new System.Windows.Forms.Panel();
             this.txtKey = new System.Windows.Forms.TextBox();
+            this.label5 = new System.Windows.Forms.Label();
             this.BtnCapoDown = new System.Windows.Forms.PictureBox();
+            this.label4 = new System.Windows.Forms.Label();
             this.BtnCapoUp = new System.Windows.Forms.PictureBox();
+            this.label6 = new System.Windows.Forms.Label();
             this.BtnTransposeDown = new System.Windows.Forms.PictureBox();
+            this.txtTitle = new System.Windows.Forms.TextBox();
             this.BtnTransposeUp = new System.Windows.Forms.PictureBox();
+            this.txtAuthor = new System.Windows.Forms.TextBox();
             this.BtnFixFormatting = new System.Windows.Forms.PictureBox();
+            this.label2 = new System.Windows.Forms.Label();
             this.btnPlay = new System.Windows.Forms.PictureBox();
+            this.txtRef = new System.Windows.Forms.TextBox();
             this.btnPresentSong = new System.Windows.Forms.PictureBox();
             this.label10 = new System.Windows.Forms.Label();
-            this.txtRef = new System.Windows.Forms.TextBox();
-            this.label2 = new System.Windows.Forms.Label();
-            this.txtAuthor = new System.Windows.Forms.TextBox();
-            this.txtTitle = new System.Windows.Forms.TextBox();
-            this.label1 = new System.Windows.Forms.Label();
-            this.label6 = new System.Windows.Forms.Label();
-            this.label4 = new System.Windows.Forms.Label();
-            this.label5 = new System.Windows.Forms.Label();
-            this.txtOrder = new System.Windows.Forms.TextBox();
+            this.splitLyricsAndNotes = new System.Windows.Forms.SplitContainer();
+            this.grpChordsLyrics = new System.Windows.Forms.GroupBox();
+            this.txtLyrics = new System.Windows.Forms.RichTextBox();
+            this.splitContainerNotesImage = new System.Windows.Forms.SplitContainer();
+            this.grpNotes = new System.Windows.Forms.GroupBox();
+            this.txtNotes = new System.Windows.Forms.RichTextBox();
+            this.grpImage = new System.Windows.Forms.GroupBox();
             this.picBackgroundImage = new System.Windows.Forms.PictureBox();
+            this.splitContainerSetVsButtons = new System.Windows.Forms.SplitContainer();
             this.menuStrip1.SuspendLayout();
             this.splitMainForm.Panel1.SuspendLayout();
             this.splitMainForm.Panel2.SuspendLayout();
@@ -116,17 +123,26 @@
             this.splitSetsAndSongs.Panel1.SuspendLayout();
             this.splitSetsAndSongs.Panel2.SuspendLayout();
             this.splitSetsAndSongs.SuspendLayout();
-            this.pnlSet.SuspendLayout();
+            this.splitContainerPresentationSetList.Panel1.SuspendLayout();
+            this.splitContainerPresentationSetList.Panel2.SuspendLayout();
+            this.splitContainerPresentationSetList.SuspendLayout();
+            this.grpPresentation.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.imgUp)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.imgDown)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.BtnPresentSet)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.BtnClear)).BeginInit();
+            this.grpSetList.SuspendLayout();
+            this.splitContainerSongListSearchBar.Panel1.SuspendLayout();
+            this.splitContainerSongListSearchBar.Panel2.SuspendLayout();
+            this.splitContainerSongListSearchBar.SuspendLayout();
+            this.grpSongList.SuspendLayout();
+            this.grpSearchBar.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.BtnSearch)).BeginInit();
             this.panel2.SuspendLayout();
-            this.splitLyricsAndNotes.Panel1.SuspendLayout();
-            this.splitLyricsAndNotes.Panel2.SuspendLayout();
-            this.splitLyricsAndNotes.SuspendLayout();
-            this.grpSongMeta.SuspendLayout();
+            this.splitContainerMetaLyrics.Panel1.SuspendLayout();
+            this.splitContainerMetaLyrics.Panel2.SuspendLayout();
+            this.splitContainerMetaLyrics.SuspendLayout();
+            this.grpSongMetadata.SuspendLayout();
             this.pnlSharpsFlats.SuspendLayout();
             this.panel4.SuspendLayout();
             this.panel3.SuspendLayout();
@@ -137,6 +153,19 @@
             ((System.ComponentModel.ISupportInitialize)(this.BtnFixFormatting)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.btnPlay)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.btnPresentSong)).BeginInit();
+            this.splitLyricsAndNotes.Panel1.SuspendLayout();
+            this.splitLyricsAndNotes.Panel2.SuspendLayout();
+            this.splitLyricsAndNotes.SuspendLayout();
+            this.grpChordsLyrics.SuspendLayout();
+            this.splitContainerNotesImage.Panel1.SuspendLayout();
+            this.splitContainerNotesImage.Panel2.SuspendLayout();
+            this.splitContainerNotesImage.SuspendLayout();
+            this.grpNotes.SuspendLayout();
+            this.grpImage.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.picBackgroundImage)).BeginInit();
+            this.splitContainerSetVsButtons.Panel1.SuspendLayout();
+            this.splitContainerSetVsButtons.Panel2.SuspendLayout();
+            this.splitContainerSetVsButtons.SuspendLayout();
             this.SuspendLayout();
             // 
             // menuStrip1
@@ -169,7 +198,6 @@
             // 
             // newToolStripMenuItem
             // 
-            this.newToolStripMenuItem.Image = Properties.Resources.New;
             this.newToolStripMenuItem.Name = "newToolStripMenuItem";
             this.newToolStripMenuItem.ShortcutKeyDisplayString = "Ctrl+N";
             this.newToolStripMenuItem.Size = new System.Drawing.Size(168, 22);
@@ -178,7 +206,6 @@
             // 
             // exploreToolStripMenuItem
             // 
-            this.exploreToolStripMenuItem.Image = Properties.Resources.Explore;
             this.exploreToolStripMenuItem.Name = "exploreToolStripMenuItem";
             this.exploreToolStripMenuItem.Size = new System.Drawing.Size(168, 22);
             this.exploreToolStripMenuItem.Text = "Explore";
@@ -186,7 +213,6 @@
             // 
             // refreshToolStripMenuItem
             // 
-            this.refreshToolStripMenuItem.Image = Properties.Resources.Reload;
             this.refreshToolStripMenuItem.Name = "refreshToolStripMenuItem";
             this.refreshToolStripMenuItem.ShortcutKeyDisplayString = "F5";
             this.refreshToolStripMenuItem.Size = new System.Drawing.Size(168, 22);
@@ -195,7 +221,6 @@
             // 
             // saveToolStripMenuItem
             // 
-            this.saveToolStripMenuItem.Image = Properties.Resources.Save;
             this.saveToolStripMenuItem.Name = "saveToolStripMenuItem";
             this.saveToolStripMenuItem.ShortcutKeyDisplayString = "Ctrl+S";
             this.saveToolStripMenuItem.Size = new System.Drawing.Size(168, 22);
@@ -204,7 +229,6 @@
             // 
             // deleteToolStripMenuItem
             // 
-            this.deleteToolStripMenuItem.Image = Properties.Resources.Delete;
             this.deleteToolStripMenuItem.Name = "deleteToolStripMenuItem";
             this.deleteToolStripMenuItem.Size = new System.Drawing.Size(168, 22);
             this.deleteToolStripMenuItem.Text = "Delete Song";
@@ -212,7 +236,6 @@
             // 
             // revertToSavedToolStripMenuItem
             // 
-            this.revertToSavedToolStripMenuItem.Image = Properties.Resources.Revert;
             this.revertToSavedToolStripMenuItem.Name = "revertToSavedToolStripMenuItem";
             this.revertToSavedToolStripMenuItem.Size = new System.Drawing.Size(168, 22);
             this.revertToSavedToolStripMenuItem.Text = "Revert to saved";
@@ -220,7 +243,6 @@
             // 
             // exitToolStripMenuItem
             // 
-            this.exitToolStripMenuItem.Image = Properties.Resources.Exit;
             this.exitToolStripMenuItem.Name = "exitToolStripMenuItem";
             this.exitToolStripMenuItem.ShortcutKeyDisplayString = "Alt+F4";
             this.exitToolStripMenuItem.Size = new System.Drawing.Size(168, 22);
@@ -262,7 +284,6 @@
             // 
             // FixFormatingtoolStripMenuItem
             // 
-            this.FixFormatingtoolStripMenuItem.Image = Properties.Resources.Repair;
             this.FixFormatingtoolStripMenuItem.Name = "FixFormatingtoolStripMenuItem";
             this.FixFormatingtoolStripMenuItem.ShortcutKeyDisplayString = "Ctrl+F";
             this.FixFormatingtoolStripMenuItem.Size = new System.Drawing.Size(190, 22);
@@ -271,7 +292,6 @@
             // 
             // preferencesToolStripMenuItem
             // 
-            this.preferencesToolStripMenuItem.Image = Properties.Resources.Settings;
             this.preferencesToolStripMenuItem.Name = "preferencesToolStripMenuItem";
             this.preferencesToolStripMenuItem.Size = new System.Drawing.Size(190, 22);
             this.preferencesToolStripMenuItem.Text = "Preferences";
@@ -288,7 +308,6 @@
             // 
             // presentSongToolStripMenuItem
             // 
-            this.presentSongToolStripMenuItem.Image = Properties.Resources.PresentSong;
             this.presentSongToolStripMenuItem.Name = "presentSongToolStripMenuItem";
             this.presentSongToolStripMenuItem.ShortcutKeyDisplayString = "F11";
             this.presentSongToolStripMenuItem.Size = new System.Drawing.Size(167, 22);
@@ -297,7 +316,6 @@
             // 
             // presentSetToolStripMenuItem
             // 
-            this.presentSetToolStripMenuItem.Image = Properties.Resources.Present;
             this.presentSetToolStripMenuItem.Name = "presentSetToolStripMenuItem";
             this.presentSetToolStripMenuItem.ShortcutKeyDisplayString = "F12";
             this.presentSetToolStripMenuItem.Size = new System.Drawing.Size(167, 22);
@@ -321,7 +339,6 @@
             this.exportAllSongsToolStripMenuItem,
             this.exportAllSetsToolStripMenuItem,
             this.launchOpenSongToolStripMenuItem});
-            this.openSongToolStripMenuItem.Image = Properties.Resources.OpenSong;
             this.openSongToolStripMenuItem.Name = "openSongToolStripMenuItem";
             this.openSongToolStripMenuItem.ShortcutKeyDisplayString = "";
             this.openSongToolStripMenuItem.Size = new System.Drawing.Size(154, 22);
@@ -353,7 +370,7 @@
             // launchOpenSongToolStripMenuItem
             // 
             this.launchOpenSongToolStripMenuItem.Name = "launchOpenSongToolStripMenuItem";
-            this.launchOpenSongToolStripMenuItem.Size = new System.Drawing.Size(288, 22);
+            this.launchOpenSongToolStripMenuItem.Size = new System.Drawing.Size(282, 22);
             this.launchOpenSongToolStripMenuItem.Text = "Launch OpenSong";
             this.launchOpenSongToolStripMenuItem.Click += new System.EventHandler(this.launchOpenSongToolStripMenuItem_Click);
             // 
@@ -363,10 +380,17 @@
             this.exportToPDFToolStripMenuItem,
             this.exportSetToPDFToolStripMenuItem1,
             this.exportSetToPDFToolStripMenuItem});
-            this.pdfToolStripMenuItem.Image = Properties.Resources.pdf;
             this.pdfToolStripMenuItem.Name = "pdfToolStripMenuItem";
             this.pdfToolStripMenuItem.Size = new System.Drawing.Size(154, 22);
             this.pdfToolStripMenuItem.Text = "PDF";
+            // 
+            // exportToPDFToolStripMenuItem
+            // 
+            this.exportToPDFToolStripMenuItem.Name = "exportToPDFToolStripMenuItem";
+            this.exportToPDFToolStripMenuItem.ShortcutKeyDisplayString = "Ctrl+P";
+            this.exportToPDFToolStripMenuItem.Size = new System.Drawing.Size(289, 22);
+            this.exportToPDFToolStripMenuItem.Text = "Export current song to PDF";
+            this.exportToPDFToolStripMenuItem.Click += new System.EventHandler(this.BtnPdfExportClick);
             // 
             // exportSetToPDFToolStripMenuItem1
             // 
@@ -383,17 +407,8 @@
             this.exportSetToPDFToolStripMenuItem.Text = "Export current set to tablet PDF";
             this.exportSetToPDFToolStripMenuItem.Click += new System.EventHandler(this.exportSetToPDFToolStripMenuItem_Click);
             // 
-            // exportToPDFToolStripMenuItem
-            // 
-            this.exportToPDFToolStripMenuItem.Name = "exportToPDFToolStripMenuItem";
-            this.exportToPDFToolStripMenuItem.ShortcutKeyDisplayString = "Ctrl+P";
-            this.exportToPDFToolStripMenuItem.Size = new System.Drawing.Size(289, 22);
-            this.exportToPDFToolStripMenuItem.Text = "Export current song to PDF";
-            this.exportToPDFToolStripMenuItem.Click += new System.EventHandler(this.BtnPdfExportClick);
-            // 
             // fileSyncUtilityToolStripMenuItem
             // 
-            this.fileSyncUtilityToolStripMenuItem.Image = Properties.Resources.Sync;
             this.fileSyncUtilityToolStripMenuItem.Name = "fileSyncUtilityToolStripMenuItem";
             this.fileSyncUtilityToolStripMenuItem.Size = new System.Drawing.Size(154, 22);
             this.fileSyncUtilityToolStripMenuItem.Text = "File Sync Utility";
@@ -410,7 +425,6 @@
             // 
             // manualToolStripMenuItem
             // 
-            this.manualToolStripMenuItem.Image = Properties.Resources.Help;
             this.manualToolStripMenuItem.Name = "manualToolStripMenuItem";
             this.manualToolStripMenuItem.Size = new System.Drawing.Size(177, 22);
             this.manualToolStripMenuItem.Text = "Manual";
@@ -418,7 +432,6 @@
             // 
             // aboutOpenChordsToolStripMenuItem
             // 
-            this.aboutOpenChordsToolStripMenuItem.Image = Properties.Resources.About;
             this.aboutOpenChordsToolStripMenuItem.Name = "aboutOpenChordsToolStripMenuItem";
             this.aboutOpenChordsToolStripMenuItem.Size = new System.Drawing.Size(177, 22);
             this.aboutOpenChordsToolStripMenuItem.Text = "About OpenChords";
@@ -455,8 +468,6 @@
             this.panel1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(53)))), ((int)(((byte)(76)))), ((int)(((byte)(103)))));
             this.panel1.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
             this.panel1.Controls.Add(this.splitSetsAndSongs);
-            this.panel1.Controls.Add(this.BtnSearch);
-            this.panel1.Controls.Add(this.txtSearch);
             this.panel1.ForeColor = System.Drawing.SystemColors.ControlText;
             this.panel1.Location = new System.Drawing.Point(0, 0);
             this.panel1.Name = "panel1";
@@ -465,9 +476,8 @@
             // 
             // splitSetsAndSongs
             // 
-            this.splitSetsAndSongs.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
+            this.splitSetsAndSongs.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.splitSetsAndSongs.FixedPanel = System.Windows.Forms.FixedPanel.Panel1;
             this.splitSetsAndSongs.Location = new System.Drawing.Point(0, 0);
             this.splitSetsAndSongs.Margin = new System.Windows.Forms.Padding(0);
             this.splitSetsAndSongs.Name = "splitSetsAndSongs";
@@ -475,76 +485,120 @@
             // 
             // splitSetsAndSongs.Panel1
             // 
-            this.splitSetsAndSongs.Panel1.Controls.Add(this.pnlSet);
-            this.splitSetsAndSongs.Panel1MinSize = 155;
+            this.splitSetsAndSongs.Panel1.Controls.Add(this.splitContainerPresentationSetList);
+            this.splitSetsAndSongs.Panel1MinSize = 179;
             // 
             // splitSetsAndSongs.Panel2
             // 
-            this.splitSetsAndSongs.Panel2.Controls.Add(this.listSongs);
+            this.splitSetsAndSongs.Panel2.Controls.Add(this.splitContainerSongListSearchBar);
             this.splitSetsAndSongs.Panel2.Padding = new System.Windows.Forms.Padding(3, 0, 0, 0);
-            this.splitSetsAndSongs.Size = new System.Drawing.Size(210, 673);
-            this.splitSetsAndSongs.SplitterDistance = 155;
+            this.splitSetsAndSongs.Size = new System.Drawing.Size(213, 706);
+            this.splitSetsAndSongs.SplitterDistance = 179;
             this.splitSetsAndSongs.TabIndex = 5;
             this.splitSetsAndSongs.TabStop = false;
             // 
-            // pnlSet
+            // splitContainerPresentationSetList
             // 
-            this.pnlSet.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.pnlSet.Controls.Add(this.imgUp);
-            this.pnlSet.Controls.Add(this.listSet);
-            this.pnlSet.Controls.Add(this.imgDown);
-            this.pnlSet.Controls.Add(this.cmboSets);
-            this.pnlSet.Controls.Add(this.lblSongCount);
-            this.pnlSet.Controls.Add(this.BtnPresentSet);
-            this.pnlSet.Controls.Add(this.BtnClear);
-            this.pnlSet.ForeColor = System.Drawing.Color.White;
-            this.pnlSet.Location = new System.Drawing.Point(0, 0);
-            this.pnlSet.Name = "pnlSet";
-            this.pnlSet.Size = new System.Drawing.Size(210, 155);
-            this.pnlSet.TabIndex = 23;
-            this.pnlSet.Text = "Set";
+            this.splitContainerPresentationSetList.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.splitContainerPresentationSetList.FixedPanel = System.Windows.Forms.FixedPanel.Panel2;
+            this.splitContainerPresentationSetList.IsSplitterFixed = true;
+            this.splitContainerPresentationSetList.Location = new System.Drawing.Point(0, 0);
+            this.splitContainerPresentationSetList.Name = "splitContainerPresentationSetList";
+            this.splitContainerPresentationSetList.Orientation = System.Windows.Forms.Orientation.Horizontal;
+            // 
+            // splitContainerPresentationSetList.Panel1
+            // 
+            this.splitContainerPresentationSetList.Panel1.Controls.Add(this.grpPresentation);
+            // 
+            // splitContainerPresentationSetList.Panel2
+            // 
+            this.splitContainerPresentationSetList.Panel2.Controls.Add(this.grpSetList);
+            this.splitContainerPresentationSetList.Size = new System.Drawing.Size(213, 179);
+            this.splitContainerPresentationSetList.SplitterDistance = 138;
+            this.splitContainerPresentationSetList.SplitterWidth = 1;
+            this.splitContainerPresentationSetList.TabIndex = 23;
+            // 
+            // grpPresentation
+            // 
+            this.grpPresentation.Controls.Add(this.splitContainerSetVsButtons);
+            this.grpPresentation.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.grpPresentation.ForeColor = System.Drawing.Color.White;
+            this.grpPresentation.Location = new System.Drawing.Point(0, 0);
+            this.grpPresentation.Name = "grpPresentation";
+            this.grpPresentation.Size = new System.Drawing.Size(213, 138);
+            this.grpPresentation.TabIndex = 0;
+            this.grpPresentation.TabStop = false;
+            this.grpPresentation.Text = "Song Presentation";
+            // 
+            // listSet
+            // 
+            this.listSet.BackColor = System.Drawing.Color.White;
+            this.listSet.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.listSet.Font = new System.Drawing.Font("Lucida Console", 12F);
+            this.listSet.ForeColor = System.Drawing.Color.Black;
+            this.listSet.FormattingEnabled = true;
+            this.listSet.ItemHeight = 16;
+            this.listSet.Location = new System.Drawing.Point(0, 0);
+            this.listSet.Margin = new System.Windows.Forms.Padding(0);
+            this.listSet.Name = "listSet";
+            this.listSet.Size = new System.Drawing.Size(171, 119);
+            this.listSet.TabIndex = 0;
+            this.listSet.SelectedIndexChanged += new System.EventHandler(this.ListSetSelectedIndexChanged);
+            this.listSet.KeyUp += new System.Windows.Forms.KeyEventHandler(this.ListSetKeyUp);
             // 
             // imgUp
             // 
             this.imgUp.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.imgUp.Image = Properties.Resources.Up;
-            this.imgUp.Location = new System.Drawing.Point(179, 3);
+            this.imgUp.Location = new System.Drawing.Point(12, 3);
             this.imgUp.Name = "imgUp";
             this.imgUp.Size = new System.Drawing.Size(16, 16);
             this.imgUp.TabIndex = 22;
             this.imgUp.TabStop = false;
             this.imgUp.Click += new System.EventHandler(this.BtnMoveUpClick);
             // 
-            // listSet
-            // 
-            this.listSet.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.listSet.BackColor = System.Drawing.Color.White;
-            this.listSet.Font = new System.Drawing.Font("Lucida Console", 12F);
-            this.listSet.ForeColor = System.Drawing.Color.Black;
-            this.listSet.FormattingEnabled = true;
-            this.listSet.ItemHeight = 16;
-            this.listSet.Location = new System.Drawing.Point(3, 3);
-            this.listSet.Margin = new System.Windows.Forms.Padding(0);
-            this.listSet.Name = "listSet";
-            this.listSet.Size = new System.Drawing.Size(174, 116);
-            this.listSet.TabIndex = 0;
-            this.listSet.SelectedIndexChanged += new System.EventHandler(this.ListSetSelectedIndexChanged);
-            this.listSet.KeyUp += new System.Windows.Forms.KeyEventHandler(this.ListSetKeyUp);
-            // 
             // imgDown
             // 
             this.imgDown.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.imgDown.Image = Properties.Resources.Down;
-            this.imgDown.Location = new System.Drawing.Point(179, 104);
+            this.imgDown.Location = new System.Drawing.Point(12, 95);
             this.imgDown.Name = "imgDown";
             this.imgDown.Size = new System.Drawing.Size(16, 16);
             this.imgDown.TabIndex = 18;
             this.imgDown.TabStop = false;
             this.imgDown.Click += new System.EventHandler(this.BtnMoveDownClick);
+            // 
+            // BtnPresentSet
+            // 
+            this.BtnPresentSet.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.BtnPresentSet.Location = new System.Drawing.Point(-2, 60);
+            this.BtnPresentSet.Name = "BtnPresentSet";
+            this.BtnPresentSet.Size = new System.Drawing.Size(32, 32);
+            this.BtnPresentSet.TabIndex = 8;
+            this.BtnPresentSet.TabStop = false;
+            this.BtnPresentSet.Click += new System.EventHandler(this.BtnPresentSetClick);
+            // 
+            // BtnClear
+            // 
+            this.BtnClear.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.BtnClear.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
+            this.BtnClear.Location = new System.Drawing.Point(-2, 22);
+            this.BtnClear.Name = "BtnClear";
+            this.BtnClear.Size = new System.Drawing.Size(32, 32);
+            this.BtnClear.TabIndex = 7;
+            this.BtnClear.TabStop = false;
+            this.BtnClear.Click += new System.EventHandler(this.BtnClearClick);
+            // 
+            // grpSetList
+            // 
+            this.grpSetList.Controls.Add(this.cmboSets);
+            this.grpSetList.Controls.Add(this.lblSongCount);
+            this.grpSetList.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.grpSetList.ForeColor = System.Drawing.Color.White;
+            this.grpSetList.Location = new System.Drawing.Point(0, 0);
+            this.grpSetList.Name = "grpSetList";
+            this.grpSetList.Size = new System.Drawing.Size(213, 40);
+            this.grpSetList.TabIndex = 0;
+            this.grpSetList.TabStop = false;
+            this.grpSetList.Text = "Set List";
             // 
             // cmboSets
             // 
@@ -556,9 +610,9 @@
             this.cmboSets.Font = new System.Drawing.Font("Lucida Console", 8.25F);
             this.cmboSets.ForeColor = System.Drawing.Color.Black;
             this.cmboSets.FormattingEnabled = true;
-            this.cmboSets.Location = new System.Drawing.Point(3, 136);
+            this.cmboSets.Location = new System.Drawing.Point(3, 18);
             this.cmboSets.Name = "cmboSets";
-            this.cmboSets.Size = new System.Drawing.Size(174, 19);
+            this.cmboSets.Size = new System.Drawing.Size(180, 19);
             this.cmboSets.Sorted = true;
             this.cmboSets.TabIndex = 1;
             this.cmboSets.TabStop = false;
@@ -569,64 +623,74 @@
             // 
             this.lblSongCount.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.lblSongCount.ForeColor = System.Drawing.Color.White;
-            this.lblSongCount.Location = new System.Drawing.Point(187, 134);
+            this.lblSongCount.Location = new System.Drawing.Point(186, 15);
             this.lblSongCount.Name = "lblSongCount";
             this.lblSongCount.Size = new System.Drawing.Size(25, 22);
             this.lblSongCount.TabIndex = 4;
             this.lblSongCount.Text = "[*]";
             this.lblSongCount.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             // 
-            // BtnPresentSet
+            // splitContainerSongListSearchBar
             // 
-            this.BtnPresentSet.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.BtnPresentSet.Image = Properties.Resources.Present;
-            this.BtnPresentSet.Location = new System.Drawing.Point(179, 69);
-            this.BtnPresentSet.Name = "BtnPresentSet";
-            this.BtnPresentSet.Size = new System.Drawing.Size(32, 32);
-            this.BtnPresentSet.TabIndex = 8;
-            this.BtnPresentSet.TabStop = false;
-            this.BtnPresentSet.Click += new System.EventHandler(this.BtnPresentSetClick);
+            this.splitContainerSongListSearchBar.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.splitContainerSongListSearchBar.FixedPanel = System.Windows.Forms.FixedPanel.Panel2;
+            this.splitContainerSongListSearchBar.IsSplitterFixed = true;
+            this.splitContainerSongListSearchBar.Location = new System.Drawing.Point(3, 0);
+            this.splitContainerSongListSearchBar.Name = "splitContainerSongListSearchBar";
+            this.splitContainerSongListSearchBar.Orientation = System.Windows.Forms.Orientation.Horizontal;
             // 
-            // BtnClear
+            // splitContainerSongListSearchBar.Panel1
             // 
-            this.BtnClear.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.BtnClear.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
-            this.BtnClear.Image = Properties.Resources.Delete;
-            this.BtnClear.Location = new System.Drawing.Point(179, 28);
-            this.BtnClear.Name = "BtnClear";
-            this.BtnClear.Size = new System.Drawing.Size(32, 32);
-            this.BtnClear.TabIndex = 7;
-            this.BtnClear.TabStop = false;
-            this.BtnClear.Click += new System.EventHandler(this.BtnClearClick);
+            this.splitContainerSongListSearchBar.Panel1.Controls.Add(this.grpSongList);
+            // 
+            // splitContainerSongListSearchBar.Panel2
+            // 
+            this.splitContainerSongListSearchBar.Panel2.Controls.Add(this.grpSearchBar);
+            this.splitContainerSongListSearchBar.Size = new System.Drawing.Size(210, 523);
+            this.splitContainerSongListSearchBar.SplitterDistance = 470;
+            this.splitContainerSongListSearchBar.TabIndex = 2;
+            // 
+            // grpSongList
+            // 
+            this.grpSongList.Controls.Add(this.listSongs);
+            this.grpSongList.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.grpSongList.ForeColor = System.Drawing.Color.White;
+            this.grpSongList.Location = new System.Drawing.Point(0, 0);
+            this.grpSongList.Name = "grpSongList";
+            this.grpSongList.Size = new System.Drawing.Size(210, 470);
+            this.grpSongList.TabIndex = 3;
+            this.grpSongList.TabStop = false;
+            this.grpSongList.Text = "Song List";
             // 
             // listSongs
             // 
-            this.listSongs.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
             this.listSongs.BackColor = System.Drawing.Color.White;
+            this.listSongs.Dock = System.Windows.Forms.DockStyle.Fill;
             this.listSongs.Font = new System.Drawing.Font("Microsoft Sans Serif", 8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.listSongs.ForeColor = System.Drawing.Color.Black;
-            this.listSongs.Location = new System.Drawing.Point(3, 0);
+            this.listSongs.Location = new System.Drawing.Point(3, 16);
+            this.listSongs.Margin = new System.Windows.Forms.Padding(3, 3, 3, 0);
             this.listSongs.Name = "listSongs";
             this.listSongs.ScrollAlwaysVisible = true;
-            this.listSongs.Size = new System.Drawing.Size(207, 511);
+            this.listSongs.Size = new System.Drawing.Size(204, 451);
             this.listSongs.Sorted = true;
             this.listSongs.TabIndex = 1;
             this.listSongs.SelectedIndexChanged += new System.EventHandler(this.ListSongsSelectedIndexChanged);
             this.listSongs.DoubleClick += new System.EventHandler(this.ListSongsDoubleClick);
             this.listSongs.KeyUp += new System.Windows.Forms.KeyEventHandler(this.ListSongsKeyUp);
             // 
-            // BtnSearch
+            // grpSearchBar
             // 
-            this.BtnSearch.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.BtnSearch.Image = Properties.Resources.Search;
-            this.BtnSearch.Location = new System.Drawing.Point(183, 676);
-            this.BtnSearch.Name = "BtnSearch";
-            this.BtnSearch.Size = new System.Drawing.Size(29, 30);
-            this.BtnSearch.TabIndex = 9;
-            this.BtnSearch.TabStop = false;
-            this.BtnSearch.Click += new System.EventHandler(this.BtnSearchClick);
+            this.grpSearchBar.Controls.Add(this.txtSearch);
+            this.grpSearchBar.Controls.Add(this.BtnSearch);
+            this.grpSearchBar.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.grpSearchBar.ForeColor = System.Drawing.Color.White;
+            this.grpSearchBar.Location = new System.Drawing.Point(0, 0);
+            this.grpSearchBar.Name = "grpSearchBar";
+            this.grpSearchBar.Size = new System.Drawing.Size(210, 49);
+            this.grpSearchBar.TabIndex = 3;
+            this.grpSearchBar.TabStop = false;
+            this.grpSearchBar.Text = "Search Bar";
             // 
             // txtSearch
             // 
@@ -634,13 +698,23 @@
             | System.Windows.Forms.AnchorStyles.Right)));
             this.txtSearch.BackColor = System.Drawing.Color.White;
             this.txtSearch.Font = new System.Drawing.Font("Courier New", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtSearch.Location = new System.Drawing.Point(3, 676);
+            this.txtSearch.Location = new System.Drawing.Point(8, 17);
             this.txtSearch.Name = "txtSearch";
-            this.txtSearch.Size = new System.Drawing.Size(174, 26);
+            this.txtSearch.Size = new System.Drawing.Size(163, 26);
             this.txtSearch.TabIndex = 2;
             this.txtSearch.TextChanged += new System.EventHandler(this.txtSearchTextChanged);
             this.txtSearch.Enter += new System.EventHandler(this.TxtSearchClick);
             this.txtSearch.KeyUp += new System.Windows.Forms.KeyEventHandler(this.TxtSearchEnterPressed);
+            // 
+            // BtnSearch
+            // 
+            this.BtnSearch.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.BtnSearch.Location = new System.Drawing.Point(175, 13);
+            this.BtnSearch.Name = "BtnSearch";
+            this.BtnSearch.Size = new System.Drawing.Size(29, 30);
+            this.BtnSearch.TabIndex = 9;
+            this.BtnSearch.TabStop = false;
+            this.BtnSearch.Click += new System.EventHandler(this.BtnSearchClick);
             // 
             // panel2
             // 
@@ -649,150 +723,70 @@
             | System.Windows.Forms.AnchorStyles.Right)));
             this.panel2.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(53)))), ((int)(((byte)(76)))), ((int)(((byte)(103)))));
             this.panel2.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
-            this.panel2.Controls.Add(this.splitLyricsAndNotes);
-            this.panel2.Controls.Add(this.grpSongMeta);
+            this.panel2.Controls.Add(this.splitContainerMetaLyrics);
             this.panel2.ForeColor = System.Drawing.Color.White;
             this.panel2.Location = new System.Drawing.Point(0, 0);
             this.panel2.Name = "panel2";
             this.panel2.Size = new System.Drawing.Size(791, 706);
             this.panel2.TabIndex = 3;
             // 
-            // splitLyricsAndNotes
+            // splitContainerMetaLyrics
             // 
-            this.splitLyricsAndNotes.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.splitLyricsAndNotes.Location = new System.Drawing.Point(-3, 140);
-            this.splitLyricsAndNotes.Name = "splitLyricsAndNotes";
+            this.splitContainerMetaLyrics.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.splitContainerMetaLyrics.FixedPanel = System.Windows.Forms.FixedPanel.Panel1;
+            this.splitContainerMetaLyrics.IsSplitterFixed = true;
+            this.splitContainerMetaLyrics.Location = new System.Drawing.Point(0, 0);
+            this.splitContainerMetaLyrics.Name = "splitContainerMetaLyrics";
+            this.splitContainerMetaLyrics.Orientation = System.Windows.Forms.Orientation.Horizontal;
             // 
-            // splitLyricsAndNotes.Panel1
+            // splitContainerMetaLyrics.Panel1
             // 
-            this.splitLyricsAndNotes.Panel1.Controls.Add(this.label3);
-            this.splitLyricsAndNotes.Panel1.Controls.Add(this.txtLyrics);
+            this.splitContainerMetaLyrics.Panel1.Controls.Add(this.grpSongMetadata);
             // 
-            // splitLyricsAndNotes.Panel2
+            // splitContainerMetaLyrics.Panel2
             // 
-            this.splitLyricsAndNotes.Panel2.Controls.Add(this.label9);
-            this.splitLyricsAndNotes.Panel2.Controls.Add(this.txtNotes);
-            this.splitLyricsAndNotes.Panel2.Controls.Add(this.picBackgroundImage);
-            this.splitLyricsAndNotes.Size = new System.Drawing.Size(794, 566);
-            this.splitLyricsAndNotes.SplitterDistance = 671;
-            this.splitLyricsAndNotes.TabIndex = 5;
-            this.splitLyricsAndNotes.TabStop = false;
+            this.splitContainerMetaLyrics.Panel2.Controls.Add(this.splitLyricsAndNotes);
+            this.splitContainerMetaLyrics.Size = new System.Drawing.Size(791, 706);
+            this.splitContainerMetaLyrics.SplitterDistance = 141;
+            this.splitContainerMetaLyrics.SplitterWidth = 1;
+            this.splitContainerMetaLyrics.TabIndex = 22;
             // 
-            // label3
+            // grpSongMetadata
             // 
-            this.label3.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.label3.AutoSize = true;
-            this.label3.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(53)))), ((int)(((byte)(76)))), ((int)(((byte)(103)))));
-            this.label3.Font = new System.Drawing.Font("Comic Sans MS", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label3.Location = new System.Drawing.Point(3, 1);
-            this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(80, 15);
-            this.label3.TabIndex = 4;
-            this.label3.Text = "Chords/Lyrics";
-            // 
-            // txtLyrics
-            // 
-            this.txtLyrics.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.txtLyrics.BackColor = System.Drawing.Color.White;
-            this.txtLyrics.Font = new System.Drawing.Font("Courier New", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtLyrics.ForeColor = System.Drawing.Color.Black;
-            this.txtLyrics.Location = new System.Drawing.Point(6, 18);
-            this.txtLyrics.Name = "txtLyrics";
-            this.txtLyrics.Size = new System.Drawing.Size(662, 544);
-            this.txtLyrics.TabIndex = 2;
-            this.txtLyrics.Text = "";
-            this.txtLyrics.WordWrap = false;
-            this.txtLyrics.TextChanged += new System.EventHandler(this.TextFieldTextChanged);
-            this.txtLyrics.KeyUp += new System.Windows.Forms.KeyEventHandler(this.TextFieldKeyUp);
-            this.txtLyrics.Leave += new System.EventHandler(this.txtLyrics_Leave);
-            // 
-            // label9
-            // 
-            this.label9.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.label9.AutoSize = true;
-            this.label9.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(53)))), ((int)(((byte)(76)))), ((int)(((byte)(103)))));
-            this.label9.Font = new System.Drawing.Font("Comic Sans MS", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label9.Location = new System.Drawing.Point(3, 1);
-            this.label9.Name = "label9";
-            this.label9.Size = new System.Drawing.Size(37, 15);
-            this.label9.TabIndex = 4;
-            this.label9.Text = "Notes";
-            // 
-            // txtNotes
-            // 
-            this.txtNotes.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.txtNotes.BackColor = System.Drawing.Color.White;
-            this.txtNotes.Font = new System.Drawing.Font("Courier New", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtNotes.ForeColor = System.Drawing.Color.Black;
-            this.txtNotes.Location = new System.Drawing.Point(6, 18);
-            this.txtNotes.Name = "txtNotes";
-            this.txtNotes.Size = new System.Drawing.Size(110, 345);
-            this.txtNotes.TabIndex = 3;
-            this.txtNotes.Text = "";
-            this.txtNotes.WordWrap = false;
-            this.txtNotes.TextChanged += new System.EventHandler(this.TextFieldTextChanged);
-            this.txtNotes.KeyUp += new System.Windows.Forms.KeyEventHandler(this.txtNotes_KeyUp);
-            this.txtNotes.Leave += new System.EventHandler(this.txtNotes_Leave);
-            // 
-            // picBackgroundImage
-            // 
-            this.picBackgroundImage.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.picBackgroundImage.BackColor = System.Drawing.Color.Black;
-            this.picBackgroundImage.Location = new System.Drawing.Point(6, 469);
-            this.picBackgroundImage.Name = "picBackgroundImage";
-            this.picBackgroundImage.Size = new System.Drawing.Size(110, 93);
-            this.picBackgroundImage.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
-            this.picBackgroundImage.TabIndex = 5;
-            this.picBackgroundImage.TabStop = false;
-            this.picBackgroundImage.Click += new System.EventHandler(this.picBackgroundImage_Click);
-            // 
-            // grpSongMeta
-            // 
-            this.grpSongMeta.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.grpSongMeta.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(53)))), ((int)(((byte)(76)))), ((int)(((byte)(103)))));
-            this.grpSongMeta.Controls.Add(this.pnlSharpsFlats);
-            this.grpSongMeta.Controls.Add(this.panel4);
-            this.grpSongMeta.Controls.Add(this.panel3);
-            this.grpSongMeta.Controls.Add(this.BtnCapoDown);
-            this.grpSongMeta.Controls.Add(this.BtnCapoUp);
-            this.grpSongMeta.Controls.Add(this.BtnTransposeDown);
-            this.grpSongMeta.Controls.Add(this.BtnTransposeUp);
-            this.grpSongMeta.Controls.Add(this.BtnFixFormatting);
-            this.grpSongMeta.Controls.Add(this.btnPlay);
-            this.grpSongMeta.Controls.Add(this.btnPresentSong);
-            this.grpSongMeta.Controls.Add(this.label10);
-            this.grpSongMeta.Controls.Add(this.txtRef);
-            this.grpSongMeta.Controls.Add(this.label2);
-            this.grpSongMeta.Controls.Add(this.txtAuthor);
-            this.grpSongMeta.Controls.Add(this.txtTitle);
-            this.grpSongMeta.Controls.Add(this.label1);
-            this.grpSongMeta.Controls.Add(this.label6);
-            this.grpSongMeta.Controls.Add(this.label4);
-            this.grpSongMeta.Controls.Add(this.label5);
-            this.grpSongMeta.Controls.Add(this.txtOrder);
-            this.grpSongMeta.ForeColor = System.Drawing.Color.White;
-            this.grpSongMeta.Location = new System.Drawing.Point(2, 0);
-            this.grpSongMeta.Name = "grpSongMeta";
-            this.grpSongMeta.Size = new System.Drawing.Size(789, 143);
-            this.grpSongMeta.TabIndex = 1;
+            this.grpSongMetadata.Controls.Add(this.pnlSharpsFlats);
+            this.grpSongMetadata.Controls.Add(this.label1);
+            this.grpSongMetadata.Controls.Add(this.panel4);
+            this.grpSongMetadata.Controls.Add(this.txtOrder);
+            this.grpSongMetadata.Controls.Add(this.panel3);
+            this.grpSongMetadata.Controls.Add(this.label5);
+            this.grpSongMetadata.Controls.Add(this.BtnCapoDown);
+            this.grpSongMetadata.Controls.Add(this.label4);
+            this.grpSongMetadata.Controls.Add(this.BtnCapoUp);
+            this.grpSongMetadata.Controls.Add(this.label6);
+            this.grpSongMetadata.Controls.Add(this.BtnTransposeDown);
+            this.grpSongMetadata.Controls.Add(this.txtTitle);
+            this.grpSongMetadata.Controls.Add(this.BtnTransposeUp);
+            this.grpSongMetadata.Controls.Add(this.txtAuthor);
+            this.grpSongMetadata.Controls.Add(this.BtnFixFormatting);
+            this.grpSongMetadata.Controls.Add(this.label2);
+            this.grpSongMetadata.Controls.Add(this.btnPlay);
+            this.grpSongMetadata.Controls.Add(this.txtRef);
+            this.grpSongMetadata.Controls.Add(this.btnPresentSong);
+            this.grpSongMetadata.Controls.Add(this.label10);
+            this.grpSongMetadata.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.grpSongMetadata.ForeColor = System.Drawing.Color.White;
+            this.grpSongMetadata.Location = new System.Drawing.Point(0, 0);
+            this.grpSongMetadata.Name = "grpSongMetadata";
+            this.grpSongMetadata.Size = new System.Drawing.Size(791, 141);
+            this.grpSongMetadata.TabIndex = 22;
+            this.grpSongMetadata.TabStop = false;
             // 
             // pnlSharpsFlats
             // 
             this.pnlSharpsFlats.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.pnlSharpsFlats.Controls.Add(this.rdoFlats);
             this.pnlSharpsFlats.Controls.Add(this.rdoSharps);
-            this.pnlSharpsFlats.Location = new System.Drawing.Point(589, 107);
+            this.pnlSharpsFlats.Location = new System.Drawing.Point(580, 108);
             this.pnlSharpsFlats.Name = "pnlSharpsFlats";
             this.pnlSharpsFlats.Size = new System.Drawing.Size(145, 28);
             this.pnlSharpsFlats.TabIndex = 6;
@@ -823,13 +817,24 @@
             this.rdoSharps.UseVisualStyleBackColor = true;
             this.rdoSharps.CheckedChanged += new System.EventHandler(this.TextFieldTextChanged);
             // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(53)))), ((int)(((byte)(76)))), ((int)(((byte)(103)))));
+            this.label1.Font = new System.Drawing.Font("Comic Sans MS", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label1.Location = new System.Drawing.Point(6, 8);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(31, 15);
+            this.label1.TabIndex = 0;
+            this.label1.Text = "Title";
+            // 
             // panel4
             // 
             this.panel4.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.panel4.BackColor = System.Drawing.Color.White;
             this.panel4.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
             this.panel4.Controls.Add(this.txtCapo);
-            this.panel4.Location = new System.Drawing.Point(642, 59);
+            this.panel4.Location = new System.Drawing.Point(633, 64);
             this.panel4.Name = "panel4";
             this.panel4.Size = new System.Drawing.Size(70, 40);
             this.panel4.TabIndex = 21;
@@ -849,13 +854,27 @@
             this.txtCapo.Text = "0";
             this.txtCapo.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             // 
+            // txtOrder
+            // 
+            this.txtOrder.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.txtOrder.BackColor = System.Drawing.Color.White;
+            this.txtOrder.CharacterCasing = System.Windows.Forms.CharacterCasing.Upper;
+            this.txtOrder.Font = new System.Drawing.Font("Lucida Console", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtOrder.Location = new System.Drawing.Point(6, 63);
+            this.txtOrder.Name = "txtOrder";
+            this.txtOrder.Size = new System.Drawing.Size(568, 23);
+            this.txtOrder.TabIndex = 2;
+            this.txtOrder.TextChanged += new System.EventHandler(this.TextFieldTextChanged);
+            this.txtOrder.Leave += new System.EventHandler(this.txtOrder_Leave);
+            // 
             // panel3
             // 
             this.panel3.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.panel3.BackColor = System.Drawing.Color.White;
             this.panel3.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
             this.panel3.Controls.Add(this.txtKey);
-            this.panel3.Location = new System.Drawing.Point(642, 9);
+            this.panel3.Location = new System.Drawing.Point(633, 14);
             this.panel3.Name = "panel3";
             this.panel3.Size = new System.Drawing.Size(70, 40);
             this.panel3.TabIndex = 20;
@@ -874,79 +893,155 @@
             this.txtKey.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             this.txtKey.TextChanged += new System.EventHandler(this.TextFieldTextChanged);
             // 
+            // label5
+            // 
+            this.label5.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.label5.AutoSize = true;
+            this.label5.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(53)))), ((int)(((byte)(76)))), ((int)(((byte)(103)))));
+            this.label5.Font = new System.Drawing.Font("Comic Sans MS", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label5.Location = new System.Drawing.Point(588, 24);
+            this.label5.Name = "label5";
+            this.label5.Size = new System.Drawing.Size(26, 15);
+            this.label5.TabIndex = 0;
+            this.label5.Text = "Key";
+            // 
             // BtnCapoDown
             // 
             this.BtnCapoDown.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.BtnCapoDown.Image = Properties.Resources.Down;
-            this.BtnCapoDown.Location = new System.Drawing.Point(716, 84);
+            this.BtnCapoDown.Location = new System.Drawing.Point(707, 89);
             this.BtnCapoDown.Name = "BtnCapoDown";
             this.BtnCapoDown.Size = new System.Drawing.Size(16, 16);
             this.BtnCapoDown.TabIndex = 19;
             this.BtnCapoDown.TabStop = false;
             this.BtnCapoDown.Click += new System.EventHandler(this.BtnCapoDownClick);
             // 
+            // label4
+            // 
+            this.label4.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.label4.AutoSize = true;
+            this.label4.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(53)))), ((int)(((byte)(76)))), ((int)(((byte)(103)))));
+            this.label4.Font = new System.Drawing.Font("Comic Sans MS", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label4.Location = new System.Drawing.Point(6, 49);
+            this.label4.Name = "label4";
+            this.label4.Size = new System.Drawing.Size(38, 15);
+            this.label4.TabIndex = 0;
+            this.label4.Text = "Order";
+            // 
             // BtnCapoUp
             // 
             this.BtnCapoUp.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.BtnCapoUp.Image = Properties.Resources.Up;
-            this.BtnCapoUp.Location = new System.Drawing.Point(716, 60);
+            this.BtnCapoUp.Location = new System.Drawing.Point(707, 65);
             this.BtnCapoUp.Name = "BtnCapoUp";
             this.BtnCapoUp.Size = new System.Drawing.Size(16, 16);
             this.BtnCapoUp.TabIndex = 18;
             this.BtnCapoUp.TabStop = false;
             this.BtnCapoUp.Click += new System.EventHandler(this.BtnCapoUpClick);
             // 
+            // label6
+            // 
+            this.label6.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.label6.AutoSize = true;
+            this.label6.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(53)))), ((int)(((byte)(76)))), ((int)(((byte)(103)))));
+            this.label6.Font = new System.Drawing.Font("Comic Sans MS", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label6.Location = new System.Drawing.Point(588, 73);
+            this.label6.Name = "label6";
+            this.label6.Size = new System.Drawing.Size(32, 15);
+            this.label6.TabIndex = 11;
+            this.label6.Text = "Capo";
+            // 
             // BtnTransposeDown
             // 
             this.BtnTransposeDown.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.BtnTransposeDown.Image = Properties.Resources.Down;
-            this.BtnTransposeDown.Location = new System.Drawing.Point(718, 32);
+            this.BtnTransposeDown.Location = new System.Drawing.Point(709, 37);
             this.BtnTransposeDown.Name = "BtnTransposeDown";
             this.BtnTransposeDown.Size = new System.Drawing.Size(16, 16);
             this.BtnTransposeDown.TabIndex = 17;
             this.BtnTransposeDown.TabStop = false;
             this.BtnTransposeDown.Click += new System.EventHandler(this.BtnTransposeDownClick);
             // 
+            // txtTitle
+            // 
+            this.txtTitle.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.txtTitle.BackColor = System.Drawing.Color.White;
+            this.txtTitle.Font = new System.Drawing.Font("Lucida Console", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtTitle.Location = new System.Drawing.Point(6, 23);
+            this.txtTitle.Name = "txtTitle";
+            this.txtTitle.Size = new System.Drawing.Size(568, 23);
+            this.txtTitle.TabIndex = 1;
+            this.txtTitle.TextChanged += new System.EventHandler(this.TextFieldTextChanged);
+            // 
             // BtnTransposeUp
             // 
             this.BtnTransposeUp.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.BtnTransposeUp.Image = Properties.Resources.Up;
-            this.BtnTransposeUp.Location = new System.Drawing.Point(718, 8);
+            this.BtnTransposeUp.Location = new System.Drawing.Point(709, 13);
             this.BtnTransposeUp.Name = "BtnTransposeUp";
             this.BtnTransposeUp.Size = new System.Drawing.Size(16, 16);
             this.BtnTransposeUp.TabIndex = 16;
             this.BtnTransposeUp.TabStop = false;
             this.BtnTransposeUp.Click += new System.EventHandler(this.BtnTransposeUpClick);
             // 
+            // txtAuthor
+            // 
+            this.txtAuthor.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.txtAuthor.BackColor = System.Drawing.Color.White;
+            this.txtAuthor.Font = new System.Drawing.Font("Lucida Console", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtAuthor.Location = new System.Drawing.Point(6, 108);
+            this.txtAuthor.Name = "txtAuthor";
+            this.txtAuthor.Size = new System.Drawing.Size(361, 23);
+            this.txtAuthor.TabIndex = 3;
+            this.txtAuthor.TextChanged += new System.EventHandler(this.TextFieldTextChanged);
+            // 
             // BtnFixFormatting
             // 
             this.BtnFixFormatting.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.BtnFixFormatting.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(53)))), ((int)(((byte)(76)))), ((int)(((byte)(103)))));
-            this.BtnFixFormatting.Image = Properties.Resources.Repair;
-            this.BtnFixFormatting.Location = new System.Drawing.Point(748, 56);
+            this.BtnFixFormatting.Location = new System.Drawing.Point(740, 54);
             this.BtnFixFormatting.Name = "BtnFixFormatting";
             this.BtnFixFormatting.Size = new System.Drawing.Size(32, 32);
             this.BtnFixFormatting.TabIndex = 15;
             this.BtnFixFormatting.TabStop = false;
             this.BtnFixFormatting.Click += new System.EventHandler(this.BtnFixFormattingClick);
             // 
+            // label2
+            // 
+            this.label2.AutoSize = true;
+            this.label2.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(53)))), ((int)(((byte)(76)))), ((int)(((byte)(103)))));
+            this.label2.Font = new System.Drawing.Font("Comic Sans MS", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label2.Location = new System.Drawing.Point(6, 92);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(42, 15);
+            this.label2.TabIndex = 0;
+            this.label2.Text = "Author";
+            // 
             // btnPlay
             // 
             this.btnPlay.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnPlay.Image = Properties.Resources.Play;
-            this.btnPlay.Location = new System.Drawing.Point(748, 6);
+            this.btnPlay.Location = new System.Drawing.Point(741, 12);
             this.btnPlay.Name = "btnPlay";
             this.btnPlay.Size = new System.Drawing.Size(32, 32);
             this.btnPlay.TabIndex = 14;
             this.btnPlay.TabStop = false;
             this.btnPlay.Click += new System.EventHandler(this.BtnPlayClick);
             // 
+            // txtRef
+            // 
+            this.txtRef.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.txtRef.BackColor = System.Drawing.Color.White;
+            this.txtRef.Font = new System.Drawing.Font("Lucida Console", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtRef.Location = new System.Drawing.Point(373, 109);
+            this.txtRef.Name = "txtRef";
+            this.txtRef.Size = new System.Drawing.Size(201, 23);
+            this.txtRef.TabIndex = 4;
+            this.txtRef.TextChanged += new System.EventHandler(this.TextFieldTextChanged);
+            // 
             // btnPresentSong
             // 
             this.btnPresentSong.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.btnPresentSong.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(53)))), ((int)(((byte)(76)))), ((int)(((byte)(103)))));
-            this.btnPresentSong.Image = Properties.Resources.PresentSong;
-            this.btnPresentSong.Location = new System.Drawing.Point(748, 103);
+            this.btnPresentSong.Location = new System.Drawing.Point(739, 100);
             this.btnPresentSong.Name = "btnPresentSong";
             this.btnPresentSong.Size = new System.Drawing.Size(32, 32);
             this.btnPresentSong.TabIndex = 13;
@@ -959,119 +1054,151 @@
             this.label10.AutoSize = true;
             this.label10.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(53)))), ((int)(((byte)(76)))), ((int)(((byte)(103)))));
             this.label10.Font = new System.Drawing.Font("Comic Sans MS", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label10.Location = new System.Drawing.Point(379, 96);
+            this.label10.Location = new System.Drawing.Point(370, 92);
             this.label10.Name = "label10";
             this.label10.Size = new System.Drawing.Size(61, 15);
             this.label10.TabIndex = 0;
             this.label10.Text = "Reference";
             // 
-            // txtRef
+            // splitLyricsAndNotes
             // 
-            this.txtRef.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.txtRef.BackColor = System.Drawing.Color.White;
-            this.txtRef.Font = new System.Drawing.Font("Lucida Console", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtRef.Location = new System.Drawing.Point(382, 112);
-            this.txtRef.Name = "txtRef";
-            this.txtRef.Size = new System.Drawing.Size(201, 23);
-            this.txtRef.TabIndex = 4;
-            this.txtRef.TextChanged += new System.EventHandler(this.TextFieldTextChanged);
+            this.splitLyricsAndNotes.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.splitLyricsAndNotes.Location = new System.Drawing.Point(0, 0);
+            this.splitLyricsAndNotes.Name = "splitLyricsAndNotes";
             // 
-            // label2
+            // splitLyricsAndNotes.Panel1
             // 
-            this.label2.AutoSize = true;
-            this.label2.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(53)))), ((int)(((byte)(76)))), ((int)(((byte)(103)))));
-            this.label2.Font = new System.Drawing.Font("Comic Sans MS", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label2.Location = new System.Drawing.Point(-3, 96);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(42, 15);
-            this.label2.TabIndex = 0;
-            this.label2.Text = "Author";
+            this.splitLyricsAndNotes.Panel1.Controls.Add(this.grpChordsLyrics);
             // 
-            // txtAuthor
+            // splitLyricsAndNotes.Panel2
             // 
-            this.txtAuthor.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.txtAuthor.BackColor = System.Drawing.Color.White;
-            this.txtAuthor.Font = new System.Drawing.Font("Lucida Console", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtAuthor.Location = new System.Drawing.Point(-3, 112);
-            this.txtAuthor.Name = "txtAuthor";
-            this.txtAuthor.Size = new System.Drawing.Size(379, 23);
-            this.txtAuthor.TabIndex = 3;
-            this.txtAuthor.TextChanged += new System.EventHandler(this.TextFieldTextChanged);
+            this.splitLyricsAndNotes.Panel2.Controls.Add(this.splitContainerNotesImage);
+            this.splitLyricsAndNotes.Size = new System.Drawing.Size(791, 564);
+            this.splitLyricsAndNotes.SplitterDistance = 668;
+            this.splitLyricsAndNotes.SplitterWidth = 1;
+            this.splitLyricsAndNotes.TabIndex = 5;
+            this.splitLyricsAndNotes.TabStop = false;
             // 
-            // txtTitle
+            // grpChordsLyrics
             // 
-            this.txtTitle.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.txtTitle.BackColor = System.Drawing.Color.White;
-            this.txtTitle.Font = new System.Drawing.Font("Lucida Console", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtTitle.Location = new System.Drawing.Point(-3, 20);
-            this.txtTitle.Name = "txtTitle";
-            this.txtTitle.Size = new System.Drawing.Size(586, 23);
-            this.txtTitle.TabIndex = 1;
-            this.txtTitle.TextChanged += new System.EventHandler(this.TextFieldTextChanged);
+            this.grpChordsLyrics.Controls.Add(this.txtLyrics);
+            this.grpChordsLyrics.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.grpChordsLyrics.ForeColor = System.Drawing.Color.White;
+            this.grpChordsLyrics.Location = new System.Drawing.Point(0, 0);
+            this.grpChordsLyrics.Name = "grpChordsLyrics";
+            this.grpChordsLyrics.Size = new System.Drawing.Size(668, 564);
+            this.grpChordsLyrics.TabIndex = 5;
+            this.grpChordsLyrics.TabStop = false;
+            this.grpChordsLyrics.Text = "Chords/Lyrics";
             // 
-            // label1
+            // txtLyrics
             // 
-            this.label1.AutoSize = true;
-            this.label1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(53)))), ((int)(((byte)(76)))), ((int)(((byte)(103)))));
-            this.label1.Font = new System.Drawing.Font("Comic Sans MS", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label1.Location = new System.Drawing.Point(-3, 2);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(31, 15);
-            this.label1.TabIndex = 0;
-            this.label1.Text = "Title";
+            this.txtLyrics.BackColor = System.Drawing.Color.White;
+            this.txtLyrics.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.txtLyrics.Font = new System.Drawing.Font("Courier New", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtLyrics.ForeColor = System.Drawing.Color.Black;
+            this.txtLyrics.Location = new System.Drawing.Point(3, 16);
+            this.txtLyrics.Name = "txtLyrics";
+            this.txtLyrics.Size = new System.Drawing.Size(662, 545);
+            this.txtLyrics.TabIndex = 2;
+            this.txtLyrics.Text = "";
+            this.txtLyrics.WordWrap = false;
+            this.txtLyrics.TextChanged += new System.EventHandler(this.TextFieldTextChanged);
+            this.txtLyrics.KeyUp += new System.Windows.Forms.KeyEventHandler(this.TextFieldKeyUp);
+            this.txtLyrics.Leave += new System.EventHandler(this.txtLyrics_Leave);
             // 
-            // label6
+            // splitContainerNotesImage
             // 
-            this.label6.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.label6.AutoSize = true;
-            this.label6.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(53)))), ((int)(((byte)(76)))), ((int)(((byte)(103)))));
-            this.label6.Font = new System.Drawing.Font("Comic Sans MS", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label6.Location = new System.Drawing.Point(597, 68);
-            this.label6.Name = "label6";
-            this.label6.Size = new System.Drawing.Size(32, 15);
-            this.label6.TabIndex = 11;
-            this.label6.Text = "Capo";
+            this.splitContainerNotesImage.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.splitContainerNotesImage.Location = new System.Drawing.Point(0, 0);
+            this.splitContainerNotesImage.Name = "splitContainerNotesImage";
+            this.splitContainerNotesImage.Orientation = System.Windows.Forms.Orientation.Horizontal;
             // 
-            // label4
+            // splitContainerNotesImage.Panel1
             // 
-            this.label4.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.label4.AutoSize = true;
-            this.label4.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(53)))), ((int)(((byte)(76)))), ((int)(((byte)(103)))));
-            this.label4.Font = new System.Drawing.Font("Comic Sans MS", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label4.Location = new System.Drawing.Point(-3, 47);
-            this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(38, 15);
-            this.label4.TabIndex = 0;
-            this.label4.Text = "Order";
+            this.splitContainerNotesImage.Panel1.Controls.Add(this.grpNotes);
             // 
-            // label5
+            // splitContainerNotesImage.Panel2
             // 
-            this.label5.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.label5.AutoSize = true;
-            this.label5.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(53)))), ((int)(((byte)(76)))), ((int)(((byte)(103)))));
-            this.label5.Font = new System.Drawing.Font("Comic Sans MS", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label5.Location = new System.Drawing.Point(597, 19);
-            this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(26, 15);
-            this.label5.TabIndex = 0;
-            this.label5.Text = "Key";
+            this.splitContainerNotesImage.Panel2.Controls.Add(this.grpImage);
+            this.splitContainerNotesImage.Size = new System.Drawing.Size(122, 564);
+            this.splitContainerNotesImage.SplitterDistance = 447;
+            this.splitContainerNotesImage.SplitterWidth = 1;
+            this.splitContainerNotesImage.TabIndex = 6;
             // 
-            // txtOrder
+            // grpNotes
             // 
-            this.txtOrder.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.txtOrder.BackColor = System.Drawing.Color.White;
-            this.txtOrder.CharacterCasing = System.Windows.Forms.CharacterCasing.Upper;
-            this.txtOrder.Font = new System.Drawing.Font("Lucida Console", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtOrder.Location = new System.Drawing.Point(-3, 65);
-            this.txtOrder.Name = "txtOrder";
-            this.txtOrder.Size = new System.Drawing.Size(586, 23);
-            this.txtOrder.TabIndex = 2;
-            this.txtOrder.TextChanged += new System.EventHandler(this.TextFieldTextChanged);
-            this.txtOrder.Leave += new System.EventHandler(this.txtOrder_Leave);
+            this.grpNotes.Controls.Add(this.txtNotes);
+            this.grpNotes.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.grpNotes.ForeColor = System.Drawing.Color.White;
+            this.grpNotes.Location = new System.Drawing.Point(0, 0);
+            this.grpNotes.Name = "grpNotes";
+            this.grpNotes.Size = new System.Drawing.Size(122, 447);
+            this.grpNotes.TabIndex = 0;
+            this.grpNotes.TabStop = false;
+            this.grpNotes.Text = "Notes";
+            // 
+            // txtNotes
+            // 
+            this.txtNotes.BackColor = System.Drawing.Color.White;
+            this.txtNotes.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.txtNotes.Font = new System.Drawing.Font("Courier New", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtNotes.ForeColor = System.Drawing.Color.Black;
+            this.txtNotes.Location = new System.Drawing.Point(3, 16);
+            this.txtNotes.Name = "txtNotes";
+            this.txtNotes.Size = new System.Drawing.Size(116, 428);
+            this.txtNotes.TabIndex = 3;
+            this.txtNotes.Text = "";
+            this.txtNotes.WordWrap = false;
+            this.txtNotes.TextChanged += new System.EventHandler(this.TextFieldTextChanged);
+            this.txtNotes.KeyUp += new System.Windows.Forms.KeyEventHandler(this.txtNotes_KeyUp);
+            this.txtNotes.Leave += new System.EventHandler(this.txtNotes_Leave);
+            // 
+            // grpImage
+            // 
+            this.grpImage.Controls.Add(this.picBackgroundImage);
+            this.grpImage.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.grpImage.ForeColor = System.Drawing.Color.White;
+            this.grpImage.Location = new System.Drawing.Point(0, 0);
+            this.grpImage.Name = "grpImage";
+            this.grpImage.Size = new System.Drawing.Size(122, 116);
+            this.grpImage.TabIndex = 0;
+            this.grpImage.TabStop = false;
+            this.grpImage.Text = "Image";
+            // 
+            // picBackgroundImage
+            // 
+            this.picBackgroundImage.BackColor = System.Drawing.Color.Black;
+            this.picBackgroundImage.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.picBackgroundImage.Location = new System.Drawing.Point(3, 16);
+            this.picBackgroundImage.Name = "picBackgroundImage";
+            this.picBackgroundImage.Size = new System.Drawing.Size(116, 97);
+            this.picBackgroundImage.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.picBackgroundImage.TabIndex = 5;
+            this.picBackgroundImage.TabStop = false;
+            this.picBackgroundImage.Click += new System.EventHandler(this.picBackgroundImage_Click);
+            // 
+            // splitContainerSetVsButtons
+            // 
+            this.splitContainerSetVsButtons.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.splitContainerSetVsButtons.FixedPanel = System.Windows.Forms.FixedPanel.Panel2;
+            this.splitContainerSetVsButtons.IsSplitterFixed = true;
+            this.splitContainerSetVsButtons.Location = new System.Drawing.Point(3, 16);
+            this.splitContainerSetVsButtons.Name = "splitContainerSetVsButtons";
+            // 
+            // splitContainerSetVsButtons.Panel1
+            // 
+            this.splitContainerSetVsButtons.Panel1.Controls.Add(this.listSet);
+            // 
+            // splitContainerSetVsButtons.Panel2
+            // 
+            this.splitContainerSetVsButtons.Panel2.Controls.Add(this.imgUp);
+            this.splitContainerSetVsButtons.Panel2.Controls.Add(this.imgDown);
+            this.splitContainerSetVsButtons.Panel2.Controls.Add(this.BtnPresentSet);
+            this.splitContainerSetVsButtons.Panel2.Controls.Add(this.BtnClear);
+            this.splitContainerSetVsButtons.Size = new System.Drawing.Size(207, 119);
+            this.splitContainerSetVsButtons.SplitterDistance = 171;
+            this.splitContainerSetVsButtons.TabIndex = 23;
             // 
             // EditorForm
             // 
@@ -1098,24 +1225,31 @@
             this.splitMainForm.Panel2.ResumeLayout(false);
             this.splitMainForm.ResumeLayout(false);
             this.panel1.ResumeLayout(false);
-            this.panel1.PerformLayout();
             this.splitSetsAndSongs.Panel1.ResumeLayout(false);
             this.splitSetsAndSongs.Panel2.ResumeLayout(false);
             this.splitSetsAndSongs.ResumeLayout(false);
-            this.pnlSet.ResumeLayout(false);
+            this.splitContainerPresentationSetList.Panel1.ResumeLayout(false);
+            this.splitContainerPresentationSetList.Panel2.ResumeLayout(false);
+            this.splitContainerPresentationSetList.ResumeLayout(false);
+            this.grpPresentation.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.imgUp)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.imgDown)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.BtnPresentSet)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.BtnClear)).EndInit();
+            this.grpSetList.ResumeLayout(false);
+            this.splitContainerSongListSearchBar.Panel1.ResumeLayout(false);
+            this.splitContainerSongListSearchBar.Panel2.ResumeLayout(false);
+            this.splitContainerSongListSearchBar.ResumeLayout(false);
+            this.grpSongList.ResumeLayout(false);
+            this.grpSearchBar.ResumeLayout(false);
+            this.grpSearchBar.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.BtnSearch)).EndInit();
             this.panel2.ResumeLayout(false);
-            this.splitLyricsAndNotes.Panel1.ResumeLayout(false);
-            this.splitLyricsAndNotes.Panel1.PerformLayout();
-            this.splitLyricsAndNotes.Panel2.ResumeLayout(false);
-            this.splitLyricsAndNotes.Panel2.PerformLayout();
-            this.splitLyricsAndNotes.ResumeLayout(false);
-            this.grpSongMeta.ResumeLayout(false);
-            this.grpSongMeta.PerformLayout();
+            this.splitContainerMetaLyrics.Panel1.ResumeLayout(false);
+            this.splitContainerMetaLyrics.Panel2.ResumeLayout(false);
+            this.splitContainerMetaLyrics.ResumeLayout(false);
+            this.grpSongMetadata.ResumeLayout(false);
+            this.grpSongMetadata.PerformLayout();
             this.pnlSharpsFlats.ResumeLayout(false);
             this.pnlSharpsFlats.PerformLayout();
             this.panel4.ResumeLayout(false);
@@ -1129,6 +1263,19 @@
             ((System.ComponentModel.ISupportInitialize)(this.BtnFixFormatting)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.btnPlay)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.btnPresentSong)).EndInit();
+            this.splitLyricsAndNotes.Panel1.ResumeLayout(false);
+            this.splitLyricsAndNotes.Panel2.ResumeLayout(false);
+            this.splitLyricsAndNotes.ResumeLayout(false);
+            this.grpChordsLyrics.ResumeLayout(false);
+            this.splitContainerNotesImage.Panel1.ResumeLayout(false);
+            this.splitContainerNotesImage.Panel2.ResumeLayout(false);
+            this.splitContainerNotesImage.ResumeLayout(false);
+            this.grpNotes.ResumeLayout(false);
+            this.grpImage.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.picBackgroundImage)).EndInit();
+            this.splitContainerSetVsButtons.Panel1.ResumeLayout(false);
+            this.splitContainerSetVsButtons.Panel2.ResumeLayout(false);
+            this.splitContainerSetVsButtons.ResumeLayout(false);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -1185,7 +1332,6 @@
         private System.Windows.Forms.ListBox listSet;
         private System.Windows.Forms.Panel panel2;
         private System.Windows.Forms.RichTextBox txtNotes;
-        private System.Windows.Forms.Panel grpSongMeta;
         private System.Windows.Forms.Panel panel4;
         private System.Windows.Forms.TextBox txtCapo;
         private System.Windows.Forms.Panel panel3;
@@ -1207,13 +1353,10 @@
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.Label label5;
         private System.Windows.Forms.TextBox txtOrder;
-        private System.Windows.Forms.Label label9;
-        private System.Windows.Forms.Label label3;
         private System.Windows.Forms.RichTextBox txtLyrics;
         private System.Windows.Forms.PictureBox imgDown;
         private System.Windows.Forms.PictureBox imgUp;
         private System.Windows.Forms.SplitContainer splitLyricsAndNotes;
-        private System.Windows.Forms.Panel pnlSet;
         private System.Windows.Forms.SplitContainer splitSetsAndSongs;
         private System.Windows.Forms.Panel pnlSharpsFlats;
         private System.Windows.Forms.RadioButton rdoFlats;
@@ -1225,6 +1368,19 @@
         private System.Windows.Forms.ToolStripMenuItem launchOpenSongToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem pdfToolStripMenuItem;
         private System.Windows.Forms.PictureBox picBackgroundImage;
+        private System.Windows.Forms.GroupBox grpChordsLyrics;
+        private System.Windows.Forms.SplitContainer splitContainerNotesImage;
+        private System.Windows.Forms.GroupBox grpNotes;
+        private System.Windows.Forms.GroupBox grpImage;
+        private System.Windows.Forms.GroupBox grpSongMetadata;
+        private System.Windows.Forms.SplitContainer splitContainerMetaLyrics;
+        private System.Windows.Forms.SplitContainer splitContainerSongListSearchBar;
+        private System.Windows.Forms.GroupBox grpSongList;
+        private System.Windows.Forms.GroupBox grpSearchBar;
+        private System.Windows.Forms.SplitContainer splitContainerPresentationSetList;
+        private System.Windows.Forms.GroupBox grpPresentation;
+        private System.Windows.Forms.GroupBox grpSetList;
+        private System.Windows.Forms.SplitContainer splitContainerSetVsButtons;
         
   
     }

@@ -182,6 +182,11 @@
       <Name>OpenChordsResources</Name>
     </ProjectReference>
   </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Forms\EditorForm.resx">
+      <DependentUpon>EditorForm.cs</DependentUpon>
+    </EmbeddedResource>
+  </ItemGroup>
   <ProjectExtensions>
     <MonoDevelop>
       <Properties>

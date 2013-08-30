@@ -31,6 +31,35 @@ namespace OpenChords.Forms
 			this.DoubleBuffered=true;
 			SetStyle(System.Windows.Forms.ControlStyles.DoubleBuffer, true);
 
+            this.Icon = Properties.Resources.guitar;
+            this.newToolStripMenuItem.Image = Properties.Resources.New;
+            this.exploreToolStripMenuItem.Image = Properties.Resources.Explore;
+            this.refreshToolStripMenuItem.Image = Properties.Resources.Reload;
+            this.saveToolStripMenuItem.Image = Properties.Resources.Save;
+            this.deleteToolStripMenuItem.Image = Properties.Resources.Delete;
+            this.revertToSavedToolStripMenuItem.Image = Properties.Resources.Revert;
+            this.exitToolStripMenuItem.Image = Properties.Resources.Exit;
+            this.FixFormatingtoolStripMenuItem.Image = Properties.Resources.Repair;
+            this.preferencesToolStripMenuItem.Image = Properties.Resources.Settings;
+            this.presentSongToolStripMenuItem.Image = Properties.Resources.PresentSong;
+            this.presentSetToolStripMenuItem.Image = Properties.Resources.Present;
+            this.openSongToolStripMenuItem.Image = Properties.Resources.OpenSong;
+            this.pdfToolStripMenuItem.Image = Properties.Resources.pdf;
+            this.fileSyncUtilityToolStripMenuItem.Image = Properties.Resources.Sync;
+            this.manualToolStripMenuItem.Image = Properties.Resources.Help;
+            this.aboutOpenChordsToolStripMenuItem.Image = Properties.Resources.About;
+            this.imgUp.Image = Properties.Resources.Up;
+            this.imgDown.Image = Properties.Resources.Down;
+            this.BtnPresentSet.Image = Properties.Resources.Present;
+            this.BtnClear.Image = Properties.Resources.Delete;
+            this.BtnSearch.Image = Properties.Resources.Search;
+            this.BtnCapoDown.Image = Properties.Resources.Down;
+            this.BtnCapoUp.Image = Properties.Resources.Up;
+            this.BtnTransposeDown.Image = Properties.Resources.Down;
+            this.BtnTransposeUp.Image = Properties.Resources.Up;
+            this.BtnFixFormatting.Image = Properties.Resources.Repair;
+            this.btnPlay.Image = Properties.Resources.Play;
+            this.btnPresentSong.Image = Properties.Resources.PresentSong;
 
             refreshAll();
 			
