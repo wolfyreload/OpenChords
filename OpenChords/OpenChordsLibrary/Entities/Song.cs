@@ -29,140 +29,101 @@ namespace OpenChords.Entities
     /// <remarks/>
     [System.CodeDom.Compiler.GeneratedCodeAttribute("xsd", "2.0.50727.3038")]
     [System.SerializableAttribute()]
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.ComponentModel.DesignerCategoryAttribute("code")]
     [System.Xml.Serialization.XmlTypeAttribute(AnonymousType = true)]
     public partial class songStyle
     {
-
-        private songStyleBackground backgroundField;
-
-        [System.Xml.Serialization.XmlElementAttribute("background", Form = System.Xml.Schema.XmlSchemaForm.Unqualified)]
-        public songStyleBackground background
-        {
-            get
-            {
-                return this.backgroundField;
-            }
-            set
-            {
-                this.backgroundField = value;
-            }
-        }
+        public songStyleSongElements title { get; set; }
+        public songStyleSongElements body { get; set; }
+        public songStyleSongElements subtitle { get; set; }
+        public songStyleBackground background {get; set;}
     }
 
     [System.SerializableAttribute()]
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.ComponentModel.DesignerCategoryAttribute("code")]
     [System.Xml.Serialization.XmlTypeAttribute(AnonymousType = true)]
     public class songStyleBackground
     {
+        [System.Xml.Serialization.XmlAttributeAttribute()]
+        public string filename {get; set;}  
+    }
 
-        private string filenameField;
-
+    [System.Xml.Serialization.XmlTypeAttribute(AnonymousType = true)]
+    public class songStyleSongElements
+    {
+        [System.Xml.Serialization.XmlAttributeAttribute()]
+        public string align { get; set; }  
 
         [System.Xml.Serialization.XmlAttributeAttribute()]
-        public string filename
-        {
-            get
-            {
-                return this.filenameField;
-            }
-            set
-            {
-                this.filenameField = value;
-            }
-        }
+        public string bold { get; set; }  
+
+        [System.Xml.Serialization.XmlAttributeAttribute()]
+        public string border { get; set; }  
+
+        [System.Xml.Serialization.XmlAttributeAttribute()]
+        public string border_color { get; set; }  
+
+        [System.Xml.Serialization.XmlAttributeAttribute()]
+        public string color { get; set; }  
+
+        [System.Xml.Serialization.XmlAttributeAttribute()]
+        public string fill { get; set; }  
+
+        [System.Xml.Serialization.XmlAttributeAttribute()]
+        public string fill_color { get; set; }  
+
+        [System.Xml.Serialization.XmlAttributeAttribute()]
+        public string font { get; set; }  
+
+        [System.Xml.Serialization.XmlAttributeAttribute()]
+        public string italic { get; set; }  
+
+        [System.Xml.Serialization.XmlAttributeAttribute()]
+        public string highlight_chorus { get; set; }  
+
+        [System.Xml.Serialization.XmlAttributeAttribute()]
+        public string shadow { get; set; }  
+
+        [System.Xml.Serialization.XmlAttributeAttribute()]
+        public string shadow_color { get; set; }  
+
+        [System.Xml.Serialization.XmlAttributeAttribute()]
+        public string underline { get; set; }  
+
+        [System.Xml.Serialization.XmlAttributeAttribute()]
+        public string valign { get; set; }  
+
+        [System.Xml.Serialization.XmlAttributeAttribute()]
+        public string enabled { get; set; }  
+
+        [System.Xml.Serialization.XmlAttributeAttribute()]
+        public string auto_scale { get; set; }
+
+        [System.Xml.Serialization.XmlAttributeAttribute()]
+        public string size { get; set; } 
+ 
+        [System.Xml.Serialization.XmlAttributeAttribute()]
+        public string include_verse { get; set; } 
     }
 
 
     [System.SerializableAttribute()]
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.ComponentModel.DesignerCategoryAttribute("code")]
-    [System.Xml.Serialization.XmlTypeAttribute(AnonymousType = true)]
     [XmlRoot("song")]
     public partial class Song
     {
         private static readonly log4net.ILog logger = log4net.LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
 
-        private string titleField;
-
-        private string authorField;
-
-        private string presentationField;
-
-        public string capo;
-
-        private string keyField;
-
-        private string lyricsField;
-
-        private string ccliField;
-
-        public string preferFlats;
-
-        private string notesField;
+        public string title { get; set; }
+        public string author { get; set; }
+        public string presentation { get; set; }
+        public string capo { get; set; }
+        public string key { get; set; }
+        public string lyrics { get; set; }
+        public string ccli { get; set; }
+        public string preferFlats { get; set; }
 
         [XmlIgnore]
-        public string notes
-        {
-            get
-            {
-                if (notesField == null)
-                    return "";
-                else
-                    return notesField;
+        public string notes {get; set;}
 
-            }
-            set
-            {
-                notesField = value;
-            }
-
-        }
-
-        private songStyle styleField;
-
-        
-        [System.Xml.Serialization.XmlElementAttribute(Form = System.Xml.Schema.XmlSchemaForm.Unqualified)]
-        public string title
-        {
-            get
-            {
-                return this.titleField;
-            }
-            set
-            {
-                this.titleField = value;
-            }
-        }
-
-        
-        [System.Xml.Serialization.XmlElementAttribute(Form = System.Xml.Schema.XmlSchemaForm.Unqualified)]
-        public string author
-        {
-            get
-            {
-                return this.authorField;
-            }
-            set
-            {
-                this.authorField = value;
-            }
-        }
-
-        [System.Xml.Serialization.XmlElementAttribute(Form = System.Xml.Schema.XmlSchemaForm.Unqualified)]
-        public string presentation
-        {
-            get
-            {
-                return this.presentationField;
-            }
-            set
-            {
-                this.presentationField = value;
-            }
-        }
+        public songStyle style;
 
         [XmlIgnore]
         public int Capo
@@ -176,46 +137,6 @@ namespace OpenChords.Entities
             set
             {
                 this.capo = value.ToString();
-            }
-        }
-
-        
-        [System.Xml.Serialization.XmlElementAttribute(Form = System.Xml.Schema.XmlSchemaForm.Unqualified)]
-        public string key
-        {
-            get
-            {
-                return this.keyField;
-            }
-            set
-            {
-                this.keyField = value;
-            }
-        }
-        
-        [System.Xml.Serialization.XmlElementAttribute(Form = System.Xml.Schema.XmlSchemaForm.Unqualified)]
-        public string lyrics
-        {
-            get
-            {
-                return this.lyricsField;
-            }
-            set
-            {
-                this.lyricsField = value;
-            }
-        }
-
-        [System.Xml.Serialization.XmlElementAttribute(Form = System.Xml.Schema.XmlSchemaForm.Unqualified)]
-        public string ccli
-        {
-            get
-            {
-                return this.ccliField;
-            }
-            set
-            {
-                this.ccliField = value;
             }
         }
 
@@ -235,29 +156,18 @@ namespace OpenChords.Entities
             }
         }
 
-        [System.Xml.Serialization.XmlElementAttribute("style", Form = System.Xml.Schema.XmlSchemaForm.Unqualified)]
-        public songStyle style
-        {
-            get
-            {
-                return this.styleField;
-            }
-            set
-            {
-                this.styleField = value;
-            }
-        }
-
         public Song()
         {
-            titleField = "";
-            authorField = "";
-            keyField = "";
+            title = "";
+            author = "";
+            key = "";
             capo = "0";
-            presentationField = "";
+            presentation = "";
 
-            lyricsField = "";
+            lyrics = "";
             preferFlats = "false";
+
+            initializeSongStyle(this);
         }
 
 
@@ -267,7 +177,66 @@ namespace OpenChords.Entities
         {
             Song song = XmlReaderWriter.readSong(ExtAppsAndDir.songsFolder + SongName);
             song.notes = Note.loadNotes(SongName).notes;
+
+            initializeSongStyle(song);
+
+
+
             return song;
+
+        }
+
+        private static void initializeSongStyle(Song song)
+        {
+            //fix song style if empty
+            if (song.style == null)
+                song.style = new songStyle();
+
+            song.style.title = new songStyleSongElements()
+            {
+                align = "center",
+                bold = "true",
+                border = "true",
+                border_color = "#000000",
+                color = "#FFFFFF",
+                fill = "false",
+                fill_color = "#000000",
+                font = "Helvetica",
+                italic = "true",
+                shadow = "true",
+                shadow_color = "#000000",
+                size = "26",
+                underline = "false",
+                valign = "bottom",
+                include_verse = "false",
+                enabled = "true"
+            };
+
+            song.style.body = new songStyleSongElements()
+            {
+                align = "center",
+                bold = "true",
+                border = "true",
+                border_color = "#000000",
+                color = "#FFFFFF",
+                fill = "false",
+                fill_color = "#FF0000",
+                font = "Helvetica",
+                highlight_chorus = "true",
+                italic = "false",
+                shadow = "true",
+                shadow_color = "#000000",
+                size = "34",
+                underline = "false",
+                valign = "middle",
+                enabled = "true",
+                auto_scale = "true"
+            };
+
+            song.style.subtitle = new songStyleSongElements()
+            {
+                enabled = "false"
+            };
 
         }
 
@@ -472,8 +441,8 @@ namespace OpenChords.Entities
             {
                 if (!string.IsNullOrEmpty(value))
                 {
-                    style = null;
-                    style = new songStyle();
+                    if (style == null)
+                        style = new songStyle();
                     style.background = new songStyleBackground();
                     style.background.filename = value;
                 }
