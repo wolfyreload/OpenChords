@@ -39,13 +39,13 @@ namespace OpenChords.Forms
 			txtTitle.Text = currentSong.title;
 			txtAuthor.Text = currentSong.author;
 			txtKey.Text = currentSong.key;
-			txtCapo.Text = currentSong.capo.ToString();
+			txtCapo.Text = currentSong.Capo.ToString();
 			txtOrder.Text = currentSong.presentation;
 			
 			txtLyrics.Text = currentSong.lyrics;
 			txtNotes.Text = currentSong.notes;
             txtRef.Text = currentSong.ccli;
-		    if (currentSong.preferFlats)
+		    if (currentSong.PreferFlats)
 		        rdoFlats.Checked = true;
 		    else
 		        rdoSharps.Checked = true;
@@ -97,16 +97,16 @@ namespace OpenChords.Forms
 			currentSong.title = txtTitle.Text;
 			currentSong.author = txtAuthor.Text;
 			currentSong.key = txtKey.Text;
-			currentSong.capo = int.Parse(txtCapo.Text);
+			currentSong.Capo = int.Parse(txtCapo.Text);
 			currentSong.presentation = txtOrder.Text;
 			
 			currentSong.lyrics = txtLyrics.Text;
 			currentSong.notes = txtNotes.Text;
             currentSong.ccli = txtRef.Text;
 		    if (rdoFlats.Checked)
-		        currentSong.preferFlats = true;
+		        currentSong.PreferFlats = true;
 		    else
-		        currentSong.preferFlats = false;
+		        currentSong.PreferFlats = false;
 
 		}
 		

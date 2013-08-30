@@ -303,7 +303,7 @@ namespace OpenChords.Forms
 
         private void SwitchBetweenSharpsAndFlats()
         {
-            currentSong.preferFlats = !currentSong.preferFlats;
+            currentSong.PreferFlats = !currentSong.PreferFlats;
             currentSong.transposeKeyUp();
             currentSong.transposeKeyDown();
             songChanged = true;

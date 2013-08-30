@@ -223,11 +223,8 @@ namespace OpenChords.Settings
 	        get
 	        {	
 	        	string path;
-                //if (settings.isLocalOpenSong)
-                //    path = AppsFolder + "OpenSong\\OpenSong Data\\Songs\\";
-                //else
-                    path = settings.OpenSongSetsAndSongs + "\\Songs\\OpenChords\\";
-                
+                var directory = new DirectoryInfo(settings.OpenSongSetsAndSongs);
+                path = directory + "\\Songs\\OpenChords\\";
                 string fixedPath = fixPaths(path);
 	        	if (!System.IO.Directory.Exists(fixedPath))
 	        		System.IO.Directory.CreateDirectory(fixedPath);
@@ -241,11 +238,8 @@ namespace OpenChords.Settings
             get
             {
                 string path;
-                //if (settings.isLocalOpenSong)
-                //    path = AppsFolder + "OpenSong\\OpenSong Data\\Songs\\";
-                //else
-                path = settings.OpenSongSetsAndSongs + "\\Backgrounds\\";
-
+                var directory = new DirectoryInfo(settings.OpenSongSetsAndSongs);
+                path = directory.FullName + "\\Backgrounds\\";
                 string fixedPath = fixPaths(path);
                 if (!System.IO.Directory.Exists(fixedPath))
                     System.IO.Directory.CreateDirectory(fixedPath);
@@ -256,11 +250,9 @@ namespace OpenChords.Settings
         public static String openSongSetFolder{
 	        get
 	        {	
-                	string path;
-                //if (settings.isLocalOpenSong)
-                //    path = AppsFolder + "OpenSong\\OpenSong Data\\Sets\\";
-                //else
-                    path = settings.OpenSongSetsAndSongs + "\\Sets\\";
+                string path;
+                var directory = new DirectoryInfo(settings.OpenSongSetsAndSongs);
+                path = directory + "\\Sets\\";
 
 	        	string fixedPath = fixPaths(path);
 	        	if (!System.IO.Directory.Exists(fixedPath))

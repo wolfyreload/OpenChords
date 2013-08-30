@@ -91,7 +91,7 @@ namespace OpenChords.Entities
 
         private string presentationField;
 
-        private string capoField;
+        public string capo;
 
         private string keyField;
 
@@ -99,7 +99,7 @@ namespace OpenChords.Entities
 
         private string ccliField;
 
-        private string preferFlatsField;
+        public string preferFlats;
 
         private string notesField;
 
@@ -164,18 +164,18 @@ namespace OpenChords.Entities
             }
         }
 
-        [System.Xml.Serialization.XmlElementAttribute(Form = System.Xml.Schema.XmlSchemaForm.Unqualified)]
-        public int capo
+        [XmlIgnore]
+        public int Capo
         {
             get
             {
                 var capoValue = 0;
-                int.TryParse(capoField, out capoValue);
+                int.TryParse(capo, out capoValue);
                 return capoValue;
             }
             set
             {
-                this.capoField = value.ToString();
+                this.capo = value.ToString();
             }
         }
 
@@ -219,19 +219,19 @@ namespace OpenChords.Entities
             }
         }
 
-        [System.Xml.Serialization.XmlElementAttribute(Form = System.Xml.Schema.XmlSchemaForm.Unqualified)]
-        public bool preferFlats
+        [XmlIgnore]
+        public bool PreferFlats
         {
             get
             {
                 var value = false;
-                if (!string.IsNullOrEmpty(preferFlatsField))
-                    bool.TryParse(preferFlatsField, out value);
+                if (!string.IsNullOrEmpty(preferFlats))
+                    bool.TryParse(preferFlats, out value);
                 return value;
             }
             set
             {
-                preferFlatsField = value.ToString();
+                preferFlats = value.ToString();
             }
         }
 
@@ -253,11 +253,11 @@ namespace OpenChords.Entities
             titleField = "";
             authorField = "";
             keyField = "";
-            capoField = "0";
+            capo = "0";
             presentationField = "";
 
             lyricsField = "";
-            preferFlatsField = "false";
+            preferFlats = "false";
         }
 
 
@@ -303,7 +303,7 @@ namespace OpenChords.Entities
             this.title = oldSave.title;
             this.notes = oldSave.notes;
             this.author = oldSave.author;
-            this.capo = oldSave.capo;
+            this.Capo = oldSave.Capo;
             this.ccli = oldSave.ccli;
             this.key = oldSave.key;
             this.lyrics = oldSave.lyrics;
@@ -318,7 +318,7 @@ namespace OpenChords.Entities
         public void transposeKeyUp()
         {
             SongProcessor.transposeKeyUp(this);
-            this.key = SongProcessor.transposeChord(this.key, this.preferFlats).TrimEnd();
+            this.key = SongProcessor.transposeChord(this.key, this.PreferFlats).TrimEnd();
         }
 
         public void transposeKeyDown()
@@ -341,8 +341,8 @@ namespace OpenChords.Entities
         public void capoDown()
         {
             SongProcessor.transposeKeyUp(this);
-            int tempcapo = 12 + this.capo - 1;
-            this.capo = tempcapo % 12;
+            int tempcapo = 12 + this.Capo - 1;
+            this.Capo = tempcapo % 12;
         }
 
         public void fixFormatting()
