@@ -13,6 +13,7 @@ using System.Linq;
 using OpenChords.Entities;
 using OpenChords.Functions;
 using OpenChords.Settings;
+using System.Drawing;
 
 namespace OpenChords.Forms
 {
@@ -38,20 +39,27 @@ namespace OpenChords.Forms
 			txtTitle.Text = currentSong.title;
 			txtAuthor.Text = currentSong.author;
 			txtKey.Text = currentSong.key;
-			txtCapo.Text = currentSong.Capo.ToString();
+			txtCapo.Text = currentSong.capo.ToString();
 			txtOrder.Text = currentSong.presentation;
 			
 			txtLyrics.Text = currentSong.lyrics;
 			txtNotes.Text = currentSong.notes;
             txtRef.Text = currentSong.ccli;
-		    if (currentSong.PreferFlats)
+		    if (currentSong.preferFlats)
 		        rdoFlats.Checked = true;
 		    else
 		        rdoSharps.Checked = true;
 
+            getBackgroundImage();
+
             formatLyrics();
             formatNotes();
 		}
+
+        private void getBackgroundImage()
+        {
+            picBackgroundImage.Image = currentSong.getSongImage();
+        }
 		
 		/// <summary>
 		/// updates the sets list box
@@ -89,16 +97,16 @@ namespace OpenChords.Forms
 			currentSong.title = txtTitle.Text;
 			currentSong.author = txtAuthor.Text;
 			currentSong.key = txtKey.Text;
-			currentSong.Capo = int.Parse(txtCapo.Text);
+			currentSong.capo = int.Parse(txtCapo.Text);
 			currentSong.presentation = txtOrder.Text;
 			
 			currentSong.lyrics = txtLyrics.Text;
 			currentSong.notes = txtNotes.Text;
             currentSong.ccli = txtRef.Text;
 		    if (rdoFlats.Checked)
-		        currentSong.PreferFlats = true;
+		        currentSong.preferFlats = true;
 		    else
-		        currentSong.PreferFlats = false;
+		        currentSong.preferFlats = false;
 
 		}
 		

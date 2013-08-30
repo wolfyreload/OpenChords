@@ -235,6 +235,24 @@ namespace OpenChords.Settings
 	        	
 	        }
         }
+
+        public static String opensongBackgroundsFolder
+        {
+            get
+            {
+                string path;
+                //if (settings.isLocalOpenSong)
+                //    path = AppsFolder + "OpenSong\\OpenSong Data\\Songs\\";
+                //else
+                path = settings.OpenSongSetsAndSongs + "\\Backgrounds\\";
+
+                string fixedPath = fixPaths(path);
+                if (!System.IO.Directory.Exists(fixedPath))
+                    System.IO.Directory.CreateDirectory(fixedPath);
+                return fixedPath;
+
+            }
+        }
         public static String openSongSetFolder{
 	        get
 	        {	

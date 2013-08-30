@@ -12,7 +12,10 @@ namespace OpenChords.Forms
 	public partial class EditorForm : Form
 	{
         private static readonly log4net.ILog logger = log4net.LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
-
+        private OpenFileDialog openFileDialogSelectOpenSongBackground = new OpenFileDialog()
+            {
+                 DefaultExt = "jpeg | *.jpg, *.jpeg"
+            };
 		private void TextFieldTextChanged(object sender, EventArgs e)
 		{
             if (!disableChangesMadeDetection)
@@ -1065,6 +1068,19 @@ namespace OpenChords.Forms
         {
             logger.Info("Clicked");
             Export.ExportToOpenSong.launchOpenSong();
+        }
+
+        private void picBackgroundImage_Click(object sender, EventArgs e)
+        {
+            openFileDialogSelectOpenSongBackground.InitialDirectory = OpenChords.Settings.ExtAppsAndDir.opensongBackgroundsFolder;
+            var result = openFileDialogSelectOpenSongBackground.ShowDialog();
+            if (result == System.Windows.Forms.DialogResult.OK)
+            {
+                var filename = openFileDialogSelectOpenSongBackground.FileName.Replace(OpenChords.Settings.ExtAppsAndDir.opensongBackgroundsFolder, "");
+                currentSong.OpenSongImageFileName = filename;
+                picBackgroundImage.Image = currentSong.getSongImage();
+                changesMade = true;
+            }
         }
 
 

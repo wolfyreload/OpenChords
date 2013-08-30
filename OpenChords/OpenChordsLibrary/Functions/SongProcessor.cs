@@ -130,9 +130,9 @@ namespace OpenChords.Functions
 			{
 				songTitleLine.Append("(Key - " + song.key);
 				
-				if (song.Capo != 0)
+				if (song.capo != 0)
 				{
-					songTitleLine.Append(" Capo - " + song.Capo);
+					songTitleLine.Append(" Capo - " + song.capo);
 				}
 
 				songTitleLine.Append(")");
@@ -161,7 +161,7 @@ namespace OpenChords.Functions
 				for (int j = 0; j < currentVerse.Length; j++)
 				{
 					if (isChord[i][j])
-                        currentVerse[j] = tranposeLine(currentVerse[j], song.PreferFlats);
+                        currentVerse[j] = tranposeLine(currentVerse[j], song.preferFlats);
 				}
 				
 			}

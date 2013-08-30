@@ -107,6 +107,7 @@
             this.label4 = new System.Windows.Forms.Label();
             this.label5 = new System.Windows.Forms.Label();
             this.txtOrder = new System.Windows.Forms.TextBox();
+            this.picBackgroundImage = new System.Windows.Forms.PictureBox();
             this.menuStrip1.SuspendLayout();
             this.splitMainForm.Panel1.SuspendLayout();
             this.splitMainForm.Panel2.SuspendLayout();
@@ -673,6 +674,7 @@
             // 
             this.splitLyricsAndNotes.Panel2.Controls.Add(this.label9);
             this.splitLyricsAndNotes.Panel2.Controls.Add(this.txtNotes);
+			this.splitLyricsAndNotes.Panel2.Controls.Add(this.picBackgroundImage);
             this.splitLyricsAndNotes.Size = new System.Drawing.Size(794, 566);
             this.splitLyricsAndNotes.SplitterDistance = 671;
             this.splitLyricsAndNotes.TabIndex = 5;
@@ -721,7 +723,21 @@
             this.label9.Size = new System.Drawing.Size(37, 15);
             this.label9.TabIndex = 4;
             this.label9.Text = "Notes";
+            
+			// picBackgroundImage
             // 
+            this.picBackgroundImage.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.picBackgroundImage.BackColor = System.Drawing.Color.Black;
+            this.picBackgroundImage.Location = new System.Drawing.Point(6, 469);
+            this.picBackgroundImage.Name = "picBackgroundImage";
+            this.picBackgroundImage.Size = new System.Drawing.Size(110, 93);
+            this.picBackgroundImage.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.picBackgroundImage.TabIndex = 5;
+            this.picBackgroundImage.TabStop = false;
+            this.picBackgroundImage.Click += new System.EventHandler(this.picBackgroundImage_Click);
+			// 
             // txtNotes
             // 
             this.txtNotes.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
@@ -732,7 +748,7 @@
             this.txtNotes.ForeColor = System.Drawing.Color.Black;
             this.txtNotes.Location = new System.Drawing.Point(6, 18);
             this.txtNotes.Name = "txtNotes";
-            this.txtNotes.Size = new System.Drawing.Size(110, 544);
+            this.txtNotes.Size = new System.Drawing.Size(110, 344);
             this.txtNotes.TabIndex = 3;
             this.txtNotes.Text = "";
             this.txtNotes.WordWrap = false;
@@ -1208,6 +1224,8 @@
         private System.Windows.Forms.ToolStripMenuItem exportAllSetsToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem launchOpenSongToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem pdfToolStripMenuItem;
+        private System.Windows.Forms.PictureBox picBackgroundImage;
+        
   
     }
 }
