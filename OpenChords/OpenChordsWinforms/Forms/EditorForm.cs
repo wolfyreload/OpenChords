@@ -249,6 +249,7 @@ namespace OpenChords.Forms
 
         private void presentSong()
         {
+            confirmSave();
             updateSelectedSong();
             var displaySettings = DisplayAndPrintSettings.loadSettings(DisplayAndPrintSettingsType.DisplaySettings);
             saveState();
@@ -257,6 +258,7 @@ namespace OpenChords.Forms
 
 		void presentSet()
 		{
+            confirmSave();
             var displaySettings = DisplayAndPrintSettings.loadSettings(DisplayAndPrintSettingsType.DisplaySettings);
 			saveState();
 			if (currentSet.songNames.Count > 0)

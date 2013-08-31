@@ -294,11 +294,11 @@ namespace OpenChords.Forms
 		void drawHeader()
 		{
 			heightPosition = displaySettings.topPageMargin;
-		
-			this.Text = SongProcessor.generateFileName(currentSong);
+
+            var title = SongProcessor.generateSongTitleInPresentation(currentSong);
 			
 			//draw title
-            graphicsObj.DrawString(SongProcessor.generateFileName(currentSong),
+            graphicsObj.DrawString(title,
                                    titleFormatter.Font,
                                    titleFormatter.Brush,
                                    displaySettings.leftPageMargin,
