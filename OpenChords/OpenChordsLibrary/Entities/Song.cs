@@ -119,6 +119,10 @@ namespace OpenChords.Entities
         public string lyrics { get; set; }
         public string ccli { get; set; }
         public string preferFlats { get; set; }
+        public string tempo { get; set; }
+        public string time_sig { get; set; }
+        public string copyright { get; set; }
+        public string hymn_number { get; set; }
 
         [XmlIgnore]
         public string notes {get; set;}
@@ -449,6 +453,28 @@ namespace OpenChords.Entities
             }
 
 
+        }
+
+        public static List<string> TimeSignatureOptions()
+        {
+            var options = new List<string>();
+            options.Add("2/4");
+            options.Add("3/4");
+            options.Add("4/4");
+            options.Add("3/8");
+            options.Add("6/8");
+            return options;
+        }
+
+        public static List<string> TempoOptions()
+        {
+            var options = new List<string>();
+            options.Add("Very Fast");
+            options.Add("Fast");
+            options.Add("Moderate");
+            options.Add("Slow");
+            options.Add("Very Slow");
+            return options;
         }
 
 

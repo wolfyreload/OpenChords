@@ -65,6 +65,7 @@
             this.splitSetsAndSongs = new System.Windows.Forms.SplitContainer();
             this.splitContainerPresentationSetList = new System.Windows.Forms.SplitContainer();
             this.grpPresentation = new System.Windows.Forms.GroupBox();
+            this.splitContainerSetVsButtons = new System.Windows.Forms.SplitContainer();
             this.listSet = new System.Windows.Forms.ListBox();
             this.imgUp = new System.Windows.Forms.PictureBox();
             this.imgDown = new System.Windows.Forms.PictureBox();
@@ -82,30 +83,49 @@
             this.panel2 = new System.Windows.Forms.Panel();
             this.splitContainerMetaLyrics = new System.Windows.Forms.SplitContainer();
             this.grpSongMetadata = new System.Windows.Forms.GroupBox();
+            this.pnlMoreMetaData = new System.Windows.Forms.Panel();
+            this.label5 = new System.Windows.Forms.Label();
+            this.btnPresentSong = new System.Windows.Forms.PictureBox();
             this.pnlSharpsFlats = new System.Windows.Forms.Panel();
             this.rdoFlats = new System.Windows.Forms.RadioButton();
             this.rdoSharps = new System.Windows.Forms.RadioButton();
-            this.label1 = new System.Windows.Forms.Label();
+            this.btnPlay = new System.Windows.Forms.PictureBox();
             this.panel4 = new System.Windows.Forms.Panel();
             this.txtCapo = new System.Windows.Forms.TextBox();
-            this.txtOrder = new System.Windows.Forms.TextBox();
+            this.BtnFixFormatting = new System.Windows.Forms.PictureBox();
             this.panel3 = new System.Windows.Forms.Panel();
             this.txtKey = new System.Windows.Forms.TextBox();
-            this.label5 = new System.Windows.Forms.Label();
-            this.BtnCapoDown = new System.Windows.Forms.PictureBox();
-            this.label4 = new System.Windows.Forms.Label();
-            this.BtnCapoUp = new System.Windows.Forms.PictureBox();
-            this.label6 = new System.Windows.Forms.Label();
-            this.BtnTransposeDown = new System.Windows.Forms.PictureBox();
-            this.txtTitle = new System.Windows.Forms.TextBox();
             this.BtnTransposeUp = new System.Windows.Forms.PictureBox();
-            this.txtAuthor = new System.Windows.Forms.TextBox();
-            this.BtnFixFormatting = new System.Windows.Forms.PictureBox();
-            this.label2 = new System.Windows.Forms.Label();
-            this.btnPlay = new System.Windows.Forms.PictureBox();
+            this.BtnTransposeDown = new System.Windows.Forms.PictureBox();
+            this.BtnCapoDown = new System.Windows.Forms.PictureBox();
+            this.label6 = new System.Windows.Forms.Label();
+            this.BtnCapoUp = new System.Windows.Forms.PictureBox();
+            this.flowMetaOtherSettings = new System.Windows.Forms.FlowLayoutPanel();
+            this.flowTempo = new System.Windows.Forms.FlowLayoutPanel();
+            this.lblTempo = new System.Windows.Forms.Label();
+            this.cmbTempo = new System.Windows.Forms.ComboBox();
+            this.flowSig = new System.Windows.Forms.FlowLayoutPanel();
+            this.lblSig = new System.Windows.Forms.Label();
+            this.cmbSig = new System.Windows.Forms.ComboBox();
+            this.flowccli = new System.Windows.Forms.FlowLayoutPanel();
+            this.lblccli = new System.Windows.Forms.Label();
+            this.txtccli = new System.Windows.Forms.TextBox();
+            this.flowReference = new System.Windows.Forms.FlowLayoutPanel();
+            this.lblReference = new System.Windows.Forms.Label();
             this.txtRef = new System.Windows.Forms.TextBox();
-            this.btnPresentSong = new System.Windows.Forms.PictureBox();
-            this.label10 = new System.Windows.Forms.Label();
+            this.pnlMainSongSettings = new System.Windows.Forms.Panel();
+            this.pnlCopyright = new System.Windows.Forms.Panel();
+            this.lblCopyright = new System.Windows.Forms.Label();
+            this.txtCopyright = new System.Windows.Forms.TextBox();
+            this.pnlAuthor = new System.Windows.Forms.Panel();
+            this.lblAuthor = new System.Windows.Forms.Label();
+            this.txtAuthor = new System.Windows.Forms.TextBox();
+            this.pnlOrder = new System.Windows.Forms.Panel();
+            this.lblOrder = new System.Windows.Forms.Label();
+            this.txtOrder = new System.Windows.Forms.TextBox();
+            this.pnlTitle = new System.Windows.Forms.Panel();
+            this.lblTitle = new System.Windows.Forms.Label();
+            this.txtTitle = new System.Windows.Forms.TextBox();
             this.splitLyricsAndNotes = new System.Windows.Forms.SplitContainer();
             this.grpChordsLyrics = new System.Windows.Forms.GroupBox();
             this.txtLyrics = new System.Windows.Forms.RichTextBox();
@@ -114,7 +134,6 @@
             this.txtNotes = new System.Windows.Forms.RichTextBox();
             this.grpImage = new System.Windows.Forms.GroupBox();
             this.picBackgroundImage = new System.Windows.Forms.PictureBox();
-            this.splitContainerSetVsButtons = new System.Windows.Forms.SplitContainer();
             this.menuStrip1.SuspendLayout();
             this.splitMainForm.Panel1.SuspendLayout();
             this.splitMainForm.Panel2.SuspendLayout();
@@ -127,6 +146,9 @@
             this.splitContainerPresentationSetList.Panel2.SuspendLayout();
             this.splitContainerPresentationSetList.SuspendLayout();
             this.grpPresentation.SuspendLayout();
+            this.splitContainerSetVsButtons.Panel1.SuspendLayout();
+            this.splitContainerSetVsButtons.Panel2.SuspendLayout();
+            this.splitContainerSetVsButtons.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.imgUp)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.imgDown)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.BtnPresentSet)).BeginInit();
@@ -143,16 +165,27 @@
             this.splitContainerMetaLyrics.Panel2.SuspendLayout();
             this.splitContainerMetaLyrics.SuspendLayout();
             this.grpSongMetadata.SuspendLayout();
+            this.pnlMoreMetaData.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.btnPresentSong)).BeginInit();
             this.pnlSharpsFlats.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.btnPlay)).BeginInit();
             this.panel4.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.BtnFixFormatting)).BeginInit();
             this.panel3.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.BtnTransposeUp)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.BtnTransposeDown)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.BtnCapoDown)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.BtnCapoUp)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.BtnTransposeDown)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.BtnTransposeUp)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.BtnFixFormatting)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.btnPlay)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.btnPresentSong)).BeginInit();
+            this.flowMetaOtherSettings.SuspendLayout();
+            this.flowTempo.SuspendLayout();
+            this.flowSig.SuspendLayout();
+            this.flowccli.SuspendLayout();
+            this.flowReference.SuspendLayout();
+            this.pnlMainSongSettings.SuspendLayout();
+            this.pnlCopyright.SuspendLayout();
+            this.pnlAuthor.SuspendLayout();
+            this.pnlOrder.SuspendLayout();
+            this.pnlTitle.SuspendLayout();
             this.splitLyricsAndNotes.Panel1.SuspendLayout();
             this.splitLyricsAndNotes.Panel2.SuspendLayout();
             this.splitLyricsAndNotes.SuspendLayout();
@@ -163,9 +196,6 @@
             this.grpNotes.SuspendLayout();
             this.grpImage.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.picBackgroundImage)).BeginInit();
-            this.splitContainerSetVsButtons.Panel1.SuspendLayout();
-            this.splitContainerSetVsButtons.Panel2.SuspendLayout();
-            this.splitContainerSetVsButtons.SuspendLayout();
             this.SuspendLayout();
             // 
             // menuStrip1
@@ -486,14 +516,14 @@
             // splitSetsAndSongs.Panel1
             // 
             this.splitSetsAndSongs.Panel1.Controls.Add(this.splitContainerPresentationSetList);
-            this.splitSetsAndSongs.Panel1MinSize = 179;
+            this.splitSetsAndSongs.Panel1MinSize = 177;
             // 
             // splitSetsAndSongs.Panel2
             // 
             this.splitSetsAndSongs.Panel2.Controls.Add(this.splitContainerSongListSearchBar);
             this.splitSetsAndSongs.Panel2.Padding = new System.Windows.Forms.Padding(3, 0, 0, 0);
             this.splitSetsAndSongs.Size = new System.Drawing.Size(213, 706);
-            this.splitSetsAndSongs.SplitterDistance = 179;
+            this.splitSetsAndSongs.SplitterDistance = 177;
             this.splitSetsAndSongs.TabIndex = 5;
             this.splitSetsAndSongs.TabStop = false;
             // 
@@ -513,7 +543,8 @@
             // splitContainerPresentationSetList.Panel2
             // 
             this.splitContainerPresentationSetList.Panel2.Controls.Add(this.grpSetList);
-            this.splitContainerPresentationSetList.Size = new System.Drawing.Size(213, 179);
+            this.splitContainerPresentationSetList.Panel2MinSize = 30;
+            this.splitContainerPresentationSetList.Size = new System.Drawing.Size(213, 177);
             this.splitContainerPresentationSetList.SplitterDistance = 138;
             this.splitContainerPresentationSetList.SplitterWidth = 1;
             this.splitContainerPresentationSetList.TabIndex = 23;
@@ -529,6 +560,28 @@
             this.grpPresentation.TabIndex = 0;
             this.grpPresentation.TabStop = false;
             this.grpPresentation.Text = "Song Presentation";
+            // 
+            // splitContainerSetVsButtons
+            // 
+            this.splitContainerSetVsButtons.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.splitContainerSetVsButtons.FixedPanel = System.Windows.Forms.FixedPanel.Panel2;
+            this.splitContainerSetVsButtons.IsSplitterFixed = true;
+            this.splitContainerSetVsButtons.Location = new System.Drawing.Point(3, 16);
+            this.splitContainerSetVsButtons.Name = "splitContainerSetVsButtons";
+            // 
+            // splitContainerSetVsButtons.Panel1
+            // 
+            this.splitContainerSetVsButtons.Panel1.Controls.Add(this.listSet);
+            // 
+            // splitContainerSetVsButtons.Panel2
+            // 
+            this.splitContainerSetVsButtons.Panel2.Controls.Add(this.imgUp);
+            this.splitContainerSetVsButtons.Panel2.Controls.Add(this.imgDown);
+            this.splitContainerSetVsButtons.Panel2.Controls.Add(this.BtnPresentSet);
+            this.splitContainerSetVsButtons.Panel2.Controls.Add(this.BtnClear);
+            this.splitContainerSetVsButtons.Size = new System.Drawing.Size(207, 119);
+            this.splitContainerSetVsButtons.SplitterDistance = 171;
+            this.splitContainerSetVsButtons.TabIndex = 23;
             // 
             // listSet
             // 
@@ -595,7 +648,7 @@
             this.grpSetList.ForeColor = System.Drawing.Color.White;
             this.grpSetList.Location = new System.Drawing.Point(0, 0);
             this.grpSetList.Name = "grpSetList";
-            this.grpSetList.Size = new System.Drawing.Size(213, 40);
+            this.grpSetList.Size = new System.Drawing.Size(213, 38);
             this.grpSetList.TabIndex = 0;
             this.grpSetList.TabStop = false;
             this.grpSetList.Text = "Set List";
@@ -610,9 +663,9 @@
             this.cmboSets.Font = new System.Drawing.Font("Lucida Console", 8.25F);
             this.cmboSets.ForeColor = System.Drawing.Color.Black;
             this.cmboSets.FormattingEnabled = true;
-            this.cmboSets.Location = new System.Drawing.Point(3, 18);
+            this.cmboSets.Location = new System.Drawing.Point(3, 16);
             this.cmboSets.Name = "cmboSets";
-            this.cmboSets.Size = new System.Drawing.Size(180, 19);
+            this.cmboSets.Size = new System.Drawing.Size(171, 19);
             this.cmboSets.Sorted = true;
             this.cmboSets.TabIndex = 1;
             this.cmboSets.TabStop = false;
@@ -623,9 +676,9 @@
             // 
             this.lblSongCount.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.lblSongCount.ForeColor = System.Drawing.Color.White;
-            this.lblSongCount.Location = new System.Drawing.Point(186, 15);
+            this.lblSongCount.Location = new System.Drawing.Point(176, 13);
             this.lblSongCount.Name = "lblSongCount";
-            this.lblSongCount.Size = new System.Drawing.Size(25, 22);
+            this.lblSongCount.Size = new System.Drawing.Size(35, 22);
             this.lblSongCount.TabIndex = 4;
             this.lblSongCount.Text = "[*]";
             this.lblSongCount.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
@@ -646,8 +699,8 @@
             // splitContainerSongListSearchBar.Panel2
             // 
             this.splitContainerSongListSearchBar.Panel2.Controls.Add(this.grpSearchBar);
-            this.splitContainerSongListSearchBar.Size = new System.Drawing.Size(210, 523);
-            this.splitContainerSongListSearchBar.SplitterDistance = 470;
+            this.splitContainerSongListSearchBar.Size = new System.Drawing.Size(210, 525);
+            this.splitContainerSongListSearchBar.SplitterDistance = 472;
             this.splitContainerSongListSearchBar.TabIndex = 2;
             // 
             // grpSongList
@@ -657,7 +710,7 @@
             this.grpSongList.ForeColor = System.Drawing.Color.White;
             this.grpSongList.Location = new System.Drawing.Point(0, 0);
             this.grpSongList.Name = "grpSongList";
-            this.grpSongList.Size = new System.Drawing.Size(210, 470);
+            this.grpSongList.Size = new System.Drawing.Size(210, 472);
             this.grpSongList.TabIndex = 3;
             this.grpSongList.TabStop = false;
             this.grpSongList.Text = "Song List";
@@ -672,7 +725,7 @@
             this.listSongs.Margin = new System.Windows.Forms.Padding(3, 3, 3, 0);
             this.listSongs.Name = "listSongs";
             this.listSongs.ScrollAlwaysVisible = true;
-            this.listSongs.Size = new System.Drawing.Size(204, 451);
+            this.listSongs.Size = new System.Drawing.Size(204, 453);
             this.listSongs.Sorted = true;
             this.listSongs.TabIndex = 1;
             this.listSongs.SelectedIndexChanged += new System.EventHandler(this.ListSongsSelectedIndexChanged);
@@ -709,7 +762,7 @@
             // BtnSearch
             // 
             this.BtnSearch.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.BtnSearch.Location = new System.Drawing.Point(175, 13);
+            this.BtnSearch.Location = new System.Drawing.Point(176, 13);
             this.BtnSearch.Name = "BtnSearch";
             this.BtnSearch.Size = new System.Drawing.Size(29, 30);
             this.BtnSearch.TabIndex = 9;
@@ -753,26 +806,9 @@
             // 
             // grpSongMetadata
             // 
-            this.grpSongMetadata.Controls.Add(this.pnlSharpsFlats);
-            this.grpSongMetadata.Controls.Add(this.label1);
-            this.grpSongMetadata.Controls.Add(this.panel4);
-            this.grpSongMetadata.Controls.Add(this.txtOrder);
-            this.grpSongMetadata.Controls.Add(this.panel3);
-            this.grpSongMetadata.Controls.Add(this.label5);
-            this.grpSongMetadata.Controls.Add(this.BtnCapoDown);
-            this.grpSongMetadata.Controls.Add(this.label4);
-            this.grpSongMetadata.Controls.Add(this.BtnCapoUp);
-            this.grpSongMetadata.Controls.Add(this.label6);
-            this.grpSongMetadata.Controls.Add(this.BtnTransposeDown);
-            this.grpSongMetadata.Controls.Add(this.txtTitle);
-            this.grpSongMetadata.Controls.Add(this.BtnTransposeUp);
-            this.grpSongMetadata.Controls.Add(this.txtAuthor);
-            this.grpSongMetadata.Controls.Add(this.BtnFixFormatting);
-            this.grpSongMetadata.Controls.Add(this.label2);
-            this.grpSongMetadata.Controls.Add(this.btnPlay);
-            this.grpSongMetadata.Controls.Add(this.txtRef);
-            this.grpSongMetadata.Controls.Add(this.btnPresentSong);
-            this.grpSongMetadata.Controls.Add(this.label10);
+            this.grpSongMetadata.Controls.Add(this.pnlMoreMetaData);
+            this.grpSongMetadata.Controls.Add(this.flowMetaOtherSettings);
+            this.grpSongMetadata.Controls.Add(this.pnlMainSongSettings);
             this.grpSongMetadata.Dock = System.Windows.Forms.DockStyle.Fill;
             this.grpSongMetadata.ForeColor = System.Drawing.Color.White;
             this.grpSongMetadata.Location = new System.Drawing.Point(0, 0);
@@ -781,15 +817,58 @@
             this.grpSongMetadata.TabIndex = 22;
             this.grpSongMetadata.TabStop = false;
             // 
+            // pnlMoreMetaData
+            // 
+            this.pnlMoreMetaData.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.pnlMoreMetaData.Controls.Add(this.label5);
+            this.pnlMoreMetaData.Controls.Add(this.btnPresentSong);
+            this.pnlMoreMetaData.Controls.Add(this.pnlSharpsFlats);
+            this.pnlMoreMetaData.Controls.Add(this.btnPlay);
+            this.pnlMoreMetaData.Controls.Add(this.panel4);
+            this.pnlMoreMetaData.Controls.Add(this.BtnFixFormatting);
+            this.pnlMoreMetaData.Controls.Add(this.panel3);
+            this.pnlMoreMetaData.Controls.Add(this.BtnTransposeUp);
+            this.pnlMoreMetaData.Controls.Add(this.BtnTransposeDown);
+            this.pnlMoreMetaData.Controls.Add(this.BtnCapoDown);
+            this.pnlMoreMetaData.Controls.Add(this.label6);
+            this.pnlMoreMetaData.Controls.Add(this.BtnCapoUp);
+            this.pnlMoreMetaData.Location = new System.Drawing.Point(600, 8);
+            this.pnlMoreMetaData.Name = "pnlMoreMetaData";
+            this.pnlMoreMetaData.Size = new System.Drawing.Size(185, 130);
+            this.pnlMoreMetaData.TabIndex = 3;
+            // 
+            // label5
+            // 
+            this.label5.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.label5.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(53)))), ((int)(((byte)(76)))), ((int)(((byte)(103)))));
+            this.label5.Font = new System.Drawing.Font("Comic Sans MS", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label5.Location = new System.Drawing.Point(1, 11);
+            this.label5.Name = "label5";
+            this.label5.Size = new System.Drawing.Size(35, 32);
+            this.label5.TabIndex = 0;
+            this.label5.Text = "Key";
+            this.label5.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            // 
+            // btnPresentSong
+            // 
+            this.btnPresentSong.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnPresentSong.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(53)))), ((int)(((byte)(76)))), ((int)(((byte)(103)))));
+            this.btnPresentSong.Location = new System.Drawing.Point(148, 90);
+            this.btnPresentSong.Name = "btnPresentSong";
+            this.btnPresentSong.Size = new System.Drawing.Size(32, 32);
+            this.btnPresentSong.TabIndex = 13;
+            this.btnPresentSong.TabStop = false;
+            this.btnPresentSong.Click += new System.EventHandler(this.BtnPresentSongClick);
+            // 
             // pnlSharpsFlats
             // 
             this.pnlSharpsFlats.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.pnlSharpsFlats.Controls.Add(this.rdoFlats);
             this.pnlSharpsFlats.Controls.Add(this.rdoSharps);
-            this.pnlSharpsFlats.Location = new System.Drawing.Point(580, 108);
+            this.pnlSharpsFlats.Location = new System.Drawing.Point(4, 99);
             this.pnlSharpsFlats.Name = "pnlSharpsFlats";
-            this.pnlSharpsFlats.Size = new System.Drawing.Size(145, 28);
-            this.pnlSharpsFlats.TabIndex = 6;
+            this.pnlSharpsFlats.Size = new System.Drawing.Size(131, 28);
+            this.pnlSharpsFlats.TabIndex = 3;
             // 
             // rdoFlats
             // 
@@ -808,7 +887,7 @@
             // 
             this.rdoSharps.AutoSize = true;
             this.rdoSharps.CheckAlign = System.Drawing.ContentAlignment.MiddleRight;
-            this.rdoSharps.Location = new System.Drawing.Point(84, 7);
+            this.rdoSharps.Location = new System.Drawing.Point(67, 7);
             this.rdoSharps.Name = "rdoSharps";
             this.rdoSharps.Size = new System.Drawing.Size(58, 17);
             this.rdoSharps.TabIndex = 1;
@@ -817,16 +896,15 @@
             this.rdoSharps.UseVisualStyleBackColor = true;
             this.rdoSharps.CheckedChanged += new System.EventHandler(this.TextFieldTextChanged);
             // 
-            // label1
+            // btnPlay
             // 
-            this.label1.AutoSize = true;
-            this.label1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(53)))), ((int)(((byte)(76)))), ((int)(((byte)(103)))));
-            this.label1.Font = new System.Drawing.Font("Comic Sans MS", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label1.Location = new System.Drawing.Point(6, 8);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(31, 15);
-            this.label1.TabIndex = 0;
-            this.label1.Text = "Title";
+            this.btnPlay.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnPlay.Location = new System.Drawing.Point(150, 2);
+            this.btnPlay.Name = "btnPlay";
+            this.btnPlay.Size = new System.Drawing.Size(32, 32);
+            this.btnPlay.TabIndex = 14;
+            this.btnPlay.TabStop = false;
+            this.btnPlay.Click += new System.EventHandler(this.BtnPlayClick);
             // 
             // panel4
             // 
@@ -834,7 +912,7 @@
             this.panel4.BackColor = System.Drawing.Color.White;
             this.panel4.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
             this.panel4.Controls.Add(this.txtCapo);
-            this.panel4.Location = new System.Drawing.Point(633, 64);
+            this.panel4.Location = new System.Drawing.Point(42, 54);
             this.panel4.Name = "panel4";
             this.panel4.Size = new System.Drawing.Size(70, 40);
             this.panel4.TabIndex = 21;
@@ -849,24 +927,21 @@
             this.txtCapo.Name = "txtCapo";
             this.txtCapo.ReadOnly = true;
             this.txtCapo.Size = new System.Drawing.Size(68, 19);
-            this.txtCapo.TabIndex = 9;
+            this.txtCapo.TabIndex = 2;
             this.txtCapo.TabStop = false;
             this.txtCapo.Text = "0";
             this.txtCapo.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             // 
-            // txtOrder
+            // BtnFixFormatting
             // 
-            this.txtOrder.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.txtOrder.BackColor = System.Drawing.Color.White;
-            this.txtOrder.CharacterCasing = System.Windows.Forms.CharacterCasing.Upper;
-            this.txtOrder.Font = new System.Drawing.Font("Lucida Console", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtOrder.Location = new System.Drawing.Point(6, 63);
-            this.txtOrder.Name = "txtOrder";
-            this.txtOrder.Size = new System.Drawing.Size(568, 23);
-            this.txtOrder.TabIndex = 2;
-            this.txtOrder.TextChanged += new System.EventHandler(this.TextFieldTextChanged);
-            this.txtOrder.Leave += new System.EventHandler(this.txtOrder_Leave);
+            this.BtnFixFormatting.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.BtnFixFormatting.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(53)))), ((int)(((byte)(76)))), ((int)(((byte)(103)))));
+            this.BtnFixFormatting.Location = new System.Drawing.Point(149, 44);
+            this.BtnFixFormatting.Name = "BtnFixFormatting";
+            this.BtnFixFormatting.Size = new System.Drawing.Size(32, 32);
+            this.BtnFixFormatting.TabIndex = 15;
+            this.BtnFixFormatting.TabStop = false;
+            this.BtnFixFormatting.Click += new System.EventHandler(this.BtnFixFormattingClick);
             // 
             // panel3
             // 
@@ -874,7 +949,7 @@
             this.panel3.BackColor = System.Drawing.Color.White;
             this.panel3.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
             this.panel3.Controls.Add(this.txtKey);
-            this.panel3.Location = new System.Drawing.Point(633, 14);
+            this.panel3.Location = new System.Drawing.Point(42, 4);
             this.panel3.Name = "panel3";
             this.panel3.Size = new System.Drawing.Size(70, 40);
             this.panel3.TabIndex = 20;
@@ -888,99 +963,276 @@
             this.txtKey.Location = new System.Drawing.Point(-2, 10);
             this.txtKey.Name = "txtKey";
             this.txtKey.Size = new System.Drawing.Size(68, 19);
-            this.txtKey.TabIndex = 5;
+            this.txtKey.TabIndex = 1;
             this.txtKey.Text = "Am";
             this.txtKey.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             this.txtKey.TextChanged += new System.EventHandler(this.TextFieldTextChanged);
             // 
-            // label5
+            // BtnTransposeUp
             // 
-            this.label5.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.label5.AutoSize = true;
-            this.label5.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(53)))), ((int)(((byte)(76)))), ((int)(((byte)(103)))));
-            this.label5.Font = new System.Drawing.Font("Comic Sans MS", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label5.Location = new System.Drawing.Point(588, 24);
-            this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(26, 15);
-            this.label5.TabIndex = 0;
-            this.label5.Text = "Key";
-            // 
-            // BtnCapoDown
-            // 
-            this.BtnCapoDown.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.BtnCapoDown.Location = new System.Drawing.Point(707, 89);
-            this.BtnCapoDown.Name = "BtnCapoDown";
-            this.BtnCapoDown.Size = new System.Drawing.Size(16, 16);
-            this.BtnCapoDown.TabIndex = 19;
-            this.BtnCapoDown.TabStop = false;
-            this.BtnCapoDown.Click += new System.EventHandler(this.BtnCapoDownClick);
-            // 
-            // label4
-            // 
-            this.label4.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.label4.AutoSize = true;
-            this.label4.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(53)))), ((int)(((byte)(76)))), ((int)(((byte)(103)))));
-            this.label4.Font = new System.Drawing.Font("Comic Sans MS", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label4.Location = new System.Drawing.Point(6, 49);
-            this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(38, 15);
-            this.label4.TabIndex = 0;
-            this.label4.Text = "Order";
-            // 
-            // BtnCapoUp
-            // 
-            this.BtnCapoUp.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.BtnCapoUp.Location = new System.Drawing.Point(707, 65);
-            this.BtnCapoUp.Name = "BtnCapoUp";
-            this.BtnCapoUp.Size = new System.Drawing.Size(16, 16);
-            this.BtnCapoUp.TabIndex = 18;
-            this.BtnCapoUp.TabStop = false;
-            this.BtnCapoUp.Click += new System.EventHandler(this.BtnCapoUpClick);
-            // 
-            // label6
-            // 
-            this.label6.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.label6.AutoSize = true;
-            this.label6.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(53)))), ((int)(((byte)(76)))), ((int)(((byte)(103)))));
-            this.label6.Font = new System.Drawing.Font("Comic Sans MS", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label6.Location = new System.Drawing.Point(588, 73);
-            this.label6.Name = "label6";
-            this.label6.Size = new System.Drawing.Size(32, 15);
-            this.label6.TabIndex = 11;
-            this.label6.Text = "Capo";
+            this.BtnTransposeUp.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.BtnTransposeUp.Location = new System.Drawing.Point(118, 3);
+            this.BtnTransposeUp.Name = "BtnTransposeUp";
+            this.BtnTransposeUp.Size = new System.Drawing.Size(16, 16);
+            this.BtnTransposeUp.TabIndex = 16;
+            this.BtnTransposeUp.TabStop = false;
+            this.BtnTransposeUp.Click += new System.EventHandler(this.BtnTransposeUpClick);
             // 
             // BtnTransposeDown
             // 
             this.BtnTransposeDown.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.BtnTransposeDown.Location = new System.Drawing.Point(709, 37);
+            this.BtnTransposeDown.Location = new System.Drawing.Point(118, 27);
             this.BtnTransposeDown.Name = "BtnTransposeDown";
             this.BtnTransposeDown.Size = new System.Drawing.Size(16, 16);
             this.BtnTransposeDown.TabIndex = 17;
             this.BtnTransposeDown.TabStop = false;
             this.BtnTransposeDown.Click += new System.EventHandler(this.BtnTransposeDownClick);
             // 
-            // txtTitle
+            // BtnCapoDown
             // 
-            this.txtTitle.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            this.BtnCapoDown.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.BtnCapoDown.Location = new System.Drawing.Point(118, 79);
+            this.BtnCapoDown.Name = "BtnCapoDown";
+            this.BtnCapoDown.Size = new System.Drawing.Size(16, 16);
+            this.BtnCapoDown.TabIndex = 19;
+            this.BtnCapoDown.TabStop = false;
+            this.BtnCapoDown.Click += new System.EventHandler(this.BtnCapoDownClick);
+            // 
+            // label6
+            // 
+            this.label6.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.label6.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(53)))), ((int)(((byte)(76)))), ((int)(((byte)(103)))));
+            this.label6.Font = new System.Drawing.Font("Comic Sans MS", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label6.Location = new System.Drawing.Point(1, 54);
+            this.label6.Name = "label6";
+            this.label6.Size = new System.Drawing.Size(35, 40);
+            this.label6.TabIndex = 11;
+            this.label6.Text = "Capo";
+            this.label6.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            // 
+            // BtnCapoUp
+            // 
+            this.BtnCapoUp.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.BtnCapoUp.Location = new System.Drawing.Point(118, 55);
+            this.BtnCapoUp.Name = "BtnCapoUp";
+            this.BtnCapoUp.Size = new System.Drawing.Size(16, 16);
+            this.BtnCapoUp.TabIndex = 18;
+            this.BtnCapoUp.TabStop = false;
+            this.BtnCapoUp.Click += new System.EventHandler(this.BtnCapoUpClick);
+            // 
+            // flowMetaOtherSettings
+            // 
+            this.flowMetaOtherSettings.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.flowMetaOtherSettings.Controls.Add(this.flowTempo);
+            this.flowMetaOtherSettings.Controls.Add(this.flowSig);
+            this.flowMetaOtherSettings.Controls.Add(this.flowccli);
+            this.flowMetaOtherSettings.Controls.Add(this.flowReference);
+            this.flowMetaOtherSettings.FlowDirection = System.Windows.Forms.FlowDirection.TopDown;
+            this.flowMetaOtherSettings.Location = new System.Drawing.Point(339, 7);
+            this.flowMetaOtherSettings.Name = "flowMetaOtherSettings";
+            this.flowMetaOtherSettings.Size = new System.Drawing.Size(259, 131);
+            this.flowMetaOtherSettings.TabIndex = 2;
+            // 
+            // flowTempo
+            // 
+            this.flowTempo.AutoSize = true;
+            this.flowTempo.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
+            this.flowTempo.Controls.Add(this.lblTempo);
+            this.flowTempo.Controls.Add(this.cmbTempo);
+            this.flowTempo.Location = new System.Drawing.Point(4, 4);
+            this.flowTempo.Margin = new System.Windows.Forms.Padding(4, 4, 1, 4);
+            this.flowTempo.Name = "flowTempo";
+            this.flowTempo.Size = new System.Drawing.Size(249, 23);
+            this.flowTempo.TabIndex = 24;
+            // 
+            // lblTempo
+            // 
+            this.lblTempo.Font = new System.Drawing.Font("Comic Sans MS", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblTempo.Location = new System.Drawing.Point(3, 0);
+            this.lblTempo.Name = "lblTempo";
+            this.lblTempo.Size = new System.Drawing.Size(61, 23);
+            this.lblTempo.TabIndex = 0;
+            this.lblTempo.Text = "Tempo";
+            this.lblTempo.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            // 
+            // cmbTempo
+            // 
+            this.cmbTempo.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cmbTempo.FormattingEnabled = true;
+            this.cmbTempo.Location = new System.Drawing.Point(67, 0);
+            this.cmbTempo.Margin = new System.Windows.Forms.Padding(0);
+            this.cmbTempo.Name = "cmbTempo";
+            this.cmbTempo.Size = new System.Drawing.Size(182, 21);
+            this.cmbTempo.TabIndex = 1;
+            this.cmbTempo.SelectedIndexChanged += new System.EventHandler(this.comboBoxSelectedIndexChanged);
+            // 
+            // flowSig
+            // 
+            this.flowSig.AutoSize = true;
+            this.flowSig.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
+            this.flowSig.Controls.Add(this.lblSig);
+            this.flowSig.Controls.Add(this.cmbSig);
+            this.flowSig.Location = new System.Drawing.Point(4, 35);
+            this.flowSig.Margin = new System.Windows.Forms.Padding(4, 4, 1, 4);
+            this.flowSig.Name = "flowSig";
+            this.flowSig.Size = new System.Drawing.Size(249, 23);
+            this.flowSig.TabIndex = 25;
+            // 
+            // lblSig
+            // 
+            this.lblSig.Font = new System.Drawing.Font("Comic Sans MS", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblSig.Location = new System.Drawing.Point(3, 0);
+            this.lblSig.Name = "lblSig";
+            this.lblSig.Size = new System.Drawing.Size(61, 23);
+            this.lblSig.TabIndex = 0;
+            this.lblSig.Text = "Signature";
+            this.lblSig.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            // 
+            // cmbSig
+            // 
+            this.cmbSig.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cmbSig.FormattingEnabled = true;
+            this.cmbSig.Location = new System.Drawing.Point(67, 0);
+            this.cmbSig.Margin = new System.Windows.Forms.Padding(0);
+            this.cmbSig.Name = "cmbSig";
+            this.cmbSig.Size = new System.Drawing.Size(182, 21);
+            this.cmbSig.TabIndex = 1;
+            this.cmbSig.SelectedIndexChanged += new System.EventHandler(this.comboBoxSelectedIndexChanged);
+            // 
+            // flowccli
+            // 
+            this.flowccli.AutoSize = true;
+            this.flowccli.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
+            this.flowccli.Controls.Add(this.lblccli);
+            this.flowccli.Controls.Add(this.txtccli);
+            this.flowccli.Location = new System.Drawing.Point(4, 66);
+            this.flowccli.Margin = new System.Windows.Forms.Padding(4, 4, 1, 4);
+            this.flowccli.Name = "flowccli";
+            this.flowccli.Size = new System.Drawing.Size(249, 23);
+            this.flowccli.TabIndex = 26;
+            // 
+            // lblccli
+            // 
+            this.lblccli.Font = new System.Drawing.Font("Comic Sans MS", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblccli.Location = new System.Drawing.Point(3, 0);
+            this.lblccli.Name = "lblccli";
+            this.lblccli.Size = new System.Drawing.Size(61, 23);
+            this.lblccli.TabIndex = 0;
+            this.lblccli.Text = "ccli";
+            this.lblccli.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            // 
+            // txtccli
+            // 
+            this.txtccli.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.txtccli.BackColor = System.Drawing.Color.White;
+            this.txtccli.Font = new System.Drawing.Font("Lucida Console", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtccli.Location = new System.Drawing.Point(67, 0);
+            this.txtccli.Margin = new System.Windows.Forms.Padding(0);
+            this.txtccli.Name = "txtccli";
+            this.txtccli.Size = new System.Drawing.Size(182, 23);
+            this.txtccli.TabIndex = 4;
+            this.txtccli.TextChanged += new System.EventHandler(this.TextFieldTextChanged);
+            // 
+            // flowReference
+            // 
+            this.flowReference.AutoSize = true;
+            this.flowReference.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
+            this.flowReference.Controls.Add(this.lblReference);
+            this.flowReference.Controls.Add(this.txtRef);
+            this.flowReference.Location = new System.Drawing.Point(4, 97);
+            this.flowReference.Margin = new System.Windows.Forms.Padding(4, 4, 1, 4);
+            this.flowReference.Name = "flowReference";
+            this.flowReference.Size = new System.Drawing.Size(249, 26);
+            this.flowReference.TabIndex = 27;
+            // 
+            // lblReference
+            // 
+            this.lblReference.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.lblReference.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(53)))), ((int)(((byte)(76)))), ((int)(((byte)(103)))));
+            this.lblReference.Font = new System.Drawing.Font("Comic Sans MS", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblReference.Location = new System.Drawing.Point(3, 0);
+            this.lblReference.Name = "lblReference";
+            this.lblReference.Size = new System.Drawing.Size(61, 26);
+            this.lblReference.TabIndex = 0;
+            this.lblReference.Text = "Reference";
+            this.lblReference.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            // 
+            // txtRef
+            // 
+            this.txtRef.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.txtRef.BackColor = System.Drawing.Color.White;
+            this.txtRef.Font = new System.Drawing.Font("Lucida Console", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtRef.Location = new System.Drawing.Point(67, 0);
+            this.txtRef.Margin = new System.Windows.Forms.Padding(0);
+            this.txtRef.Name = "txtRef";
+            this.txtRef.Size = new System.Drawing.Size(182, 23);
+            this.txtRef.TabIndex = 4;
+            this.txtRef.TextChanged += new System.EventHandler(this.TextFieldTextChanged);
+            // 
+            // pnlMainSongSettings
+            // 
+            this.pnlMainSongSettings.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.txtTitle.BackColor = System.Drawing.Color.White;
-            this.txtTitle.Font = new System.Drawing.Font("Lucida Console", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtTitle.Location = new System.Drawing.Point(6, 23);
-            this.txtTitle.Name = "txtTitle";
-            this.txtTitle.Size = new System.Drawing.Size(568, 23);
-            this.txtTitle.TabIndex = 1;
-            this.txtTitle.TextChanged += new System.EventHandler(this.TextFieldTextChanged);
+            this.pnlMainSongSettings.Controls.Add(this.pnlCopyright);
+            this.pnlMainSongSettings.Controls.Add(this.pnlAuthor);
+            this.pnlMainSongSettings.Controls.Add(this.pnlOrder);
+            this.pnlMainSongSettings.Controls.Add(this.pnlTitle);
+            this.pnlMainSongSettings.Location = new System.Drawing.Point(6, 8);
+            this.pnlMainSongSettings.Name = "pnlMainSongSettings";
+            this.pnlMainSongSettings.Size = new System.Drawing.Size(332, 130);
+            this.pnlMainSongSettings.TabIndex = 1;
             // 
-            // BtnTransposeUp
+            // pnlCopyright
             // 
-            this.BtnTransposeUp.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.BtnTransposeUp.Location = new System.Drawing.Point(709, 13);
-            this.BtnTransposeUp.Name = "BtnTransposeUp";
-            this.BtnTransposeUp.Size = new System.Drawing.Size(16, 16);
-            this.BtnTransposeUp.TabIndex = 16;
-            this.BtnTransposeUp.TabStop = false;
-            this.BtnTransposeUp.Click += new System.EventHandler(this.BtnTransposeUpClick);
+            this.pnlCopyright.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.pnlCopyright.Controls.Add(this.lblCopyright);
+            this.pnlCopyright.Controls.Add(this.txtCopyright);
+            this.pnlCopyright.Location = new System.Drawing.Point(1, 93);
+            this.pnlCopyright.Name = "pnlCopyright";
+            this.pnlCopyright.Size = new System.Drawing.Size(330, 29);
+            this.pnlCopyright.TabIndex = 3;
+            // 
+            // lblCopyright
+            // 
+            this.lblCopyright.Font = new System.Drawing.Font("Comic Sans MS", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblCopyright.Location = new System.Drawing.Point(3, 0);
+            this.lblCopyright.Name = "lblCopyright";
+            this.lblCopyright.Size = new System.Drawing.Size(67, 23);
+            this.lblCopyright.TabIndex = 0;
+            this.lblCopyright.Text = "Copyright";
+            this.lblCopyright.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            // 
+            // txtCopyright
+            // 
+            this.txtCopyright.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.txtCopyright.Location = new System.Drawing.Point(70, 3);
+            this.txtCopyright.Name = "txtCopyright";
+            this.txtCopyright.Size = new System.Drawing.Size(257, 20);
+            this.txtCopyright.TabIndex = 1;
+            // 
+            // pnlAuthor
+            // 
+            this.pnlAuthor.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.pnlAuthor.Controls.Add(this.lblAuthor);
+            this.pnlAuthor.Controls.Add(this.txtAuthor);
+            this.pnlAuthor.Location = new System.Drawing.Point(1, 62);
+            this.pnlAuthor.Name = "pnlAuthor";
+            this.pnlAuthor.Size = new System.Drawing.Size(330, 29);
+            this.pnlAuthor.TabIndex = 2;
+            // 
+            // lblAuthor
+            // 
+            this.lblAuthor.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(53)))), ((int)(((byte)(76)))), ((int)(((byte)(103)))));
+            this.lblAuthor.Font = new System.Drawing.Font("Comic Sans MS", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblAuthor.Location = new System.Drawing.Point(3, 0);
+            this.lblAuthor.Name = "lblAuthor";
+            this.lblAuthor.Size = new System.Drawing.Size(55, 25);
+            this.lblAuthor.TabIndex = 0;
+            this.lblAuthor.Text = "Author";
+            this.lblAuthor.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
             // txtAuthor
             // 
@@ -988,77 +1240,81 @@
             | System.Windows.Forms.AnchorStyles.Right)));
             this.txtAuthor.BackColor = System.Drawing.Color.White;
             this.txtAuthor.Font = new System.Drawing.Font("Lucida Console", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtAuthor.Location = new System.Drawing.Point(6, 108);
+            this.txtAuthor.Location = new System.Drawing.Point(70, 3);
             this.txtAuthor.Name = "txtAuthor";
-            this.txtAuthor.Size = new System.Drawing.Size(361, 23);
+            this.txtAuthor.Size = new System.Drawing.Size(257, 23);
             this.txtAuthor.TabIndex = 3;
             this.txtAuthor.TextChanged += new System.EventHandler(this.TextFieldTextChanged);
             // 
-            // BtnFixFormatting
+            // pnlOrder
             // 
-            this.BtnFixFormatting.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.BtnFixFormatting.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(53)))), ((int)(((byte)(76)))), ((int)(((byte)(103)))));
-            this.BtnFixFormatting.Location = new System.Drawing.Point(740, 54);
-            this.BtnFixFormatting.Name = "BtnFixFormatting";
-            this.BtnFixFormatting.Size = new System.Drawing.Size(32, 32);
-            this.BtnFixFormatting.TabIndex = 15;
-            this.BtnFixFormatting.TabStop = false;
-            this.BtnFixFormatting.Click += new System.EventHandler(this.BtnFixFormattingClick);
+            this.pnlOrder.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.pnlOrder.Controls.Add(this.lblOrder);
+            this.pnlOrder.Controls.Add(this.txtOrder);
+            this.pnlOrder.Location = new System.Drawing.Point(2, 31);
+            this.pnlOrder.Name = "pnlOrder";
+            this.pnlOrder.Size = new System.Drawing.Size(330, 29);
+            this.pnlOrder.TabIndex = 1;
             // 
-            // label2
+            // lblOrder
             // 
-            this.label2.AutoSize = true;
-            this.label2.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(53)))), ((int)(((byte)(76)))), ((int)(((byte)(103)))));
-            this.label2.Font = new System.Drawing.Font("Comic Sans MS", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label2.Location = new System.Drawing.Point(6, 92);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(42, 15);
-            this.label2.TabIndex = 0;
-            this.label2.Text = "Author";
+            this.lblOrder.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(53)))), ((int)(((byte)(76)))), ((int)(((byte)(103)))));
+            this.lblOrder.Font = new System.Drawing.Font("Comic Sans MS", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblOrder.Location = new System.Drawing.Point(3, 0);
+            this.lblOrder.Name = "lblOrder";
+            this.lblOrder.Size = new System.Drawing.Size(54, 26);
+            this.lblOrder.TabIndex = 0;
+            this.lblOrder.Text = "Order";
+            this.lblOrder.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
-            // btnPlay
+            // txtOrder
             // 
-            this.btnPlay.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnPlay.Location = new System.Drawing.Point(741, 12);
-            this.btnPlay.Name = "btnPlay";
-            this.btnPlay.Size = new System.Drawing.Size(32, 32);
-            this.btnPlay.TabIndex = 14;
-            this.btnPlay.TabStop = false;
-            this.btnPlay.Click += new System.EventHandler(this.BtnPlayClick);
+            this.txtOrder.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.txtOrder.BackColor = System.Drawing.Color.White;
+            this.txtOrder.CharacterCasing = System.Windows.Forms.CharacterCasing.Upper;
+            this.txtOrder.Font = new System.Drawing.Font("Lucida Console", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtOrder.Location = new System.Drawing.Point(69, 3);
+            this.txtOrder.Name = "txtOrder";
+            this.txtOrder.Size = new System.Drawing.Size(258, 23);
+            this.txtOrder.TabIndex = 2;
+            this.txtOrder.TextChanged += new System.EventHandler(this.TextFieldTextChanged);
+            this.txtOrder.Leave += new System.EventHandler(this.txtOrder_Leave);
             // 
-            // txtRef
+            // pnlTitle
             // 
-            this.txtRef.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.txtRef.BackColor = System.Drawing.Color.White;
-            this.txtRef.Font = new System.Drawing.Font("Lucida Console", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtRef.Location = new System.Drawing.Point(373, 109);
-            this.txtRef.Name = "txtRef";
-            this.txtRef.Size = new System.Drawing.Size(201, 23);
-            this.txtRef.TabIndex = 4;
-            this.txtRef.TextChanged += new System.EventHandler(this.TextFieldTextChanged);
+            this.pnlTitle.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.pnlTitle.Controls.Add(this.lblTitle);
+            this.pnlTitle.Controls.Add(this.txtTitle);
+            this.pnlTitle.Location = new System.Drawing.Point(2, 0);
+            this.pnlTitle.Name = "pnlTitle";
+            this.pnlTitle.Size = new System.Drawing.Size(330, 29);
+            this.pnlTitle.TabIndex = 0;
             // 
-            // btnPresentSong
+            // lblTitle
             // 
-            this.btnPresentSong.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnPresentSong.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(53)))), ((int)(((byte)(76)))), ((int)(((byte)(103)))));
-            this.btnPresentSong.Location = new System.Drawing.Point(739, 100);
-            this.btnPresentSong.Name = "btnPresentSong";
-            this.btnPresentSong.Size = new System.Drawing.Size(32, 32);
-            this.btnPresentSong.TabIndex = 13;
-            this.btnPresentSong.TabStop = false;
-            this.btnPresentSong.Click += new System.EventHandler(this.BtnPresentSongClick);
+            this.lblTitle.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(53)))), ((int)(((byte)(76)))), ((int)(((byte)(103)))));
+            this.lblTitle.Font = new System.Drawing.Font("Comic Sans MS", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblTitle.Location = new System.Drawing.Point(3, 0);
+            this.lblTitle.Name = "lblTitle";
+            this.lblTitle.Size = new System.Drawing.Size(54, 27);
+            this.lblTitle.TabIndex = 0;
+            this.lblTitle.Text = "Title";
+            this.lblTitle.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
-            // label10
+            // txtTitle
             // 
-            this.label10.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.label10.AutoSize = true;
-            this.label10.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(53)))), ((int)(((byte)(76)))), ((int)(((byte)(103)))));
-            this.label10.Font = new System.Drawing.Font("Comic Sans MS", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label10.Location = new System.Drawing.Point(370, 92);
-            this.label10.Name = "label10";
-            this.label10.Size = new System.Drawing.Size(61, 15);
-            this.label10.TabIndex = 0;
-            this.label10.Text = "Reference";
+            this.txtTitle.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.txtTitle.BackColor = System.Drawing.Color.White;
+            this.txtTitle.Font = new System.Drawing.Font("Lucida Console", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtTitle.Location = new System.Drawing.Point(69, 3);
+            this.txtTitle.Name = "txtTitle";
+            this.txtTitle.Size = new System.Drawing.Size(258, 23);
+            this.txtTitle.TabIndex = 1;
+            this.txtTitle.TextChanged += new System.EventHandler(this.TextFieldTextChanged);
             // 
             // splitLyricsAndNotes
             // 
@@ -1075,7 +1331,6 @@
             this.splitLyricsAndNotes.Panel2.Controls.Add(this.splitContainerNotesImage);
             this.splitLyricsAndNotes.Size = new System.Drawing.Size(791, 564);
             this.splitLyricsAndNotes.SplitterDistance = 668;
-            this.splitLyricsAndNotes.SplitterWidth = 1;
             this.splitLyricsAndNotes.TabIndex = 5;
             this.splitLyricsAndNotes.TabStop = false;
             // 
@@ -1121,7 +1376,7 @@
             // splitContainerNotesImage.Panel2
             // 
             this.splitContainerNotesImage.Panel2.Controls.Add(this.grpImage);
-            this.splitContainerNotesImage.Size = new System.Drawing.Size(122, 564);
+            this.splitContainerNotesImage.Size = new System.Drawing.Size(119, 564);
             this.splitContainerNotesImage.SplitterDistance = 447;
             this.splitContainerNotesImage.SplitterWidth = 1;
             this.splitContainerNotesImage.TabIndex = 6;
@@ -1133,7 +1388,7 @@
             this.grpNotes.ForeColor = System.Drawing.Color.White;
             this.grpNotes.Location = new System.Drawing.Point(0, 0);
             this.grpNotes.Name = "grpNotes";
-            this.grpNotes.Size = new System.Drawing.Size(122, 447);
+            this.grpNotes.Size = new System.Drawing.Size(119, 447);
             this.grpNotes.TabIndex = 0;
             this.grpNotes.TabStop = false;
             this.grpNotes.Text = "Notes";
@@ -1146,7 +1401,7 @@
             this.txtNotes.ForeColor = System.Drawing.Color.Black;
             this.txtNotes.Location = new System.Drawing.Point(3, 16);
             this.txtNotes.Name = "txtNotes";
-            this.txtNotes.Size = new System.Drawing.Size(116, 428);
+            this.txtNotes.Size = new System.Drawing.Size(113, 428);
             this.txtNotes.TabIndex = 3;
             this.txtNotes.Text = "";
             this.txtNotes.WordWrap = false;
@@ -1161,10 +1416,10 @@
             this.grpImage.ForeColor = System.Drawing.Color.White;
             this.grpImage.Location = new System.Drawing.Point(0, 0);
             this.grpImage.Name = "grpImage";
-            this.grpImage.Size = new System.Drawing.Size(122, 116);
+            this.grpImage.Size = new System.Drawing.Size(119, 116);
             this.grpImage.TabIndex = 0;
             this.grpImage.TabStop = false;
-            this.grpImage.Text = "Image";
+            this.grpImage.Text = "Background Image";
             // 
             // picBackgroundImage
             // 
@@ -1172,33 +1427,11 @@
             this.picBackgroundImage.Dock = System.Windows.Forms.DockStyle.Fill;
             this.picBackgroundImage.Location = new System.Drawing.Point(3, 16);
             this.picBackgroundImage.Name = "picBackgroundImage";
-            this.picBackgroundImage.Size = new System.Drawing.Size(116, 97);
+            this.picBackgroundImage.Size = new System.Drawing.Size(113, 97);
             this.picBackgroundImage.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
             this.picBackgroundImage.TabIndex = 5;
             this.picBackgroundImage.TabStop = false;
             this.picBackgroundImage.Click += new System.EventHandler(this.picBackgroundImage_Click);
-            // 
-            // splitContainerSetVsButtons
-            // 
-            this.splitContainerSetVsButtons.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.splitContainerSetVsButtons.FixedPanel = System.Windows.Forms.FixedPanel.Panel2;
-            this.splitContainerSetVsButtons.IsSplitterFixed = true;
-            this.splitContainerSetVsButtons.Location = new System.Drawing.Point(3, 16);
-            this.splitContainerSetVsButtons.Name = "splitContainerSetVsButtons";
-            // 
-            // splitContainerSetVsButtons.Panel1
-            // 
-            this.splitContainerSetVsButtons.Panel1.Controls.Add(this.listSet);
-            // 
-            // splitContainerSetVsButtons.Panel2
-            // 
-            this.splitContainerSetVsButtons.Panel2.Controls.Add(this.imgUp);
-            this.splitContainerSetVsButtons.Panel2.Controls.Add(this.imgDown);
-            this.splitContainerSetVsButtons.Panel2.Controls.Add(this.BtnPresentSet);
-            this.splitContainerSetVsButtons.Panel2.Controls.Add(this.BtnClear);
-            this.splitContainerSetVsButtons.Size = new System.Drawing.Size(207, 119);
-            this.splitContainerSetVsButtons.SplitterDistance = 171;
-            this.splitContainerSetVsButtons.TabIndex = 23;
             // 
             // EditorForm
             // 
@@ -1232,6 +1465,9 @@
             this.splitContainerPresentationSetList.Panel2.ResumeLayout(false);
             this.splitContainerPresentationSetList.ResumeLayout(false);
             this.grpPresentation.ResumeLayout(false);
+            this.splitContainerSetVsButtons.Panel1.ResumeLayout(false);
+            this.splitContainerSetVsButtons.Panel2.ResumeLayout(false);
+            this.splitContainerSetVsButtons.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.imgUp)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.imgDown)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.BtnPresentSet)).EndInit();
@@ -1249,20 +1485,37 @@
             this.splitContainerMetaLyrics.Panel2.ResumeLayout(false);
             this.splitContainerMetaLyrics.ResumeLayout(false);
             this.grpSongMetadata.ResumeLayout(false);
-            this.grpSongMetadata.PerformLayout();
+            this.pnlMoreMetaData.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.btnPresentSong)).EndInit();
             this.pnlSharpsFlats.ResumeLayout(false);
             this.pnlSharpsFlats.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.btnPlay)).EndInit();
             this.panel4.ResumeLayout(false);
             this.panel4.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.BtnFixFormatting)).EndInit();
             this.panel3.ResumeLayout(false);
             this.panel3.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.BtnTransposeUp)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.BtnTransposeDown)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.BtnCapoDown)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.BtnCapoUp)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.BtnTransposeDown)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.BtnTransposeUp)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.BtnFixFormatting)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.btnPlay)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.btnPresentSong)).EndInit();
+            this.flowMetaOtherSettings.ResumeLayout(false);
+            this.flowMetaOtherSettings.PerformLayout();
+            this.flowTempo.ResumeLayout(false);
+            this.flowSig.ResumeLayout(false);
+            this.flowccli.ResumeLayout(false);
+            this.flowccli.PerformLayout();
+            this.flowReference.ResumeLayout(false);
+            this.flowReference.PerformLayout();
+            this.pnlMainSongSettings.ResumeLayout(false);
+            this.pnlCopyright.ResumeLayout(false);
+            this.pnlCopyright.PerformLayout();
+            this.pnlAuthor.ResumeLayout(false);
+            this.pnlAuthor.PerformLayout();
+            this.pnlOrder.ResumeLayout(false);
+            this.pnlOrder.PerformLayout();
+            this.pnlTitle.ResumeLayout(false);
+            this.pnlTitle.PerformLayout();
             this.splitLyricsAndNotes.Panel1.ResumeLayout(false);
             this.splitLyricsAndNotes.Panel2.ResumeLayout(false);
             this.splitLyricsAndNotes.ResumeLayout(false);
@@ -1273,9 +1526,6 @@
             this.grpNotes.ResumeLayout(false);
             this.grpImage.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.picBackgroundImage)).EndInit();
-            this.splitContainerSetVsButtons.Panel1.ResumeLayout(false);
-            this.splitContainerSetVsButtons.Panel2.ResumeLayout(false);
-            this.splitContainerSetVsButtons.ResumeLayout(false);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -1343,14 +1593,14 @@
         private System.Windows.Forms.PictureBox BtnFixFormatting;
         private System.Windows.Forms.PictureBox btnPlay;
         private System.Windows.Forms.PictureBox btnPresentSong;
-        private System.Windows.Forms.Label label10;
+        private System.Windows.Forms.Label lblReference;
         private System.Windows.Forms.TextBox txtRef;
-        private System.Windows.Forms.Label label2;
+        private System.Windows.Forms.Label lblAuthor;
         private System.Windows.Forms.TextBox txtAuthor;
         private System.Windows.Forms.TextBox txtTitle;
-        private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.Label lblTitle;
         private System.Windows.Forms.Label label6;
-        private System.Windows.Forms.Label label4;
+        private System.Windows.Forms.Label lblOrder;
         private System.Windows.Forms.Label label5;
         private System.Windows.Forms.TextBox txtOrder;
         private System.Windows.Forms.RichTextBox txtLyrics;
@@ -1381,6 +1631,25 @@
         private System.Windows.Forms.GroupBox grpPresentation;
         private System.Windows.Forms.GroupBox grpSetList;
         private System.Windows.Forms.SplitContainer splitContainerSetVsButtons;
+        private System.Windows.Forms.Panel pnlMainSongSettings;
+        private System.Windows.Forms.Panel pnlOrder;
+        private System.Windows.Forms.Panel pnlTitle;
+        private System.Windows.Forms.Panel pnlAuthor;
+        private System.Windows.Forms.Panel pnlCopyright;
+        private System.Windows.Forms.Label lblCopyright;
+        private System.Windows.Forms.TextBox txtCopyright;
+        private System.Windows.Forms.FlowLayoutPanel flowMetaOtherSettings;
+        private System.Windows.Forms.FlowLayoutPanel flowTempo;
+        private System.Windows.Forms.Label lblTempo;
+        private System.Windows.Forms.ComboBox cmbTempo;
+        private System.Windows.Forms.FlowLayoutPanel flowSig;
+        private System.Windows.Forms.Label lblSig;
+        private System.Windows.Forms.ComboBox cmbSig;
+        private System.Windows.Forms.FlowLayoutPanel flowccli;
+        private System.Windows.Forms.Label lblccli;
+        private System.Windows.Forms.TextBox txtccli;
+        private System.Windows.Forms.FlowLayoutPanel flowReference;
+        private System.Windows.Forms.Panel pnlMoreMetaData;
         
   
     }

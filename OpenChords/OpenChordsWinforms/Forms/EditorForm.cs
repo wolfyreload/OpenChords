@@ -21,6 +21,12 @@ namespace OpenChords.Forms
             if (!disableChangesMadeDetection)
 			    changesMade = true;
 		}
+
+        private void comboBoxSelectedIndexChanged(object sender, EventArgs e)
+        {
+            if (!disableChangesMadeDetection)
+                changesMade = true;
+        }
 		
 		private List<string> songList = new  List<string>(); 
 		
@@ -60,6 +66,9 @@ namespace OpenChords.Forms
             this.BtnFixFormatting.Image = Properties.Resources.Repair;
             this.btnPlay.Image = Properties.Resources.Play;
             this.btnPresentSong.Image = Properties.Resources.PresentSong;
+
+            cmbSig.DataSource = Song.TimeSignatureOptions();
+            cmbTempo.DataSource = Song.TempoOptions();
 
             refreshAll();
 			
@@ -1111,6 +1120,8 @@ namespace OpenChords.Forms
                 changesMade = true;
             }
         }
+
+
 
 
   

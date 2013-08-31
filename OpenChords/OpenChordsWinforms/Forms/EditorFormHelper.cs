@@ -44,7 +44,10 @@ namespace OpenChords.Forms
 			
 			txtLyrics.Text = currentSong.lyrics;
 			txtNotes.Text = currentSong.notes;
-            txtRef.Text = currentSong.ccli;
+            txtRef.Text = currentSong.hymn_number;
+            txtccli.Text = currentSong.ccli;
+            cmbTempo.Text = currentSong.tempo;
+            cmbSig.Text = currentSong.time_sig;
 		    if (currentSong.PreferFlats)
 		        rdoFlats.Checked = true;
 		    else
@@ -102,7 +105,12 @@ namespace OpenChords.Forms
 			
 			currentSong.lyrics = txtLyrics.Text;
 			currentSong.notes = txtNotes.Text;
-            currentSong.ccli = txtRef.Text;
+            currentSong.hymn_number = txtRef.Text;
+            currentSong.ccli = txtccli.Text;
+            currentSong.tempo = cmbTempo.Text;
+            currentSong.time_sig = cmbSig.Text;
+
+
 		    if (rdoFlats.Checked)
 		        currentSong.PreferFlats = true;
 		    else
