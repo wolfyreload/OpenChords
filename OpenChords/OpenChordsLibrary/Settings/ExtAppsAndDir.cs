@@ -25,14 +25,16 @@ namespace OpenChords.Config
 
 
 
-        public ExtAppsAndDirClass()
+        public ExtAppsAndDirClass(Entities.FileAndFolderSettings settings)
         {
-            settings = Entities.FileAndFolderSettings.loadSettings();
+            this.settings = settings;
+           
         }
+
 
         public void refreshFileAndFolderSettings()
         {
-            settings = Entities.FileAndFolderSettings.loadSettings();
+            settings.refresh();
         }
 
         public String fileManager
@@ -54,12 +56,9 @@ namespace OpenChords.Config
         {
             get
             {
-                if (IO.FileFolderFunctions.isFilePresent("Manual.pdf"))
-                    return "Manual.pdf";
-                else if (IO.FileFolderFunctions.isFilePresent(fixPaths("..\\Manual.pdf")))
-                    return fixPaths("..\\Manual.pdf");
-                else if (IO.FileFolderFunctions.isFilePresent(fixPaths("..\\..\\Manual.pdf")))
-                    return fixPaths("..\\..\\Manual.pdf");
+                var path = settings.CurrentPath + "Manual.pdf";
+                if (IO.FileFolderFunctions.isFilePresent(path))
+                    return path;
                 else
                     return null;
             }
@@ -67,36 +66,13 @@ namespace OpenChords.Config
         }
 
         //external Apps
-        public String pdfViewerApp
-        {
-            get
-            {
-                string path = AppsFolder + "PDF\\PDF.exe";
-                string fixedPath = fixPaths(path);
-                return fixedPath;
-
-            }
-        }
         public String openSongApp
         {
             get
             {
                 string path;
-                //if (settings.isLocalOpenSong)
-                //    path = AppsFolder + "OpenSong\\OpenSong.exe";
-                //else
                 path = settings.OpenSongExecutable;
 
-                string fixedPath = fixPaths(path);
-                return fixedPath;
-
-            }
-        }
-        public String musicPlayerApp
-        {
-            get
-            {
-                string path = AppsFolder + "Mp3\\xmplay.exe";
                 string fixedPath = fixPaths(path);
                 return fixedPath;
 
@@ -117,7 +93,7 @@ namespace OpenChords.Config
         {
             get
             {
-                string path = settings.ApplicationDataFolder + "\\";
+                string path = settings.CurrentPath + settings.ApplicationDataFolder + "\\";
                 string fixedPath = fixPaths(path);
                 if (!System.IO.Directory.Exists(fixedPath))
                     System.IO.Directory.CreateDirectory(fixedPath);
@@ -262,23 +238,12 @@ namespace OpenChords.Config
             }
         }
 
-        public String AppsFolder
-        {
-            get
-            {
-                string path = settings.AppsFolder;
-                string fixedPath = fixPaths(path);
-                if (!System.IO.Directory.Exists(fixedPath))
-                    System.IO.Directory.CreateDirectory(fixedPath);
-                return fixedPath;
-            }
-        }
 
         public String settingsFolder
         {
             get
             {
-                string path = settings.SettingsFolder;
+                string path = settings.CurrentPath + settings.SettingsFolder;
                 string fixedPath = fixPaths(path);
                 if (!System.IO.Directory.Exists(fixedPath))
                     System.IO.Directory.CreateDirectory(fixedPath);

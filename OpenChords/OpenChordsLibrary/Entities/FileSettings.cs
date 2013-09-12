@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Windows.Forms;
@@ -46,12 +47,30 @@ namespace OpenChords.Entities
         
         public static FileAndFolderSettings loadSettings()
         {
-            return IO.XmlReaderWriter.readSettings();
+            var settings = IO.XmlReaderWriter.readFileAndFolderSettings();
+            var dir = new DirectoryInfo(@".\");
+            settings.CurrentPath = dir.FullName;
+            return settings;
         }
+
+        /// <summary>
+        /// load settings with specified path
+        /// </summary>
+        /// <returns></returns>
+        public static FileAndFolderSettings loadSettings(string path)
+        {        
+            var settings = IO.XmlReaderWriter.readFileAndFolderSettings(path);
+            var dir = new DirectoryInfo(path);    
+            settings.CurrentPath = dir.Parent.FullName + "\\";
+            return settings;
+        }
+
+
+        public string CurrentPath { get; protected set; }
 
         public void saveSettings()
         {
-            IO.XmlReaderWriter.writeSettings(this);
+            IO.XmlReaderWriter.writeFileAndFolderSettings(this);
 
         }
 
@@ -72,5 +91,10 @@ namespace OpenChords.Entities
 
 
 
+
+        internal void refresh()
+        {
+            throw new NotImplementedException();
+        }
     }
 }

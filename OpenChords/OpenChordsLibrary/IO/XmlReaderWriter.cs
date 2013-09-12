@@ -73,7 +73,7 @@ namespace OpenChords.IO
 
         private static string SETTINGS_FILENAME = "settings.xml";
 
-        public static void writeSettings(Entities.FileAndFolderSettings settings)
+        public static void writeFileAndFolderSettings(Entities.FileAndFolderSettings settings)
         {
             
             XmlSerializer serializer = new XmlSerializer(typeof(Entities.FileAndFolderSettings));
@@ -83,19 +83,24 @@ namespace OpenChords.IO
 
         }
 
-        public static Entities.FileAndFolderSettings readSettings()
+        /// <summary>
+        /// read file and folder settings with a provided settings path
+        /// </summary>
+        /// <param name="path"></param>
+        /// <returns></returns>
+        public static Entities.FileAndFolderSettings readFileAndFolderSettings(string path)
         {
             Entities.FileAndFolderSettings settings = new OpenChords.Entities.FileAndFolderSettings();
-            if (!IO.FileFolderFunctions.isFilePresent(SETTINGS_FILENAME))
+            if (!IO.FileFolderFunctions.isFilePresent(path))
             {
                 XmlSerializer serializer = new XmlSerializer(typeof(Entities.FileAndFolderSettings));
-                TextWriter textWriter = new StreamWriter(SETTINGS_FILENAME);
+                TextWriter textWriter = new StreamWriter(path);
                 serializer.Serialize(textWriter, settings);
                 textWriter.Close();
             }
             else
             {
-                TextReader textReader = new StreamReader(SETTINGS_FILENAME);
+                TextReader textReader = new StreamReader(path);
                 try
                 {
                     XmlSerializer deserializer = new XmlSerializer(typeof(Entities.FileAndFolderSettings));
@@ -115,6 +120,16 @@ namespace OpenChords.IO
 
             return settings;
 
+        }
+
+        /// <summary>
+        /// read file and folder settings with using the default file and folder setting path
+        /// </summary>
+        /// <param name="path"></param>
+        /// <returns></returns>
+        public static Entities.FileAndFolderSettings readFileAndFolderSettings()
+        {
+            return readFileAndFolderSettings(SETTINGS_FILENAME);         
         }
 
 

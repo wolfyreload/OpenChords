@@ -9,9 +9,9 @@ namespace OpenChords
     {
         private static OpenChords.Config.ExtAppsAndDirClass _fileAndFolderSettings;
 
-        static Settings()
+        public static void setup(Entities.FileAndFolderSettings settings)
         {
-            _fileAndFolderSettings = new OpenChords.Config.ExtAppsAndDirClass();
+            _fileAndFolderSettings = new Config.ExtAppsAndDirClass(settings);
         }
 
         public static OpenChords.Config.ExtAppsAndDirClass ExtAppsAndDir
@@ -19,6 +19,10 @@ namespace OpenChords
             get
             {
                 return _fileAndFolderSettings;
+            }
+            set
+            {
+                _fileAndFolderSettings = value;
             }
         }
     }
