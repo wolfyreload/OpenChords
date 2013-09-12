@@ -15,7 +15,8 @@ namespace OpenChords.Web
         //make the settings files if they dont exist
         private static void setup()
         {
-            var fileAndFolderSettings = Entities.FileAndFolderSettings.loadSettings(@"C:\Users\michael.antwerpen\Dropbox\OpenChords\App\settings.xml");
+            var path = System.Web.Configuration.WebConfigurationManager.AppSettings["OpenChordsSettingsFilePath"];
+            var fileAndFolderSettings = Entities.FileAndFolderSettings.loadSettings(path);
             OpenChords.Settings.setup(fileAndFolderSettings);
             var tablet = new Entities.DisplayAndPrintSettings(Entities.DisplayAndPrintSettingsType.TabletSettings);
             tablet.saveSettings();

@@ -13,7 +13,7 @@ using System.Windows.Forms;
 
 using OpenChords.Entities;
 using OpenChords.Functions;
-using OpenChords.Settings;
+
 
 
 namespace OpenChords.Forms

@@ -12,8 +12,9 @@ using System.Linq;
 
 using OpenChords.Entities;
 using OpenChords.Functions;
-using OpenChords.Settings;
+
 using System.Drawing;
+using OpenChords.Config;
 
 namespace OpenChords.Forms
 {
@@ -133,7 +134,7 @@ namespace OpenChords.Forms
 		private void loadSongList()
 		{
 			
-			songList = IO.FileFolderFunctions.getDirectoryListingAsList(ExtAppsAndDir.songsFolder);
+			songList = IO.FileFolderFunctions.getDirectoryListingAsList(OpenChords.Settings.ExtAppsAndDir.songsFolder);
 			fillSongList();
 			
 		}
@@ -142,7 +143,7 @@ namespace OpenChords.Forms
 		{
 			cmboSets.Items.Clear();
 			string[] setList =
-				IO.FileFolderFunctions.getDirectoryListing(ExtAppsAndDir.setsFolder);
+                IO.FileFolderFunctions.getDirectoryListing(OpenChords.Settings.ExtAppsAndDir.setsFolder);
 			cmboSets.Items.AddRange(setList);
 		}
 		
@@ -246,7 +247,7 @@ namespace OpenChords.Forms
                 if (result == DialogResult.Yes)
                 {
                     //create a blank file
-                    IO.FileReaderWriter.writeToFile(ExtAppsAndDir.setsFolder + title, "");
+                    IO.FileReaderWriter.writeToFile(OpenChords.Settings.ExtAppsAndDir.setsFolder + title, "");
 
                     fillSetCmboBox();
 
@@ -275,7 +276,7 @@ namespace OpenChords.Forms
                 if (result == DialogResult.Yes)
                 {
                     //create a blank file
-                    System.IO.File.Delete(ExtAppsAndDir.setsFolder + title);
+                    System.IO.File.Delete(OpenChords.Settings.ExtAppsAndDir.setsFolder + title);
 
                     fillSetCmboBox();
                   

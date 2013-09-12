@@ -65,7 +65,7 @@ namespace OpenChords.Entities
             return settings;
         }
 
-
+        [XmlIgnore]
         public string CurrentPath { get; protected set; }
 
         public void saveSettings()

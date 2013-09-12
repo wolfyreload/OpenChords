@@ -47,29 +47,18 @@ namespace OpenChords
         //make the settings files if they dont exist
         private static void setup()
         {
+            //ensureValidFileSettingsFile();
+
+            var fileSettings = Entities.FileAndFolderSettings.loadSettings();
+            Settings.ExtAppsAndDir = new Config.ExtAppsAndDirClass(fileSettings);
+            
             ensureValidSettingsFile(Entities.DisplayAndPrintSettingsType.DisplaySettings);
             ensureValidSettingsFile(Entities.DisplayAndPrintSettingsType.PrintSettings);
             ensureValidSettingsFile(Entities.DisplayAndPrintSettingsType.TabletSettings);
 
-            //ensureValidFileSettingsFile();
-
+            
             OpenChords.Entities.GlobalVariables.restartApplicationOnExit = false;
             OpenChords.Entities.GlobalVariables.patchApplicationOnExit = false;
-        }
-
-        /// <summary>
-        /// check if portable mode is off. if it is we need to point to the app data folder for the current user
-        /// </summary>
-        private static void ensureValidFileSettingsFile()
-        {
-            var fileSettings = Entities.FileAndFolderSettings.loadSettings();
-            if (!fileSettings.PortableMode)
-            {
-                var oldSettingsFolder = fileSettings.SettingsFolder;
-                fileSettings.SettingsFolder = Application.UserAppDataPath + "\\";
-                if (oldSettingsFolder != fileSettings.SettingsFolder)
-                    fileSettings.saveSettings();
-            }
         }
 
         private static void logErrors(object sender, UnhandledExceptionEventArgs e)

@@ -12,7 +12,7 @@ using System.Windows.Forms;
 using System.Collections.Generic;
 
 using OpenChords.Entities;
-using OpenChords.Settings;
+
 using OpenChords.Functions;
 using System.Text;
 

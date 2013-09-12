@@ -243,7 +243,7 @@ namespace OpenChords.Config
         {
             get
             {
-                string path = settings.CurrentPath + settings.SettingsFolder;
+                string path = settings.SettingsFolder;
                 string fixedPath = fixPaths(path);
                 if (!System.IO.Directory.Exists(fixedPath))
                     System.IO.Directory.CreateDirectory(fixedPath);

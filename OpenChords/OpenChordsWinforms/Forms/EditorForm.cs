@@ -2,7 +2,7 @@
 using System.Windows.Forms;
 using OpenChords.Entities;
 using OpenChords.Functions;
-using OpenChords.Settings;
+
 using System.Collections.Generic;
 using System.Drawing;
 using System.Linq;
@@ -112,13 +112,13 @@ namespace OpenChords.Forms
 		void BtnExplorerClick(object sender, EventArgs e)
         {
             logger.Info("Clicked");
-			string filename = String.Format("\"{0}\"", ExtAppsAndDir.songsFolder + currentSong.title);
-			string fileManager = ExtAppsAndDir.fileManager;
+            string filename = String.Format("\"{0}\"", OpenChords.Settings.ExtAppsAndDir.songsFolder + currentSong.title);
+            string fileManager = OpenChords.Settings.ExtAppsAndDir.fileManager;
 			
 			if (string.IsNullOrEmpty(fileManager))
 				System.Diagnostics.Process.Start("Explorer", "/select, " + filename);
 			else
-			    System.Diagnostics.Process.Start(fileManager, ExtAppsAndDir.songsFolder);
+                System.Diagnostics.Process.Start(fileManager, OpenChords.Settings.ExtAppsAndDir.songsFolder);
 			    
 		}
 		
@@ -203,11 +203,11 @@ namespace OpenChords.Forms
 		void exportToPdf()
 		{
 			//get the filemanager for the filesystem
-			string fileManager = ExtAppsAndDir.fileManager;
+            string fileManager = OpenChords.Settings.ExtAppsAndDir.fileManager;
 			
 			//get the filename
 			string filename = Export.ExportToPdf.exportSong(currentSong, DisplayAndPrintSettingsType.PrintSettings);
-			filename = String.Format("\"{0}\"", ExtAppsAndDir.printFolder + filename);
+            filename = String.Format("\"{0}\"", OpenChords.Settings.ExtAppsAndDir.printFolder + filename);
 			
 			//try run the file with the default application
 			if (string.IsNullOrEmpty(fileManager))
@@ -222,8 +222,8 @@ namespace OpenChords.Forms
 		
 		void BtnLaunchDropBox()
 		{
-			if (IO.FileFolderFunctions.isFilePresent(ExtAppsAndDir.FileSyncUtility))
-				System.Diagnostics.Process.Start(ExtAppsAndDir.FileSyncUtility);
+            if (IO.FileFolderFunctions.isFilePresent(OpenChords.Settings.ExtAppsAndDir.FileSyncUtility))
+                System.Diagnostics.Process.Start(OpenChords.Settings.ExtAppsAndDir.FileSyncUtility);
 			
 			
 		}
@@ -756,7 +756,7 @@ namespace OpenChords.Forms
             logger.Info("Clicked");
             if (currentSong.isMp3Available())
             {
-				string fileManager = ExtAppsAndDir.fileManager;
+                string fileManager = OpenChords.Settings.ExtAppsAndDir.fileManager;
 			    string filename = "\"" + currentSong.getMp3Filename() + "\"";
 			    if (string.IsNullOrEmpty(fileManager))
 					System.Diagnostics.Process.Start(filename);
@@ -780,8 +780,8 @@ namespace OpenChords.Forms
         void ManualToolStripMenuItemClick(object sender, EventArgs e)
         {
             logger.Info("Clicked");
-            string fileManager = ExtAppsAndDir.fileManager;
-            string filename = ExtAppsAndDir.manual;
+            string fileManager = OpenChords.Settings.ExtAppsAndDir.fileManager;
+            string filename = OpenChords.Settings.ExtAppsAndDir.manual;
 
             if (string.IsNullOrEmpty(filename))
                 return;
@@ -946,7 +946,7 @@ namespace OpenChords.Forms
         private void cmboSets_KeyUp(object sender, KeyEventArgs e)
         {
             var setName = cmboSets.Text;
-            var setList = new List<string>(IO.FileFolderFunctions.getDirectoryListing(ExtAppsAndDir.setsFolder));
+            var setList = new List<string>(IO.FileFolderFunctions.getDirectoryListing(OpenChords.Settings.ExtAppsAndDir.setsFolder));
 
             var found = setList.Where(s => s.ToUpper() == setName.ToUpper()).FirstOrDefault();
 
@@ -972,7 +972,7 @@ namespace OpenChords.Forms
             Form settings = new Forms.Settings();
             settings.ShowDialog();
             //reload settings
-            ExtAppsAndDir.refreshFileAndFolderSettings();
+            OpenChords.Settings.ExtAppsAndDir.refreshFileAndFolderSettings();
         }
 
         private void FixFormatingtoolStripMenuItem_Click(object sender, EventArgs e)
@@ -985,7 +985,7 @@ namespace OpenChords.Forms
         private void fileSyncUtilityToolStripMenuItem_Click(object sender, EventArgs e)
         {
             logger.Info("Clicked");
-            System.Diagnostics.Process.Start(ExtAppsAndDir.FileSyncUtility);
+            System.Diagnostics.Process.Start(OpenChords.Settings.ExtAppsAndDir.FileSyncUtility);
         }
 
         private void refreshToolStripMenuItem_Click(object sender, EventArgs e)
@@ -1016,11 +1016,11 @@ namespace OpenChords.Forms
             loadFonts(this.Controls);
 
             //disable the export to opensong if opensong is not available
-            if (!IO.FileFolderFunctions.isFilePresent(ExtAppsAndDir.openSongApp))
+            if (!IO.FileFolderFunctions.isFilePresent(OpenChords.Settings.ExtAppsAndDir.openSongApp))
                 openSongToolStripMenuItem.Enabled = false;
 
             //disable sync utility if it isn't pointing to a real file
-            if (!IO.FileFolderFunctions.isFilePresent(ExtAppsAndDir.FileSyncUtility))
+            if (!IO.FileFolderFunctions.isFilePresent(OpenChords.Settings.ExtAppsAndDir.FileSyncUtility))
                 fileSyncUtilityToolStripMenuItem.Enabled = false;
 
             if (currentSong.isMp3Available())
