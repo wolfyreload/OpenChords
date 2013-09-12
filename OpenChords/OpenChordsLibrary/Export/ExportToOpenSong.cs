@@ -1,6 +1,5 @@
 ﻿using OpenChords.Entities;
 using OpenChords.IO;
-using OpenChords.Settings;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
@@ -31,9 +30,9 @@ namespace OpenChords.Export
 
         public static void exportAllSongsToOpenSong()
         {
-            var songNameList = IO.FileFolderFunctions.getDirectoryListingAsList(ExtAppsAndDir.songsFolder);
-            string source = ExtAppsAndDir.songsFolder;
-            string destination = ExtAppsAndDir.opensongSongsFolder;
+            var songNameList = IO.FileFolderFunctions.getDirectoryListingAsList(Settings.ExtAppsAndDir.songsFolder);
+            string source =Settings.ExtAppsAndDir.songsFolder;
+            string destination =Settings.ExtAppsAndDir.opensongSongsFolder;
             
             //clear all the files in the songs folder
             IO.FileFolderFunctions.clearFolder(destination);
@@ -47,8 +46,8 @@ namespace OpenChords.Export
             }
 
             //copy welcome slide
-            if (!string.IsNullOrEmpty(ExtAppsAndDir.welcomeSlide))
-                File.Copy(ExtAppsAndDir.welcomeSlide, destination + "welcome", true);
+            if (!string.IsNullOrEmpty(Settings.ExtAppsAndDir.welcomeSlide))
+                File.Copy(Settings.ExtAppsAndDir.welcomeSlide, destination + "welcome", true);
         }
 
         /// <summary>
@@ -57,8 +56,8 @@ namespace OpenChords.Export
         /// <param name="set"></param>
         private static void exportSongListToOpenSong(Set set)
         {
-            string source = ExtAppsAndDir.songsFolder;
-            string destination = ExtAppsAndDir.opensongSongsFolder;
+            string source =Settings.ExtAppsAndDir.songsFolder;
+            string destination =Settings.ExtAppsAndDir.opensongSongsFolder;
             foreach (string filename in set.songNames)
             {
                 var sourceFile = source + filename;
@@ -67,8 +66,8 @@ namespace OpenChords.Export
             }
 
             //copy welcome slide
-            if (!string.IsNullOrEmpty(ExtAppsAndDir.welcomeSlide))
-                File.Copy(ExtAppsAndDir.welcomeSlide, destination + "welcome", true);
+            if (!string.IsNullOrEmpty(Settings.ExtAppsAndDir.welcomeSlide))
+                File.Copy(Settings.ExtAppsAndDir.welcomeSlide, destination + "welcome", true);
         }
 
         /// <summary>
@@ -76,7 +75,7 @@ namespace OpenChords.Export
         /// </summary>
         public static void exportAllSetsToOpenSong()
         {
-            var ListOfSetNames = IO.FileFolderFunctions.getDirectoryListingAsList(ExtAppsAndDir.setsFolder);
+            var ListOfSetNames = IO.FileFolderFunctions.getDirectoryListingAsList(Settings.ExtAppsAndDir.setsFolder);
             foreach (string setName in ListOfSetNames)
             {
                 var set = Set.loadSet(setName);
@@ -94,7 +93,7 @@ namespace OpenChords.Export
         {
             try
             {
-                var filename = ExtAppsAndDir.openSongSetFolder + set.setName;
+                var filename =Settings.ExtAppsAndDir.openSongSetFolder + set.setName;
                 Entities.FileAndFolderSettings settings = Entities.FileAndFolderSettings.loadSettings();
                 string path = "OpenChords/";
 
@@ -148,7 +147,7 @@ namespace OpenChords.Export
              }
              else
              {
-                 System.Diagnostics.Process.Start(ExtAppsAndDir.openSongApp);
+                 System.Diagnostics.Process.Start(Settings.ExtAppsAndDir.openSongApp);
              }
          }
 

@@ -11,7 +11,7 @@ using System.Drawing;
 using System.Windows.Forms;
 using System.Collections.Generic;
 
-using OpenChords.Settings;
+
 using OpenChords.Entities;
 using OpenChords.Functions;
 
@@ -69,7 +69,7 @@ namespace OpenChords.Export
 			
 			writeSong();
 			
-			richTextBox.SaveFile(ExtAppsAndDir.printFolder + Filename + ".rtf");
+			richTextBox.SaveFile(Settings.ExtAppsAndDir.printFolder + Filename + ".rtf");
 			
 			return Filename + ".rtf";
 			

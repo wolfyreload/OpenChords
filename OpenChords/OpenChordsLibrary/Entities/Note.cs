@@ -8,7 +8,7 @@
  */
 using System;
 using OpenChords.Entities;
-using OpenChords.Settings;
+
 using OpenChords.IO;
 
 namespace OpenChords.Entities
@@ -37,7 +37,7 @@ namespace OpenChords.Entities
 
             if (notesFileExists(songName))
             {
-                notesObject.notes = FileReaderWriter.readFromFile(ExtAppsAndDir.notesFolder + songName);
+                notesObject.notes = FileReaderWriter.readFromFile(Settings.ExtAppsAndDir.notesFolder + songName);
             }
             else
             {
@@ -49,13 +49,13 @@ namespace OpenChords.Entities
 		
 		public void saveNotes()
 		{
-			FileReaderWriter.writeToFile(ExtAppsAndDir.notesFolder + songName, notes);
+			FileReaderWriter.writeToFile(Settings.ExtAppsAndDir.notesFolder + songName, notes);
 		}
 		
 		
 		private static bool notesFileExists(string songName)
 		{
-			string path = ExtAppsAndDir.notesFolder + songName;
+			string path =Settings.ExtAppsAndDir.notesFolder + songName;
 			bool exists = FileFolderFunctions.isFilePresent(path);
 			return exists;
 		}

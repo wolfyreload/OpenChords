@@ -11,7 +11,7 @@ using System.Collections.Generic;
 using System.IO;
 
 using OpenChords.IO;
-using OpenChords.Settings;
+
 
 namespace OpenChords.Entities
 {
@@ -141,7 +141,7 @@ namespace OpenChords.Entities
 		
 		public static Set loadSet(string setName)
 		{
-			Set set = SettingsReaderWriter.readSet(ExtAppsAndDir.setsFolder + setName);
+			Set set = SettingsReaderWriter.readSet(Settings.ExtAppsAndDir.setsFolder + setName);
             set.setName = setName;
 			set.changeMade = false;
             set.loadAllSongs();
@@ -152,7 +152,7 @@ namespace OpenChords.Entities
 		public void saveSet()
 		{
 			if (this.setName != "" && changeMade == true)
-				SettingsReaderWriter.writeSet(ExtAppsAndDir.setsFolder + this.setName, this);
+				SettingsReaderWriter.writeSet(Settings.ExtAppsAndDir.setsFolder + this.setName, this);
 		}
 		
         /// <summary>
@@ -211,11 +211,11 @@ namespace OpenChords.Entities
         public void displayPdf(DisplayAndPrintSettingsType settingsType)
         {
             //get the filemanager for the filesystem
-            string fileManager = ExtAppsAndDir.fileManager;
+            string fileManager =Settings.ExtAppsAndDir.fileManager;
 
             var pdfPath = Export.ExportToPdf.exportSet(this, settingsType);
 
-            pdfPath = ExtAppsAndDir.printFolder + pdfPath;
+            pdfPath =Settings.ExtAppsAndDir.printFolder + pdfPath;
 
             //try run the file with the default application
             if (string.IsNullOrEmpty(fileManager))

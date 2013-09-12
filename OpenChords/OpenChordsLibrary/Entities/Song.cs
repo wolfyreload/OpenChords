@@ -9,7 +9,7 @@
 using System;
 using OpenChords.Functions;
 using OpenChords.IO;
-using OpenChords.Settings;
+
 using System.Runtime.Serialization;
 using System.Xml.Serialization;
 using System.Windows.Forms;
@@ -179,7 +179,7 @@ namespace OpenChords.Entities
 
         public static Song loadSong(string SongName)
         {
-            Song song = XmlReaderWriter.readSong(ExtAppsAndDir.songsFolder + SongName);
+            Song song = XmlReaderWriter.readSong(Settings.ExtAppsAndDir.songsFolder + SongName);
             song.notes = Note.loadNotes(SongName).notes;
 
             initializeSongStyle(song);
@@ -254,7 +254,7 @@ namespace OpenChords.Entities
                 noteClass.notes = notes;
 
                 //remove the notes when saving the song
-                XmlReaderWriter.writeSong(ExtAppsAndDir.songsFolder + this.title, this);
+                XmlReaderWriter.writeSong(Settings.ExtAppsAndDir.songsFolder + this.title, this);
                 
                 noteClass.saveNotes();
             }
@@ -264,8 +264,8 @@ namespace OpenChords.Entities
         {
             if (this.title != "")
             {
-                FileFolderFunctions.deleteFile(ExtAppsAndDir.songsFolder + this.title);
-                FileFolderFunctions.deleteFile(ExtAppsAndDir.notesFolder + this.title);
+                FileFolderFunctions.deleteFile(Settings.ExtAppsAndDir.songsFolder + this.title);
+                FileFolderFunctions.deleteFile(Settings.ExtAppsAndDir.notesFolder + this.title);
             }
 
         }
@@ -339,7 +339,7 @@ namespace OpenChords.Entities
         public bool isMp3Available()
         {
 
-            string songName = ExtAppsAndDir.mediaFolder + this.title;
+            string songName =Settings.ExtAppsAndDir.mediaFolder + this.title;
 
             if (FileFolderFunctions.isFilePresent(songName + ".mp3"))
                 return true;
@@ -360,7 +360,7 @@ namespace OpenChords.Entities
 
         public string getMp3Filename()
         {
-            string songName = ExtAppsAndDir.mediaFolder + this.title;
+            string songName =Settings.ExtAppsAndDir.mediaFolder + this.title;
 
             if (FileFolderFunctions.isFilePresent(songName + ".mp3"))
                 return songName + ".mp3";
@@ -387,11 +387,11 @@ namespace OpenChords.Entities
         public void displayPdf(DisplayAndPrintSettingsType settingsType)
         {
             //get the filemanager for the filesystem
-            string fileManager = ExtAppsAndDir.fileManager;
+            string fileManager =Settings.ExtAppsAndDir.fileManager;
 
             var pdfPath = Export.ExportToPdf.exportSong(this, settingsType);
 
-            pdfPath = ExtAppsAndDir.printFolder + pdfPath;
+            pdfPath =Settings.ExtAppsAndDir.printFolder + pdfPath;
 
             //try run the file with the default application
             if (string.IsNullOrEmpty(fileManager))

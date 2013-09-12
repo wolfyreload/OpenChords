@@ -12,7 +12,7 @@ using OpenChords.IO;
 using System.Collections.Generic;
 using System.Runtime.Serialization;
 using System.Runtime.Serialization.Formatters.Binary;
-using OpenChords.Settings;
+
 using System.Drawing;
 using System.Xml.Serialization;
 
@@ -142,17 +142,17 @@ namespace OpenChords.Entities
 			
 			if (settingsType == DisplayAndPrintSettingsType.DisplaySettings)
 			{
-                settings = XmlReaderWriter.readSettings(ExtAppsAndDir.displaySettingsFileName);
+                settings = XmlReaderWriter.readSettings(Settings.ExtAppsAndDir.displaySettingsFileName);
                 if (settings == null) settings = new DisplayAndPrintSettings(DisplayAndPrintSettingsType.DisplaySettings);
 			}
             else if (settingsType == DisplayAndPrintSettingsType.PrintSettings)
 			{
-                settings = XmlReaderWriter.readSettings(ExtAppsAndDir.printSettingsFilename);
+                settings = XmlReaderWriter.readSettings(Settings.ExtAppsAndDir.printSettingsFilename);
                 if (settings == null) settings = new DisplayAndPrintSettings(DisplayAndPrintSettingsType.PrintSettings);
 			}
             else if (settingsType == DisplayAndPrintSettingsType.TabletSettings)
             {
-                settings = XmlReaderWriter.readSettings(ExtAppsAndDir.tabletSettingsFilename);
+                settings = XmlReaderWriter.readSettings(Settings.ExtAppsAndDir.tabletSettingsFilename);
                 if (settings == null) settings = new DisplayAndPrintSettings(DisplayAndPrintSettingsType.TabletSettings);
             }
 			
@@ -164,11 +164,11 @@ namespace OpenChords.Entities
 		public void saveSettings()
 		{
 			if (settingsType == DisplayAndPrintSettingsType.DisplaySettings)
-				XmlReaderWriter.writeSettings(ExtAppsAndDir.displaySettingsFileName, this);
+				XmlReaderWriter.writeSettings(Settings.ExtAppsAndDir.displaySettingsFileName, this);
             else if (settingsType == DisplayAndPrintSettingsType.PrintSettings)
-                XmlReaderWriter.writeSettings(ExtAppsAndDir.printSettingsFilename, this);
+                XmlReaderWriter.writeSettings(Settings.ExtAppsAndDir.printSettingsFilename, this);
             else if (settingsType == DisplayAndPrintSettingsType.TabletSettings)
-                XmlReaderWriter.writeSettings(ExtAppsAndDir.tabletSettingsFilename, this);
+                XmlReaderWriter.writeSettings(Settings.ExtAppsAndDir.tabletSettingsFilename, this);
 		}
 
         public bool isSettingsFilePresent()

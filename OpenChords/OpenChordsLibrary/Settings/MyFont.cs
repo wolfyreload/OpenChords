@@ -9,7 +9,7 @@
 using System;
 using System.Drawing;
 
-namespace OpenChords.Settings
+namespace OpenChords.Config
 {
 	/// <summary>
 	/// Description of FontNames.

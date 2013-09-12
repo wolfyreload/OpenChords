@@ -3,7 +3,7 @@ using System.Xml.Linq;
 using OpenChords.Entities;
 using System.IO;
 using System.Xml.Serialization;
-using OpenChords.Settings;
+
 using System.Drawing;
 
 namespace OpenChords.IO

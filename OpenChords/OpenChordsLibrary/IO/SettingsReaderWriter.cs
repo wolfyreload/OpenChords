@@ -16,7 +16,7 @@ using System.IO;
 
 using OpenChords.Entities;
 using OpenChords.Functions;
-using OpenChords.Settings;
+
 using System.Xml.Serialization;
 
 namespace OpenChords.IO
@@ -46,7 +46,7 @@ namespace OpenChords.IO
 				
 				foreach (string element in elements)
 				{
-					if (FileFolderFunctions.isFilePresent(ExtAppsAndDir.songsFolder + element))
+					if (FileFolderFunctions.isFilePresent(Settings.ExtAppsAndDir.songsFolder + element))
 						set.addSongToSet(element);
 				}
 				
@@ -93,7 +93,7 @@ namespace OpenChords.IO
         /// <returns></returns>
 		public static string readSessionState()
 		{
-			return FileReaderWriter.readFromFile(ExtAppsAndDir.sessionSaveState);
+			return FileReaderWriter.readFromFile(Settings.ExtAppsAndDir.sessionSaveState);
 		}
 		
         /// <summary>
@@ -102,7 +102,7 @@ namespace OpenChords.IO
         /// <param name="state"></param>
 		public static void writeSessionState(string state)
 		{
-			FileReaderWriter.writeToFile(ExtAppsAndDir.sessionSaveState,state);
+			FileReaderWriter.writeToFile(Settings.ExtAppsAndDir.sessionSaveState,state);
 		}
 	
 

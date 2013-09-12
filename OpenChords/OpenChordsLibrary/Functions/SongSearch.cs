@@ -10,7 +10,7 @@ using System;
 using System.Collections.Generic;
 using OpenChords.Entities;
 using OpenChords.IO;
-using OpenChords.Settings;
+
 using System.Text.RegularExpressions;
 using System.Text;
 
@@ -35,7 +35,7 @@ namespace OpenChords.Functions
 		{
 			//load directory list
 			string[] songlist = 
-				FileFolderFunctions.getDirectoryListing(ExtAppsAndDir.songsFolder);
+				FileFolderFunctions.getDirectoryListing(Settings.ExtAppsAndDir.songsFolder);
 			
 			//if there is no search
 			if (searchCriteria == "")

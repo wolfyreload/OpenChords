@@ -7,7 +7,7 @@ using System.Linq;
 
 using OpenChords.Entities;
 using OpenChords.Functions;
-using OpenChords.Settings;
+
 
 namespace OpenChords.Export
 {
@@ -50,7 +50,7 @@ namespace OpenChords.Export
                 Song song = Song.loadSong(songName);
                 writeSong(song, true);
             }
-            doc.createPDF(ExtAppsAndDir.printFolder + Filename + ".pdf");
+            doc.createPDF(Settings.ExtAppsAndDir.printFolder + Filename + ".pdf");
             return Filename + ".pdf";
 
 
@@ -73,7 +73,7 @@ namespace OpenChords.Export
             pageNumber = 0;
             writeSong(song, true);
 
-            doc.createPDF(ExtAppsAndDir.printFolder + Filename + ".pdf");
+            doc.createPDF(Settings.ExtAppsAndDir.printFolder + Filename + ".pdf");
             return Filename + ".pdf";
         }
 

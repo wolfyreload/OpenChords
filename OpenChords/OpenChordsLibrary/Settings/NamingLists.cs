@@ -8,7 +8,7 @@
  */
 using System;
 
-namespace OpenChords.Settings
+namespace OpenChords.Config
 {
 	/// <summary>
 	/// Description of NamingLists.
