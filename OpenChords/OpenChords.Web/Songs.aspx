@@ -9,21 +9,10 @@
 <body>
     <form id="form1" runat="server">
     <div>
-        <asp:GridView ID="grdSongs" runat="server" EnableModelValidation="True" OnRowDataBound="grdSongs_RowDataBound">
-            <Columns>
-                <asp:TemplateField HeaderText="Songs">
-                    <ItemTemplate>
-                        <asp:LinkButton ID="lnkSong" runat="server" CommandArgument="" OnClick="lnkSong_Click"></asp:LinkButton>
-                    </ItemTemplate>
-                    <EditItemTemplate>
-                        Hello World
+        <asp:Panel ID="pnlSongs" runat="server">
 
-                    </EditItemTemplate>
-                </asp:TemplateField>
-            </Columns>
-        </asp:GridView>
 
-       
+        </asp:Panel>
     </div>
     </form>
 </body>

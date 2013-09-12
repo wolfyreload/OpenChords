@@ -183,11 +183,17 @@ namespace OpenChords.Entities
             song.notes = Note.loadNotes(SongName).notes;
 
             initializeSongStyle(song);
-
-
-
             return song;
 
+        }
+
+        /// <summary>
+        /// returns a list of all songs in the system
+        /// </summary>
+        /// <returns></returns>
+        public static List<string> listOfAllSongs()
+        {
+            return IO.FileFolderFunctions.getDirectoryListingAsList(Settings.ExtAppsAndDir.songsFolder);
         }
 
         private static void initializeSongStyle(Song song)
@@ -386,20 +392,29 @@ namespace OpenChords.Entities
 
         public void displayPdf(DisplayAndPrintSettingsType settingsType)
         {
+            string pdfPath = getPdfPath(settingsType);
+
             //get the filemanager for the filesystem
-            string fileManager =Settings.ExtAppsAndDir.fileManager;
-
-            var pdfPath = Export.ExportToPdf.exportSong(this, settingsType);
-
-            pdfPath =Settings.ExtAppsAndDir.printFolder + pdfPath;
-
-            //try run the file with the default application
+            string fileManager = Settings.ExtAppsAndDir.fileManager;
             if (string.IsNullOrEmpty(fileManager))
                 System.Diagnostics.Process.Start(pdfPath);
             else
                 System.Diagnostics.Process.Start(fileManager, pdfPath);
 
 
+        }
+
+        /// <summary>
+        /// create the pdf and return the path to the pdf
+        /// </summary>
+        /// <param name="settingsType"></param>
+        /// <returns></returns>
+        public string getPdfPath(DisplayAndPrintSettingsType settingsType)
+        {
+            string pdfPath;
+            pdfPath = Export.ExportToPdf.exportSong(this, settingsType);
+            pdfPath = Settings.ExtAppsAndDir.printFolder + pdfPath;
+            return pdfPath;
         }
 
         /// <summary>

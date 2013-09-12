@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Text.RegularExpressions;
 using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
@@ -11,20 +12,48 @@ namespace OpenChords.Web
     {
         protected void Page_Load(object sender, EventArgs e)
         {
-            if (!IsPostBack)
+            makeSongList();
+
+            var query = Request.Url.Query;
+            if (query.Length > 0)
             {
-                
+                downloadSong(query);
             }
         }
 
-        protected void lnkSong_Click(object sender, EventArgs e)
+        private void makeSongList()
         {
-
+            var listOfSongs = Entities.Song.listOfAllSongs();
+            foreach (var song in listOfSongs)
+            {
+                var link = new HyperLink()
+                {
+                    Text = song,
+                    NavigateUrl = "~/Songs.aspx?" + song
+                };
+                pnlSongs.Controls.Add(link);
+                pnlSongs.Controls.Add(new LiteralControl("<br/>"));
+            }
         }
 
-        protected void grdSongs_RowDataBound(object sender, GridViewRowEventArgs e)
+        private void downloadSong(string query)
         {
-            var test = (LinkButton)e.Row.FindControl("lnkSong");
+            var songClean = query.Remove(0, 1);
+            songClean = songClean.Replace("%20", " ");
+
+            var song = Entities.Song.loadSong(songClean);
+            var pdfPath = song.getPdfPath(Entities.DisplayAndPrintSettingsType.TabletSettings);
+
+
+            Response.ClearContent();
+            Response.Clear();
+
+            Response.ContentType = "application/pdf";
+            Response.AppendHeader("Content-Disposition", "attachment; filename=" + songClean + ".pdf");
+            Response.TransmitFile(pdfPath);
+            Response.Flush();
+
+            Response.End();
         }
 
 

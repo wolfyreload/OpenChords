@@ -16,7 +16,9 @@ namespace OpenChords.Web
         private static void setup()
         {
             var fileAndFolderSettings = Entities.FileAndFolderSettings.loadSettings(@"C:\Users\michael.antwerpen\Dropbox\OpenChords\App\settings.xml");
-            OpenChords.Settings.setup(fileAndFolderSettings);    
+            OpenChords.Settings.setup(fileAndFolderSettings);
+            var tablet = new Entities.DisplayAndPrintSettings(Entities.DisplayAndPrintSettingsType.TabletSettings);
+            tablet.saveSettings();
         }
 
         protected void Application_Start(object sender, EventArgs e)

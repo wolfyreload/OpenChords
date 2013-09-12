@@ -137,8 +137,17 @@ namespace OpenChords.Entities
 			
 			changeMade = true;
 		}
-		
-		
+
+
+        /// <summary>
+        /// returns a list of all sets in the system
+        /// </summary>
+        /// <returns></returns>
+        public static List<string> listOfAllSets()
+        {
+            return IO.FileFolderFunctions.getDirectoryListingAsList(Settings.ExtAppsAndDir.setsFolder);
+        }
+
 		public static Set loadSet(string setName)
 		{
 			Set set = SettingsReaderWriter.readSet(Settings.ExtAppsAndDir.setsFolder + setName);
@@ -208,15 +217,27 @@ namespace OpenChords.Entities
 	
 		}
 
+        /// <summary>
+        /// create the pdf and return the path to the pdf
+        /// </summary>
+        /// <param name="settingsType"></param>
+        /// <returns></returns>
+        public string getPdfPath(DisplayAndPrintSettingsType settingsType)
+        {
+            string pdfPath;
+            pdfPath = Export.ExportToPdf.exportSet(this, settingsType);
+            pdfPath = Settings.ExtAppsAndDir.printFolder + pdfPath;
+            return pdfPath;
+        }
+
+
         public void displayPdf(DisplayAndPrintSettingsType settingsType)
         {
+            
+            var pdfPath = getPdfPath(settingsType);
+
             //get the filemanager for the filesystem
-            string fileManager =Settings.ExtAppsAndDir.fileManager;
-
-            var pdfPath = Export.ExportToPdf.exportSet(this, settingsType);
-
-            pdfPath =Settings.ExtAppsAndDir.printFolder + pdfPath;
-
+            string fileManager = Settings.ExtAppsAndDir.fileManager;
             //try run the file with the default application
             if (string.IsNullOrEmpty(fileManager))
                 System.Diagnostics.Process.Start(pdfPath);
