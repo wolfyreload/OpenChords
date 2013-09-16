@@ -10,6 +10,10 @@ namespace OpenChords.Web
 {
     public partial class Songs : System.Web.UI.Page
     {
+       
+    
+
+
         protected void Page_Load(object sender, EventArgs e)
         {
             makeSongList();
@@ -42,7 +46,8 @@ namespace OpenChords.Web
             songClean = songClean.Replace("%20", " ");
 
             var song = Entities.Song.loadSong(songClean);
-            var pdfPath = song.getPdfPath(Entities.DisplayAndPrintSettingsType.TabletSettings);
+            var settingsPath = OpenChords.Web.App_Code.Global.SettingsFileName;
+            var pdfPath = song.getPdfPath(Entities.DisplayAndPrintSettingsType.TabletSettings, settingsPath);
 
 
             Response.ClearContent();

@@ -144,44 +144,43 @@ namespace OpenChords.Entities
 			{
                 settings = XmlReaderWriter.readSettings(Settings.ExtAppsAndDir.displaySettingsFileName);
                 if (settings == null) settings = new DisplayAndPrintSettings(DisplayAndPrintSettingsType.DisplaySettings);
-			}
+                settings.SettingsFilePath = Settings.ExtAppsAndDir.displaySettingsFileName;
+            }
             else if (settingsType == DisplayAndPrintSettingsType.PrintSettings)
 			{
                 settings = XmlReaderWriter.readSettings(Settings.ExtAppsAndDir.printSettingsFilename);
                 if (settings == null) settings = new DisplayAndPrintSettings(DisplayAndPrintSettingsType.PrintSettings);
+                settings.SettingsFilePath = Settings.ExtAppsAndDir.printSettingsFilename;
 			}
             else if (settingsType == DisplayAndPrintSettingsType.TabletSettings)
             {
                 settings = XmlReaderWriter.readSettings(Settings.ExtAppsAndDir.tabletSettingsFilename);
                 if (settings == null) settings = new DisplayAndPrintSettings(DisplayAndPrintSettingsType.TabletSettings);
+                settings.SettingsFilePath = Settings.ExtAppsAndDir.tabletSettingsFilename;
             }
 			
 			return settings;
 		}
-		
-		
+
+        //load settings file from indicated path
+        public static DisplayAndPrintSettings loadSettings(DisplayAndPrintSettingsType settingsType, string path)
+        {
+           var settings = XmlReaderWriter.readSettings(path);
+           if (settings == null) settings = new DisplayAndPrintSettings(settingsType, path);
+           settings.SettingsFilePath = path;
+            return settings;
+        }
 		
 		public void saveSettings()
 		{
-			if (settingsType == DisplayAndPrintSettingsType.DisplaySettings)
-				XmlReaderWriter.writeSettings(Settings.ExtAppsAndDir.displaySettingsFileName, this);
-            else if (settingsType == DisplayAndPrintSettingsType.PrintSettings)
-                XmlReaderWriter.writeSettings(Settings.ExtAppsAndDir.printSettingsFilename, this);
-            else if (settingsType == DisplayAndPrintSettingsType.TabletSettings)
-                XmlReaderWriter.writeSettings(Settings.ExtAppsAndDir.tabletSettingsFilename, this);
+            XmlReaderWriter.writeSettings(SettingsFilePath, this);   
 		}
 
         public bool isSettingsFilePresent()
         {
             var settingsFilePresent = false;
-            if (settingsType == Entities.DisplayAndPrintSettingsType.DisplaySettings)
-                settingsFilePresent = IO.FileFolderFunctions.isFilePresent(Settings.ExtAppsAndDir.displaySettingsFileName);
-            else if (settingsType == Entities.DisplayAndPrintSettingsType.PrintSettings)
-                settingsFilePresent = IO.FileFolderFunctions.isFilePresent(Settings.ExtAppsAndDir.printSettingsFilename);
-            else if (settingsType == Entities.DisplayAndPrintSettingsType.TabletSettings)
-                settingsFilePresent = IO.FileFolderFunctions.isFilePresent(Settings.ExtAppsAndDir.tabletSettingsFilename);
+            settingsFilePresent = IO.FileFolderFunctions.isFilePresent(SettingsFilePath);
             return settingsFilePresent;
-
         }
 		
 		public DisplayAndPrintSettings()
@@ -204,11 +203,32 @@ namespace OpenChords.Entities
 
         }
 		
+        [XmlIgnore]
+        public string SettingsFilePath {get; set;}
+
+        /// <summary>
+        /// creates the default settings with a path in which to save the settings to
+        /// </summary>
+        /// <param name="settingsType"></param>
+        /// <param name="path"></param>
+        public DisplayAndPrintSettings(DisplayAndPrintSettingsType settingsType, string path)
+        {
+            createDefault(settingsType);
+
+            SettingsFilePath = path;
+
+        }
+
         /// <summary>
         /// defzult settings
         /// </summary>
         /// <param name="settingsType"></param>
         public DisplayAndPrintSettings(DisplayAndPrintSettingsType settingsType)
+        {
+            createDefault(settingsType);
+        }
+
+        private void createDefault(DisplayAndPrintSettingsType settingsType)
         {
             this.settingsType = settingsType;
             float titleSize;
@@ -233,6 +253,7 @@ namespace OpenChords.Entities
 
             if (settingsType == DisplayAndPrintSettingsType.DisplaySettings)
             {
+                SettingsFilePath = Settings.ExtAppsAndDir.displaySettingsFileName;
                 pageHeight = System.Windows.Forms.SystemInformation.PrimaryMonitorSize.Height;
                 pageWidth = System.Windows.Forms.SystemInformation.PrimaryMonitorSize.Width;
 
@@ -246,8 +267,8 @@ namespace OpenChords.Entities
                 paragraphSpacing = adjustForLowerResolutions2(7);
                 contentLineSpacing = adjustForLowerResolutions2(3);
 
-                leftPageMargin   = 5;
-                topPageMargin    = 5;
+                leftPageMargin = 5;
+                topPageMargin = 5;
                 bottomPageMargin = 5;
                 rightPageMargin = 5;
 
@@ -266,7 +287,7 @@ namespace OpenChords.Entities
                 HeadingsColor = ColorTranslator.FromHtml("#BE7C7C");
                 TitleColor = ColorTranslator.FromHtml("#FEAF81");
                 OrderColor1 = ColorTranslator.FromHtml("#FF8040");
-                OrderColor2 = ColorTranslator.FromHtml("#FFFF80");  
+                OrderColor2 = ColorTranslator.FromHtml("#FFFF80");
                 NoteColor = ColorTranslator.FromHtml("#80FF80");
 
                 NoteWidth = (int)adjustForLowerResolutions2(188);
@@ -282,6 +303,7 @@ namespace OpenChords.Entities
             }
             else if (settingsType == DisplayAndPrintSettingsType.TabletSettings)
             {
+                SettingsFilePath = Settings.ExtAppsAndDir.tabletSettingsFilename;
                 pageHeight = 1024;
                 pageWidth = 768;
 
@@ -318,7 +340,7 @@ namespace OpenChords.Entities
                 OrderColor2 = ColorTranslator.FromHtml("#FFFF80");
                 NoteColor = ColorTranslator.FromHtml("#80FF80");
 
-                
+
                 NoteWidth = (int)adjustForLowerResolutions2(564);
                 if (DualColumns.Value == true) NoteWidth = NoteWidth / 2;
 
@@ -333,6 +355,7 @@ namespace OpenChords.Entities
             }
             else //if (settingsType == DisplayAndPrintSettingsType.PrintSettings)
             {
+                SettingsFilePath = Settings.ExtAppsAndDir.printSettingsFilename;
                 pageHeight = 842;
                 pageWidth = 595;
 
@@ -369,7 +392,7 @@ namespace OpenChords.Entities
                 OrderColor2 = Color.Gray;
 
                 NoteWidth = 150;
-                
+
                 BoldChords = true;
                 BoldLyrics = false;
                 BoldNotes = false;

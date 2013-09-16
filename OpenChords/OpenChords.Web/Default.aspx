@@ -12,6 +12,8 @@
         <asp:HyperLink ID="lnkSets" runat="server" NavigateUrl="~/Sets.aspx">Sets</asp:HyperLink>
         <br />
         <asp:HyperLink ID="lnkSongs" runat="server" NavigateUrl="~/Songs.aspx">Songs</asp:HyperLink>
+        <br />
+        <asp:HyperLink ID="HyperLink1" runat="server" NavigateUrl="~/Settings.aspx">Settings</asp:HyperLink>
     </div>
     </form>
 </body>

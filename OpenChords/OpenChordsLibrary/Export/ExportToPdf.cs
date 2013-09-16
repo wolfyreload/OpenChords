@@ -52,9 +52,26 @@ namespace OpenChords.Export
             }
             doc.createPDF(Settings.ExtAppsAndDir.printFolder + Filename + ".pdf");
             return Filename + ".pdf";
+        }
+
+        public static string exportSet(Set set, DisplayAndPrintSettingsType settingsType, string settingsPath)
+        {
+            //initialize
+            doc = new pdfDocument(set.setName, "OpenChords");
 
 
+            String Filename = set.setName;
+            printSettings = DisplayAndPrintSettings.loadSettings(settingsType, settingsPath);
+            BackgroundColor = new pdfColor(printSettings.BackgroundColor.R, printSettings.BackgroundColor.G, printSettings.BackgroundColor.B);
+            pageNumber = 0;
 
+            foreach (String songName in set.songNames)
+            {
+                Song song = Song.loadSong(songName);
+                writeSong(song, true);
+            }
+            doc.createPDF(Settings.ExtAppsAndDir.printFolder + Filename + ".pdf");
+            return Filename + ".pdf";
         }
 
         /// <summary>
@@ -69,6 +86,27 @@ namespace OpenChords.Export
             //page = doc.addPage(PrintSettings.pageHeight, PrintSettings.pageWidth)
             String Filename = SongProcessor.generateFileName(song);
             printSettings = DisplayAndPrintSettings.loadSettings(settingsType);
+            BackgroundColor = new pdfColor(printSettings.BackgroundColor.R, printSettings.BackgroundColor.G, printSettings.BackgroundColor.B);
+            pageNumber = 0;
+            writeSong(song, true);
+
+            doc.createPDF(Settings.ExtAppsAndDir.printFolder + Filename + ".pdf");
+            return Filename + ".pdf";
+        }
+
+        /// <summary>
+        /// exports the song to pdf
+        /// returns the title of the file
+        /// using a settingspath rather than a settings type
+        /// </summary>
+        /// <param name="song"></param>
+        public static string exportSong(Song song, DisplayAndPrintSettingsType settingsType, string settingsPath)
+        {
+            //initialize
+            doc = new pdfDocument(song.title, song.author);
+            //page = doc.addPage(PrintSettings.pageHeight, PrintSettings.pageWidth)
+            String Filename = SongProcessor.generateFileName(song);
+            printSettings = DisplayAndPrintSettings.loadSettings(settingsType, settingsPath);
             BackgroundColor = new pdfColor(printSettings.BackgroundColor.R, printSettings.BackgroundColor.G, printSettings.BackgroundColor.B);
             pageNumber = 0;
             writeSong(song, true);

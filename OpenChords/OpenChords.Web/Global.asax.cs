@@ -13,23 +13,29 @@ namespace OpenChords.Web
 
 
         //make the settings files if they dont exist
-        private static void setup()
+        private static void setupApplication()
         {
             var path = System.Web.Configuration.WebConfigurationManager.AppSettings["OpenChordsSettingsFilePath"];
             var fileAndFolderSettings = Entities.FileAndFolderSettings.loadSettings(path);
             OpenChords.Settings.setup(fileAndFolderSettings);
-            var tablet = new Entities.DisplayAndPrintSettings(Entities.DisplayAndPrintSettingsType.TabletSettings);
+         
+        }
+
+        private static void setupTabletSettings(string settingsFilePath)
+        {
+            var tablet = Entities.DisplayAndPrintSettings.loadSettings(Entities.DisplayAndPrintSettingsType.TabletSettings, settingsFilePath);
             tablet.saveSettings();
         }
 
         protected void Application_Start(object sender, EventArgs e)
         {
-            setup();
+            setupApplication();
         }
 
         protected void Session_Start(object sender, EventArgs e)
         {
-
+            var fileName = OpenChords.Web.App_Code.Global.SettingsFileName;
+            setupTabletSettings(fileName);
         }
 
         protected void Application_BeginRequest(object sender, EventArgs e)

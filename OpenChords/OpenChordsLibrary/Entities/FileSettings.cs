@@ -60,13 +60,17 @@ namespace OpenChords.Entities
         public static FileAndFolderSettings loadSettings(string path)
         {        
             var settings = IO.XmlReaderWriter.readFileAndFolderSettings(path);
-            var dir = new DirectoryInfo(path);    
+            var dir = new DirectoryInfo(path);
+            settings.CurrentFullPath = path;
             settings.CurrentPath = dir.Parent.FullName + "\\";
             return settings;
         }
 
         [XmlIgnore]
         public string CurrentPath { get; protected set; }
+
+        [XmlIgnore]
+        public string CurrentFullPath { get; protected set; }
 
         public void saveSettings()
         {
@@ -91,10 +95,15 @@ namespace OpenChords.Entities
 
 
 
-
-        internal void refresh()
+        /// <summary>
+        /// gets a fresh version of the current settings and returns the settings
+        /// </summary>
+        /// <returns></returns>
+        public void refresh()
         {
-            throw new NotImplementedException();
+            logger.Debug("Refresh function called that doesn't do anything yet");
+            return;
+            
         }
     }
 }

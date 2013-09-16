@@ -135,21 +135,19 @@ namespace OpenChords.IO
 
         public static DisplayAndPrintSettings readSettings(String fileName)
         {
+            TextReader textReader = null;
             DisplayAndPrintSettings settings = null;
-            TextReader textReader = new StreamReader(fileName);
             try
             {
+                textReader = new StreamReader(fileName);
                 XmlSerializer deserializer = new XmlSerializer(typeof(DisplayAndPrintSettings));
                 settings = (DisplayAndPrintSettings)deserializer.Deserialize(textReader);
                 fixNulls(settings);
+                textReader.Close();
             }
             catch (Exception ex)
             {
                 logger.Error("Error reading settings", ex);
-            }
-            finally
-            {
-                textReader.Close();
             }
 
             return settings;

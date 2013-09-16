@@ -230,6 +230,19 @@ namespace OpenChords.Entities
             return pdfPath;
         }
 
+        /// <summary>
+        /// create the pdf and return the path to the pdf
+        /// </summary>
+        /// <param name="settingsType"></param>
+        /// <returns></returns>
+        public string getPdfPath(DisplayAndPrintSettingsType settingsType, string settingsPath)
+        {
+            string pdfPath;
+            pdfPath = Export.ExportToPdf.exportSet(this, settingsType, settingsPath);
+            pdfPath = Settings.ExtAppsAndDir.printFolder + pdfPath;
+            return pdfPath;
+        }
+
 
         public void displayPdf(DisplayAndPrintSettingsType settingsType)
         {

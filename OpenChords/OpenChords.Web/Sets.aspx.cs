@@ -47,7 +47,8 @@ namespace OpenChords.Web
             songSet = songSet.Replace("%20", " ");
 
             var set = Entities.Set.loadSet(songSet);
-            var pdfPath = set.getPdfPath(Entities.DisplayAndPrintSettingsType.TabletSettings);
+            var settingsPath = App_Code.Global.SettingsFileName;
+            var pdfPath = set.getPdfPath(Entities.DisplayAndPrintSettingsType.TabletSettings, settingsPath);
 
 
             Response.ClearContent();

@@ -418,6 +418,19 @@ namespace OpenChords.Entities
         }
 
         /// <summary>
+        /// create the pdf and return the path to the pdf
+        /// </summary>
+        /// <param name="settingsType"></param>
+        /// <returns></returns>
+        public string getPdfPath(DisplayAndPrintSettingsType settingsType, string settingsPath)
+        {
+            string pdfPath;
+            pdfPath = Export.ExportToPdf.exportSong(this, settingsType, settingsPath);
+            pdfPath = Settings.ExtAppsAndDir.printFolder + pdfPath;
+            return pdfPath;
+        }
+
+        /// <summary>
         /// Get the currently selected OpenSong image
         /// </summary>
         /// <returns></returns>
