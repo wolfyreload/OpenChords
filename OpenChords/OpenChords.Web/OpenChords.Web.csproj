@@ -105,6 +105,7 @@
     <Folder Include="App_Data\" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="Properties\PublishProfiles\DropboxPublish.pubxml" />
     <None Include="Properties\PublishProfiles\OpenChordsTest.pubxml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
