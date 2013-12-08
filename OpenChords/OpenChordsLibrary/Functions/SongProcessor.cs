@@ -366,9 +366,8 @@ namespace OpenChords.Functions
 			bool rebuildNeeded = false;
 			for (int i = 0; i < splitLyrics.Length; i++)
 			{
-				char char1 = splitLyrics[i][0];
 				//check for unexpected characters
-				if (char1 != '[' && char1 != '.' && char1 != ' ')
+                if (!splitLyrics[i].StartsWith(".") && !splitLyrics[i].StartsWith(" ") && !splitLyrics[i].StartsWith("["))
 				{
 					rebuildNeeded = true;
 					break;
@@ -380,7 +379,10 @@ namespace OpenChords.Functions
 			{
 				for (int i = 0; i < splitLyrics.Length; i++)
 				{
-					tempLyrics.AppendLine(" " + splitLyrics[i]);
+                    if (!splitLyrics[i].StartsWith(".") && !splitLyrics[i].StartsWith(" ") && !splitLyrics[i].StartsWith("["))
+                        tempLyrics.AppendLine(" " + splitLyrics[i]);
+                    else
+                        tempLyrics.AppendLine(splitLyrics[i]);
 				}
 				song.lyrics = tempLyrics.ToString();
 			}
