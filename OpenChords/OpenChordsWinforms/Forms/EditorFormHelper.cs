@@ -47,8 +47,8 @@ namespace OpenChords.Forms
 			txtNotes.Text = currentSong.notes;
             txtRef.Text = currentSong.hymn_number;
             txtccli.Text = currentSong.ccli;
-            cmbTempo.Text = currentSong.tempo;
-            cmbSig.Text = currentSong.time_sig;
+            cmbTempo.Text = (!string.IsNullOrEmpty(currentSong.tempo)) ? currentSong.tempo : "-Select tempo-";
+            cmbSig.Text = (!string.IsNullOrEmpty(currentSong.time_sig)) ? currentSong.time_sig : "-Select time signature-";
 		    if (currentSong.PreferFlats)
 		        rdoFlats.Checked = true;
 		    else
@@ -108,9 +108,9 @@ namespace OpenChords.Forms
 			currentSong.notes = txtNotes.Text;
             currentSong.hymn_number = txtRef.Text;
             currentSong.ccli = txtccli.Text;
-            currentSong.tempo = cmbTempo.Text;
-            currentSong.time_sig = cmbSig.Text;
-
+            currentSong.tempo = (cmbTempo.SelectedIndex > 0) ? cmbTempo.Text : "";
+            currentSong.time_sig = (cmbSig.SelectedIndex > 0) ? cmbSig.Text : "";
+            
 
 		    if (rdoFlats.Checked)
 		        currentSong.PreferFlats = true;

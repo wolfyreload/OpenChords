@@ -495,6 +495,7 @@ namespace OpenChords.Entities
         public static List<string> TimeSignatureOptions()
         {
             var options = new List<string>();
+            options.Add("-Select time signature-");
             options.Add("2/4");
             options.Add("3/4");
             options.Add("4/4");
@@ -506,6 +507,7 @@ namespace OpenChords.Entities
         public static List<string> TempoOptions()
         {
             var options = new List<string>();
+            options.Add("-Select tempo-");
             options.Add("Very Fast");
             options.Add("Fast");
             options.Add("Moderate");
