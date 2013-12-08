@@ -203,7 +203,9 @@ namespace OpenChords.Entities
                 if (endOfHeaderIndex >= 0)
                 {
                     string header = verse.Substring(0, endOfHeaderIndex);
-                    newLyrics.Add(header, verse.Substring(endOfHeaderIndex + 1));
+                    //ensure that there is only one of every chord piece
+                    if (!newLyrics.ContainsKey(header))
+                        newLyrics[header] = verse.Substring(endOfHeaderIndex + 1);
                 }
             }
 
