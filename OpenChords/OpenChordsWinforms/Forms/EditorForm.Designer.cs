@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             this.menuStrip1 = new System.Windows.Forms.MenuStrip();
             this.fileToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.newToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -134,6 +135,7 @@
             this.txtNotes = new System.Windows.Forms.RichTextBox();
             this.grpImage = new System.Windows.Forms.GroupBox();
             this.picBackgroundImage = new System.Windows.Forms.PictureBox();
+            this.timerOrderChanged = new System.Windows.Forms.Timer(this.components);
             this.menuStrip1.SuspendLayout();
             this.splitMainForm.Panel1.SuspendLayout();
             this.splitMainForm.Panel2.SuspendLayout();
@@ -1279,8 +1281,7 @@
             this.txtOrder.Name = "txtOrder";
             this.txtOrder.Size = new System.Drawing.Size(258, 23);
             this.txtOrder.TabIndex = 2;
-            this.txtOrder.TextChanged += new System.EventHandler(this.TextFieldTextChanged);
-            this.txtOrder.Leave += new System.EventHandler(this.txtOrder_Leave);
+            this.txtOrder.TextChanged += new System.EventHandler(this.txtOrder_TextChanged);
             // 
             // pnlTitle
             // 
@@ -1432,6 +1433,11 @@
             this.picBackgroundImage.TabIndex = 5;
             this.picBackgroundImage.TabStop = false;
             this.picBackgroundImage.Click += new System.EventHandler(this.picBackgroundImage_Click);
+            // 
+            // timerOrderChanged
+            // 
+            this.timerOrderChanged.Interval = 500;
+            this.timerOrderChanged.Tick += new System.EventHandler(this.timerOrderChanged_Tick);
             // 
             // EditorForm
             // 
@@ -1650,6 +1656,7 @@
         private System.Windows.Forms.TextBox txtccli;
         private System.Windows.Forms.FlowLayoutPanel flowReference;
         private System.Windows.Forms.Panel pnlMoreMetaData;
+        private System.Windows.Forms.Timer timerOrderChanged;
         
   
     }

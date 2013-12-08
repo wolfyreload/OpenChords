@@ -1070,13 +1070,6 @@ namespace OpenChords.Forms
             TextFieldTextChanged(sender, e);
         }
 
-        private void txtOrder_Leave(object sender, EventArgs e)
-        {
-            //only reorder if the order changes
-            if (txtOrder.Text != currentSong.presentation)
-                fixNoteAndLyricsOrdering();
-         
-        }
 
 
         void BtnLaunchOpenSongClick(object sender, EventArgs e)
@@ -1123,6 +1116,25 @@ namespace OpenChords.Forms
                 picBackgroundImage.Image = currentSong.getSongImage();
                 changesMade = true;
             }
+        }
+
+        private void timerOrderChanged_Tick(object sender, EventArgs e)
+        {
+            timerOrderChanged.Enabled = false;
+            txtOrder.SelectionLength = 0;
+            var oldTextPosition = txtOrder.SelectionStart;
+            //only reorder if the order changes
+            if (txtOrder.Text != currentSong.presentation)
+                fixNoteAndLyricsOrdering();
+
+            txtOrder.SelectionStart = oldTextPosition;
+
+        }
+
+        private void txtOrder_TextChanged(object sender, EventArgs e)
+        {
+            timerOrderChanged.Stop();
+            timerOrderChanged.Start();
         }
 
 

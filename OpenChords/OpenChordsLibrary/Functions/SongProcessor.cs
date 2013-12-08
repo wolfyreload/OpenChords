@@ -503,7 +503,7 @@ namespace OpenChords.Functions
 			song.title = song.title.TrimEnd();
 			song.author = song.author.TrimEnd();
 			song.key = song.key.TrimEnd();
-			song.presentation = song.presentation.TrimEnd();
+			song.presentation = song.presentation;
 			
 			
 
@@ -766,7 +766,7 @@ namespace OpenChords.Functions
                 {
                     var newVerse = '[' + verse;
                     var notePart = newVerse.Substring(newVerse.IndexOf(']'));
-                    if (notePart.Trim(new char[] { ' ', '\r', '\n' }).Length >= 2)
+                    if (notePart.Trim(new char[] { ' ', '\r', '\n' }).Length > 3)
                         newVerses.Add(newVerse);
                 }
             }
