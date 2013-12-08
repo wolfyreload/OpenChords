@@ -439,7 +439,16 @@ namespace OpenChords.Entities
             Image outputImage = null;
             if (!String.IsNullOrEmpty(OpenSongImageFileName))
             {
-                var path = OpenChords.Settings.ExtAppsAndDir.opensongBackgroundsFolder + OpenSongImageFileName;
+                string path = "";
+                if (OpenSongImageFileName.Contains(":\\"))
+                {
+                    path = OpenSongImageFileName;
+                }
+                else
+                {
+                    path = OpenChords.Settings.ExtAppsAndDir.opensongBackgroundsFolder + OpenSongImageFileName;
+                }
+
                 try
                 {
                     outputImage = Image.FromFile(path);
