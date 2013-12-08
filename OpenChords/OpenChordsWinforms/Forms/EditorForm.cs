@@ -1017,8 +1017,10 @@ namespace OpenChords.Forms
 
             //disable the export to opensong if opensong is not available
             if (!IO.FileFolderFunctions.isFilePresent(OpenChords.Settings.ExtAppsAndDir.openSongApp))
+            {
                 openSongToolStripMenuItem.Enabled = false;
-
+                splitContainerNotesImage.Panel2Collapsed = true;
+            }
             //disable sync utility if it isn't pointing to a real file
             if (!IO.FileFolderFunctions.isFilePresent(OpenChords.Settings.ExtAppsAndDir.FileSyncUtility))
                 fileSyncUtilityToolStripMenuItem.Enabled = false;
