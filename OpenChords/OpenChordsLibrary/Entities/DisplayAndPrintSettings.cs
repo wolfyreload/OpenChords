@@ -283,7 +283,7 @@ namespace OpenChords.Entities
 
                 LyricsColor = ColorTranslator.FromHtml("White");
                 BackgroundColor = Color.Black;
-                ChordColor = ColorTranslator.FromHtml("Silver");
+                ChordColor = ColorTranslator.FromHtml("#00FF80");
                 HeadingsColor = ColorTranslator.FromHtml("#BE7C7C");
                 TitleColor = ColorTranslator.FromHtml("#FEAF81");
                 OrderColor1 = ColorTranslator.FromHtml("#FF8040");
@@ -333,7 +333,7 @@ namespace OpenChords.Entities
 
                 LyricsColor = ColorTranslator.FromHtml("White");
                 BackgroundColor = Color.Black;
-                ChordColor = ColorTranslator.FromHtml("Silver");
+                ChordColor = ColorTranslator.FromHtml("#00FF80");
                 HeadingsColor = ColorTranslator.FromHtml("#BE7C7C");
                 TitleColor = ColorTranslator.FromHtml("#FEAF81");
                 OrderColor1 = ColorTranslator.FromHtml("#FF8040");
