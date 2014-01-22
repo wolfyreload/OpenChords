@@ -188,37 +188,91 @@ namespace OpenChords.Forms
 			
 		}
 		
-		void BtnPdfExportClick(object sender, EventArgs e)
+		void exportCurrentSongToA4PDFToolStripMenuItem_Click(object sender, EventArgs e)
         {
             logger.Info("Clicked");
-			exportToPdf();
+            exportToPdf(OpenChords.Config.Enumerations.DocumentType.CurrentSong, DisplayAndPrintSettingsType.PrintSettings);
 		}
-		
-		void  BtndeleteClick(object sender, EventArgs e)
+
+        private void exportCurrentSetToA4PDFToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            logger.Info("Clicked");
+            exportToPdf(OpenChords.Config.Enumerations.DocumentType.CurrentSet, DisplayAndPrintSettingsType.PrintSettings);
+        }
+
+        
+        private void exportAllSongsToA4PDFToolStripMenuItem_Click(object sender, System.EventArgs e)
+        {
+            logger.Info("Clicked");
+            exportToPdf(OpenChords.Config.Enumerations.DocumentType.AllSongs, DisplayAndPrintSettingsType.PrintSettings);
+        }
+
+        private void exportCurrentSongToTabletPDFToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            logger.Info("Clicked");
+            exportToPdf(OpenChords.Config.Enumerations.DocumentType.CurrentSong, DisplayAndPrintSettingsType.TabletSettings);
+        }
+
+        
+        private void exportCurrentSetToTabletPDFToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            logger.Info("Clicked");
+            exportToPdf(OpenChords.Config.Enumerations.DocumentType.CurrentSet, DisplayAndPrintSettingsType.TabletSettings);
+        }
+
+       
+        private void exportAllSongsToTabletPDFToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            logger.Info("Clicked");
+            exportToPdf(OpenChords.Config.Enumerations.DocumentType.AllSongs, DisplayAndPrintSettingsType.TabletSettings);
+        }
+
+   
+        
+
+
+        void exportToPdf(OpenChords.Config.Enumerations.DocumentType doc, DisplayAndPrintSettingsType printSettings)
+        {
+            //get the filemanager for the filesystem
+            string fileManager = OpenChords.Settings.ExtAppsAndDir.fileManager;
+            string filename = null;
+
+            //get the filename
+            if (doc == Config.Enumerations.DocumentType.CurrentSong)
+                filename = Export.ExportToPdf.exportSong(currentSong, printSettings);
+            else if (doc == Config.Enumerations.DocumentType.CurrentSet)
+                filename = Export.ExportToPdf.exportSet(currentSet, printSettings);
+            else
+            {
+                var songList = Song.listOfAllSongs();
+                foreach (var stringSong in songList)
+                {
+                    var song = Song.loadSong(stringSong);
+                    Export.ExportToPdf.exportSong(song, printSettings);
+                }
+
+
+            }
+            if (!string.IsNullOrEmpty(filename))
+            {
+                filename = String.Format("\"{0}\"", OpenChords.Settings.ExtAppsAndDir.printFolder + filename);
+
+                //try run the file with the default application
+                if (string.IsNullOrEmpty(fileManager))
+                    System.Diagnostics.Process.Start(filename);
+                else
+                    System.Diagnostics.Process.Start(fileManager, filename);
+            }
+
+        }
+        
+        void  BtndeleteClick(object sender, EventArgs e)
         {
             logger.Info("Clicked");
 			confirmDelete();
 		}
-		
-		void exportToPdf()
-		{
-			//get the filemanager for the filesystem
-            string fileManager = OpenChords.Settings.ExtAppsAndDir.fileManager;
-			
-			//get the filename
-			string filename = Export.ExportToPdf.exportSong(currentSong, DisplayAndPrintSettingsType.PrintSettings);
-            filename = String.Format("\"{0}\"", OpenChords.Settings.ExtAppsAndDir.printFolder + filename);
-			
-			//try run the file with the default application
-			if (string.IsNullOrEmpty(fileManager))
-				System.Diagnostics.Process.Start(filename);
-			else
-				System.Diagnostics.Process.Start(fileManager, filename);
-			
-			//export song to rtf
-			Export.ExportToRtf.exportSong(currentSong, DisplayAndPrintSettingsType.PrintSettings);
-			
-		}
+
+        
 		
 		void BtnLaunchDropBox()
 		{
@@ -553,7 +607,7 @@ namespace OpenChords.Forms
 					presentSet();
 					return true;
                 case Keys.Control | Keys.F12:
-                    exportSetToPDF(DisplayAndPrintSettingsType.TabletSettings);
+                    exportToPdf(Config.Enumerations.DocumentType.CurrentSet, DisplayAndPrintSettingsType.TabletSettings);
                     return true;
                 case Keys.F5:
                     refreshAll();
@@ -568,7 +622,7 @@ namespace OpenChords.Forms
 					randomizer();
 					return true;
 				case Keys.Control | Keys.P:
-					exportToPdf();
+                    exportToPdf(Config.Enumerations.DocumentType.CurrentSong, DisplayAndPrintSettingsType.PrintSettings);
 					return true;
 				case Keys.Control | Keys.Alt | Keys.Shift | Keys.F:
 					fixUpScript();
@@ -709,7 +763,7 @@ namespace OpenChords.Forms
             deleteToolStripMenuItem.ToolTipText = "Delete the currently selected song";
             revertToSavedToolStripMenuItem.ToolTipText = "Reverted the currently selected song to its last saved state";
             exitToolStripMenuItem.ToolTipText = "Exit OpenChords";
-            exportToPDFToolStripMenuItem.ToolTipText = "Export currently selected song to a PDF file";
+            exportCurrentSongToA4PDFToolStripMenuItem.ToolTipText = "Export currently selected song to a PDF file";
 
             FixFormatingtoolStripMenuItem.ToolTipText = "Attempts to fix the formatting of the lyrics of the song and its notes";
 
@@ -1038,27 +1092,9 @@ namespace OpenChords.Forms
             (new OpenChordsAboutBox()).ShowDialog();
         }
 
-        private void exportSetToPDFToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            logger.Info("Clicked");
-            exportSetToPDF(DisplayAndPrintSettingsType.TabletSettings);
-
-        }
-
-        private void exportSetToPDFToolStripMenuItem1_Click(object sender, EventArgs e)
-        {
-            logger.Info("Clicked");
-            exportSetToPDF(DisplayAndPrintSettingsType.PrintSettings);
-        }
+      
 
 
-
-
-        private void exportSetToPDF(DisplayAndPrintSettingsType settings)
-        {
-            currentSet.saveSet();
-            currentSet.displayPdf(settings);
-        }
 
         private void rdoFlats_CheckedChanged(object sender, EventArgs e)
         {
@@ -1136,6 +1172,8 @@ namespace OpenChords.Forms
             timerOrderChanged.Stop();
             timerOrderChanged.Start();
         }
+
+    
 
 
 

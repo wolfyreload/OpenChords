@@ -54,9 +54,14 @@
             this.exportAllSetsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.launchOpenSongToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.pdfToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.exportToPDFToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.exportSetToPDFToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
-            this.exportSetToPDFToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.pdfA4StripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.exportCurrentSongToA4PDFToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.exportCurrentSetToA4PDFToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.exportAllSongsToA4PDFToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.pdfTabletStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.exportCurrentSongToTabletPDFToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.exportCurrentSetToTabletPDFToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.exportAllSongsToTabletPDFToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.fileSyncUtilityToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.helpToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.manualToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -409,35 +414,75 @@
             // pdfToolStripMenuItem
             // 
             this.pdfToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.exportToPDFToolStripMenuItem,
-            this.exportSetToPDFToolStripMenuItem1,
-            this.exportSetToPDFToolStripMenuItem});
+            this.pdfA4StripMenuItem,
+            this.pdfTabletStripMenuItem});
             this.pdfToolStripMenuItem.Name = "pdfToolStripMenuItem";
             this.pdfToolStripMenuItem.Size = new System.Drawing.Size(154, 22);
             this.pdfToolStripMenuItem.Text = "PDF";
             // 
-            // exportToPDFToolStripMenuItem
+            // pdfA4StripMenuItem
             // 
-            this.exportToPDFToolStripMenuItem.Name = "exportToPDFToolStripMenuItem";
-            this.exportToPDFToolStripMenuItem.ShortcutKeyDisplayString = "Ctrl+P";
-            this.exportToPDFToolStripMenuItem.Size = new System.Drawing.Size(289, 22);
-            this.exportToPDFToolStripMenuItem.Text = "Export current song to PDF";
-            this.exportToPDFToolStripMenuItem.Click += new System.EventHandler(this.BtnPdfExportClick);
+            this.pdfA4StripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.exportCurrentSongToA4PDFToolStripMenuItem,
+            this.exportCurrentSetToA4PDFToolStripMenuItem,
+            this.exportAllSongsToA4PDFToolStripMenuItem});
+            this.pdfA4StripMenuItem.Name = "pdfA4StripMenuItem";
+            this.pdfA4StripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.pdfA4StripMenuItem.Text = "A4";
             // 
-            // exportSetToPDFToolStripMenuItem1
+            // exportCurrentSongToA4PDFToolStripMenuItem
             // 
-            this.exportSetToPDFToolStripMenuItem1.Name = "exportSetToPDFToolStripMenuItem1";
-            this.exportSetToPDFToolStripMenuItem1.Size = new System.Drawing.Size(289, 22);
-            this.exportSetToPDFToolStripMenuItem1.Text = "Export current set to PDF";
-            this.exportSetToPDFToolStripMenuItem1.Click += new System.EventHandler(this.exportSetToPDFToolStripMenuItem1_Click);
+            this.exportCurrentSongToA4PDFToolStripMenuItem.Name = "exportCurrentSongToA4PDFToolStripMenuItem";
+            this.exportCurrentSongToA4PDFToolStripMenuItem.ShortcutKeyDisplayString = "Ctrl+P";
+            this.exportCurrentSongToA4PDFToolStripMenuItem.Size = new System.Drawing.Size(184, 22);
+            this.exportCurrentSongToA4PDFToolStripMenuItem.Text = "Current song";
+            this.exportCurrentSongToA4PDFToolStripMenuItem.Click += new System.EventHandler(this.exportCurrentSongToA4PDFToolStripMenuItem_Click);
             // 
-            // exportSetToPDFToolStripMenuItem
+            // exportCurrentSetToA4PDFToolStripMenuItem
             // 
-            this.exportSetToPDFToolStripMenuItem.Name = "exportSetToPDFToolStripMenuItem";
-            this.exportSetToPDFToolStripMenuItem.ShortcutKeyDisplayString = "Ctrl+F12";
-            this.exportSetToPDFToolStripMenuItem.Size = new System.Drawing.Size(289, 22);
-            this.exportSetToPDFToolStripMenuItem.Text = "Export current set to tablet PDF";
-            this.exportSetToPDFToolStripMenuItem.Click += new System.EventHandler(this.exportSetToPDFToolStripMenuItem_Click);
+            this.exportCurrentSetToA4PDFToolStripMenuItem.Name = "exportCurrentSetToA4PDFToolStripMenuItem";
+            this.exportCurrentSetToA4PDFToolStripMenuItem.Size = new System.Drawing.Size(184, 22);
+            this.exportCurrentSetToA4PDFToolStripMenuItem.Text = "Current set";
+            this.exportCurrentSetToA4PDFToolStripMenuItem.Click += new System.EventHandler(this.exportCurrentSetToA4PDFToolStripMenuItem_Click);
+            // 
+            // exportAllSongsToA4PDFToolStripMenuItem
+            // 
+            this.exportAllSongsToA4PDFToolStripMenuItem.Name = "exportAllSongsToA4PDFToolStripMenuItem";
+            this.exportAllSongsToA4PDFToolStripMenuItem.Size = new System.Drawing.Size(184, 22);
+            this.exportAllSongsToA4PDFToolStripMenuItem.Text = "All songs";
+            this.exportAllSongsToA4PDFToolStripMenuItem.Click += new System.EventHandler(this.exportAllSongsToA4PDFToolStripMenuItem_Click);
+            // 
+            // pdfTabletStripMenuItem
+            // 
+            this.pdfTabletStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.exportCurrentSongToTabletPDFToolStripMenuItem,
+            this.exportCurrentSetToTabletPDFToolStripMenuItem,
+            this.exportAllSongsToTabletPDFToolStripMenuItem});
+            this.pdfTabletStripMenuItem.Name = "pdfTabletStripMenuItem";
+            this.pdfTabletStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.pdfTabletStripMenuItem.Text = "Tablet";
+            // 
+            // exportCurrentSongToTabletPDFToolStripMenuItem
+            // 
+            this.exportCurrentSongToTabletPDFToolStripMenuItem.Name = "exportCurrentSongToTabletPDFToolStripMenuItem";
+            this.exportCurrentSongToTabletPDFToolStripMenuItem.Size = new System.Drawing.Size(184, 22);
+            this.exportCurrentSongToTabletPDFToolStripMenuItem.Text = "Current song";
+            this.exportCurrentSongToTabletPDFToolStripMenuItem.Click += new System.EventHandler(this.exportCurrentSongToTabletPDFToolStripMenuItem_Click);
+            // 
+            // exportCurrentSetToTabletPDFToolStripMenuItem
+            // 
+            this.exportCurrentSetToTabletPDFToolStripMenuItem.Name = "exportCurrentSetToTabletPDFToolStripMenuItem";
+            this.exportCurrentSetToTabletPDFToolStripMenuItem.ShortcutKeyDisplayString = "Ctrl+F12";
+            this.exportCurrentSetToTabletPDFToolStripMenuItem.Size = new System.Drawing.Size(184, 22);
+            this.exportCurrentSetToTabletPDFToolStripMenuItem.Text = "Current set";
+            this.exportCurrentSetToTabletPDFToolStripMenuItem.Click += new System.EventHandler(this.exportCurrentSetToTabletPDFToolStripMenuItem_Click);
+            // 
+            // exportAllSongsToTabletPDFToolStripMenuItem
+            // 
+            this.exportAllSongsToTabletPDFToolStripMenuItem.Name = "exportAllSongsToTabletPDFToolStripMenuItem";
+            this.exportAllSongsToTabletPDFToolStripMenuItem.Size = new System.Drawing.Size(184, 22);
+            this.exportAllSongsToTabletPDFToolStripMenuItem.Text = "All songs";
+            this.exportAllSongsToTabletPDFToolStripMenuItem.Click += new System.EventHandler(this.exportAllSongsToTabletPDFToolStripMenuItem_Click);
             // 
             // fileSyncUtilityToolStripMenuItem
             // 
@@ -547,7 +592,7 @@
             this.splitContainerPresentationSetList.Panel2.Controls.Add(this.grpSetList);
             this.splitContainerPresentationSetList.Panel2MinSize = 30;
             this.splitContainerPresentationSetList.Size = new System.Drawing.Size(213, 177);
-            this.splitContainerPresentationSetList.SplitterDistance = 138;
+            this.splitContainerPresentationSetList.SplitterDistance = 144;
             this.splitContainerPresentationSetList.SplitterWidth = 1;
             this.splitContainerPresentationSetList.TabIndex = 23;
             // 
@@ -558,7 +603,7 @@
             this.grpPresentation.ForeColor = System.Drawing.Color.White;
             this.grpPresentation.Location = new System.Drawing.Point(0, 0);
             this.grpPresentation.Name = "grpPresentation";
-            this.grpPresentation.Size = new System.Drawing.Size(213, 138);
+            this.grpPresentation.Size = new System.Drawing.Size(213, 144);
             this.grpPresentation.TabIndex = 0;
             this.grpPresentation.TabStop = false;
             this.grpPresentation.Text = "Song Presentation";
@@ -581,7 +626,7 @@
             this.splitContainerSetVsButtons.Panel2.Controls.Add(this.imgDown);
             this.splitContainerSetVsButtons.Panel2.Controls.Add(this.BtnPresentSet);
             this.splitContainerSetVsButtons.Panel2.Controls.Add(this.BtnClear);
-            this.splitContainerSetVsButtons.Size = new System.Drawing.Size(207, 119);
+            this.splitContainerSetVsButtons.Size = new System.Drawing.Size(207, 125);
             this.splitContainerSetVsButtons.SplitterDistance = 171;
             this.splitContainerSetVsButtons.TabIndex = 23;
             // 
@@ -596,7 +641,7 @@
             this.listSet.Location = new System.Drawing.Point(0, 0);
             this.listSet.Margin = new System.Windows.Forms.Padding(0);
             this.listSet.Name = "listSet";
-            this.listSet.Size = new System.Drawing.Size(171, 119);
+            this.listSet.Size = new System.Drawing.Size(171, 125);
             this.listSet.TabIndex = 0;
             this.listSet.SelectedIndexChanged += new System.EventHandler(this.ListSetSelectedIndexChanged);
             this.listSet.KeyUp += new System.Windows.Forms.KeyEventHandler(this.ListSetKeyUp);
@@ -614,7 +659,7 @@
             // imgDown
             // 
             this.imgDown.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.imgDown.Location = new System.Drawing.Point(12, 95);
+            this.imgDown.Location = new System.Drawing.Point(12, 101);
             this.imgDown.Name = "imgDown";
             this.imgDown.Size = new System.Drawing.Size(16, 16);
             this.imgDown.TabIndex = 18;
@@ -624,7 +669,7 @@
             // BtnPresentSet
             // 
             this.BtnPresentSet.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.BtnPresentSet.Location = new System.Drawing.Point(-2, 60);
+            this.BtnPresentSet.Location = new System.Drawing.Point(-2, 66);
             this.BtnPresentSet.Name = "BtnPresentSet";
             this.BtnPresentSet.Size = new System.Drawing.Size(32, 32);
             this.BtnPresentSet.TabIndex = 8;
@@ -650,7 +695,7 @@
             this.grpSetList.ForeColor = System.Drawing.Color.White;
             this.grpSetList.Location = new System.Drawing.Point(0, 0);
             this.grpSetList.Name = "grpSetList";
-            this.grpSetList.Size = new System.Drawing.Size(213, 38);
+            this.grpSetList.Size = new System.Drawing.Size(213, 32);
             this.grpSetList.TabIndex = 0;
             this.grpSetList.TabStop = false;
             this.grpSetList.Text = "Set List";
@@ -665,7 +710,7 @@
             this.cmboSets.Font = new System.Drawing.Font("Lucida Console", 8.25F);
             this.cmboSets.ForeColor = System.Drawing.Color.Black;
             this.cmboSets.FormattingEnabled = true;
-            this.cmboSets.Location = new System.Drawing.Point(3, 16);
+            this.cmboSets.Location = new System.Drawing.Point(3, 10);
             this.cmboSets.Name = "cmboSets";
             this.cmboSets.Size = new System.Drawing.Size(171, 19);
             this.cmboSets.Sorted = true;
@@ -678,7 +723,7 @@
             // 
             this.lblSongCount.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.lblSongCount.ForeColor = System.Drawing.Color.White;
-            this.lblSongCount.Location = new System.Drawing.Point(176, 13);
+            this.lblSongCount.Location = new System.Drawing.Point(176, 7);
             this.lblSongCount.Name = "lblSongCount";
             this.lblSongCount.Size = new System.Drawing.Size(35, 22);
             this.lblSongCount.TabIndex = 4;
@@ -1536,6 +1581,7 @@
             this.PerformLayout();
 
         }
+
         private System.Windows.Forms.ToolStripMenuItem exploreToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem openSongToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem addonsToolStripMenuItem;
@@ -1547,7 +1593,7 @@
         private System.Windows.Forms.ToolStripMenuItem displaySettingsToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem printSettingsToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem settingsToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem exportToPDFToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem exportCurrentSongToA4PDFToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem revertToSavedToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem saveToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem newToolStripMenuItem;
@@ -1575,7 +1621,9 @@
         private System.Windows.Forms.ToolStripMenuItem fileSyncUtilityToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem refreshToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem aboutOpenChordsToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem exportSetToPDFToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem exportCurrentSetToTabletPDFToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem exportCurrentSongToTabletPDFToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem exportAllSongsToTabletPDFToolStripMenuItem;
         private System.Windows.Forms.SplitContainer splitMainForm;
         private System.Windows.Forms.Panel panel1;
         private System.Windows.Forms.PictureBox BtnSearch;
@@ -1617,12 +1665,15 @@
         private System.Windows.Forms.Panel pnlSharpsFlats;
         private System.Windows.Forms.RadioButton rdoFlats;
         private System.Windows.Forms.RadioButton rdoSharps;
-        private System.Windows.Forms.ToolStripMenuItem exportSetToPDFToolStripMenuItem1;
+        private System.Windows.Forms.ToolStripMenuItem exportCurrentSetToA4PDFToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem exportAllSongsToA4PDFToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem exportCurrentSetToOpenSongToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem exportAllSongsToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem exportAllSetsToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem launchOpenSongToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem pdfToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem pdfA4StripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem pdfTabletStripMenuItem;
         private System.Windows.Forms.PictureBox picBackgroundImage;
         private System.Windows.Forms.GroupBox grpChordsLyrics;
         private System.Windows.Forms.SplitContainer splitContainerNotesImage;
