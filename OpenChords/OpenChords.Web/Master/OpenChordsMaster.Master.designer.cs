@@ -31,6 +31,15 @@ namespace OpenChords.Web.Master {
         protected global::System.Web.UI.HtmlControls.HtmlForm Content;
         
         /// <summary>
+        /// PageName control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.ContentPlaceHolder PageName;
+        
+        /// <summary>
         /// PagingPanel control.
         /// </summary>
         /// <remarks>

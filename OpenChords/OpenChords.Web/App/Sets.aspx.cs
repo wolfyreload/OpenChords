@@ -153,6 +153,7 @@ namespace OpenChords.Web
             _songsIncurrentSet.RemoveAt(selectedIndex);
                        
             lstSongsInSet.DataBind();
+            if (lstSongsInSet.Items.Count == 0) return;
 
             selectedIndex--;
             if (selectedIndex == -1) selectedIndex = 0;

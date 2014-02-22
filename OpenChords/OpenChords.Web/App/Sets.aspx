@@ -1,5 +1,8 @@
 ﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="Sets.aspx.cs" Inherits="OpenChords.Web.Sets" MasterPageFile="~/Master/OpenChordsMaster.Master" %>
 
+<asp:Content ContentPlaceHolderID="PageName" runat="server">
+    Configure Song Sets
+</asp:Content>
 
 <asp:Content ContentPlaceHolderID="PagingPanel" runat="server">
     <asp:Button ID="cmdGoBack" runat="server" OnClick="cmdGoBack_Click" CssClass="nice-button" Text="Back" />
@@ -15,7 +18,7 @@
     </asp:Panel>
 
     <asp:Panel ID="pnlSetContents" Visible="false" runat="server" CssClass="Inline">
-        <asp:Panel ID="pnlSongs" runat="server" CssClass="BoxPanel gradientBoxesWithOuterShadows" GroupingText="Songs">
+        <asp:Panel ID="pnlSongs" runat="server" CssClass="BoxPanel gradientBoxesWithOuterShadows" GroupingText="Available Songs">
             <asp:ListBox ID="lstSongs" CssClass="SongList" runat="server" OnDataBinding="lstSongs_DataBinding"></asp:ListBox>
             <br />
             <asp:Label ID="lblSearchSong" runat="server" Text="Search"></asp:Label>
