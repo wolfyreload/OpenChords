@@ -1,4 +1,6 @@
-﻿<%@ Master Language="C#" AutoEventWireup="true" CodeBehind="OpenChordsMaster.master.cs" Inherits="OpenChords.Web.Master.OpenChordsMaster" %>
+﻿<%@ Master Language="C#" AutoEventWireup="true" CodeBehind="OpenChordsDisplay.master.cs" Inherits="OpenChords.Web.Master.OpenChordsDisplay" %>
+
+<!DOCTYPE html>
 
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 
@@ -8,10 +10,10 @@
     <asp:ContentPlaceHolder ID="head" runat="server">
     </asp:ContentPlaceHolder>
 </head>
-<body>
+<body class="DisplayBody">
     <form id="Content" runat="server">
 
-        <div id="Page">
+        <div id="DisplayPage">
             <div>
                 <label class="niceHeading">
                     <asp:ContentPlaceHolder ID="PageName" runat="server">

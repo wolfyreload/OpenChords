@@ -191,6 +191,11 @@ namespace OpenChords.Web
             downloadSet(currentSet);
         }
 
+        protected void imgHtml_Click(object sender, ImageClickEventArgs e)
+        {
+            Response.Redirect("Display.aspx?Set=" + lstSets.SelectedValue);
+        }
+
 
 
     

@@ -16,6 +16,8 @@ namespace OpenChords.Export
 
         public ExportToHtml(Set set, string settingFilename)
         {
+            _set = set;
+            _settings = DisplayAndPrintSettings.loadSettings(DisplayAndPrintSettingsType.DisplaySettings, settingFilename);
         }
 
         public ExportToHtml(Song song, string settingsFilename)
@@ -45,6 +47,7 @@ namespace OpenChords.Export
                 }
                 html.Html = sb.ToString();
                 htmlSongs.Add(html);
+                sb.Length = 0;
             }
             return htmlSongs;
         }
@@ -59,24 +62,24 @@ namespace OpenChords.Export
             StringBuilder sb = new StringBuilder();
             //add heading line
             sb.AppendLine("<div class=\"SongVerse\">");
-            sb.AppendFormat("<div class=\"LineVerseHeading\">{0}</div>\r\n", trimLine(verse.Header));
+            sb.AppendFormat("<div class=\"DisplayLineVerseHeading\">{0}</div>\r\n", trimLine(verse.FullHeaderName));
             //add lyrics
-            sb.AppendLine("<div class=\"LineVerseLyrics\">");
+            sb.AppendLine("<div class=\"DisplayLineVerseLyrics\">");
             for (int i=0; i<verse.Lyrics.Count(); i++)
             {
                 if (verse.IsChord[i])
                 {
-                    sb.AppendFormat("<p class=\"LineChord\">{0}</p>\r\n", trimLine(verse.Lyrics[i]));
+                    sb.AppendFormat("<p class=\"DisplayLineChord\">{0}</p>\r\n", trimLine(verse.Lyrics[i]));
                 }
                 else
                 {
-                    sb.AppendFormat("<p class=\"LineLyrics\">{0}</p>\r\n", trimLine(verse.Lyrics[i]));
+                    sb.AppendFormat("<p class=\"DisplayLineLyrics\">{0}</p>\r\n", trimLine(verse.Lyrics[i]));
                 }
             }
             sb.AppendLine("</div>");
 
             //addNotes
-            sb.AppendLine("<div class=\"LineVerseNotes\">");
+            sb.AppendLine("<div class=\"DisplayLineVerseNotes\">");
             sb.AppendLine(verse.Notes.Replace("\r\n", "<br/>").TrimEnd().Replace(" ", "&nbsp;"));
             sb.AppendLine("</div>");
             sb.AppendLine("</div>");

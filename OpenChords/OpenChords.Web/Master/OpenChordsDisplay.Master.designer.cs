@@ -7,54 +7,54 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace OpenChords.Web.App {
+namespace OpenChords.Web.Master {
     
     
-    public partial class Display2 {
+    public partial class OpenChordsDisplay {
         
         /// <summary>
-        /// cmdPreviousSong control.
+        /// head control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Button cmdPreviousSong;
+        protected global::System.Web.UI.WebControls.ContentPlaceHolder head;
         
         /// <summary>
-        /// cmdNextSong control.
+        /// Content control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Button cmdNextSong;
+        protected global::System.Web.UI.HtmlControls.HtmlForm Content;
         
         /// <summary>
-        /// lblSongName control.
+        /// PageName control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Label lblSongName;
+        protected global::System.Web.UI.WebControls.ContentPlaceHolder PageName;
         
         /// <summary>
-        /// lblSongOrder control.
+        /// PagingPanel control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Label lblSongOrder;
+        protected global::System.Web.UI.WebControls.ContentPlaceHolder PagingPanel;
         
         /// <summary>
-        /// litSongContent control.
+        /// MainForm control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Literal litSongContent;
+        protected global::System.Web.UI.WebControls.ContentPlaceHolder MainForm;
     }
 }
