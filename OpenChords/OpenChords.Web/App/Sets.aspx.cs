@@ -212,6 +212,13 @@ namespace OpenChords.Web
             
         }
 
+        
+        protected void cmdGoBack_Click(object sender, EventArgs e)
+        {
+            Response.Redirect("~/");
+        }
+
+
 
     
       

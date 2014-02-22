@@ -9,12 +9,20 @@
     </asp:ContentPlaceHolder>
 </head>
 <body>
-    <form id="form1" runat="server">
-    <div>
-        <asp:ContentPlaceHolder ID="MainForm" runat="server">
-        
-        </asp:ContentPlaceHolder>
-    </div>
+    <form id="Content" runat="server">
+        <div id="Page">
+            <div class="PagingControls">
+                <p>
+                    <asp:ContentPlaceHolder ID="PagingPanel" runat="server">
+                    </asp:ContentPlaceHolder>
+                </p>
+            </div>
+            <br />
+            <div>
+                <asp:ContentPlaceHolder ID="MainForm" runat="server">
+                </asp:ContentPlaceHolder>
+            </div>
+        </div>
     </form>
 </body>
 </html>
