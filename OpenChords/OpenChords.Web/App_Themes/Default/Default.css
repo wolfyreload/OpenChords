@@ -230,12 +230,19 @@ FieldSet legend {
         margin-top: 5px;
     }
 
+.DisplayPage {
+    -moz-column-count: 3; /* Firefox */
+    -webkit-column-count: 3; /* Safari and Chrome */
+    column-count: 3;
+    height: 800px;
+}
+
 
 .SongVerse {
     padding: 5px;
     background-color: white;
     /* outer shadows  (note the rgba is red, green, blue, alpha) */
-    -webkit-box-shadow: 0px 0px 12px rgba(0, 0, 0, 0.4);
+    -webkit-box-shadow: 0px 0px 6px rgba(0, 0, 0, 0.4);
     -moz-box-shadow: 0px 1px 6px rgba(23, 69, 88, .5);
     /* rounded corners */
     -webkit-border-radius: 12px;
@@ -243,35 +250,44 @@ FieldSet legend {
     border-radius: 7px;
     /* gradients */
     background: -webkit-gradient(linear, left top, left bottom, color-stop(0%, rgb(246, 246, 246)), color-stop(15%, rgb(240, 240, 240)), color-stop(100%, #E1E1E1));
-    font-family:'DejaVu Sans Mono';
-    margin-bottom: 10px;
-    width: 45%;
-    max-width: 700px;
+    font-family: 'DejaVu Sans Mono';
+    margin-bottom: 20px;
+    font-size: 18px;
+    break-inside: avoid-column; /*stop column breaks on headings*/
+    -webkit-column-break-inside: avoid;
 }
 
-.LineVerseHeading {
-    font: bold 12px arial;
+.DisplaySongName {
+    font: bold 36px arial;
 }
 
-.LineVerseLyrics {
+.DisplaySongOrder {
+    font: bold 36px arial;
+}
+
+.DisplayLineVerseHeading {
+    font: bold 24px arial;
+}
+
+.DisplayLineVerseLyrics {
     display: inline-block;
     vertical-align: top;
 }
 
-.LineChord {
+.DisplayLineChord {
     font-weight: bold;
 }
 
-.LineLyrics {
+.DisplayLineLyrics {
     font-weight: normal;
 }
 
-.LineVerseNotes {
+.DisplayLineVerseNotes {
     float: right;
     clear: both;
-    margin-left:auto; 
-    margin-right:0px;
+    margin-left: auto;
+    margin-right: 0px;
     display: inline-block;
     vertical-align: top;
-    font-family:'Global Monospace';
+    font-family: 'Global Monospace';
 }

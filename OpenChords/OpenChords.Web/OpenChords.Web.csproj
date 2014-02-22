@@ -54,7 +54,6 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="App\Display.aspx" />
-    <Content Include="App\HtmlPage1.html" />
     <Content Include="App_Themes\Default\Images\About.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>

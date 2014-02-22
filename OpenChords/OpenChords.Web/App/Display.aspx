@@ -7,10 +7,11 @@
 <asp:Content ID="Content3" ContentPlaceHolderID="PagingPanel" runat="server">
 </asp:Content>
 <asp:Content ID="Content4" ContentPlaceHolderID="MainForm" runat="server">
-    <asp:Label ID="lblSongName" runat="server"></asp:Label>
-    <asp:Label ID="lblSongOrder" runat="server"></asp:Label>
+    <asp:label id="lblSongName" class="DisplaySongName" runat="server"></asp:label><br />
+    <asp:label id="lblSongOrder" class="DisplaySongOrder" runat="server"></asp:label>
     <br />
-    
-    <asp:Literal ID="litSongContent" runat="server" />
-        
+
+    <div class="DisplayPage">
+        <asp:literal id="litSongContent" runat="server" />
+    </div>
 </asp:Content>
