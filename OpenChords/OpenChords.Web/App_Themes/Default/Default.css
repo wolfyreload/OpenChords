@@ -1,0 +1,43 @@
+﻿.SetList {
+    width: 260px;
+    height: 768px;
+    max-height : 80%;
+    vertical-align:top;
+}
+
+.SongList {
+    width: 260px;
+    height: 768px;
+    max-height : 80%;
+    vertical-align:top;
+}
+
+.BoxPanel
+{
+    width: 300px;
+    display: inline-block;
+
+}
+
+FieldSet
+{
+    border: 1px solid black;
+}
+
+
+.Inline
+{
+     display: inline-block;
+}
+
+.SidewayButtonPane
+{
+    height: 768px;
+    width: 30px;
+    vertical-align:middle;
+}
+
+    .SidewayButtonPane input {
+        margin-top:5px;
+    }
+

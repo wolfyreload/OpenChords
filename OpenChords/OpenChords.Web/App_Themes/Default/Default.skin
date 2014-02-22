@@ -1,0 +1,24 @@
+﻿<%--
+Default skin template. The following skins are provided as examples only.
+
+1. Named control skin. The SkinId should be uniquely defined because
+   duplicate SkinId's per control type are not allowed in the same theme.
+
+<asp:GridView runat="server" SkinId="gridviewSkin" BackColor="White" >
+   <AlternatingRowStyle BackColor="Blue" />
+</asp:GridView>
+
+2. Default skin. The SkinId is not defined. Only one default 
+   control skin per control type is allowed in the same theme.
+
+<asp:Image runat="server" ImageUrl="~/images/image1.jpg" />
+--%>
+
+
+<asp:ImageButton SkinID="imgSearch" runat="server" ImageUrl="./Images/Search.png" />
+<asp:ImageButton SkinID="imgNew" runat="server" ImageUrl="./Images/New.png" />
+<asp:ImageButton SkinID="imgDelete" runat="server" ImageUrl="./Images/Delete.png" />
+<asp:ImageButton SkinID="imgUp" runat="server" ImageUrl="./Images/Up.png" />
+<asp:ImageButton SkinID="imgDown" runat="server" ImageUrl="./Images/Down.png" />
+<asp:ImageButton SkinID="imgSave" runat="server" ImageUrl="./Images/Save.png" />
+<asp:ImageButton SkinID="imgCancel" runat="server" ImageUrl="./Images/Cancel.png" />

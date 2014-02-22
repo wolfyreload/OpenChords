@@ -4,9 +4,7 @@
 
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head runat="server">
-    <title></title>
-    <link rel="stylesheetReset" type="text/css" href="~/Scripts/reset.css" />
-    <link rel="stylesheetDefault" type="text/css" href="~/Scripts/Default.css" />
+    <title>OpenChords</title>
     <asp:ContentPlaceHolder ID="head" runat="server">
     </asp:ContentPlaceHolder>
 </head>
