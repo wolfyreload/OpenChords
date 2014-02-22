@@ -5,7 +5,7 @@
         <label>Title</label>
         <asp:TextBox ID="txtTitle" runat="server"></asp:TextBox><br />
         <label>Order</label>
-        <asp:TextBox ID="txtOrder" runat="server"></asp:TextBox><br />
+        <asp:TextBox ID="txtOrder" runat="server" OnTextChanged="txtOrder_TextChanged" AutoPostBack="true"></asp:TextBox><br />
         <label>Author</label>
         <asp:TextBox ID="txtAuthor" runat="server"></asp:TextBox><br />
         <label>Copyright</label>
@@ -26,16 +26,16 @@
             <label>Key</label>
             <asp:TextBox ID="txtKey" runat="server" CssClass="BigOneLineTextbox"></asp:TextBox>
             <asp:Panel ID="pnlKeyButtons" runat="server" CssClass="Inline SmallButtonPanel">
-                <asp:ImageButton ID="imgKeyUp" runat="server" SkinID="imgUp" />
-                <asp:ImageButton ID="ImageKeyDown" runat="server" SkinID="imgDown" />
+                <asp:ImageButton ID="imgKeyUp" runat="server" SkinID="imgUp" OnClick="imgKeyUp_Click" />
+                <asp:ImageButton ID="ImageKeyDown" runat="server" SkinID="imgDown" OnClick="ImageKeyDown_Click" />
             </asp:Panel>
         </asp:Panel>
         <asp:Panel ID="pnlCapo" runat="server">
             <label>Capo</label>
             <asp:TextBox ID="txtCapo" runat="server" CssClass="BigOneLineTextbox"></asp:TextBox>
             <asp:Panel ID="pnlCapoButtons" runat="server" CssClass="Inline SmallButtonPanel">
-                <asp:ImageButton ID="imgCapoUp" runat="server" SkinID="imgUp" />
-                <asp:ImageButton ID="imgCapoDown" runat="server" SkinID="imgDown" />
+                <asp:ImageButton ID="imgCapoUp" runat="server" SkinID="imgUp" OnClick="imgCapoUp_Click" />
+                <asp:ImageButton ID="imgCapoDown" runat="server" SkinID="imgDown" OnClick="imgCapoDown_Click" />
             </asp:Panel>
         </asp:Panel>
     </asp:Panel>

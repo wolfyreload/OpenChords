@@ -10,13 +10,18 @@
 
 <asp:Content ContentPlaceHolderID="PagingPanel" runat="server">
     <asp:Button ID="cmdGoBack" runat="server" OnClick="cmdGoBack_Click" CssClass="nice-button" Text="Back" />
+    <asp:ImageButton ID="imgCancel" runat="server" SkinID="imgCancel" OnClick="imgCancel_Click" />
+    <asp:ImageButton ID="imgSave" runat="server" SkinID="imgSave" OnClick="imgSave_Click" />
+    <asp:ImageButton ID="imgPdf" runat="server" SkinID="imgPdf" OnClick="imgPdf_Click" />
+    
+
 </asp:Content>
 
 
 <asp:Content ContentPlaceHolderID="MainForm" runat="server">
     <uc1:SongList runat="server" ID="SongList" OnNewSongSelected="SongList_NewSongSelected" />
     <asp:Panel ID="pnlSongEdit" runat="server" CssClass="Inline SongEditPanel" Visible="false">
-        <uc1:SongMetaData runat="server" id="SongMetaData" />
+        <uc1:SongMetaData runat="server" id="SongMetaData" OnPresentationOrderChanged="SongMetaData_PresentationOrderChanged" OnSongKeyIncreased="SongMetaData_SongKeyIncreased" OnSongKeyDecreased="SongMetaData_SongKeyDecreased" OnSongCapoDecreased="SongMetaData_SongCapoDecreased" OnSongCapoIncreased="SongMetaData_SongCapoIncreased" />
         <br /><br />
         <asp:Panel ID="pnlLyrics" runat="server" GroupingText="Chords and lyrics" CssClass="BoxPanel Inline gradientBoxesWithOuterShadows SongEditLyricsPanel">
             <asp:TextBox ID="txtSongEditLyrics" CssClass="SongEditLyrics" runat="server" TextMode="MultiLine">

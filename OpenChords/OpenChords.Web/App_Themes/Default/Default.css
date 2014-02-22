@@ -35,11 +35,11 @@ h6 {
 }
 
 #Page {
-    width: 90%;
-    min-width: 1200px;
+    width: 98%;
+    min-width: 1000px;
     background-color: white;
     border-radius: 15px;
-    margin: 20px auto 0px auto;
+    margin: 10px auto 0px auto;
     left: auto;
     right: auto;
     padding: 10px;
@@ -141,7 +141,7 @@ h6 {
 
 .Listbox {
     width: 100% !important;
-    height: 700px;
+    height: 755px;
     background-color: transparent;
     border: none;
 }
@@ -186,7 +186,7 @@ h6 {
 
 
 .SongEditPanel {
-    width: 70%;
+    width: 65%;
 }
 
 .SongEditLyricsPanel {
@@ -199,13 +199,13 @@ h6 {
 
 .SongEditLyrics {
     width: 98%;
-    height: 581px;
+    height: 635px;
     margin: 2px;
 }
 
 .SongEditNotes {
     width: 98%;
-    height: 581px;
+    height: 635px;
     margin: 2px;
 }
 
