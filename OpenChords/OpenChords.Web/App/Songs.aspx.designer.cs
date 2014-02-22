@@ -10,24 +10,15 @@
 namespace OpenChords.Web {
     
     
-    public partial class Sets {
+    public partial class Songs {
         
         /// <summary>
-        /// form1 control.
+        /// pnlSongs control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlForm form1;
-        
-        /// <summary>
-        /// pnlSets control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Panel pnlSets;
+        protected global::System.Web.UI.WebControls.Panel pnlSongs;
     }
 }

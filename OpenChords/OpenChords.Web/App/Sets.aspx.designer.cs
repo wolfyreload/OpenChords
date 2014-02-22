@@ -10,33 +10,51 @@
 namespace OpenChords.Web {
     
     
-    public partial class _Default {
+    public partial class Sets {
         
         /// <summary>
-        /// lnkSets control.
+        /// pnlSets control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.HyperLink lnkSets;
+        protected global::System.Web.UI.WebControls.Panel pnlSets;
         
         /// <summary>
-        /// lnkSongs control.
+        /// lstSets control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.HyperLink lnkSongs;
+        protected global::System.Web.UI.WebControls.ListBox lstSets;
         
         /// <summary>
-        /// HyperLink1 control.
+        /// lblSearchSet control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.HyperLink HyperLink1;
+        protected global::System.Web.UI.WebControls.Label lblSearchSet;
+        
+        /// <summary>
+        /// txtSearchSet control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox txtSearchSet;
+        
+        /// <summary>
+        /// objSets control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.ObjectDataSource objSets;
     }
 }

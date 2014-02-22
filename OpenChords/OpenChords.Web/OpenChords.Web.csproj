@@ -56,12 +56,14 @@
     <Content Include="Default.aspx" />
     <Content Include="Global.asax" />
     <Content Include="OpenChordsWebSettings.xml" />
+    <Content Include="Scripts\Default.css" />
     <Content Include="Scripts\jquery-1.7.1.intellisense.js" />
     <Content Include="Scripts\jquery-1.7.1.js" />
     <Content Include="Scripts\jquery-1.7.1.min.js" />
-    <Content Include="Sets.aspx" />
-    <Content Include="Settings.aspx" />
-    <Content Include="Songs.aspx" />
+    <Content Include="App\Sets.aspx" />
+    <Content Include="App\Settings.aspx" />
+    <Content Include="App\Songs.aspx" />
+    <Content Include="Scripts\Reset.css" />
     <Content Include="Web.config">
       <SubType>Designer</SubType>
     </Content>
@@ -78,26 +80,33 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Master\OpenChordsMaster.Master.cs">
+      <DependentUpon>OpenChordsMaster.Master</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Master\OpenChordsMaster.Master.designer.cs">
+      <DependentUpon>OpenChordsMaster.Master</DependentUpon>
+    </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Sets.aspx.cs">
+    <Compile Include="App\Sets.aspx.cs">
       <DependentUpon>Sets.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="Sets.aspx.designer.cs">
+    <Compile Include="App\Sets.aspx.designer.cs">
       <DependentUpon>Sets.aspx</DependentUpon>
     </Compile>
-    <Compile Include="Settings.aspx.cs">
+    <Compile Include="App\Settings.aspx.cs">
       <DependentUpon>Settings.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="Settings.aspx.designer.cs">
+    <Compile Include="App\Settings.aspx.designer.cs">
       <DependentUpon>Settings.aspx</DependentUpon>
     </Compile>
-    <Compile Include="Songs.aspx.cs">
+    <Compile Include="App\Songs.aspx.cs">
       <DependentUpon>Songs.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="Songs.aspx.designer.cs">
+    <Compile Include="App\Songs.aspx.designer.cs">
       <DependentUpon>Songs.aspx</DependentUpon>
     </Compile>
   </ItemGroup>
@@ -105,6 +114,7 @@
     <Folder Include="App_Data\" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Master\OpenChordsMaster.Master" />
     <None Include="Properties\PublishProfiles\DropboxPublish.pubxml" />
     <None Include="Properties\PublishProfiles\OpenChordsTest.pubxml" />
     <None Include="Web.Debug.config">

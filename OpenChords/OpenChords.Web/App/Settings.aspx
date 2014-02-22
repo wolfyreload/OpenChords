@@ -1,13 +1,7 @@
-﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="Settings.aspx.cs" Inherits="OpenChords.Web.Settings" %>
+﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="Settings.aspx.cs" Inherits="OpenChords.Web.Settings" MasterPageFile="~/Master/OpenChordsMaster.Master" %>
 
-<!DOCTYPE html>
+<asp:Content ContentPlaceHolderID="MainForm" runat="server">
 
-<html xmlns="http://www.w3.org/1999/xhtml">
-<head runat="server">
-    <title></title>
-</head>
-<body>
-    <form id="form1" runat="server">
     <div>
         Width <asp:TextBox ID="txtWidth" runat="server"></asp:TextBox><br />
         Height <asp:TextBox ID="txtHeight" runat="server"></asp:TextBox><br />
@@ -44,6 +38,4 @@
 
 
     </div>
-    </form>
-</body>
-</html>
+</asp:Content>

@@ -1,20 +1,13 @@
-﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="Default.aspx.cs" Inherits="OpenChords.Web._Default" %>
+﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="Default.aspx.cs" Inherits="OpenChords.Web._Default" MasterPageFile="~/Master/OpenChordsMaster.Master" %>
 
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-
-<html xmlns="http://www.w3.org/1999/xhtml">
-<head runat="server">
-    <title></title>
-</head>
-<body>
-    <form id="form1" runat="server">
+<asp:Content ContentPlaceHolderID="MainForm" runat="server">
+    
     <div>
-        <asp:HyperLink ID="lnkSets" runat="server" NavigateUrl="~/Sets.aspx">Sets</asp:HyperLink>
+        <asp:HyperLink ID="lnkSets" runat="server" NavigateUrl="~/App/Sets.aspx">Sets</asp:HyperLink>
         <br />
-        <asp:HyperLink ID="lnkSongs" runat="server" NavigateUrl="~/Songs.aspx">Songs</asp:HyperLink>
+        <asp:HyperLink ID="lnkSongs" runat="server" NavigateUrl="~/App/Songs.aspx">Songs</asp:HyperLink>
         <br />
-        <asp:HyperLink ID="HyperLink1" runat="server" NavigateUrl="~/Settings.aspx">Settings</asp:HyperLink>
+        <asp:HyperLink ID="HyperLink1" runat="server" NavigateUrl="~/App/Settings.aspx">Settings</asp:HyperLink>
     </div>
-    </form>
-</body>
-</html>
+
+</asp:Content>

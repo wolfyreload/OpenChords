@@ -12,34 +12,16 @@ namespace OpenChords.Web
 
         protected void Page_Load(object sender, EventArgs e)
         {
-            makeSetList();
-
-            var query = Request.Url.Query;
-            if (query.Length > 0)
+            if (!IsPostBack)
             {
-                downloadSet(query);
-
+                lstSets.DataBind();
             }
         }
 
 
 
 
-        private void makeSetList()
-        {
-
-            var listOfSets = Entities.Set.listOfAllSets();
-            foreach (var song in listOfSets)
-            {
-                var link = new HyperLink()
-                {
-                    Text = song,
-                    NavigateUrl = "~/Sets.aspx?" + song
-                };
-                pnlSets.Controls.Add(link);
-                pnlSets.Controls.Add(new LiteralControl("<br/>"));
-            }
-        }
+        
 
         private void downloadSet(string query)
         {
@@ -60,6 +42,23 @@ namespace OpenChords.Web
             Response.Flush();
 
             Response.End();
+        }
+
+        protected void txtSearchSet_TextChanged(object sender, EventArgs e)
+        {
+            lstSets.DataBind();
+        }
+
+        
+
+        protected void objSets_Selected(object sender, ObjectDataSourceStatusEventArgs e)
+        {
+            var allSets = OpenChords.Entities.Set.listOfAllSets();
+            var filter = txtSearchSet.Text.ToUpper();
+            var filteredResults = allSets.Where(a => filter.Contains(a.ToUpper()));
+
+            foreach (var res in  filteredResults)
+            e.OutputParameters.Add(res, res);
         }
     }
 }
