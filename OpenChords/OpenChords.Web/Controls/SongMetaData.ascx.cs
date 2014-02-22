@@ -61,8 +61,8 @@ namespace OpenChords.Web.Controls
             song.copyright = txtCopyright.Text;
             song.ccli = txtCcli.Text;
             song.hymn_number = txtReference.Text;
-            song.key = song.key;
-            song.capo = song.capo;
+            song.key = txtKey.Text;
+            song.capo = txtCapo.Text;
 
             if (ddlTempo.SelectedIndex > 0)
                 song.tempo = ddlTempo.Text;

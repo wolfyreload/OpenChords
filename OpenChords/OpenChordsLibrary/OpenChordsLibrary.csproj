@@ -76,8 +76,10 @@
     <Compile Include="Entities\Note.cs" />
     <Compile Include="Entities\Set.cs" />
     <Compile Include="Entities\Song.cs" />
+    <Compile Include="Entities\SongHtml.cs" />
     <Compile Include="Entities\SongVerse.cs" />
     <Compile Include="Entities\SongElementFormat.cs" />
+    <Compile Include="Export\ExportToHtml.cs" />
     <Compile Include="Export\ExportToOpenSong.cs" />
     <Compile Include="Export\ExportToPdf.cs" />
     <Compile Include="Export\ExportToRtf.cs" />

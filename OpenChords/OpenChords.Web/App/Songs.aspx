@@ -13,6 +13,7 @@
     <asp:ImageButton ID="imgCancel" runat="server" SkinID="imgCancel" OnClick="imgCancel_Click" />
     <asp:ImageButton ID="imgSave" runat="server" SkinID="imgSave" OnClick="imgSave_Click" />
     <asp:ImageButton ID="imgPdf" runat="server" SkinID="imgPdf" OnClick="imgPdf_Click" />
+    <asp:ImageButton ID="imgHtml" runat="server" SkinID="imgHtml" OnClick="imgHtml_Click" />
     
 
 </asp:Content>

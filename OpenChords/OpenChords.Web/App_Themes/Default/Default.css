@@ -229,3 +229,49 @@ FieldSet legend {
     .SidewayButtonPane input {
         margin-top: 5px;
     }
+
+
+.SongVerse {
+    padding: 5px;
+    background-color: white;
+    /* outer shadows  (note the rgba is red, green, blue, alpha) */
+    -webkit-box-shadow: 0px 0px 12px rgba(0, 0, 0, 0.4);
+    -moz-box-shadow: 0px 1px 6px rgba(23, 69, 88, .5);
+    /* rounded corners */
+    -webkit-border-radius: 12px;
+    -moz-border-radius: 7px;
+    border-radius: 7px;
+    /* gradients */
+    background: -webkit-gradient(linear, left top, left bottom, color-stop(0%, rgb(246, 246, 246)), color-stop(15%, rgb(240, 240, 240)), color-stop(100%, #E1E1E1));
+    font-family:'DejaVu Sans Mono';
+    margin-bottom: 10px;
+    width: 45%;
+    max-width: 700px;
+}
+
+.LineVerseHeading {
+    font: bold 12px arial;
+}
+
+.LineVerseLyrics {
+    display: inline-block;
+    vertical-align: top;
+}
+
+.LineChord {
+    font-weight: bold;
+}
+
+.LineLyrics {
+    font-weight: normal;
+}
+
+.LineVerseNotes {
+    float: right;
+    clear: both;
+    margin-left:auto; 
+    margin-right:0px;
+    display: inline-block;
+    vertical-align: top;
+    font-family:'Global Monospace';
+}

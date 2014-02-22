@@ -25,9 +25,8 @@ namespace OpenChords.Web
         }
         
 
-        private void downloadSet(string setName)
+        private void downloadSet(OpenChords.Entities.Set set)
         {
-            var set = Entities.Set.loadSet(setName);
             var settingsPath = App_Code.Global.SettingsFileName;
             var pdfPath = set.getPdfPath(Entities.DisplayAndPrintSettingsType.TabletSettings, settingsPath);
 
@@ -36,7 +35,7 @@ namespace OpenChords.Web
             Response.Clear();
 
             Response.ContentType = "application/pdf";
-            Response.AppendHeader("Content-Disposition", "attachment; filename=" + setName + ".pdf");
+            Response.AppendHeader("Content-Disposition", "attachment; filename=" + set.setName + ".pdf");
             Response.TransmitFile(pdfPath);
             Response.Flush();
 
@@ -185,7 +184,11 @@ namespace OpenChords.Web
 
         protected void exportToPdf_Click(object sender, ImageClickEventArgs e)
         {
-            downloadSet(lstSets.SelectedValue);
+            var currentSet = OpenChords.Entities.Set.loadSet(lstSets.SelectedValue);
+            currentSet.clearSongSet();
+            foreach (string songTitle in _songsIncurrentSet)
+                currentSet.addSongToSet(songTitle);
+            downloadSet(currentSet);
         }
 
 

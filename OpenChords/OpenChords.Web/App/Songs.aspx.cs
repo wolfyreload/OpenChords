@@ -120,6 +120,11 @@ namespace OpenChords.Web
             pnlSongEdit.Visible = false;
         }
 
+        protected void imgHtml_Click(object sender, ImageClickEventArgs e)
+        {
+            Response.Redirect("Display.aspx?Song=" + SongList.SelectedValue);
+        }
+
         
 
 

@@ -405,6 +405,17 @@ namespace OpenChords.Entities
         }
 
         /// <summary>
+        /// returns the song in html format
+        /// </summary>
+        /// <returns></returns>
+        public List<SongHtml> getHtml(string settingsPath)
+        {
+            Export.ExportToHtml htmlExporter = new Export.ExportToHtml(this, settingsPath);
+            var result = htmlExporter.GenerateHtml();
+            return result;
+        }
+
+        /// <summary>
         /// create the pdf and return the path to the pdf
         /// </summary>
         /// <param name="settingsType"></param>

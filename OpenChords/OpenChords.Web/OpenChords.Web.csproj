@@ -53,6 +53,8 @@
     <Reference Include="System.Web.Mobile" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="App\Display.aspx" />
+    <Content Include="App\HtmlPage1.html" />
     <Content Include="App_Themes\Default\Images\About.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
@@ -147,6 +149,13 @@
     </Content>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="App\Display.aspx.cs">
+      <DependentUpon>Display.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="App\Display.aspx.designer.cs">
+      <DependentUpon>Display.aspx</DependentUpon>
+    </Compile>
     <Compile Include="App_Code\Global.cs" />
     <Compile Include="Controls\SongList.ascx.cs">
       <DependentUpon>SongList.ascx</DependentUpon>
