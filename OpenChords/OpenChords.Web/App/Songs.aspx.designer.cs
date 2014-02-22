@@ -13,6 +13,15 @@ namespace OpenChords.Web {
     public partial class Songs {
         
         /// <summary>
+        /// cmdGoBack control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button cmdGoBack;
+        
+        /// <summary>
         /// SongList control.
         /// </summary>
         /// <remarks>
@@ -20,5 +29,59 @@ namespace OpenChords.Web {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::OpenChords.Web.Controls.SongList SongList;
+        
+        /// <summary>
+        /// pnlSongEdit control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Panel pnlSongEdit;
+        
+        /// <summary>
+        /// SongMetaData control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::OpenChords.Web.Controls.SongMetaData SongMetaData;
+        
+        /// <summary>
+        /// pnlLyrics control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Panel pnlLyrics;
+        
+        /// <summary>
+        /// txtSongEditLyrics control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox txtSongEditLyrics;
+        
+        /// <summary>
+        /// pnlNotes control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Panel pnlNotes;
+        
+        /// <summary>
+        /// txtSongEditNotes control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox txtSongEditNotes;
     }
 }

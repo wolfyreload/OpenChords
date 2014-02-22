@@ -60,7 +60,7 @@ h6 {
 }
 
 .PagingControls {
-    width: 50%
+    width: 50%;
 }
 
     .PagingControls p {
@@ -76,9 +76,9 @@ h6 {
     float: left;
 }
 
-.FloatLeft br {
-    clear: both;
-}
+    .FloatLeft br {
+        clear: both;
+    }
 
 .niceHeading {
     text-shadow: 0px 0 16px #0A0066, 4px 0 47px #2E0066;
@@ -139,25 +139,74 @@ h6 {
     font-size: 8em;
 }
 
-Select {
-    width: 95%;
+.Listbox {
+    width: 100% !important;
     height: 700px;
     background-color: transparent;
     border: none;
 }
 
+.SmallButtonPanel {
+    width: 16px;
+    text-align: center;
+    vertical-align: middle;
+}
+
+.BigOneLineTextbox {
+    height: 42px;
+}
 
 .BoxPanel {
-    width: 350px;
-    max-width: 400px;
+    min-width: 300px;
     display: inline-block;
     margin-right: 10px;
     margin-left: 10px;
     vertical-align: top;
 }
 
-.BoxPanel input {
-    background-color: rgba(49, 52, 52, 0.01);
+    .BoxPanel input[type="text"] {
+        background-color: rgba(49, 52, 52, 0.01);
+        width: 264px;
+    }
+
+    .BoxPanel TextArea {
+        background-color: rgba(49, 52, 52, 0.01);
+        border: none;
+    }
+
+    .BoxPanel Label {
+        display: inline-block;
+        width: 70px;
+    }
+
+    .BoxPanel Select {
+        background-color: rgba(49, 52, 52, 0.01);
+        width: 267px;
+    }
+
+
+.SongEditPanel {
+    width: 70%;
+}
+
+.SongEditLyricsPanel {
+    width: 65%;
+}
+
+.SongEditNotesPanel {
+    width: 20%;
+}
+
+.SongEditLyrics {
+    width: 98%;
+    height: 581px;
+    margin: 2px;
+}
+
+.SongEditNotes {
+    width: 98%;
+    height: 581px;
+    margin: 2px;
 }
 
 FieldSet legend {
@@ -171,9 +220,10 @@ FieldSet legend {
 }
 
 .SidewayButtonPane {
-    height: 700px;
+    height: 450px;
     width: 30px;
-    vertical-align: top;
+    vertical-align: bottom;
+    text-align: center;
 }
 
     .SidewayButtonPane input {

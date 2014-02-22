@@ -9,6 +9,8 @@ namespace OpenChords.Web.Controls
 {
     public partial class SongList : System.Web.UI.UserControl
     {
+        protected SongList _myself;
+
         protected void Page_Load(object sender, EventArgs e)
         {
 
@@ -30,6 +32,7 @@ namespace OpenChords.Web.Controls
             get { return lstSongs.SelectedValue; }
         }
 
+        public event EventHandler NewSongSelected;
 
 
         protected void lstSongs_DataBinding(object sender, EventArgs e)
@@ -63,6 +66,12 @@ namespace OpenChords.Web.Controls
         {
             _UseAdvangedSongSearch = false;
             lstSongs.DataBind();
+        }
+
+        protected void lstSongs_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if (NewSongSelected != null)
+                NewSongSelected(this, e);
         }
 
 

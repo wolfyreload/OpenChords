@@ -41,6 +41,23 @@ namespace OpenChords.Web
             Response.End();
         }
 
+        protected void SongList_NewSongSelected(object sender, EventArgs e)
+        {
+            var songName = SongList.SelectedValue;
+            var song = OpenChords.Entities.Song.loadSong(songName);
+            SongMetaData.fillInSongMeta(song);
+            txtSongEditLyrics.Text = song.lyrics;
+            txtSongEditNotes.Text = song.notes;
+            pnlSongEdit.Visible = true;
+        }
+
+        protected void cmdGoBack_Click(object sender, EventArgs e)
+        {
+            Response.Redirect("~/");
+        }
+
+ 
+
 
     }
 }
