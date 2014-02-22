@@ -22,3 +22,6 @@ Default skin template. The following skins are provided as examples only.
 <asp:ImageButton SkinID="imgDown" runat="server" ImageUrl="./Images/Down.png" />
 <asp:ImageButton SkinID="imgSave" runat="server" ImageUrl="./Images/Save.png" />
 <asp:ImageButton SkinID="imgCancel" runat="server" ImageUrl="./Images/Cancel.png" />
+<asp:ImageButton SkinID="imgPdf" runat="server" ImageUrl="./Images/Pdf.png" />
+<asp:ImageButton SkinID="imgHtml" runat="server" ImageUrl="./Images/Html.png" />
+

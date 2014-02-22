@@ -58,6 +58,15 @@ namespace OpenChords.Web {
         protected global::System.Web.UI.WebControls.TextBox txtSearchSet;
         
         /// <summary>
+        /// cmdAdvancedSetSearch control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.ImageButton cmdAdvancedSetSearch;
+        
+        /// <summary>
         /// pnlSetContents control.
         /// </summary>
         /// <remarks>
@@ -67,49 +76,13 @@ namespace OpenChords.Web {
         protected global::System.Web.UI.WebControls.Panel pnlSetContents;
         
         /// <summary>
-        /// pnlSongs control.
+        /// SongList control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Panel pnlSongs;
-        
-        /// <summary>
-        /// lstSongs control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.ListBox lstSongs;
-        
-        /// <summary>
-        /// lblSearchSong control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Label lblSearchSong;
-        
-        /// <summary>
-        /// txtSearchSong control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox txtSearchSong;
-        
-        /// <summary>
-        /// cmdAdvancedSearch control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.ImageButton cmdAdvancedSearch;
+        protected global::OpenChords.Web.Controls.SongList SongList;
         
         /// <summary>
         /// pnlControls1 control.
@@ -173,6 +146,15 @@ namespace OpenChords.Web {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.ImageButton cmdSave;
+        
+        /// <summary>
+        /// exportToPdf control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.ImageButton exportToPdf;
         
         /// <summary>
         /// pnlControls2 control.

@@ -16,36 +16,16 @@ namespace OpenChords.Web
 
         protected void Page_Load(object sender, EventArgs e)
         {
-            makeSongList();
-
-            var query = Request.Url.Query;
-            if (query.Length > 0)
+            if (!IsPostBack)
             {
-                downloadSong(query);
+                SongList.DataBind();
             }
         }
 
-        private void makeSongList()
+        private void downloadSong(string songName)
         {
-            var listOfSongs = Entities.Song.listOfAllSongs();
-            foreach (var song in listOfSongs)
-            {
-                var link = new HyperLink()
-                {
-                    Text = song,
-                    NavigateUrl = "~/Songs.aspx?" + song
-                };
-                pnlSongs.Controls.Add(link);
-                pnlSongs.Controls.Add(new LiteralControl("<br/>"));
-            }
-        }
 
-        private void downloadSong(string query)
-        {
-            var songClean = query.Remove(0, 1);
-            songClean = songClean.Replace("%20", " ");
-
-            var song = Entities.Song.loadSong(songClean);
+            var song = Entities.Song.loadSong(songName);
             var settingsPath = OpenChords.Web.App_Code.Global.SettingsFileName;
             var pdfPath = song.getPdfPath(Entities.DisplayAndPrintSettingsType.TabletSettings, settingsPath);
 
@@ -54,7 +34,7 @@ namespace OpenChords.Web
             Response.Clear();
 
             Response.ContentType = "application/pdf";
-            Response.AppendHeader("Content-Disposition", "attachment; filename=" + songClean + ".pdf");
+            Response.AppendHeader("Content-Disposition", "attachment; filename=" + songName + ".pdf");
             Response.TransmitFile(pdfPath);
             Response.Flush();
 

@@ -18,12 +18,6 @@ namespace OpenChords.Web
             }
         }
 
-        public bool _UseAdvangedSongSearch
-        {
-            get { return (bool)(this.ViewState["UseAdvancedSearch"] ?? false); }
-            set { this.ViewState["UseAdvancedSearch"] = value; }
-        }
-
         public List<string> _songsIncurrentSet
         {
             get { return (List<string>)(this.ViewState["CurrentSet"]); }
@@ -31,12 +25,9 @@ namespace OpenChords.Web
         }
         
 
-        private void downloadSet(string query)
+        private void downloadSet(string setName)
         {
-            var songSet = query.Remove(0, 1);
-            songSet = songSet.Replace("%20", " ");
-
-            var set = Entities.Set.loadSet(songSet);
+            var set = Entities.Set.loadSet(setName);
             var settingsPath = App_Code.Global.SettingsFileName;
             var pdfPath = set.getPdfPath(Entities.DisplayAndPrintSettingsType.TabletSettings, settingsPath);
 
@@ -45,7 +36,7 @@ namespace OpenChords.Web
             Response.Clear();
 
             Response.ContentType = "application/pdf";
-            Response.AppendHeader("Content-Disposition", "attachment; filename=" + songSet + ".pdf");
+            Response.AppendHeader("Content-Disposition", "attachment; filename=" + setName + ".pdf");
             Response.TransmitFile(pdfPath);
             Response.Flush();
 
@@ -74,45 +65,13 @@ namespace OpenChords.Web
         {
             var currentSet = OpenChords.Entities.Set.loadSet(lstSets.SelectedValue);
             _songsIncurrentSet = currentSet.songList.Select(s => s.title).ToList();
-            lstSongs.DataBind();
+            SongList.DataBind();
             lstSongsInSet.DataBind();
             setUpAndDownButtons();
             pnlSetContents.Visible = true;
         }
 
-        protected void lstSongs_DataBinding(object sender, EventArgs e)
-        {
-            List<string> allSongs = null;
-            
-            if (_UseAdvangedSongSearch)
-            {
-                allSongs = OpenChords.Functions.SongSearch.search(txtSearchSong.Text).ToList();
-            }
-            else
-            {
-                allSongs = OpenChords.Entities.Song.listOfAllSongs();
-                var filter = txtSearchSong.Text.ToUpper();
-                if (!string.IsNullOrEmpty(filter))
-                {
-                    allSongs = allSongs.Where(a => a.ToUpper().Contains(filter)).ToList();
-                } 
-            }
-            
-            lstSongs.DataSource = allSongs;
-        }
-
-        protected void cmdAdvancedSearch_Click(object sender, ImageClickEventArgs e)
-        {
-            _UseAdvangedSongSearch = true;
-            lstSongs.DataBind();
-        }
-
-        protected void txtSearchSong_TextChanged(object sender, EventArgs e)
-        {
-            _UseAdvangedSongSearch = false;
-            lstSongs.DataBind();
-        }
-
+        
         protected void lstSongsInSet_DataBinding(object sender, EventArgs e)
         {
             lstSongsInSet.DataSource = _songsIncurrentSet;
@@ -120,7 +79,7 @@ namespace OpenChords.Web
 
         protected void imgAdd_Click(object sender, ImageClickEventArgs e)
         {
-            var selectedSong = lstSongs.SelectedValue;
+            var selectedSong = SongList.SelectedValue;
             _songsIncurrentSet.Add(selectedSong);
             lstSongsInSet.DataBind();
             lstSongsInSet.SelectedIndex = lstSongsInSet.Items.Count - 1;
@@ -217,6 +176,16 @@ namespace OpenChords.Web
         protected void cmdGoBack_Click(object sender, EventArgs e)
         {
             Response.Redirect("~/");
+        }
+
+        protected void cmdAdvancedSetSearch_Click(object sender, ImageClickEventArgs e)
+        {
+
+        }
+
+        protected void exportToPdf_Click(object sender, ImageClickEventArgs e)
+        {
+            downloadSet(lstSets.SelectedValue);
         }
 
 

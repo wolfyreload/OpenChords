@@ -1,7 +1,10 @@
 ﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="Sets.aspx.cs" Inherits="OpenChords.Web.Sets" MasterPageFile="~/Master/OpenChordsMaster.Master" %>
 
+<%@ Register Src="~/Controls/SongList.ascx" TagPrefix="uc1" TagName="SongList" %>
+
+
 <asp:Content ContentPlaceHolderID="PageName" runat="server">
-    Configure Song Sets
+    Edit Song Sets
 </asp:Content>
 
 <asp:Content ContentPlaceHolderID="PagingPanel" runat="server">
@@ -15,17 +18,12 @@
         <br />
         <asp:Label ID="lblSearchSet" runat="server" Text="Search"></asp:Label>
         <asp:TextBox ID="txtSearchSet" runat="server" AutoPostBack="true" OnTextChanged="txtSearchSet_TextChanged"></asp:TextBox>
+        <asp:ImageButton ID="cmdAdvancedSetSearch" runat="server" OnClick="cmdAdvancedSetSearch_Click" SkinID="imgSearch" />
     </asp:Panel>
 
     <asp:Panel ID="pnlSetContents" Visible="false" runat="server" CssClass="Inline">
-        <asp:Panel ID="pnlSongs" runat="server" CssClass="BoxPanel gradientBoxesWithOuterShadows" GroupingText="Available Songs">
-            <asp:ListBox ID="lstSongs" CssClass="SongList" runat="server" OnDataBinding="lstSongs_DataBinding"></asp:ListBox>
-            <br />
-            <asp:Label ID="lblSearchSong" runat="server" Text="Search"></asp:Label>
-            <asp:TextBox ID="txtSearchSong" runat="server" AutoPostBack="true" OnTextChanged="txtSearchSong_TextChanged"></asp:TextBox>
-            <asp:ImageButton ID="cmdAdvancedSearch" runat="server" OnClick="cmdAdvancedSearch_Click" SkinID="imgSearch" />
-        </asp:Panel>
-
+        <uc1:SongList runat="server" ID="SongList" />
+        
         <asp:Panel ID="pnlControls1" runat="server" CssClass="Inline SidewayButtonPane">
             <asp:ImageButton ID="imgAdd" runat="server" SkinID="imgNew" OnClick="imgAdd_Click" />
             <asp:ImageButton ID="imgDelete" runat="server" SkinID="imgDelete" OnClick="imgDelete_Click" />
@@ -36,6 +34,7 @@
             <br />
             <asp:ImageButton ID="cmdCancel" runat="server" SkinID="imgCancel" OnClick="cmdCancel_Click" />
             <asp:ImageButton ID="cmdSave" runat="server" SkinID="imgSave" OnClick="cmdSave_Click" />
+            <asp:ImageButton ID="exportToPdf" runat="server" SkinID="imgPdf" OnClick="exportToPdf_Click" />
 
         </asp:Panel>
         <asp:Panel ID="pnlControls2" runat="server" CssClass="Inline SidewayButtonPane">

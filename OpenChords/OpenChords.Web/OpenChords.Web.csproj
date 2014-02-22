@@ -74,6 +74,9 @@
     <Content Include="App_Themes\Default\Images\Help.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
+    <Content Include="App_Themes\Default\Images\Html.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
     <Content Include="App_Themes\Default\Images\New.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
@@ -125,6 +128,7 @@
     <Content Include="App_Themes\Default\_Reset.css">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
+    <Content Include="Controls\SongList.ascx" />
     <Content Include="Default.aspx" />
     <Content Include="Global.asax" />
     <Content Include="OpenChordsWebSettings.xml" />
@@ -143,6 +147,13 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="App_Code\Global.cs" />
+    <Compile Include="Controls\SongList.ascx.cs">
+      <DependentUpon>SongList.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Controls\SongList.ascx.designer.cs">
+      <DependentUpon>SongList.ascx</DependentUpon>
+    </Compile>
     <Compile Include="Default.aspx.cs">
       <SubType>ASPXCodeBehind</SubType>
       <DependentUpon>Default.aspx</DependentUpon>
