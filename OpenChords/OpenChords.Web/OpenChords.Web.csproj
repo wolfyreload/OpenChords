@@ -180,6 +180,13 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Master\OpenChordsDisplay.Master.cs">
+      <DependentUpon>OpenChordsDisplay.Master</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Master\OpenChordsDisplay.Master.designer.cs">
+      <DependentUpon>OpenChordsDisplay.Master</DependentUpon>
+    </Compile>
     <Compile Include="Master\OpenChordsMaster.Master.cs">
       <DependentUpon>OpenChordsMaster.Master</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -216,6 +223,7 @@
   <ItemGroup>
     <Content Include="Master\OpenChordsMaster.Master" />
     <Content Include="App_Themes\Default\Default.skin" />
+    <Content Include="Master\OpenChordsDisplay.Master" />
     <None Include="Properties\PublishProfiles\DropboxPublish.pubxml" />
     <None Include="Properties\PublishProfiles\OpenChordsTest.pubxml" />
     <None Include="Web.Debug.config">

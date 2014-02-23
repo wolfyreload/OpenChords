@@ -1,0 +1,37 @@
+﻿<%@ Master Language="C#" AutoEventWireup="true" CodeBehind="OpenChordsDisplay.master.cs" Inherits="OpenChords.Web.Master.OpenChordsDisplay" %>
+
+<!DOCTYPE html>
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head runat="server">
+    <title>OpenChords</title>
+    <asp:ContentPlaceHolder ID="head" runat="server">
+    </asp:ContentPlaceHolder>
+</head>
+<body class="DisplayBody">
+    <form id="Content" runat="server">
+
+        <div id="DisplayPage">
+            <div>
+                <label class="niceHeading">
+                    <asp:ContentPlaceHolder ID="PageName" runat="server">
+                    </asp:ContentPlaceHolder>
+                </label>
+                <div class="PagingControls Inline">
+                    <p>
+                        <asp:ContentPlaceHolder ID="PagingPanel" runat="server">
+                        </asp:ContentPlaceHolder>
+                    </p>
+                </div>
+            </div>
+            <br />
+            <div style="width: 100%">
+                <asp:ContentPlaceHolder ID="MainForm" runat="server">
+                </asp:ContentPlaceHolder>
+            </div>
+        </div>
+    </form>
+</body>
+</html>

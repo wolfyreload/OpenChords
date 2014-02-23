@@ -5,6 +5,7 @@ using System.Text;
 
 namespace OpenChords.Entities
 {
+    [Serializable]
     public class SongHtml
     {
         public string Name { get; set; }

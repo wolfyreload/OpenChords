@@ -16,6 +16,8 @@ namespace OpenChords.Export
 
         public ExportToHtml(Set set, string settingFilename)
         {
+            _set = set;
+            _settings = DisplayAndPrintSettings.loadSettings(DisplayAndPrintSettingsType.DisplaySettings, settingFilename);
         }
 
         public ExportToHtml(Song song, string settingsFilename)
@@ -45,6 +47,7 @@ namespace OpenChords.Export
                 }
                 html.Html = sb.ToString();
                 htmlSongs.Add(html);
+                sb.Length = 0;
             }
             return htmlSongs;
         }
