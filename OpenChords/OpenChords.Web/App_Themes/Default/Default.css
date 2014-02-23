@@ -85,6 +85,12 @@ h6 {
     font-size: 4em;
 }
 
+.menu {
+    width: 100px;
+    text-align: center;
+    margin-left : 20px
+}
+
 .nice-button {
     -moz-box-shadow: inset 0px 1px 0px 0px #bbdaf7;
     -webkit-box-shadow: inset 0px 1px 0px 0px #bbdaf7;
@@ -93,18 +99,18 @@ h6 {
     background: -moz-linear-gradient( center top, #79bbff 5%, #378de5 100% );
     filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#79bbff', endColorstr='#378de5');
     background-color: #79bbff;
-    -webkit-border-top-left-radius: 20px;
-    -moz-border-radius-topleft: 20px;
-    border-top-left-radius: 20px;
-    -webkit-border-top-right-radius: 20px;
-    -moz-border-radius-topright: 20px;
-    border-top-right-radius: 20px;
-    -webkit-border-bottom-right-radius: 20px;
-    -moz-border-radius-bottomright: 20px;
-    border-bottom-right-radius: 20px;
-    -webkit-border-bottom-left-radius: 20px;
-    -moz-border-radius-bottomleft: 20px;
-    border-bottom-left-radius: 20px;
+    -webkit-border-top-left-radius: 6px;
+    -moz-border-radius-topleft: 6px;
+    border-top-left-radius: 6px;
+    -webkit-border-top-right-radius: 6px;
+    -moz-border-radius-topright: 6px;
+    border-top-right-radius: 6px;
+    -webkit-border-bottom-right-radius: 6px;
+    -moz-border-radius-bottomright: 6px;
+    border-bottom-right-radius: 6px;
+    -webkit-border-bottom-left-radius: 6px;
+    -moz-border-radius-bottomleft: 6px;
+    border-bottom-left-radius: 6px;
     text-indent: 0;
     border: 1px solid #84bbf3;
     display: inline-block;
@@ -113,9 +119,7 @@ h6 {
     font-size: 15px;
     font-weight: bold;
     font-style: normal;
-    height: 50px;
     line-height: 50px;
-    width: 100px;
     text-decoration: none;
     text-align: center;
     text-shadow: 1px 1px 0px #528ecc;
@@ -132,7 +136,6 @@ h6 {
         position: relative;
         top: 1px;
     }
-
 
 #ApplicationTitle {
     text-shadow: 0px 0 16px #0A0066, 4px 0 47px #2E0066;
@@ -240,7 +243,7 @@ FieldSet legend {
 
 .SongVerse {
     padding: 5px;
-    font-family: "HelveticaNeue-Light", "Helvetica Neue Light", "Helvetica Neue", Helvetica, Arial, "Lucida Grande", sans-serif;
+    font-family: "Courier New";
     margin-bottom: 20px;
     font-size: 18px;
     break-inside: avoid-column; /*stop column breaks on headings*/
@@ -288,4 +291,50 @@ FieldSet legend {
 
 .DisplayBody body {
     background-color: black;
+    font-family: "HelveticaNeue-Light", "Helvetica Neue Light", "Helvetica Neue", Helvetica, Arial, "Lucida Grande", sans-serif;
 }
+
+.DisplayBody .nice-button {
+    -moz-box-shadow: inset 0px 1px 0px 0px #e184f3;
+    -webkit-box-shadow: inset 0px 1px 0px 0px #e184f3;
+    box-shadow: inset 0px 1px 0px 0px #e184f3;
+    background: -webkit-gradient( linear, left top, left bottom, color-stop(0.05, #c123de), color-stop(1, #a20dbd) );
+    background: -moz-linear-gradient( center top, #c123de 5%, #a20dbd 100% );
+    filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#c123de', endColorstr='#a20dbd');
+    background-color: #c123de;
+    -webkit-border-top-left-radius: 6px;
+    -moz-border-radius-topleft: 6px;
+    border-top-left-radius: 6px;
+    -webkit-border-top-right-radius: 6px;
+    -moz-border-radius-topright: 6px;
+    border-top-right-radius: 6px;
+    -webkit-border-bottom-right-radius: 6px;
+    -moz-border-radius-bottomright: 6px;
+    border-bottom-right-radius: 6px;
+    -webkit-border-bottom-left-radius: 6px;
+    -moz-border-radius-bottomleft: 6px;
+    border-bottom-left-radius: 6px;
+    text-indent: 0;
+    border: 1px solid #a511c0;
+    display: inline-block;
+    color: #ffffff;
+    font-family: Arial;
+    font-size: 15px;
+    font-weight: bold;
+    font-style: normal;
+    line-height: 50px;
+    text-decoration: none;
+    text-align: center;
+    text-shadow: 1px 1px 0px #9b14b3;
+}
+
+    .DisplayBody .nice-button:hover {
+        background: -webkit-gradient( linear, left top, left bottom, color-stop(0.05, #a20dbd), color-stop(1, #c123de) );
+        background: -moz-linear-gradient( center top, #a20dbd 5%, #c123de 100% );
+        filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#a20dbd', endColorstr='#c123de');
+        background-color: #a20dbd;
+    }
+
+    .DisplayBody.nice-button:active {
+        position: relative;
+        top: 1px;

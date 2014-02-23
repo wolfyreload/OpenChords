@@ -10,8 +10,10 @@ namespace OpenChords.Web
 {
     public partial class Songs : System.Web.UI.Page
     {
-       
-    
+
+
+        private string SongName
+        { get { return (string)this.Request.Params["Song"]; } }
 
 
         protected void Page_Load(object sender, EventArgs e)
@@ -19,6 +21,8 @@ namespace OpenChords.Web
             if (!IsPostBack)
             {
                 SongList.DataBind();
+                if (SongName != null)
+                    SongList.SelectedValue = SongName;
             }
         }
 

@@ -10,20 +10,35 @@ namespace OpenChords.Web
     public partial class Sets : System.Web.UI.Page
     {
 
+
         protected void Page_Load(object sender, EventArgs e)
         {
             if (!IsPostBack)
             {
                 lstSets.DataBind();
+                if (SetName != null)
+                {
+                    lstSets.SelectedValue = SetName;
+                    ShowSet();
+                }
             }
         }
+
+        protected void Page_PreRender(object sender, EventArgs e)
+        {
+            
+        }
+
+        private string SetName
+        { get { return (string)this.Request.Params["Set"]; } }
+
 
         public List<string> _songsIncurrentSet
         {
             get { return (List<string>)(this.ViewState["CurrentSet"]); }
             set { this.ViewState["CurrentSet"] = value; }
         }
-        
+
 
         private void downloadSet(OpenChords.Entities.Set set)
         {
@@ -57,10 +72,15 @@ namespace OpenChords.Web
                 allSets = allSets.Where(a => a.ToUpper().Contains(filter)).ToList();
             }
 
-            lstSets.DataSource = allSets;    
+            lstSets.DataSource = allSets;
         }
 
         protected void lstSets_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            ShowSet();
+        }
+
+        private void ShowSet()
         {
             var currentSet = OpenChords.Entities.Set.loadSet(lstSets.SelectedValue);
             _songsIncurrentSet = currentSet.songList.Select(s => s.title).ToList();
@@ -70,7 +90,7 @@ namespace OpenChords.Web
             pnlSetContents.Visible = true;
         }
 
-        
+
         protected void lstSongsInSet_DataBinding(object sender, EventArgs e)
         {
             lstSongsInSet.DataSource = _songsIncurrentSet;
@@ -99,17 +119,17 @@ namespace OpenChords.Web
             currentSet.saveSet();
             pnlSetContents.Visible = false;
             lstSets.SelectedIndex = -1;
-           
+
         }
 
         protected void imgDelete_Click(object sender, ImageClickEventArgs e)
         {
-            
+
             var selectedIndex = lstSongsInSet.SelectedIndex;
             if (selectedIndex == -1) return;
 
             _songsIncurrentSet.RemoveAt(selectedIndex);
-                       
+
             lstSongsInSet.DataBind();
             if (lstSongsInSet.Items.Count == 0) return;
 
@@ -151,7 +171,7 @@ namespace OpenChords.Web
         {
             imgSetItemUp.Visible = true;
             imgSetItemDown.Visible = true;
-            
+
             var selectedIndex = lstSongsInSet.SelectedIndex;
             if (lstSongsInSet.Items.Count <= 1 || selectedIndex == -1)
             {
@@ -168,10 +188,10 @@ namespace OpenChords.Web
                 imgSetItemUp.Visible = true;
                 imgSetItemDown.Visible = false;
             }
-            
+
         }
 
-        
+
         protected void cmdGoBack_Click(object sender, EventArgs e)
         {
             Response.Redirect("~/");
@@ -197,7 +217,7 @@ namespace OpenChords.Web
         }
 
 
-    
-      
+
+
     }
 }

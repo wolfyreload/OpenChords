@@ -7,14 +7,10 @@
         <br /><br /><br /><br /><br />
         
         <asp:Panel ID="pnlMenu" runat="server" Height="100%">
-            <asp:HyperLink ID="lnkSets" runat="server" NavigateUrl="~/App/Sets.aspx" CssClass="nice-button">Sets</asp:HyperLink>
-            <br />
-            <br /><br />
-            <asp:HyperLink ID="lnkSongs" runat="server" NavigateUrl="~/App/Songs.aspx" CssClass="nice-button">Songs</asp:HyperLink>
-            <br />
-            <br /><br />
-            <asp:HyperLink ID="HyperLink1" runat="server" NavigateUrl="~/App/Settings.aspx" CssClass="nice-button">Settings</asp:HyperLink>
-            <br /><br />
+            <asp:HyperLink ID="lnkSets" runat="server" NavigateUrl="~/App/Sets.aspx" CssClass="menu nice-button">Sets</asp:HyperLink>
+            <asp:HyperLink ID="lnkSongs" runat="server" NavigateUrl="~/App/Songs.aspx" CssClass="menu nice-button">Songs</asp:HyperLink>
+            <asp:HyperLink ID="HyperLink1" runat="server" NavigateUrl="~/App/Settings.aspx" CssClass="menu nice-button">Settings</asp:HyperLink>
+            
         </asp:Panel>
 
     </div>

@@ -30,6 +30,12 @@ namespace OpenChords.Web.Controls
         public string SelectedValue
         {
             get { return lstSongs.SelectedValue; }
+            set
+            {
+                lstSongs.SelectedValue = value;
+                if (NewSongSelected != null)
+                    NewSongSelected(this, new EventArgs());
+            }
         }
 
         public event EventHandler NewSongSelected;

@@ -408,10 +408,10 @@ namespace OpenChords.Entities
         /// returns the song in html format
         /// </summary>
         /// <returns></returns>
-        public List<SongHtml> getHtml(string settingsPath)
+        public SongHtml getHtml(string settingsPath)
         {
             Export.ExportToHtml htmlExporter = new Export.ExportToHtml(this, settingsPath);
-            var result = htmlExporter.GenerateHtml();
+            var result = htmlExporter.GenerateHtml()[0];
             return result;
         }
 
