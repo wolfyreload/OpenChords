@@ -61,7 +61,7 @@ namespace OpenChords.Export
         {
             StringBuilder sb = new StringBuilder();
             //add heading line
-            sb.AppendLine("<div class=\"SongVerse\">");
+            sb.AppendLine("<div class=\"DisplaySongVerse\">");
             sb.AppendFormat("<div class=\"DisplayLineVerseHeading\">{0}</div>\r\n", trimLine(verse.FullHeaderName));
             //add lyrics
             sb.AppendLine("<div class=\"DisplayLineVerseLyrics\">");

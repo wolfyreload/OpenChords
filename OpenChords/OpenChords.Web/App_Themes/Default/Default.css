@@ -1,4 +1,8 @@
-﻿body {
+﻿* {
+    font-size: 18px;
+}
+
+body {
     background: Black;
 }
 
@@ -35,8 +39,8 @@ h6 {
 }
 
 #Page {
-    width: 98%;
-    min-width: 1000px;
+    width: 80%;
+    min-width: 1200px;
     background-color: white;
     border-radius: 15px;
     margin: 10px auto 0px auto;
@@ -88,7 +92,7 @@ h6 {
 .menu {
     width: 100px;
     text-align: center;
-    margin-left : 20px
+    margin-left: 20px;
 }
 
 .nice-button {
@@ -144,7 +148,7 @@ h6 {
 
 .Listbox {
     width: 100% !important;
-    height: 755px;
+    height: 743px;
     background-color: transparent;
     border: none;
 }
@@ -155,12 +159,7 @@ h6 {
     vertical-align: middle;
 }
 
-.BigOneLineTextbox {
-    height: 42px;
-}
-
 .BoxPanel {
-    min-width: 300px;
     display: inline-block;
     margin-right: 10px;
     margin-left: 10px;
@@ -184,32 +183,61 @@ h6 {
 
     .BoxPanel Select {
         background-color: rgba(49, 52, 52, 0.01);
-        width: 267px;
     }
 
-
-.SongEditPanel {
-    width: 65%;
+.SongListPanel {
+    width: 22em;
 }
 
+.SongEditPanel {
+    width: 71em;
+}
+
+.SongMetaPanel {
+    width: 93%;
+}
+
+   .SongMetaPanel input[type="text"] {
+        background-color: rgba(49, 52, 52, 0.01);
+        width: 340px;
+    }
+
+    .SongMetaPanel Label {
+        display: inline-block;
+        width: 70px;
+    }
+
+    .SongMetaPanel Select {
+        background-color: rgba(49, 52, 52, 0.01);
+        width: 343px;
+    }
+
 .SongEditLyricsPanel {
-    width: 65%;
+    width: 67%;
 }
 
 .SongEditNotesPanel {
-    width: 20%;
+    width: 23%;
 }
 
 .SongEditLyrics {
     width: 98%;
-    height: 635px;
+    height: 600px;
     margin: 2px;
 }
 
 .SongEditNotes {
     width: 98%;
-    height: 635px;
+    height: 600px;
     margin: 2px;
+}
+
+.AvailableSetsPanel {
+    width: 22em;
+}
+
+.SongsInSetPanel {
+    width: 20em;
 }
 
 FieldSet legend {
@@ -233,21 +261,36 @@ FieldSet legend {
         margin-top: 5px;
     }
 
+.BigOneLineTextbox {
+    height: 42px;
+    width: 42px !important;
+    text-align: center;
+}
+
 .DisplayPage {
     -moz-column-count: 3; /* Firefox */
     -webkit-column-count: 3; /* Safari and Chrome */
     column-count: 3;
-    height: 700px;
+    /*height: 49em;*/
+    height: 600px;
 }
 
 
-.SongVerse {
+.DisplaySongVerse {
     padding: 5px;
     font-family: "Courier New";
     margin-bottom: 20px;
     font-size: 18px;
     break-inside: avoid-column; /*stop column breaks on headings*/
     -webkit-column-break-inside: avoid;
+    -webkit-box-shadow: 0px 0px 20px rgba(76, 72, 72, 0.93);
+    -moz-box-shadow: 0px 1px 6px rgba(76, 72, 72, 0.93);
+/* rounded corners */
+    -webkit-border-radius: 12px;
+    -moz-border-radius: 7px;
+    border-radius: 7px;
+    /* gradients */
+    background: -webkit-gradient(linear, left top, left bottom, color-stop(0%, rgb(73, 7, 7)), color-stop(15%, rgb(0, 0, 0)), color-stop(100%, #2E2424));
 }
 
 .DisplaySongName {
@@ -338,3 +381,8 @@ FieldSet legend {
     .DisplayBody.nice-button:active {
         position: relative;
         top: 1px;
+    }
+
+.DisplayBody .PagingControls {
+    width:auto;
+}

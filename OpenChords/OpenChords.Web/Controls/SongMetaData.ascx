@@ -1,6 +1,6 @@
 ﻿<%@ Control Language="C#" AutoEventWireup="true" CodeBehind="SongMetaData.ascx.cs" Inherits="OpenChords.Web.Controls.SongMetaData" %>
 
-<asp:Panel ID="pnlSongMetaData" runat="server" GroupingText="Song Meta Data" CssClass="BoxPanel Inline gradientBoxesWithOuterShadows">
+<asp:Panel ID="pnlSongMetaData" runat="server" GroupingText="Song Meta Data" CssClass="BoxPanel gradientBoxesWithOuterShadows SongMetaPanel">
     <asp:Panel ID="MetaPane1" runat="server" CssClass="BoxPanel">
         <label>Title</label>
         <asp:TextBox ID="txtTitle" runat="server"></asp:TextBox><br />
