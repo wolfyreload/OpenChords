@@ -249,7 +249,7 @@ FieldSet legend {
 
 .DisplaySongName {
     font: bold 36px;
-    color: #BE7C7C;
+    color: #FEAF81;
 }
 
 .DisplaySongOrder {
@@ -274,7 +274,7 @@ FieldSet legend {
 
 .DisplayLineLyrics {
     font-weight: normal;
-    color: Silver;
+    color: white;
 }
 
 .DisplayLineVerseNotes {
@@ -284,4 +284,8 @@ FieldSet legend {
     vertical-align: top;
     font-family: 'Global Monospace';
     color: #80FF80;
+}
+
+.DisplayBody body {
+    background-color: black;
 }
