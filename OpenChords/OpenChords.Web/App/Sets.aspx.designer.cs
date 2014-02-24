@@ -22,58 +22,13 @@ namespace OpenChords.Web {
         protected global::System.Web.UI.WebControls.Button cmdGoBack;
         
         /// <summary>
-        /// pnlSets control.
+        /// SetList control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Panel pnlSets;
-        
-        /// <summary>
-        /// lstSets control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.ListBox lstSets;
-        
-        /// <summary>
-        /// lblSearchSet control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Label lblSearchSet;
-        
-        /// <summary>
-        /// txtSearchSet control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox txtSearchSet;
-        
-        /// <summary>
-        /// cmdAdvancedSetSearch control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.ImageButton cmdAdvancedSetSearch;
-        
-        /// <summary>
-        /// pnlSetContents control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Panel pnlSetContents;
+        protected global::OpenChords.Web.Controls.SetList SetList;
         
         /// <summary>
         /// SongList control.

@@ -15,12 +15,13 @@ namespace OpenChords.Web
         {
             if (!IsPostBack)
             {
-                lstSets.DataBind();
-                if (SetName != null)
-                {
-                    lstSets.SelectedValue = SetName;
-                    ShowSet();
-                }
+                SetList.DataBind();
+                hideSetDetails();
+                //if (SetName != null)
+                //{
+                //    lstSets.SelectedValue = SetName;
+                //    ShowSet();
+                //}
             }
         }
 
@@ -57,37 +58,26 @@ namespace OpenChords.Web
             Response.End();
         }
 
-        protected void txtSearchSet_TextChanged(object sender, EventArgs e)
+        
+        private void showSetDetails()
         {
-            lstSets.DataBind();
-        }
-
-        protected void lstSets_DataBinding(object sender, EventArgs e)
-        {
-            var allSets = OpenChords.Entities.Set.listOfAllSets();
-
-            var filter = txtSearchSet.Text.ToUpper();
-            if (!string.IsNullOrEmpty(filter))
-            {
-                allSets = allSets.Where(a => a.ToUpper().Contains(filter)).ToList();
-            }
-
-            lstSets.DataSource = allSets;
-        }
-
-        protected void lstSets_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            ShowSet();
-        }
-
-        private void ShowSet()
-        {
-            var currentSet = OpenChords.Entities.Set.loadSet(lstSets.SelectedValue);
+            var currentSet = OpenChords.Entities.Set.loadSet(SetList.SelectedSet);
             _songsIncurrentSet = currentSet.songList.Select(s => s.title).ToList();
             SongList.DataBind();
             lstSongsInSet.DataBind();
             setUpAndDownButtons();
-            pnlSetContents.Visible = true;
+            pnlControls1.Visible = true;
+            pnlControls2.Visible = true;
+            pnlSongsInSet.Visible = true;
+            SongList.Visible = true;
+        }
+
+        private void hideSetDetails()
+        {
+            pnlControls1.Visible = false;
+            pnlControls2.Visible = false;
+            pnlSongsInSet.Visible = false;
+            SongList.Visible = false;
         }
 
 
@@ -104,22 +94,16 @@ namespace OpenChords.Web
             lstSongsInSet.SelectedIndex = lstSongsInSet.Items.Count - 1;
         }
 
-        protected void cmdCancel_Click(object sender, ImageClickEventArgs e)
-        {
-            pnlSetContents.Visible = false;
-            lstSets.SelectedIndex = -1;
-        }
-
+        
         protected void cmdSave_Click(object sender, ImageClickEventArgs e)
         {
-            var currentSet = OpenChords.Entities.Set.loadSet(lstSets.SelectedValue);
+            var currentSet = OpenChords.Entities.Set.loadSet(SetList.SelectedSet);
             currentSet.clearSongSet();
             foreach (string songTitle in _songsIncurrentSet)
                 currentSet.addSongToSet(songTitle);
             currentSet.saveSet();
-            pnlSetContents.Visible = false;
-            lstSets.SelectedIndex = -1;
-
+            hideSetDetails();
+        
         }
 
         protected void imgDelete_Click(object sender, ImageClickEventArgs e)
@@ -197,14 +181,9 @@ namespace OpenChords.Web
             Response.Redirect("~/");
         }
 
-        protected void cmdAdvancedSetSearch_Click(object sender, ImageClickEventArgs e)
-        {
-
-        }
-
         protected void exportToPdf_Click(object sender, ImageClickEventArgs e)
         {
-            var currentSet = OpenChords.Entities.Set.loadSet(lstSets.SelectedValue);
+            var currentSet = OpenChords.Entities.Set.loadSet(SetList.SelectedSet);
             currentSet.clearSongSet();
             foreach (string songTitle in _songsIncurrentSet)
                 currentSet.addSongToSet(songTitle);
@@ -213,8 +192,20 @@ namespace OpenChords.Web
 
         protected void imgHtml_Click(object sender, ImageClickEventArgs e)
         {
-            Response.Redirect("Display.aspx?Set=" + lstSets.SelectedValue);
+            Response.Redirect("Display.aspx?Set=" + SetList.SelectedSet);
         }
+
+        protected void cmdCancel_Click(object sender, ImageClickEventArgs e)
+        {
+            pnlSongsInSet.Visible = false;
+        }
+
+        protected void SetList_SelectedSetChanged(object sender, EventArgs e)
+        {
+            showSetDetails();
+        }
+
+        
 
 
 

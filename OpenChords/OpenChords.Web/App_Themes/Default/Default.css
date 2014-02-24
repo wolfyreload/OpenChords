@@ -26,6 +26,11 @@ h4 {
     line-height: 20px;
 }
 
+input[type="text"], select, textarea {
+    background-color: rgba(49, 52, 52, 0.01);
+    border-radius: 10px;
+}
+
 /* Won't be used here */
 
 h5 {
@@ -39,8 +44,7 @@ h6 {
 }
 
 #Page {
-    width: 80%;
-    min-width: 1200px;
+    width: 90%;
     background-color: white;
     border-radius: 15px;
     margin: 10px auto 0px auto;
@@ -166,7 +170,7 @@ h6 {
     vertical-align: top;
 }
 
-    .BoxPanel input[type="text"] {
+    /*.BoxPanel input[type="text"] {
         background-color: rgba(49, 52, 52, 0.01);
         width: 264px;
     }
@@ -183,7 +187,7 @@ h6 {
 
     .BoxPanel Select {
         background-color: rgba(49, 52, 52, 0.01);
-    }
+    }*/
 
 .SongListPanel {
     width: 22em;
@@ -232,13 +236,37 @@ h6 {
     margin: 2px;
 }
 
-.AvailableSetsPanel {
-    width: 22em;
+.PanelWithSearchBox {
+    width: 30%;    
 }
 
-.SongsInSetPanel {
-    width: 20em;
+    .PanelWithSearchBox ul {
+        height: 200px;
+        overflow-y: scroll;
+    }
+
+    .PanelWithSearchBox input[type="text"] {
+        width: 65%;
+    }
+
+    .PanelWithSearchBox a {
+        text-decoration: none;
+        color: black;
+    }
+
+.PanelWithoutSearchBox {
+    width: 30%;
 }
+
+.PanelWithoutSearchBox ul {
+        height: 200px;
+        overflow-y: scroll;
+    }
+
+    .PanelWithoutSearchBox input[type="text"] {
+        width: 80%;
+    }
+    
 
 FieldSet legend {
     font: bold 14px arial;

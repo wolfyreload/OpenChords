@@ -129,6 +129,7 @@
     <Content Include="App_Themes\Default\_Reset.css">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
+    <Content Include="Controls\SetList.ascx" />
     <Content Include="Controls\SongList.ascx" />
     <Content Include="Controls\SongMetaData.ascx" />
     <Content Include="Default.aspx" />
@@ -156,6 +157,13 @@
       <DependentUpon>Display.aspx</DependentUpon>
     </Compile>
     <Compile Include="App_Code\Global.cs" />
+    <Compile Include="Controls\SetList.ascx.cs">
+      <DependentUpon>SetList.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Controls\SetList.ascx.designer.cs">
+      <DependentUpon>SetList.ascx</DependentUpon>
+    </Compile>
     <Compile Include="Controls\SongList.ascx.cs">
       <DependentUpon>SongList.ascx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
