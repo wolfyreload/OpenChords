@@ -11,6 +11,9 @@ namespace OpenChords.Web.Controls
     {
         protected SongList _myself;
 
+        public event EventHandler NewSongSelected;
+
+
         protected void Page_Load(object sender, EventArgs e)
         {
 
@@ -24,24 +27,40 @@ namespace OpenChords.Web.Controls
 
         public override void DataBind()
         {
-            lstSongs.DataBind();
+            lstViewSongs.DataBind();
         }
 
         public string SelectedValue
         {
-            get { return lstSongs.SelectedValue; }
+            get { return (string)lstViewSongs.SelectedValue; }
             set
-            {
-                lstSongs.SelectedValue = value;
+            {   
+                var dummy = value;
+                lstViewSongs.SelectedIndex = 0;
                 if (NewSongSelected != null)
                     NewSongSelected(this, new EventArgs());
             }
         }
 
-        public event EventHandler NewSongSelected;
+       
+        protected void cmdAdvancedSearch_Click(object sender, ImageClickEventArgs e)
+        {
+            _UseAdvangedSongSearch = true;
+            lstViewSongs.DataBind();
+        }
 
+        protected void txtSearchSong_TextChanged(object sender, EventArgs e)
+        {
+            _UseAdvangedSongSearch = false;
+            lstViewSongs.DataBind();
+        }
 
-        protected void lstSongs_DataBinding(object sender, EventArgs e)
+        class RandomMappingClass
+        {
+            public string Name { get; set; }
+        }
+
+        protected void lstViewSongs_DataBinding(object sender, EventArgs e)
         {
             List<string> allSongs = null;
 
@@ -59,23 +78,13 @@ namespace OpenChords.Web.Controls
                 }
             }
 
-            lstSongs.DataSource = allSongs;
+            var source = allSongs.Select(s => new RandomMappingClass() { Name = s });
+            lstViewSongs.DataSource = source;
         }
 
-        protected void cmdAdvancedSearch_Click(object sender, ImageClickEventArgs e)
+        protected void lstViewSongs_SelectedIndexChanging(object sender, ListViewSelectEventArgs e)
         {
-            _UseAdvangedSongSearch = true;
-            lstSongs.DataBind();
-        }
-
-        protected void txtSearchSong_TextChanged(object sender, EventArgs e)
-        {
-            _UseAdvangedSongSearch = false;
-            lstSongs.DataBind();
-        }
-
-        protected void lstSongs_SelectedIndexChanged(object sender, EventArgs e)
-        {
+            lstViewSongs.SelectedIndex = e.NewSelectedIndex;
             if (NewSongSelected != null)
                 NewSongSelected(this, e);
         }

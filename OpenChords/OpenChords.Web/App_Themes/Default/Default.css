@@ -68,11 +68,11 @@ h6 {
 }
 
 .PagingControls {
-    width: 50%;
+    vertical-align: top;
 }
 
     .PagingControls p {
-        text-align: center;
+        
     }
 
 .Centered {
@@ -90,7 +90,7 @@ h6 {
 
 .niceHeading {
     text-shadow: 0px 0 16px #0A0066, 4px 0 47px #2E0066;
-    font-size: 4em;
+    font-size: 3.5em;
 }
 
 .menu {
@@ -189,32 +189,33 @@ h6 {
         background-color: rgba(49, 52, 52, 0.01);
     }*/
 
-.SongListPanel {
-    width: 22em;
-}
-
 .SongEditPanel {
-    width: 71em;
+    width: 65%;
 }
 
 .SongMetaPanel {
-    width: 93%;
+    width: 93.5%;
 }
 
    .SongMetaPanel input[type="text"] {
         background-color: rgba(49, 52, 52, 0.01);
-        width: 340px;
+        width: 78%;
     }
 
     .SongMetaPanel Label {
         display: inline-block;
-        width: 70px;
+        width: 19%;
+        font-size-adjust:1:
     }
 
     .SongMetaPanel Select {
         background-color: rgba(49, 52, 52, 0.01);
-        width: 343px;
+        width: 79%;
     }
+
+.MetaSubPanel {
+    width: 40%;
+}
 
 .SongEditLyricsPanel {
     width: 67%;
@@ -237,11 +238,12 @@ h6 {
 }
 
 .PanelWithSearchBox {
-    width: 30%;    
+    width: 25%; 
+    min-width: 150px;   
 }
 
     .PanelWithSearchBox ul {
-        height: 200px;
+        height: 738px;
         overflow-y: scroll;
     }
 
@@ -255,7 +257,7 @@ h6 {
     }
 
 .PanelWithoutSearchBox {
-    width: 30%;
+    width: 25%;
 }
 
 .PanelWithoutSearchBox ul {
@@ -267,6 +269,13 @@ h6 {
         width: 80%;
     }
     
+.ListItemUnselected {
+
+}
+
+.ListItemSelected {
+    background-color: lightblue;
+}
 
 FieldSet legend {
     font: bold 14px arial;
@@ -280,7 +289,7 @@ FieldSet legend {
 
 .SidewayButtonPane {
     height: 450px;
-    width: 30px;
+    width: 1%;
     vertical-align: bottom;
     text-align: center;
 }
@@ -410,7 +419,3 @@ FieldSet legend {
         position: relative;
         top: 1px;
     }
-
-.DisplayBody .PagingControls {
-    width:auto;
-}

@@ -59,6 +59,10 @@ namespace OpenChords.Web.Controls
         protected void lstViewSets_SelectedIndexChanging(object sender, ListViewSelectEventArgs e)
         {
             lstViewSets.SelectedIndex = e.NewSelectedIndex;
+        }
+
+        protected void lstViewSets_SelectedIndexChanged(object sender, EventArgs e)
+        {
             if (SelectedSetChanged != null)
                 SelectedSetChanged(this, e);
         }

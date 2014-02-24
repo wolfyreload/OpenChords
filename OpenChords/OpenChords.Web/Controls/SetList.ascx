@@ -1,17 +1,22 @@
 ﻿<%@ Control Language="C#" AutoEventWireup="true" CodeBehind="SetList.ascx.cs" Inherits="OpenChords.Web.Controls.SetList" %>
 
 <asp:Panel ID="pnlSets" runat="server" CssClass="BoxPanel gradientBoxesWithOuterShadows PanelWithSearchBox" GroupingText="Sets">
-    <asp:ListView ID="lstViewSets" runat="server" OnDataBinding="lstViewSets_DataBinding" DataKeyNames="Name" OnSelectedIndexChanging="lstViewSets_SelectedIndexChanging">
+    <asp:ListView ID="lstViewSets" runat="server" OnDataBinding="lstViewSets_DataBinding" DataKeyNames="Name" OnSelectedIndexChanging="lstViewSets_SelectedIndexChanging" OnSelectedIndexChanged="lstViewSets_SelectedIndexChanged">
         <LayoutTemplate>
             <ul>
                 <li runat="server" id="itemPlaceholder"></li>
             </ul>
         </LayoutTemplate>
         <ItemTemplate>
-            <li runat="server">
+            <li class="ListItemUnselected">
                 <asp:LinkButton ID="lnkSets" runat="server" Text='<%#Eval("Name") %>' CommandName="Select"></asp:LinkButton>
             </li>
         </ItemTemplate>
+        <SelectedItemTemplate>
+            <li class="ListItemSelected">
+                <asp:LinkButton ID="lnkSets" runat="server" Text='<%#Eval("Name") %>' CommandName="Select"></asp:LinkButton>
+            </li>
+        </SelectedItemTemplate>
     </asp:ListView>
     <br />
     <asp:Label ID="lblSearchSet" runat="server" Text="Search"></asp:Label>
