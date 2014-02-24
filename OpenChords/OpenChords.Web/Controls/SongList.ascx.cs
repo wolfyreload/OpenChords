@@ -36,7 +36,17 @@ namespace OpenChords.Web.Controls
             set
             {   
                 var dummy = value;
-                lstViewSongs.SelectedIndex = 0;
+                for (int i = 0; i < lstViewSongs.Items.Count; i++)
+                {
+                    var item = (LinkButton)lstViewSongs.Items[i].FindControl("lnkSets");
+                    if (item.Text == value)
+                    {
+                        lstViewSongs.SelectedIndex = i;
+                        lstViewSongs.DataBind();
+                        break;
+                    }
+
+                }
                 if (NewSongSelected != null)
                     NewSongSelected(this, new EventArgs());
             }
@@ -85,6 +95,7 @@ namespace OpenChords.Web.Controls
         protected void lstViewSongs_SelectedIndexChanging(object sender, ListViewSelectEventArgs e)
         {
             lstViewSongs.SelectedIndex = e.NewSelectedIndex;
+            lstViewSongs.DataBind();
             if (NewSongSelected != null)
                 NewSongSelected(this, e);
         }

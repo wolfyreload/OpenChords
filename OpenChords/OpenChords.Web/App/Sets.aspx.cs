@@ -17,11 +17,11 @@ namespace OpenChords.Web
             {
                 SetList.DataBind();
                 hideSetDetails();
-                //if (SetName != null)
-                //{
-                //    lstSets.SelectedValue = SetName;
-                //    ShowSet();
-                //}
+                if (SetName != null)
+                {
+                    SetList.SelectedSet = SetName;
+                    showSetDetails();
+                }
             }
         }
 
