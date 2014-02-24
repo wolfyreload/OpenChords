@@ -1,5 +1,5 @@
 ﻿* {
-    font-size: 18px;
+    font-size: 12px;
 }
 
 body {
@@ -31,6 +31,10 @@ input[type="text"], select, textarea {
     border-radius: 10px;
 }
 
+textarea {
+    border: none;
+}
+
 /* Won't be used here */
 
 h5 {
@@ -44,7 +48,7 @@ h6 {
 }
 
 #Page {
-    width: 90%;
+    width: 96%;
     background-color: white;
     border-radius: 15px;
     margin: 10px auto 0px auto;
@@ -190,7 +194,7 @@ h6 {
     }*/
 
 .SongEditPanel {
-    width: 65%;
+    width: 69%;
 }
 
 .SongMetaPanel {
@@ -199,26 +203,25 @@ h6 {
 
    .SongMetaPanel input[type="text"] {
         background-color: rgba(49, 52, 52, 0.01);
-        width: 78%;
+        width: 60%;
     }
 
     .SongMetaPanel Label {
         display: inline-block;
-        width: 19%;
-        font-size-adjust:1:
+        width: 30%;
     }
 
     .SongMetaPanel Select {
         background-color: rgba(49, 52, 52, 0.01);
-        width: 79%;
+        width: 65%;
     }
 
 .MetaSubPanel {
-    width: 40%;
+    width: 38%;
 }
 
 .SongEditLyricsPanel {
-    width: 67%;
+    width: 64%;
 }
 
 .SongEditNotesPanel {
@@ -227,13 +230,13 @@ h6 {
 
 .SongEditLyrics {
     width: 98%;
-    height: 600px;
+    height: 282px;
     margin: 2px;
 }
 
 .SongEditNotes {
     width: 98%;
-    height: 600px;
+    height: 282px;
     margin: 2px;
 }
 
@@ -243,7 +246,7 @@ h6 {
 }
 
     .PanelWithSearchBox ul {
-        height: 738px;
+        height: 400px;
         overflow-y: scroll;
     }
 
@@ -261,7 +264,7 @@ h6 {
 }
 
 .PanelWithoutSearchBox ul {
-        height: 200px;
+        height: 400px;
         overflow-y: scroll;
     }
 
@@ -282,6 +285,9 @@ FieldSet legend {
     margin-bottom: 5px;
 }
 
+FieldSet {
+    border: none;
+}
 
 .Inline {
     display: inline-block;
@@ -289,7 +295,7 @@ FieldSet legend {
 
 .SidewayButtonPane {
     height: 450px;
-    width: 1%;
+    width: 3%;
     vertical-align: bottom;
     text-align: center;
 }
