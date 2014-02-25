@@ -67,22 +67,49 @@ namespace OpenChords.Web {
         protected global::System.Web.UI.WebControls.ImageButton imgDelete;
         
         /// <summary>
-        /// pnlSongsInSet control.
+        /// SongsInSetList control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Panel pnlSongsInSet;
+        protected global::OpenChords.Web.Controls.SongsInSetList SongsInSetList;
         
         /// <summary>
-        /// lstSongsInSet control.
+        /// pnlControls2 control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.ListBox lstSongsInSet;
+        protected global::System.Web.UI.WebControls.Panel pnlControls2;
+        
+        /// <summary>
+        /// imgSetItemUp control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.ImageButton imgSetItemUp;
+        
+        /// <summary>
+        /// imgSetItemDown control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.ImageButton imgSetItemDown;
+        
+        /// <summary>
+        /// pnlButtons control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Panel pnlButtons;
         
         /// <summary>
         /// cmdCancel control.
@@ -119,32 +146,5 @@ namespace OpenChords.Web {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.ImageButton imgHtml;
-        
-        /// <summary>
-        /// pnlControls2 control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Panel pnlControls2;
-        
-        /// <summary>
-        /// imgSetItemUp control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.ImageButton imgSetItemUp;
-        
-        /// <summary>
-        /// imgSetItemDown control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.ImageButton imgSetItemDown;
     }
 }

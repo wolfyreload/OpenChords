@@ -2,6 +2,8 @@
 
 <%@ Register Src="~/Controls/SongList.ascx" TagPrefix="uc1" TagName="SongList" %>
 <%@ Register Src="~/Controls/SetList.ascx" TagPrefix="uc1" TagName="SetList" %>
+<%@ Register Src="~/Controls/SongsInSetList.ascx" TagPrefix="uc1" TagName="SongsInSetList" %>
+
 
 
 
@@ -24,18 +26,18 @@
         <asp:ImageButton ID="imgDelete" runat="server" SkinID="imgDelete" OnClick="imgDelete_Click" />
     </asp:Panel>
 
-    <asp:Panel ID="pnlSongsInSet" runat="server" CssClass="BoxPanel gradientBoxesWithOuterShadows PanelWithoutSearchBox" GroupingText="Songs In Set" l>
-        <asp:ListBox ID="lstSongsInSet" CssClass="Listbox" runat="server" OnDataBinding="lstSongsInSet_DataBinding" OnSelectedIndexChanged="lstSongsInSet_SelectedIndexChanged" AutoPostBack="true"></asp:ListBox>
-        <br />
-        <asp:ImageButton ID="cmdCancel" runat="server" SkinID="imgCancel" OnClick="cmdCancel_Click" />
-        <asp:ImageButton ID="cmdSave" runat="server" SkinID="imgSave" OnClick="cmdSave_Click" />
-        <asp:ImageButton ID="exportToPdf" runat="server" SkinID="imgPdf" OnClick="exportToPdf_Click" />
-        <asp:ImageButton ID="imgHtml" runat="server" SkinID="imgHtml" OnClick="imgHtml_Click" />
-
-    </asp:Panel>
+    <uc1:SongsInSetList runat="server" ID="SongsInSetList" OnSelectedSongChanged="SongsInSetList_SelectedSongChanged" />
     <asp:Panel ID="pnlControls2" runat="server" CssClass="Inline SidewayButtonPane">
         <asp:ImageButton ID="imgSetItemUp" runat="server" SkinID="imgUp" OnClick="imgSetItemUp_Click" />
         <asp:ImageButton ID="imgSetItemDown" runat="server" SkinID="imgDown" OnClick="imgSetItemDown_Click" />
     </asp:Panel>
+    <br />
+    <asp:Panel ID="pnlButtons" runat="server" CssClass="Inline">
+        <asp:ImageButton ID="cmdCancel" runat="server" SkinID="imgCancel" OnClick="cmdCancel_Click" />
+        <asp:ImageButton ID="cmdSave" runat="server" SkinID="imgSave" OnClick="cmdSave_Click" />
+        <asp:ImageButton ID="exportToPdf" runat="server" SkinID="imgPdf" OnClick="exportToPdf_Click" />
+        <asp:ImageButton ID="imgHtml" runat="server" SkinID="imgHtml" OnClick="imgHtml_Click" />
+    </asp:Panel>
+
 
 </asp:Content>

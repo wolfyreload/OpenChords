@@ -132,6 +132,7 @@
     <Content Include="Controls\SetList.ascx" />
     <Content Include="Controls\SongList.ascx" />
     <Content Include="Controls\SongMetaData.ascx" />
+    <Content Include="Controls\SongsInSetList.ascx" />
     <Content Include="Default.aspx" />
     <Content Include="Global.asax" />
     <Content Include="OpenChordsWebSettings.xml" />
@@ -177,6 +178,13 @@
     </Compile>
     <Compile Include="Controls\SongMetaData.ascx.designer.cs">
       <DependentUpon>SongMetaData.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\SongsInSetList.ascx.cs">
+      <DependentUpon>SongsInSetList.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Controls\SongsInSetList.ascx.designer.cs">
+      <DependentUpon>SongsInSetList.ascx</DependentUpon>
     </Compile>
     <Compile Include="Default.aspx.cs">
       <SubType>ASPXCodeBehind</SubType>

@@ -251,7 +251,7 @@ h6 {
     }
 
     .PanelWithSearchBox input[type="text"] {
-        width: 65%;
+        width: 85%;
     }
 
     .PanelWithSearchBox a {
@@ -263,13 +263,18 @@ h6 {
     width: 25%;
 }
 
+.SearchBox {
+    width : 75%;
+}
+
 .PanelWithoutSearchBox ul {
-        height: 400px;
+        height: 456px;
         overflow-y: scroll;
     }
 
-    .PanelWithoutSearchBox input[type="text"] {
-        width: 80%;
+    .PanelWithoutSearchBox a {
+        text-decoration: none;
+        color: black;
     }
     
 .ListItemUnselected {

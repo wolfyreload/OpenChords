@@ -19,8 +19,10 @@
         </SelectedItemTemplate>
     </asp:ListView>
     <br />
-    <asp:Label ID="lblSearchSet" runat="server" Text="Search"></asp:Label>
-    <asp:TextBox ID="txtSearchSet" runat="server" AutoPostBack="true" OnTextChanged="txtSearchSet_TextChanged"></asp:TextBox>
-    <asp:ImageButton ID="cmdAdvancedSetSearch" runat="server" SkinID="imgSearch" />
+    <div class="Inline SearchBox">
+        <asp:Label ID="lblSearchSet" runat="server" Text="Search"></asp:Label>
+        <asp:TextBox ID="txtSearchSet" runat="server" AutoPostBack="true" OnTextChanged="txtSearchSet_TextChanged"></asp:TextBox>
+    </div>
+    <asp:ImageButton CssClass="Inline" ID="cmdAdvancedSetSearch" runat="server" SkinID="imgSearch" />
 </asp:Panel>
 

@@ -34,13 +34,6 @@ namespace OpenChords.Web
         { get { return (string)this.Request.Params["Set"]; } }
 
 
-        public List<string> _songsIncurrentSet
-        {
-            get { return (List<string>)(this.ViewState["CurrentSet"]); }
-            set { this.ViewState["CurrentSet"] = value; }
-        }
-
-
         private void downloadSet(OpenChords.Entities.Set set)
         {
             var settingsPath = App_Code.Global.SettingsFileName;
@@ -61,37 +54,33 @@ namespace OpenChords.Web
         
         private void showSetDetails()
         {
-            var currentSet = OpenChords.Entities.Set.loadSet(SetList.SelectedSet);
-            _songsIncurrentSet = currentSet.songList.Select(s => s.title).ToList();
+            
             SongList.DataBind();
-            lstSongsInSet.DataBind();
+            var currentSet = OpenChords.Entities.Set.loadSet(SetList.SelectedSet);
+            SongsInSetList.SongsIncurrentSet = currentSet.songNames;
+            SongsInSetList.DataBind();
             setUpAndDownButtons();
             pnlControls1.Visible = true;
             pnlControls2.Visible = true;
-            pnlSongsInSet.Visible = true;
+            SongsInSetList.Visible = true;
             SongList.Visible = true;
+            pnlButtons.Visible = true;
         }
 
         private void hideSetDetails()
         {
             pnlControls1.Visible = false;
             pnlControls2.Visible = false;
-            pnlSongsInSet.Visible = false;
+            SongsInSetList.Visible = false;
             SongList.Visible = false;
+            pnlButtons.Visible = false;
         }
 
-
-        protected void lstSongsInSet_DataBinding(object sender, EventArgs e)
-        {
-            lstSongsInSet.DataSource = _songsIncurrentSet;
-        }
 
         protected void imgAdd_Click(object sender, ImageClickEventArgs e)
         {
             var selectedSong = SongList.SelectedValue;
-            _songsIncurrentSet.Add(selectedSong);
-            lstSongsInSet.DataBind();
-            lstSongsInSet.SelectedIndex = lstSongsInSet.Items.Count - 1;
+            SongsInSetList.AddSong(selectedSong);
         }
 
         
@@ -99,7 +88,7 @@ namespace OpenChords.Web
         {
             var currentSet = OpenChords.Entities.Set.loadSet(SetList.SelectedSet);
             currentSet.clearSongSet();
-            foreach (string songTitle in _songsIncurrentSet)
+            foreach (string songTitle in SongsInSetList.SongsIncurrentSet)
                 currentSet.addSongToSet(songTitle);
             currentSet.saveSet();
             hideSetDetails();
@@ -108,41 +97,18 @@ namespace OpenChords.Web
 
         protected void imgDelete_Click(object sender, ImageClickEventArgs e)
         {
-
-            var selectedIndex = lstSongsInSet.SelectedIndex;
-            if (selectedIndex == -1) return;
-
-            _songsIncurrentSet.RemoveAt(selectedIndex);
-
-            lstSongsInSet.DataBind();
-            if (lstSongsInSet.Items.Count == 0) return;
-
-            selectedIndex--;
-            if (selectedIndex == -1) selectedIndex = 0;
-            lstSongsInSet.SelectedIndex = selectedIndex;
+            SongsInSetList.RemoveSong();
         }
 
         protected void imgSetItemUp_Click(object sender, ImageClickEventArgs e)
         {
-            var selectedIndex = lstSongsInSet.SelectedIndex;
-            var item = _songsIncurrentSet[selectedIndex];
-            _songsIncurrentSet.RemoveAt(selectedIndex);
-            selectedIndex--;
-            _songsIncurrentSet.Insert(selectedIndex, item);
-            lstSongsInSet.DataBind();
-            lstSongsInSet.SelectedIndex = selectedIndex;
+            SongsInSetList.MoveSongUp();
             setUpAndDownButtons();
         }
 
         protected void imgSetItemDown_Click(object sender, ImageClickEventArgs e)
         {
-            var selectedIndex = lstSongsInSet.SelectedIndex;
-            var item = _songsIncurrentSet[selectedIndex];
-            _songsIncurrentSet.RemoveAt(selectedIndex);
-            selectedIndex++;
-            _songsIncurrentSet.Insert(selectedIndex, item);
-            lstSongsInSet.DataBind();
-            lstSongsInSet.SelectedIndex = selectedIndex;
+            SongsInSetList.MoveSongDown();
             setUpAndDownButtons();
         }
 
@@ -156,8 +122,9 @@ namespace OpenChords.Web
             imgSetItemUp.Visible = true;
             imgSetItemDown.Visible = true;
 
-            var selectedIndex = lstSongsInSet.SelectedIndex;
-            if (lstSongsInSet.Items.Count <= 1 || selectedIndex == -1)
+
+            var selectedIndex = SongsInSetList.SelectedIndex;
+            if (SongsInSetList.Count <= 1 || selectedIndex == -1)
             {
                 imgSetItemUp.Visible = false;
                 imgSetItemDown.Visible = false;
@@ -167,7 +134,7 @@ namespace OpenChords.Web
                 imgSetItemUp.Visible = false;
                 imgSetItemDown.Visible = true;
             }
-            else if (selectedIndex >= lstSongsInSet.Items.Count - 1)
+            else if (selectedIndex >= SongsInSetList.Count - 1)
             {
                 imgSetItemUp.Visible = true;
                 imgSetItemDown.Visible = false;
@@ -185,7 +152,7 @@ namespace OpenChords.Web
         {
             var currentSet = OpenChords.Entities.Set.loadSet(SetList.SelectedSet);
             currentSet.clearSongSet();
-            foreach (string songTitle in _songsIncurrentSet)
+            foreach (string songTitle in SongsInSetList.SongsIncurrentSet)
                 currentSet.addSongToSet(songTitle);
             downloadSet(currentSet);
         }
@@ -197,12 +164,17 @@ namespace OpenChords.Web
 
         protected void cmdCancel_Click(object sender, ImageClickEventArgs e)
         {
-            pnlSongsInSet.Visible = false;
+            hideSetDetails();
         }
 
         protected void SetList_SelectedSetChanged(object sender, EventArgs e)
         {
             showSetDetails();
+        }
+
+        protected void SongsInSetList_SelectedSongChanged(object sender, EventArgs e)
+        {
+            setUpAndDownButtons();
         }
 
         
