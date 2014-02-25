@@ -18,10 +18,8 @@
                     </asp:ContentPlaceHolder>
                 </label>
                 <div class="PagingControls Inline">
-                    <p>
-                        <asp:ContentPlaceHolder ID="PagingPanel" runat="server">
-                        </asp:ContentPlaceHolder>
-                    </p>
+                    <asp:ContentPlaceHolder ID="PagingPanel" runat="server">
+                    </asp:ContentPlaceHolder>
                 </div>
             </div>
             <br />

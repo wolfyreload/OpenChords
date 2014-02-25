@@ -12,15 +12,18 @@
     <asp:Button ID="cmdKeyDown" runat="server" CssClass="nice-button" Text="Key Down" OnClick="cmdKeyDown_Click" />
     <asp:Button ID="cmdCapoUp" runat="server" CssClass="nice-button" Text="Capo Up" OnClick="cmdCapoUp_Click" />
     <asp:Button ID="cmdCapoDown" runat="server" CssClass="nice-button" Text="Capo Down" OnClick="cmdCapoDown_Click" />
-
+    <asp:Button ID="cmdShowOptions" runat="server" CssClass="nice-button" Text="Show Advanced" OnClick="cmdShowOptions_Click" />
+    <asp:Panel ID="pnlOtherOptions" CssClass="Inline" runat="server" Visible="false">
+        <asp:Button ID="cmdHideOptions" runat="server" CssClass="nice-button" Text="Hide Advanced" OnClick="cmdHideOptions_Click" />
+    </asp:Panel>
 
 </asp:Content>
 <asp:Content ContentPlaceHolderID="MainForm" runat="server">
-    <asp:label id="lblSongName" class="DisplaySongName" runat="server"></asp:label><br />
-    <asp:label id="lblSongOrder" class="DisplaySongOrder" runat="server"></asp:label>
+    <asp:Label ID="lblSongName" class="DisplaySongName" runat="server"></asp:Label><br />
+    <asp:Label ID="lblSongOrder" class="DisplaySongOrder" runat="server"></asp:Label>
     <br />
 
     <div class="DisplayPage">
-        <asp:literal id="litSongContent" runat="server" />
+        <asp:Literal ID="litSongContent" runat="server" />
     </div>
 </asp:Content>

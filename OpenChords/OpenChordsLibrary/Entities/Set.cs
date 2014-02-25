@@ -18,6 +18,8 @@ namespace OpenChords.Entities
 	/// <summary>
 	/// Description of Set
 	/// </summary>
+    /// 
+    [Serializable]
 	public class Set
 	{
         private static readonly log4net.ILog logger = log4net.LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
@@ -44,6 +46,7 @@ namespace OpenChords.Entities
 		
 		public void addSongToSet(Song song)
 		{
+            songList.Add(song);
             addSongToSet(song.title);
 		}
 		
@@ -201,7 +204,7 @@ namespace OpenChords.Entities
             Export.ExportToOpenSong.exportSetAndSongsToOpenSong(this);
 		}
 		
-		private void loadAllSongs()
+		public void loadAllSongs()
 		{
 			songList.Clear();
 			foreach (string name in songNames)

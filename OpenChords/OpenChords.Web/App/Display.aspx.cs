@@ -16,15 +16,15 @@ namespace OpenChords.Web.App
         private string SetName
         { get { return (string)this.Request.Params["Set"]; } }
 
-        private List<OpenChords.Entities.SongHtml> SongsHtml
+        private OpenChords.Entities.Set _Set
         {
             get
             {
-                return (List<OpenChords.Entities.SongHtml>)this.Session["SongHtml"];
+                return (OpenChords.Entities.Set)this.Session["Set"];
             }
             set
             {
-                this.Session["SongHtml"] = value;
+                this.Session["Set"] = value;
             }
         }
 
@@ -46,21 +46,17 @@ namespace OpenChords.Web.App
         {
             if (!IsPostBack)
             {
-                var settingsPath = App_Code.Global.SettingsFileName;
                 
                 if (SongName != null)
                 {
                     var song = OpenChords.Entities.Song.loadSong(SongName);
-                    var html = song.getHtml(settingsPath);
-                    var list = new List<OpenChords.Entities.SongHtml>();
-                    list.Add(html);
-                    SongsHtml = list;
+                    _Set = new OpenChords.Entities.Set();
+                    _Set.addSongToSet(song);
                 }
                 else if (SetName != null)
                 {
-                    var set = OpenChords.Entities.Set.loadSet(SetName);
-                    var html = set.getHtml(settingsPath);
-                    SongsHtml = html;
+                    _Set = OpenChords.Entities.Set.loadSet(SetName);
+                    _Set.loadAllSongs();
                 }
                 renderCurrentSong();
                 setButtonStates();
@@ -69,7 +65,9 @@ namespace OpenChords.Web.App
 
         private void renderCurrentSong()
         {
-            var htmlSong = SongsHtml[CurrentIndex];
+            var settingsPath = App_Code.Global.SettingsFileName;
+            var song = _Set.songList[CurrentIndex];
+            var htmlSong = song.getHtml(settingsPath); 
             lblSongName.Text = htmlSong.Name;
             lblSongOrder.Text = htmlSong.Order;
             litSongContent.Mode = LiteralMode.PassThrough;
@@ -88,14 +86,14 @@ namespace OpenChords.Web.App
         {
             cmdPreviousSong.Visible = true;
             cmdNextSong.Visible = true;
-            if (SongsHtml.Count() == 1)
+            if (_Set.songList.Count() == 1)
             {
                 cmdPreviousSong.Visible = false;
                 cmdNextSong.Visible = false;
             }
             else if (CurrentIndex == 0)
                 cmdPreviousSong.Visible = false;
-            else if (CurrentIndex == SongsHtml.Count() - 1)
+            else if (CurrentIndex == _Set.songList.Count() - 1)
                 cmdNextSong.Visible = false;
             
 
@@ -118,40 +116,47 @@ namespace OpenChords.Web.App
 
         private OpenChords.Entities.Song getSong()
         {
-            var htmlSong = SongsHtml[CurrentIndex];
-            var songName = htmlSong.Name;
-            var song = OpenChords.Entities.Song.loadSong(songName);
-            return song;
-        }
-
-        private void upDateHtmlSong(OpenChords.Entities.Song song)
-        {
-            var settingsPath = App_Code.Global.SettingsFileName;
-            var html = song.getHtml(settingsPath);
-            SongsHtml[CurrentIndex] = html;
-            renderCurrentSong();
+            return _Set.songList[CurrentIndex];
         }
 
         protected void cmdKeyUp_Click(object sender, EventArgs e)
         {
             var song = getSong();
             song.transposeKeyUp();
-            upDateHtmlSong(song);
+            renderCurrentSong();
         }
 
         protected void cmdKeyDown_Click(object sender, EventArgs e)
         {
-
+            var song = getSong();
+            song.transposeKeyDown();
+            renderCurrentSong();
         }
 
         protected void cmdCapoUp_Click(object sender, EventArgs e)
         {
-
+            var song = getSong();
+            song.capoUp();
+            renderCurrentSong();
         }
 
         protected void cmdCapoDown_Click(object sender, EventArgs e)
         {
+            var song = getSong();
+            song.capoDown();
+            renderCurrentSong();
+        }
 
+        protected void cmdShowOptions_Click(object sender, EventArgs e)
+        {
+            pnlOtherOptions.Visible = true;
+            cmdShowOptions.Visible = false;
+        }
+
+        protected void cmdHideOptions_Click(object sender, EventArgs e)
+        {
+            pnlOtherOptions.Visible = false;
+            cmdShowOptions.Visible = true;
         }
     }
 }

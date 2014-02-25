@@ -32,12 +32,11 @@ namespace OpenChords.Export
             StringBuilder sb = new StringBuilder();
 
             List<SongHtml> htmlSongs = new List<SongHtml>();
-            foreach (string songName in _set.songNames)
+            foreach (var song in _set.songList)
             {
-                var song = OpenChords.Entities.Song.loadSong(songName);
                 SongHtml html = new SongHtml();
-            
-                html.Name = song.title;
+
+                html.Name = song.generateLongTitle();
                 html.Order = song.presentation;
                 var verses = song.getSongVerses();
                 foreach (var verse in verses)

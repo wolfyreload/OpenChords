@@ -76,6 +76,33 @@ namespace OpenChords.Web.App {
         protected global::System.Web.UI.WebControls.Button cmdCapoDown;
         
         /// <summary>
+        /// cmdShowOptions control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button cmdShowOptions;
+        
+        /// <summary>
+        /// pnlOtherOptions control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Panel pnlOtherOptions;
+        
+        /// <summary>
+        /// cmdHideOptions control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button cmdHideOptions;
+        
+        /// <summary>
         /// lblSongName control.
         /// </summary>
         /// <remarks>
