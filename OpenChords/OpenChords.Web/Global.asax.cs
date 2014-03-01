@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Web;
 using System.Web.Security;
@@ -16,9 +17,24 @@ namespace OpenChords.Web
         private static void setupApplication()
         {
             var path = System.Web.Configuration.WebConfigurationManager.AppSettings["OpenChordsSettingsFilePath"];
+            path = getFullPath(path);
+            
+            
             var fileAndFolderSettings = Entities.FileAndFolderSettings.loadSettings(path);
             OpenChords.Settings.setup(fileAndFolderSettings);
          
+        }
+
+        private static string getFullPath(string path)
+        {
+            if (!path.Contains(":"))
+            {
+                var directoryPathOfApp = HttpContext.Current.Server.MapPath("~/");
+                DirectoryInfo dirRootDirectory = new DirectoryInfo(directoryPathOfApp+path);
+                return dirRootDirectory.FullName;
+            }
+            return path;
+            
         }
 
         private static void setupTabletSettings(string settingsFilePath)

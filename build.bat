@@ -38,7 +38,8 @@ DEL /F /S /Q .\build\OpenChords\Web\*.cs
 DEL /F /S /Q .\build\OpenChords\Web\*.csproj
 DEL /F /S /Q .\build\OpenChords\Web\*.user
 DEL /F /S /Q .\build\OpenChords\Web\Bin\*.pdb
-
+xcopy /Y .\build\OpenChords\Web\OpenChordsWebSettings.build.xml .\build\OpenChords\Web\OpenChordsWebSettings.xml
+DEL /F /Q .\build\OpenChords\Web\OpenChordsWebSettings.build.xml
 
 
 echo cd app\bin >> .\build\OpenChords\StartOpenChords.bat
