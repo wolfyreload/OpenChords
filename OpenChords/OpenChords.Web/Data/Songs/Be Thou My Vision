@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="utf-8"?>
+<song xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <title>Be Thou My Vision</title>
+  <author>Irish Folk Hymn; Elanor H. Hull</author>
+  <key>D</key>
+  <presentation>V1 V2 V3 V4</presentation>
+  <lyrics>[V1]
+.D          Bm7       G          D                      
+ Be Thou my Vision, O Lord of my heart,                 
+.A             Bm7        G              A              
+ Naught be all else to me save that Thou art;           
+.Gmaj7        F#m7       D         G    A               
+ Thou my best thought by day or by night,               
+.D         Bm7           G2          D                  
+ Waking or sleeping, Thy presence my light.             
+
+[V2]
+.D          Bm7        G            D                   
+ Be Thou my wisdom, be Thou my true Word,               
+.A      Bm7           G             A                   
+ I ever with Thee and Thou with me, Lord;               
+.Gmaj7         F#m7        D          G  A              
+ Thou my great Father, and I thy true son,              
+.D          Bm7           G2          D                 
+ Thou in me dwelling, and I with Thee one.              
+
+[V3]
+.E        C#m7          A           E                   
+ Riches I heed not, nor man's empty praise,             
+.B           C#m7      A         B                      
+ Thou mine Inheritance now and always;                  
+.Amaj7         G#m7  E           A    B                 
+ Thou and Thou only, first in my heart,                 
+.E            C#m7       A2            E                
+ High King of heaven, my Treasure Thou art.             
+
+[V4]
+.E            C#m7      A       E                       
+ High King of heaven my victory won,                    
+.B           C#m7           A                 B         
+ May I reach heaven's joys, O bright heav'n's Sun;      
+.Amaj7       G#m7           E      A   B                
+ Heart of my own heart, whatever befall,                
+.E           C#m7      A2       E                       
+ Still be my Vision, O Ruler of all.                    
+
+</lyrics>
+  <notes />
+  <ccli>248328</ccli>
+</song>

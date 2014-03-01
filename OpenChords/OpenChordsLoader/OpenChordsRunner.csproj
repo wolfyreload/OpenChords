@@ -71,10 +71,6 @@
       <Project>{715e8953-5bd3-42f5-8eea-78df1f03da5f}</Project>
       <Name>OpenChordsResources</Name>
     </ProjectReference>
-    <ProjectReference Include="..\OpenChordsWinforms\OpenChordsWinforms.csproj">
-      <Project>{52dca840-b4d4-4700-8475-0dc938a4bd41}</Project>
-      <Name>OpenChordsWinforms</Name>
-    </ProjectReference>
   </ItemGroup>
   <ItemGroup>
     <Content Include="guitar.ico" />

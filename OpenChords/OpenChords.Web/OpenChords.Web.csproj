@@ -145,6 +145,7 @@
     <Content Include="App\Sets.aspx" />
     <Content Include="App\Settings.aspx" />
     <Content Include="App\Songs.aspx" />
+    <Content Include="settings.xml" />
     <Content Include="Web.config">
       <SubType>Designer</SubType>
     </Content>
@@ -235,6 +236,7 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="Data\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Master\OpenChordsMaster.Master" />

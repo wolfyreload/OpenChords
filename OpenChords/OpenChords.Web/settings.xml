@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<settings xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <_SettingsFolder>.\OpenChordsSettings\</_SettingsFolder>
+  <AppsFolder>.\OpenChordsApps\</AppsFolder>
+  <OpenSongExecutable>c:\Program Files\OpenSong\OpenSong.exe</OpenSongExecutable>
+  <OpenSongSetsAndSongs>c:\OpenSong</OpenSongSetsAndSongs>
+  <OpenSongUseWelcomeSlide>false</OpenSongUseWelcomeSlide>
+  <OpenSongWelcomeSlide>Welcome</OpenSongWelcomeSlide>
+  <PortableMode>false</PortableMode>
+  <ApplicationDataFolder>.\Data</ApplicationDataFolder>
+  <FileSync />
+  <CheckForUpdates>true</CheckForUpdates>
+</settings>

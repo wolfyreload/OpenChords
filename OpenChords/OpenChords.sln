@@ -5,11 +5,7 @@ VisualStudioVersion = 12.0.21005.1
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OpenChordsLibrary", "OpenChordsLibrary\OpenChordsLibrary.csproj", "{C23EB2CC-3ACA-4A91-B598-FE584168CCD6}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OpenChordsWinforms", "OpenChordsWinforms\OpenChordsWinforms.csproj", "{52DCA840-B4D4-4700-8475-0DC938A4BD41}"
-EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OpenChordsResources", "OpenChordsResources\OpenChordsResources.csproj", "{715E8953-5BD3-42F5-8EEA-78DF1F03DA5F}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OpenChordsRunner", "OpenChordsLoader\OpenChordsRunner.csproj", "{B93854AB-9F76-49D4-B107-B61C3CD639BB}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OpenChords.Web", "OpenChords.Web\OpenChords.Web.csproj", "{8CA35AD8-1BC8-4667-B8F6-A0D22C87C51F}"
 EndProject
@@ -23,18 +19,10 @@ Global
 		{C23EB2CC-3ACA-4A91-B598-FE584168CCD6}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{C23EB2CC-3ACA-4A91-B598-FE584168CCD6}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{C23EB2CC-3ACA-4A91-B598-FE584168CCD6}.Release|Any CPU.Build.0 = Release|Any CPU
-		{52DCA840-B4D4-4700-8475-0DC938A4BD41}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{52DCA840-B4D4-4700-8475-0DC938A4BD41}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{52DCA840-B4D4-4700-8475-0DC938A4BD41}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{52DCA840-B4D4-4700-8475-0DC938A4BD41}.Release|Any CPU.Build.0 = Release|Any CPU
 		{715E8953-5BD3-42F5-8EEA-78DF1F03DA5F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{715E8953-5BD3-42F5-8EEA-78DF1F03DA5F}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{715E8953-5BD3-42F5-8EEA-78DF1F03DA5F}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{715E8953-5BD3-42F5-8EEA-78DF1F03DA5F}.Release|Any CPU.Build.0 = Release|Any CPU
-		{B93854AB-9F76-49D4-B107-B61C3CD639BB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{B93854AB-9F76-49D4-B107-B61C3CD639BB}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{B93854AB-9F76-49D4-B107-B61C3CD639BB}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{B93854AB-9F76-49D4-B107-B61C3CD639BB}.Release|Any CPU.Build.0 = Release|Any CPU
 		{8CA35AD8-1BC8-4667-B8F6-A0D22C87C51F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{8CA35AD8-1BC8-4667-B8F6-A0D22C87C51F}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{8CA35AD8-1BC8-4667-B8F6-A0D22C87C51F}.Release|Any CPU.ActiveCfg = Release|Any CPU
