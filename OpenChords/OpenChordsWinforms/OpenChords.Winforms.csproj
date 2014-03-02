@@ -1,7 +1,7 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <PropertyGroup>
-    <ProjectGuid>{52DCA840-B4D4-4700-8475-0DC938A4BD41}</ProjectGuid>
+    <ProjectGuid>{50B1D110-0A65-4E76-AAA4-46F9B66DE671}</ProjectGuid>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">x86</Platform>
     <OutputType>Library</OutputType>
@@ -136,7 +136,7 @@
       <Project>{C23EB2CC-3ACA-4A91-B598-FE584168CCD6}</Project>
       <Name>OpenChords.Library</Name>
     </ProjectReference>
-    <ProjectReference Include="..\OpenChordsLibrary\OpenChordsLibrary.csproj">
+    <ProjectReference Include="..\OpenChordsLibrary\OpenChords.Library.csproj">
       <Project>{C23EB2CC-3ACA-4A91-B598-FE584168CCD6}</Project>
       <Name>OpenChordsLibrary</Name>
     </ProjectReference>
