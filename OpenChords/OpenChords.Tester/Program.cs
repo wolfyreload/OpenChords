@@ -1,6 +1,5 @@
 ﻿using OpenChords.Entities;
 using OpenChords.IO;
-using OpenChords.Settings;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -62,9 +61,10 @@ namespace OpenChords.Teester
 
         private static void testPrintingToPdf()
         {
+            
             string[] songlist =
-                FileFolderFunctions.getDirectoryListing(ExtAppsAndDir.songsFolder);
-            string[] setList = FileFolderFunctions.getDirectoryListing(ExtAppsAndDir.setsFolder);
+                FileFolderFunctions.getDirectoryListing(OpenChords.Settings.ExtAppsAndDir.songsFolder);
+            string[] setList = FileFolderFunctions.getDirectoryListing(OpenChords.Settings.ExtAppsAndDir.setsFolder);
 
 
             var firstSong = Song.loadSong(songlist.First());

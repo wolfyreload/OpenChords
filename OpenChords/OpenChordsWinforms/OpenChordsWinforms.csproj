@@ -132,17 +132,17 @@
     </BootstrapperPackage>
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\OpenChordsLibrary\OpenChordsLibrary.csproj">
+    <ProjectReference Include="..\OpenChordsLibrary\OpenChords.Library.csproj">
       <Project>{C23EB2CC-3ACA-4A91-B598-FE584168CCD6}</Project>
-      <Name>OpenChordsLibrary</Name>
+      <Name>OpenChords.Library</Name>
     </ProjectReference>
     <ProjectReference Include="..\OpenChordsLibrary\OpenChordsLibrary.csproj">
       <Project>{C23EB2CC-3ACA-4A91-B598-FE584168CCD6}</Project>
       <Name>OpenChordsLibrary</Name>
     </ProjectReference>
-    <ProjectReference Include="..\OpenChordsResources\OpenChordsResources.csproj">
+    <ProjectReference Include="..\OpenChordsResources\OpenChords.Resources.csproj">
       <Project>{715E8953-5BD3-42F5-8EEA-78DF1F03DA5F}</Project>
-      <Name>OpenChordsResources</Name>
+      <Name>OpenChords.Resources</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>

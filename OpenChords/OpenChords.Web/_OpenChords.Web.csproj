@@ -269,13 +269,9 @@
     </None>
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\OpenChordsLibrary\OpenChordsLibrary.csproj">
+    <ProjectReference Include="..\OpenChordsLibrary\OpenChords.Library.csproj">
       <Project>{c23eb2cc-3aca-4a91-b598-fe584168ccd6}</Project>
-      <Name>OpenChordsLibrary</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\OpenChordsResources\OpenChordsResources.csproj">
-      <Project>{715e8953-5bd3-42f5-8eea-78df1f03da5f}</Project>
-      <Name>OpenChordsResources</Name>
+      <Name>OpenChords.Library</Name>
     </ProjectReference>
   </ItemGroup>
   <PropertyGroup>
