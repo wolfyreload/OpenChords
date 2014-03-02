@@ -54,6 +54,7 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="App\Display.aspx" />
+    <Content Include="App_Themes\Default\Display.css" />
     <Content Include="App_Themes\Default\Images\About.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
@@ -135,6 +136,7 @@
     <Content Include="Controls\SongsInSetList.ascx" />
     <Content Include="Default.aspx" />
     <Content Include="Global.asax" />
+    <Content Include="Login.aspx" />
     <Content Include="OpenChordsWebSettings.xml" />
     <Content Include="App_Themes\Default\Default.css">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
@@ -197,12 +199,26 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Login.aspx.cs">
+      <DependentUpon>Login.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Login.aspx.designer.cs">
+      <DependentUpon>Login.aspx</DependentUpon>
+    </Compile>
     <Compile Include="Master\OpenChordsDisplay.Master.cs">
       <DependentUpon>OpenChordsDisplay.Master</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
     <Compile Include="Master\OpenChordsDisplay.Master.designer.cs">
       <DependentUpon>OpenChordsDisplay.Master</DependentUpon>
+    </Compile>
+    <Compile Include="Master\OpenChordsPublic.Master.cs">
+      <DependentUpon>OpenChordsPublic.Master</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Master\OpenChordsPublic.Master.designer.cs">
+      <DependentUpon>OpenChordsPublic.Master</DependentUpon>
     </Compile>
     <Compile Include="Master\OpenChordsMaster.Master.cs">
       <DependentUpon>OpenChordsMaster.Master</DependentUpon>
@@ -242,6 +258,7 @@
     <Content Include="Master\OpenChordsMaster.Master" />
     <Content Include="App_Themes\Default\Default.skin" />
     <Content Include="Master\OpenChordsDisplay.Master" />
+    <Content Include="Master\OpenChordsPublic.Master" />
     <None Include="Properties\PublishProfiles\DropboxPublish.pubxml" />
     <None Include="Properties\PublishProfiles\OpenChordsTest.pubxml" />
     <None Include="Web.Debug.config">

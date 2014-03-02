@@ -1,0 +1,115 @@
+﻿.DisplayPage {
+    /*-moz-column-count: 2;*/ /* Firefox */
+    /*-webkit-column-count: 2;*/ /* Safari and Chrome */
+    /*column-count: 2;*/
+    /*height: 49em;*/
+    /*height: 600px;*/
+}
+
+
+.DisplaySongVerse {
+    padding: 5px;
+    font-family: "Courier New";
+    margin-bottom: 20px;
+    font-size: 18px;
+    break-inside: avoid-column; /*stop column breaks on headings*/
+    -webkit-column-break-inside: avoid;
+    -webkit-box-shadow: 0px 0px 20px rgba(76, 72, 72, 0.93);
+    -moz-box-shadow: 0px 1px 6px rgba(76, 72, 72, 0.93);
+/* rounded corners */
+    -webkit-border-radius: 12px;
+    -moz-border-radius: 7px;
+    border-radius: 7px;
+    /* gradients */
+    background: -webkit-gradient(linear, left top, left bottom, color-stop(0%, rgb(73, 7, 7)), color-stop(15%, rgb(0, 0, 0)), color-stop(100%, #2E2424));
+}
+
+.DisplaySongName {
+    font: bold 36px;
+    color: #FEAF81;
+}
+
+.DisplaySongOrder {
+    font: bold 36px;
+    color: #FF8040;
+}
+
+.DisplayLineVerseHeading {
+    font: bold 24px;
+    color: #BE7C7C;
+}
+
+.DisplayLineVerseLyrics {
+    display: inline-block;
+    vertical-align: top;
+}
+
+.DisplayLineChord {
+    font-weight: bold;
+    color: #00FF80;
+}
+
+.DisplayLineLyrics {
+    font-weight: normal;
+    color: white;
+}
+
+.DisplayLineVerseNotes {
+    margin-left: auto;
+    margin-right: 0px;
+    display: inline-block;
+    vertical-align: top;
+    font-family: 'Global Monospace';
+    color: #80FF80;
+}
+
+.DisplayBody body {
+    background-color: black;
+    font-family: "HelveticaNeue-Light", "Helvetica Neue Light", "Helvetica Neue", Helvetica, Arial, "Lucida Grande", sans-serif;
+}
+
+.DisplayBody .nice-button {
+    -moz-box-shadow: inset 0px 1px 0px 0px #e184f3;
+    -webkit-box-shadow: inset 0px 1px 0px 0px #e184f3;
+    box-shadow: inset 0px 1px 0px 0px #e184f3;
+    background: -webkit-gradient( linear, left top, left bottom, color-stop(0.05, #c123de), color-stop(1, #a20dbd) );
+    background: -moz-linear-gradient( center top, #c123de 5%, #a20dbd 100% );
+    filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#c123de', endColorstr='#a20dbd');
+    background-color: #c123de;
+    -webkit-border-top-left-radius: 6px;
+    -moz-border-radius-topleft: 6px;
+    border-top-left-radius: 6px;
+    -webkit-border-top-right-radius: 6px;
+    -moz-border-radius-topright: 6px;
+    border-top-right-radius: 6px;
+    -webkit-border-bottom-right-radius: 6px;
+    -moz-border-radius-bottomright: 6px;
+    border-bottom-right-radius: 6px;
+    -webkit-border-bottom-left-radius: 6px;
+    -moz-border-radius-bottomleft: 6px;
+    border-bottom-left-radius: 6px;
+    text-indent: 0;
+    border: 1px solid #a511c0;
+    display: inline-block;
+    color: #ffffff;
+    font-family: Arial;
+    font-size: 15px;
+    font-weight: bold;
+    font-style: normal;
+    line-height: 50px;
+    text-decoration: none;
+    text-align: center;
+    text-shadow: 1px 1px 0px #9b14b3;
+}
+
+    .DisplayBody .nice-button:hover {
+        background: -webkit-gradient( linear, left top, left bottom, color-stop(0.05, #a20dbd), color-stop(1, #c123de) );
+        background: -moz-linear-gradient( center top, #a20dbd 5%, #c123de 100% );
+        filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#a20dbd', endColorstr='#c123de');
+        background-color: #a20dbd;
+    }
+
+    .DisplayBody.nice-button:active {
+        position: relative;
+        top: 1px;
+    }
