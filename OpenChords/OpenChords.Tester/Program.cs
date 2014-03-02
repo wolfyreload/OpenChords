@@ -9,7 +9,7 @@ namespace OpenChords.Teester
 {
     class Program
     {
-        private static readonly log4net.ILog logger = log4net.LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
+        //private static readonly log4net.ILog logger = log4net.LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
 
 
         private static void ensureValidSettingsFile(Entities.DisplayAndPrintSettingsType type)
@@ -84,9 +84,9 @@ namespace OpenChords.Teester
             var list1 = OpenChords.Functions.SongSearch.search("You are holy");
 
             var list2 = OpenChords.Functions.SongSearch.search("'There must be more' 'consuming fire'");
-            logger.Info(list1);
+            //logger.Info(list1);
 
-            logger.Info(list2);
+            //logger.Info(list2);
         }
 
         private static void Application_ApplicationExit(object sender, EventArgs e)
