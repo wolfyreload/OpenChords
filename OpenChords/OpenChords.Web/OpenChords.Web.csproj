@@ -54,6 +54,9 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="App\Display.aspx" />
+    <Content Include="App_Themes\Default\Display.css">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
     <Content Include="App_Themes\Default\Images\About.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
@@ -135,6 +138,7 @@
     <Content Include="Controls\SongsInSetList.ascx" />
     <Content Include="Default.aspx" />
     <Content Include="Global.asax" />
+    <Content Include="Login.aspx" />
     <Content Include="OpenChordsWebSettings.xml" />
     <Content Include="App_Themes\Default\Default.css">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
@@ -197,12 +201,26 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Login.aspx.cs">
+      <DependentUpon>Login.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Login.aspx.designer.cs">
+      <DependentUpon>Login.aspx</DependentUpon>
+    </Compile>
     <Compile Include="Master\OpenChordsDisplay.Master.cs">
       <DependentUpon>OpenChordsDisplay.Master</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
     <Compile Include="Master\OpenChordsDisplay.Master.designer.cs">
       <DependentUpon>OpenChordsDisplay.Master</DependentUpon>
+    </Compile>
+    <Compile Include="Master\OpenChordsPublic.Master.cs">
+      <DependentUpon>OpenChordsPublic.Master</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Master\OpenChordsPublic.Master.designer.cs">
+      <DependentUpon>OpenChordsPublic.Master</DependentUpon>
     </Compile>
     <Compile Include="Master\OpenChordsMaster.Master.cs">
       <DependentUpon>OpenChordsMaster.Master</DependentUpon>
@@ -242,6 +260,7 @@
     <Content Include="Master\OpenChordsMaster.Master" />
     <Content Include="App_Themes\Default\Default.skin" />
     <Content Include="Master\OpenChordsDisplay.Master" />
+    <Content Include="Master\OpenChordsPublic.Master" />
     <None Include="Properties\PublishProfiles\DropboxPublish.pubxml" />
     <None Include="Properties\PublishProfiles\OpenChordsTest.pubxml" />
     <None Include="Web.Debug.config">
@@ -252,13 +271,13 @@
     </None>
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\OpenChordsLibrary\OpenChordsLibrary.csproj">
+    <ProjectReference Include="..\OpenChordsLibrary\OpenChords.Library.csproj">
       <Project>{c23eb2cc-3aca-4a91-b598-fe584168ccd6}</Project>
-      <Name>OpenChordsLibrary</Name>
+      <Name>OpenChords.Library</Name>
     </ProjectReference>
-    <ProjectReference Include="..\OpenChordsResources\OpenChordsResources.csproj">
+    <ProjectReference Include="..\OpenChordsResources\OpenChords.Resources.csproj">
       <Project>{715e8953-5bd3-42f5-8eea-78df1f03da5f}</Project>
-      <Name>OpenChordsResources</Name>
+      <Name>OpenChords.Resources</Name>
     </ProjectReference>
   </ItemGroup>
   <PropertyGroup>

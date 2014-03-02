@@ -1,0 +1,40 @@
+﻿<%@ Master Language="C#" AutoEventWireup="true" CodeBehind="OpenChordsPublic.Master.cs" Inherits="OpenChords.Web.Master.OpenChordsPublic" %>
+
+<!DOCTYPE html>
+
+<html>
+<head runat="server">
+    <title>OpenChords</title>
+    <asp:ContentPlaceHolder ID="head" runat="server">
+    </asp:ContentPlaceHolder>
+</head>
+<body>
+    <form id="Content" runat="server">
+        <div id="Page">
+            <div>
+                <label class="niceHeading">
+                    <asp:ContentPlaceHolder ID="PageName" runat="server">
+                    </asp:ContentPlaceHolder>
+                </label>
+                <div class="PagingControls Inline">
+                    <asp:ContentPlaceHolder ID="PagingPanel" runat="server">
+                    </asp:ContentPlaceHolder>
+                </div>
+            </div>
+            <br />
+            <div>
+                <div class="Centered">
+                    <label id="ApplicationTitle">OpenChords</label>
+                </div>
+                <br />
+                <br />
+                <br />
+                <br />
+                <br />
+                <asp:ContentPlaceHolder ID="MainForm" runat="server">
+                </asp:ContentPlaceHolder>
+            </div>
+        </div>
+    </form>
+</body>
+</html>
