@@ -37,19 +37,23 @@
             // 
             this.txtHeading.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
+            this.txtHeading.BackColor = System.Drawing.Color.Black;
             this.txtHeading.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.txtHeading.Location = new System.Drawing.Point(4, 4);
             this.txtHeading.Name = "txtHeading";
-            this.txtHeading.Size = new System.Drawing.Size(656, 36);
+            this.txtHeading.Size = new System.Drawing.Size(656, 30);
             this.txtHeading.TabIndex = 0;
             this.txtHeading.Text = "";
             // 
             // txtOrder
             // 
+            this.txtOrder.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.txtOrder.BackColor = System.Drawing.Color.Black;
             this.txtOrder.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.txtOrder.Location = new System.Drawing.Point(4, 47);
+            this.txtOrder.Location = new System.Drawing.Point(3, 40);
             this.txtOrder.Name = "txtOrder";
-            this.txtOrder.Size = new System.Drawing.Size(656, 32);
+            this.txtOrder.Size = new System.Drawing.Size(656, 24);
             this.txtOrder.TabIndex = 1;
             this.txtOrder.Text = "";
             // 
@@ -58,9 +62,10 @@
             this.flowSongSegments.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.flowSongSegments.Location = new System.Drawing.Point(4, 85);
+            this.flowSongSegments.FlowDirection = System.Windows.Forms.FlowDirection.TopDown;
+            this.flowSongSegments.Location = new System.Drawing.Point(4, 70);
             this.flowSongSegments.Name = "flowSongSegments";
-            this.flowSongSegments.Size = new System.Drawing.Size(656, 355);
+            this.flowSongSegments.Size = new System.Drawing.Size(656, 370);
             this.flowSongSegments.TabIndex = 2;
             // 
             // comSongDisplay

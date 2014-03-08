@@ -3,6 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Diagnostics;
+using System.Drawing;
 using System.Linq;
 using System.Text;
 using System.Windows.Forms;
@@ -20,7 +21,7 @@ namespace OpenChords.UserControls
             get { return _songIndex; }
             set
             {
-                if (value > _set.songList.Count())
+                if (value >= _set.songList.Count())
                     value = _set.songList.Count - 1;
                 if (value < 0) value = 0;
                 _songIndex = value;
@@ -31,7 +32,10 @@ namespace OpenChords.UserControls
         public comSongDisplay()
         {
             InitializeComponent();
+            this.BackColor = Color.Transparent;
         }
+
+        
 
 
         public void LoadSet(Set set, DisplayAndPrintSettings settings)
@@ -39,82 +43,95 @@ namespace OpenChords.UserControls
             _set = set;
             _displaySettings = settings;
             _songIndex = 0;
+            this.BackColor = settings.BackgroundColor;        
         }
 
         public void drawSong()
         {
             flowSongSegments.Controls.Clear();
             var currentSong = _set.songList[SongIndex];
-            var flowVerses = getNewVerseCollection();
+            
+            txtHeading.Text = currentSong.generateLongTitle();
+            txtHeading.BackColor = _displaySettings.BackgroundColor;
+            txtHeading.ForeColor = _displaySettings.HeadingsFormat.FontColor;
+            txtHeading.Font = _displaySettings.HeadingsFormat.Font;
+            txtHeading.ReadOnly = true;
+
+            txtOrder.Text = currentSong.presentation;
+            txtOrder.BackColor = _displaySettings.BackgroundColor;
+            txtOrder.ForeColor = _displaySettings.Order1Format.FontColor;
+            txtOrder.Font = _displaySettings.Order1Format.Font;
+            txtOrder.ReadOnly = true;
+
             foreach (SongVerse verse in currentSong.getSongVerses())
             {
-            
                 var pnlVerse = new UserControls.comSongVerse(verse, _displaySettings);
-                flowVerses.Controls.Add(pnlVerse);
-                if (VerseOutsideOfPane(pnlVerse))
-                {
-                    flowVerses.Controls.Remove(pnlVerse);
-                    flowSongSegments.Controls.Add(flowVerses);
-                    flowVerses = getNewVerseCollection();
-                }
+                flowSongSegments.Controls.Add(pnlVerse); 
             }
-            flowSongSegments.Controls.Add(flowVerses);
-            
         }
 
-        private FlowLayoutPanel getNewVerseCollection()
-        {
-            var flowVerses = new FlowLayoutPanel();
-            flowVerses.AutoSize = true;
-            flowVerses.FlowDirection = FlowDirection.TopDown;
-            return flowVerses;
-        }
 
-        private bool VerseOutsideOfPane(Control con)
+        private bool VerseVisible(Control con)
         {
-            return con.Location.Y + con.Height > this.Height;
+            return con.Location.X + con.Width < flowSongSegments.Width;
         }
 
         public void moveToNextSlideOrSong()
-        {
-            //var currentPos = flowSong.HorizontalScroll.Value;
-            //var max = flowSong.HorizontalScroll.Maximum;
-            //var pos = flowSong.HorizontalScroll.Value + this.Width;
+        {            
+            //find the first control that is not visible
+            int nextIndex = 0;
+            for (int i = 0; i < flowSongSegments.Controls.Count; i++)
+            {
+                var verse = flowSongSegments.Controls[i];
+                if (!VerseVisible(verse))
+                {
+                    nextIndex = i;
+                    break;
+                }
+            }
 
-            //if (currentPos != max)
-            //{
-            //    if (pos > max) pos = max;
-            //    flowSong.HorizontalScroll.Value = pos;
-            //    return;
-            //}
-            //else
-            //{
-            //    SongIndex++;
-            //    drawSong();
-            //    return;
-            //}
+            //hide all the other controls that were currently visible
+            for (int i = 0; i < nextIndex; i++)
+            {
+                flowSongSegments.Controls[i].Visible = false;
+            }
+
+            if (nextIndex == 0)
+            {
+                SongIndex++;
+                drawSong();
+                return;
+            }
 
         }
 
         public void moveToPreviousSlideOrSong()
         {
-            //var currentPos = flowSong.HorizontalScroll.Value;
-            //var min = flowSong.HorizontalScroll.Minimum;
-            //var max = flowSong.HorizontalScroll.Maximum;
-            //var pos = flowSong.HorizontalScroll.Value - this.Width;
+            int indexOfFirstVisibleControl = 0;
+            for (int i = 0; i < flowSongSegments.Controls.Count; i++)
+            {
+                if (flowSongSegments.Controls[i].Visible == true)
+                {
+                    indexOfFirstVisibleControl = i;
+                    break;
+                }
+            }
+            var firstVisisbleControl = flowSongSegments.Controls[indexOfFirstVisibleControl];
 
-            //if (currentPos != min)
-            //{
-            //    if (pos < min) pos = min;
-            //    flowSong.HorizontalScroll.Value = pos;
-            //    return;
-            //}
-            //else
-            //{
-            //    SongIndex--;
-            //    drawSong();
-            //    return;
-            //}
+            for (int i=indexOfFirstVisibleControl; i>=0; i--)
+            {
+                var verse = flowSongSegments.Controls[i];
+                verse.Visible = true;
+                if (!VerseVisible(firstVisisbleControl))
+                    break;
+            }
+
+            if (indexOfFirstVisibleControl == 0)
+            {
+                SongIndex--;
+                drawSong();
+                return;
+            }
         }
 
         public void increaseFontSize()
@@ -126,6 +143,64 @@ namespace OpenChords.UserControls
         public void decreaseFontSize()
         {
             _displaySettings.desceaseSizes();
+            drawSong();
+        }
+
+        internal void increaseKey()
+        {
+            var currentSong = _set.songList[SongIndex];
+            currentSong.transposeKeyUp();
+            drawSong();
+        }
+
+        internal void decreaseKey()
+        {
+            var currentSong = _set.songList[SongIndex];
+            currentSong.transposeKeyDown();
+            drawSong();
+        }
+
+        internal void increaseCapo()
+        {
+            var currentSong = _set.songList[SongIndex];
+            currentSong.capoUp();
+            drawSong();
+        }
+
+        internal void decreaseCapo()
+        {
+            var currentSong = _set.songList[SongIndex];
+            currentSong.capoDown();
+            drawSong();
+        }
+
+        internal void toggleWords()
+        {
+            _displaySettings.ShowLyrics = !_displaySettings.ShowLyrics;
+            drawSong();
+        }
+
+        internal void toggleChords()
+        {
+            _displaySettings.ShowChords = !_displaySettings.ShowChords;
+            drawSong();
+        }
+
+        internal void toggleNotes()
+        {
+            _displaySettings.ShowNotes = !_displaySettings.ShowNotes;
+            drawSong();
+        }
+
+        internal void nextSong()
+        {
+            SongIndex++;
+            drawSong();
+        }
+
+        internal void previousSong()
+        {
+            SongIndex--;
             drawSong();
         }
     }

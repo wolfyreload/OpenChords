@@ -25,6 +25,11 @@ namespace OpenChords.Forms
         {
             InitializeComponent();
             comSongDisplay1.LoadSet(set, displaySettings);
+
+            this.WindowState = FormWindowState.Maximized;
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
+            this.BackColor = displaySettings.BackgroundColor;
+
             loadForm();
         }
 
@@ -34,24 +39,42 @@ namespace OpenChords.Forms
             var set = new Set();
             set.addSongToSet(song);
             set.loadAllSongs();
+
+            this.WindowState = FormWindowState.Maximized;
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
+            this.BackColor = displaySettings.BackgroundColor;
+            
             comSongDisplay1.LoadSet(set, displaySettings);
             loadForm();
         }
 
         private void loadForm()
         {
-            //this.WindowState = FormWindowState.Maximized;
-            //this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
+            
             comSongDisplay1.drawSong();
-            this.KeyDown += DisplayForm2_KeyDown;
+            this.KeyUp += DisplayForm2_KeyUp;
         }
 
         
 
-        private void DisplayForm2_KeyDown(object sender, KeyEventArgs e)
+        private void DisplayForm2_KeyUp(object sender, KeyEventArgs e)
         {
             if (e.KeyCode == Keys.Escape)
                 this.Close();
+            else if (e.Modifiers == Keys.Control && e.KeyCode == Keys.Oemplus)
+                comSongDisplay1.increaseKey();
+            else if (e.Modifiers == Keys.Control && e.KeyCode == Keys.OemMinus)
+                comSongDisplay1.decreaseKey();
+            else if (e.Modifiers == Keys.Shift && e.KeyCode == Keys.Oemplus)
+                comSongDisplay1.increaseKey();
+            else if (e.Modifiers == Keys.Shift && e.KeyCode == Keys.OemMinus)
+                comSongDisplay1.decreaseKey();
+            else if (e.Modifiers == Keys.Control && e.KeyCode == Keys.W)
+                comSongDisplay1.toggleWords();
+            else if (e.Modifiers == Keys.Control && e.KeyCode == Keys.C)
+                comSongDisplay1.toggleChords();
+            else if (e.Modifiers == Keys.Control && e.KeyCode == Keys.N)
+                comSongDisplay1.toggleNotes();
             else if (e.KeyCode == Keys.Oemplus || e.KeyCode == Keys.Add)
                 comSongDisplay1.increaseFontSize();
             else if (e.KeyCode == Keys.OemMinus || e.KeyCode == Keys.Subtract)
@@ -60,6 +83,7 @@ namespace OpenChords.Forms
                 comSongDisplay1.moveToNextSlideOrSong();
             else if (e.KeyCode == Keys.Left || e.KeyCode == Keys.Up)
                 comSongDisplay1.moveToPreviousSlideOrSong();
+            
 
         }
 
@@ -70,12 +94,72 @@ namespace OpenChords.Forms
             this.Focus();
         }
 
-        private void cmdNext_Click(object sender, EventArgs e)
+        private void exitToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            comSongDisplay1.drawSong();
+        }
+
+        private void increaseSizeToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            comSongDisplay1.increaseFontSize();
+        }
+
+        private void decreaseSizeToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            comSongDisplay1.decreaseFontSize();
+        }
+
+        private void increaseKeyToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            comSongDisplay1.increaseKey();
+        }
+
+        private void decreaseKeyToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            comSongDisplay1.decreaseKey();
+        }
+
+        private void increaseCapoToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            comSongDisplay1.increaseCapo();
+        }
+
+        private void decreaseCapoToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            comSongDisplay1.decreaseCapo();
+        }
+
+        private void showHideChordsToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            comSongDisplay1.toggleChords();
+        }
+
+        private void showHideLyricsToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            comSongDisplay1.toggleWords();
+        }
+
+        private void showHideNotesToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            comSongDisplay1.toggleNotes();
+        }
+
+        private void nextSongToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            comSongDisplay1.nextSong();
+        }
+
+        private void previousSongToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            comSongDisplay1.previousSong();
+        }
+
+        private void nextPageToolStripMenuItem_Click(object sender, EventArgs e)
         {
             comSongDisplay1.moveToNextSlideOrSong();
         }
 
-        private void cmdPrevious_Click(object sender, EventArgs e)
+        private void previousPageToolStripMenuItem_Click(object sender, EventArgs e)
         {
             comSongDisplay1.moveToPreviousSlideOrSong();
         }

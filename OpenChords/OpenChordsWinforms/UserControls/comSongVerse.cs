@@ -83,11 +83,12 @@ namespace OpenChords.UserControls
         
         private Size calculateSize(SongElementFormat formatter, string text)
         {
-            text = text.TrimEnd('\r', '\n');
-          
+            //text = text.TrimEnd('\r', '\n');
+            var lines = text.Split(new string[] {"\r\n"}, StringSplitOptions.None);
             
             Size size = TextRenderer.MeasureText(text, formatter.Font, new Size(10,10), TextFormatFlags.LeftAndRightPadding);
-            size.Width += 30;
+            size.Width += 10;
+            size.Height = lines.Length * (int)Math.Ceiling(formatter.FontSize) + 5;
             return size;
         }
 
