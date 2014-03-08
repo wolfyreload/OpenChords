@@ -438,9 +438,9 @@ namespace OpenChords.Entities
         /// returns the song in html format
         /// </summary>
         /// <returns></returns>
-        public SongHtml getHtml(string settingsPath)
+        public SongHtml getHtml(DisplayAndPrintSettings settings)
         {
-            Export.ExportToHtml htmlExporter = new Export.ExportToHtml(this, settingsPath);
+            Export.ExportToHtml htmlExporter = new Export.ExportToHtml(this, settings);
             var result = htmlExporter.GenerateHtml()[0];
             return result;
         }

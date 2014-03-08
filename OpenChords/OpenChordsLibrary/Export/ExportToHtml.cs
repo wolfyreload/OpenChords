@@ -13,19 +13,19 @@ namespace OpenChords.Export
         private DisplayAndPrintSettings _settings;
         private Set _set;
 
-
-        public ExportToHtml(Set set, string settingFilename)
+        public ExportToHtml(Set set, DisplayAndPrintSettings settings)
         {
             _set = set;
-            _settings = DisplayAndPrintSettings.loadSettings(DisplayAndPrintSettingsType.DisplaySettings, settingFilename);
+            _settings = settings;
         }
 
-        public ExportToHtml(Song song, string settingsFilename)
+        public ExportToHtml(Song song, DisplayAndPrintSettings settings)
         {
             _set = new Set();
             _set.addSongToSet(song);
-            _settings = DisplayAndPrintSettings.loadSettings(DisplayAndPrintSettingsType.DisplaySettings, settingsFilename);
+            _settings = settings;
         }
+
 
         public List<SongHtml> GenerateHtml()
         {

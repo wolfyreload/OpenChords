@@ -307,7 +307,7 @@ namespace OpenChords.Forms
             updateSelectedSong();
             var displaySettings = DisplayAndPrintSettings.loadSettings(DisplayAndPrintSettingsType.DisplaySettings);
             saveState();
-            new Forms.DisplayForm(currentSong, displaySettings).ShowDialog();
+            new Forms.DisplayForm2(currentSong, displaySettings).ShowDialog();
         }
 
 		void presentSet()
@@ -318,7 +318,7 @@ namespace OpenChords.Forms
 			if (currentSet.songNames.Count > 0)
 			{
 				currentSet = currentSet.saveAndreloadSet();
-				new Forms.DisplayForm(currentSet, displaySettings).ShowDialog();
+				new Forms.DisplayForm2(currentSet, displaySettings).ShowDialog();
 			
 				
 			}

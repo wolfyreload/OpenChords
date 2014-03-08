@@ -77,6 +77,12 @@
     <Compile Include="Forms\Custom Controls\SettingsPanel.Designer.cs">
       <DependentUpon>SettingsPanel.cs</DependentUpon>
     </Compile>
+    <Compile Include="Forms\DisplayForm2.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\DisplayForm2.Designer.cs">
+      <DependentUpon>DisplayForm2.cs</DependentUpon>
+    </Compile>
     <Compile Include="Forms\EditorFormHelper.cs">
       <DependentUpon>EditorForm.cs</DependentUpon>
       <SubType>Form</SubType>
@@ -110,6 +116,12 @@
       <DependentUpon>Settings.cs</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="UserControls\comSongVerse.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="UserControls\comSongVerse.Designer.cs">
+      <DependentUpon>comSongVerse.cs</DependentUpon>
+    </Compile>
   </ItemGroup>
   <ItemGroup>
     <None Include="app.config" />
@@ -146,6 +158,9 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
+    <EmbeddedResource Include="Forms\DisplayForm2.resx">
+      <DependentUpon>DisplayForm2.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Forms\EditorForm.resx">
       <DependentUpon>EditorForm.cs</DependentUpon>
     </EmbeddedResource>
