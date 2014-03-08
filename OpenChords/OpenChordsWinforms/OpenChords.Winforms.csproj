@@ -116,6 +116,12 @@
       <DependentUpon>Settings.cs</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="UserControls\comSongDisplay.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="UserControls\comSongDisplay.Designer.cs">
+      <DependentUpon>comSongDisplay.cs</DependentUpon>
+    </Compile>
     <Compile Include="UserControls\comSongVerse.cs">
       <SubType>Component</SubType>
     </Compile>
@@ -163,6 +169,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\EditorForm.resx">
       <DependentUpon>EditorForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UserControls\comSongDisplay.resx">
+      <DependentUpon>comSongDisplay.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UserControls\comSongVerse.resx">
+      <DependentUpon>comSongVerse.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <ProjectExtensions>

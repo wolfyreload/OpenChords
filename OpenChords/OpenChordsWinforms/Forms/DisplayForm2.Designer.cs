@@ -28,42 +28,81 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.flowSong = new System.Windows.Forms.FlowLayoutPanel();
+            this.flowButtons = new System.Windows.Forms.FlowLayoutPanel();
+            this.cmdPrevious = new System.Windows.Forms.Button();
+            this.cmdNext = new System.Windows.Forms.Button();
+            this.comSongDisplay1 = new OpenChords.UserControls.comSongDisplay();
+            this.flowButtons.SuspendLayout();
             this.SuspendLayout();
             // 
-            // flowSong
+            // flowButtons
             // 
-            this.flowSong.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            this.flowButtons.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.flowButtons.AutoScroll = true;
+            this.flowButtons.Controls.Add(this.cmdPrevious);
+            this.flowButtons.Controls.Add(this.cmdNext);
+            this.flowButtons.Location = new System.Drawing.Point(13, 4);
+            this.flowButtons.Margin = new System.Windows.Forms.Padding(0);
+            this.flowButtons.Name = "flowButtons";
+            this.flowButtons.Size = new System.Drawing.Size(890, 32);
+            this.flowButtons.TabIndex = 1;
+            // 
+            // cmdPrevious
+            // 
+            this.cmdPrevious.Location = new System.Drawing.Point(3, 3);
+            this.cmdPrevious.Name = "cmdPrevious";
+            this.cmdPrevious.Size = new System.Drawing.Size(75, 23);
+            this.cmdPrevious.TabIndex = 0;
+            this.cmdPrevious.Text = "previous";
+            this.cmdPrevious.UseVisualStyleBackColor = true;
+            this.cmdPrevious.Click += new System.EventHandler(this.cmdPrevious_Click);
+            // 
+            // cmdNext
+            // 
+            this.cmdNext.Location = new System.Drawing.Point(84, 3);
+            this.cmdNext.Name = "cmdNext";
+            this.cmdNext.Size = new System.Drawing.Size(75, 23);
+            this.cmdNext.TabIndex = 1;
+            this.cmdNext.Text = "next";
+            this.cmdNext.UseVisualStyleBackColor = true;
+            this.cmdNext.Click += new System.EventHandler(this.cmdNext_Click);
+            // 
+            // comSongDisplay1
+            // 
+            this.comSongDisplay1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.flowSong.AutoScroll = true;
-            this.flowSong.FlowDirection = System.Windows.Forms.FlowDirection.TopDown;
-            this.flowSong.Location = new System.Drawing.Point(2, 2);
-            this.flowSong.Margin = new System.Windows.Forms.Padding(0);
-            this.flowSong.Name = "flowSong";
-            this.flowSong.Size = new System.Drawing.Size(907, 542);
-            this.flowSong.TabIndex = 0;
+            this.comSongDisplay1.Enabled = false;
+            this.comSongDisplay1.Location = new System.Drawing.Point(13, 39);
+            this.comSongDisplay1.Name = "comSongDisplay1";
+            this.comSongDisplay1.Size = new System.Drawing.Size(887, 496);
+            this.comSongDisplay1.TabIndex = 0;
             // 
             // DisplayForm2
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(912, 547);
-            this.Controls.Add(this.flowSong);
+            this.Controls.Add(this.flowButtons);
+            this.Controls.Add(this.comSongDisplay1);
             this.DoubleBuffered = true;
             this.KeyPreview = true;
             this.Name = "DisplayForm2";
             this.Text = "OpenChords Display";
-            this.TopMost = true;
-            this.WindowState = System.Windows.Forms.FormWindowState.Maximized;
             this.Load += new System.EventHandler(this.DisplayForm2_Load);
+            this.flowButtons.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }
 
         #endregion
 
-        private System.Windows.Forms.FlowLayoutPanel flowSong;
+        private UserControls.comSongDisplay comSongDisplay1;
+        private System.Windows.Forms.FlowLayoutPanel flowButtons;
+        private System.Windows.Forms.Button cmdPrevious;
+        private System.Windows.Forms.Button cmdNext;
+
 
 
     }

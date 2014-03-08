@@ -1,4 +1,5 @@
 ﻿using OpenChords.Entities;
+using OpenChords.UserControls;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -17,54 +18,66 @@ namespace OpenChords.Forms
             InitializeComponent();
         }
 
-        private Set _set;
-        private DisplayAndPrintSettings _displaySettings;
-        private int _songIndex = 0;
+        
 
 
         public DisplayForm2(Set set, DisplayAndPrintSettings displaySettings)
         {
             InitializeComponent();
-            _set = set;
-            _displaySettings = displaySettings;
-            _songIndex = 0;
-            loadSong();
+            comSongDisplay1.LoadSet(set, displaySettings);
+            loadForm();
         }
 
         public DisplayForm2(Song song, DisplayAndPrintSettings displaySettings)
         {
             InitializeComponent();
-            _set = new Set();
-            _set.addSongToSet(song);
-            _set.loadAllSongs();
-            _displaySettings = displaySettings;
-            _songIndex = 0;
-            loadSong();
+            var set = new Set();
+            set.addSongToSet(song);
+            set.loadAllSongs();
+            comSongDisplay1.LoadSet(set, displaySettings);
+            loadForm();
         }
 
-        private void loadSong()
+        private void loadForm()
         {
-            this.WindowState = FormWindowState.Maximized;
-            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
-            var currentSong = _set.songList[_songIndex];
-
-            foreach (SongVerse verse in currentSong.getSongVerses())
-            {
-                var pnlVerse = new UserControls.comSongVerse(verse, _displaySettings);
-                flowSong.Controls.Add(pnlVerse);
-            }
-            this.KeyUp += DisplayForm2_KeyUp;
+            //this.WindowState = FormWindowState.Maximized;
+            //this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
+            comSongDisplay1.drawSong();
+            this.KeyDown += DisplayForm2_KeyDown;
         }
 
-        private void DisplayForm2_KeyUp(object sender, KeyEventArgs e)
+        
+
+        private void DisplayForm2_KeyDown(object sender, KeyEventArgs e)
         {
             if (e.KeyCode == Keys.Escape)
                 this.Close();
+            else if (e.KeyCode == Keys.Oemplus || e.KeyCode == Keys.Add)
+                comSongDisplay1.increaseFontSize();
+            else if (e.KeyCode == Keys.OemMinus || e.KeyCode == Keys.Subtract)
+                comSongDisplay1.decreaseFontSize();
+            else if (e.KeyCode == Keys.Right || e.KeyCode == Keys.Down || e.KeyCode == Keys.Space)
+                comSongDisplay1.moveToNextSlideOrSong();
+            else if (e.KeyCode == Keys.Left || e.KeyCode == Keys.Up)
+                comSongDisplay1.moveToPreviousSlideOrSong();
+
         }
 
+        
+        
         private void DisplayForm2_Load(object sender, EventArgs e)
         {
             this.Focus();
+        }
+
+        private void cmdNext_Click(object sender, EventArgs e)
+        {
+            comSongDisplay1.moveToNextSlideOrSong();
+        }
+
+        private void cmdPrevious_Click(object sender, EventArgs e)
+        {
+            comSongDisplay1.moveToPreviousSlideOrSong();
         }
     }
 }

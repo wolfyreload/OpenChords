@@ -28,7 +28,14 @@
         /// </summary>
         private void InitializeComponent()
         {
-            components = new System.ComponentModel.Container();
+            this.SuspendLayout();
+            // 
+            // comSongVerse
+            // 
+            this.VisibleChanged += new System.EventHandler(this.comSongVerse_VisibleChanged);
+            this.ParentChanged += new System.EventHandler(this.comSongVerse_ParentChanged);
+            this.ResumeLayout(false);
+
         }
 
         #endregion

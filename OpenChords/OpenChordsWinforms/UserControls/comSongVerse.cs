@@ -10,13 +10,14 @@ using System.Windows.Forms;
 
 namespace OpenChords.UserControls
 {
-    public partial class comSongVerse : Panel
+    public partial class comSongVerse : Panel 
     {
         public comSongVerse()
         {
             InitializeComponent();
         }
 
+        private System.Drawing.Bitmap songBitmap;
         private SongVerse _verse;
         private DisplayAndPrintSettings _displaySettings;
         private Graphics graphics;
@@ -35,29 +36,58 @@ namespace OpenChords.UserControls
         {
             _verse = verse;
             _displaySettings = displaySettings;
-            lyricsFormattor = displaySettings.LyricsFormat;
-            chordsFormattor = displaySettings.ChordFormat;
-            notesFormattor = displaySettings.NoteFormat;
-            headingFormattor = displaySettings.HeadingsFormat;
             this.BackColor = displaySettings.BackgroundColor;
             Padding = new Padding(0);
             Margin = new Padding(3);
 
+            redrawVerse();
+        }
+
+        public void redrawVerse()
+        {
+            lyricsFormattor = _displaySettings.LyricsFormat;
+            chordsFormattor = _displaySettings.ChordFormat;
+            notesFormattor = _displaySettings.NoteFormat;
+            headingFormattor = _displaySettings.HeadingsFormat;
+            
             _headingSize = calculateSize(headingFormattor, _verse.FullHeaderName);
             _notesSize = calculateSize(notesFormattor, _verse.Notes);
             _lyricsSize = calculateSize(lyricsFormattor, _verse.Lyrics);
 
             Width = _notesSize.Width + _lyricsSize.Width + 30;
-            Height = _lyricsSize.Height + _headingSize.Height;
-          
-         }
+            Height = (_notesSize.Height > _lyricsSize.Height) ? _notesSize.Height + _headingSize.Height : _lyricsSize.Height + _headingSize.Height;
+
+            songBitmap = null;
+            songBitmap = new Bitmap(this.Width, this.Height,
+            System.Drawing.Imaging.PixelFormat.Format32bppArgb);
+
+            graphics = Graphics.FromImage(songBitmap);
+
+            drawHeading();
+            drawNotes();
+            drawVerse();
+            graphics.Dispose();
+        }
+
+        protected override void OnPaint(PaintEventArgs e)
+        {
+            Graphics graphicsObj = e.Graphics;
+
+            graphicsObj.DrawImage(songBitmap, 0, 0, songBitmap.Width, songBitmap.Height);
+
+            graphicsObj.Dispose();
+            
+            base.OnPaint(e);
+        }
 
         
         private Size calculateSize(SongElementFormat formatter, string text)
         {
             text = text.TrimEnd('\r', '\n');
-            Size size = TextRenderer.MeasureText(text, formatter.Font);
-            size.Width += 10;
+          
+            
+            Size size = TextRenderer.MeasureText(text, formatter.Font, new Size(10,10), TextFormatFlags.LeftAndRightPadding);
+            size.Width += 30;
             return size;
         }
 
@@ -73,18 +103,6 @@ namespace OpenChords.UserControls
             return calculateSize(formatter, sb.ToString());
         }
 
-        protected override void OnPaint(PaintEventArgs e)
-        {
-            //base.OnPaint(e);
-
-            graphics = e.Graphics;
-
-            
-
-            drawHeading();
-            drawNotes();
-            drawVerse();
-        }
 
         private void drawHeading()
         {
@@ -129,6 +147,16 @@ namespace OpenChords.UserControls
                 heightPosition += lyricsFormattor.FontSize;
 
             }
+        }
+
+        private void comSongVerse_VisibleChanged(object sender, EventArgs e)
+        {
+            this.Invalidate();
+        }
+
+        private void comSongVerse_ParentChanged(object sender, EventArgs e)
+        {
+            this.Invalidate();
         }
 
         
