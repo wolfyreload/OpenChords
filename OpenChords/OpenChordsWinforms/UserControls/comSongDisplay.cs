@@ -33,7 +33,13 @@ namespace OpenChords.UserControls
         {
             InitializeComponent();
             this.BackColor = Color.Transparent;
+            titleFormatter = new SongElementFormat("Courier New", 10, Color.Blue, true);
+            orderFormatter = new SongElementFormat("Courier New", 10, Color.Blue, true);
+            _displaySettings = new DisplayAndPrintSettings();
         }
+
+        private SongElementFormat titleFormatter;
+        private SongElementFormat orderFormatter;
 
         
 
@@ -43,31 +49,43 @@ namespace OpenChords.UserControls
             _set = set;
             _displaySettings = settings;
             _songIndex = 0;
-            this.BackColor = settings.BackgroundColor;        
+            this.BackColor = settings.BackgroundColor;
+            titleFormatter = _displaySettings.TitleFormat;
+            orderFormatter = _displaySettings.Order1Format;
         }
 
+
+        private string _songTitle = "";
+        private string _songOrder = "";
         public void drawSong()
         {
             flowSongSegments.Controls.Clear();
             var currentSong = _set.songList[SongIndex];
-            
-            txtHeading.Text = currentSong.generateLongTitle();
-            txtHeading.BackColor = _displaySettings.BackgroundColor;
-            txtHeading.ForeColor = _displaySettings.HeadingsFormat.FontColor;
-            txtHeading.Font = _displaySettings.HeadingsFormat.Font;
-            txtHeading.ReadOnly = true;
 
-            txtOrder.Text = currentSong.presentation;
-            txtOrder.BackColor = _displaySettings.BackgroundColor;
-            txtOrder.ForeColor = _displaySettings.Order1Format.FontColor;
-            txtOrder.Font = _displaySettings.Order1Format.Font;
-            txtOrder.ReadOnly = true;
+            _songTitle = currentSong.generateLongTitle();
+            _songOrder = currentSong.presentation;
 
             foreach (SongVerse verse in currentSong.getSongVerses())
             {
                 var pnlVerse = new UserControls.comSongVerse(verse, _displaySettings);
                 flowSongSegments.Controls.Add(pnlVerse); 
             }
+
+            this.Invalidate();
+        }
+
+        protected override void OnPaint(PaintEventArgs e)
+        {
+            Graphics graphicsObj = e.Graphics;
+
+            var y = 10;
+            graphicsObj.DrawString(_songTitle, titleFormatter.Font, titleFormatter.Brush, _displaySettings.leftPageMargin, y);
+            y += (int)titleFormatter.FontSize+5;
+            graphicsObj.DrawString(_songOrder, orderFormatter.Font, orderFormatter.Brush, _displaySettings.leftPageMargin, y);
+            
+
+
+            base.OnPaint(e);
         }
 
 
@@ -102,7 +120,6 @@ namespace OpenChords.UserControls
                 drawSong();
                 return;
             }
-
         }
 
         public void moveToPreviousSlideOrSong()
@@ -202,6 +219,23 @@ namespace OpenChords.UserControls
         {
             SongIndex--;
             drawSong();
+        }
+
+        /// <summary>
+        /// finds the song in the set and switches to the song
+        /// </summary>
+        /// <param name="p"></param>
+        internal void changeToSong(string p)
+        {
+            var index = _set.songNames.IndexOf(p);
+            SongIndex = index;
+            drawSong();
+        }
+
+        public string getCurrentSong()
+        {
+            var songName = _set.songNames[SongIndex];
+            return songName;
         }
     }
 }

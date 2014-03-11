@@ -28,7 +28,6 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.comSongDisplay1 = new OpenChords.UserControls.comSongDisplay();
             this.exitToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.sizeToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.increaseSizeToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -49,20 +48,11 @@
             this.nextPageToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.previousPageToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.OpenChordsMenuStrip2 = new System.Windows.Forms.MenuStrip();
+            this.songListToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.exitToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
+            this.comSongDisplay1 = new OpenChords.UserControls.comSongDisplay();
             this.OpenChordsMenuStrip2.SuspendLayout();
             this.SuspendLayout();
-            // 
-            // comSongDisplay1
-            // 
-            this.comSongDisplay1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.comSongDisplay1.BackColor = System.Drawing.Color.Transparent;
-            this.comSongDisplay1.Enabled = false;
-            this.comSongDisplay1.Location = new System.Drawing.Point(13, 27);
-            this.comSongDisplay1.Name = "comSongDisplay1";
-            this.comSongDisplay1.Size = new System.Drawing.Size(887, 508);
-            this.comSongDisplay1.TabIndex = 0;
             // 
             // exitToolStripMenuItem
             // 
@@ -157,7 +147,7 @@
             // 
             this.showHideChordsToolStripMenuItem.Name = "showHideChordsToolStripMenuItem";
             this.showHideChordsToolStripMenuItem.ShortcutKeyDisplayString = "Ctrl+C";
-            this.showHideChordsToolStripMenuItem.Size = new System.Drawing.Size(239, 22);
+            this.showHideChordsToolStripMenuItem.Size = new System.Drawing.Size(216, 22);
             this.showHideChordsToolStripMenuItem.Text = "Show/Hide Chords";
             this.showHideChordsToolStripMenuItem.Click += new System.EventHandler(this.showHideChordsToolStripMenuItem_Click);
             // 
@@ -165,7 +155,7 @@
             // 
             this.showHideLyricsToolStripMenuItem.Name = "showHideLyricsToolStripMenuItem";
             this.showHideLyricsToolStripMenuItem.ShortcutKeyDisplayString = "Ctrl+W";
-            this.showHideLyricsToolStripMenuItem.Size = new System.Drawing.Size(239, 22);
+            this.showHideLyricsToolStripMenuItem.Size = new System.Drawing.Size(216, 22);
             this.showHideLyricsToolStripMenuItem.Text = "Show/Hide Lyrics";
             this.showHideLyricsToolStripMenuItem.Click += new System.EventHandler(this.showHideLyricsToolStripMenuItem_Click);
             // 
@@ -173,7 +163,7 @@
             // 
             this.showHideNotesToolStripMenuItem.Name = "showHideNotesToolStripMenuItem";
             this.showHideNotesToolStripMenuItem.ShortcutKeyDisplayString = "Ctrl+N";
-            this.showHideNotesToolStripMenuItem.Size = new System.Drawing.Size(239, 22);
+            this.showHideNotesToolStripMenuItem.Size = new System.Drawing.Size(216, 22);
             this.showHideNotesToolStripMenuItem.Text = "Show/Hide Notes";
             this.showHideNotesToolStripMenuItem.Click += new System.EventHandler(this.showHideNotesToolStripMenuItem_Click);
             // 
@@ -181,7 +171,7 @@
             // 
             this.showHideSongListToolStripMenuItem.Name = "showHideSongListToolStripMenuItem";
             this.showHideSongListToolStripMenuItem.ShortcutKeyDisplayString = "L";
-            this.showHideSongListToolStripMenuItem.Size = new System.Drawing.Size(239, 22);
+            this.showHideSongListToolStripMenuItem.Size = new System.Drawing.Size(216, 22);
             this.showHideSongListToolStripMenuItem.Text = "Show/Hide Song List";
             // 
             // navigationToolStripMenuItem
@@ -234,12 +224,39 @@
             this.sizeToolStripMenuItem,
             this.keyToolStripMenuItem,
             this.visibilityToolStripMenuItem,
-            this.navigationToolStripMenuItem});
+            this.navigationToolStripMenuItem,
+            this.songListToolStripMenuItem,
+            this.exitToolStripMenuItem1});
             this.OpenChordsMenuStrip2.Location = new System.Drawing.Point(0, 0);
             this.OpenChordsMenuStrip2.Name = "OpenChordsMenuStrip2";
             this.OpenChordsMenuStrip2.Size = new System.Drawing.Size(912, 24);
             this.OpenChordsMenuStrip2.TabIndex = 3;
             this.OpenChordsMenuStrip2.Text = "menuStrip1";
+            // 
+            // songListToolStripMenuItem
+            // 
+            this.songListToolStripMenuItem.Name = "songListToolStripMenuItem";
+            this.songListToolStripMenuItem.Size = new System.Drawing.Size(67, 20);
+            this.songListToolStripMenuItem.Text = "Song List";
+            // 
+            // exitToolStripMenuItem1
+            // 
+            this.exitToolStripMenuItem1.Name = "exitToolStripMenuItem1";
+            this.exitToolStripMenuItem1.Size = new System.Drawing.Size(37, 20);
+            this.exitToolStripMenuItem1.Text = "Exit";
+            this.exitToolStripMenuItem1.Click += new System.EventHandler(this.exitToolStripMenuItem1_Click);
+            // 
+            // comSongDisplay1
+            // 
+            this.comSongDisplay1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.comSongDisplay1.BackColor = System.Drawing.Color.Transparent;
+            this.comSongDisplay1.Enabled = false;
+            this.comSongDisplay1.Location = new System.Drawing.Point(13, 27);
+            this.comSongDisplay1.Name = "comSongDisplay1";
+            this.comSongDisplay1.Size = new System.Drawing.Size(887, 508);
+            this.comSongDisplay1.TabIndex = 0;
             // 
             // DisplayForm2
             // 
@@ -284,6 +301,8 @@
         private System.Windows.Forms.ToolStripMenuItem nextPageToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem previousPageToolStripMenuItem;
         private System.Windows.Forms.MenuStrip OpenChordsMenuStrip2;
+        private System.Windows.Forms.ToolStripMenuItem exitToolStripMenuItem1;
+        private System.Windows.Forms.ToolStripMenuItem songListToolStripMenuItem;
 
 
 

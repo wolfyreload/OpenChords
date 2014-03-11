@@ -30,7 +30,26 @@ namespace OpenChords.Forms
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
             this.BackColor = displaySettings.BackgroundColor;
 
+            addSongListToMenu(set.songList);
+
             loadForm();
+        }
+
+        private void addSongListToMenu(List<Song> list)
+        {
+            foreach (var song in list)
+            {
+                ToolStripItem item = new ToolStripMenuItem();
+                item.Text = song.title;
+                item.Click += item_Click;
+                songListToolStripMenuItem.DropDownItems.Add(item);
+            }
+        }
+
+        void item_Click(object sender, EventArgs e)
+        {
+            var item = (ToolStripItem)sender;
+            comSongDisplay1.changeToSong(item.Text);
         }
 
         public DisplayForm2(Song song, DisplayAndPrintSettings displaySettings)
@@ -45,6 +64,7 @@ namespace OpenChords.Forms
             this.BackColor = displaySettings.BackgroundColor;
             
             comSongDisplay1.LoadSet(set, displaySettings);
+            songListToolStripMenuItem.Visible = false;
             loadForm();
         }
 
@@ -83,11 +103,29 @@ namespace OpenChords.Forms
                 comSongDisplay1.moveToNextSlideOrSong();
             else if (e.KeyCode == Keys.Left || e.KeyCode == Keys.Up)
                 comSongDisplay1.moveToPreviousSlideOrSong();
+            else if (e.KeyCode == Keys.PageUp)
+                comSongDisplay1.previousSong();
+            else if (e.KeyCode == Keys.PageDown)
+                comSongDisplay1.nextSong();
+            else if (e.KeyCode == Keys.L)
+                showSongList();
+
             
 
         }
 
-        
+  
+        private void showSongList()
+        {
+            songListToolStripMenuItem.ShowDropDown();
+            var currentSong = comSongDisplay1.getCurrentSong();
+            for (int i=0; i < songListToolStripMenuItem.DropDownItems.Count; i++)
+            {
+                ToolStripItem item = (ToolStripItem)songListToolStripMenuItem.DropDownItems[i];
+                if (item.Text == currentSong)
+                    item.Select();
+            }
+        }
         
         private void DisplayForm2_Load(object sender, EventArgs e)
         {
@@ -163,5 +201,12 @@ namespace OpenChords.Forms
         {
             comSongDisplay1.moveToPreviousSlideOrSong();
         }
+
+        private void exitToolStripMenuItem1_Click(object sender, EventArgs e)
+        {
+            this.Close();
+        }
+
+  
     }
 }

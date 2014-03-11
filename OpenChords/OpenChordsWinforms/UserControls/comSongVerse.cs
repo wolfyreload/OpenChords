@@ -39,6 +39,9 @@ namespace OpenChords.UserControls
             this.BackColor = displaySettings.BackgroundColor;
             Padding = new Padding(0);
             Margin = new Padding(3);
+            _notesSize = new System.Drawing.Size(0, 0);
+            _headingSize = new System.Drawing.Size(0, 0);
+            _lyricsSize = new System.Drawing.Size(0, 0);
 
             redrawVerse();
         }
@@ -51,8 +54,12 @@ namespace OpenChords.UserControls
             headingFormattor = _displaySettings.HeadingsFormat;
             
             _headingSize = calculateSize(headingFormattor, _verse.FullHeaderName);
-            _notesSize = calculateSize(notesFormattor, _verse.Notes);
+            
             _lyricsSize = calculateSize(lyricsFormattor, _verse.Lyrics);
+
+            if (_displaySettings.ShowNotes ?? false)
+                _notesSize = calculateSize(notesFormattor, _verse.Notes);
+            
 
             Width = _notesSize.Width + _lyricsSize.Width + 30;
             Height = (_notesSize.Height > _lyricsSize.Height) ? _notesSize.Height + _headingSize.Height : _lyricsSize.Height + _headingSize.Height;
@@ -113,7 +120,8 @@ namespace OpenChords.UserControls
 
         private void drawNotes()
         {
-            graphics.DrawString(_verse.Notes, notesFormattor.Font, notesFormattor.Brush, _lyricsSize.Width+20, heightPosition);
+            if (_displaySettings.ShowNotes ?? false)
+                graphics.DrawString(_verse.Notes, notesFormattor.Font, notesFormattor.Brush, _lyricsSize.Width+20, heightPosition);
         }
 
         
