@@ -55,7 +55,7 @@ namespace OpenChords.UserControls
             
             _headingSize = calculateSize(headingFormattor, _verse.FullHeaderName);
             
-            _lyricsSize = calculateSize(lyricsFormattor, _verse.Lyrics);
+            _lyricsSize = calculateLyricsSize(lyricsFormattor, _verse.Lyrics, _verse.IsChord);
 
             if (_displaySettings.ShowNotes ?? false)
                 _notesSize = calculateSize(notesFormattor, _verse.Notes);
@@ -99,14 +99,25 @@ namespace OpenChords.UserControls
             return size;
         }
 
-        private Size calculateSize(SongElementFormat formatter, List<string> lines)
+        private Size calculateLyricsSize(SongElementFormat formatter, List<string> lyricsLines, List<bool> chordSwitches)
         {
             StringBuilder sb = new StringBuilder();
-            foreach (string line in lines)
+            for (int i = 0; i < lyricsLines.Count; i++)
             {
+                var line = lyricsLines[i];
+                var isChord = chordSwitches[i];
                 var trim = line.TrimEnd();
-                if (trim.Length > 0)
-                sb.AppendLine(trim);
+                //dont add chords to the size estimate if we not showing chords
+                if (isChord && (_displaySettings.ShowChords ?? false))
+                {
+                    sb.AppendLine(trim);
+                }
+                //dont add lyrics to the size estimate if we not showing lyrics
+                else if (!isChord && (_displaySettings.ShowLyrics ?? false))
+                {
+                    sb.AppendLine(trim);
+                }
+                
             }
             return calculateSize(formatter, sb.ToString());
         }
@@ -144,6 +155,7 @@ namespace OpenChords.UserControls
                                         chordsFormattor.Brush,
                                         0,
                                         heightPosition);
+                    heightPosition += lyricsFormattor.FontSize;
                 }
                 else if (!isChordLine && (_displaySettings.ShowLyrics ?? false))
                 {
@@ -152,8 +164,9 @@ namespace OpenChords.UserControls
                                         lyricsFormattor.Brush,
                                         0,
                                         heightPosition);
+                    heightPosition += lyricsFormattor.FontSize;
                 }
-                heightPosition += lyricsFormattor.FontSize;
+                
 
             }
         }

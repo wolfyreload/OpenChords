@@ -41,7 +41,6 @@
             this.showHideChordsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.showHideLyricsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.showHideNotesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.showHideSongListToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.navigationToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.nextSongToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.previousSongToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -137,8 +136,7 @@
             this.visibilityToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.showHideChordsToolStripMenuItem,
             this.showHideLyricsToolStripMenuItem,
-            this.showHideNotesToolStripMenuItem,
-            this.showHideSongListToolStripMenuItem});
+            this.showHideNotesToolStripMenuItem});
             this.visibilityToolStripMenuItem.Name = "visibilityToolStripMenuItem";
             this.visibilityToolStripMenuItem.Size = new System.Drawing.Size(63, 20);
             this.visibilityToolStripMenuItem.Text = "Visibility";
@@ -166,13 +164,6 @@
             this.showHideNotesToolStripMenuItem.Size = new System.Drawing.Size(216, 22);
             this.showHideNotesToolStripMenuItem.Text = "Show/Hide Notes";
             this.showHideNotesToolStripMenuItem.Click += new System.EventHandler(this.showHideNotesToolStripMenuItem_Click);
-            // 
-            // showHideSongListToolStripMenuItem
-            // 
-            this.showHideSongListToolStripMenuItem.Name = "showHideSongListToolStripMenuItem";
-            this.showHideSongListToolStripMenuItem.ShortcutKeyDisplayString = "L";
-            this.showHideSongListToolStripMenuItem.Size = new System.Drawing.Size(216, 22);
-            this.showHideSongListToolStripMenuItem.Text = "Show/Hide Song List";
             // 
             // navigationToolStripMenuItem
             // 
@@ -294,7 +285,6 @@
         private System.Windows.Forms.ToolStripMenuItem showHideChordsToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem showHideLyricsToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem showHideNotesToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem showHideSongListToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem navigationToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem nextSongToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem previousSongToolStripMenuItem;
