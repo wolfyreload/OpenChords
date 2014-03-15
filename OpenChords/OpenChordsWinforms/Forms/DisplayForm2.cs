@@ -54,7 +54,9 @@ namespace OpenChords.Forms
         void item_Click(object sender, EventArgs e)
         {
             var item = (ToolStripItem)sender;
-            comSongDisplay1.changeToSong(item.Text);
+            var parent = item.GetCurrentParent();
+            var index = parent.Items.IndexOf(item);
+            comSongDisplay1.changeToSong(index);
         }
 
         public DisplayForm2(Song song, DisplayAndPrintSettings displaySettings)
@@ -108,19 +110,18 @@ namespace OpenChords.Forms
                 comSongDisplay1.previousSong();
             else if (e.KeyCode == Keys.PageDown)
                 comSongDisplay1.nextSong();
+            else if (e.KeyCode >= Keys.D1 && e.KeyCode <= Keys.D9)
+                comSongDisplay1.changeToSong((int)e.KeyCode - 49);
         }
 
 
         private void toggleSongList()
         {
             songListToolStripMenuItem.ShowDropDown();
-            var currentSong = comSongDisplay1.getCurrentSong();
-            for (int i = 0; i < songListToolStripMenuItem.DropDownItems.Count; i++)
-            {
-                ToolStripItem item = (ToolStripItem)songListToolStripMenuItem.DropDownItems[i];
-                if (item.Text == currentSong)
-                    item.Select();
-            }
+            var currentSongIndex = comSongDisplay1.getCurrentSongIndex();
+            ToolStripItem item = (ToolStripItem)songListToolStripMenuItem.DropDownItems[currentSongIndex];
+            item.Select();
+            
         }
 
         private void DisplayForm2_Load(object sender, EventArgs e)
@@ -211,7 +212,7 @@ namespace OpenChords.Forms
             comSongDisplay1.toggleSharpsAndFlats();
         }
 
-        private void toggleSongListToolStripMenuItem_Click(object sender, EventArgs e)
+        private void songListToolStripMenuItem_Click(object sender, EventArgs e)
         {
             toggleSongList();
         }

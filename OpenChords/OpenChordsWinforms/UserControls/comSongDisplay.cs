@@ -145,7 +145,7 @@ namespace OpenChords.UserControls
         {
             var nextScreenIndex = _currentScreenIndex - 1;
 
-            if (nextScreenIndex >= 0)
+            if (_maxSongIndex >= nextScreenIndex && nextScreenIndex >= 0)
             {
                 pnlLyrics.Controls[_currentScreenIndex].Visible = false;
                 pnlLyrics.Controls[nextScreenIndex].Visible = true;
@@ -160,12 +160,14 @@ namespace OpenChords.UserControls
         public void increaseFontSize()
         {
             _displaySettings.increaseSizes();
+            songRendered = false;
             drawSong();
         }
 
         public void decreaseFontSize()
         {
             _displaySettings.desceaseSizes();
+            songRendered = false;
             drawSong();
         }
 
@@ -174,6 +176,7 @@ namespace OpenChords.UserControls
             var currentSong = _set.songList[_songIndex];
             currentSong.transposeKeyUp();
             currentSong.saveSong();
+            songRendered = false;
             drawSong();
         }
 
@@ -182,6 +185,7 @@ namespace OpenChords.UserControls
             var currentSong = _set.songList[_songIndex];
             currentSong.transposeKeyDown();
             currentSong.saveSong();
+            songRendered = false;
             drawSong();
         }
 
@@ -190,6 +194,7 @@ namespace OpenChords.UserControls
             var currentSong = _set.songList[_songIndex];
             currentSong.capoUp();
             currentSong.saveSong();
+            songRendered = false;
             drawSong();
         }
 
@@ -198,24 +203,28 @@ namespace OpenChords.UserControls
             var currentSong = _set.songList[_songIndex];
             currentSong.capoDown();
             currentSong.saveSong();
+            songRendered = false;
             drawSong();
         }
 
         internal void toggleWords()
         {
             _displaySettings.ShowLyrics = !_displaySettings.ShowLyrics;
+            songRendered = false;
             drawSong();
         }
 
         internal void toggleChords()
         {
             _displaySettings.ShowChords = !_displaySettings.ShowChords;
+            songRendered = false;
             drawSong();
         }
 
         internal void toggleNotes()
         {
             _displaySettings.ShowNotes = !_displaySettings.ShowNotes;
+            songRendered = false;
             drawSong();
         }
 
@@ -226,6 +235,7 @@ namespace OpenChords.UserControls
             currentSong.transposeKeyUp();
             currentSong.transposeKeyDown();
             currentSong.saveSong();
+            songRendered = false;
             drawSong();
             
         }
@@ -262,7 +272,22 @@ namespace OpenChords.UserControls
         {
             var index = _set.songNames.IndexOf(p);
             _songIndex = index;
+            songRendered = false;
             drawSong();
+        }
+
+        /// <summary>
+        /// finds the song in the set and switches to the song
+        /// </summary>
+        /// <param name="p"></param>
+        internal void changeToSong(int p)
+        {
+            if (0 <= p && p <= _maxSongIndex)
+            {
+                _songIndex = p;
+                songRendered = false;
+                drawSong();
+            }
         }
 
         public string getCurrentSong()
@@ -274,6 +299,11 @@ namespace OpenChords.UserControls
         internal void refresh()
         {
             _set.loadAllSongs();
+        }
+
+        internal int getCurrentSongIndex()
+        {
+            return _songIndex;
         }
     }
 }

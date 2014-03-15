@@ -245,6 +245,7 @@
             this.songListToolStripMenuItem.ShortcutKeyDisplayString = "";
             this.songListToolStripMenuItem.Size = new System.Drawing.Size(67, 20);
             this.songListToolStripMenuItem.Text = "Song List";
+            this.songListToolStripMenuItem.Click += new System.EventHandler(this.songListToolStripMenuItem_Click);
             // 
             // exitToolStripMenuItem
             // 
