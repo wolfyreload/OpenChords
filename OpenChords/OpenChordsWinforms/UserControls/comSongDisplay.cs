@@ -299,6 +299,7 @@ namespace OpenChords.UserControls
         internal void refresh()
         {
             _set.loadAllSongs();
+            songRendered = false;
         }
 
         internal int getCurrentSongIndex()
