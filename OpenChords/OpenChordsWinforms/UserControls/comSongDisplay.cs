@@ -25,12 +25,13 @@ namespace OpenChords.UserControls
             InitializeComponent();
             this.BackColor = Color.Transparent;
             titleFormatter = new SongElementFormat("Courier New", 10, Color.Blue, true);
-            orderFormatter = new SongElementFormat("Courier New", 10, Color.Blue, true);
+            order1Formatter = new SongElementFormat("Courier New", 10, Color.Blue, true);
+            order2Formatter = new SongElementFormat("Courier New", 10, Color.Blue, true);
             _displaySettings = new DisplayAndPrintSettings();
         }
 
         private SongElementFormat titleFormatter;
-        private SongElementFormat orderFormatter;
+        private SongElementFormat order1Formatter;
 
         
 
@@ -43,7 +44,8 @@ namespace OpenChords.UserControls
             _maxSongIndex = _set.songList.Count - 1;
             this.BackColor = settings.BackgroundColor;
             titleFormatter = _displaySettings.TitleFormat;
-            orderFormatter = _displaySettings.Order1Format;
+            order1Formatter = _displaySettings.Order1Format;
+            order2Formatter = _displaySettings.Order2Format;
         }
 
 
@@ -64,6 +66,7 @@ namespace OpenChords.UserControls
         }
 
         private bool songRendered = false;
+        private SongElementFormat order2Formatter;
         public void renderSongInMemory()
         {
             pnlLyrics.Controls.Clear();
@@ -112,11 +115,43 @@ namespace OpenChords.UserControls
             var y = 10;
             graphicsObj.DrawString(_songTitle, titleFormatter.Font, titleFormatter.Brush, _displaySettings.leftPageMargin, y);
             y += (int)titleFormatter.FontSize+5;
-            graphicsObj.DrawString(_songOrder, orderFormatter.Font, orderFormatter.Brush, _displaySettings.leftPageMargin, y);
-            
-
-
+            paintOrder(graphicsObj, y);
+           
             base.OnPaint(e);
+        }
+
+        private void paintOrder(Graphics graphicsObj, int y)
+        {
+            if (pnlLyrics.Controls.Count == 0) return;
+            if (_songOrder.Trim() == "") return;
+
+            var orderElements = _songOrder.Split(new string[] { " " }, StringSplitOptions.RemoveEmptyEntries);
+            float x = (float)_displaySettings.leftPageMargin;
+
+            var index = 0;
+            for (int i = 0; i < pnlLyrics.Controls.Count; i++)
+            {
+                var screen = pnlLyrics.Controls[i];
+                var visible = screen.Visible;
+                for (int j = 0; j < screen.Controls.Count; j++)
+                {
+                    
+                    if (visible)
+                    {
+                        graphicsObj.DrawString(orderElements[index], order2Formatter.Font, order2Formatter.Brush, x, y);
+                        x += graphicsObj.MeasureString(orderElements[index], order2Formatter.Font).Width+10;
+                    }
+                    else
+                    {
+                        graphicsObj.DrawString(orderElements[index], order2Formatter.Font, order1Formatter.Brush, x, y);
+                        x += graphicsObj.MeasureString(orderElements[index], order1Formatter.Font).Width+10;
+                    }    
+                    index++;
+                }
+            }
+
+
+                
         }
 
 
@@ -134,6 +169,7 @@ namespace OpenChords.UserControls
                 pnlLyrics.Controls[_currentScreenIndex].Visible = false;
                 pnlLyrics.Controls[nextScreenIndex].Visible = true;
                 _currentScreenIndex++;
+                this.Invalidate();
             }
             else
             {
@@ -150,6 +186,7 @@ namespace OpenChords.UserControls
                 pnlLyrics.Controls[_currentScreenIndex].Visible = false;
                 pnlLyrics.Controls[nextScreenIndex].Visible = true;
                 _currentScreenIndex--;
+                this.Invalidate();
             }
             else
             {
