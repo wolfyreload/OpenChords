@@ -28,23 +28,22 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.flowSongSegments = new System.Windows.Forms.FlowLayoutPanel();
+            this.pnlLyrics = new System.Windows.Forms.Panel();
             this.SuspendLayout();
             // 
-            // flowSongSegments
+            // pnlLyrics
             // 
-            this.flowSongSegments.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            this.pnlLyrics.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.flowSongSegments.FlowDirection = System.Windows.Forms.FlowDirection.TopDown;
-            this.flowSongSegments.Location = new System.Drawing.Point(4, 70);
-            this.flowSongSegments.Name = "flowSongSegments";
-            this.flowSongSegments.Size = new System.Drawing.Size(656, 370);
-            this.flowSongSegments.TabIndex = 2;
+            this.pnlLyrics.Location = new System.Drawing.Point(0, 73);
+            this.pnlLyrics.Name = "pnlLyrics";
+            this.pnlLyrics.Size = new System.Drawing.Size(663, 370);
+            this.pnlLyrics.TabIndex = 3;
             // 
             // comSongDisplay
             // 
-            this.Controls.Add(this.flowSongSegments);
+            this.Controls.Add(this.pnlLyrics);
             this.Name = "comSongDisplay";
             this.Size = new System.Drawing.Size(663, 443);
             this.ResumeLayout(false);
@@ -53,6 +52,7 @@
 
         #endregion
 
-        private System.Windows.Forms.FlowLayoutPanel flowSongSegments;
+        private System.Windows.Forms.Panel pnlLyrics;
+
     }
 }

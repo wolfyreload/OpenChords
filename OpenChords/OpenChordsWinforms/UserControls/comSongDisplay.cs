@@ -16,18 +16,9 @@ namespace OpenChords.UserControls
         private DisplayAndPrintSettings _displaySettings;
 
         private int _songIndex;
-        private int SongIndex
-        {
-            get { return _songIndex; }
-            set
-            {
-                if (value >= _set.songList.Count())
-                    value = _set.songList.Count - 1;
-                if (value < 0) value = 0;
-                _songIndex = value;
-            }
-
-        }
+        private int _maxSongIndex;
+        private int _currentScreenIndex;
+        private int _maxScreenIndex;
         
         public comSongDisplay()
         {
@@ -49,6 +40,7 @@ namespace OpenChords.UserControls
             _set = set;
             _displaySettings = settings;
             _songIndex = 0;
+            _maxSongIndex = _set.songList.Count - 1;
             this.BackColor = settings.BackgroundColor;
             titleFormatter = _displaySettings.TitleFormat;
             orderFormatter = _displaySettings.Order1Format;
@@ -57,19 +49,58 @@ namespace OpenChords.UserControls
 
         private string _songTitle = "";
         private string _songOrder = "";
-        public void drawSong()
+
+        private FlowLayoutPanel createNewScreen()
         {
-            flowSongSegments.Controls.Clear();
-            var currentSong = _set.songList[SongIndex];
+            var flow = new FlowLayoutPanel()
+            {
+                FlowDirection = FlowDirection.TopDown,
+                Visible = false,
+                Width = pnlLyrics.Width,
+                Height = pnlLyrics.Height
+            };
+            pnlLyrics.Controls.Add(flow);
+            return flow;
+        }
+
+        private bool songRendered = false;
+        public void renderSongInMemory()
+        {
+            pnlLyrics.Controls.Clear();
+            
+            var currentSong = _set.songList[_songIndex];
 
             _songTitle = currentSong.generateLongTitle();
             _songOrder = currentSong.presentation;
 
-            foreach (SongVerse verse in currentSong.getSongVerses())
+            var screen = createNewScreen();
+            var songVerses = currentSong.getSongVerses();
+            var versesOnScreenCounter = 0;
+            for (int i = 0; i < songVerses.Count; i++)
             {
-                var pnlVerse = new UserControls.comSongVerse(verse, _displaySettings);
-                flowSongSegments.Controls.Add(pnlVerse); 
+                var songVerse = songVerses[i];
+                var renderedVerse = new UserControls.comSongVerse(songVerse, _displaySettings);
+                screen.Controls.Add(renderedVerse);
+                if (!VerseVisible(renderedVerse))
+                {
+                    screen.Controls.RemoveAt(versesOnScreenCounter);
+                    screen = createNewScreen();
+                    screen.Controls.Add(renderedVerse);
+                    versesOnScreenCounter = 0;
+                }
+                versesOnScreenCounter++;
             }
+            _maxScreenIndex = pnlLyrics.Controls.Count - 1;
+            songRendered = true;
+        }
+        
+        public void drawSong()
+        {
+            if (!songRendered)
+                renderSongInMemory();
+
+            if (_currentScreenIndex <= _maxScreenIndex)
+                pnlLyrics.Controls[_currentScreenIndex].Visible = true;
 
             this.Invalidate();
         }
@@ -91,63 +122,38 @@ namespace OpenChords.UserControls
 
         private bool VerseVisible(Control con)
         {
-            return con.Location.X + con.Width < flowSongSegments.Width;
+            return con.Location.X + con.Width < con.Parent.Width;
         }
 
         public void moveToNextSlideOrSong()
         {            
-            //find the first control that is not visible
-            int nextIndex = 0;
-            for (int i = 0; i < flowSongSegments.Controls.Count; i++)
-            {
-                var verse = flowSongSegments.Controls[i];
-                if (!VerseVisible(verse))
-                {
-                    nextIndex = i;
-                    break;
-                }
-            }
+            var nextScreenIndex = _currentScreenIndex + 1;
 
-            //hide all the other controls that were currently visible
-            for (int i = 0; i < nextIndex; i++)
+            if (nextScreenIndex <= _maxScreenIndex)
             {
-                flowSongSegments.Controls[i].Visible = false;
+                pnlLyrics.Controls[_currentScreenIndex].Visible = false;
+                pnlLyrics.Controls[nextScreenIndex].Visible = true;
+                _currentScreenIndex++;
             }
-
-            if (nextIndex == 0)
+            else
             {
-                SongIndex++;
-                drawSong();
-                return;
+                nextSong();
             }
         }
 
         public void moveToPreviousSlideOrSong()
         {
-            int indexOfFirstVisibleControl = 0;
-            for (int i = 0; i < flowSongSegments.Controls.Count; i++)
-            {
-                if (flowSongSegments.Controls[i].Visible == true)
-                {
-                    indexOfFirstVisibleControl = i;
-                    break;
-                }
-            }
-            var firstVisisbleControl = flowSongSegments.Controls[indexOfFirstVisibleControl];
+            var nextScreenIndex = _currentScreenIndex - 1;
 
-            for (int i=indexOfFirstVisibleControl; i>=0; i--)
+            if (nextScreenIndex >= 0)
             {
-                var verse = flowSongSegments.Controls[i];
-                verse.Visible = true;
-                if (!VerseVisible(firstVisisbleControl))
-                    break;
+                pnlLyrics.Controls[_currentScreenIndex].Visible = false;
+                pnlLyrics.Controls[nextScreenIndex].Visible = true;
+                _currentScreenIndex--;
             }
-
-            if (indexOfFirstVisibleControl == 0)
+            else
             {
-                SongIndex--;
-                drawSong();
-                return;
+                previousSong();
             }
         }
 
@@ -165,7 +171,7 @@ namespace OpenChords.UserControls
 
         internal void increaseKey()
         {
-            var currentSong = _set.songList[SongIndex];
+            var currentSong = _set.songList[_songIndex];
             currentSong.transposeKeyUp();
             currentSong.saveSong();
             drawSong();
@@ -173,7 +179,7 @@ namespace OpenChords.UserControls
 
         internal void decreaseKey()
         {
-            var currentSong = _set.songList[SongIndex];
+            var currentSong = _set.songList[_songIndex];
             currentSong.transposeKeyDown();
             currentSong.saveSong();
             drawSong();
@@ -181,7 +187,7 @@ namespace OpenChords.UserControls
 
         internal void increaseCapo()
         {
-            var currentSong = _set.songList[SongIndex];
+            var currentSong = _set.songList[_songIndex];
             currentSong.capoUp();
             currentSong.saveSong();
             drawSong();
@@ -189,7 +195,7 @@ namespace OpenChords.UserControls
 
         internal void decreaseCapo()
         {
-            var currentSong = _set.songList[SongIndex];
+            var currentSong = _set.songList[_songIndex];
             currentSong.capoDown();
             currentSong.saveSong();
             drawSong();
@@ -215,7 +221,7 @@ namespace OpenChords.UserControls
 
         internal void toggleSharpsAndFlats()
         {
-            var currentSong = _set.songList[SongIndex];
+            var currentSong = _set.songList[_songIndex];
             currentSong.PreferFlats = !currentSong.PreferFlats;
             currentSong.transposeKeyUp();
             currentSong.transposeKeyDown();
@@ -226,14 +232,26 @@ namespace OpenChords.UserControls
 
         internal void nextSong()
         {
-            SongIndex++;
-            drawSong();
+            var nextSongIndex = _songIndex + 1;
+            if (nextSongIndex <= _maxSongIndex)
+            {
+                songRendered = false;
+                _songIndex++;
+                _currentScreenIndex = 0;
+                drawSong();
+            }
         }
 
         internal void previousSong()
         {
-            SongIndex--;
-            drawSong();
+            var nextSongIndex = _songIndex - 1;
+            if (nextSongIndex >= 0)
+            {
+                _songIndex--;
+                renderSongInMemory();
+                _currentScreenIndex = _maxScreenIndex;
+                drawSong();
+            }
         }
 
         /// <summary>
@@ -243,13 +261,13 @@ namespace OpenChords.UserControls
         internal void changeToSong(string p)
         {
             var index = _set.songNames.IndexOf(p);
-            SongIndex = index;
+            _songIndex = index;
             drawSong();
         }
 
         public string getCurrentSong()
         {
-            var songName = _set.songNames[SongIndex];
+            var songName = _set.songNames[_songIndex];
             return songName;
         }
 
