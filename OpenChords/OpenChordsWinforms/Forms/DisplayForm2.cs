@@ -29,8 +29,6 @@ namespace OpenChords.Forms
             changeColors(displaySettings);
             
             addSongListToMenu(set.songList);
-
-            loadForm();
         }
 
         private void changeColors(DisplayAndPrintSettings displaySettings)
@@ -40,24 +38,6 @@ namespace OpenChords.Forms
             this.BackColor = displaySettings.BackgroundColor;
         }
 
-        private void addSongListToMenu(List<Song> list)
-        {
-            foreach (var song in list)
-            {
-                ToolStripItem item = new ToolStripMenuItem();
-                item.Text = song.title;
-                item.Click += item_Click;
-                songListToolStripMenuItem.DropDownItems.Add(item);
-            }
-        }
-
-        void item_Click(object sender, EventArgs e)
-        {
-            var item = (ToolStripItem)sender;
-            var parent = item.GetCurrentParent();
-            var index = parent.Items.IndexOf(item);
-            comSongDisplay1.changeToSong(index);
-        }
 
         public DisplayForm2(Song song, DisplayAndPrintSettings displaySettings)
         {
@@ -72,7 +52,6 @@ namespace OpenChords.Forms
             
             comSongDisplay1.LoadSet(set, displaySettings);
             songListToolStripMenuItem.Visible = false;
-            loadForm();
         }
 
         private void loadForm()
@@ -115,6 +94,26 @@ namespace OpenChords.Forms
         }
 
 
+        private void addSongListToMenu(List<Song> list)
+        {
+            foreach (var song in list)
+            {
+                ToolStripItem item = new ToolStripMenuItem();
+                item.Text = song.title;
+                item.Click += item_Click;
+                songListToolStripMenuItem.DropDownItems.Add(item);
+            }
+        }
+
+        void item_Click(object sender, EventArgs e)
+        {
+            var item = (ToolStripItem)sender;
+            var parent = item.GetCurrentParent();
+            var index = parent.Items.IndexOf(item);
+            comSongDisplay1.changeToSong(index);
+        }
+
+
         private void toggleSongList()
         {
             songListToolStripMenuItem.ShowDropDown();
@@ -127,6 +126,10 @@ namespace OpenChords.Forms
         private void DisplayForm2_Load(object sender, EventArgs e)
         {
             this.Focus();
+            if (comSongDisplay1 != null)
+            {
+                loadForm();
+            }
         }
 
 
