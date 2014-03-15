@@ -145,7 +145,7 @@ namespace OpenChords.Forms
 		
 		void drawSong()
 		{
-			List<bool[]> temp;
+			//List<bool[]> temp;
             currentSongElements = currentSong.getSongVerses();
 
 			bool firstHalfOfPage = true;

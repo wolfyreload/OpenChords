@@ -84,8 +84,8 @@ namespace OpenChords.Forms
 		{
 			Random rand = new Random();
 			int randomSongIndex = 0;
-			string songName = "";
-			int counter = 0;
+			//string songName = "";
+			//int counter = 0;
 
             randomSongIndex = rand.Next(0, listSongs.Items.Count - 1);
 		    listSongs.SelectedIndex = randomSongIndex;

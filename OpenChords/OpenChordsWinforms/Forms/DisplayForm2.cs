@@ -26,13 +26,18 @@ namespace OpenChords.Forms
             InitializeComponent();
             comSongDisplay1.LoadSet(set, displaySettings);
 
-            this.WindowState = FormWindowState.Maximized;
-            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
-            this.BackColor = displaySettings.BackgroundColor;
-
+            changeColors(displaySettings);
+            
             addSongListToMenu(set.songList);
 
             loadForm();
+        }
+
+        private void changeColors(DisplayAndPrintSettings displaySettings)
+        {
+            this.WindowState = FormWindowState.Maximized;
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
+            this.BackColor = displaySettings.BackgroundColor;
         }
 
         private void addSongListToMenu(List<Song> list)
@@ -79,22 +84,18 @@ namespace OpenChords.Forms
 
         private void DisplayForm2_KeyUp(object sender, KeyEventArgs e)
         {
-            if (e.KeyCode == Keys.Escape)
+            if (e.KeyCode == Keys.L)
+                toggleSongList();
+            else if (e.KeyCode == Keys.Escape)
                 this.Close();
             else if (e.Modifiers == Keys.Control && e.KeyCode == Keys.Oemplus)
                 comSongDisplay1.increaseKey();
             else if (e.Modifiers == Keys.Control && e.KeyCode == Keys.OemMinus)
                 comSongDisplay1.decreaseKey();
             else if (e.Modifiers == Keys.Shift && e.KeyCode == Keys.Oemplus)
-                comSongDisplay1.increaseKey();
+                comSongDisplay1.increaseCapo();
             else if (e.Modifiers == Keys.Shift && e.KeyCode == Keys.OemMinus)
-                comSongDisplay1.decreaseKey();
-            else if (e.Modifiers == Keys.Control && e.KeyCode == Keys.W)
-                comSongDisplay1.toggleWords();
-            else if (e.Modifiers == Keys.Control && e.KeyCode == Keys.C)
-                comSongDisplay1.toggleChords();
-            else if (e.Modifiers == Keys.Control && e.KeyCode == Keys.N)
-                comSongDisplay1.toggleNotes();
+                comSongDisplay1.decreaseCapo();
             else if (e.KeyCode == Keys.Oemplus || e.KeyCode == Keys.Add)
                 comSongDisplay1.increaseFontSize();
             else if (e.KeyCode == Keys.OemMinus || e.KeyCode == Keys.Subtract)
@@ -107,35 +108,26 @@ namespace OpenChords.Forms
                 comSongDisplay1.previousSong();
             else if (e.KeyCode == Keys.PageDown)
                 comSongDisplay1.nextSong();
-            else if (e.KeyCode == Keys.L)
-                showSongList();
-
-            
-
         }
 
-  
-        private void showSongList()
+
+        private void toggleSongList()
         {
             songListToolStripMenuItem.ShowDropDown();
             var currentSong = comSongDisplay1.getCurrentSong();
-            for (int i=0; i < songListToolStripMenuItem.DropDownItems.Count; i++)
+            for (int i = 0; i < songListToolStripMenuItem.DropDownItems.Count; i++)
             {
                 ToolStripItem item = (ToolStripItem)songListToolStripMenuItem.DropDownItems[i];
                 if (item.Text == currentSong)
                     item.Select();
             }
         }
-        
+
         private void DisplayForm2_Load(object sender, EventArgs e)
         {
             this.Focus();
         }
 
-        private void exitToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            comSongDisplay1.drawSong();
-        }
 
         private void increaseSizeToolStripMenuItem_Click(object sender, EventArgs e)
         {
@@ -202,11 +194,28 @@ namespace OpenChords.Forms
             comSongDisplay1.moveToPreviousSlideOrSong();
         }
 
-        private void exitToolStripMenuItem1_Click(object sender, EventArgs e)
+        private void refreshToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+
+            comSongDisplay1.refresh();
+            comSongDisplay1.drawSong();
+        }
+
+        private void exitToolStripMenuItem_Click(object sender, EventArgs e)
         {
             this.Close();
         }
 
-  
+        private void toggleSharpsFlatsToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            comSongDisplay1.toggleSharpsAndFlats();
+        }
+
+        private void toggleSongListToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            toggleSongList();
+        }
+
+        
     }
 }

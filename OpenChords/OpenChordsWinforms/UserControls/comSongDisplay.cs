@@ -167,6 +167,7 @@ namespace OpenChords.UserControls
         {
             var currentSong = _set.songList[SongIndex];
             currentSong.transposeKeyUp();
+            currentSong.saveSong();
             drawSong();
         }
 
@@ -174,6 +175,7 @@ namespace OpenChords.UserControls
         {
             var currentSong = _set.songList[SongIndex];
             currentSong.transposeKeyDown();
+            currentSong.saveSong();
             drawSong();
         }
 
@@ -181,6 +183,7 @@ namespace OpenChords.UserControls
         {
             var currentSong = _set.songList[SongIndex];
             currentSong.capoUp();
+            currentSong.saveSong();
             drawSong();
         }
 
@@ -188,6 +191,7 @@ namespace OpenChords.UserControls
         {
             var currentSong = _set.songList[SongIndex];
             currentSong.capoDown();
+            currentSong.saveSong();
             drawSong();
         }
 
@@ -207,6 +211,17 @@ namespace OpenChords.UserControls
         {
             _displaySettings.ShowNotes = !_displaySettings.ShowNotes;
             drawSong();
+        }
+
+        internal void toggleSharpsAndFlats()
+        {
+            var currentSong = _set.songList[SongIndex];
+            currentSong.PreferFlats = !currentSong.PreferFlats;
+            currentSong.transposeKeyUp();
+            currentSong.transposeKeyDown();
+            currentSong.saveSong();
+            drawSong();
+            
         }
 
         internal void nextSong()
@@ -236,6 +251,11 @@ namespace OpenChords.UserControls
         {
             var songName = _set.songNames[SongIndex];
             return songName;
+        }
+
+        internal void refresh()
+        {
+            _set.loadAllSongs();
         }
     }
 }

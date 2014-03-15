@@ -28,7 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.exitToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.refreshToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.sizeToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.increaseSizeToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.decreaseSizeToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -41,6 +41,7 @@
             this.showHideChordsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.showHideLyricsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.showHideNotesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.toggleSharpsFlatsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.navigationToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.nextSongToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.previousSongToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -48,21 +49,23 @@
             this.previousPageToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.OpenChordsMenuStrip2 = new System.Windows.Forms.MenuStrip();
             this.songListToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.exitToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
+            this.exitToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.comSongDisplay1 = new OpenChords.UserControls.comSongDisplay();
             this.OpenChordsMenuStrip2.SuspendLayout();
             this.SuspendLayout();
             // 
-            // exitToolStripMenuItem
+            // refreshToolStripMenuItem
             // 
-            this.exitToolStripMenuItem.Name = "exitToolStripMenuItem";
-            this.exitToolStripMenuItem.ShortcutKeyDisplayString = "F5";
-            this.exitToolStripMenuItem.Size = new System.Drawing.Size(58, 20);
-            this.exitToolStripMenuItem.Text = "Refresh";
-            this.exitToolStripMenuItem.Click += new System.EventHandler(this.exitToolStripMenuItem_Click);
+            this.refreshToolStripMenuItem.Name = "refreshToolStripMenuItem";
+            this.refreshToolStripMenuItem.ShortcutKeyDisplayString = "F5";
+            this.refreshToolStripMenuItem.ShortcutKeys = System.Windows.Forms.Keys.F5;
+            this.refreshToolStripMenuItem.Size = new System.Drawing.Size(58, 20);
+            this.refreshToolStripMenuItem.Text = "Refresh";
+            this.refreshToolStripMenuItem.Click += new System.EventHandler(this.refreshToolStripMenuItem_Click);
             // 
             // sizeToolStripMenuItem
             // 
+            this.sizeToolStripMenuItem.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
             this.sizeToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.increaseSizeToolStripMenuItem,
             this.decreaseSizeToolStripMenuItem});
@@ -136,7 +139,8 @@
             this.visibilityToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.showHideChordsToolStripMenuItem,
             this.showHideLyricsToolStripMenuItem,
-            this.showHideNotesToolStripMenuItem});
+            this.showHideNotesToolStripMenuItem,
+            this.toggleSharpsFlatsToolStripMenuItem});
             this.visibilityToolStripMenuItem.Name = "visibilityToolStripMenuItem";
             this.visibilityToolStripMenuItem.Size = new System.Drawing.Size(63, 20);
             this.visibilityToolStripMenuItem.Text = "Visibility";
@@ -144,26 +148,37 @@
             // showHideChordsToolStripMenuItem
             // 
             this.showHideChordsToolStripMenuItem.Name = "showHideChordsToolStripMenuItem";
-            this.showHideChordsToolStripMenuItem.ShortcutKeyDisplayString = "Ctrl+C";
-            this.showHideChordsToolStripMenuItem.Size = new System.Drawing.Size(216, 22);
+            this.showHideChordsToolStripMenuItem.ShortcutKeyDisplayString = "";
+            this.showHideChordsToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.C)));
+            this.showHideChordsToolStripMenuItem.Size = new System.Drawing.Size(218, 22);
             this.showHideChordsToolStripMenuItem.Text = "Show/Hide Chords";
             this.showHideChordsToolStripMenuItem.Click += new System.EventHandler(this.showHideChordsToolStripMenuItem_Click);
             // 
             // showHideLyricsToolStripMenuItem
             // 
             this.showHideLyricsToolStripMenuItem.Name = "showHideLyricsToolStripMenuItem";
-            this.showHideLyricsToolStripMenuItem.ShortcutKeyDisplayString = "Ctrl+W";
-            this.showHideLyricsToolStripMenuItem.Size = new System.Drawing.Size(216, 22);
+            this.showHideLyricsToolStripMenuItem.ShortcutKeyDisplayString = "";
+            this.showHideLyricsToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.W)));
+            this.showHideLyricsToolStripMenuItem.Size = new System.Drawing.Size(218, 22);
             this.showHideLyricsToolStripMenuItem.Text = "Show/Hide Lyrics";
             this.showHideLyricsToolStripMenuItem.Click += new System.EventHandler(this.showHideLyricsToolStripMenuItem_Click);
             // 
             // showHideNotesToolStripMenuItem
             // 
             this.showHideNotesToolStripMenuItem.Name = "showHideNotesToolStripMenuItem";
-            this.showHideNotesToolStripMenuItem.ShortcutKeyDisplayString = "Ctrl+N";
-            this.showHideNotesToolStripMenuItem.Size = new System.Drawing.Size(216, 22);
+            this.showHideNotesToolStripMenuItem.ShortcutKeyDisplayString = "";
+            this.showHideNotesToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.N)));
+            this.showHideNotesToolStripMenuItem.Size = new System.Drawing.Size(218, 22);
             this.showHideNotesToolStripMenuItem.Text = "Show/Hide Notes";
             this.showHideNotesToolStripMenuItem.Click += new System.EventHandler(this.showHideNotesToolStripMenuItem_Click);
+            // 
+            // toggleSharpsFlatsToolStripMenuItem
+            // 
+            this.toggleSharpsFlatsToolStripMenuItem.Name = "toggleSharpsFlatsToolStripMenuItem";
+            this.toggleSharpsFlatsToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.S)));
+            this.toggleSharpsFlatsToolStripMenuItem.Size = new System.Drawing.Size(218, 22);
+            this.toggleSharpsFlatsToolStripMenuItem.Text = "Toggle Sharps/Flats";
+            this.toggleSharpsFlatsToolStripMenuItem.Click += new System.EventHandler(this.toggleSharpsFlatsToolStripMenuItem_Click);
             // 
             // navigationToolStripMenuItem
             // 
@@ -211,13 +226,13 @@
             // OpenChordsMenuStrip2
             // 
             this.OpenChordsMenuStrip2.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.exitToolStripMenuItem,
+            this.refreshToolStripMenuItem,
             this.sizeToolStripMenuItem,
             this.keyToolStripMenuItem,
             this.visibilityToolStripMenuItem,
             this.navigationToolStripMenuItem,
             this.songListToolStripMenuItem,
-            this.exitToolStripMenuItem1});
+            this.exitToolStripMenuItem});
             this.OpenChordsMenuStrip2.Location = new System.Drawing.Point(0, 0);
             this.OpenChordsMenuStrip2.Name = "OpenChordsMenuStrip2";
             this.OpenChordsMenuStrip2.Size = new System.Drawing.Size(912, 24);
@@ -227,15 +242,16 @@
             // songListToolStripMenuItem
             // 
             this.songListToolStripMenuItem.Name = "songListToolStripMenuItem";
+            this.songListToolStripMenuItem.ShortcutKeyDisplayString = "";
             this.songListToolStripMenuItem.Size = new System.Drawing.Size(67, 20);
             this.songListToolStripMenuItem.Text = "Song List";
             // 
-            // exitToolStripMenuItem1
+            // exitToolStripMenuItem
             // 
-            this.exitToolStripMenuItem1.Name = "exitToolStripMenuItem1";
-            this.exitToolStripMenuItem1.Size = new System.Drawing.Size(37, 20);
-            this.exitToolStripMenuItem1.Text = "Exit";
-            this.exitToolStripMenuItem1.Click += new System.EventHandler(this.exitToolStripMenuItem1_Click);
+            this.exitToolStripMenuItem.Name = "exitToolStripMenuItem";
+            this.exitToolStripMenuItem.Size = new System.Drawing.Size(37, 20);
+            this.exitToolStripMenuItem.Text = "Exit";
+            this.exitToolStripMenuItem.Click += new System.EventHandler(this.exitToolStripMenuItem_Click);
             // 
             // comSongDisplay1
             // 
@@ -272,7 +288,7 @@
         #endregion
 
         private UserControls.comSongDisplay comSongDisplay1;
-        private System.Windows.Forms.ToolStripMenuItem exitToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem refreshToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem sizeToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem increaseSizeToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem decreaseSizeToolStripMenuItem;
@@ -291,8 +307,9 @@
         private System.Windows.Forms.ToolStripMenuItem nextPageToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem previousPageToolStripMenuItem;
         private System.Windows.Forms.MenuStrip OpenChordsMenuStrip2;
-        private System.Windows.Forms.ToolStripMenuItem exitToolStripMenuItem1;
+        private System.Windows.Forms.ToolStripMenuItem exitToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem songListToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem toggleSharpsFlatsToolStripMenuItem;
 
 
 

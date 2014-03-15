@@ -48,7 +48,7 @@ namespace OpenChords.Functions
             var searchCriteriaList = getSearchCriteriaList(searchCriteria);
 			
 			//search each song for the required criteria
-			Song tempSong;
+			//Song tempSong;
 			foreach (string songName in songlist)
 			{
                 var songFound = performSearch(searchCriteriaList, songName);

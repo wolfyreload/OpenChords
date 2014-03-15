@@ -9,13 +9,10 @@
 using System;
 using OpenChords.Functions;
 using OpenChords.IO;
-
 using System.Runtime.Serialization;
 using System.Xml.Serialization;
 using System.Windows.Forms;
 using System.Collections.Generic;
-
-using System.Xml.Serialization;
 using System.Drawing;
 using System.Text;
 
