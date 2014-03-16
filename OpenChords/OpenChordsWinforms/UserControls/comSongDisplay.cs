@@ -19,7 +19,9 @@ namespace OpenChords.UserControls
         private int _maxSongIndex;
         private int _currentScreenIndex;
         private int _maxScreenIndex;
-        
+        private bool songRendered = false;
+        private SongElementFormat order2Formatter;
+
         public comSongDisplay()
         {
             InitializeComponent();
@@ -65,8 +67,7 @@ namespace OpenChords.UserControls
             return flow;
         }
 
-        private bool songRendered = false;
-        private SongElementFormat order2Formatter;
+
         public void renderSongInMemory()
         {
             pnlLyrics.Controls.Clear();
@@ -86,7 +87,9 @@ namespace OpenChords.UserControls
                 screen.Controls.Add(renderedVerse);
                 if (!VerseVisible(renderedVerse))
                 {
+                    var partial = new UserControls.comSongVersePartial(songVerse, _displaySettings);
                     screen.Controls.RemoveAt(versesOnScreenCounter);
+                    screen.Controls.Add(partial);
                     screen = createNewScreen();
                     screen.Controls.Add(renderedVerse);
                     versesOnScreenCounter = 0;
@@ -143,10 +146,13 @@ namespace OpenChords.UserControls
                     }
                     else
                     {
-                        graphicsObj.DrawString(orderElements[index], order2Formatter.Font, order1Formatter.Brush, x, y);
+                        graphicsObj.DrawString(orderElements[index], order1Formatter.Font, order1Formatter.Brush, x, y);
                         x += graphicsObj.MeasureString(orderElements[index], order1Formatter.Font).Width+10;
-                    }    
-                    index++;
+                    }
+
+                    var isSongVerse = pnlLyrics.Controls[i].Controls[j] is UserControls.comSongVersePartial;
+                    if (!isSongVerse)
+                        index++;
                 }
             }
 

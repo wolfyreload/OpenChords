@@ -122,6 +122,9 @@
     <Compile Include="UserControls\comSongDisplay.Designer.cs">
       <DependentUpon>comSongDisplay.cs</DependentUpon>
     </Compile>
+    <Compile Include="UserControls\comSongVersePartial.cs">
+      <SubType>Component</SubType>
+    </Compile>
     <Compile Include="UserControls\comSongVerse.cs">
       <SubType>Component</SubType>
     </Compile>

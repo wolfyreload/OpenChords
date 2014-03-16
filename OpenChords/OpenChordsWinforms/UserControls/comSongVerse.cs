@@ -18,7 +18,7 @@ namespace OpenChords.UserControls
         }
 
         private System.Drawing.Bitmap songBitmap;
-        private SongVerse _verse;
+        protected SongVerse _verse;
         private DisplayAndPrintSettings _displaySettings;
         private Graphics graphics;
         SongElementFormat lyricsFormattor;
