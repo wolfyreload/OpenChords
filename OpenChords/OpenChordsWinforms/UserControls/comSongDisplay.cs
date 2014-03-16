@@ -138,20 +138,20 @@ namespace OpenChords.UserControls
                 var visible = screen.Visible;
                 for (int j = 0; j < screen.Controls.Count; j++)
                 {
-                    
-                    if (visible)
+                    var isNotPartialSongVerse = !(pnlLyrics.Controls[i].Controls[j] is UserControls.comSongVersePartial);
+
+                    if (visible && isNotPartialSongVerse)
                     {
                         graphicsObj.DrawString(orderElements[index], order2Formatter.Font, order2Formatter.Brush, x, y);
                         x += graphicsObj.MeasureString(orderElements[index], order2Formatter.Font).Width+10;
                     }
-                    else
+                    else if (isNotPartialSongVerse)
                     {
                         graphicsObj.DrawString(orderElements[index], order1Formatter.Font, order1Formatter.Brush, x, y);
                         x += graphicsObj.MeasureString(orderElements[index], order1Formatter.Font).Width+10;
                     }
 
-                    var isSongVerse = pnlLyrics.Controls[i].Controls[j] is UserControls.comSongVersePartial;
-                    if (!isSongVerse)
+                    if (isNotPartialSongVerse)
                         index++;
                 }
             }
@@ -167,37 +167,61 @@ namespace OpenChords.UserControls
         }
 
         public void moveToNextSlideOrSong()
-        {            
-            var nextScreenIndex = _currentScreenIndex + 1;
-
-            if (nextScreenIndex <= _maxScreenIndex)
-            {
-                pnlLyrics.Controls[_currentScreenIndex].Visible = false;
-                pnlLyrics.Controls[nextScreenIndex].Visible = true;
-                _currentScreenIndex++;
-                this.Invalidate();
-            }
-            else
+        {
+            if (_currentScreenIndex >= _maxScreenIndex)
             {
                 nextSong();
+                return;
             }
+
+            //calculate what the next slide will be
+            var nextScreenIndex = _currentScreenIndex + 1;
+
+            //make the current slide invisible
+            if (_maxScreenIndex >= _currentScreenIndex)
+                pnlLyrics.Controls[_currentScreenIndex].Visible = false;
+
+
+            //make the next slide visible and reset the screen
+            if (_maxScreenIndex >= nextScreenIndex && nextScreenIndex >= 0)
+            {
+                pnlLyrics.Controls[nextScreenIndex].Visible = true;
+                this.Invalidate();
+            }
+
+            //finally we change to the set the current screen index back
+            _currentScreenIndex++;
+
+
         }
 
         public void moveToPreviousSlideOrSong()
         {
-            var nextScreenIndex = _currentScreenIndex - 1;
-
-            if (_maxSongIndex >= nextScreenIndex && nextScreenIndex >= 0)
-            {
-                pnlLyrics.Controls[_currentScreenIndex].Visible = false;
-                pnlLyrics.Controls[nextScreenIndex].Visible = true;
-                _currentScreenIndex--;
-                this.Invalidate();
-            }
-            else
+            //if we on the first screen go to the previous song
+            if (_currentScreenIndex == 0)
             {
                 previousSong();
+                return;
             }
+
+            //otherwise we calculate what the next slide will be
+            var nextScreenIndex = _currentScreenIndex - 1;
+
+            //make the current slide invisible
+            if (_maxScreenIndex >= _currentScreenIndex)
+                pnlLyrics.Controls[_currentScreenIndex].Visible = false;
+                
+
+            //make the next slide visible and reset the screen
+            if (_maxScreenIndex >= nextScreenIndex && nextScreenIndex >= 0)
+            {
+                pnlLyrics.Controls[nextScreenIndex].Visible = true;
+                this.Invalidate();
+            }
+
+            //finally we change to the set the current screen index back
+            _currentScreenIndex--;
+            
         }
 
         public void increaseFontSize()
@@ -210,7 +234,11 @@ namespace OpenChords.UserControls
         public void decreaseFontSize()
         {
             _displaySettings.desceaseSizes();
-            songRendered = false;
+            renderSongInMemory();
+            if (_currentScreenIndex > _maxScreenIndex)
+            {
+                _currentScreenIndex = _maxScreenIndex;
+            }
             drawSong();
         }
 

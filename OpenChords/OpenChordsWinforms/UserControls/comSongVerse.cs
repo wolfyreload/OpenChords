@@ -58,8 +58,10 @@ namespace OpenChords.UserControls
             _lyricsSize = calculateLyricsSize(lyricsFormattor, _verse.Lyrics, _verse.IsChord);
 
             if (_displaySettings.ShowNotes ?? false)
+            {
+                fixNoteLength();
                 _notesSize = calculateSize(notesFormattor, _verse.Notes);
-            
+            }
 
             Width = _notesSize.Width + _lyricsSize.Width + 30;
             Height = (_notesSize.Height > _lyricsSize.Height) ? _notesSize.Height + _headingSize.Height : _lyricsSize.Height + _headingSize.Height;
@@ -74,6 +76,25 @@ namespace OpenChords.UserControls
             drawNotes();
             drawVerse();
             graphics.Dispose();
+        }
+
+        private void fixNoteLength()
+        {
+            StringBuilder sb = new StringBuilder();
+            StringBuilder line = new StringBuilder();
+            string[] words = _verse.Notes.Split(new string[] { " " }, StringSplitOptions.RemoveEmptyEntries);
+            foreach (var word in words)
+            {
+                line.Append(word + " ");
+                if (line.Length >= _displaySettings.NoteWidth)
+                {
+                    sb.AppendLine(line.ToString());
+                    line.Length = 0;
+                }
+            }
+            sb.AppendLine(line.ToString());
+            _verse.Notes = sb.ToString();
+
         }
 
         protected override void OnPaint(PaintEventArgs e)
@@ -94,7 +115,7 @@ namespace OpenChords.UserControls
             var lines = text.Split(new string[] {"\r\n"}, StringSplitOptions.None);
             
             Size size = TextRenderer.MeasureText(text, formatter.Font, new Size(10,10), TextFormatFlags.LeftAndRightPadding);
-            size.Width += 10;
+            size.Width += 20;
             size.Height = lines.Length * (int)Math.Ceiling(formatter.FontSize) + 5;
             return size;
         }
@@ -131,8 +152,11 @@ namespace OpenChords.UserControls
 
         private void drawNotes()
         {
+
             if (_displaySettings.ShowNotes ?? false)
-                graphics.DrawString(_verse.Notes, notesFormattor.Font, notesFormattor.Brush, _lyricsSize.Width+20, heightPosition);
+            {
+                graphics.DrawString(_verse.Notes, notesFormattor.Font, notesFormattor.Brush, _lyricsSize.Width + 20, heightPosition);
+            }
         }
 
         

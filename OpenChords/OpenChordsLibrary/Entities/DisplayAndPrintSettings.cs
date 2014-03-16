@@ -290,7 +290,7 @@ namespace OpenChords.Entities
                 OrderColor2 = ColorTranslator.FromHtml("#FFFF80");
                 NoteColor = ColorTranslator.FromHtml("#80FF80");
 
-                NoteWidth = (int)adjustForLowerResolutions2(188);
+                NoteWidth = 20;
 
                 BoldChords = true;
                 BoldLyrics = true;

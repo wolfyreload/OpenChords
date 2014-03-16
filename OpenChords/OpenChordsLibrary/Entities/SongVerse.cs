@@ -9,7 +9,7 @@ namespace OpenChords.Entities
     public class SongVerse
     {
         public string Header { get; private set; }
-        public string Notes { get; private set; }
+        public string Notes { get; set; }
         public List<string> Lyrics { get; private set; }
         public List<bool> IsChord { get; private set; }
         public bool isElementDisplayed { get; set; }
