@@ -342,6 +342,7 @@ namespace OpenChords.UserControls
         internal void changeToSong(string p)
         {
             var index = _set.songNames.IndexOf(p);
+            _currentScreenIndex = 0;
             _songIndex = index;
             songRendered = false;
             drawSong();

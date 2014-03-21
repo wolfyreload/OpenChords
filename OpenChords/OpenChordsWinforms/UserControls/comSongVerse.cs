@@ -57,7 +57,7 @@ namespace OpenChords.UserControls
             
             _lyricsSize = calculateLyricsSize(lyricsFormattor, _verse.Lyrics, _verse.IsChord);
 
-            if (_displaySettings.ShowNotes ?? false)
+            if (_verse.Notes.Trim() != "" && (_displaySettings.ShowNotes ?? false))
             {
                 fixNoteLength();
                 _notesSize = calculateSize(notesFormattor, _verse.Notes);
