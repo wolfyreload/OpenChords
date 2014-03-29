@@ -167,6 +167,9 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
+    <EmbeddedResource Include="Forms\Custom Controls\FileSettingsPanel.resx">
+      <DependentUpon>FileSettingsPanel.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Forms\DisplayForm2.resx">
       <DependentUpon>DisplayForm2.cs</DependentUpon>
     </EmbeddedResource>

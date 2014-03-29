@@ -54,8 +54,8 @@
             this.flowLayoutPanel2 = new System.Windows.Forms.FlowLayoutPanel();
             this.flowLayoutPanel3 = new System.Windows.Forms.FlowLayoutPanel();
             this.flowLayoutPanel4 = new System.Windows.Forms.FlowLayoutPanel();
-            this.flowLayoutPanel5 = new System.Windows.Forms.FlowLayoutPanel();
             this.chkPortableMode = new System.Windows.Forms.CheckBox();
+            this.flowLayoutPanel5 = new System.Windows.Forms.FlowLayoutPanel();
             ((System.ComponentModel.ISupportInitialize)(this.imgSettingsFolder)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.imgApplicationDataFolder)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.imgFileSyncFolder)).BeginInit();
@@ -70,8 +70,8 @@
             // 
             // imgSettingsFolder
             // 
-            this.imgSettingsFolder.Image = Properties.Resources.Explore;
-            this.imgSettingsFolder.InitialImage = Properties.Resources.Explore;
+            this.imgSettingsFolder.Image = ((System.Drawing.Image)(resources.GetObject("imgSettingsFolder.Image")));
+            this.imgSettingsFolder.InitialImage = ((System.Drawing.Image)(resources.GetObject("imgSettingsFolder.InitialImage")));
             this.imgSettingsFolder.Location = new System.Drawing.Point(608, 3);
             this.imgSettingsFolder.Name = "imgSettingsFolder";
             this.imgSettingsFolder.Size = new System.Drawing.Size(20, 20);
@@ -82,8 +82,8 @@
             // 
             // imgApplicationDataFolder
             // 
-            this.imgApplicationDataFolder.Image = Properties.Resources.Explore;
-            this.imgApplicationDataFolder.InitialImage = Properties.Resources.Explore;
+            this.imgApplicationDataFolder.Image = ((System.Drawing.Image)(resources.GetObject("imgApplicationDataFolder.Image")));
+            this.imgApplicationDataFolder.InitialImage = ((System.Drawing.Image)(resources.GetObject("imgApplicationDataFolder.InitialImage")));
             this.imgApplicationDataFolder.Location = new System.Drawing.Point(608, 29);
             this.imgApplicationDataFolder.Name = "imgApplicationDataFolder";
             this.imgApplicationDataFolder.Size = new System.Drawing.Size(20, 20);
@@ -152,8 +152,8 @@
             // 
             // imgFileSyncFolder
             // 
-            this.imgFileSyncFolder.Image = Properties.Resources.Explore;
-            this.imgFileSyncFolder.InitialImage = Properties.Resources.Explore;
+            this.imgFileSyncFolder.Image = ((System.Drawing.Image)(resources.GetObject("imgFileSyncFolder.Image")));
+            this.imgFileSyncFolder.InitialImage = ((System.Drawing.Image)(resources.GetObject("imgFileSyncFolder.InitialImage")));
             this.imgFileSyncFolder.Location = new System.Drawing.Point(608, 3);
             this.imgFileSyncFolder.Name = "imgFileSyncFolder";
             this.imgFileSyncFolder.Size = new System.Drawing.Size(20, 20);
@@ -181,8 +181,8 @@
             // 
             // imgOpenSongExecutableFolder
             // 
-            this.imgOpenSongExecutableFolder.Image = Properties.Resources.Explore;
-            this.imgOpenSongExecutableFolder.InitialImage = Properties.Resources.Explore;
+            this.imgOpenSongExecutableFolder.Image = ((System.Drawing.Image)(resources.GetObject("imgOpenSongExecutableFolder.Image")));
+            this.imgOpenSongExecutableFolder.InitialImage = ((System.Drawing.Image)(resources.GetObject("imgOpenSongExecutableFolder.InitialImage")));
             this.imgOpenSongExecutableFolder.Location = new System.Drawing.Point(608, 3);
             this.imgOpenSongExecutableFolder.Name = "imgOpenSongExecutableFolder";
             this.imgOpenSongExecutableFolder.Size = new System.Drawing.Size(20, 20);
@@ -193,8 +193,8 @@
             // 
             // imgOpenSongSetsFolder
             // 
-            this.imgOpenSongSetsFolder.Image = Properties.Resources.Explore;
-            this.imgOpenSongSetsFolder.InitialImage = Properties.Resources.Explore;
+            this.imgOpenSongSetsFolder.Image = ((System.Drawing.Image)(resources.GetObject("imgOpenSongSetsFolder.Image")));
+            this.imgOpenSongSetsFolder.InitialImage = ((System.Drawing.Image)(resources.GetObject("imgOpenSongSetsFolder.InitialImage")));
             this.imgOpenSongSetsFolder.Location = new System.Drawing.Point(608, 29);
             this.imgOpenSongSetsFolder.Name = "imgOpenSongSetsFolder";
             this.imgOpenSongSetsFolder.Size = new System.Drawing.Size(20, 20);
@@ -238,6 +238,7 @@
             this.txtWelcomeSlideName.Name = "txtWelcomeSlideName";
             this.txtWelcomeSlideName.Size = new System.Drawing.Size(453, 20);
             this.txtWelcomeSlideName.TabIndex = 3;
+            this.txtWelcomeSlideName.Visible = false;
             // 
             // label29
             // 
@@ -258,6 +259,7 @@
             this.label31.TabIndex = 8;
             this.label31.Text = "Welcome Slide Name";
             this.label31.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.label31.Visible = false;
             // 
             // txtOpenSongSetsAndSongs
             // 
@@ -329,6 +331,19 @@
             this.flowLayoutPanel4.Size = new System.Drawing.Size(643, 103);
             this.flowLayoutPanel4.TabIndex = 19;
             // 
+            // chkPortableMode
+            // 
+            this.flowLayoutPanel4.SetFlowBreak(this.chkPortableMode, true);
+            this.chkPortableMode.ForeColor = System.Drawing.Color.White;
+            this.chkPortableMode.Location = new System.Drawing.Point(3, 45);
+            this.chkPortableMode.Name = "chkPortableMode";
+            this.chkPortableMode.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
+            this.chkPortableMode.Size = new System.Drawing.Size(160, 24);
+            this.chkPortableMode.TabIndex = 18;
+            this.chkPortableMode.Text = "Portable Mode";
+            this.chkPortableMode.UseVisualStyleBackColor = true;
+            this.chkPortableMode.CheckedChanged += new System.EventHandler(this.chkPortableMode_CheckedChanged);
+            // 
             // flowLayoutPanel5
             // 
             this.flowLayoutPanel5.AutoSize = true;
@@ -342,19 +357,6 @@
             this.flowLayoutPanel5.Name = "flowLayoutPanel5";
             this.flowLayoutPanel5.Size = new System.Drawing.Size(649, 313);
             this.flowLayoutPanel5.TabIndex = 20;
-            // 
-            // chkPortableMode
-            // 
-            this.flowLayoutPanel4.SetFlowBreak(this.chkPortableMode, true);
-            this.chkPortableMode.ForeColor = System.Drawing.Color.White;
-            this.chkPortableMode.Location = new System.Drawing.Point(3, 45);
-            this.chkPortableMode.Name = "chkPortableMode";
-            this.chkPortableMode.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
-            this.chkPortableMode.Size = new System.Drawing.Size(160, 24);
-            this.chkPortableMode.TabIndex = 18;
-            this.chkPortableMode.Text = "Portable Mode";
-            this.chkPortableMode.UseVisualStyleBackColor = true;
-            this.chkPortableMode.CheckedChanged += new System.EventHandler(this.chkPortableMode_CheckedChanged);
             // 
             // FileSettingsPanel
             // 

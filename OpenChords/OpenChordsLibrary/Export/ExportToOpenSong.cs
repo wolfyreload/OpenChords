@@ -95,13 +95,13 @@ namespace OpenChords.Export
         {
             try
             {
-                var filename =Settings.ExtAppsAndDir.openSongSetFolder + set.setName;
+                var filename = Settings.ExtAppsAndDir.openSongSetFolder + set.setName;
 
                 Entities.FileAndFolderSettings settings = Entities.FileAndFolderSettings.loadSettings();
 
                 if (settings.OpenSongUseWelcomeSlide)
-                    set.addSongToSet(0, Song.loadSong(settings.OpenSongWelcomeSlide));
-
+                    set.xmlSetSongCollection.Insert(0, new XmlSetSong("Welcome"));   
+                
                 SettingsReaderWriter.writeSet(filename, set);
             }
             catch (Exception Ex)

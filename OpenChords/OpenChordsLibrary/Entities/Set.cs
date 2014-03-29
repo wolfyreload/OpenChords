@@ -66,6 +66,11 @@ namespace OpenChords.Entities
             }
         }
 
+        public void Insert(int index, XmlSetSong song)
+        {
+            setSongs.Insert(index, song);
+        }
+
         internal List<string> listOfSongNames()
         {
             return setSongs.Select(s => s.name).ToList();
