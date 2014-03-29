@@ -71,7 +71,7 @@ namespace OpenChords.Forms
 		private void updateSetsListBox()
 		{
 			listSet.Items.Clear();
-			listSet.Items.AddRange(currentSet.songNames.ToArray());
+			listSet.Items.AddRange(currentSet.songList.Select(s => s.title).ToArray());
 			int index = currentSet.indexOfCurrentSong;
 			if (index > -1 && index < currentSet.songSetSize)
 				listSet.SelectedIndex = currentSet.indexOfCurrentSong;
@@ -354,7 +354,7 @@ namespace OpenChords.Forms
 		private void updateSetListbox()
 		{
 			listSet.Items.Clear();
-			listSet.Items.AddRange(currentSet.songNames.ToArray());
+			listSet.Items.AddRange(currentSet.songList.Select(s => s.title).ToArray());
 			
 		}
 		

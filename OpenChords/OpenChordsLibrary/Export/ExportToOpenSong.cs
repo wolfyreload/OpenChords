@@ -58,8 +58,10 @@ namespace OpenChords.Export
         {
             string source =Settings.ExtAppsAndDir.songsFolder;
             string destination =Settings.ExtAppsAndDir.opensongSongsFolder;
-            foreach (string filename in set.songNames)
+
+            foreach (var songs in set.songList)
             {
+                var filename = songs.title;
                 var sourceFile = source + filename;
                 var destinationFile = destination + filename;
                 File.Copy(sourceFile, destinationFile, true);
@@ -94,38 +96,13 @@ namespace OpenChords.Export
             try
             {
                 var filename =Settings.ExtAppsAndDir.openSongSetFolder + set.setName;
+
                 Entities.FileAndFolderSettings settings = Entities.FileAndFolderSettings.loadSettings();
-                string path = "OpenChords/";
 
-                String Header = "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\r\n";
-                XElement Contents = new XElement("set");
-                Contents.SetAttributeValue("name", set.setName);
-                XElement songAttributes = new XElement("slide_groups");
-                Contents.Add(songAttributes);
-
-                //use welcome slide if its there and if we want it
                 if (settings.OpenSongUseWelcomeSlide)
-                {
-                    XElement temp = new XElement("slide_group");
-                    temp.SetAttributeValue("name", "welcome");
-                    temp.SetAttributeValue("type", "song");
-                    temp.SetAttributeValue("presentation", "");
-                    temp.SetAttributeValue("path", path);
+                    set.addSongToSet(0, Song.loadSong(settings.OpenSongWelcomeSlide));
 
-                    songAttributes.Add(temp);
-                }
-
-                for (int i = 0; i < set.songNames.Count; i++)
-                {
-                    XElement temp = new XElement("slide_group");
-                    temp.SetAttributeValue("name", set.songNames[i]);
-                    temp.SetAttributeValue("type", "song");
-                    temp.SetAttributeValue("presentation", "");
-                    temp.SetAttributeValue("path", path);
-
-                    songAttributes.Add(temp);
-                }
-                FileReaderWriter.writeToFile(filename, Header + Contents.ToString());
+                SettingsReaderWriter.writeSet(filename, set);
             }
             catch (Exception Ex)
             {

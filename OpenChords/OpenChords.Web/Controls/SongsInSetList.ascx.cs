@@ -29,9 +29,9 @@ namespace OpenChords.Web.Controls
             set { this.ViewState["SongsInSet_SetName"] = value; } 
         }
 
-        public List<string> SongsIncurrentSet
+        public OpenChords.Entities.Set CurrentSet
         {
-            get { return (List<string>)(this.ViewState["SongsInSet_CurrentSet"]); }
+            get { return (OpenChords.Entities.Set)(this.ViewState["SongsInSet_CurrentSet"]); }
             set { this.ViewState["SongsInSet_CurrentSet"] = value; }
         }
 
@@ -52,47 +52,43 @@ namespace OpenChords.Web.Controls
 
         protected void lstViewSongs_DataBinding(object sender, EventArgs e)
         {
-            var source = SongsIncurrentSet.Select(s => new RandomMappingClass() { Name = s });
+            var source = CurrentSet.songList;
             lstViewSongs.DataSource = source;
         }
 
         public void AddSong(string songName)
         {
-            SongsIncurrentSet.Add(songName);
-            lstViewSongs.SelectedIndex = SongsIncurrentSet.Count - 1;
+            CurrentSet.addSongToSet(songName);
+            lstViewSongs.SelectedIndex = CurrentSet.indexOfCurrentSong;
             lstViewSongs.DataBind();
         }
 
         public void RemoveSong()
         {
             var index = lstViewSongs.SelectedIndex;
-            if (index < 0 || SongsIncurrentSet.Count==0) return;
-            SongsIncurrentSet.RemoveAt(index);
-            index--;
-            if (index < 0) index = 0;
-            lstViewSongs.SelectedIndex = index;
+            var songName = (string)lstViewSongs.SelectedValue;
+            CurrentSet.removeSongFromSet(index);
+            lstViewSongs.SelectedIndex = CurrentSet.indexOfCurrentSong;
             lstViewSongs.DataBind();
         }
 
         public void MoveSongUp()
         {
             var index = lstViewSongs.SelectedIndex;
-            var song = SongsIncurrentSet[index];
-            SongsIncurrentSet.RemoveAt(index);
+            CurrentSet.indexOfCurrentSong = index;
+            CurrentSet.moveSongUp();
             index--;
-            SongsIncurrentSet.Insert(index, song);
-            lstViewSongs.SelectedIndex = index;
+            lstViewSongs.SelectedIndex = CurrentSet.indexOfCurrentSong;
             lstViewSongs.DataBind();
         }
 
         public void MoveSongDown()
         {
             var index = lstViewSongs.SelectedIndex;
-            var song = SongsIncurrentSet[index];
-            SongsIncurrentSet.RemoveAt(index);
+            CurrentSet.indexOfCurrentSong = index;
+            CurrentSet.moveSongDown();
             index++;
-            SongsIncurrentSet.Insert(index, song);
-            lstViewSongs.SelectedIndex = index;
+            lstViewSongs.SelectedIndex = CurrentSet.indexOfCurrentSong;
             lstViewSongs.DataBind();
         }
 

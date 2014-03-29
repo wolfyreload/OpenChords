@@ -339,19 +339,6 @@ namespace OpenChords.UserControls
         /// finds the song in the set and switches to the song
         /// </summary>
         /// <param name="p"></param>
-        internal void changeToSong(string p)
-        {
-            var index = _set.songNames.IndexOf(p);
-            _currentScreenIndex = 0;
-            _songIndex = index;
-            songRendered = false;
-            drawSong();
-        }
-
-        /// <summary>
-        /// finds the song in the set and switches to the song
-        /// </summary>
-        /// <param name="p"></param>
         internal void changeToSong(int p)
         {
             if (0 <= p && p <= _maxSongIndex)
@@ -364,7 +351,7 @@ namespace OpenChords.UserControls
 
         public string getCurrentSong()
         {
-            var songName = _set.songNames[_songIndex];
+            var songName = _set.songList[_songIndex].title;
             return songName;
         }
 

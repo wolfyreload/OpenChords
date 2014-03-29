@@ -1,4 +1,5 @@
-﻿using System;
+﻿using OpenChords.Entities;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
@@ -57,7 +58,7 @@ namespace OpenChords.Web
             
             SongList.DataBind();
             var currentSet = OpenChords.Entities.Set.loadSet(SetList.SelectedSet);
-            SongsInSetList.SongsIncurrentSet = currentSet.songNames;
+            SongsInSetList.CurrentSet = currentSet;
             SongsInSetList.DataBind();
             setUpAndDownButtons();
             pnlControls1.Visible = true;
@@ -88,8 +89,6 @@ namespace OpenChords.Web
         {
             var currentSet = OpenChords.Entities.Set.loadSet(SetList.SelectedSet);
             currentSet.clearSongSet();
-            foreach (string songTitle in SongsInSetList.SongsIncurrentSet)
-                currentSet.addSongToSet(songTitle);
             currentSet.saveSet();
             hideSetDetails();
         
@@ -152,8 +151,6 @@ namespace OpenChords.Web
         {
             var currentSet = OpenChords.Entities.Set.loadSet(SetList.SelectedSet);
             currentSet.clearSongSet();
-            foreach (string songTitle in SongsInSetList.SongsIncurrentSet)
-                currentSet.addSongToSet(songTitle);
             downloadSet(currentSet);
         }
 

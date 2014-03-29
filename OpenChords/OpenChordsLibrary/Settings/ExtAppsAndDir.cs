@@ -304,8 +304,7 @@ namespace OpenChords.Config
                 Entities.FileAndFolderSettings settings = Entities.FileAndFolderSettings.loadSettings();
 
                 if (!settings.OpenSongUseWelcomeSlide) return null;
-
-                string path = dataFolder + settings.OpenSongWelcomeSlide;
+                string path = songsFolder + settings.OpenSongWelcomeSlide;
                 string fixedPath = fixPaths(path);
                 return fixedPath;
             }

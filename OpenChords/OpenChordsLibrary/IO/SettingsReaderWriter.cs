@@ -37,29 +37,53 @@ namespace OpenChords.IO
 		/// <returns></returns>
 		public static Set readSet(string filename)
 		{
-			Set set = new Set();
-			try
-			{
-				String Contents = FileReaderWriter.readFromFile(filename);
-
-				string[] elements = SongProcessor.multiLineToStringArray(Contents, true);
-				
-				foreach (string element in elements)
-				{
-					if (FileFolderFunctions.isFilePresent(Settings.ExtAppsAndDir.songsFolder + element))
-						set.addSongToSet(element);
-				}
-				
-				return set;
-
-			}
-			catch (Exception Ex)
-			{
-                logger.Error("Error reading set", Ex);
-				return new Set();
-			}
+		    try
+            {
+                XmlSerializer serialiser = new XmlSerializer(typeof(Set));
+                var fileContents = File.ReadAllText(filename);
+                StringReader reader = new StringReader(fileContents);
+                var set = (Set)serialiser.Deserialize(reader);
+                return set;
+            }
+            catch(Exception ex)
+            {
+                logger.Debug("Failed to decode set trying old read method");
+                return readOldSet(filename);
+            }
+            
+            
 		}
-		
+
+        /// <summary>
+        /// reads in the specified song set
+        /// </summary>
+        /// <param name="filename"></param>
+        /// <returns></returns>
+        private static Set readOldSet(string filename)
+        {
+            Set set = new Set();
+            try
+            {
+                String Contents = FileReaderWriter.readFromFile(filename);
+
+                string[] elements = SongProcessor.multiLineToStringArray(Contents, true);
+
+                foreach (string element in elements)
+                {
+                    if (FileFolderFunctions.isFilePresent(Settings.ExtAppsAndDir.songsFolder + element))
+                        set.addSongToSet(element);
+                }
+
+                return set;
+
+            }
+            catch (Exception Ex)
+            {
+                logger.Error("Error reading set", Ex);
+                return new Set();
+            }
+        }
+
 		/// <summary>
 		/// writes the supplied song set to disk
 		/// </summary>
@@ -67,18 +91,14 @@ namespace OpenChords.IO
 		/// <param name="set"></param>
 		public static void writeSet(string filename, Set set)
 		{
-			StringBuilder songList = new StringBuilder();
-			foreach (string song in set.songNames)
-			{
-				songList.Append(song);
-				songList.Append(Environment.NewLine);
-			}
-			
-			//songList.Replace("\r", "\r\n");
-			
 			try
 			{
-				FileReaderWriter.writeToFile(filename, songList.ToString());
+                XmlSerializer serialiser = new XmlSerializer(typeof(Set));
+                FileStream file = new FileStream(filename, FileMode.Create);
+                serialiser.Serialize(file, set);
+                file.Flush();
+                file.Close();
+            
 			}
 			catch (Exception Ex)
 			{

@@ -13,6 +13,7 @@ using System.Windows.Forms;
 
 using OpenChords.Entities;
 using OpenChords.Functions;
+using System.Linq;
 
 
 
@@ -353,7 +354,7 @@ namespace OpenChords.Forms
 		void fillSongList()
 		{
 			listSongs.Items.Clear();
-			listSongs.Items.AddRange(currentSet.songNames.ToArray());
+			listSongs.Items.AddRange(currentSet.songList.Select(s => s.title).ToArray());
 		}
 		
 		

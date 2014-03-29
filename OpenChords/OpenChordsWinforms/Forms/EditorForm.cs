@@ -315,9 +315,10 @@ namespace OpenChords.Forms
             confirmSave();
             var displaySettings = DisplayAndPrintSettings.loadSettings(DisplayAndPrintSettingsType.DisplaySettings);
 			saveState();
-			if (currentSet.songNames.Count > 0)
+			if (currentSet.songList.Count > 0)
 			{
-				currentSet = currentSet.saveAndreloadSet();
+				currentSet.saveSet();
+                currentSet.loadAllSongs();
 				new Forms.DisplayForm2(currentSet, displaySettings).ShowDialog();
 			
 				

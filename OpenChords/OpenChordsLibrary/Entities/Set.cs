@@ -11,10 +11,121 @@ using System.Collections.Generic;
 using System.IO;
 
 using OpenChords.IO;
-
+using System.Xml.Serialization;
+using System.Linq;
 
 namespace OpenChords.Entities
 {
+
+    [Serializable]
+    [XmlRoot("slidegroup")]
+    public class XmlSetSong
+    {
+        [XmlAttribute("name")]
+        public string name;
+        [XmlAttribute("type")]
+        public string type;
+        [XmlAttribute("presentation")]
+        public string presentation;
+        [XmlAttribute("path")]
+        public string path; 
+
+        public XmlSetSong() {
+            type = "song";
+            path="OpenChords/";
+            presentation = "";
+        }
+
+        public XmlSetSong(string songName)
+        {
+            name = songName;
+            type = "song";
+            path = "OpenChords/";
+            presentation = "";
+        }
+    }
+
+    [Serializable]
+    public class XmlSetSongCollection
+    {
+        [XmlElement("slide_group")]
+        public List<XmlSetSong> setSongs;
+
+        public XmlSetSongCollection()
+        {
+            setSongs = new List<XmlSetSong>();
+        }
+
+        public XmlSetSongCollection(List<Song> songs)
+        {
+            setSongs = new List<XmlSetSong>();
+            foreach (Song song in songs)
+            {
+                XmlSetSong temp = new XmlSetSong(song.title);
+                setSongs.Add(temp);
+            }
+        }
+
+        internal List<string> listOfSongNames()
+        {
+            return setSongs.Select(s => s.name).ToList();
+        }
+    }
+
+
+    //public class SongCollection
+    //{
+    //    public void Add(List<Song> songs, XmlSetSong song)
+    //    {
+    //        setSongs.Add(song);
+    //    }
+
+    //    public int LastIndexOf(XmlSetSong song)
+    //    {
+    //        return setSongs.LastIndexOf(song);
+    //    }
+
+    //    public void Remove(string songTitle)
+    //    {
+    //        var song = setSongs.FirstOrDefault(t => t.name == songTitle);
+    //        if (song != null)
+    //            setSongs.Remove(song);
+    //    }
+
+    //    public void Remove(int index)
+    //    {
+    //        setSongs.RemoveAt(index);
+    //    }
+
+    //    public void MoveUp(int index)
+    //    {
+    //        var tempSetSong = setSongs[index];
+    //        //remove the song
+    //        setSongs.RemoveAt(index);
+
+    //        setSongs.Insert(index - 1, tempSetSong);
+    //    }
+
+    //    public void MoveDown(int index)
+    //    {
+    //        var tempSetSong = setSongs[index];
+    //        //remove the song
+    //        setSongs.RemoveAt(index);
+
+    //        setSongs.Insert(index + 1, tempSetSong);
+    //    }
+
+    //    internal List<string> listOfSon0gNames()
+    //    {
+    //        return setSongs.Select(s => s.name).ToList();
+    //    }
+
+    //    internal void Insert(int position, XmlSetSong slide)
+    //    {
+    //        setSongs.Insert(position, slide);
+    //    }
+    //}
+
 	/// <summary>
 	/// Description of Set
 	/// </summary>
@@ -23,21 +134,35 @@ namespace OpenChords.Entities
 	public class Set
 	{
         private static readonly log4net.ILog logger = log4net.LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
-		public string setName;
-		
-		
-		public List<string> songNames;
-		public List<Song> songList;
-		public int indexOfCurrentSong;
-		
+	    [XmlAttribute("name")]
+        public string setName;
+		[XmlElement("slide_groups")]
+        public XmlSetSongCollection xmlSetSongCollection;
+        [XmlIgnore]
+        public int indexOfCurrentSong;
+        [XmlIgnore]
 		public int songSetSize;
-		
+        [XmlIgnore]
 		public bool changeMade {get; set;}
+
+        private List<Song> _songList = null;
+        [XmlIgnore]
+        public List<Song> songList { get
+            {
+                if (_songList == null)
+                    loadAllSongs();
+                return _songList;
+            }
+            set
+            {
+                _songList = value;
+            }
+        }
+
 		
 		public Set()
 		{
-			songNames = new List<string>();
-			songList = new List<Song>();
+            xmlSetSongCollection = new XmlSetSongCollection();
 			indexOfCurrentSong = -1;
 			songSetSize = 0;
 			
@@ -47,42 +172,35 @@ namespace OpenChords.Entities
 		public void addSongToSet(Song song)
 		{
             songList.Add(song);
-            addSongToSet(song.title);
+            indexOfCurrentSong = songList.LastIndexOf(song);
+            songSetSize++;
+            changeMade = true;
 		}
 		
 		public void addSongToSet(string songTitle)
 		{
-			songNames.Add(songTitle);
-			indexOfCurrentSong = songNames.LastIndexOf(songTitle);
-			songSetSize++;
-			
-			changeMade = true;
+            var song = Song.loadSong(songTitle);
+            addSongToSet(song);
 		}
 
+        public void addSongToSet(int position, Song song)
+        {
+            songList.Insert(position, song);
+            indexOfCurrentSong = songList.LastIndexOf(song);
+            songSetSize++;
+            changeMade = true;
+        }
 		public void removeSongFromSet(Song song)
 		{
-			if (songNames.Contains(song.title))
-			{
-                //reverse the songlist
-                songNames.Reverse();
-				songNames.Remove(song.title);
-                //put it the right way around again
-                songNames.Reverse();
-
-				if (indexOfCurrentSong == songSetSize-1)
-					indexOfCurrentSong--;
-				
-				songSetSize--;
-				
-				changeMade = true;
-			}
+            var index = songList.LastIndexOf(song);
+            removeSongFromSet(index);
 		}
 
         public void removeSongFromSet(int index)
         {
-            if (songNames.Count > index && index != -1)
+            if (index != -1)
             {
-                songNames.RemoveAt(index);
+                songList.RemoveAt(index);
                 
                 if (indexOfCurrentSong == songSetSize - 1)
                     indexOfCurrentSong--;
@@ -95,7 +213,7 @@ namespace OpenChords.Entities
 
 		public void clearSongSet()
 		{
-			songNames.Clear();
+            songList = new List<Song>();
 			indexOfCurrentSong = -1;
 			songSetSize = 0;
 			
@@ -107,17 +225,12 @@ namespace OpenChords.Entities
 			int index = indexOfCurrentSong;
 			if (index <= 0)
 				return;
-			
-			//store the song name
-			string tempName = songNames[index];
-			
-			//remove the song
-			songNames.RemoveAt(index);
-			
-			songNames.Insert(index-1,tempName);
-			
-			indexOfCurrentSong = index-1;
-			
+
+            var item = songList[index];
+            songList.RemoveAt(index);
+            index--;
+            songList.Insert(index, item);
+            indexOfCurrentSong = index;
 			changeMade = true;
 			
 		}
@@ -127,18 +240,13 @@ namespace OpenChords.Entities
 			int index = indexOfCurrentSong;
 			if (index >= songSetSize-1)
 				return;
-			
-			//store the song name
-			string tempName = songNames[index];
-			
-			//remove the song
-			songNames.RemoveAt(index);
-			
-			songNames.Insert(index+1,tempName);
-			
-			indexOfCurrentSong = index+1;
-			
-			changeMade = true;
+
+            var item = songList[index];
+            songList.RemoveAt(index);
+            index++;
+            songList.Insert(index, item);
+            indexOfCurrentSong = index;
+            changeMade = true;
 		}
 
 
@@ -156,31 +264,19 @@ namespace OpenChords.Entities
 			Set set = SettingsReaderWriter.readSet(Settings.ExtAppsAndDir.setsFolder + setName);
             set.setName = setName;
 			set.changeMade = false;
-            set.loadAllSongs();
-
+            set.indexOfCurrentSong = set.songList.Count - 1;
+            set.songSetSize = set.songList.Count;
             return set;
 		}
-		
-		public void saveSet()
-		{
-			if (this.setName != "" && changeMade == true)
-				SettingsReaderWriter.writeSet(Settings.ExtAppsAndDir.setsFolder + this.setName, this);
-		}
-		
-        /// <summary>
-        /// save and reload the set, returning the reloaded set
-        /// </summary>
-        /// <returns></returns>
-		public Set saveAndreloadSet()
-		{
-            if (setName != null)
+
+        public void saveSet()
+        {
+            if (this.setName != "" && changeMade == true)
             {
-                saveSet();
-                return loadSet(setName);
+                xmlSetSongCollection = new XmlSetSongCollection(songList);
+                SettingsReaderWriter.writeSet(Settings.ExtAppsAndDir.setsFolder + this.setName, this);
             }
-            else
-                throw new Exception("set name not valid, cannot save set");
-		}
+        }
 
         /// <summary>
         /// reload and return the newly reloaded set
@@ -206,11 +302,12 @@ namespace OpenChords.Entities
 		
 		public void loadAllSongs()
 		{
-			songList.Clear();
-			foreach (string name in songNames)
+            if (_songList == null) _songList = new List<Song>();
+            _songList.Clear();
+			foreach (string songName in xmlSetSongCollection.listOfSongNames())
 			{
-				Song temp = Song.loadSong(name);
-				songList.Add(temp);	
+				Song temp = Song.loadSong(songName);
+                _songList.Add(temp);	
 			}
 		}
 		

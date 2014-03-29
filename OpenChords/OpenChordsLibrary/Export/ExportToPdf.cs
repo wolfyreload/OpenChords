@@ -45,9 +45,8 @@ namespace OpenChords.Export
             BackgroundColor = new pdfColor(printSettings.BackgroundColor.R, printSettings.BackgroundColor.G, printSettings.BackgroundColor.B);
             pageNumber = 0;
 
-            foreach (String songName in set.songNames)
+            foreach (Song song in set.songList)
             {
-                Song song = Song.loadSong(songName);
                 writeSong(song, true);
             }
             doc.createPDF(Settings.ExtAppsAndDir.printFolder + Filename + ".pdf");
@@ -65,9 +64,8 @@ namespace OpenChords.Export
             BackgroundColor = new pdfColor(printSettings.BackgroundColor.R, printSettings.BackgroundColor.G, printSettings.BackgroundColor.B);
             pageNumber = 0;
 
-            foreach (String songName in set.songNames)
+            foreach (Song song in set.songList)
             {
-                Song song = Song.loadSong(songName);
                 writeSong(song, true);
             }
             doc.createPDF(Settings.ExtAppsAndDir.printFolder + Filename + ".pdf");
