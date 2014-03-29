@@ -121,9 +121,10 @@ namespace OpenChords.Entities
         public string time_sig { get; set; }
         public string copyright { get; set; }
         public string hymn_number { get; set; }
+        public string notes {get; set;}
 
         [XmlIgnore]
-        public string notes {get; set;}
+        private string songFileName { get; set; }
 
         public songStyle style;
 
@@ -178,7 +179,10 @@ namespace OpenChords.Entities
         public static Song loadSong(string SongName)
         {
             Song song = XmlReaderWriter.readSong(Settings.ExtAppsAndDir.songsFolder + SongName);
-            song.notes = Note.loadNotes(SongName).notes;
+            if  (string.IsNullOrEmpty(song.notes))
+                song.notes = Note.loadNotes(SongName).notes;
+
+            song.songFileName = SongName;
 
             initializeSongStyle(song);
             return song;
@@ -254,13 +258,13 @@ namespace OpenChords.Entities
 
             if (this.title != "")
             {
-                var noteClass = Note.loadNotes(this.title);
-                noteClass.notes = notes;
+                //var noteClass = Note.loadNotes(this.title);
+                //noteClass.notes = notes;
 
                 //remove the notes when saving the song
                 XmlReaderWriter.writeSong(Settings.ExtAppsAndDir.songsFolder + this.title, this);
                 
-                noteClass.saveNotes();
+                //noteClass.saveNotes();
             }
         }
 
@@ -268,8 +272,8 @@ namespace OpenChords.Entities
         {
             if (this.title != "")
             {
-                FileFolderFunctions.deleteFile(Settings.ExtAppsAndDir.songsFolder + this.title);
-                FileFolderFunctions.deleteFile(Settings.ExtAppsAndDir.notesFolder + this.title);
+                FileFolderFunctions.deleteFile(Settings.ExtAppsAndDir.songsFolder + this.songFileName);
+                FileFolderFunctions.deleteFile(Settings.ExtAppsAndDir.notesFolder + this.songFileName);
             }
 
         }

@@ -631,6 +631,9 @@ namespace OpenChords.Forms
                 case Keys.Control | Keys.N:
                     newSong();
                     return true;
+                case Keys.Control | Keys.Alt | Keys.Shift | Keys.P:
+                    ResaveEverySong();
+                    return true;
 					
 										
 					
@@ -641,6 +644,15 @@ namespace OpenChords.Forms
 			}
 			return false;
 		}
+
+        private void ResaveEverySong()
+        {
+            foreach (var songname in Song.listOfAllSongs())
+            {
+                var song = Song.loadSong(songname);
+                song.saveSong();
+            }
+        }
 
         private void fixFormatting()
         {
