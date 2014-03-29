@@ -297,8 +297,19 @@ namespace OpenChords.Entities
 		
 		public void exportSetAndSongsToOpenSong()
 		{
-            Export.ExportToOpenSong.exportSetAndSongsToOpenSong(this);
+            Export.ExportToOpenSong.exportSetAndSongsToOpenSong(this.Clone());
 		}
+
+        private Set Clone()
+        {
+            var set = new Set();
+            set.indexOfCurrentSong = this.indexOfCurrentSong;
+            set.setName = this.setName;
+            set.songSetSize = this.songSetSize;
+            set._songList = new List<Song>(this._songList);
+            set.xmlSetSongCollection = new XmlSetSongCollection(set._songList);
+            return set;
+        }
 		
 		public void loadAllSongs()
 		{
@@ -316,6 +327,16 @@ namespace OpenChords.Entities
 			return songSetSize;
 	
 		}
+
+        public void revertSet()
+        {
+            var set = Set.loadSet(this.setName);
+            this.setName = set.setName;
+            this.changeMade = false;
+            this.songSetSize = set.songSetSize;
+            this.songList = set.songList;
+            this.xmlSetSongCollection = set.xmlSetSongCollection;
+        }
 
         /// <summary>
         /// returns the set in html format

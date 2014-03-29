@@ -44,8 +44,7 @@ namespace OpenChords.Forms
             InitializeComponent();
             var set = new Set();
             set.addSongToSet(song);
-            set.loadAllSongs();
-
+         
             this.WindowState = FormWindowState.Maximized;
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
             this.BackColor = displaySettings.BackgroundColor;

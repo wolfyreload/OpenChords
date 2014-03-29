@@ -181,7 +181,7 @@ namespace OpenChords.Forms
 			
 		}
 		
-		private void confirmSave()
+		private void confirmChangesToSong()
 		{
 			String title = currentSong.title;
 
@@ -189,12 +189,7 @@ namespace OpenChords.Forms
 			{
 				String text = "Save the song \"" + currentSong.title + "\"?";
 				DialogResult result =
-					MessageBox.Show(this,
-					                text,
-					                "Save?",
-					                MessageBoxButtons.YesNo,
-					                MessageBoxIcon.Question,
-					                MessageBoxDefaultButton.Button1);
+                    showSaveConfirmationMessageBox(text);
 
 				if (result == DialogResult.Yes)
 				{
@@ -202,6 +197,16 @@ namespace OpenChords.Forms
 				}
 			}
 		}
+
+        private System.Windows.Forms.DialogResult showSaveConfirmationMessageBox(String text)
+        {
+            return MessageBox.Show(this,
+                                                text,
+                                                "Save?",
+                                                MessageBoxButtons.YesNo,
+                                                MessageBoxIcon.Question,
+                                                MessageBoxDefaultButton.Button1);
+        }
 		
 		private void confirmDelete()
 		{

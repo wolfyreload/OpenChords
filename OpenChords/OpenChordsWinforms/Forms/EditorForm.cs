@@ -68,7 +68,7 @@ namespace OpenChords.Forms
             this.btnPresentSong.Image = Properties.Resources.PresentSong;
 
             cmbSig.DataSource = Song.TimeSignatureOptions();
-            cmbTempo.DataSource = Song.TempoOptions();
+            cmbTempo.DataSource = Song.TempoOptions();    
 
             refreshAll();
 			
@@ -81,7 +81,7 @@ namespace OpenChords.Forms
 		void ListSongsSelectedIndexChanged(object sender, EventArgs e)
 		{
 			if (changesMade == true)
-				confirmSave();
+				confirmChangesToSong();
 			
 			int index = listSongs.SelectedIndex;
 			if (index >= 0 && index < listSongs.Items.Count)
@@ -303,7 +303,7 @@ namespace OpenChords.Forms
 
         private void presentSong()
         {
-            confirmSave();
+            confirmChangesToSong();
             updateSelectedSong();
             var displaySettings = DisplayAndPrintSettings.loadSettings(DisplayAndPrintSettingsType.DisplaySettings);
             saveState();
@@ -312,16 +312,13 @@ namespace OpenChords.Forms
 
 		void presentSet()
 		{
-            confirmSave();
+            confirmChangesToSong();
+            confirmChangesToSet();
             var displaySettings = DisplayAndPrintSettings.loadSettings(DisplayAndPrintSettingsType.DisplaySettings);
 			saveState();
 			if (currentSet.songList.Count > 0)
 			{
-				currentSet.saveSet();
-                currentSet.loadAllSongs();
-				new Forms.DisplayForm2(currentSet, displaySettings).ShowDialog();
-			
-				
+				new Forms.DisplayForm2(currentSet, displaySettings).ShowDialog();	
 			}
 		}
 		
@@ -570,7 +567,7 @@ namespace OpenChords.Forms
 		void ListSetSelectedIndexChanged(object sender, EventArgs e)
 		{
 			if (changesMade == true)
-				confirmSave();
+				confirmChangesToSong();
 			
 			int index = listSet.SelectedIndex;
             if (index >= 0 && index < listSet.Items.Count)
@@ -702,7 +699,7 @@ namespace OpenChords.Forms
 		
 		void CmboSetsSelectedIndexChanged(object sender, EventArgs e)
 		{
-			currentSet.saveSet();
+            confirmChangesToSet();
 			int index = cmboSets.SelectedIndex;
 			if (index >= 0 && index < cmboSets.Items.Count)
 			{
@@ -711,6 +708,21 @@ namespace OpenChords.Forms
 				updateSetNumber();
 			}
 		}
+
+        private void confirmChangesToSet()
+        {
+            if (currentSet.changeMade)
+            {
+                var text = string.Format("Save changes to set: {0}?", cmboSets.Text);
+                if (showSaveConfirmationMessageBox(text) == System.Windows.Forms.DialogResult.Yes)
+                    currentSet.saveSet();
+                else
+                {
+                    currentSet.revertSet();
+                    updateSetListbox();
+                }
+            }
+        }
 		
 		void EditorFormLoad(object sender, EventArgs e)
 		{
@@ -724,7 +736,7 @@ namespace OpenChords.Forms
         private void setSplitterDistances()
         {
             splitMainForm.SplitterDistance = 250;
-            splitSetsAndSongs.SplitterDistance = 155;
+            splitSetsAndSongs.SplitterDistance = 250;
             splitLyricsAndNotes.SplitterDistance = splitLyricsAndNotes.Width / 100 * 80;
         }
 
@@ -782,7 +794,8 @@ namespace OpenChords.Forms
 
         private void exitApp()
         {
-            currentSet.saveSet();
+            confirmChangesToSong();
+            confirmChangesToSet();
             saveState();
             Application.ExitThread();
            
@@ -790,8 +803,8 @@ namespace OpenChords.Forms
 		
 		private void exportSetToOpenSong()
 		{
-			currentSet.saveSet();
-			saveState();
+            confirmChangesToSet();
+            saveState();
 
             currentSet.exportSetAndSongsToOpenSong();
            
