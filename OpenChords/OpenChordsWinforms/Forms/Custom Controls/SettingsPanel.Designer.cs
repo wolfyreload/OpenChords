@@ -53,6 +53,8 @@
             this.flowLayoutPanel6 = new System.Windows.Forms.FlowLayoutPanel();
             this.flowLayoutPanel2 = new System.Windows.Forms.FlowLayoutPanel();
             this.flowLayoutPanel7 = new System.Windows.Forms.FlowLayoutPanel();
+            this.label2 = new System.Windows.Forms.Label();
+            this.txtNoteWidth = new System.Windows.Forms.TextBox();
             this.flowLayoutPanel1 = new System.Windows.Forms.FlowLayoutPanel();
             this.flowFontHeadings = new System.Windows.Forms.FlowLayoutPanel();
             this.flowLayoutPanel5 = new System.Windows.Forms.FlowLayoutPanel();
@@ -103,13 +105,18 @@
             this.textBox7 = new System.Windows.Forms.TextBox();
             this.pictureBox7 = new System.Windows.Forms.PictureBox();
             this.comboBox16 = new System.Windows.Forms.ComboBox();
+            this.flowNextPage = new System.Windows.Forms.FlowLayoutPanel();
+            this.label3 = new System.Windows.Forms.Label();
+            this.comboBox1 = new System.Windows.Forms.ComboBox();
+            this.textBox8 = new System.Windows.Forms.TextBox();
+            this.pictureBox8 = new System.Windows.Forms.PictureBox();
+            this.comboBox2 = new System.Windows.Forms.ComboBox();
             this.flowBackground = new System.Windows.Forms.FlowLayoutPanel();
             this.label34 = new System.Windows.Forms.Label();
             this.label35 = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
             this.picBackgroundColor = new System.Windows.Forms.PictureBox();
-            this.label2 = new System.Windows.Forms.Label();
-            this.txtNoteWidth = new System.Windows.Forms.TextBox();
+            this.chkPleaseTurnOver = new System.Windows.Forms.CheckBox();
             this.flowLayoutPanel6.SuspendLayout();
             this.flowLayoutPanel2.SuspendLayout();
             this.flowLayoutPanel7.SuspendLayout();
@@ -130,13 +137,15 @@
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox6)).BeginInit();
             this.flowNotes.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox7)).BeginInit();
+            this.flowNextPage.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox8)).BeginInit();
             this.flowBackground.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.picBackgroundColor)).BeginInit();
             this.SuspendLayout();
             // 
             // cmdReset
             // 
-            this.cmdReset.Location = new System.Drawing.Point(278, 355);
+            this.cmdReset.Location = new System.Drawing.Point(278, 384);
             this.cmdReset.Name = "cmdReset";
             this.cmdReset.Size = new System.Drawing.Size(75, 41);
             this.cmdReset.TabIndex = 6;
@@ -379,7 +388,7 @@
             this.flowLayoutPanel6.FlowDirection = System.Windows.Forms.FlowDirection.TopDown;
             this.flowLayoutPanel6.Location = new System.Drawing.Point(0, 3);
             this.flowLayoutPanel6.Name = "flowLayoutPanel6";
-            this.flowLayoutPanel6.Size = new System.Drawing.Size(775, 400);
+            this.flowLayoutPanel6.Size = new System.Drawing.Size(775, 428);
             this.flowLayoutPanel6.TabIndex = 35;
             // 
             // flowLayoutPanel2
@@ -393,9 +402,10 @@
             this.flowLayoutPanel2.Controls.Add(this.chkShowNotes);
             this.flowLayoutPanel2.Controls.Add(this.chkShowChords);
             this.flowLayoutPanel2.Controls.Add(this.chkShowLyrics);
+            this.flowLayoutPanel2.Controls.Add(this.chkPleaseTurnOver);
             this.flowLayoutPanel2.Location = new System.Drawing.Point(3, 3);
             this.flowLayoutPanel2.Name = "flowLayoutPanel2";
-            this.flowLayoutPanel2.Size = new System.Drawing.Size(269, 124);
+            this.flowLayoutPanel2.Size = new System.Drawing.Size(269, 164);
             this.flowLayoutPanel2.TabIndex = 2;
             // 
             // flowLayoutPanel7
@@ -407,10 +417,33 @@
             this.flowLayoutPanel7.Controls.Add(this.txtContentLineSpacing);
             this.flowLayoutPanel7.Controls.Add(this.label2);
             this.flowLayoutPanel7.Controls.Add(this.txtNoteWidth);
-            this.flowLayoutPanel7.Location = new System.Drawing.Point(3, 133);
+            this.flowLayoutPanel7.Location = new System.Drawing.Point(3, 173);
             this.flowLayoutPanel7.Name = "flowLayoutPanel7";
             this.flowLayoutPanel7.Size = new System.Drawing.Size(269, 100);
             this.flowLayoutPanel7.TabIndex = 3;
+            // 
+            // label2
+            // 
+            this.label2.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.label2.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(53)))), ((int)(((byte)(76)))), ((int)(((byte)(103)))));
+            this.label2.ForeColor = System.Drawing.Color.White;
+            this.label2.Location = new System.Drawing.Point(3, 64);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(109, 32);
+            this.label2.TabIndex = 31;
+            this.label2.Text = "Note Width";
+            this.label2.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // txtNoteWidth
+            // 
+            this.txtNoteWidth.Font = new System.Drawing.Font("Courier New", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtNoteWidth.ForeColor = System.Drawing.Color.Black;
+            this.txtNoteWidth.Location = new System.Drawing.Point(118, 67);
+            this.txtNoteWidth.Name = "txtNoteWidth";
+            this.txtNoteWidth.Size = new System.Drawing.Size(133, 26);
+            this.txtNoteWidth.TabIndex = 32;
             // 
             // flowLayoutPanel1
             // 
@@ -423,7 +456,7 @@
             this.flowLayoutPanel1.Controls.Add(this.txtLeftMargin);
             this.flowLayoutPanel1.Controls.Add(this.label21);
             this.flowLayoutPanel1.Controls.Add(this.txtRightMargin);
-            this.flowLayoutPanel1.Location = new System.Drawing.Point(3, 239);
+            this.flowLayoutPanel1.Location = new System.Drawing.Point(3, 279);
             this.flowLayoutPanel1.Name = "flowLayoutPanel1";
             this.flowLayoutPanel1.Size = new System.Drawing.Size(269, 139);
             this.flowLayoutPanel1.TabIndex = 4;
@@ -439,11 +472,12 @@
             this.flowFontHeadings.Controls.Add(this.flowChords);
             this.flowFontHeadings.Controls.Add(this.flowLyrics);
             this.flowFontHeadings.Controls.Add(this.flowNotes);
+            this.flowFontHeadings.Controls.Add(this.flowNextPage);
             this.flowFontHeadings.Controls.Add(this.flowBackground);
             this.flowFontHeadings.FlowDirection = System.Windows.Forms.FlowDirection.TopDown;
             this.flowFontHeadings.Location = new System.Drawing.Point(278, 3);
             this.flowFontHeadings.Name = "flowFontHeadings";
-            this.flowFontHeadings.Size = new System.Drawing.Size(490, 346);
+            this.flowFontHeadings.Size = new System.Drawing.Size(490, 375);
             this.flowFontHeadings.TabIndex = 57;
             // 
             // flowLayoutPanel5
@@ -953,6 +987,67 @@
             this.comboBox16.Size = new System.Drawing.Size(85, 21);
             this.comboBox16.TabIndex = 6;
             // 
+            // flowNextPage
+            // 
+            this.flowNextPage.AutoSize = true;
+            this.flowNextPage.Controls.Add(this.label3);
+            this.flowNextPage.Controls.Add(this.comboBox1);
+            this.flowNextPage.Controls.Add(this.textBox8);
+            this.flowNextPage.Controls.Add(this.pictureBox8);
+            this.flowNextPage.Controls.Add(this.comboBox2);
+            this.flowNextPage.Location = new System.Drawing.Point(3, 298);
+            this.flowNextPage.Name = "flowNextPage";
+            this.flowNextPage.Size = new System.Drawing.Size(475, 32);
+            this.flowNextPage.TabIndex = 64;
+            // 
+            // label3
+            // 
+            this.label3.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(53)))), ((int)(((byte)(76)))), ((int)(((byte)(103)))));
+            this.label3.ForeColor = System.Drawing.Color.White;
+            this.label3.Location = new System.Drawing.Point(0, 0);
+            this.label3.Margin = new System.Windows.Forms.Padding(0);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(113, 28);
+            this.label3.TabIndex = 1;
+            this.label3.Text = "Next page text";
+            this.label3.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // comboBox1
+            // 
+            this.comboBox1.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.comboBox1.FormattingEnabled = true;
+            this.comboBox1.Location = new System.Drawing.Point(116, 3);
+            this.comboBox1.Name = "comboBox1";
+            this.comboBox1.Size = new System.Drawing.Size(99, 21);
+            this.comboBox1.TabIndex = 2;
+            // 
+            // textBox8
+            // 
+            this.textBox8.Font = new System.Drawing.Font("Courier New", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.textBox8.ForeColor = System.Drawing.Color.Black;
+            this.textBox8.Location = new System.Drawing.Point(221, 3);
+            this.textBox8.Name = "textBox8";
+            this.textBox8.Size = new System.Drawing.Size(92, 26);
+            this.textBox8.TabIndex = 3;
+            // 
+            // pictureBox8
+            // 
+            this.pictureBox8.BackColor = System.Drawing.Color.Black;
+            this.pictureBox8.Location = new System.Drawing.Point(319, 3);
+            this.pictureBox8.Name = "pictureBox8";
+            this.pictureBox8.Size = new System.Drawing.Size(62, 26);
+            this.pictureBox8.TabIndex = 54;
+            this.pictureBox8.TabStop = false;
+            // 
+            // comboBox2
+            // 
+            this.comboBox2.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.comboBox2.FormattingEnabled = true;
+            this.comboBox2.Location = new System.Drawing.Point(387, 3);
+            this.comboBox2.Name = "comboBox2";
+            this.comboBox2.Size = new System.Drawing.Size(85, 21);
+            this.comboBox2.TabIndex = 6;
+            // 
             // flowBackground
             // 
             this.flowBackground.AutoSize = true;
@@ -960,7 +1055,7 @@
             this.flowBackground.Controls.Add(this.label35);
             this.flowBackground.Controls.Add(this.label1);
             this.flowBackground.Controls.Add(this.picBackgroundColor);
-            this.flowBackground.Location = new System.Drawing.Point(3, 298);
+            this.flowBackground.Location = new System.Drawing.Point(3, 336);
             this.flowBackground.Name = "flowBackground";
             this.flowBackground.Size = new System.Drawing.Size(385, 32);
             this.flowBackground.TabIndex = 64;
@@ -1009,28 +1104,15 @@
             this.picBackgroundColor.TabStop = false;
             this.picBackgroundColor.Click += new System.EventHandler(this.ColorPicker_Click);
             // 
-            // label2
+            // chkPleaseTurnOver
             // 
-            this.label2.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.label2.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(53)))), ((int)(((byte)(76)))), ((int)(((byte)(103)))));
-            this.label2.ForeColor = System.Drawing.Color.White;
-            this.label2.Location = new System.Drawing.Point(3, 64);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(109, 32);
-            this.label2.TabIndex = 31;
-            this.label2.Text = "Note Width";
-            this.label2.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            // 
-            // txtNoteWidth
-            // 
-            this.txtNoteWidth.Font = new System.Drawing.Font("Courier New", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtNoteWidth.ForeColor = System.Drawing.Color.Black;
-            this.txtNoteWidth.Location = new System.Drawing.Point(118, 67);
-            this.txtNoteWidth.Name = "txtNoteWidth";
-            this.txtNoteWidth.Size = new System.Drawing.Size(133, 26);
-            this.txtNoteWidth.TabIndex = 32;
+            this.chkPleaseTurnOver.ForeColor = System.Drawing.Color.White;
+            this.chkPleaseTurnOver.Location = new System.Drawing.Point(3, 131);
+            this.chkPleaseTurnOver.Name = "chkPleaseTurnOver";
+            this.chkPleaseTurnOver.Size = new System.Drawing.Size(172, 26);
+            this.chkPleaseTurnOver.TabIndex = 7;
+            this.chkPleaseTurnOver.Text = "Show Please Turn Over Text";
+            this.chkPleaseTurnOver.UseVisualStyleBackColor = true;
             // 
             // SettingsPanel
             // 
@@ -1041,7 +1123,7 @@
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(53)))), ((int)(((byte)(76)))), ((int)(((byte)(103)))));
             this.Controls.Add(this.flowLayoutPanel6);
             this.Name = "SettingsPanel";
-            this.Size = new System.Drawing.Size(778, 406);
+            this.Size = new System.Drawing.Size(778, 434);
             this.Load += new System.EventHandler(this.SettingsPanel_Load);
             this.flowLayoutPanel6.ResumeLayout(false);
             this.flowLayoutPanel2.ResumeLayout(false);
@@ -1074,6 +1156,9 @@
             this.flowNotes.ResumeLayout(false);
             this.flowNotes.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox7)).EndInit();
+            this.flowNextPage.ResumeLayout(false);
+            this.flowNextPage.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox8)).EndInit();
             this.flowBackground.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.picBackgroundColor)).EndInit();
             this.ResumeLayout(false);
@@ -1164,5 +1249,12 @@
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.TextBox txtNoteWidth;
+        private System.Windows.Forms.FlowLayoutPanel flowNextPage;
+        private System.Windows.Forms.Label label3;
+        private System.Windows.Forms.ComboBox comboBox1;
+        private System.Windows.Forms.TextBox textBox8;
+        private System.Windows.Forms.PictureBox pictureBox8;
+        private System.Windows.Forms.ComboBox comboBox2;
+        private System.Windows.Forms.CheckBox chkPleaseTurnOver;
     }
 }

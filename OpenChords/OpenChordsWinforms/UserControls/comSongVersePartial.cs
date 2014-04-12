@@ -17,15 +17,20 @@ namespace OpenChords.UserControls
         }
 
         public comSongVersePartial(SongVerse verse, DisplayAndPrintSettings displaySettings)
-            : base(AddPtoText(verse), displaySettings)
+            : base(AddPtoText(verse, displaySettings), displaySettings)
         {
         }
 
-        private static SongVerse AddPtoText(SongVerse verse)
+        private static SongVerse AddPtoText(SongVerse verse, DisplayAndPrintSettings displaySettings)
         {
-            var originalLyrics = " Press space to continue...";
-            var newVerse = new SongVerse(verse.Header, originalLyrics);
-            return newVerse;
+            if (displaySettings.ShowPleaseTurnOver ?? false)
+            {
+                var originalLyrics = "TPress space to continue...";
+                var newVerse = new SongVerse(verse.Header, originalLyrics);
+                return newVerse;
+            }
+            else
+                return new SongVerse();
         }
     }
 }

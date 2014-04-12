@@ -42,6 +42,7 @@ namespace OpenChords.Entities
                 this.ChordFormat.FontSize--;
                 this.contentLineSpacing--;
                 this.NoteFormat.FontSize--;
+                this.NextPageFormat.FontSize--;
             }
 
         }
@@ -53,6 +54,7 @@ namespace OpenChords.Entities
             this.ChordFormat.FontSize++;
             this.contentLineSpacing++;
             this.NoteFormat.FontSize++;
+            this.NextPageFormat.FontSize++;
         }
         
         
@@ -82,6 +84,7 @@ namespace OpenChords.Entities
         public bool? ShowNotes  {get; set;}
         public bool? ShowChords  {get; set;}
         public bool? ShowLyrics  {get; set;}
+        public bool? ShowPleaseTurnOver { get; set; }
         
         public bool? ShowGeneralNotes { get; set; }
         public string BackgroundColorHex { get; set; }
@@ -93,6 +96,7 @@ namespace OpenChords.Entities
         public SongElementFormat Order1Format { get; set; }
         public SongElementFormat Order2Format { get; set; }
         public SongElementFormat NoteFormat { get; set; }
+        public SongElementFormat NextPageFormat { get; set; }
 
         public int? NoteWidth { get; set; }
 
@@ -102,7 +106,7 @@ namespace OpenChords.Entities
         /// <returns></returns>
         public bool nullsInFile()
         {
-            if (DualColumns == null || ShowNotes == null || ShowChords == null || ShowLyrics == null)
+            if (DualColumns == null || ShowNotes == null || ShowChords == null || ShowLyrics == null || ShowPleaseTurnOver == null)
                 return true;
 
             if (ShowGeneralNotes == null)
@@ -113,7 +117,7 @@ namespace OpenChords.Entities
 
             if (TitleFormat == null || ChordFormat == null || LyricsFormat == null ||
                 HeadingsFormat == null || Order1Format == null || Order2Format == null ||
-                NoteFormat == null)
+                NoteFormat == null || NextPageFormat == null)
                 return true;
 
             if (NoteWidth == null)
@@ -249,7 +253,9 @@ namespace OpenChords.Entities
             bool BoldNotes;
             bool BoldOrder1;
             bool BoldOrder2;
-
+            Color NextPageColor;
+            bool BoldNextPage;
+            float nextPageSize;
 
             if (settingsType == DisplayAndPrintSettingsType.DisplaySettings)
             {
@@ -263,6 +269,8 @@ namespace OpenChords.Entities
                 footerSize = adjustForLowerResolutions1(13);
                 notesSize = adjustForLowerResolutions1(14);
                 orderSize = adjustForLowerResolutions1(13);
+                nextPageSize = adjustForLowerResolutions1(15);
+                
 
                 paragraphSpacing = adjustForLowerResolutions2(7);
                 contentLineSpacing = adjustForLowerResolutions2(3);
@@ -289,6 +297,7 @@ namespace OpenChords.Entities
                 OrderColor1 = ColorTranslator.FromHtml("#FF8040");
                 OrderColor2 = ColorTranslator.FromHtml("#FFFF80");
                 NoteColor = ColorTranslator.FromHtml("#80FF80");
+                NextPageColor = ColorTranslator.FromHtml("White");
 
                 NoteWidth = 20;
 
@@ -299,6 +308,7 @@ namespace OpenChords.Entities
                 BoldTitle = true;
                 BoldOrder1 = true;
                 BoldOrder2 = true;
+                BoldNextPage = true;
 
             }
             else if (settingsType == DisplayAndPrintSettingsType.TabletSettings)
@@ -313,7 +323,8 @@ namespace OpenChords.Entities
                 footerSize = adjustForLowerResolutions1(13);
                 notesSize = adjustForLowerResolutions1(18);
                 orderSize = adjustForLowerResolutions1(18);
-
+                nextPageSize = adjustForLowerResolutions1(20);
+                
                 paragraphSpacing = adjustForLowerResolutions2(7);
                 contentLineSpacing = adjustForLowerResolutions2(2);
 
@@ -339,7 +350,7 @@ namespace OpenChords.Entities
                 OrderColor1 = ColorTranslator.FromHtml("#FF8040");
                 OrderColor2 = ColorTranslator.FromHtml("#FFFF80");
                 NoteColor = ColorTranslator.FromHtml("#80FF80");
-
+                NextPageColor = ColorTranslator.FromHtml("White");
 
                 NoteWidth = (int)adjustForLowerResolutions2(564);
                 if (DualColumns.Value == true) NoteWidth = NoteWidth / 2;
@@ -351,7 +362,7 @@ namespace OpenChords.Entities
                 BoldTitle = true;
                 BoldOrder1 = true;
                 BoldOrder2 = true;
-
+                BoldNextPage = true;
             }
             else //if (settingsType == DisplayAndPrintSettingsType.PrintSettings)
             {
@@ -363,6 +374,7 @@ namespace OpenChords.Entities
                 authorSize = 12;
                 contentSize = 15;
                 footerSize = 13;
+                nextPageSize = 15;
 
                 paragraphSpacing = 15;
                 contentLineSpacing = 6;
@@ -375,6 +387,8 @@ namespace OpenChords.Entities
                 notesStartPosition = 150;
                 lyricsStartPosition = 60;
                 orderSize = 12;
+                
+                
 
                 DualColumns = false;
                 ShowNotes = true;
@@ -390,6 +404,7 @@ namespace OpenChords.Entities
                 TitleColor = Color.Black;
                 OrderColor1 = Color.Black;
                 OrderColor2 = Color.Gray;
+                NextPageColor = ColorTranslator.FromHtml("White");
 
                 NoteWidth = 150;
 
@@ -400,9 +415,12 @@ namespace OpenChords.Entities
                 BoldTitle = true;
                 BoldOrder1 = true;
                 BoldOrder2 = true;
+                BoldNextPage = true;
 
 
             }
+
+            ShowPleaseTurnOver = true;
 
             TitleFormat = new SongElementFormat("Helvetica", titleSize, TitleColor, BoldTitle);
             HeadingsFormat = new SongElementFormat("Helvetica", contentSize, HeadingsColor, BoldHeadings);
@@ -411,6 +429,7 @@ namespace OpenChords.Entities
             Order1Format = new SongElementFormat("Courier New", orderSize, OrderColor1, BoldOrder1);
             Order2Format = new SongElementFormat("Courier New", orderSize, OrderColor2, BoldOrder2);
             NoteFormat = new SongElementFormat("Courier New", notesSize, NoteColor, BoldNotes);
+            NextPageFormat = new SongElementFormat("Courier New", nextPageSize, NextPageColor, BoldNextPage);
         }
 		
         //public DisplayAndPrintSettings(SerializationInfo info, StreamingContext ctxt)
@@ -470,8 +489,10 @@ namespace OpenChords.Entities
         //    info.AddValue("DualColumns", DualColumns);
         //    info.AddValue("ShowNotes", ShowNotes);
         //}
-		
-		
-	}
+
+
+
+        
+    }
 }
 

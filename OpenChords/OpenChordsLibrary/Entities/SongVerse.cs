@@ -61,6 +61,11 @@ namespace OpenChords.Entities
             _SongElement(header, lyrics, notes);
         }
 
+        public SongVerse()
+        {
+            _SongElement("", "", "");
+        }
+
         private void _SongElement(string header, string lyrics, string notes)
         {
             Header = header;

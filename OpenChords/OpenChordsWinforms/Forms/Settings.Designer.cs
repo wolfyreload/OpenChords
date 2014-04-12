@@ -57,6 +57,8 @@
             // 
             // fileSettingsCustomControl
             // 
+            this.fileSettingsCustomControl.AutoSize = true;
+            this.fileSettingsCustomControl.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
             this.fileSettingsCustomControl.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(53)))), ((int)(((byte)(76)))), ((int)(((byte)(103)))));
             this.fileSettingsCustomControl.Dock = System.Windows.Forms.DockStyle.Fill;
             this.fileSettingsCustomControl.Location = new System.Drawing.Point(3, 3);
@@ -71,17 +73,19 @@
             this.tabPageDisplaySettings.Location = new System.Drawing.Point(4, 25);
             this.tabPageDisplaySettings.Name = "tabPageDisplaySettings";
             this.tabPageDisplaySettings.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPageDisplaySettings.Size = new System.Drawing.Size(784, 408);
+            this.tabPageDisplaySettings.Size = new System.Drawing.Size(784, 439);
             this.tabPageDisplaySettings.TabIndex = 0;
             this.tabPageDisplaySettings.Text = "Display Settings";
             // 
             // displaySettingsCustomControl
             // 
+            this.displaySettingsCustomControl.AutoSize = true;
+            this.displaySettingsCustomControl.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
             this.displaySettingsCustomControl.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(53)))), ((int)(((byte)(76)))), ((int)(((byte)(103)))));
             this.displaySettingsCustomControl.Dock = System.Windows.Forms.DockStyle.Fill;
             this.displaySettingsCustomControl.Location = new System.Drawing.Point(3, 3);
             this.displaySettingsCustomControl.Name = "displaySettingsCustomControl";
-            this.displaySettingsCustomControl.Size = new System.Drawing.Size(778, 402);
+            this.displaySettingsCustomControl.Size = new System.Drawing.Size(778, 433);
             this.displaySettingsCustomControl.TabIndex = 0;
             // 
             // tabPager
@@ -96,7 +100,7 @@
             this.tabPager.Location = new System.Drawing.Point(0, 0);
             this.tabPager.Name = "tabPager";
             this.tabPager.SelectedIndex = 0;
-            this.tabPager.Size = new System.Drawing.Size(792, 437);
+            this.tabPager.Size = new System.Drawing.Size(792, 468);
             this.tabPager.TabIndex = 0;
             // 
             // tabPagePrintSettings
@@ -112,6 +116,8 @@
             // 
             // printSettingsCustomControl
             // 
+            this.printSettingsCustomControl.AutoSize = true;
+            this.printSettingsCustomControl.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
             this.printSettingsCustomControl.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(53)))), ((int)(((byte)(76)))), ((int)(((byte)(103)))));
             this.printSettingsCustomControl.Dock = System.Windows.Forms.DockStyle.Fill;
             this.printSettingsCustomControl.Location = new System.Drawing.Point(3, 3);
@@ -132,6 +138,8 @@
             // 
             // tabletSettingsCustomControl
             // 
+            this.tabletSettingsCustomControl.AutoSize = true;
+            this.tabletSettingsCustomControl.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
             this.tabletSettingsCustomControl.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(53)))), ((int)(((byte)(76)))), ((int)(((byte)(103)))));
             this.tabletSettingsCustomControl.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tabletSettingsCustomControl.Location = new System.Drawing.Point(3, 3);
@@ -144,7 +152,7 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(53)))), ((int)(((byte)(76)))), ((int)(((byte)(103)))));
-            this.ClientSize = new System.Drawing.Size(792, 437);
+            this.ClientSize = new System.Drawing.Size(792, 468);
             this.Controls.Add(this.tabPager);
             this.MaximizeBox = false;
             this.Name = "Settings";
@@ -153,10 +161,14 @@
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.Settings_FormClosing);
             this.Load += new System.EventHandler(this.Settings_Load);
             this.tabPageFileSettings.ResumeLayout(false);
+            this.tabPageFileSettings.PerformLayout();
             this.tabPageDisplaySettings.ResumeLayout(false);
+            this.tabPageDisplaySettings.PerformLayout();
             this.tabPager.ResumeLayout(false);
             this.tabPagePrintSettings.ResumeLayout(false);
+            this.tabPagePrintSettings.PerformLayout();
             this.tabPageTabletSettings.ResumeLayout(false);
+            this.tabPageTabletSettings.PerformLayout();
             this.ResumeLayout(false);
 
         }

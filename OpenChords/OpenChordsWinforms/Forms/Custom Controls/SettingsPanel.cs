@@ -62,6 +62,7 @@ namespace OpenChords.Forms.Custom_Controls
             chkShowNotes.Checked = settings.ShowNotes.Value;
             chkShowLyrics.Checked = settings.ShowLyrics.Value;
             chkShowChords.Checked = settings.ShowChords.Value;
+            chkPleaseTurnOver.Checked = settings.ShowPleaseTurnOver.Value;
             //chkGeneralNotes.Checked = settings.ShowGeneralNotes.Value;
             txtNoteWidth.Text = settings.NoteWidth.Value.ToString();
 
@@ -73,6 +74,7 @@ namespace OpenChords.Forms.Custom_Controls
             setSettingsToFlowLayout(settings.ChordFormat, flowChords);
             setSettingsToFlowLayout(settings.LyricsFormat, flowLyrics);
             setSettingsToFlowLayout(settings.NoteFormat, flowNotes);
+            setSettingsToFlowLayout(settings.NextPageFormat, flowNextPage);
         }
 
         private int getInt(string input)
@@ -107,7 +109,7 @@ namespace OpenChords.Forms.Custom_Controls
             settings.ShowNotes = chkShowNotes.Checked;
             settings.ShowLyrics = chkShowLyrics.Checked;
             settings.ShowChords = chkShowChords.Checked;
-            //settings.ShowGeneralNotes = chkGeneralNotes.Checked;
+            settings.ShowPleaseTurnOver = chkPleaseTurnOver.Checked;
             settings.NoteWidth = getInt(txtNoteWidth.Text);
 
             settings.BackgroundColor = picBackgroundColor.BackColor;
@@ -119,6 +121,8 @@ namespace OpenChords.Forms.Custom_Controls
             settings.ChordFormat = getSettingsFromFlowLayout(flowChords);
             settings.LyricsFormat = getSettingsFromFlowLayout(flowLyrics);
             settings.NoteFormat = getSettingsFromFlowLayout(flowNotes);
+            settings.NextPageFormat = getSettingsFromFlowLayout(flowNextPage);
+
         }
 
         private SongElementFormat getSettingsFromFlowLayout(FlowLayoutPanel flowLayout)

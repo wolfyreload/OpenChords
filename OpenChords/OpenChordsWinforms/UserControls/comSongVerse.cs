@@ -25,6 +25,7 @@ namespace OpenChords.UserControls
         SongElementFormat chordsFormattor;
         SongElementFormat notesFormattor;
         SongElementFormat headingFormattor;
+        SongElementFormat nextPageFormattor;
 
         private Size _lyricsSize;
         private Size _headingSize;
@@ -52,7 +53,8 @@ namespace OpenChords.UserControls
             chordsFormattor = _displaySettings.ChordFormat;
             notesFormattor = _displaySettings.NoteFormat;
             headingFormattor = _displaySettings.HeadingsFormat;
-            
+            nextPageFormattor = _displaySettings.NextPageFormat;
+
             _headingSize = calculateSize(headingFormattor, _verse.FullHeaderName);
             
             _lyricsSize = calculateLyricsSize(lyricsFormattor, _verse.Lyrics, _verse.IsChord);
@@ -183,12 +185,24 @@ namespace OpenChords.UserControls
                 }
                 else if (!isChordLine && (_displaySettings.ShowLyrics ?? false))
                 {
-                    graphics.DrawString(lyricLine,
-                                        lyricsFormattor.Font,
-                                        lyricsFormattor.Brush,
-                                        0,
-                                        heightPosition);
-                    heightPosition += lyricsFormattor.FontSize;
+                    if (lyricLine != "Press space to continue...")
+                    {
+                        graphics.DrawString(lyricLine,
+                                            lyricsFormattor.Font,
+                                            lyricsFormattor.Brush,
+                                            0,
+                                            heightPosition);
+                        heightPosition += lyricsFormattor.FontSize;
+                    }
+                    else
+                    {
+                        graphics.DrawString(lyricLine,
+                                         nextPageFormattor.Font,
+                                         nextPageFormattor.Brush,
+                                         0,
+                                         heightPosition);
+                        heightPosition += nextPageFormattor.FontSize;
+                    }
                 }
                 
 
