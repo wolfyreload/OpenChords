@@ -422,8 +422,8 @@ namespace OpenChords.Entities
 
             ShowPleaseTurnOver = true;
 
-            TitleFormat = new SongElementFormat("Helvetica", titleSize, TitleColor, BoldTitle);
-            HeadingsFormat = new SongElementFormat("Helvetica", contentSize, HeadingsColor, BoldHeadings);
+            TitleFormat = new SongElementFormat("Arial", titleSize, TitleColor, BoldTitle);
+            HeadingsFormat = new SongElementFormat("Arial", contentSize, HeadingsColor, BoldHeadings);
             ChordFormat = new SongElementFormat("Courier New", contentSize, ChordColor, BoldChords);
             LyricsFormat = new SongElementFormat("Courier New", contentSize, LyricsColor, BoldLyrics);
             Order1Format = new SongElementFormat("Courier New", orderSize, OrderColor1, BoldOrder1);

@@ -107,5 +107,17 @@ namespace OpenChords.Entities
             else
                 this.FontStyle = FontStyle.Regular;
         }
+
+        public SongElementFormat Clone()
+        {
+            var SongElementFormat = new SongElementFormat()
+            {
+                FontName = this.FontName,
+                FontSize = this.FontSize,
+                FontColor = this.FontColor,
+                FontStyle = this.FontStyle
+            };
+            return SongElementFormat;
+        }
     }
 }

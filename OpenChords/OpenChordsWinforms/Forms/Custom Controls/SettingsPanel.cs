@@ -154,7 +154,10 @@ namespace OpenChords.Forms.Custom_Controls
             var colorPickerBox = (PictureBox)flowLayout.Controls[3];
             var style = (ComboBox)flowLayout.Controls[4];
 
-            ddlFont.DataSource = new string[] { "Helvetica", "Courier New" };
+            if (flowLayout.Name.Contains("Lyrics") || flowLayout.Name.Contains("Chords") || flowLayout.Name.Contains("Order"))
+                ddlFont.DataSource = Functions.FontList.ListOfAllMonospaceFonts();
+            else
+                ddlFont.DataSource = Functions.FontList.ListOfAllFonts();
             style.DataSource = new string[] { "Regular", "Bold", "Italic" };
           
 

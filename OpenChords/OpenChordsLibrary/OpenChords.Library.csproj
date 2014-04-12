@@ -83,6 +83,7 @@
     <Compile Include="Export\ExportToOpenSong.cs" />
     <Compile Include="Export\ExportToPdf.cs" />
     <Compile Include="Export\ExportToRtf.cs" />
+    <Compile Include="Functions\FontList.cs" />
     <Compile Include="Functions\SongProcessor.cs" />
     <Compile Include="Functions\SongSearch.cs" />
     <Compile Include="Functions\Updater.cs" />

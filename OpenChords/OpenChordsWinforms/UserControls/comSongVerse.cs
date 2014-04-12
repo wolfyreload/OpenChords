@@ -115,10 +115,10 @@ namespace OpenChords.UserControls
         {
             //text = text.TrimEnd('\r', '\n');
             var lines = text.Split(new string[] {"\r\n"}, StringSplitOptions.None);
-            
-            Size size = TextRenderer.MeasureText(text, formatter.Font, new Size(10,10), TextFormatFlags.LeftAndRightPadding);
+            var tempFormattor =  formatter.Clone();
+            Size size = TextRenderer.MeasureText(text, tempFormattor.Font, new Size(10, 10), TextFormatFlags.LeftAndRightPadding);
             size.Width += 20;
-            size.Height = lines.Length * (int)Math.Ceiling(formatter.FontSize) + 5;
+            size.Height = lines.Length * (int)Math.Ceiling(formatter.FontSize + _displaySettings.contentLineSpacing);
             return size;
         }
 
@@ -149,7 +149,7 @@ namespace OpenChords.UserControls
         private void drawHeading()
         {
             graphics.DrawString(_verse.FullHeaderName, headingFormattor.Font, headingFormattor.Brush, 0, heightPosition);
-            heightPosition += headingFormattor.FontSize;
+            heightPosition += headingFormattor.FontSize + _displaySettings.contentLineSpacing;
         }
 
         private void drawNotes()
@@ -181,7 +181,7 @@ namespace OpenChords.UserControls
                                         chordsFormattor.Brush,
                                         0,
                                         heightPosition);
-                    heightPosition += lyricsFormattor.FontSize;
+                    heightPosition += lyricsFormattor.FontSize + _displaySettings.contentLineSpacing; ;
                 }
                 else if (!isChordLine && (_displaySettings.ShowLyrics ?? false))
                 {
@@ -192,7 +192,7 @@ namespace OpenChords.UserControls
                                             lyricsFormattor.Brush,
                                             0,
                                             heightPosition);
-                        heightPosition += lyricsFormattor.FontSize;
+                        heightPosition += lyricsFormattor.FontSize + _displaySettings.contentLineSpacing;
                     }
                     else
                     {
@@ -201,7 +201,7 @@ namespace OpenChords.UserControls
                                          nextPageFormattor.Brush,
                                          0,
                                          heightPosition);
-                        heightPosition += nextPageFormattor.FontSize;
+                        heightPosition += nextPageFormattor.FontSize + _displaySettings.contentLineSpacing; ;
                     }
                 }
                 
