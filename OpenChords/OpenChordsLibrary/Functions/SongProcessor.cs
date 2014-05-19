@@ -13,6 +13,7 @@ using System.Linq;
 
 using OpenChords.Entities;
 using System.Windows.Forms;
+using System.Text.RegularExpressions;
 
 namespace OpenChords.Functions
 {
@@ -425,12 +426,8 @@ namespace OpenChords.Functions
 			{
 				for (int j = 0; j < isChord[i].Length; j++)
 				{
-					if (j % 2 == 0) //chord line
-						if (!isChord[i][j])
-							isChord[i][j] = true;
-					if (j % 2 == 1) //lyrics line
-						if (isChord[i][j])
-							isChord[i][j] = false;
+                    var isChordLine = checkIfChordsLine(verseContents[i][j]);
+                    isChord[i][j] = isChordLine;
 				}
 			}
 			
@@ -509,6 +506,20 @@ namespace OpenChords.Functions
 
 			
 		}
+
+        private static bool checkIfChordsLine(string line)
+        {
+            var regexPattern = @"\s+([CDEFGAB])(#|##|b|bb)?(maj7|maj|min7|min|sus2|m)?\s+";
+            
+            var appearsToBeChords = Regex.IsMatch(" " + line + " ", regexPattern);
+            var appearsToBeWords = Regex.IsMatch(line, @"\w{4,20}");
+
+            if (appearsToBeWords) 
+                return false;
+            else
+                return appearsToBeChords;
+  
+        }
 
 
         /// <summary>
