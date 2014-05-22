@@ -357,6 +357,15 @@ namespace OpenChords.Entities
 
         public void fixFormatting()
         {
+            if (!this.lyrics.Contains("["))
+            {
+                var importedLyrics = Functions.ImportSong.importLyrics(this.lyrics);
+                this.lyrics = importedLyrics;
+                this.presentation = Functions.ImportSong.importPresentationList(importedLyrics);
+                fixNoteOrdering();
+                fixLyricsOrdering();
+            }
+
             SongProcessor.fixFormatting(this);
         }
 

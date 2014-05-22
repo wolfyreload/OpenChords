@@ -352,6 +352,8 @@ namespace OpenChords.Functions
 			return list.ToString();
 		}
 		
+
+
 		/// <summary>
 		/// attempt to fix the formatting of the song
 		/// </summary>
@@ -509,10 +511,10 @@ namespace OpenChords.Functions
 
         private static bool checkIfChordsLine(string line)
         {
-            var regexPattern = @"\s+([CDEFGAB])(#|##|b|bb)?(maj7|maj|min7|min|sus2|m)?\s+";
+            var regexPattern = @"\s+([CDEFGAB])(#|##|b|bb)?(m|maj|maj7|min|m7|m9|2|7|9|11|13|sus4|sus2|5|aug)?/?\s+";
             
             var appearsToBeChords = Regex.IsMatch(" " + line + " ", regexPattern);
-            var appearsToBeWords = Regex.IsMatch(line, @"\w{4,20}");
+            var appearsToBeWords = Regex.IsMatch(" " + line + " ", @"\s+[a-zA-z]{5,20}\s+");
 
             if (appearsToBeWords) 
                 return false;
