@@ -26,14 +26,14 @@ namespace OpenChords.Functions
                     line = line.Replace((char)65533, "'"[0]);
                 if (Regex.IsMatch(line.Trim().ToUpper(), @"\(?PAGE.*")) continue;
 
-                line = regexReplaceFix(line, @"CHORUS\s?(\d*)\s*:?", "[C$1]");
-                line = regexReplaceFix(line, @"BRIDGE\s?(\d*)\s*:?", "[B$1]");
-                line = regexReplaceFix(line, @"INTRO\s?(\d*)\s*:?", "[I$1]");
-                line = regexReplaceFix(line, @"Interlude\s?(\d*)\s*:?", "[I$1]");
-                line = regexReplaceFix(line, @"Verse\s?(\d*)\s*:?", @"[V$1]");
-                line = regexReplaceFix(line, @"Refrain\s?(\d*)\s*:?", @"[R$1]");
-                line = regexReplaceFix(line, @"Ending\s?(\d*)\s*:?", @"[E$1]");
-                line = regexReplaceFix(line, @"Outro\s?(\d*)\s*:?", @"[E$1]");
+                line = regexReplaceFix(line, @"CHORUS\s?(\d*)\s*:?", "[C$1] ");
+                line = regexReplaceFix(line, @"BRIDGE\s?(\d*)\s*:?", "[B$1] ");
+                line = regexReplaceFix(line, @"INTRO\s?(\d*)\s*:?", "[I$1] ");
+                line = regexReplaceFix(line, @"Interlude\s?(\d*)\s*:?", "[I$1] ");
+                line = regexReplaceFix(line, @"Verse\s?(\d*)\s*:?", @"[V$1] ");
+                line = regexReplaceFix(line, @"Refrain\s?(\d*)\s*:?", @"[R$1] ");
+                line = regexReplaceFix(line, @"Ending\s?(\d*)\s*:?", @"[E$1] ");
+                line = regexReplaceFix(line, @"Outro\s?(\d*)\s*:?", @"[E$1] ");
                 //line = line.TrimEnd();
                 sbLyrics.AppendLine(line);
             }
