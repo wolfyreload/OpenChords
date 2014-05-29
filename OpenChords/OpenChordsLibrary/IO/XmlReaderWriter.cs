@@ -42,7 +42,6 @@ namespace OpenChords.IO
         /// <param name="filename"></param>
         public static Song readSong(String filename)
         {
- 
             Song song = new Song();
             TextReader textReader = new StreamReader(filename);
             try

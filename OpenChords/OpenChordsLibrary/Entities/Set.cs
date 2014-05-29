@@ -280,6 +280,7 @@ namespace OpenChords.Entities
             {
                 xmlSetSongCollection = new XmlSetSongCollection(songList);
                 SettingsReaderWriter.writeSet(Settings.ExtAppsAndDir.setsFolder + this.setName, this);
+                changeMade = false;
             }
         }
 

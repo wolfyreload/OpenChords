@@ -70,11 +70,13 @@ namespace OpenChords.Forms
 		/// </summary>
 		private void updateSetsListBox()
 		{
-			listSet.Items.Clear();
+            listSet.SelectedIndexChanged -= ListSetSelectedIndexChanged;
+            listSet.Items.Clear();
 			listSet.Items.AddRange(currentSet.songList.Select(s => s.title).ToArray());
 			int index = currentSet.indexOfCurrentSong;
 			if (index > -1 && index < currentSet.songSetSize)
 				listSet.SelectedIndex = currentSet.indexOfCurrentSong;
+            listSet.SelectedIndexChanged += ListSetSelectedIndexChanged;
 		}
 		
 		/// <summary>
@@ -121,6 +123,7 @@ namespace OpenChords.Forms
 		
 		private void fillSongList()
 		{
+            listSongs.SelectedIndexChanged -= ListSongsSelectedIndexChanged;
 			listSongs.Items.Clear();
 			
 			var itemsToShow = songList.AsQueryable();
@@ -129,6 +132,7 @@ namespace OpenChords.Forms
 				itemsToShow = itemsToShow.Where(s => s.Replace(",","").ToUpper().Contains(txtSearch.Text.ToUpper()));
 			
 			listSongs.Items.AddRange(itemsToShow.ToArray());
+            listSongs.SelectedIndexChanged += ListSongsSelectedIndexChanged;
 		}
 		
 		private void loadSongList()

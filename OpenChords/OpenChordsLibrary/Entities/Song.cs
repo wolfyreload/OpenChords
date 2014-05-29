@@ -178,6 +178,7 @@ namespace OpenChords.Entities
 
         public static Song loadSong(string SongName)
         {
+            if (string.IsNullOrEmpty(SongName)) return new Song();
             Song song = XmlReaderWriter.readSong(Settings.ExtAppsAndDir.songsFolder + SongName);
             if  (string.IsNullOrEmpty(song.notes))
                 song.notes = Note.loadNotes(SongName).notes;

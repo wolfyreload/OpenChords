@@ -141,14 +141,19 @@ namespace OpenChords.Forms
 		
 		void BtnRevertClick(object sender, EventArgs e)
         {
-            logger.Info("Clicked");
-			currentSong.revertToSaved();
-			updateTextFieldsInGui();
-
-
-
-			changesMade = false;
+            revertSong();
 		}
+
+        private void revertSong()
+        {
+            logger.Info("Clicked");
+            currentSong.revertToSaved();
+            updateTextFieldsInGui();
+
+
+
+            changesMade = false;
+        }
 		
 		void BtnSearchClick(object sender, EventArgs e)
         {
@@ -727,7 +732,10 @@ namespace OpenChords.Forms
             {
                 var text = string.Format("Save changes to set: {0}?", cmboSets.Text);
                 if (showSaveConfirmationMessageBox(text) == System.Windows.Forms.DialogResult.Yes)
+                {
                     currentSet.saveSet();
+                    currentSet.reloadSet();
+                }
                 else
                 {
                     currentSet.revertSet();
@@ -1081,11 +1089,11 @@ namespace OpenChords.Forms
         {
             fillSetCmboBox();
             
-            int songIndex = listSongs.SelectedIndex;
+            //int songIndex = listSongs.SelectedIndex;
 
             loadSongList();
 
-            listSongs.SelectedIndex = songIndex;
+            //listSongs.SelectedIndex = songIndex;
 
             txtSearch.Text = "";
 
@@ -1109,6 +1117,8 @@ namespace OpenChords.Forms
                 btnPlay.Visible = true;
             else
                 btnPlay.Visible = false;
+
+            revertSong();
 
         }
 
