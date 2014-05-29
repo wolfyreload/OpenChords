@@ -51,7 +51,7 @@ namespace OpenChords.Functions
         {
             var verseNumber = 1;
             //find some new lines
-            var songSections = Regex.Split(sbLyrics.ToString(), @"([\r\n]){4,100}");
+            var songSections = Regex.Split(sbLyrics.ToString(), @"([\r\n]){3,100}");
             sbLyrics.Length = 0;
             for (int i =0; i < songSections.Length; i++)
             {
