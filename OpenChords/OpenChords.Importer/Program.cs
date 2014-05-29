@@ -16,7 +16,7 @@ namespace OpenChords.Importer
             fafs.ApplicationDataFolder = @".\Data";
             Settings.setup(fafs);
 
-            var SongList = OpenChords.IO.FileFolderFunctions.getDirectoryListingAsList(@"TestSongs");
+            var SongList = OpenChords.IO.FileFolderFunctions.getDirectoryListingAsList(@"input");
 
             foreach (string songFilename in SongList)
             {
@@ -30,7 +30,7 @@ namespace OpenChords.Importer
 
         private static Song createBaseSong(string filename)
         {
-            var path = "TestSongs\\" + filename;
+            var path = "input\\" + filename;
             var fileContent = System.IO.File.ReadAllLines(path);
 
             var title = fileContent[0];
@@ -48,16 +48,7 @@ namespace OpenChords.Importer
                   line = line.Replace((char)65533, "'"[0]);
                 if (line.Trim().ToUpper() == title.ToUpper()) continue;
                 if (line.Trim().ToUpper() == author.ToUpper()) continue;
-                if (line.Trim().ToUpper() == author.ToUpper()) continue;
                 if (Regex.IsMatch(line.Trim().ToUpper(), @"\(?PAGE.*")) continue;
-
-                line = regexReplaceFix(line, @"CHORUS:?", "[C]");
-
-                line = regexReplaceFix(line, @"BRIDGE:?", "[B]");
-
-                line = regexReplaceFix(line, @"INTRO:?", "[I]");
-
-                line = regexReplaceFix(line, @"Verse\s?(\d*)\s*:?", @"[V$1]");
 
                 setCapo(song, ref line);
 
@@ -84,16 +75,5 @@ namespace OpenChords.Importer
                 line = "";
             }
         }
-
-        private static string regexReplaceFix(string line, string pattern, string replacementText)
-        {
-            if (Regex.IsMatch(line.Trim(), pattern, RegexOptions.IgnoreCase))
-            {
-                line = Regex.Replace(line, pattern, replacementText, RegexOptions.IgnoreCase);
-            }
-            return line;
-
-        }
-
     }
 }
