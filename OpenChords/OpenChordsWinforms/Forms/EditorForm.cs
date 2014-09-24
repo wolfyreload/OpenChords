@@ -339,42 +339,24 @@ namespace OpenChords.Forms
 		
 		void BtnTransposeUpClick(object sender, EventArgs e)
         {
-            logger.Info("Transpose key up for song " + currentSong.title);
-			updateSelectedSong();
-			currentSong.transposeKeyUp();
-			updateTextFieldsInGui();
-			txtLyrics.Focus();
-			txtLyrics.Select(0,0);
+            transposeUp();
 		}
 		
+
 		void BtnTransposeDownClick(object sender, EventArgs e)
         {
-            logger.Info("Transpose key down for song " + currentSong.title); 
-            updateSelectedSong();
-			currentSong.transposeKeyDown();
-			updateTextFieldsInGui();
-			txtLyrics.Focus();
-			txtLyrics.Select(0,0);
+            transposeDown();
 		}
-		
+
 		void BtnCapoUpClick(object sender, System.EventArgs e)
         {
-            logger.Info("Capo up for song " + currentSong.title);
-            updateSelectedSong();
-			currentSong.capoUp();
-			updateTextFieldsInGui();
-			txtLyrics.Focus();
-			txtLyrics.Select(0,0);
+            capoUp();
 		}
-		
+
+        
 		void BtnCapoDownClick(object sender, System.EventArgs e)
         {
-            logger.Info("Capo down for song " + currentSong.title);
-            updateSelectedSong();
-			currentSong.capoDown();
-			updateTextFieldsInGui();
-			txtLyrics.Focus();
-			txtLyrics.Select(0,0);
+            capoDown();
 		}
 
 		
@@ -392,7 +374,42 @@ namespace OpenChords.Forms
 
 			
 		}
-		
+
+        private void transposeUp()
+        {
+            logger.Info("Transpose key up for song " + currentSong.title);
+            updateSelectedSong();
+            currentSong.transposeKeyUp();
+            updateTextFieldsInGui();
+        }
+
+
+        private void transposeDown()
+        {
+            logger.Info("Transpose key down for song " + currentSong.title);
+            updateSelectedSong();
+            currentSong.transposeKeyDown();
+            updateTextFieldsInGui();
+        }
+
+
+        private void capoUp()
+        {
+            logger.Info("Capo up for song " + currentSong.title);
+            updateSelectedSong();
+            currentSong.capoUp();
+            updateTextFieldsInGui();
+        }
+
+        private void capoDown()
+        {
+            logger.Info("Capo down for song " + currentSong.title);
+            updateSelectedSong();
+            currentSong.capoDown();
+            updateTextFieldsInGui();
+        }
+
+
 		void TextFieldKeyUp(object sender, KeyEventArgs e)
 		{
             //if (e.Modifiers == Keys.Control && e.KeyCode == Keys.A)
@@ -644,7 +661,18 @@ namespace OpenChords.Forms
                 case Keys.Control | Keys.Alt | Keys.Shift | Keys.P:
                     ResaveEverySong();
                     return true;
-					
+				case Keys.Control | Keys.Oemplus:
+                    transposeUp();
+                    return true;
+                case Keys.Control | Keys.OemMinus:
+                    transposeDown();
+                    return true;
+                case Keys.Shift | Keys.Oemplus:
+                    capoUp();
+                    return true;
+                case Keys.Shift | Keys.OemMinus:
+                    capoDown();
+                    return true;
 										
 					
 					
