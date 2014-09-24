@@ -260,7 +260,7 @@ namespace OpenChords.Forms
 
 
             }
-            if (!string.IsNullOrEmpty(filename))
+            if (!string.IsNullOrEmpty(filename)) //open pdf
             {
                 filename = String.Format("\"{0}\"", OpenChords.Settings.ExtAppsAndDir.printFolder + filename);
 
@@ -269,6 +269,13 @@ namespace OpenChords.Forms
                     System.Diagnostics.Process.Start(filename);
                 else
                     System.Diagnostics.Process.Start(fileManager, filename);
+            }
+            else //open folder
+            {
+                if (string.IsNullOrEmpty(fileManager)) 
+                    System.Diagnostics.Process.Start(OpenChords.Settings.ExtAppsAndDir.printFolder);
+                else
+                    System.Diagnostics.Process.Start(fileManager, OpenChords.Settings.ExtAppsAndDir.printFolder);
             }
 
         }
