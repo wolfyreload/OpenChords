@@ -293,9 +293,11 @@ namespace OpenChords.Entities
             this.presentation = oldSave.presentation;
             this.style = oldSave.style;
 
-
-            var notesClass = Note.loadNotes(title);
-            this.notes = notesClass.notes;
+            if (this.notes == "")
+            {
+                var notesClass = Note.loadNotes(title);
+                this.notes = notesClass.notes;
+            }
         }
 
         public void transposeKeyUp()
