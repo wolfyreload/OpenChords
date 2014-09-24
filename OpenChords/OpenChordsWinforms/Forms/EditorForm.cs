@@ -308,6 +308,7 @@ namespace OpenChords.Forms
 
         private void presentSong()
         {
+            logger.Info("Presenting song " + currentSong.title);
             confirmChangesToSong();
             updateSelectedSong();
             var displaySettings = DisplayAndPrintSettings.loadSettings(DisplayAndPrintSettingsType.DisplaySettings);
@@ -317,6 +318,7 @@ namespace OpenChords.Forms
 
 		void presentSet()
 		{
+            logger.Info("Presenting set " + currentSet.setName);
             confirmChangesToSong();
             confirmChangesToSet();
             var displaySettings = DisplayAndPrintSettings.loadSettings(DisplayAndPrintSettingsType.DisplaySettings);
@@ -335,7 +337,7 @@ namespace OpenChords.Forms
 		
 		void BtnTransposeUpClick(object sender, EventArgs e)
         {
-            logger.Info("Clicked");
+            logger.Info("Transpose key up for song " + currentSong.title);
 			updateSelectedSong();
 			currentSong.transposeKeyUp();
 			updateTextFieldsInGui();
@@ -345,8 +347,8 @@ namespace OpenChords.Forms
 		
 		void BtnTransposeDownClick(object sender, EventArgs e)
         {
-            logger.Info("Clicked");
-			updateSelectedSong();
+            logger.Info("Transpose key down for song " + currentSong.title); 
+            updateSelectedSong();
 			currentSong.transposeKeyDown();
 			updateTextFieldsInGui();
 			txtLyrics.Focus();
@@ -355,8 +357,8 @@ namespace OpenChords.Forms
 		
 		void BtnCapoUpClick(object sender, System.EventArgs e)
         {
-            logger.Info("Clicked");
-			updateSelectedSong();
+            logger.Info("Capo up for song " + currentSong.title);
+            updateSelectedSong();
 			currentSong.capoUp();
 			updateTextFieldsInGui();
 			txtLyrics.Focus();
@@ -365,8 +367,8 @@ namespace OpenChords.Forms
 		
 		void BtnCapoDownClick(object sender, System.EventArgs e)
         {
-            logger.Info("Clicked");
-			updateSelectedSong();
+            logger.Info("Capo down for song " + currentSong.title);
+            updateSelectedSong();
 			currentSong.capoDown();
 			updateTextFieldsInGui();
 			txtLyrics.Focus();
@@ -376,7 +378,8 @@ namespace OpenChords.Forms
 		
 		private void breakLine()
 		{
-			updateSelectedSong();
+            logger.Info("break current line in two for song " + currentSong.title); 
+            updateSelectedSong();
 			int caret = txtLyrics.SelectionStart;
 			int newCaret =  Functions.SongProcessor.BreakSongLine(txtLyrics, caret);
             currentSong.lyrics = txtLyrics.Text;
@@ -734,7 +737,6 @@ namespace OpenChords.Forms
                 if (showSaveConfirmationMessageBox(text) == System.Windows.Forms.DialogResult.Yes)
                 {
                     currentSet.saveSet();
-                    currentSet.reloadSet();
                 }
                 else
                 {
@@ -916,7 +918,7 @@ namespace OpenChords.Forms
 
         private void formatLyrics()
         {
-			RichTextBox rtf = new RichTextBox();
+        	RichTextBox rtf = new RichTextBox();
             rtf.Font = txtLyrics.Font;
 
             string[] songText;
