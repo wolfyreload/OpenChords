@@ -742,6 +742,8 @@ namespace OpenChords.Forms
                     updateSetListbox();
                 }
             }
+            currentSet.reloadSet();
+               
         }
 		
 		void EditorFormLoad(object sender, EventArgs e)
