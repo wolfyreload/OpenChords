@@ -123,6 +123,8 @@ namespace OpenChords.Forms
 		
 		private void fillSongList()
 		{
+            //save selectedIndex
+            var savedSelectedIndex = listSongs.SelectedIndex;
             listSongs.SelectedIndexChanged -= ListSongsSelectedIndexChanged;
 			listSongs.Items.Clear();
 			
@@ -132,6 +134,11 @@ namespace OpenChords.Forms
 				itemsToShow = itemsToShow.Where(s => s.Replace(",","").ToUpper().Contains(txtSearch.Text.ToUpper()));
 			
 			listSongs.Items.AddRange(itemsToShow.ToArray());
+
+            //restore saved position
+            if (listSongs.Items.Count > savedSelectedIndex)
+                listSongs.SelectedIndex = savedSelectedIndex;
+
             listSongs.SelectedIndexChanged += ListSongsSelectedIndexChanged;
 		}
 		
