@@ -335,12 +335,12 @@ namespace OpenChords.Entities
         /// <returns></returns>
         public string generateLongTitle()
         {
-            StringBuilder songTitleLine = new StringBuilder(this.title + " ");
+            StringBuilder songTitleLine = new StringBuilder(this.title.Trim() + " ");
 
             //fill in key and capo
             if (!string.IsNullOrEmpty(this.key))
             {
-                songTitleLine.Append("(Key - " + this.key);
+                songTitleLine.Append("(Key - " + this.key.Trim());
 
                 if (this.Capo != 0)
                 {
@@ -354,6 +354,30 @@ namespace OpenChords.Entities
             if (!string.IsNullOrEmpty(this.tempo))
                 songTitleLine.Append(" " + this.tempo);
 
+            return songTitleLine.ToString();
+        }
+
+        /// <summary>
+        /// generate long title
+        /// </summary>
+        /// <param name="song"></param>
+        /// <returns></returns>
+        public string generateShortTitle()
+        {
+            StringBuilder songTitleLine = new StringBuilder(this.title.Trim() + " ");
+
+            //fill in key and capo
+            if (!string.IsNullOrEmpty(this.key))
+            {
+                songTitleLine.Append("(Key - " + this.key.Trim());
+
+                if (this.Capo != 0)
+                {
+                    songTitleLine.Append(" Capo - " + this.Capo);
+                }
+
+                songTitleLine.Append(")");
+            }
             return songTitleLine.ToString();
         }
 

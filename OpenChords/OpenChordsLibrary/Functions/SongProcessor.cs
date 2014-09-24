@@ -125,45 +125,12 @@ namespace OpenChords.Functions
 		/// <returns></returns>
 		public static string generateFileName(Song song)
 		{
-			StringBuilder songTitleLine = new StringBuilder(song.title + " ");
-
-			if (song.key != "")
-			{
-				songTitleLine.Append("(Key - " + song.key);
-				
-				if (song.Capo != 0)
-				{
-					songTitleLine.Append(" Capo - " + song.Capo);
-				}
-
-				songTitleLine.Append(")");
-			}
-			
-			return songTitleLine.ToString();
+            return song.generateShortTitle();
 		}
 
         public static string generateSongTitleInPresentation(Song song)
         {
-            StringBuilder songTitleLine = new StringBuilder(song.title + " ");
-
-            //fill in key and capo
-            if (!string.IsNullOrEmpty(song.key))
-            {
-                songTitleLine.Append("(Key - " + song.key);
-
-                if (song.Capo != 0)
-                {
-                    songTitleLine.Append(" Capo - " + song.Capo);
-                }
-
-                songTitleLine.Append(")");
-            }
-            if (!string.IsNullOrEmpty(song.time_sig))
-                songTitleLine.Append(" " + song.time_sig);
-            if (!string.IsNullOrEmpty(song.tempo))
-                songTitleLine.Append(" " + song.tempo);
-
-            return songTitleLine.ToString();
+            return song.generateLongTitle();
         }
 		
 		/// <summary>

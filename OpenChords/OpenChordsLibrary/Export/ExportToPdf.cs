@@ -249,7 +249,7 @@ namespace OpenChords.Export
         {
             heightPosition = printSettings.pageHeight - printSettings.topPageMargin;
 
-            String songTitleLine = SongProcessor.generateFileName(currentSong);
+            String songTitleLine = SongProcessor.generateSongTitleInPresentation(currentSong);
             var x1 = printSettings.leftPageMargin;
             var y1 = heightPosition;
             AddTextToPage(songTitleLine, printSettings.TitleFormat, x1, y1);
