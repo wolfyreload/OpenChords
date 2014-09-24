@@ -242,6 +242,8 @@ namespace OpenChords.Forms
             string fileManager = OpenChords.Settings.ExtAppsAndDir.fileManager;
             string filename = null;
 
+            confirmChangesToSong();
+            confirmChangesToSet();
             //get the filename
             if (doc == Config.Enumerations.DocumentType.CurrentSong)
                 filename = Export.ExportToPdf.exportSong(currentSong, printSettings);
