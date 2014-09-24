@@ -152,7 +152,7 @@ namespace OpenChords.Config
         {
             get
             {
-                string path = settingsFolder + "Media\\";
+                string path = dataFolder + "Media\\";
                 string fixedPath = fixPaths(path);
                 if (!System.IO.Directory.Exists(fixedPath))
                     System.IO.Directory.CreateDirectory(fixedPath);
@@ -165,7 +165,7 @@ namespace OpenChords.Config
         {
             get
             {
-                string path = settingsFolder + "Print\\";
+                string path = dataFolder + "Export\\";
                 string fixedPath = fixPaths(path);
                 if (!System.IO.Directory.Exists(fixedPath))
                     System.IO.Directory.CreateDirectory(fixedPath);
