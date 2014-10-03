@@ -1,13 +1,18 @@
 <?xml version="1.0" encoding="utf-8"?>
 <song xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <style>
+    <title align="center" bold="true" border="true" border_color="#000000" color="#FFFFFF" fill="false" fill_color="#000000" font="Helvetica" italic="true" shadow="true" shadow_color="#000000" underline="false" valign="bottom" enabled="true" size="26" include_verse="false" />
+    <body align="center" bold="true" border="true" border_color="#000000" color="#FFFFFF" fill="false" fill_color="#FF0000" font="Helvetica" italic="false" highlight_chorus="true" shadow="true" shadow_color="#000000" underline="false" valign="middle" enabled="true" auto_scale="true" size="34" />
+    <subtitle enabled="false" />
+  </style>
   <title>What A Friend We Have In Jesus</title>
   <author>Joseph M. Scriven &amp; Charles C. Convers</author>
-  <key>D</key>
-  <capo>0</capo>
   <presentation>V1 V2 V3</presentation>
+  <capo>0</capo>
+  <key>D</key>
   <lyrics>[V1]
 .D                        G                                  
- What a friend we have in Jesus,                             
+ What a friend we have in Jesus,                            
 .D                           A                               
  All ours sins and griefs to bear;                           
 .D                   G                                       
@@ -59,7 +64,21 @@
 .A                       D                                   
  Thou wilt find a solace there.                              
 
+
 </lyrics>
-  <notes />
   <ccli>27714</ccli>
+  <preferFlats>False</preferFlats>
+  <tempo />
+  <time_sig />
+  <hymn_number />
+  <notes>[V1]
+ 
+[V2]
+ 
+[V3]
+ 
+[G]
+ 
+
+</notes>
 </song>

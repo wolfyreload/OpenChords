@@ -1,14 +1,18 @@
 <?xml version="1.0" encoding="utf-8"?>
 <song xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <style>
+    <title align="center" bold="true" border="true" border_color="#000000" color="#FFFFFF" fill="false" fill_color="#000000" font="Helvetica" italic="true" shadow="true" shadow_color="#000000" underline="false" valign="bottom" enabled="true" size="26" include_verse="false" />
+    <body align="center" bold="true" border="true" border_color="#000000" color="#FFFFFF" fill="false" fill_color="#FF0000" font="Helvetica" italic="false" highlight_chorus="true" shadow="true" shadow_color="#000000" underline="false" valign="middle" enabled="true" auto_scale="true" size="34" />
+    <subtitle enabled="false" />
+  </style>
   <title>Amazing Grace</title>
   <author>John Newton</author>
-  <key>D</key>
-  <capo>0</capo>
-  <preferFlats>False</preferFlats>
   <presentation>V3 V1 V2 V4</presentation>
+  <capo>0</capo>
+  <key>D</key>
   <lyrics>[V1]
 . D      D7        G         D                                                              
- Amazing grace how sweet the sound                      
+ Amazing grace how sweet the sound                     
 .     Bm      E           A  A7                                                             
  that saved a wretch like me;                           
 .  D        D7       G       D                                                              
@@ -46,7 +50,33 @@
 .     Bm        A       G   D                                                               
  than when we'd first begun!                            
 
+
 </lyrics>
-  <notes />
   <ccli>1037882</ccli>
+  <preferFlats>False</preferFlats>
+  <tempo />
+  <time_sig />
+  <hymn_number />
+  <notes>[V3]
+ slow and worshipful
+[V1]
+ switch to 4/4 
+ timing
+ with palm muting
+ add light drums
+ 
+[V2]
+ heavy
+ 
+[V4]
+ heavy
+ sharp ending
+ on D
+ 
+[G]
+ do V3 original
+ song then switch to 
+ 4/4 timing
+
+</notes>
 </song>

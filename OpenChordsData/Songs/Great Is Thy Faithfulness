@@ -1,12 +1,18 @@
 <?xml version="1.0" encoding="utf-8"?>
 <song xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <style>
+    <title align="center" bold="true" border="true" border_color="#000000" color="#FFFFFF" fill="false" fill_color="#000000" font="Helvetica" italic="true" shadow="true" shadow_color="#000000" underline="false" valign="bottom" enabled="true" size="26" include_verse="false" />
+    <body align="center" bold="true" border="true" border_color="#000000" color="#FFFFFF" fill="false" fill_color="#FF0000" font="Helvetica" italic="false" highlight_chorus="true" shadow="true" shadow_color="#000000" underline="false" valign="middle" enabled="true" auto_scale="true" size="34" />
+    <subtitle enabled="false" />
+  </style>
   <title>Great Is Thy Faithfulness</title>
   <author>Thomas O. Chisholm</author>
-  <key>A</key>
   <presentation>V1 C V2 C V3 C</presentation>
+  <capo>0</capo>
+  <key>A</key>
   <lyrics>[V1]
 .A            E             D        A                  
- Great is Thy faithfulness, O God my Father,            
+ Great is Thy faithfulness, O God my Father,           
 .D           A         B7           E                   
  There is no shadow of turning with Thee;               
 .E7            A           A7            D              
@@ -44,7 +50,27 @@
 .Bm7           A             D         E A              
  Blessings all mine with ten thousands beside.          
 
+
 </lyrics>
-  <notes />
   <ccli>18723</ccli>
+  <preferFlats>False</preferFlats>
+  <tempo />
+  <time_sig />
+  <hymn_number />
+  <notes>[V1]
+ 
+[C]
+ 
+[V2]
+ 
+[C]
+ 
+[V3]
+ 
+[C]
+ 
+[G]
+ 
+
+</notes>
 </song>

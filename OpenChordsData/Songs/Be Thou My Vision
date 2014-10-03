@@ -1,12 +1,18 @@
 <?xml version="1.0" encoding="utf-8"?>
 <song xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <style>
+    <title align="center" bold="true" border="true" border_color="#000000" color="#FFFFFF" fill="false" fill_color="#000000" font="Helvetica" italic="true" shadow="true" shadow_color="#000000" underline="false" valign="bottom" enabled="true" size="26" include_verse="false" />
+    <body align="center" bold="true" border="true" border_color="#000000" color="#FFFFFF" fill="false" fill_color="#FF0000" font="Helvetica" italic="false" highlight_chorus="true" shadow="true" shadow_color="#000000" underline="false" valign="middle" enabled="true" auto_scale="true" size="34" />
+    <subtitle enabled="false" />
+  </style>
   <title>Be Thou My Vision</title>
   <author>Irish Folk Hymn; Elanor H. Hull</author>
-  <key>D</key>
   <presentation>V1 V2 V3 V4</presentation>
+  <capo>0</capo>
+  <key>D</key>
   <lyrics>[V1]
 .D          Bm7       G          D                      
- Be Thou my Vision, O Lord of my heart,                 
+ Be Thou my Vision, O Lord of my heart,                
 .A             Bm7        G              A              
  Naught be all else to me save that Thou art;           
 .Gmaj7        F#m7       D         G    A               
@@ -44,7 +50,23 @@
 .E           C#m7      A2       E                       
  Still be my Vision, O Ruler of all.                    
 
+
 </lyrics>
-  <notes />
   <ccli>248328</ccli>
+  <preferFlats>False</preferFlats>
+  <tempo />
+  <time_sig />
+  <hymn_number />
+  <notes>[V1]
+ 
+[V2]
+ 
+[V3]
+ 
+[V4]
+ 
+[G]
+ 
+
+</notes>
 </song>

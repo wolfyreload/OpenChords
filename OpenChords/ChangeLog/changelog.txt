@@ -1,3 +1,24 @@
+OpenChords v1.5.0
+============================================================================
+-Improvement: Changed song editor layout to be more intuitive 
+-Improvement: Added menu at the top of the presentation screen with all options of modifying the song
+-Improvement: Added shortcut keys to song editor to change song key/capo (Ctrl+= and Ctrl+-)
+-Improvement: Discarded dual columns option to allow more than just 2 columns of lyrics text
+-Improvement: Merged notes into a single file (since song notes are usually shared among the entire music team)
+-Improvement: You can now disable the please turn over text in present mode
+-Improvement: Added tempo and time signature settings to pdf exports
+-Improvement: Set format changed from a simple text list to xml format
+-Improvement: You now have much more choice on lyrics/chord fonts when presenting songs
+-Improvement: Added chord line detection (if you have an intro piece with just chords it should be detected as just chords)
+-Improvement: No longer need to change screen width/height in settings when changing screen resolutions
+-Improvement: Set changes are no longer autosaved, you are asked if you want to save changes
+-Depreciation: removed the web component from install until I can find a simple way for it to be deployed (not using IIS)
+-Note: you will need to resave old sets in order for them to work properly (since the file format changed, just add and remove a song and switch to another set)
+
+OpenChords v1.4.0
+=============================================================================
+-Added basic web interface that you deploy on a webserver
+
 OpenChords v1.3.1
 =============================================================================
 -Improvement: Pressing F5 in Display Mode will now refresh the Set/Song displayed (useful if you using Dropbox for syncing between people)
