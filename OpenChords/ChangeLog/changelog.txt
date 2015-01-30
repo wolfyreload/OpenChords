@@ -1,3 +1,7 @@
+OpenChords v1.6.0
+============================================================================
+-Improvement: When you change display settings in set or song presentation mode then settings are saved
+
 OpenChords v1.5.0
 ============================================================================
 -Improvement: Changed song editor layout to be more intuitive 

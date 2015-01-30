@@ -13,6 +13,7 @@ namespace OpenChords.Forms
 {
     public partial class DisplayForm2 : Form
     {
+        private DisplayAndPrintSettings _displaySettings;
         public DisplayForm2()
         {
             InitializeComponent();
@@ -24,11 +25,19 @@ namespace OpenChords.Forms
         public DisplayForm2(Set set, DisplayAndPrintSettings displaySettings)
         {
             InitializeComponent();
+            _displaySettings = displaySettings;
             comSongDisplay1.LoadSet(set, displaySettings);
 
             changeColors(displaySettings);
             
             addSongListToMenu(set.songList);
+            this.FormClosing += DisplayForm2_FormClosing;
+        }
+
+        void DisplayForm2_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            //save display options when closing the song presentation
+            _displaySettings.saveSettings();
         }
 
         private void changeColors(DisplayAndPrintSettings displaySettings)
@@ -42,6 +51,7 @@ namespace OpenChords.Forms
         public DisplayForm2(Song song, DisplayAndPrintSettings displaySettings)
         {
             InitializeComponent();
+            _displaySettings = displaySettings;
             var set = new Set();
             set.addSongToSet(song);
          
@@ -51,6 +61,7 @@ namespace OpenChords.Forms
             
             comSongDisplay1.LoadSet(set, displaySettings);
             songListToolStripMenuItem.Visible = false;
+            this.FormClosing += DisplayForm2_FormClosing;
         }
 
         private void loadForm()
