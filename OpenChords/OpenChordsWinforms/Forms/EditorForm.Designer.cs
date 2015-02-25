@@ -139,6 +139,7 @@
             this.grpImage = new System.Windows.Forms.GroupBox();
             this.picBackgroundImage = new System.Windows.Forms.PictureBox();
             this.timerOrderChanged = new System.Windows.Forms.Timer(this.components);
+            this.exportSongListToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.menuStrip1.SuspendLayout();
             this.splitMainForm.Panel1.SuspendLayout();
             this.splitMainForm.Panel2.SuspendLayout();
@@ -354,7 +355,8 @@
             this.addonsToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.openSongToolStripMenuItem,
             this.pdfToolStripMenuItem,
-            this.fileSyncUtilityToolStripMenuItem});
+            this.fileSyncUtilityToolStripMenuItem,
+            this.exportSongListToolStripMenuItem});
             this.addonsToolStripMenuItem.Name = "addonsToolStripMenuItem";
             this.addonsToolStripMenuItem.Size = new System.Drawing.Size(60, 20);
             this.addonsToolStripMenuItem.Text = "Addons";
@@ -368,7 +370,7 @@
             this.launchOpenSongToolStripMenuItem});
             this.openSongToolStripMenuItem.Name = "openSongToolStripMenuItem";
             this.openSongToolStripMenuItem.ShortcutKeyDisplayString = "";
-            this.openSongToolStripMenuItem.Size = new System.Drawing.Size(154, 22);
+            this.openSongToolStripMenuItem.Size = new System.Drawing.Size(158, 22);
             this.openSongToolStripMenuItem.Text = "OpenSong";
             this.openSongToolStripMenuItem.Click += new System.EventHandler(this.BtnLaunchOpenSongClick);
             // 
@@ -407,7 +409,7 @@
             this.pdfA4StripMenuItem,
             this.pdfTabletStripMenuItem});
             this.pdfToolStripMenuItem.Name = "pdfToolStripMenuItem";
-            this.pdfToolStripMenuItem.Size = new System.Drawing.Size(154, 22);
+            this.pdfToolStripMenuItem.Size = new System.Drawing.Size(158, 22);
             this.pdfToolStripMenuItem.Text = "PDF";
             // 
             // pdfA4StripMenuItem
@@ -477,7 +479,7 @@
             // fileSyncUtilityToolStripMenuItem
             // 
             this.fileSyncUtilityToolStripMenuItem.Name = "fileSyncUtilityToolStripMenuItem";
-            this.fileSyncUtilityToolStripMenuItem.Size = new System.Drawing.Size(154, 22);
+            this.fileSyncUtilityToolStripMenuItem.Size = new System.Drawing.Size(158, 22);
             this.fileSyncUtilityToolStripMenuItem.Text = "File Sync Utility";
             this.fileSyncUtilityToolStripMenuItem.Click += new System.EventHandler(this.fileSyncUtilityToolStripMenuItem_Click);
             // 
@@ -1436,6 +1438,13 @@
             this.timerOrderChanged.Interval = 500;
             this.timerOrderChanged.Tick += new System.EventHandler(this.timerOrderChanged_Tick);
             // 
+            // exportSongListToolStripMenuItem
+            // 
+            this.exportSongListToolStripMenuItem.Name = "exportSongListToolStripMenuItem";
+            this.exportSongListToolStripMenuItem.Size = new System.Drawing.Size(158, 22);
+            this.exportSongListToolStripMenuItem.Text = "Export Song List";
+            this.exportSongListToolStripMenuItem.Click += new System.EventHandler(this.ExportSongListToolStripMenuItem_Click);
+            // 
             // EditorForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -1650,6 +1659,7 @@
         private System.Windows.Forms.Timer timerOrderChanged;
         private System.Windows.Forms.Panel pnlSetButtons;
         private System.Windows.Forms.GroupBox groupBox1;
+        private System.Windows.Forms.ToolStripMenuItem exportSongListToolStripMenuItem;
         
   
     }

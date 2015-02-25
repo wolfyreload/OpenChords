@@ -227,5 +227,20 @@ namespace OpenChords.Export
             box.SelectionLength = 0; // clear*/
 		}
 		
+		
+		public static string exportSetSongList(Set currentSet)
+		{
+            richTextBox = new RichTextBox();
+            richTextBox.AppendText(currentSet.setName + "\r\n\r\n");
+			foreach (Song song in currentSet.songList)
+            {
+                richTextBox.AppendText(string.Format("{0} {1}\r\n", song.generateLongTitle(), song.presentation));
+            
+            }
+            string filename = String.Format("{0}{1}.rtf", Settings.ExtAppsAndDir.printFolder, currentSet.setName);
+            richTextBox.SaveFile(filename);
+            return filename;
+		    
+        }
 	}
 }

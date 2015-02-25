@@ -1,3 +1,8 @@
+OpenChords v1.6.1
+============================================================================
+-Improvement: Added a export set list option
+
+
 OpenChords v1.6.0
 ============================================================================
 -Improvement: When you change display settings in set or song presentation mode then settings are saved
@@ -107,7 +112,7 @@ OpenChords v1.1.5
 -tried to make the application look a little less terrible
 -added code to convert all tabs to spaces in "fix formating" methods
 -fixed bug where blank settings (all zeros) where getting saved to file
--fixed error where nothing was displaying if the user tries to enter in a non-existant song section
+-fixed error where nothing was displaying if the user tries to enter in a non-existent song section
 
 OpenChords v1.1.0
 =============================================================================
@@ -122,7 +127,7 @@ OpenChords v1.1.0
 
 OpenChords v1.0.1
 ==============================================================================
--the bold chords and the regular lyrics were not alligned, so changed the font of the lyrics textbox to Courier New
+-the bold chords and the regular lyrics were not aligned, so changed the font of the lyrics textbox to Courier New
 
 OpenChords v1.0.0
 ===============================================================================

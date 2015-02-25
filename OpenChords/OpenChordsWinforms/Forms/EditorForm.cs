@@ -232,6 +232,19 @@ namespace OpenChords.Forms
             exportToPdf(OpenChords.Config.Enumerations.DocumentType.AllSongs, DisplayAndPrintSettingsType.TabletSettings);
         }
 
+        void ExportSongListToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            logger.Info("Clicked");
+            //get the filemanager for the filesystem
+            string fileManager = OpenChords.Settings.ExtAppsAndDir.fileManager;
+            string filename = null;
+
+            confirmChangesToSong();
+            confirmChangesToSet();
+            //get the filename
+            filename = Export.ExportToRtf.exportSetSongList(currentSet);
+            System.Diagnostics.Process.Start(filename);
+        }
    
         
 
@@ -1249,18 +1262,5 @@ namespace OpenChords.Forms
             timerOrderChanged.Stop();
             timerOrderChanged.Start();
         }
-
-    
-
-
-
-
-  
-
-        
-
-
-     
-
 	}
 }

@@ -108,3 +108,5 @@ Backup*/
 UpgradeLog*.XML
 build
 *.bak
+OpenChords/Storage.dat
+OpenChords/Index.dat
