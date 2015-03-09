@@ -63,6 +63,7 @@
             this.exportCurrentSetToTabletPDFToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.exportAllSongsToTabletPDFToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.fileSyncUtilityToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.exportSongListToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.helpToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.manualToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.aboutOpenChordsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -139,7 +140,9 @@
             this.grpImage = new System.Windows.Forms.GroupBox();
             this.picBackgroundImage = new System.Windows.Forms.PictureBox();
             this.timerOrderChanged = new System.Windows.Forms.Timer(this.components);
-            this.exportSongListToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.exportToHtmlToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.htmlCurrentSongToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.htmlCurrentSetToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.menuStrip1.SuspendLayout();
             this.splitMainForm.Panel1.SuspendLayout();
             this.splitMainForm.Panel2.SuspendLayout();
@@ -355,6 +358,7 @@
             this.addonsToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.openSongToolStripMenuItem,
             this.pdfToolStripMenuItem,
+            this.exportToHtmlToolStripMenuItem,
             this.fileSyncUtilityToolStripMenuItem,
             this.exportSongListToolStripMenuItem});
             this.addonsToolStripMenuItem.Name = "addonsToolStripMenuItem";
@@ -410,7 +414,7 @@
             this.pdfTabletStripMenuItem});
             this.pdfToolStripMenuItem.Name = "pdfToolStripMenuItem";
             this.pdfToolStripMenuItem.Size = new System.Drawing.Size(158, 22);
-            this.pdfToolStripMenuItem.Text = "PDF";
+            this.pdfToolStripMenuItem.Text = "Export To PDF";
             // 
             // pdfA4StripMenuItem
             // 
@@ -419,7 +423,7 @@
             this.exportCurrentSetToA4PDFToolStripMenuItem,
             this.exportAllSongsToA4PDFToolStripMenuItem});
             this.pdfA4StripMenuItem.Name = "pdfA4StripMenuItem";
-            this.pdfA4StripMenuItem.Size = new System.Drawing.Size(107, 22);
+            this.pdfA4StripMenuItem.Size = new System.Drawing.Size(152, 22);
             this.pdfA4StripMenuItem.Text = "A4";
             // 
             // exportCurrentSongToA4PDFToolStripMenuItem
@@ -451,7 +455,7 @@
             this.exportCurrentSetToTabletPDFToolStripMenuItem,
             this.exportAllSongsToTabletPDFToolStripMenuItem});
             this.pdfTabletStripMenuItem.Name = "pdfTabletStripMenuItem";
-            this.pdfTabletStripMenuItem.Size = new System.Drawing.Size(107, 22);
+            this.pdfTabletStripMenuItem.Size = new System.Drawing.Size(152, 22);
             this.pdfTabletStripMenuItem.Text = "Tablet";
             // 
             // exportCurrentSongToTabletPDFToolStripMenuItem
@@ -482,6 +486,13 @@
             this.fileSyncUtilityToolStripMenuItem.Size = new System.Drawing.Size(158, 22);
             this.fileSyncUtilityToolStripMenuItem.Text = "File Sync Utility";
             this.fileSyncUtilityToolStripMenuItem.Click += new System.EventHandler(this.fileSyncUtilityToolStripMenuItem_Click);
+            // 
+            // exportSongListToolStripMenuItem
+            // 
+            this.exportSongListToolStripMenuItem.Name = "exportSongListToolStripMenuItem";
+            this.exportSongListToolStripMenuItem.Size = new System.Drawing.Size(158, 22);
+            this.exportSongListToolStripMenuItem.Text = "Export Song List";
+            this.exportSongListToolStripMenuItem.Click += new System.EventHandler(this.ExportSongListToolStripMenuItem_Click);
             // 
             // helpToolStripMenuItem
             // 
@@ -1438,12 +1449,28 @@
             this.timerOrderChanged.Interval = 500;
             this.timerOrderChanged.Tick += new System.EventHandler(this.timerOrderChanged_Tick);
             // 
-            // exportSongListToolStripMenuItem
+            // exportToHtmlToolStripMenuItem
             // 
-            this.exportSongListToolStripMenuItem.Name = "exportSongListToolStripMenuItem";
-            this.exportSongListToolStripMenuItem.Size = new System.Drawing.Size(158, 22);
-            this.exportSongListToolStripMenuItem.Text = "Export Song List";
-            this.exportSongListToolStripMenuItem.Click += new System.EventHandler(this.ExportSongListToolStripMenuItem_Click);
+            this.exportToHtmlToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.htmlCurrentSongToolStripMenuItem,
+            this.htmlCurrentSetToolStripMenuItem});
+            this.exportToHtmlToolStripMenuItem.Name = "exportToHtmlToolStripMenuItem";
+            this.exportToHtmlToolStripMenuItem.Size = new System.Drawing.Size(158, 22);
+            this.exportToHtmlToolStripMenuItem.Text = "Export To Html";
+            // 
+            // htmlCurrentSongToolStripMenuItem
+            // 
+            this.htmlCurrentSongToolStripMenuItem.Name = "htmlCurrentSongToolStripMenuItem";
+            this.htmlCurrentSongToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.htmlCurrentSongToolStripMenuItem.Text = "Current Song";
+            this.htmlCurrentSongToolStripMenuItem.Click += new System.EventHandler(this.htmlCurrentSongToolStripMenuItem_Click);
+            // 
+            // htmlCurrentSetToolStripMenuItem
+            // 
+            this.htmlCurrentSetToolStripMenuItem.Name = "htmlCurrentSetToolStripMenuItem";
+            this.htmlCurrentSetToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.htmlCurrentSetToolStripMenuItem.Text = "Current Set";
+            this.htmlCurrentSetToolStripMenuItem.Click += new System.EventHandler(this.htmlCurrentSetToolStripMenuItem_Click);
             // 
             // EditorForm
             // 
@@ -1660,6 +1687,9 @@
         private System.Windows.Forms.Panel pnlSetButtons;
         private System.Windows.Forms.GroupBox groupBox1;
         private System.Windows.Forms.ToolStripMenuItem exportSongListToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem exportToHtmlToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem htmlCurrentSongToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem htmlCurrentSetToolStripMenuItem;
         
   
     }

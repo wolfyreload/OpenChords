@@ -12,11 +12,15 @@ namespace OpenChords.Export
 
         private DisplayAndPrintSettings _settings;
         private Set _set;
+        public string Filename { get; private set; }
+        private string Title { get; set; }
 
         public ExportToHtml(Set set, DisplayAndPrintSettings settings)
         {
             _set = set;
             _settings = settings;
+            Title = set.setName;
+            Filename = set.setName + ".html";
         }
 
         public ExportToHtml(Song song, DisplayAndPrintSettings settings)
@@ -24,31 +28,44 @@ namespace OpenChords.Export
             _set = new Set();
             _set.addSongToSet(song);
             _settings = settings;
+            Title = song.generateShortTitle();
+            Filename = song.generateShortTitle() + ".html";
         }
 
-
-        public List<SongHtml> GenerateHtml()
+        public string GenerateHtml()
         {
-            StringBuilder sb = new StringBuilder();
+         
+            //configure the stylesheet
+            string baseStylesheet = HtmlResources.stylesheet;
+            configureStylesheet(ref baseStylesheet);
 
-            List<SongHtml> htmlSongs = new List<SongHtml>();
+            //get song html
+            StringBuilder songBuilder = new StringBuilder();
             foreach (var song in _set.songList)
-            {
-                SongHtml html = new SongHtml();
-
-                html.Name = song.generateLongTitle();
-                html.Order = song.presentation;
+            {       
+                songBuilder.AppendFormat("<div class=\"DisplaySongName\">{0}</div>\r\n", song.generateLongTitle());
                 var verses = song.getSongVerses();
                 foreach (var verse in verses)
                 {
                     var htmlString = getHtmlFromVerse(verse);
-                    sb.AppendLine(htmlString);
+                    songBuilder.AppendLine(htmlString);
                 }
-                html.Html = sb.ToString();
-                htmlSongs.Add(html);
-                sb.Length = 0;
             }
-            return htmlSongs;
+
+            //add stylesheet
+            StringBuilder sb = new StringBuilder(HtmlResources.BaseSongHtml);
+            sb.Replace("<style></style>", string.Format("<style>{0}</style>",baseStylesheet));
+            //add song body
+            sb.Replace("{SongBody}", songBuilder.ToString());
+            //set the title
+            sb.Replace("{Title}", this.Title);
+
+            return sb.ToString();
+        }
+
+        private void configureStylesheet(ref string baseStylesheet)
+        {
+            baseStylesheet = baseStylesheet.Replace("###LineChordFontSize###", _settings.ChordFormat.FontSize + "px");
         }
 
         private string trimLine(string line)
@@ -56,7 +73,7 @@ namespace OpenChords.Export
             return line.TrimEnd().Replace(" ", "&nbsp;");
         }
 
-        public string getHtmlFromVerse(SongVerse verse)
+        private string getHtmlFromVerse(SongVerse verse)
         {
             StringBuilder sb = new StringBuilder();
             //add heading line
@@ -64,13 +81,13 @@ namespace OpenChords.Export
             sb.AppendFormat("<div class=\"DisplayLineVerseHeading\">{0}</div>\r\n", trimLine(verse.FullHeaderName));
             //add lyrics
             sb.AppendLine("<div class=\"DisplayLineVerseLyrics\">");
-            for (int i=0; i<verse.Lyrics.Count(); i++)
+            for (int i = 0; i < verse.Lyrics.Count(); i++)
             {
-                if (verse.IsChord[i])
+                if (verse.IsChord[i] && (_settings.ShowChords ?? false))
                 {
                     sb.AppendFormat("<p class=\"DisplayLineChord\">{0}</p>\r\n", trimLine(verse.Lyrics[i]));
                 }
-                else
+                else if (!verse.IsChord[i] && (_settings.ShowLyrics ?? false))
                 {
                     sb.AppendFormat("<p class=\"DisplayLineLyrics\">{0}</p>\r\n", trimLine(verse.Lyrics[i]));
                 }
@@ -78,9 +95,12 @@ namespace OpenChords.Export
             sb.AppendLine("</div>");
 
             //addNotes
-            sb.AppendLine("<div class=\"DisplayLineVerseNotes\">");
-            sb.AppendLine(verse.Notes.Replace("\r\n", "<br/>").TrimEnd().Replace(" ", "&nbsp;"));
-            sb.AppendLine("</div>");
+            if (_settings.ShowNotes ?? false)
+            {
+                sb.AppendLine("<div class=\"DisplayLineVerseNotes\">");
+                sb.AppendLine(verse.Notes.Replace("\r\n", "<br/>").TrimEnd().Replace(" ", "&nbsp;"));
+                sb.AppendLine("</div>");
+            }
             sb.AppendLine("</div>");
 
             return sb.ToString();

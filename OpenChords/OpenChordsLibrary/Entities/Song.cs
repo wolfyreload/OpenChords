@@ -476,10 +476,10 @@ namespace OpenChords.Entities
         /// returns the song in html format
         /// </summary>
         /// <returns></returns>
-        public SongHtml getHtml(DisplayAndPrintSettings settings)
+        public string getHtml(DisplayAndPrintSettings settings)
         {
             Export.ExportToHtml htmlExporter = new Export.ExportToHtml(this, settings);
-            var result = htmlExporter.GenerateHtml()[0];
+            var result = htmlExporter.GenerateHtml();
             return result;
         }
 

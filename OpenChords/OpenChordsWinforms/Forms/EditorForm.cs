@@ -232,6 +232,20 @@ namespace OpenChords.Forms
             exportToPdf(OpenChords.Config.Enumerations.DocumentType.AllSongs, DisplayAndPrintSettingsType.TabletSettings);
         }
 
+        private void htmlCurrentSongToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            logger.Info("Clicked");
+            exportToHtml(OpenChords.Config.Enumerations.DocumentType.CurrentSong, DisplayAndPrintSettingsType.TabletSettings);
+
+        }
+
+        private void htmlCurrentSetToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            logger.Info("Clicked");
+            exportToHtml(OpenChords.Config.Enumerations.DocumentType.CurrentSet, DisplayAndPrintSettingsType.TabletSettings);
+
+        }
+
         void ExportSongListToolStripMenuItem_Click(object sender, EventArgs e)
         {
             logger.Info("Clicked");
@@ -290,6 +304,43 @@ namespace OpenChords.Forms
                 else
                     System.Diagnostics.Process.Start(fileManager, OpenChords.Settings.ExtAppsAndDir.printFolder);
             }
+
+        }
+
+        void exportToHtml(OpenChords.Config.Enumerations.DocumentType doc, DisplayAndPrintSettingsType printSettingsType)
+        {
+            //get the filemanager for the filesystem
+            string fileManager = OpenChords.Settings.ExtAppsAndDir.fileManager;
+            string filename = null;
+
+            confirmChangesToSong();
+            confirmChangesToSet();
+            //get the filename
+            OpenChords.Export.ExportToHtml htmlExporter = null;
+            var settings = DisplayAndPrintSettings.loadSettings(printSettingsType);
+            if (doc == Config.Enumerations.DocumentType.CurrentSong)
+                htmlExporter = new Export.ExportToHtml(currentSong, settings);
+            else if (doc == Config.Enumerations.DocumentType.CurrentSet)
+                htmlExporter = new Export.ExportToHtml(currentSet, settings);
+            else
+                throw new NotImplementedException("No option available to export all songs to html");
+            
+            string songHtml = htmlExporter.GenerateHtml();
+            filename = htmlExporter.Filename;
+           
+            if (!string.IsNullOrEmpty(filename)) //open pdf
+            {
+                filename = String.Format("{0}{1}", OpenChords.Settings.ExtAppsAndDir.printFolder, filename);
+                filename = System.IO.Path.GetFullPath(filename);
+                System.IO.File.WriteAllText(filename, songHtml);
+
+                //try run the file with the default application
+                if (string.IsNullOrEmpty(fileManager))
+                    System.Diagnostics.Process.Start(filename);
+                else
+                    System.Diagnostics.Process.Start(fileManager, filename);
+            }
+           
 
         }
         
@@ -1262,5 +1313,7 @@ namespace OpenChords.Forms
             timerOrderChanged.Stop();
             timerOrderChanged.Start();
         }
+
+    
 	}
 }

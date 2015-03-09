@@ -88,6 +88,11 @@
     <Compile Include="Functions\SongProcessor.cs" />
     <Compile Include="Functions\SongSearch.cs" />
     <Compile Include="Functions\Updater.cs" />
+    <Compile Include="HtmlResources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>HtmlResources.resx</DependentUpon>
+    </Compile>
     <Compile Include="IO\FileFolderFunctions.cs" />
     <Compile Include="IO\FileReaderWriter.cs" />
     <Compile Include="IO\SettingsReaderWriter.cs" />
@@ -120,6 +125,16 @@
     <None Include="Log4Net.config">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Resources\BaseSongHtml.html" />
+    <Content Include="Resources\stylesheet.css" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="HtmlResources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>HtmlResources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
   </ItemGroup>
   <ProjectExtensions>
     <MonoDevelop>

@@ -69,10 +69,8 @@ namespace OpenChords.Web.App
             var song = _Set.songList[CurrentIndex];
             var settings = OpenChords.Entities.DisplayAndPrintSettings.loadSettings(Entities.DisplayAndPrintSettingsType.DisplaySettings, settingsPath);
             var htmlSong = song.getHtml(settings); 
-            lblSongName.Text = htmlSong.Name;
-            lblSongOrder.Text = htmlSong.Order;
             litSongContent.Mode = LiteralMode.PassThrough;
-            litSongContent.Text = htmlSong.Html;
+            litSongContent.Text = htmlSong;
             
         }
 

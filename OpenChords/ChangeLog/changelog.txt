@@ -1,3 +1,7 @@
+OpenChords v1.6.2
+============================================================================
+-Improvement: Added a export set/song to html option
+
 OpenChords v1.6.1
 ============================================================================
 -Improvement: Added a export set list option

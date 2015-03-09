@@ -344,7 +344,7 @@ namespace OpenChords.Entities
         /// returns the set in html format
         /// </summary>
         /// <returns></returns>
-        public List<SongHtml> getHtml(DisplayAndPrintSettings settings)
+        public string getHtml(DisplayAndPrintSettings settings)
         {
             Export.ExportToHtml htmlExporter = new Export.ExportToHtml(this, settings);
             var result = htmlExporter.GenerateHtml();

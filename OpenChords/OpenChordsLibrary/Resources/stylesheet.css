@@ -1,0 +1,187 @@
+﻿/* http://meyerweb.com/eric/tools/css/reset/ 
+   v2.0 | 20110126
+   License: none (public domain)
+*/
+
+html, body, div, span, applet, object, iframe,
+h1, h2, h3, h4, h5, h6, p, blockquote, pre,
+a, abbr, acronym, address, big, cite, code,
+del, dfn, em, img, ins, kbd, q, s, samp,
+small, strike, strong, sub, sup, tt, var,
+b, u, i, center,
+dl, dt, dd, ol, ul, li,
+fieldset, form, label, legend,
+table, caption, tbody, tfoot, thead, tr, th, td,
+article, aside, canvas, details, embed, 
+figure, figcaption, footer, header, hgroup, 
+menu, nav, output, ruby, section, summary,
+time, mark, audio, video {
+	margin: 0;
+	padding: 0;
+	border: 0;
+	font-size: 100%;
+	font: inherit;
+	vertical-align: baseline;
+}
+/* HTML5 display-role reset for older browsers */
+article, aside, details, figcaption, figure, 
+footer, header, hgroup, menu, nav, section {
+	display: block;
+}
+body {
+	line-height: 1;
+}
+ol, ul {
+	list-style: none;
+}
+blockquote, q {
+	quotes: none;
+}
+blockquote:before, blockquote:after,
+q:before, q:after {
+	content: '';
+	content: none;
+}
+table {
+	border-collapse: collapse;
+	border-spacing: 0;
+}
+
+.DisplayPage {
+
+}
+
+body {
+    background-color: black
+
+}
+
+.DisplaySongVerse {
+    padding: 5px;
+    font-family: "Courier New";
+    margin-bottom: 20px;
+    font-size: 18px;
+    break-inside: avoid-column; 
+    -webkit-column-break-inside: avoid;
+    -webkit-box-shadow: 0px 0px 20px rgba(76, 72, 72, 0.93);
+    -moz-box-shadow: 0px 1px 6px rgba(76, 72, 72, 0.93);
+    -webkit-border-radius: 12px;
+    -moz-border-radius: 7px;
+    border-radius: 7px;
+    margin-right: 10px;
+    background: -webkit-gradient(linear, left top, left bottom, color-stop(0%, rgb(73, 7, 7)), color-stop(15%, rgb(0, 0, 0)), color-stop(100%, #2E2424));
+    display: inline-block;
+}
+
+.DisplaySongVerse:hover {
+    background: -webkit-gradient(linear, left top, left bottom, color-stop(0%, #AD2020), color-stop(15%, #4C4C4C), color-stop(100%, #2E2424));
+   }
+
+
+.DisplaySongVerse:active {
+    background: -webkit-gradient(linear, left top, left bottom, color-stop(0%, #AD2020), color-stop(15%, #4C4C4C), color-stop(100%, #2E2424));
+   }
+
+
+.DisplaySongName {
+    -webkit-column-break-inside: avoid;
+    -webkit-box-shadow: 0px 0px 20px rgba(76, 72, 72, 0.93);
+    -moz-box-shadow: 0px 1px 6px rgba(76, 72, 72, 0.93);
+    -webkit-border-radius: 12px;
+    -moz-border-radius: 7px;
+    border-radius: 7px;
+    background: -webkit-gradient(linear, left top, left bottom, color-stop(0%, #150749), color-stop(15%, #354AC7), color-stop(100%, #000000));
+    font-weight: bold;
+    font-size: 36px;
+    color: #FEAF81;
+    width: 100%;
+    height: 62px;
+}
+
+.DisplaySongOrder {
+    font: bold 36px;
+    color: #FF8040;
+}
+
+.DisplayLineVerseHeading {
+    font-size: 24px;
+    font-weight: bold;
+    color: #BE7C7C;
+}
+
+.DisplayLineVerseLyrics {
+    display: inline-block;
+    vertical-align: top;
+    font-size: ###LineChordFontSize###
+}
+
+.DisplayLineChord {
+    font-weight: bold;
+    color: #00FF80;
+}
+
+.DisplayLineLyrics {
+    font-weight: normal;
+    line-height: 24px;
+    color: white;
+}
+
+.DisplayLineVerseNotes {
+    margin-left: auto;
+    margin-right: 0px;
+    display: inline-block;
+    vertical-align: top;
+    font-family: 'Global Monospace';
+    color: #80FF80;
+}
+
+.DisplayBody body {
+    background-color: black;
+    font-family: "HelveticaNeue-Light", "Helvetica Neue Light", "Helvetica Neue", Helvetica, Arial, "Lucida Grande", sans-serif;
+}
+
+.DisplayBody .nice-button {
+    -moz-box-shadow: inset 0px 1px 0px 0px #e184f3;
+    -webkit-box-shadow: inset 0px 1px 0px 0px #e184f3;
+    box-shadow: inset 0px 1px 0px 0px #e184f3;
+    background: -webkit-gradient( linear, left top, left bottom, color-stop(0.05, #c123de), color-stop(1, #a20dbd) );
+    background: -moz-linear-gradient( center top, #c123de 5%, #a20dbd 100% );
+    filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#c123de', endColorstr='#a20dbd');
+    background-color: #c123de;
+    -webkit-border-top-left-radius: 6px;
+    -moz-border-radius-topleft: 6px;
+    border-top-left-radius: 6px;
+    -webkit-border-top-right-radius: 6px;
+    -moz-border-radius-topright: 6px;
+    border-top-right-radius: 6px;
+    -webkit-border-bottom-right-radius: 6px;
+    -moz-border-radius-bottomright: 6px;
+    border-bottom-right-radius: 6px;
+    -webkit-border-bottom-left-radius: 6px;
+    -moz-border-radius-bottomleft: 6px;
+    border-bottom-left-radius: 6px;
+    text-indent: 0;
+    border: 1px solid #a511c0;
+    display: inline-block;
+    color: #ffffff;
+    font-family: Arial;
+    font-size: 15px;
+    font-weight: bold;
+    font-style: normal;
+    line-height: 50px;
+    text-decoration: none;
+    text-align: center;
+    text-shadow: 1px 1px 0px #9b14b3;
+}
+
+    .DisplayBody .nice-button:hover {
+        background: -webkit-gradient( linear, left top, left bottom, color-stop(0.05, #a20dbd), color-stop(1, #c123de) );
+        background: -moz-linear-gradient( center top, #a20dbd 5%, #c123de 100% );
+        filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#a20dbd', endColorstr='#c123de');
+        background-color: #a20dbd;
+    }
+
+    .DisplayBody.nice-button:active {
+        position: relative;
+        top: 1px;
+    }
