@@ -37,9 +37,6 @@ namespace OpenChords.Forms.Custom_Controls
             txtApplicationDataFolder.Text = settings.ApplicationDataFolder;
             txtOpensongExecutable.Text = settings.OpenSongExecutable;
             txtOpenSongSetsAndSongs.Text = settings.OpenSongSetsAndSongs;
-            chkUseWelcomeSlide.Checked = settings.OpenSongUseWelcomeSlide;
-            txtWelcomeSlideName.Text = settings.OpenSongWelcomeSlide;
-            txtFileSync.Text = settings.FileSync;
             chkUpdates.Checked = settings.CheckForUpdates;
             chkPortableMode.Checked = settings.PortableMode;
 
@@ -76,9 +73,6 @@ namespace OpenChords.Forms.Custom_Controls
             settings.ApplicationDataFolder = txtApplicationDataFolder.Text;
             settings.OpenSongExecutable = txtOpensongExecutable.Text;
             settings.OpenSongSetsAndSongs = txtOpenSongSetsAndSongs.Text;
-            settings.OpenSongUseWelcomeSlide = chkUseWelcomeSlide.Checked;
-            settings.OpenSongWelcomeSlide = txtWelcomeSlideName.Text;
-            settings.FileSync = txtFileSync.Text;
             settings.CheckForUpdates = chkUpdates.Checked;
             settings.PortableMode = chkPortableMode.Checked;
             if (settings.PortableMode)
@@ -175,13 +169,7 @@ namespace OpenChords.Forms.Custom_Controls
             showExecutableDialog(txtOpensongExecutable, "OpenSong.exe");
         }
 
-       
-
-        private void imgFileSyncExecutable_Click(object sender, EventArgs e)
-        {
-            logger.Info("Clicked");
-            showExecutableDialog(txtFileSync, "FileSyncTool.exe");
-        }
+      
 
         private void chkPortableMode_CheckedChanged(object sender, EventArgs e)
         {

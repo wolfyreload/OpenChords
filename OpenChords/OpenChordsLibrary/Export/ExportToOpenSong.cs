@@ -31,23 +31,34 @@ namespace OpenChords.Export
         public static void exportAllSongsToOpenSong()
         {
             var songNameList = IO.FileFolderFunctions.getDirectoryListingAsList(Settings.ExtAppsAndDir.songsFolder);
-            string source =Settings.ExtAppsAndDir.songsFolder;
-            string destination =Settings.ExtAppsAndDir.opensongSongsFolder;
             
             //clear all the files in the songs folder
-            IO.FileFolderFunctions.clearFolder(destination);
+            IO.FileFolderFunctions.clearFolder(Settings.ExtAppsAndDir.opensongSongsFolder);
 
             //copy all the new files accross
-            foreach (string filename in songNameList)
+            foreach (string songName in songNameList)
             {
-                var sourceFile = source + filename;
-                var destinationFile = destination + filename;
-                File.Copy(sourceFile, destinationFile, true);
+                var song = Song.loadSong(songName);
+                saveSonginOpenSong(song);
             }
+        }
 
-            //copy welcome slide
-            if (!string.IsNullOrEmpty(Settings.ExtAppsAndDir.welcomeSlide))
-                File.Copy(Settings.ExtAppsAndDir.welcomeSlide, destination + "welcome", true);
+        private static void saveSonginOpenSong(Song song)
+        {
+            //write song
+            var destinationSongFolder = Settings.ExtAppsAndDir.opensongSongsFolder;
+            song.OpenSongImageFileName = string.Format("OpenChords\\{0}.jpg", song.title);
+            var destinationFile = destinationSongFolder + song.title;
+            song.saveSong(destinationFile);
+
+            //write placeholder background file
+            var destinationBackgroundFile = String.Format("{0}{1}", Settings.ExtAppsAndDir.opensongBackgroundsFolder, song.OpenSongImageFileName);
+            new DirectoryInfo(destinationBackgroundFile).Parent.Create();
+            if (!File.Exists(destinationBackgroundFile))
+            {
+                var bitmap = new System.Drawing.Bitmap(1,1);
+                bitmap.Save(destinationBackgroundFile);
+            }
         }
 
         /// <summary>
@@ -56,20 +67,13 @@ namespace OpenChords.Export
         /// <param name="set"></param>
         private static void exportSongListToOpenSong(Set set)
         {
-            string source =Settings.ExtAppsAndDir.songsFolder;
             string destination =Settings.ExtAppsAndDir.opensongSongsFolder;
 
-            foreach (var songs in set.songList)
+            foreach (var song in set.songList)
             {
-                var filename = songs.title;
-                var sourceFile = source + filename;
-                var destinationFile = destination + filename;
-                File.Copy(sourceFile, destinationFile, true);
+                saveSonginOpenSong(song);
             }
 
-            //copy welcome slide
-            if (!string.IsNullOrEmpty(Settings.ExtAppsAndDir.welcomeSlide))
-                File.Copy(Settings.ExtAppsAndDir.welcomeSlide, destination + "welcome", true);
         }
 
         /// <summary>
@@ -96,12 +100,6 @@ namespace OpenChords.Export
             try
             {
                 var filename = Settings.ExtAppsAndDir.openSongSetFolder + set.setName;
-
-                Entities.FileAndFolderSettings settings = Entities.FileAndFolderSettings.loadSettings();
-
-                if (settings.OpenSongUseWelcomeSlide)
-                    set.xmlSetSongCollection.Insert(0, new XmlSetSong("Welcome"));   
-                
                 SettingsReaderWriter.writeSet(filename, set);
             }
             catch (Exception Ex)

@@ -62,7 +62,9 @@
             this.exportCurrentSongToTabletPDFToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.exportCurrentSetToTabletPDFToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.exportAllSongsToTabletPDFToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.fileSyncUtilityToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.exportToHtmlToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.htmlCurrentSongToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.htmlCurrentSetToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.exportSongListToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.helpToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.manualToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -134,15 +136,9 @@
             this.splitLyricsAndNotes = new System.Windows.Forms.SplitContainer();
             this.grpChordsLyrics = new System.Windows.Forms.GroupBox();
             this.txtLyrics = new System.Windows.Forms.RichTextBox();
-            this.splitContainerNotesImage = new System.Windows.Forms.SplitContainer();
             this.grpNotes = new System.Windows.Forms.GroupBox();
             this.txtNotes = new System.Windows.Forms.RichTextBox();
-            this.grpImage = new System.Windows.Forms.GroupBox();
-            this.picBackgroundImage = new System.Windows.Forms.PictureBox();
             this.timerOrderChanged = new System.Windows.Forms.Timer(this.components);
-            this.exportToHtmlToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.htmlCurrentSongToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.htmlCurrentSetToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.menuStrip1.SuspendLayout();
             this.splitMainForm.Panel1.SuspendLayout();
             this.splitMainForm.Panel2.SuspendLayout();
@@ -191,12 +187,7 @@
             this.splitLyricsAndNotes.Panel2.SuspendLayout();
             this.splitLyricsAndNotes.SuspendLayout();
             this.grpChordsLyrics.SuspendLayout();
-            this.splitContainerNotesImage.Panel1.SuspendLayout();
-            this.splitContainerNotesImage.Panel2.SuspendLayout();
-            this.splitContainerNotesImage.SuspendLayout();
             this.grpNotes.SuspendLayout();
-            this.grpImage.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.picBackgroundImage)).BeginInit();
             this.SuspendLayout();
             // 
             // menuStrip1
@@ -359,11 +350,10 @@
             this.openSongToolStripMenuItem,
             this.pdfToolStripMenuItem,
             this.exportToHtmlToolStripMenuItem,
-            this.fileSyncUtilityToolStripMenuItem,
             this.exportSongListToolStripMenuItem});
             this.addonsToolStripMenuItem.Name = "addonsToolStripMenuItem";
-            this.addonsToolStripMenuItem.Size = new System.Drawing.Size(60, 20);
-            this.addonsToolStripMenuItem.Text = "Addons";
+            this.addonsToolStripMenuItem.Size = new System.Drawing.Size(52, 20);
+            this.addonsToolStripMenuItem.Text = "Export";
             // 
             // openSongToolStripMenuItem
             // 
@@ -374,8 +364,8 @@
             this.launchOpenSongToolStripMenuItem});
             this.openSongToolStripMenuItem.Name = "openSongToolStripMenuItem";
             this.openSongToolStripMenuItem.ShortcutKeyDisplayString = "";
-            this.openSongToolStripMenuItem.Size = new System.Drawing.Size(158, 22);
-            this.openSongToolStripMenuItem.Text = "OpenSong";
+            this.openSongToolStripMenuItem.Size = new System.Drawing.Size(182, 22);
+            this.openSongToolStripMenuItem.Text = "Export To Opensong";
             this.openSongToolStripMenuItem.Click += new System.EventHandler(this.BtnLaunchOpenSongClick);
             // 
             // exportCurrentSetToOpenSongToolStripMenuItem
@@ -413,7 +403,7 @@
             this.pdfA4StripMenuItem,
             this.pdfTabletStripMenuItem});
             this.pdfToolStripMenuItem.Name = "pdfToolStripMenuItem";
-            this.pdfToolStripMenuItem.Size = new System.Drawing.Size(158, 22);
+            this.pdfToolStripMenuItem.Size = new System.Drawing.Size(182, 22);
             this.pdfToolStripMenuItem.Text = "Export To PDF";
             // 
             // pdfA4StripMenuItem
@@ -423,7 +413,7 @@
             this.exportCurrentSetToA4PDFToolStripMenuItem,
             this.exportAllSongsToA4PDFToolStripMenuItem});
             this.pdfA4StripMenuItem.Name = "pdfA4StripMenuItem";
-            this.pdfA4StripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.pdfA4StripMenuItem.Size = new System.Drawing.Size(107, 22);
             this.pdfA4StripMenuItem.Text = "A4";
             // 
             // exportCurrentSongToA4PDFToolStripMenuItem
@@ -455,7 +445,7 @@
             this.exportCurrentSetToTabletPDFToolStripMenuItem,
             this.exportAllSongsToTabletPDFToolStripMenuItem});
             this.pdfTabletStripMenuItem.Name = "pdfTabletStripMenuItem";
-            this.pdfTabletStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.pdfTabletStripMenuItem.Size = new System.Drawing.Size(107, 22);
             this.pdfTabletStripMenuItem.Text = "Tablet";
             // 
             // exportCurrentSongToTabletPDFToolStripMenuItem
@@ -480,12 +470,28 @@
             this.exportAllSongsToTabletPDFToolStripMenuItem.Text = "All songs";
             this.exportAllSongsToTabletPDFToolStripMenuItem.Click += new System.EventHandler(this.exportAllSongsToTabletPDFToolStripMenuItem_Click);
             // 
-            // fileSyncUtilityToolStripMenuItem
+            // exportToHtmlToolStripMenuItem
             // 
-            this.fileSyncUtilityToolStripMenuItem.Name = "fileSyncUtilityToolStripMenuItem";
-            this.fileSyncUtilityToolStripMenuItem.Size = new System.Drawing.Size(158, 22);
-            this.fileSyncUtilityToolStripMenuItem.Text = "File Sync Utility";
-            this.fileSyncUtilityToolStripMenuItem.Click += new System.EventHandler(this.fileSyncUtilityToolStripMenuItem_Click);
+            this.exportToHtmlToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.htmlCurrentSongToolStripMenuItem,
+            this.htmlCurrentSetToolStripMenuItem});
+            this.exportToHtmlToolStripMenuItem.Name = "exportToHtmlToolStripMenuItem";
+            this.exportToHtmlToolStripMenuItem.Size = new System.Drawing.Size(182, 22);
+            this.exportToHtmlToolStripMenuItem.Text = "Export To Html";
+            // 
+            // htmlCurrentSongToolStripMenuItem
+            // 
+            this.htmlCurrentSongToolStripMenuItem.Name = "htmlCurrentSongToolStripMenuItem";
+            this.htmlCurrentSongToolStripMenuItem.Size = new System.Drawing.Size(144, 22);
+            this.htmlCurrentSongToolStripMenuItem.Text = "Current Song";
+            this.htmlCurrentSongToolStripMenuItem.Click += new System.EventHandler(this.htmlCurrentSongToolStripMenuItem_Click);
+            // 
+            // htmlCurrentSetToolStripMenuItem
+            // 
+            this.htmlCurrentSetToolStripMenuItem.Name = "htmlCurrentSetToolStripMenuItem";
+            this.htmlCurrentSetToolStripMenuItem.Size = new System.Drawing.Size(144, 22);
+            this.htmlCurrentSetToolStripMenuItem.Text = "Current Set";
+            this.htmlCurrentSetToolStripMenuItem.Click += new System.EventHandler(this.htmlCurrentSetToolStripMenuItem_Click);
             // 
             // exportSongListToolStripMenuItem
             // 
@@ -1337,7 +1343,7 @@
             // 
             // splitLyricsAndNotes.Panel2
             // 
-            this.splitLyricsAndNotes.Panel2.Controls.Add(this.splitContainerNotesImage);
+            this.splitLyricsAndNotes.Panel2.Controls.Add(this.grpNotes);
             this.splitLyricsAndNotes.Size = new System.Drawing.Size(791, 564);
             this.splitLyricsAndNotes.SplitterDistance = 668;
             this.splitLyricsAndNotes.TabIndex = 5;
@@ -1373,25 +1379,6 @@
             this.txtLyrics.KeyUp += new System.Windows.Forms.KeyEventHandler(this.TextFieldKeyUp);
             this.txtLyrics.Leave += new System.EventHandler(this.txtLyrics_Leave);
             // 
-            // splitContainerNotesImage
-            // 
-            this.splitContainerNotesImage.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.splitContainerNotesImage.Location = new System.Drawing.Point(0, 0);
-            this.splitContainerNotesImage.Name = "splitContainerNotesImage";
-            this.splitContainerNotesImage.Orientation = System.Windows.Forms.Orientation.Horizontal;
-            // 
-            // splitContainerNotesImage.Panel1
-            // 
-            this.splitContainerNotesImage.Panel1.Controls.Add(this.grpNotes);
-            // 
-            // splitContainerNotesImage.Panel2
-            // 
-            this.splitContainerNotesImage.Panel2.Controls.Add(this.grpImage);
-            this.splitContainerNotesImage.Size = new System.Drawing.Size(119, 564);
-            this.splitContainerNotesImage.SplitterDistance = 447;
-            this.splitContainerNotesImage.SplitterWidth = 1;
-            this.splitContainerNotesImage.TabIndex = 6;
-            // 
             // grpNotes
             // 
             this.grpNotes.Controls.Add(this.txtNotes);
@@ -1399,7 +1386,7 @@
             this.grpNotes.ForeColor = System.Drawing.Color.White;
             this.grpNotes.Location = new System.Drawing.Point(0, 0);
             this.grpNotes.Name = "grpNotes";
-            this.grpNotes.Size = new System.Drawing.Size(119, 447);
+            this.grpNotes.Size = new System.Drawing.Size(119, 564);
             this.grpNotes.TabIndex = 0;
             this.grpNotes.TabStop = false;
             this.grpNotes.Text = "Notes";
@@ -1412,7 +1399,7 @@
             this.txtNotes.ForeColor = System.Drawing.Color.Black;
             this.txtNotes.Location = new System.Drawing.Point(3, 16);
             this.txtNotes.Name = "txtNotes";
-            this.txtNotes.Size = new System.Drawing.Size(113, 428);
+            this.txtNotes.Size = new System.Drawing.Size(113, 545);
             this.txtNotes.TabIndex = 3;
             this.txtNotes.Text = "";
             this.txtNotes.WordWrap = false;
@@ -1420,57 +1407,10 @@
             this.txtNotes.KeyUp += new System.Windows.Forms.KeyEventHandler(this.txtNotes_KeyUp);
             this.txtNotes.Leave += new System.EventHandler(this.txtNotes_Leave);
             // 
-            // grpImage
-            // 
-            this.grpImage.Controls.Add(this.picBackgroundImage);
-            this.grpImage.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.grpImage.ForeColor = System.Drawing.Color.White;
-            this.grpImage.Location = new System.Drawing.Point(0, 0);
-            this.grpImage.Name = "grpImage";
-            this.grpImage.Size = new System.Drawing.Size(119, 116);
-            this.grpImage.TabIndex = 0;
-            this.grpImage.TabStop = false;
-            this.grpImage.Text = "Background Image";
-            // 
-            // picBackgroundImage
-            // 
-            this.picBackgroundImage.BackColor = System.Drawing.Color.Black;
-            this.picBackgroundImage.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.picBackgroundImage.Location = new System.Drawing.Point(3, 16);
-            this.picBackgroundImage.Name = "picBackgroundImage";
-            this.picBackgroundImage.Size = new System.Drawing.Size(113, 97);
-            this.picBackgroundImage.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
-            this.picBackgroundImage.TabIndex = 5;
-            this.picBackgroundImage.TabStop = false;
-            this.picBackgroundImage.Click += new System.EventHandler(this.picBackgroundImage_Click);
-            // 
             // timerOrderChanged
             // 
             this.timerOrderChanged.Interval = 500;
             this.timerOrderChanged.Tick += new System.EventHandler(this.timerOrderChanged_Tick);
-            // 
-            // exportToHtmlToolStripMenuItem
-            // 
-            this.exportToHtmlToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.htmlCurrentSongToolStripMenuItem,
-            this.htmlCurrentSetToolStripMenuItem});
-            this.exportToHtmlToolStripMenuItem.Name = "exportToHtmlToolStripMenuItem";
-            this.exportToHtmlToolStripMenuItem.Size = new System.Drawing.Size(158, 22);
-            this.exportToHtmlToolStripMenuItem.Text = "Export To Html";
-            // 
-            // htmlCurrentSongToolStripMenuItem
-            // 
-            this.htmlCurrentSongToolStripMenuItem.Name = "htmlCurrentSongToolStripMenuItem";
-            this.htmlCurrentSongToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
-            this.htmlCurrentSongToolStripMenuItem.Text = "Current Song";
-            this.htmlCurrentSongToolStripMenuItem.Click += new System.EventHandler(this.htmlCurrentSongToolStripMenuItem_Click);
-            // 
-            // htmlCurrentSetToolStripMenuItem
-            // 
-            this.htmlCurrentSetToolStripMenuItem.Name = "htmlCurrentSetToolStripMenuItem";
-            this.htmlCurrentSetToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
-            this.htmlCurrentSetToolStripMenuItem.Text = "Current Set";
-            this.htmlCurrentSetToolStripMenuItem.Click += new System.EventHandler(this.htmlCurrentSetToolStripMenuItem_Click);
             // 
             // EditorForm
             // 
@@ -1551,12 +1491,7 @@
             this.splitLyricsAndNotes.Panel2.ResumeLayout(false);
             this.splitLyricsAndNotes.ResumeLayout(false);
             this.grpChordsLyrics.ResumeLayout(false);
-            this.splitContainerNotesImage.Panel1.ResumeLayout(false);
-            this.splitContainerNotesImage.Panel2.ResumeLayout(false);
-            this.splitContainerNotesImage.ResumeLayout(false);
             this.grpNotes.ResumeLayout(false);
-            this.grpImage.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.picBackgroundImage)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -1598,7 +1533,6 @@
         private System.Windows.Forms.ToolStripMenuItem pasteToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem preferencesToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem FixFormatingtoolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem fileSyncUtilityToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem refreshToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem aboutOpenChordsToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem exportCurrentSetToTabletPDFToolStripMenuItem;
@@ -1654,11 +1588,8 @@
         private System.Windows.Forms.ToolStripMenuItem pdfToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem pdfA4StripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem pdfTabletStripMenuItem;
-        private System.Windows.Forms.PictureBox picBackgroundImage;
         private System.Windows.Forms.GroupBox grpChordsLyrics;
-        private System.Windows.Forms.SplitContainer splitContainerNotesImage;
         private System.Windows.Forms.GroupBox grpNotes;
-        private System.Windows.Forms.GroupBox grpImage;
         private System.Windows.Forms.GroupBox grpSongMetadata;
         private System.Windows.Forms.SplitContainer splitContainerMetaLyrics;
         private System.Windows.Forms.GroupBox grpSongList;

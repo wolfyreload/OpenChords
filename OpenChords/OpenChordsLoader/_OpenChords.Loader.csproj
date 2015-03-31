@@ -63,20 +63,6 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\OpenChordsLibrary\OpenChords.Library.csproj">
-      <Project>{c23eb2cc-3aca-4a91-b598-fe584168ccd6}</Project>
-      <Name>OpenChords.Library</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\OpenChordsResources\OpenChords.Resources.csproj">
-      <Project>{715e8953-5bd3-42f5-8eea-78df1f03da5f}</Project>
-      <Name>OpenChords.Resources</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\OpenChordsWinforms\OpenChords.Winforms.csproj">
-      <Project>{50b1d110-0a65-4e76-aaa4-46f9b66de671}</Project>
-      <Name>OpenChords.Winforms</Name>
-    </ProjectReference>
-  </ItemGroup>
-  <ItemGroup>
     <Content Include="guitar.ico" />
   </ItemGroup>
   <ItemGroup>
@@ -90,6 +76,16 @@
       <ProductName>.NET Framework 3.5 SP1</ProductName>
       <Install>true</Install>
     </BootstrapperPackage>
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\OpenChordsLibrary\OpenChords.Library.csproj">
+      <Project>{c23eb2cc-3aca-4a91-b598-fe584168ccd6}</Project>
+      <Name>OpenChords.Library</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\OpenChordsWinforms\OpenChords.Winforms.csproj">
+      <Project>{50b1d110-0a65-4e76-aaa4-46f9b66de671}</Project>
+      <Name>OpenChords.Winforms</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

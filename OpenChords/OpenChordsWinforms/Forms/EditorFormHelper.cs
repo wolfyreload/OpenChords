@@ -54,16 +54,10 @@ namespace OpenChords.Forms
 		    else
 		        rdoSharps.Checked = true;
 
-            getBackgroundImage();
-
+        
             formatLyrics();
             formatNotes();
 		}
-
-        private void getBackgroundImage()
-        {
-            picBackgroundImage.Image = currentSong.getSongImage();
-        }
 		
 		/// <summary>
 		/// updates the sets list box

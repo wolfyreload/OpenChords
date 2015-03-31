@@ -51,7 +51,6 @@ namespace OpenChords.Forms
             this.presentSetToolStripMenuItem.Image = Properties.Resources.Present;
             this.openSongToolStripMenuItem.Image = Properties.Resources.OpenSong;
             this.pdfToolStripMenuItem.Image = Properties.Resources.pdf;
-            this.fileSyncUtilityToolStripMenuItem.Image = Properties.Resources.Sync;
             this.manualToolStripMenuItem.Image = Properties.Resources.Help;
             this.aboutOpenChordsToolStripMenuItem.Image = Properties.Resources.About;
             this.imgUp.Image = Properties.Resources.Up;
@@ -350,29 +349,7 @@ namespace OpenChords.Forms
 			confirmDelete();
 		}
 
-        
-		
-		void BtnLaunchDropBox()
-		{
-            if (IO.FileFolderFunctions.isFilePresent(OpenChords.Settings.ExtAppsAndDir.FileSyncUtility))
-                System.Diagnostics.Process.Start(OpenChords.Settings.ExtAppsAndDir.FileSyncUtility);
-			
-			
-		}
-		
-        //void BtnPrintSettingsClick(object sender, EventArgs e)
-        //{
-        //    //System.Diagnostics.Process.Start("notepad", ExtAppsAndDir.printSettingsFilename);
-        //    DisplaySettingsForm temp = new DisplaySettingsForm(currentSong, printSettings);
-			
-        //    temp.ShowDialog();
-        //}
-		
-        //void BtnDisplaySettingsClick(object sender, EventArgs e)
-        //{
-        //    new DisplaySettingsForm(currentSong, displaySettings).ShowDialog();
-        //}
-		
+        	
 		void BtnPresentSongClick(object sender, EventArgs e)
         {
             logger.Info("Clicked");
@@ -1178,7 +1155,7 @@ namespace OpenChords.Forms
         private void fileSyncUtilityToolStripMenuItem_Click(object sender, EventArgs e)
         {
             logger.Info("Clicked");
-            System.Diagnostics.Process.Start(OpenChords.Settings.ExtAppsAndDir.FileSyncUtility);
+            //System.Diagnostics.Process.Start(OpenChords.Settings.ExtAppsAndDir.FileSyncUtility);
         }
 
         private void refreshToolStripMenuItem_Click(object sender, EventArgs e)
@@ -1212,12 +1189,8 @@ namespace OpenChords.Forms
             if (!IO.FileFolderFunctions.isFilePresent(OpenChords.Settings.ExtAppsAndDir.openSongApp))
             {
                 openSongToolStripMenuItem.Enabled = false;
-                splitContainerNotesImage.Panel2Collapsed = true;
             }
-            //disable sync utility if it isn't pointing to a real file
-            if (!IO.FileFolderFunctions.isFilePresent(OpenChords.Settings.ExtAppsAndDir.FileSyncUtility))
-                fileSyncUtilityToolStripMenuItem.Enabled = false;
-
+         
             if (currentSong.isMp3Available())
                 btnPlay.Visible = true;
             else
@@ -1258,7 +1231,9 @@ namespace OpenChords.Forms
         private void exportCurrentSetToOpenSongToolStripMenuItem_Click(object sender, EventArgs e)
         {
             logger.Info("Clicked");
-            exportSetToOpenSong();
+            confirmChangesToSet();
+            saveState();
+            currentSet.exportSetAndSongsToOpenSong();
             Export.ExportToOpenSong.launchOpenSong();
         }
 
@@ -1282,18 +1257,6 @@ namespace OpenChords.Forms
             Export.ExportToOpenSong.launchOpenSong();
         }
 
-        private void picBackgroundImage_Click(object sender, EventArgs e)
-        {
-            openFileDialogSelectOpenSongBackground.InitialDirectory = OpenChords.Settings.ExtAppsAndDir.opensongBackgroundsFolder;
-            var result = openFileDialogSelectOpenSongBackground.ShowDialog();
-            if (result == System.Windows.Forms.DialogResult.OK)
-            {
-                var filename = openFileDialogSelectOpenSongBackground.FileName.Replace(OpenChords.Settings.ExtAppsAndDir.opensongBackgroundsFolder, "");
-                currentSong.OpenSongImageFileName = filename;
-                picBackgroundImage.Image = currentSong.getSongImage();
-                changesMade = true;
-            }
-        }
 
         private void timerOrderChanged_Tick(object sender, EventArgs e)
         {

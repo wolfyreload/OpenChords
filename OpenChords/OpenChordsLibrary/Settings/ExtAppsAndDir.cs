@@ -78,16 +78,6 @@ namespace OpenChords.Config
 
             }
         }
-        public String FileSyncUtility
-        {
-            get
-            {
-                string path = settings.FileSync;
-                string fixedPath = fixPaths(path);
-                return fixedPath;
-
-            }
-        }
 
         public String dataFolder
         {
@@ -295,26 +285,6 @@ namespace OpenChords.Config
 
             }
         }
-
-        public String welcomeSlide
-        {
-            get
-            {
-
-                Entities.FileAndFolderSettings settings = Entities.FileAndFolderSettings.loadSettings();
-
-                if (!settings.OpenSongUseWelcomeSlide) return null;
-                string path = songsFolder + settings.OpenSongWelcomeSlide;
-                string fixedPath = fixPaths(path);
-                return fixedPath;
-            }
-        }
-
-
-
-
-
-
 
     }
 }

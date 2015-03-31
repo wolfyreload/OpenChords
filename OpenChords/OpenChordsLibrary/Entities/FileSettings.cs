@@ -17,11 +17,8 @@ namespace OpenChords.Entities
         //public bool isLocalOpenSong { get; set; }
         public string OpenSongExecutable { get; set; }
         public string OpenSongSetsAndSongs { get; set; }
-        public bool OpenSongUseWelcomeSlide { get; set; }
-        public string OpenSongWelcomeSlide { get; set; }
         public bool PortableMode { get; set; }
         public string ApplicationDataFolder { get; set; }
-        public string FileSync { get; set; }
         public bool CheckForUpdates { get; set; }
 
         public string _SettingsFolder;
@@ -84,11 +81,8 @@ namespace OpenChords.Entities
             _SettingsFolder = "..\\..\\OpenChordsSettings\\";
             OpenSongExecutable = "c:\\Program Files\\OpenSong\\OpenSong.exe";
             OpenSongSetsAndSongs = "c:\\OpenSong";
-            OpenSongUseWelcomeSlide = false;
-            OpenSongWelcomeSlide = "Welcome";
             PortableMode = true;
             ApplicationDataFolder = "..\\Data";
-            FileSync = "";
             CheckForUpdates = true;
         }
 

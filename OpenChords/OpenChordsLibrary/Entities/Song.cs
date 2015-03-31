@@ -256,17 +256,19 @@ namespace OpenChords.Entities
 
         public void saveSong()
         {
-
-
             if (this.title != "")
             {
-                //var noteClass = Note.loadNotes(this.title);
-                //noteClass.notes = notes;
-
                 //remove the notes when saving the song
                 XmlReaderWriter.writeSong(Settings.ExtAppsAndDir.songsFolder + this.title, this);
+            }
+        }
 
-                //noteClass.saveNotes();
+        internal void saveSong(string destination)
+        {
+            if (this.title != "")
+            {
+                //remove the notes when saving the song
+                XmlReaderWriter.writeSong(destination, this);
             }
         }
 
@@ -595,6 +597,8 @@ namespace OpenChords.Entities
 
 
 
+
+        
     }
 
 
