@@ -8,39 +8,24 @@ using System.Xml.Serialization;
 
 namespace OpenChords.Entities
 {
+
+
     [XmlRoot("settings")]
     public class FileAndFolderSettings
     {
+        public enum FileAndFolderSettingsType
+        {
+            Portable,
+            Normal
+        }
+
         private static readonly log4net.ILog logger = log4net.LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
 
-        public string AppsFolder {get; set;}
-        //public bool isLocalOpenSong { get; set; }
         public string OpenSongExecutable { get; set; }
         public string OpenSongSetsAndSongs { get; set; }
         public bool PortableMode { get; set; }
         public string ApplicationDataFolder { get; set; }
         public bool CheckForUpdates { get; set; }
-
-        public string _SettingsFolder;
-
-        //we need to be able to cator for non portable mode
-        [XmlIgnore]
-        public string SettingsFolder
-        {
-            get
-            {
-                if (!PortableMode)
-                    return Application.UserAppDataPath + "\\";
-                else
-                    return _SettingsFolder;
-            }
-            set 
-            {
-                _SettingsFolder = value;
-            }
-        }
-
-
         
         public static FileAndFolderSettings loadSettings()
         {
@@ -75,20 +60,28 @@ namespace OpenChords.Entities
 
         }
 
-        public FileAndFolderSettings()
+        protected FileAndFolderSettings() { }
+
+        public FileAndFolderSettings(FileAndFolderSettingsType type = FileAndFolderSettingsType.Normal)
         {
-            AppsFolder =  "..\\..\\OpenChordsApps\\";
-            _SettingsFolder = "..\\..\\OpenChordsSettings\\";
-            OpenSongExecutable = "c:\\Program Files\\OpenSong\\OpenSong.exe";
-            OpenSongSetsAndSongs = "c:\\OpenSong";
-            PortableMode = true;
-            ApplicationDataFolder = "..\\Data";
-            CheckForUpdates = true;
+            if (type == FileAndFolderSettingsType.Normal)
+            {
+                OpenSongExecutable = "";
+                OpenSongSetsAndSongs = "";
+                PortableMode = false;
+                ApplicationDataFolder = Environment.GetFolderPath(Environment.SpecialFolder.Personal) + "\\OpenChords\\";
+                CheckForUpdates = true;
+            }
+            else
+            {
+                OpenSongExecutable = "";
+                OpenSongSetsAndSongs = "";
+                PortableMode = false;
+                ApplicationDataFolder = "..\\Data";
+                CheckForUpdates = true;
+            }
         }
-
-
-
-
+        
         /// <summary>
         /// gets a fresh version of the current settings and returns the settings
         /// </summary>

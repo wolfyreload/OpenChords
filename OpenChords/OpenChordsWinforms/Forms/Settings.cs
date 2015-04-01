@@ -23,7 +23,6 @@ namespace OpenChords.Forms
         public Settings()
         {
             InitializeComponent();
-
             //tabPageFileSettings.Controls.Add(fileSettingsCustomControl);
             //tabPageDisplaySettings.Controls.Add(displaySettingsCustomControl);
             //tabPagePrintSettings.Controls.Add(printSettingsCustomControl);
@@ -55,7 +54,10 @@ namespace OpenChords.Forms
             displaySettingsCustomControl.saveSettings();
             printSettingsCustomControl.saveSettings();
             tabletSettingsCustomControl.saveSettings();
-           
+
+            if (fileSettingsCustomControl.ApplicationDataFolderChanged)
+                MessageBox.Show("Changes to Application data folder will only take effect after restarting OpenChords");
+
 			this.Dispose();
 		}
 

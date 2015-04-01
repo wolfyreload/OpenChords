@@ -29,14 +29,11 @@
         private void InitializeComponent()
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FileSettingsPanel));
-            this.imgSettingsFolder = new System.Windows.Forms.PictureBox();
             this.imgApplicationDataFolder = new System.Windows.Forms.PictureBox();
             this.cmdCheck = new System.Windows.Forms.Button();
             this.chkUpdates = new System.Windows.Forms.CheckBox();
             this.label30 = new System.Windows.Forms.Label();
             this.txtApplicationDataFolder = new System.Windows.Forms.TextBox();
-            this.label27 = new System.Windows.Forms.Label();
-            this.txtSettingsFolder = new System.Windows.Forms.TextBox();
             this.imgOpenSongExecutableFolder = new System.Windows.Forms.PictureBox();
             this.imgOpenSongSetsFolder = new System.Windows.Forms.PictureBox();
             this.label28 = new System.Windows.Forms.Label();
@@ -49,7 +46,6 @@
             this.flowLayoutPanel4 = new System.Windows.Forms.FlowLayoutPanel();
             this.chkPortableMode = new System.Windows.Forms.CheckBox();
             this.flowLayoutPanel5 = new System.Windows.Forms.FlowLayoutPanel();
-            ((System.ComponentModel.ISupportInitialize)(this.imgSettingsFolder)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.imgApplicationDataFolder)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.imgOpenSongExecutableFolder)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.imgOpenSongSetsFolder)).BeginInit();
@@ -59,23 +55,11 @@
             this.flowLayoutPanel5.SuspendLayout();
             this.SuspendLayout();
             // 
-            // imgSettingsFolder
-            // 
-            this.imgSettingsFolder.Image = ((System.Drawing.Image)(resources.GetObject("imgSettingsFolder.Image")));
-            this.imgSettingsFolder.InitialImage = ((System.Drawing.Image)(resources.GetObject("imgSettingsFolder.InitialImage")));
-            this.imgSettingsFolder.Location = new System.Drawing.Point(608, 3);
-            this.imgSettingsFolder.Name = "imgSettingsFolder";
-            this.imgSettingsFolder.Size = new System.Drawing.Size(20, 20);
-            this.imgSettingsFolder.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
-            this.imgSettingsFolder.TabIndex = 17;
-            this.imgSettingsFolder.TabStop = false;
-            this.imgSettingsFolder.Click += new System.EventHandler(this.imgSettingsFolder_Click);
-            // 
             // imgApplicationDataFolder
             // 
             this.imgApplicationDataFolder.Image = ((System.Drawing.Image)(resources.GetObject("imgApplicationDataFolder.Image")));
             this.imgApplicationDataFolder.InitialImage = ((System.Drawing.Image)(resources.GetObject("imgApplicationDataFolder.InitialImage")));
-            this.imgApplicationDataFolder.Location = new System.Drawing.Point(608, 29);
+            this.imgApplicationDataFolder.Location = new System.Drawing.Point(608, 3);
             this.imgApplicationDataFolder.Name = "imgApplicationDataFolder";
             this.imgApplicationDataFolder.Size = new System.Drawing.Size(20, 20);
             this.imgApplicationDataFolder.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
@@ -110,7 +94,7 @@
             // label30
             // 
             this.label30.ForeColor = System.Drawing.Color.White;
-            this.label30.Location = new System.Drawing.Point(3, 26);
+            this.label30.Location = new System.Drawing.Point(3, 0);
             this.label30.Name = "label30";
             this.label30.Size = new System.Drawing.Size(140, 23);
             this.label30.TabIndex = 3;
@@ -119,27 +103,10 @@
             // 
             // txtApplicationDataFolder
             // 
-            this.txtApplicationDataFolder.Location = new System.Drawing.Point(149, 29);
+            this.txtApplicationDataFolder.Location = new System.Drawing.Point(149, 3);
             this.txtApplicationDataFolder.Name = "txtApplicationDataFolder";
             this.txtApplicationDataFolder.Size = new System.Drawing.Size(453, 20);
             this.txtApplicationDataFolder.TabIndex = 2;
-            // 
-            // label27
-            // 
-            this.label27.ForeColor = System.Drawing.Color.White;
-            this.label27.Location = new System.Drawing.Point(3, 0);
-            this.label27.Name = "label27";
-            this.label27.Size = new System.Drawing.Size(140, 23);
-            this.label27.TabIndex = 1;
-            this.label27.Text = "Settings Folder";
-            this.label27.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
-            // 
-            // txtSettingsFolder
-            // 
-            this.txtSettingsFolder.Location = new System.Drawing.Point(149, 3);
-            this.txtSettingsFolder.Name = "txtSettingsFolder";
-            this.txtSettingsFolder.Size = new System.Drawing.Size(453, 20);
-            this.txtSettingsFolder.TabIndex = 1;
             // 
             // imgOpenSongExecutableFolder
             // 
@@ -212,15 +179,12 @@
             // flowLayoutPanel1
             // 
             this.flowLayoutPanel1.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
-            this.flowLayoutPanel1.Controls.Add(this.label27);
-            this.flowLayoutPanel1.Controls.Add(this.txtSettingsFolder);
-            this.flowLayoutPanel1.Controls.Add(this.imgSettingsFolder);
             this.flowLayoutPanel1.Controls.Add(this.label30);
             this.flowLayoutPanel1.Controls.Add(this.txtApplicationDataFolder);
             this.flowLayoutPanel1.Controls.Add(this.imgApplicationDataFolder);
             this.flowLayoutPanel1.Location = new System.Drawing.Point(3, 84);
             this.flowLayoutPanel1.Name = "flowLayoutPanel1";
-            this.flowLayoutPanel1.Size = new System.Drawing.Size(643, 59);
+            this.flowLayoutPanel1.Size = new System.Drawing.Size(643, 34);
             this.flowLayoutPanel1.TabIndex = 16;
             // 
             // flowLayoutPanel2
@@ -232,7 +196,7 @@
             this.flowLayoutPanel2.Controls.Add(this.label29);
             this.flowLayoutPanel2.Controls.Add(this.txtOpenSongSetsAndSongs);
             this.flowLayoutPanel2.Controls.Add(this.imgOpenSongSetsFolder);
-            this.flowLayoutPanel2.Location = new System.Drawing.Point(3, 149);
+            this.flowLayoutPanel2.Location = new System.Drawing.Point(3, 124);
             this.flowLayoutPanel2.Name = "flowLayoutPanel2";
             this.flowLayoutPanel2.Size = new System.Drawing.Size(643, 64);
             this.flowLayoutPanel2.TabIndex = 17;
@@ -259,7 +223,6 @@
             this.chkPortableMode.TabIndex = 18;
             this.chkPortableMode.Text = "Portable Mode";
             this.chkPortableMode.UseVisualStyleBackColor = true;
-            this.chkPortableMode.CheckedChanged += new System.EventHandler(this.chkPortableMode_CheckedChanged);
             // 
             // flowLayoutPanel5
             // 
@@ -271,7 +234,7 @@
             this.flowLayoutPanel5.FlowDirection = System.Windows.Forms.FlowDirection.TopDown;
             this.flowLayoutPanel5.Location = new System.Drawing.Point(3, 3);
             this.flowLayoutPanel5.Name = "flowLayoutPanel5";
-            this.flowLayoutPanel5.Size = new System.Drawing.Size(649, 216);
+            this.flowLayoutPanel5.Size = new System.Drawing.Size(649, 191);
             this.flowLayoutPanel5.TabIndex = 20;
             // 
             // FileSettingsPanel
@@ -283,8 +246,7 @@
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(53)))), ((int)(((byte)(76)))), ((int)(((byte)(103)))));
             this.Controls.Add(this.flowLayoutPanel5);
             this.Name = "FileSettingsPanel";
-            this.Size = new System.Drawing.Size(655, 222);
-            ((System.ComponentModel.ISupportInitialize)(this.imgSettingsFolder)).EndInit();
+            this.Size = new System.Drawing.Size(655, 197);
             ((System.ComponentModel.ISupportInitialize)(this.imgApplicationDataFolder)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.imgOpenSongExecutableFolder)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.imgOpenSongSetsFolder)).EndInit();
@@ -304,15 +266,12 @@
         private System.Windows.Forms.CheckBox chkUpdates;
         private System.Windows.Forms.Label label30;
         private System.Windows.Forms.TextBox txtApplicationDataFolder;
-        private System.Windows.Forms.Label label27;
-        private System.Windows.Forms.TextBox txtSettingsFolder;
         private System.Windows.Forms.Label label28;
         private System.Windows.Forms.TextBox txtOpensongExecutable;
         private System.Windows.Forms.Label label29;
         private System.Windows.Forms.TextBox txtOpenSongSetsAndSongs;
         private System.Windows.Forms.Button cmdCheck;
         private System.Windows.Forms.OpenFileDialog openFileDialog1;
-        private System.Windows.Forms.PictureBox imgSettingsFolder;
         private System.Windows.Forms.PictureBox imgApplicationDataFolder;
         private System.Windows.Forms.PictureBox imgOpenSongExecutableFolder;
         private System.Windows.Forms.PictureBox imgOpenSongSetsFolder;

@@ -16,7 +16,7 @@ namespace OpenChords.Config
 
         private readonly log4net.ILog logger = log4net.LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
         public char seperator = System.IO.Path.DirectorySeparatorChar;
-        private Entities.FileAndFolderSettings settings = new Entities.FileAndFolderSettings();
+        private Entities.FileAndFolderSettings settings;
 
         private string fixPaths(string old)
         {
@@ -83,7 +83,11 @@ namespace OpenChords.Config
         {
             get
             {
-                string path = settings.CurrentPath + settings.ApplicationDataFolder + "\\";
+                string path = null;
+                if (Path.IsPathRooted(settings.ApplicationDataFolder))
+                    path = settings.ApplicationDataFolder + "\\";
+                else
+                    path = String.Format("{0}{1}\\", settings.CurrentPath, settings.ApplicationDataFolder);
                 string fixedPath = fixPaths(path);
                 if (!System.IO.Directory.Exists(fixedPath))
                     System.IO.Directory.CreateDirectory(fixedPath);
@@ -233,7 +237,7 @@ namespace OpenChords.Config
         {
             get
             {
-                string path = settings.SettingsFolder;
+                string path = dataFolder + "Settings\\";
                 string fixedPath = fixPaths(path);
                 if (!System.IO.Directory.Exists(fixedPath))
                     System.IO.Directory.CreateDirectory(fixedPath);

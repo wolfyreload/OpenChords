@@ -14,6 +14,7 @@ namespace OpenChords.Forms.Custom_Controls
     {
         private static readonly log4net.ILog logger = log4net.LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
        private Entities.FileAndFolderSettings settings;
+       public bool ApplicationDataFolderChanged { get; set; }
 
         
         public FileSettingsPanel()
@@ -21,6 +22,7 @@ namespace OpenChords.Forms.Custom_Controls
             InitializeComponent();
             this.Dock = DockStyle.Fill;
             settings = Entities.FileAndFolderSettings.loadSettings();
+
             
         }
 
@@ -33,23 +35,17 @@ namespace OpenChords.Forms.Custom_Controls
         void updateGui()
         {
             //file settings
-            
+            this.txtApplicationDataFolder.TextChanged -= new System.EventHandler(this.txtApplicationDataFolder_TextChanged);
+            this.chkPortableMode.CheckedChanged -= new System.EventHandler(this.chkPortableMode_CheckedChanged);
+
             txtApplicationDataFolder.Text = settings.ApplicationDataFolder;
             txtOpensongExecutable.Text = settings.OpenSongExecutable;
             txtOpenSongSetsAndSongs.Text = settings.OpenSongSetsAndSongs;
             chkUpdates.Checked = settings.CheckForUpdates;
             chkPortableMode.Checked = settings.PortableMode;
 
-            if (!chkPortableMode.Checked)
-            {
-                txtSettingsFolder.ReadOnly = true;
-                imgSettingsFolder.Enabled = false;
-                txtSettingsFolder.Text = Application.UserAppDataPath + "\\";
-            }
-            else
-            {
-                txtSettingsFolder.Text = settings.SettingsFolder;
-            }
+            this.txtApplicationDataFolder.TextChanged += new System.EventHandler(this.txtApplicationDataFolder_TextChanged);
+            this.chkPortableMode.CheckedChanged += new System.EventHandler(this.chkPortableMode_CheckedChanged);
         }
 
         private int getInt(string input)
@@ -75,10 +71,6 @@ namespace OpenChords.Forms.Custom_Controls
             settings.OpenSongSetsAndSongs = txtOpenSongSetsAndSongs.Text;
             settings.CheckForUpdates = chkUpdates.Checked;
             settings.PortableMode = chkPortableMode.Checked;
-            if (settings.PortableMode)
-                settings.SettingsFolder = txtSettingsFolder.Text;
-            else
-                settings.SettingsFolder = "";
         }
 
         public void saveSettings()
@@ -121,22 +113,12 @@ namespace OpenChords.Forms.Custom_Controls
                 textbox.Text = openFileDialog1.FileName;
         }
 
-        private void imgSettingsFolder_Click(object sender, EventArgs e)
-        {
-            logger.Info("Clicked");
-            showFolderDialog(txtSettingsFolder);
-        }
+        
 
         private void imgApplicationDataFolder_Click(object sender, EventArgs e)
         {
             logger.Info("Clicked");
             showFolderDialog(txtApplicationDataFolder);
-        }
-
-        private void imgOpenSongExecutableFolder_Click(object sender, EventArgs e)
-        {
-            logger.Info("Clicked");
-            showFolderDialog(txtOpensongExecutable);
         }
 
         private void imgOpenSongSetsFolder_Click(object sender, EventArgs e)
@@ -175,18 +157,18 @@ namespace OpenChords.Forms.Custom_Controls
         {
             if (chkPortableMode.Checked)
             {
-
-                txtSettingsFolder.ReadOnly = false;
-                imgSettingsFolder.Enabled = true;
-                var defaultFileSettings = new Entities.FileAndFolderSettings();
-                txtSettingsFolder.Text = defaultFileSettings.SettingsFolder;
+                txtApplicationDataFolder.Text = "..\\Data";
             }
             else
             {
-                txtSettingsFolder.ReadOnly = true;
-                imgSettingsFolder.Enabled = false;
-                txtSettingsFolder.Text = Application.UserAppDataPath + "\\";
+                txtApplicationDataFolder.Text = Environment.GetFolderPath(Environment.SpecialFolder.Personal) + "\\OpenChords\\";
             }
+        }
+
+        private void txtApplicationDataFolder_TextChanged(object sender, EventArgs e)
+        {
+            this.ApplicationDataFolderChanged = true;
+            
         }
 
     }

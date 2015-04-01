@@ -70,13 +70,35 @@ namespace OpenChords.IO
             return song;
         }
 
-        private static string SETTINGS_FILENAME = "settings.xml";
+        private static string SETTINGS_LOCAL_FILENAME = "settings.xml";
+        private static string SETTINGS_APPDATA_FILENAME = Environment.GetEnvironmentVariable("LOCALAPPDATA") + "\\OpenChords\\settings.xml";
 
         public static void writeFileAndFolderSettings(Entities.FileAndFolderSettings settings)
         {
             
             XmlSerializer serializer = new XmlSerializer(typeof(Entities.FileAndFolderSettings));
-            TextWriter textWriter = new StreamWriter(SETTINGS_FILENAME);
+
+            string path = null;
+            if (File.Exists(SETTINGS_LOCAL_FILENAME))
+                path = SETTINGS_LOCAL_FILENAME;
+            else
+                path = SETTINGS_APPDATA_FILENAME;
+
+            //if we select portable mode delete the other settings file
+            if (settings.PortableMode)
+            {
+                path = SETTINGS_LOCAL_FILENAME;
+                if (File.Exists(SETTINGS_APPDATA_FILENAME))
+                    File.Delete(SETTINGS_APPDATA_FILENAME);
+            }
+            else //if we select app data for the settings delete the local settings file
+            {
+                path = SETTINGS_APPDATA_FILENAME;
+                if (File.Exists(SETTINGS_LOCAL_FILENAME))
+                    File.Delete(SETTINGS_LOCAL_FILENAME);
+            }
+
+            TextWriter textWriter = new StreamWriter(path);
             serializer.Serialize(textWriter, settings);
             textWriter.Close();
 
@@ -93,6 +115,7 @@ namespace OpenChords.IO
             if (!IO.FileFolderFunctions.isFilePresent(path))
             {
                 XmlSerializer serializer = new XmlSerializer(typeof(Entities.FileAndFolderSettings));
+                new FileInfo(path).Directory.Create(); //create directory if it doesn't exist
                 TextWriter textWriter = new StreamWriter(path);
                 serializer.Serialize(textWriter, settings);
                 textWriter.Close();
@@ -128,7 +151,10 @@ namespace OpenChords.IO
         /// <returns></returns>
         public static Entities.FileAndFolderSettings readFileAndFolderSettings()
         {
-            return readFileAndFolderSettings(SETTINGS_FILENAME);         
+            if (File.Exists(SETTINGS_LOCAL_FILENAME))
+                return readFileAndFolderSettings(SETTINGS_LOCAL_FILENAME);
+            else
+                return readFileAndFolderSettings(SETTINGS_APPDATA_FILENAME);
         }
 
 
