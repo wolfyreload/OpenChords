@@ -10,7 +10,6 @@ xcopy  /Y /E .\OpenChordsLoader\bin\Release\* .\Staging\App
 xcopy  /Y .\OpenChords\manual\manual.pdf .\Staging\App
 copy /Y .\portable.xml .\Staging\App\settings.xml
 
-echo blank >> .\staging\App\settings.xml
 echo cd app >> .\staging\StartOpenChords.bat
 echo start OpenChords.exe >> .\staging\StartOpenChords.bat
 

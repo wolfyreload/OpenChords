@@ -13,7 +13,7 @@ SolidCompression=yes
 OutputBaseFilename=OpenChords.Installer.{#AppVersion}
 
 [Files]
-Source: "..\OpenChordsLoader\bin\Release\*"; DestDir: "{app}"; Flags: ignoreversion
+Source: "..\OpenChordsLoader\bin\Release\*"; DestDir: "{app}"; Flags: ignoreversion recursesubdirs 
 Source: "..\OpenChordsLoader\bin\Release\changelog.txt"; DestDir: "{app}"; Flags: isreadme ignoreversion
 
 [Icons]
