@@ -110,3 +110,5 @@ build
 *.bak
 OpenChords/Storage.dat
 OpenChords/Index.dat
+OpenChords/Staging/*
+OpenChords/OpenChords.Setup/Output/*

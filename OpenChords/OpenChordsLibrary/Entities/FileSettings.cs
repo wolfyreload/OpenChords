@@ -69,7 +69,7 @@ namespace OpenChords.Entities
                 OpenSongExecutable = "";
                 OpenSongSetsAndSongs = "";
                 PortableMode = false;
-                ApplicationDataFolder = Environment.GetFolderPath(Environment.SpecialFolder.Personal) + "\\OpenChords\\";
+                ApplicationDataFolder = Environment.GetFolderPath(Environment.SpecialFolder.Personal) + "\\OpenChords";
                 CheckForUpdates = true;
             }
             else
