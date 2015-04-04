@@ -90,5 +90,11 @@ namespace OpenChords.CrossPlatform.SongEditor
             
         }
 
+        internal void ExportToHtml()
+        {
+            string html = CurrentSet.getHtml(DisplayAndPrintSettings.loadSettings(DisplayAndPrintSettingsType.TabletSettings));
+            string fileName = string.Format("{0}/{1}.html", Settings.ExtAppsAndDir.printFolder, CurrentSet.setName);
+            File.WriteAllText(fileName, html);
+        }
     }
 }

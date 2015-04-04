@@ -98,6 +98,12 @@ namespace OpenChords.CrossPlatform
             var menuItemPresentSet = new Command { MenuText = "Present Set", Shortcut = Keys.F12 };
             menuItemPresentSet.Executed += (s, e) => ucSetListPanel.PresentSet();
 
+            //exportMenu
+            var commandExportSetToHtml = new Command { MenuText = "Se&t" };
+            commandExportSetToHtml.Executed += (s, e) => ucSetListPanel.ExportToHtml();
+            var commandExportSongToHtml = new Command { MenuText = "&Song" };
+            commandExportSongToHtml.Executed += (s, e) => ucSongMetaDataPanel.ExportToHtml();
+            var menuItemExportToHtml = new ButtonMenuItem() { Text = "To &Html", Items = { commandExportSetToHtml, commandExportSongToHtml } };
             //about menu
             var menuItemAbout = new Command { MenuText = "About..." };
             menuItemAbout.Executed += (s, e) => MessageBox.Show(this, "About my app...");
@@ -122,6 +128,11 @@ namespace OpenChords.CrossPlatform
                     {
                         Text = "&Present", 
                         Items = { menuItemPresentSong, menuItemPresentSet }
+                    },
+                    new ButtonMenuItem()
+                    {
+                        Text = "&Export",
+                        Items = { menuItemExportToHtml }
                     }
 				},
                 QuitItem = menuItemQuit,

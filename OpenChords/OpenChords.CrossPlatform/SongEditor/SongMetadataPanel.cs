@@ -140,8 +140,8 @@ namespace OpenChords.CrossPlatform.SongEditor
                 
 
             //set font size for notes and lyrics
-            txtLyrics.Font = new Font(FontFamilies.Monospace, 20);
-            txtNotes.Font = new Font(FontFamilies.Monospace, 20);
+            txtLyrics.Font = new Font(FontFamilies.Monospace, 16);
+            txtNotes.Font = new Font(FontFamilies.Monospace, 16);
 			txtLyrics.Wrap = false;
 			txtNotes.Wrap = false;
             CurrentSong = new Song();
@@ -317,6 +317,13 @@ namespace OpenChords.CrossPlatform.SongEditor
             }
 
              this.Visible = false;
+        }
+
+        internal void ExportToHtml()
+        {
+            string html = CurrentSong.getHtml(DisplayAndPrintSettings.loadSettings(DisplayAndPrintSettingsType.TabletSettings));
+            string fileName = string.Format("{0}/{1}.html", Settings.ExtAppsAndDir.printFolder, CurrentSong.title);
+            File.WriteAllText(fileName, html);
         }
     }
 }
