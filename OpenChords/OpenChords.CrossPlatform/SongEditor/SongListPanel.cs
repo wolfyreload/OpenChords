@@ -35,6 +35,7 @@ namespace OpenChords.CrossPlatform.SongEditor
 
         void lbSongs_SelectedIndexChanged(object sender, EventArgs e)
         {
+            if (lbSongs.SelectedIndex < 0) return;
             string songName = lbSongs.SelectedValue.ToString();
             Song selectedSong = Song.loadSong(songName);
             if (SongChanged != null)
