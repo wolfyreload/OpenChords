@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="utf-8"?>
+<song xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <style>
+    <title align="center" bold="true" border="true" border_color="#000000" color="#FFFFFF" fill="false" fill_color="#000000" font="Helvetica" italic="true" shadow="true" shadow_color="#000000" underline="false" valign="bottom" enabled="true" size="26" include_verse="false" />
+    <body align="center" bold="true" border="true" border_color="#000000" color="#FFFFFF" fill="false" fill_color="#FF0000" font="Helvetica" italic="false" highlight_chorus="true" shadow="true" shadow_color="#000000" underline="false" valign="middle" enabled="true" auto_scale="true" size="34" />
+    <subtitle enabled="false" />
+  </style>
+  <title>The Old Rugged Cross</title>
+  <author>George Bennard</author>
+  <presentation>V1 C V2 C V3 C V4 C</presentation>
+  <capo>0</capo>
+  <key>A</key>
+  <lyrics>[V1]
+.     A                      D                          
+ On a hill far away stood an old rugged cross,         
+.    E7                      A                          
+ The emblem of suff'ring and shame;                     
+.      A                             D                  
+ And I love that old cross where the dearest and best,  
+.      E7                        A                      
+ For a world of lost sinners was slain.                 
+.                                                       
+
+[C]
+.        E7                     A                       
+ So I'll cherish the old rugged cross,                  
+.        D                      A                       
+ Till my trophies at last I lay down;                   
+.       A                       D                       
+ I will cling to the old rugged cross,                  
+.      A              E7        A                       
+ And exchange it some day for a crown.                  
+
+[V2]
+.        A                      D                       
+ Oh that old rugged cross, so despised by the world,    
+.      E7                      A                        
+ Has a wondrous attraction for me;                      
+.        A                         A                    
+ For the dear Lamb of God left His glory above,         
+.   E7                   A                              
+ To bear it to dark Calvary.                            
+
+[V3]
+.       A                              D                
+ In the old rugged cross, stained with blood so divine, 
+.  E7                A                                  
+ A wondrous beauty I see;                               
+.         A                       D                     
+ For twas on that old cross Jesus suffered and died,    
+.   E7                  A                               
+ To pardon and sanctify me.                             
+
+[V4]
+.       A                       D                       
+ To the old rugged cross I will ever be true,           
+.    E7                        A                        
+ Its shame and reproach gladly bear;                    
+.           A                      D                    
+ Then He'll call me some day to my home far away,       
+.          E7                 A                         
+ Where his glory forever I'll share.                    
+
+
+</lyrics>
+  <ccli>19722</ccli>
+  <preferFlats>False</preferFlats>
+  <tempo />
+  <time_sig />
+  <hymn_number />
+  <notes>[V1]
+ 
+[C]
+ 
+[V2]
+ 
+[C]
+ 
+[V3]
+ 
+[C]
+ 
+[V4]
+ 
+[C]
+ 
+[G]
+ 
+
+</notes>
+</song>

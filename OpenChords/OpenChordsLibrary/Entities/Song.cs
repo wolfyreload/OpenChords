@@ -512,36 +512,6 @@ namespace OpenChords.Entities
         }
 
         /// <summary>
-        /// Get the currently selected OpenSong image
-        /// </summary>
-        /// <returns></returns>
-        public Image getSongImage()
-        {
-            Image outputImage = null;
-            if (!String.IsNullOrEmpty(OpenSongImageFileName))
-            {
-                string path = "";
-                if (OpenSongImageFileName.Contains(":\\"))
-                {
-                    path = OpenSongImageFileName;
-                }
-                else
-                {
-                    path = OpenChords.Settings.ExtAppsAndDir.opensongBackgroundsFolder + OpenSongImageFileName;
-                }
-
-                if (!File.Exists(path))
-                {
-                    logger.InfoFormat("image file '{0}' does not exist for song '{1}'", path, this.title);
-                    return null;
-                }
-                outputImage = Image.FromFile(path);
-                
-            }
-            return outputImage;
-        }
-
-        /// <summary>
         /// read and write the OpenSongImageFileName for when we export to OpenSong
         /// </summary>
         [XmlIgnore]
@@ -598,7 +568,15 @@ namespace OpenChords.Entities
 
 
 
-        
+
+
+        public void ToggleSharpsAndFlats()
+        {
+            this.PreferFlats = !this.PreferFlats;
+            this.transposeKeyUp();
+            this.transposeKeyDown();
+           
+        }
     }
 
 

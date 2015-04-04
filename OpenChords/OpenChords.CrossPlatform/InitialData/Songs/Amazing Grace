@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="utf-8"?>
+<song xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <style>
+    <title align="center" bold="true" border="true" border_color="#000000" color="#FFFFFF" fill="false" fill_color="#000000" font="Helvetica" italic="true" shadow="true" shadow_color="#000000" underline="false" valign="bottom" enabled="true" size="26" include_verse="false" />
+    <body align="center" bold="true" border="true" border_color="#000000" color="#FFFFFF" fill="false" fill_color="#FF0000" font="Helvetica" italic="false" highlight_chorus="true" shadow="true" shadow_color="#000000" underline="false" valign="middle" enabled="true" auto_scale="true" size="34" />
+    <subtitle enabled="false" />
+  </style>
+  <title>Amazing Grace</title>
+  <author>John Newton</author>
+  <presentation>V3 V1 V2 V4</presentation>
+  <capo>0</capo>
+  <key>D</key>
+  <lyrics>[V1]
+. D      D7        G         D                                                              
+ Amazing grace how sweet the sound                     
+.     Bm      E           A  A7                                                             
+ that saved a wretch like me;                           
+.  D        D7       G       D                                                              
+ I once was lost but now I'm found,                     
+.    Bm        A     G   D                                                                  
+ was blind but now I see.                               
+
+[V2]
+.     D          D7        G        D                                                       
+ Twas grace that taught my heart to fear,               
+.    Bm       E       A      A7                                                             
+ and grace my fears relieved;                           
+.    D        D7       G       D                                                            
+ How precious did that grace appear                     
+.    Bm     A       G      D                                                                
+ the hour I first believed!                             
+
+[V3]
+.        D    D7       G                                                                    
+ Through many dangers, toils,                           
+.    D        Bm     E     A    A7                                                          
+ and snares I have already come;                        
+.     D          D7         G         D                                                     
+ 'Tis grace that brought me safe thus far               
+.    Bm         A       G    D                                                              
+ and grace will lead me home.                           
+
+[V4]
+.     D          D7        G                                                                
+ When we've been there ten thousand                     
+.D            Bm      E      A   A7                                                         
+ years bright shining as the sun;                       
+.      D       D7      G          D                                                         
+ We've no less days to sing God's praise                
+.     Bm        A       G   D                                                               
+ than when we'd first begun!                            
+
+
+</lyrics>
+  <ccli>1037882</ccli>
+  <preferFlats>False</preferFlats>
+  <tempo />
+  <time_sig />
+  <hymn_number />
+  <notes>[V3]
+ slow and worshipful
+[V1]
+ switch to 4/4 
+ timing
+ with palm muting
+ add light drums
+ 
+[V2]
+ heavy
+ 
+[V4]
+ heavy
+ sharp ending
+ on D
+ 
+[G]
+ do V3 original
+ song then switch to 
+ 4/4 timing
+
+</notes>
+</song>

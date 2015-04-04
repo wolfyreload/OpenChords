@@ -44,7 +44,7 @@ namespace OpenChords.Entities
             var settings = IO.XmlReaderWriter.readFileAndFolderSettings(path);
             var dir = new DirectoryInfo(path);
             settings.CurrentFullPath = path;
-            settings.CurrentPath = dir.Parent.FullName + "\\";
+            settings.CurrentPath = dir.Parent.FullName + "/";
             return settings;
         }
 
@@ -69,7 +69,7 @@ namespace OpenChords.Entities
                 OpenSongExecutable = "";
                 OpenSongSetsAndSongs = "";
                 PortableMode = false;
-                ApplicationDataFolder = Environment.GetFolderPath(Environment.SpecialFolder.Personal) + "\\OpenChords";
+                ApplicationDataFolder = Environment.GetFolderPath(Environment.SpecialFolder.Personal) + "/OpenChords";
                 CheckForUpdates = true;
             }
             else
@@ -77,7 +77,7 @@ namespace OpenChords.Entities
                 OpenSongExecutable = "";
                 OpenSongSetsAndSongs = "";
                 PortableMode = false;
-                ApplicationDataFolder = "..\\Data";
+                ApplicationDataFolder = "../Data";
                 CheckForUpdates = true;
             }
         }

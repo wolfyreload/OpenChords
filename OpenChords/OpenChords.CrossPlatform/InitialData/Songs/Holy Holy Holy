@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="utf-8"?>
+<song xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <style>
+    <title align="center" bold="true" border="true" border_color="#000000" color="#FFFFFF" fill="false" fill_color="#000000" font="Helvetica" italic="true" shadow="true" shadow_color="#000000" underline="false" valign="bottom" enabled="true" size="26" include_verse="false" />
+    <body align="center" bold="true" border="true" border_color="#000000" color="#FFFFFF" fill="false" fill_color="#FF0000" font="Helvetica" italic="false" highlight_chorus="true" shadow="true" shadow_color="#000000" underline="false" valign="middle" enabled="true" auto_scale="true" size="34" />
+    <subtitle enabled="false" />
+  </style>
+  <title>Holy Holy Holy</title>
+  <author>E.L. Ashford</author>
+  <presentation>V1 V2 V3 V4</presentation>
+  <capo>0</capo>
+  <key>D</key>
+  <lyrics>[V1]
+.D     Bm    A  D                                       
+ Holy, holy, ho_ly,                                    
+.G          D                                           
+ Lord God Almighty,                                     
+.A            Bm  A                                     
+ Early in the mor_ning my                               
+.E                  A                                   
+ song shall rise to Thee;                               
+.D     Bm    A  D   G            D                      
+ Holy, holy, ho_ly, merciful and mighty,                
+.Bm  Bm/A     G  D     Em      A    D                   
+ God in three persons, blessed Trinity.                 
+
+[V2]
+.D     Bm    A  D                                       
+ Holy, holy, ho_ly,                                     
+.G               D                                      
+ all the saints adore Thee,                             
+.A                  Bm     A                            
+ Casting down their golden crowns                       
+. E                A                                    
+ around the glassy sea;                                 
+.D    Bm      A   D     G              D                
+ Cherubim and seraphim, falling down before Thee,       
+.Bm     Bm/A     G   D   Em   A          D              
+ Which, wert and art and ever more shall be.            
+
+[V3]
+.D     Bm    A  D   G                   D               
+ Holy, holy, ho_ly, though the darkness hide Thee,      
+.A                 Bm     A       E             A       
+ Though the eye of sinful men Thy Glory may not see;    
+.D    Bm       A  D   G               D                 
+ Only Thou art ho_ly, there is none beside Thee,        
+.Bm  Bm/A    G      D  Em       A   D                   
+ Per_fect in power, in love and purity.                 
+.                                                       
+
+[V4]
+.D     Bm    A  D   G          D                        
+ Holy, holy, ho_ly, Lord God Almighy,                   
+.A                   Bm         A                       
+ All Thy works shall praise Thy Name in                 
+.E                 A                                    
+ earth and sky and sea;                                 
+.D     Bm    A  D   G            D                      
+ Holy, holy, ho_ly, merciful and mighty,                
+.Bm  Bm/A     G  D     Em      A    D                   
+ God in three persons, blessed Trinity.                 
+
+
+</lyrics>
+  <ccli>817404</ccli>
+  <preferFlats>False</preferFlats>
+  <tempo />
+  <time_sig />
+  <hymn_number />
+  <notes>[V1]
+ 
+[V2]
+ 
+[V3]
+ 
+[V4]
+ 
+[G]
+ 
+
+</notes>
+</song>

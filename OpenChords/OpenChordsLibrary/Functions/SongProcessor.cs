@@ -166,9 +166,9 @@ namespace OpenChords.Functions
 				for (int j = 0; j < verseContents[i].Length; j++)
 				{
 					if (isChord[i][j])
-						lyrics.AppendLine("." + verseContents[i][j]);
+						lyrics.AppendLine("." + verseContents[i][j].TrimEnd());
 					else
-						lyrics.AppendLine(" " + verseContents[i][j]);
+                        lyrics.AppendLine(" " + verseContents[i][j].TrimEnd());
 					
 				}
 				lyrics.AppendLine();
@@ -226,7 +226,7 @@ namespace OpenChords.Functions
 				buildLine.Append(chord);
 			}
 
-			return buildLine.ToString(); ;
+            return buildLine.ToString();
 
 		}
 		

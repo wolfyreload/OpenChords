@@ -294,9 +294,9 @@ namespace OpenChords.Functions
         {
             try
             {
-                Ionic.Zip.ZipFile zip = new Ionic.Zip.ZipFile("OpenChordsUpdate.zip");
+                //Ionic.Zip.ZipFile zip = new Ionic.Zip.ZipFile("OpenChordsUpdate.zip");
 
-                zip.ExtractSelectedEntries("name = '*'", @"OpenChords\App\Bin", @".\upgrade", Ionic.Zip.ExtractExistingFileAction.OverwriteSilently);
+                //zip.ExtractSelectedEntries("name = '*'", @"OpenChords\App\Bin", @".\upgrade", Ionic.Zip.ExtractExistingFileAction.OverwriteSilently);
             }
             catch { }
         }

@@ -41,12 +41,12 @@ namespace OpenChords.Config
         {
             get
             {
-                if (IO.FileFolderFunctions.isFilePresent(fixPaths("\\usr\\bin\\pcmanfm")))
-                    return fixPaths("\\usr\\bin\\pcmanfm");
-                else if (IO.FileFolderFunctions.isFilePresent(fixPaths("\\usr\\bin\\nautilus")))
-                    return fixPaths("\\usr\\bin\\nautilus");
-                else if (IO.FileFolderFunctions.isFilePresent(fixPaths("\\usr\\bin\\thunar")))
-                    return fixPaths("\\usr\\bin\\thunar");
+                if (IO.FileFolderFunctions.isFilePresent(fixPaths("/usr/bin/pcmanfm")))
+                    return fixPaths("/usr/bin/pcmanfm");
+                else if (IO.FileFolderFunctions.isFilePresent(fixPaths("/usr/bin/nautilus")))
+                    return fixPaths("/usr/bin/nautilus");
+                else if (IO.FileFolderFunctions.isFilePresent(fixPaths("/usr/bin/thunar")))
+                    return fixPaths("/usr/bin/thunar");
                 else
                     return null;
             }

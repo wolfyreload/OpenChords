@@ -63,10 +63,8 @@ namespace OpenChords {
         /// <summary>
         ///   Looks up a localized string similar to &lt;html&gt;
         ///&lt;head&gt;
-        ///    &lt;style&gt;
-        ///        {InlineStyleSheet}
-        ///    &lt;/style&gt;
-        ///    &lt;title&gt;HtmlPanel&lt;/title&gt;
+        ///    &lt;style&gt;&lt;/style&gt;
+        ///    &lt;title&gt;{Title}&lt;/title&gt;
         ///&lt;/head&gt;
         ///&lt;body&gt;
         ///    {SongBody}

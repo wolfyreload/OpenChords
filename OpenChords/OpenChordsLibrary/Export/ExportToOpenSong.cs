@@ -47,7 +47,7 @@ namespace OpenChords.Export
         {
             //write song
             var destinationSongFolder = Settings.ExtAppsAndDir.opensongSongsFolder;
-            song.OpenSongImageFileName = string.Format("OpenChords\\{0}.jpg", song.title);
+            song.OpenSongImageFileName = string.Format("OpenChords/{0}.jpg", song.title);
             var destinationFile = destinationSongFolder + song.title;
             song.saveSong(destinationFile);
 

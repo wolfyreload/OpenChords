@@ -71,7 +71,7 @@ namespace OpenChords.IO
         }
 
         private static string SETTINGS_LOCAL_FILENAME = "settings.xml";
-        private static string SETTINGS_APPDATA_FILENAME = Environment.GetEnvironmentVariable("LOCALAPPDATA") + "\\OpenChords\\settings.xml";
+        private static string SETTINGS_APPDATA_FILENAME = Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData) + "/OpenChords/settings.xml";
 
         public static void writeFileAndFolderSettings(Entities.FileAndFolderSettings settings)
         {
