@@ -125,7 +125,7 @@ namespace OpenChords.CrossPlatform.SongEditor
         private bool showConfirmation(string message = "Are you sure?")
         {
             message = message.Replace("{0}", CurrentSong.title);
-            DialogResult result = MessageBox.Show(message, MessageBoxButtons.YesNo, MessageBoxType.Question);
+            DialogResult result = MessageBox.Show(message, "", MessageBoxButtons.YesNo, MessageBoxType.Question);
             return result == DialogResult.Yes;
         }
 
@@ -136,8 +136,8 @@ namespace OpenChords.CrossPlatform.SongEditor
                 if (showConfirmation("Save changes to {0}?"))
 
 
-                    //disable events
-                    txtTitle.TextChanged -= fieldTextChanged;
+            //disable events
+            txtTitle.TextChanged -= fieldTextChanged;
             txtOrder.TextChanged -= fieldTextChanged;
             txtAuther.TextChanged -= fieldTextChanged;
             txtCopyright.TextChanged -= fieldTextChanged;

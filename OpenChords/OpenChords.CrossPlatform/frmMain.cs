@@ -60,8 +60,6 @@ namespace OpenChords.CrossPlatform
             
             ucSongListPanel.refreshPanel();
             ucSetListPanel.refreshPanel();
-            ucSongListPanel.SongChanged += SelectedSongChanged;
-            ucSetListPanel.SongChanged += SelectedSongChanged;
 
             //file menu items
             var menuItemPreferences = new Command { MenuText = "Preferences" };
@@ -74,9 +72,9 @@ namespace OpenChords.CrossPlatform
             menuItemNewSong.Executed += (s, e) => ucSongMetaDataPanel.NewSong();
             var menuItemSaveSong = new Command { MenuText = "Save Song", Shortcut = Application.Instance.CommonModifier | Keys.S };
             menuItemSaveSong.Executed += (s, e) => ucSongMetaDataPanel.SaveSong();
-            var menuItemDeleteSong = new Command { MenuText = "Delete Song", Shortcut = Application.Instance.CommonModifier };
+            var menuItemDeleteSong = new Command { MenuText = "Delete Song" };
             menuItemDeleteSong.Executed += (s, e) => { ucSongMetaDataPanel.DeleteSong(); ucSongListPanel.refreshPanel(); };
-            var menuItemCloseSong = new Command { MenuText = "Close Song", Shortcut = Application.Instance.CommonModifier };
+            var menuItemCloseSong = new Command { MenuText = "Close Song" };
             menuItemCloseSong.Executed += (s, e) => { ucSongMetaDataPanel.Close(); };
             var menuItemAdvancedSearch = new Command { MenuText = "Advanced Search" };
             menuItemAdvancedSearch.Executed += (s, e) => { throw new NotImplementedException(); };
@@ -142,7 +140,13 @@ namespace OpenChords.CrossPlatform
             };
 
             ucSongListPanel.Focus();
+            
+            // events
             this.Closing += frmMain_Closing;
+            ucSongListPanel.SongChanged += SelectedSongChanged;
+            ucSetListPanel.SongChanged += SelectedSongChanged;
+            ucSongListPanel.AddSongToSet += (s, e) => ucSetListPanel.AddSongToSet(e);
+
 
         }
 

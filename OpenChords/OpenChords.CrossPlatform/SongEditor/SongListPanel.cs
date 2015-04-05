@@ -14,6 +14,7 @@ namespace OpenChords.CrossPlatform.SongEditor
         protected TextBox txtSearch = new TextBox();
 
         public event EventHandler<Song> SongChanged;
+        public event EventHandler<Song> AddSongToSet;
         private string[] _fullSongList;
 
         public SongListPanel()
@@ -30,7 +31,22 @@ namespace OpenChords.CrossPlatform.SongEditor
 
             lbSongs.Width = Helpers.getScreenPercentageInPixels(15);
 
+            var commandAddToSet = new Command() { MenuText = "Add to set", Shortcut = Application.Instance.CommonModifier | Keys.Enter };
+            commandAddToSet.Executed += (s, e) => addSongToSet();
+
+            var menu = new ContextMenu()
+            {
+                Items = { commandAddToSet }
+            };
+            lbSongs.ContextMenu = menu;            
             txtSearch.Focus();
+        }
+
+        private void addSongToSet()
+        {
+            if (lbSongs.SelectedIndex < 0) return;
+            if (AddSongToSet != null)
+                AddSongToSet(this, Song.loadSong(lbSongs.SelectedValue.ToString()));
         }
 
         void lbSongs_SelectedIndexChanged(object sender, EventArgs e)
@@ -46,6 +62,9 @@ namespace OpenChords.CrossPlatform.SongEditor
         {
             lbSongs.SelectedIndexChanged -= lbSongs_SelectedIndexChanged;
             txtSearch.TextChanged -= txtSearch_TextChanged;
+            txtSearch.KeyUp -= txtSearch_KeyUp;
+            lbSongs.MouseDoubleClick -= lbSongs_MouseDoubleClick;
+            lbSongs.KeyUp -= lbSongs_KeyUp;
 
             _fullSongList = Song.listOfAllSongs().ToArray();
 
@@ -54,7 +73,22 @@ namespace OpenChords.CrossPlatform.SongEditor
             lbSongs.SelectedIndexChanged += lbSongs_SelectedIndexChanged;
             txtSearch.TextChanged += txtSearch_TextChanged;
             txtSearch.KeyUp += txtSearch_KeyUp;
+            lbSongs.MouseDoubleClick += lbSongs_MouseDoubleClick;
+            lbSongs.KeyUp += lbSongs_KeyUp;
+          
+        }
 
+        void lbSongs_KeyUp(object sender, KeyEventArgs e)
+        {
+            if (e.Control && e.Key == Keys.Enter)
+                addSongToSet();
+        }
+
+        void lbSongs_MouseDoubleClick(object sender, MouseEventArgs e)
+        {
+            //disable double click to add song because its too easy to double click by accident
+            //if (e.Buttons == MouseButtons.Primary)
+            //    addSongToSet();
         }
 
         void txtSearch_KeyUp(object sender, KeyEventArgs e)

@@ -11,6 +11,7 @@ namespace OpenChords.CrossPlatform.SongEditor
         protected ListBox lbSongs = new ListBox();
         protected ComboBox cmbSets = new ComboBox();
 
+        private bool SetChanged;
         private Set CurrentSet;
         public event EventHandler<Song> SongChanged;
 
@@ -24,9 +25,39 @@ namespace OpenChords.CrossPlatform.SongEditor
                         
                     }
             };
+
+            var commandDeleteFromSet = new Command() { MenuText = "delete song from set", Shortcut = Application.Instance.CommonModifier | Keys.Delete };
+            commandDeleteFromSet.Executed += (s, e) => deleteSongFromSet();
+            var commandMoveSongUp = new Command() { MenuText = "move song up", Shortcut = Application.Instance.CommonModifier | Keys.Up };
+            commandMoveSongUp.Executed += (s, e) => moveSongUp();
+            var commandMoveSongDown = new Command() { MenuText = "move song down", Shortcut = Application.Instance.CommonModifier | Keys.Down };
+            commandMoveSongDown.Executed += (s, e) => moveSongDown();
+
+            var menu = new ContextMenu()
+            {
+                Items = { commandMoveSongUp, commandDeleteFromSet, commandMoveSongDown }
+            };
+            lbSongs.ContextMenu = menu;
+
+
             cmbSets.AutoComplete = true;
+
+
+            lbSongs.KeyUp += lbSongs_KeyUp;
             CurrentSet = new Set();
         }
+
+        void lbSongs_KeyUp(object sender, KeyEventArgs e)
+        {
+            if (e.Control && e.Key == Keys.Delete)
+                deleteSongFromSet();
+            else if (e.Control && e.Key == Keys.Up)
+                moveSongUp();
+            else if (e.Control && e.Key == Keys.Down)
+                moveSongDown();
+            e.Handled = true;
+        }
+
 
         void lbSongs_SelectedIndexChanged(object sender, EventArgs e)
         {
@@ -48,6 +79,11 @@ namespace OpenChords.CrossPlatform.SongEditor
             var sets = Set.listOfAllSets();
             var selectedSet = sets[cmbSets.SelectedIndex];
             CurrentSet = Set.loadSet(selectedSet);
+            refreshSongList();
+        }
+
+        private void refreshSongList()
+        {
             var songs = CurrentSet.songList;
             ListItemCollection items = new ListItemCollection();
             foreach (var song in songs)
@@ -72,6 +108,10 @@ namespace OpenChords.CrossPlatform.SongEditor
 
         internal void PresentSet()
         {
+            if (SetChanged && showConfirmation("Save changes to set '{0}' before presenting?"))
+                saveSet();
+            else
+                revertSet();
             new frmPresent(CurrentSet, DisplayAndPrintSettings.loadSettings(DisplayAndPrintSettingsType.DisplaySettings)).Show();
         }
 
@@ -87,14 +127,76 @@ namespace OpenChords.CrossPlatform.SongEditor
         {
             if (cmbSets.SelectedIndex >= 0)
                 IO.SettingsReaderWriter.writeSessionState(cmbSets.SelectedValue.ToString());
-            
+
         }
 
         internal void ExportToHtml()
         {
+            if (SetChanged && showConfirmation("Save changes to set '{0}' before Exporting to html?"))
+                saveSet();
+            else
+                revertSet();
             string html = CurrentSet.getHtml(DisplayAndPrintSettings.loadSettings(DisplayAndPrintSettingsType.TabletSettings));
             string fileName = string.Format("{0}/{1}.html", Settings.ExtAppsAndDir.printFolder, CurrentSet.setName);
             File.WriteAllText(fileName, html);
+        }
+
+        internal void AddSongToSet(Song e)
+        {
+            CurrentSet.addSongToSet(e);
+            this.refreshSongList();
+            SetChanged = true;
+        }
+
+        private void deleteSongFromSet()
+        {
+            if (lbSongs.SelectedIndex < 0) return;
+            CurrentSet.removeSongFromSet(lbSongs.SelectedIndex);
+            this.refreshSongList();
+            lbSongs.SelectedIndex = CurrentSet.indexOfCurrentSong;
+            SetChanged = true;
+        }
+
+        private void moveSongUp()
+        {
+            if (lbSongs.SelectedIndex < 0) return;
+            CurrentSet.indexOfCurrentSong = lbSongs.SelectedIndex;
+            CurrentSet.moveSongUp();
+            this.refreshSongList();
+            lbSongs.SelectedIndex = CurrentSet.indexOfCurrentSong;
+            SetChanged = true;
+        }
+
+        private void moveSongDown()
+        {
+            if (lbSongs.SelectedIndex < 0) return;
+            CurrentSet.indexOfCurrentSong = lbSongs.SelectedIndex;
+            CurrentSet.moveSongDown();
+            this.refreshSongList();
+            lbSongs.SelectedIndex = CurrentSet.indexOfCurrentSong;
+            SetChanged = true;
+        }
+
+        internal void saveSet()
+        {
+            if (cmbSets.SelectedIndex < 0)
+                if (SetChanged)
+                    CurrentSet.saveSet();
+            SetChanged = false;
+        }
+
+        internal void revertSet()
+        {
+            CurrentSet.revertSet();
+            this.refreshSongList();
+            SetChanged = false;
+        }
+
+        private bool showConfirmation(string message = "Are you sure?")
+        {
+            message = message.Replace("{0}", CurrentSet.setName);
+            DialogResult result = MessageBox.Show(message, "", MessageBoxButtons.YesNo, MessageBoxType.Question);
+            return result == DialogResult.Yes;
         }
     }
 }
