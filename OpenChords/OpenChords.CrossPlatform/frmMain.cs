@@ -74,8 +74,6 @@ namespace OpenChords.CrossPlatform
             menuItemSaveSong.Executed += (s, e) => ucSongMetaDataPanel.SaveSong();
             var menuItemDeleteSong = new Command { MenuText = "Delete Song" };
             menuItemDeleteSong.Executed += (s, e) => { ucSongMetaDataPanel.DeleteSong(); ucSongListPanel.refreshPanel(); };
-            var menuItemCloseSong = new Command { MenuText = "Close Song" };
-            menuItemCloseSong.Executed += (s, e) => { ucSongMetaDataPanel.Close(); };
             var menuItemAdvancedSearch = new Command { MenuText = "Advanced Search" };
             menuItemAdvancedSearch.Executed += (s, e) => { throw new NotImplementedException(); };
             var menuItemSongIncreaseKey = new Command {MenuText = "Transpose Up", Shortcut = Application.Instance.CommonModifier | Keys.D0 };
@@ -86,8 +84,9 @@ namespace OpenChords.CrossPlatform
             menuItemSongIncreaseCapo.Executed += (s, e) => ucSongMetaDataPanel.TransposeCapoUp();
             var menuItemSongDecreaseCapo = new Command { MenuText = "Capo Down", Shortcut = Application.Instance.CommonModifier | Keys.D7 };
             menuItemSongDecreaseCapo.Executed += (s, e) => ucSongMetaDataPanel.TransposeCapoDown();
+            var menuItemSongFixFormating = new Command { MenuText = "Fix Song Formatting", Shortcut = Application.Instance.CommonModifier | Keys.F };
+            menuItemSongFixFormating.Executed += (s, e) => ucSongMetaDataPanel.FixFormatting();
             
-
             var menuItemKey = new ButtonMenuItem { Text = "Song Key", Items = { menuItemSongIncreaseKey, menuItemSongDecreaseKey } };
             var menuItemCapo = new ButtonMenuItem { Text = "Song Capo", Items = { menuItemSongIncreaseCapo, menuItemSongDecreaseCapo } };
 
@@ -122,7 +121,7 @@ namespace OpenChords.CrossPlatform
                     new ButtonMenuItem()
                     {
                         Text = "&Song", 
-                        Items = { menuItemNewSong, menuItemSaveSong, menuItemDeleteSong, menuItemAdvancedSearch, menuItemCloseSong, menuItemKey, menuItemCapo }
+                        Items = { menuItemNewSong, menuItemSaveSong, menuItemDeleteSong, menuItemAdvancedSearch, menuItemKey, menuItemCapo, menuItemSongFixFormating }
                     },
                     new ButtonMenuItem()
                     {

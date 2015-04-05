@@ -169,6 +169,7 @@ namespace OpenChords.Entities
             presentation = "";
 
             lyrics = "";
+            notes = "";
             preferFlats = "false";
 
             initializeSongStyle(this);

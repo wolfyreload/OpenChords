@@ -30,7 +30,6 @@ namespace OpenChords.CrossPlatform.SongEditor
 
         public SongMetadataPanel()
         {
-            this.Visible = false;
             ScreenWidth = (int)Screen.DisplayBounds.Width;
             ScreenHeight = (int)Screen.DisplayBounds.Height;
 
@@ -167,8 +166,6 @@ namespace OpenChords.CrossPlatform.SongEditor
             txtNotes.TextChanged += fieldTextChanged;
             txtCapo.TextChanged += fieldTextChanged;
             txtKey.TextChanged += fieldTextChanged;
-
-            this.Visible = true;
         }
 
         private void updateGuiFromSongObject()
@@ -186,6 +183,27 @@ namespace OpenChords.CrossPlatform.SongEditor
             radioListSharpsOrFlats.SelectedIndex = CurrentSong.PreferFlats ? 0 : 1;
             txtKey.Text = CurrentSong.key;
             txtCapo.Text = CurrentSong.Capo.ToString();
+        }
+
+
+        private void updateSongObjectFromGui()
+        {
+            int capoInt = 0;
+            int.TryParse(txtCapo.Text, out capoInt);
+
+            CurrentSong.title = txtTitle.Text;
+            CurrentSong.presentation = txtOrder.Text;
+            CurrentSong.author = txtAuther.Text;
+            CurrentSong.copyright = txtCopyright.Text;
+            CurrentSong.tempo = (cmbTempo.SelectedIndex != 0) ? cmbTempo.Text : "";
+            CurrentSong.time_sig = (cmbSignature.SelectedIndex != 0) ? cmbSignature.Text : "";
+            CurrentSong.ccli = txtCCLI.Text;
+            CurrentSong.hymn_number = txtReference.Text;
+            CurrentSong.lyrics = txtLyrics.Text;
+            CurrentSong.notes = txtNotes.Text;
+            CurrentSong.PreferFlats = (radioListSharpsOrFlats.SelectedIndex == 0);
+            CurrentSong.key = txtKey.Text;
+            CurrentSong.Capo = capoInt;
         }
 
         private void comboSelectedIndexChanged(object sender, EventArgs e)
@@ -220,29 +238,14 @@ namespace OpenChords.CrossPlatform.SongEditor
                 return;
             }
 
-            int capoInt = 0;
-            int.TryParse(txtCapo.Text, out capoInt);
-
-
-            CurrentSong.title = txtTitle.Text;
-            CurrentSong.presentation = txtOrder.Text;
-            CurrentSong.author = txtAuther.Text;
-            CurrentSong.copyright = txtCopyright.Text;
-            CurrentSong.tempo = (cmbTempo.SelectedIndex != 0) ? cmbTempo.Text : "";
-            CurrentSong.time_sig = (cmbSignature.SelectedIndex != 0) ? cmbSignature.Text : "";
-            CurrentSong.ccli = txtCCLI.Text;
-            CurrentSong.hymn_number = txtReference.Text;
-            CurrentSong.lyrics = txtLyrics.Text;
-            CurrentSong.notes = txtNotes.Text;
-            CurrentSong.PreferFlats = (radioListSharpsOrFlats.SelectedIndex == 0);
-            CurrentSong.key = txtKey.Text;
-            CurrentSong.Capo = capoInt;
+            updateSongObjectFromGui();
 
             SongChanged = false;
 
             CurrentSong.saveSong();
 
         }
+
 
         internal void DeleteSong()
         {
@@ -298,6 +301,15 @@ namespace OpenChords.CrossPlatform.SongEditor
             string html = CurrentSong.getHtml(DisplayAndPrintSettings.loadSettings(DisplayAndPrintSettingsType.TabletSettings));
             string fileName = string.Format("{0}/{1}.html", Settings.ExtAppsAndDir.printFolder, CurrentSong.title);
             File.WriteAllText(fileName, html);
+        }
+
+        internal void FixFormatting()
+        {
+            updateSongObjectFromGui();
+            CurrentSong.fixFormatting();
+            CurrentSong.fixLyricsOrdering();
+            CurrentSong.fixNoteOrdering();
+            updateGuiFromSongObject();
         }
     }
 }
