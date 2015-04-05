@@ -47,28 +47,29 @@ namespace OpenChords.CrossPlatform.SongEditor
             //build ui
             this.Content = new Splitter()
             {
+                Position = 150,
                 Orientation = SplitterOrientation.Vertical,
                 //metadata
-                Panel1 = new Splitter()
+                Panel1 = new GroupBox()
                 {
-                    Position = Helpers.getScreenPercentageInPixels(75),
-                    Panel1 = new Splitter()
+                    Text = "Song Metadata",
+                    Content = new Splitter()
                     {
-                        Position = Helpers.getScreenPercentageInPixels(40),
-                        //column 1 of metadata
+                        Position = Helpers.getScreenPercentageInPixels(60),
+                        //main metadata
                         Panel1 = new TableLayout()
                         {
                             Style = "padded-table",
                             Rows = 
                             {
-                                new TableRow(new Label() { Text = "Title" }, txtTitle),
-                                new TableRow(new Label() { Text = "Order" }, txtOrder),
-                                new TableRow(new Label() { Text = "Author" }, txtAuther),
+                                new TableRow(new Label() { Text = "Title" }, new TableCell(txtTitle) { ScaleWidth = true}, new Label() { Text = "Key" }, txtKey),
+                                new TableRow(new Label() { Text = "Order" }, txtOrder, new Label() { Text = "Capo" }, txtCapo),
+                                new TableRow(new Label() { Text = "Author" }, txtAuther, new Label(), radioListSharpsOrFlats ),
                                 new TableRow(new Label() { Text = "Copyright" }, txtCopyright),
                                 null,
-                            },
+                            }
                         },
-                        //row 2 of metadata
+                        //extra metadata
                         Panel2 = new TableLayout()
                         {
                             Style = "padded-table",
@@ -81,27 +82,9 @@ namespace OpenChords.CrossPlatform.SongEditor
                                 null,
                         
                             }
-                        },
-                    },
-                    Panel2 = new Splitter()
-                    {
-                        //row 3 of metadata
-                        Panel1 = new TableLayout()
-                        {
-                            Style = "padded-table",
-                            Rows = 
-                            {
-                                new TableRow(new Label() { Text = "Key" }, txtKey),
-                                new TableRow(new Label() { Text = "Capo" }, txtCapo),
-                                new TableRow( null, radioListSharpsOrFlats ),
-                                null,
-                            }
-                        },
-                        //row 4 with buttons
-                        Panel2 = null,
-                        FixedPanel = SplitterFixedPanel.Panel2
-                    },
-
+                        }
+                        
+                    }
                 },
                 //lyrics and notes
                 Panel2 = new Panel()
@@ -109,21 +92,12 @@ namespace OpenChords.CrossPlatform.SongEditor
                     //song editor and notes
                     Content = new Splitter()
                     {
-                        Position = Helpers.getScreenPercentageInPixels(70),
+                        Position = Helpers.getScreenPercentageInPixels(60),
                         Orientation = SplitterOrientation.Horizontal,
                         //lyrics editor
-                        Panel1 = new GroupBox()
-                        {
-                            Text = "Chords/Lyrics Editor",
-                            Content = txtLyrics,
-
-                        },
+                        Panel1 = new GroupBox() { Text = "Chords/Lyrics Editor", Content = txtLyrics },
                         //notes editor
-                        Panel2 = new GroupBox()
-                        {
-                            Text = "Notes Editor",
-                            Content = txtNotes,
-                        },
+                        Panel2 = new GroupBox() { Text = "Notes Editor", Content = txtNotes }
                     },
 
                 },
@@ -155,15 +129,15 @@ namespace OpenChords.CrossPlatform.SongEditor
             return result == DialogResult.Yes;
         }
 
-        
+
         public void refreshPanel()
         {
             if (SongChanged)
                 if (showConfirmation("Save changes to {0}?"))
 
 
-            //disable events
-            txtTitle.TextChanged -= fieldTextChanged;
+                    //disable events
+                    txtTitle.TextChanged -= fieldTextChanged;
             txtOrder.TextChanged -= fieldTextChanged;
             txtAuther.TextChanged -= fieldTextChanged;
             txtCopyright.TextChanged -= fieldTextChanged;
@@ -248,7 +222,7 @@ namespace OpenChords.CrossPlatform.SongEditor
 
             int capoInt = 0;
             int.TryParse(txtCapo.Text, out capoInt);
-            
+
 
             CurrentSong.title = txtTitle.Text;
             CurrentSong.presentation = txtOrder.Text;
@@ -276,7 +250,7 @@ namespace OpenChords.CrossPlatform.SongEditor
                 CurrentSong.deleteSong();
         }
 
-     
+
         internal void PresentSong()
         {
             new frmPresent(CurrentSong, DisplayAndPrintSettings.loadSettings(DisplayAndPrintSettingsType.DisplaySettings)).Show();
@@ -310,13 +284,13 @@ namespace OpenChords.CrossPlatform.SongEditor
 
         internal void Close()
         {
-             if (SongChanged)
+            if (SongChanged)
             {
                 if (showConfirmation("Save changes to {0}?"))
                     this.SaveSong();
             }
 
-             this.Visible = false;
+            this.Visible = false;
         }
 
         internal void ExportToHtml()
