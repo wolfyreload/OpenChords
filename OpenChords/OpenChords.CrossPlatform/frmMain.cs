@@ -23,7 +23,9 @@ namespace OpenChords.CrossPlatform
             logger.Info("Starting Openchords");
 
             setup();
-            
+
+            this.Icon = Graphics.Icon;
+
             Title = "OpenChords";
             this.WindowState = Eto.Forms.WindowState.Maximized;
             ScreenWidth = (int)Screen.DisplayBounds.Width;

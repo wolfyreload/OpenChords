@@ -42,6 +42,7 @@ namespace OpenChords.CrossPlatform
             WindowState = Eto.Forms.WindowState.Maximized;
             this.WindowStyle = Eto.Forms.WindowStyle.None;
             Content = webView;
+            this.Icon = Graphics.Icon;
 
             drawSong();
 
