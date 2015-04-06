@@ -351,6 +351,20 @@ namespace OpenChords.Entities
             return result;
         }
 
+        public string ExportToHtml(DisplayAndPrintSettings settings)
+        {
+            Export.ExportToHtml htmlExporter = new Export.ExportToHtml(this, settings);
+            string htmlText = htmlExporter.GenerateHtml();
+            string folder = null;
+            if (settings.settingsType == DisplayAndPrintSettingsType.TabletSettings)
+                folder = Settings.ExtAppsAndDir.tabletFolder;
+            else
+                folder = Settings.ExtAppsAndDir.printFolder;
+            string destination = String.Format("{0}/{1}.html", folder, this.setName);
+            File.WriteAllText(destination, htmlText);
+            return destination;
+        }
+
         /// <summary>
         /// create the pdf and return the path to the pdf
         /// </summary>

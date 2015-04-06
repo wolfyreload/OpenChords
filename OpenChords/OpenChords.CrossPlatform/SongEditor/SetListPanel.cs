@@ -3,6 +3,7 @@ using Eto.Forms;
 using Eto.Drawing;
 using System.IO;
 using OpenChords.Entities;
+using System.Diagnostics;
 
 namespace OpenChords.CrossPlatform.SongEditor
 {
@@ -197,6 +198,12 @@ namespace OpenChords.CrossPlatform.SongEditor
             message = message.Replace("{0}", CurrentSet.setName);
             DialogResult result = MessageBox.Show(message, "", MessageBoxButtons.YesNo, MessageBoxType.Question);
             return result == DialogResult.Yes;
+        }
+
+        internal void ExportToHtml(DisplayAndPrintSettings settings)
+        {
+            string destination = CurrentSet.ExportToHtml(settings);
+            Process.Start(destination);
         }
     }
 }

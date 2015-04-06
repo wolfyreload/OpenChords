@@ -3,6 +3,7 @@ using Eto.Forms;
 using Eto.Drawing;
 using System.IO;
 using OpenChords.Entities;
+using System.Diagnostics;
 
 namespace OpenChords.CrossPlatform.SongEditor
 {
@@ -296,11 +297,10 @@ namespace OpenChords.CrossPlatform.SongEditor
             this.Visible = false;
         }
 
-        internal void ExportToHtml()
+        internal void ExportToHtml(DisplayAndPrintSettings settings)
         {
-            string html = CurrentSong.getHtml(DisplayAndPrintSettings.loadSettings(DisplayAndPrintSettingsType.TabletSettings));
-            string fileName = string.Format("{0}/{1}.html", Settings.ExtAppsAndDir.printFolder, CurrentSong.title);
-            File.WriteAllText(fileName, html);
+            string destination = CurrentSong.ExportToHtml(settings);
+            Process.Start(destination);
         }
 
         internal void FixFormatting()

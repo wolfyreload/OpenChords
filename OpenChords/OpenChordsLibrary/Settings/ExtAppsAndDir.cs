@@ -159,7 +159,20 @@ namespace OpenChords.Config
         {
             get
             {
-                string path = dataFolder + "Export\\";
+                string path = dataFolder + "/Export/Print/";
+                string fixedPath = fixPaths(path);
+                if (!System.IO.Directory.Exists(fixedPath))
+                    System.IO.Directory.CreateDirectory(fixedPath);
+                return fixedPath;
+
+            }
+        }
+
+        public String tabletFolder
+        {
+            get
+            {
+                string path = dataFolder + "/Export/Tablet/";
                 string fixedPath = fixPaths(path);
                 if (!System.IO.Directory.Exists(fixedPath))
                     System.IO.Directory.CreateDirectory(fixedPath);

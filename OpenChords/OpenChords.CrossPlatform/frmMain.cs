@@ -3,6 +3,7 @@ using Eto.Forms;
 using Eto.Drawing;
 using System.IO;
 using OpenChords.CrossPlatform.SongEditor;
+using OpenChords.Entities;
 
 namespace OpenChords.CrossPlatform
 {
@@ -12,12 +13,13 @@ namespace OpenChords.CrossPlatform
     /// </summary>
     public partial class frmMain : Form
     {
+        enum ExportOption { All, Set, Song };
         protected SetListPanel ucSetListPanel = new SetListPanel();
         protected SongMetadataPanel ucSongMetaDataPanel = new SongMetadataPanel();
         protected SongListPanel ucSongListPanel = new SongListPanel();
         private int ScreenWidth;
         private int ScreenHeight;
-
+        
         public frmMain()
         {
             logger.Info("Starting Openchords");
@@ -103,11 +105,21 @@ namespace OpenChords.CrossPlatform
             menuItemPresentSet.Executed += (s, e) => ucSetListPanel.PresentSet();
 
             //exportMenu
-            var commandExportSetToHtml = new Command { MenuText = "Se&t" };
-            commandExportSetToHtml.Executed += (s, e) => ucSetListPanel.ExportToHtml();
-            var commandExportSongToHtml = new Command { MenuText = "&Song" };
-            commandExportSongToHtml.Executed += (s, e) => ucSongMetaDataPanel.ExportToHtml();
-            var menuItemExportToHtml = new ButtonMenuItem() { Text = "To &Html", Items = { commandExportSetToHtml, commandExportSongToHtml } };
+            var commandExportToPrintSetHtml = new Command { MenuText = "Current Set", Tag = ExportOption.Set };
+            commandExportToPrintSetHtml.Executed += exportToPrintHtml;
+            var commandExportToPrintSongHtml = new Command { MenuText = "Current Song", Tag = ExportOption.Song, Shortcut = Application.Instance.CommonModifier | Keys.P };
+            commandExportToPrintSongHtml.Executed += exportToPrintHtml;
+            var commandExportToPrintAllSongsHtml = new Command { MenuText = "All Songs", Tag = ExportOption.All };
+            commandExportToPrintAllSongsHtml.Executed += exportToPrintHtml;
+            var menuItemExportToPrintHtml = new ButtonMenuItem() { Text = "Export To &Print", Items = { commandExportToPrintSetHtml, commandExportToPrintSongHtml, commandExportToPrintAllSongsHtml } };
+            var commandExportToTabletSetHtml = new Command { MenuText = "Current Set", Tag = ExportOption.Set };
+            commandExportToTabletSetHtml.Executed += exportToTabletHtml;
+            var commandExportToTabletSongHtml = new Command { MenuText = "Current Song", Tag = ExportOption.Song };
+            commandExportToTabletSongHtml.Executed += exportToTabletHtml;
+            var commandExportToTabletAllSongsHtml = new Command { MenuText = "All Songs", Tag = ExportOption.All};
+            commandExportToTabletAllSongsHtml.Executed += exportToTabletHtml;
+            var menuItemExportToTabletHtml = new ButtonMenuItem() { Text = "Export To &Tablet", Items = { commandExportToTabletSetHtml, commandExportToTabletSongHtml, commandExportToTabletAllSongsHtml } };
+            
             //about menu
             var menuItemAbout = new Command { MenuText = "About..." };
             menuItemAbout.Executed += (s, e) => MessageBox.Show(this, "About my app...");
@@ -136,7 +148,7 @@ namespace OpenChords.CrossPlatform
                     new ButtonMenuItem()
                     {
                         Text = "&Export",
-                        Items = { menuItemExportToHtml }
+                        Items = { menuItemExportToPrintHtml, menuItemExportToTabletHtml }
                     }
 				},
                 QuitItem = menuItemQuit,
@@ -152,6 +164,33 @@ namespace OpenChords.CrossPlatform
             ucSongListPanel.AddSongToSet += (s, e) => ucSetListPanel.AddSongToSet(e);
 
 
+        }
+
+        private void exportToTabletHtml(object sender, EventArgs e)
+        {
+            var option = (ExportOption)((sender as Command).Tag);
+            exportToHtml(option, DisplayAndPrintSettings.loadSettings(DisplayAndPrintSettingsType.TabletSettings));
+        }
+
+        private void exportToPrintHtml(object sender, EventArgs e)
+        {
+            var option = (ExportOption)((sender as Command).Tag);
+            exportToHtml(option, DisplayAndPrintSettings.loadSettings(DisplayAndPrintSettingsType.PrintSettings));
+        }
+
+        private void exportToHtml(ExportOption option, DisplayAndPrintSettings settings)
+        {
+            if (option == ExportOption.All)
+            {
+                foreach (var song in Song.listOfAllSongs())
+                {
+                    Song.loadSong(song).ExportToHtml(settings);
+                }
+            }
+            else if (option == ExportOption.Set)
+                ucSetListPanel.ExportToHtml(settings);
+            else if (option == ExportOption.Song)
+                ucSongMetaDataPanel.ExportToHtml(settings);
         }
 
         void frmMain_Closing(object sender, System.ComponentModel.CancelEventArgs e)
