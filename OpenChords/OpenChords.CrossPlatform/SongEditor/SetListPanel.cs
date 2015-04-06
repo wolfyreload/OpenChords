@@ -119,7 +119,7 @@ namespace OpenChords.CrossPlatform.SongEditor
         {
             string saveState = IO.SettingsReaderWriter.readSessionState().Trim();
             cmbSets.SelectedValue = saveState;
-            if (cmbSets.SelectedIndex > 0)
+            if (cmbSets.SelectedIndex >= 0)
                 loadSongsInSet();
         }
 
