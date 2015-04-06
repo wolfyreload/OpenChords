@@ -56,6 +56,8 @@ namespace OpenChords.CrossPlatform.Preferences
         {
 
             lblElementName.Text = label;
+            colorPicker.Value = getColor(color);
+           
 
             Cells = new System.Collections.ObjectModel.Collection<TableCell>();
             Cells.Add(new Label() { Text = label });
@@ -65,10 +67,6 @@ namespace OpenChords.CrossPlatform.Preferences
             Cells.Add(new Label());
         }
 
-        private Entities.SongElementFormat getSongElementFormat()
-        {
-            return new Entities.SongElementFormat();
-        }
         
         private static Eto.Drawing.Color getColor(System.Drawing.Color color)
         {
