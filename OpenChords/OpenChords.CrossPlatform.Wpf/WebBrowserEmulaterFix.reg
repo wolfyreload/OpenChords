@@ -1,0 +1,7 @@
+﻿Windows Registry Editor Version 5.00
+
+[HKEY_LOCAL_MACHINE\SOFTWARE\Wow6432Node\Microsoft\Internet Explorer\Main\FeatureControl\FEATURE_BROWSER_EMULATION]
+"OpenChords.CrossPlatform.WinForms.exe"=dword:00002af9
+"OpenChords.CrossPlatform.WinForms.vshost.exe"=dword:00002af9
+"OpenChords.CrossPlatform.Wpf.exe"=dword:00002af9
+"OpenChords.CrossPlatform.Wpf.vshost.exe"=dword:00002af9

@@ -113,7 +113,14 @@ namespace OpenChords.IO
         /// <returns></returns>
 		public static string readSessionState()
 		{
-			return FileReaderWriter.readFromFile(Settings.ExtAppsAndDir.sessionSaveState);
+            try
+            {
+                return FileReaderWriter.readFromFile(Settings.ExtAppsAndDir.sessionSaveState);
+            }
+            catch
+            {
+                return "";
+            }
 		}
 		
         /// <summary>

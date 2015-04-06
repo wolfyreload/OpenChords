@@ -31,11 +31,16 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Compile Include="frmPreferences.cs" />
+    <Compile Include="Preferences\FontAndColorPanel.cs" />
+    <Compile Include="Preferences\FontAndColorPicker.cs" />
+    <Compile Include="Preferences\GeneralSettingsPreferences.cs" />
     <Compile Include="Graphics.cs" />
     <Compile Include="frmMain.Helper.cs" />
     <Compile Include="frmPresent.cs" />
     <Compile Include="Helpers.cs" />
     <Compile Include="frmMain.cs" />
+    <Compile Include="Preferences\DisplayAndPrintPreferences.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="SongEditor\SetListPanel.cs" />
     <Compile Include="SongEditor\SongListPanel.cs" />

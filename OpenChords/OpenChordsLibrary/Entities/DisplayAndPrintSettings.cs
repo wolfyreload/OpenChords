@@ -87,8 +87,13 @@ namespace OpenChords.Entities
         public bool? ShowPleaseTurnOver { get; set; }
         
         public bool? ShowGeneralNotes { get; set; }
+   
         public string BackgroundColorHex { get; set; }
-       
+        public string VerseHeadingBackgroundColorHex { get; set; }
+        public string VerseLyricsBackgroundColor1Hex { get; set; }
+        public string VerseLyricsBackgroundColor2Hex { get; set; }
+        public string VerseBorderColorHex { get; set; }
+
         public SongElementFormat TitleFormat { get; set; }
         public SongElementFormat ChordFormat { get; set; }
         public SongElementFormat LyricsFormat { get; set; }
@@ -131,6 +136,34 @@ namespace OpenChords.Entities
         {
             get { return ColorTranslator.FromHtml(BackgroundColorHex); }
             set { BackgroundColorHex = ColorTranslator.ToHtml(value); }
+        }
+
+        [XmlIgnore]
+        public Color VerseHeadingBackgroundColor
+        {
+            get { return ColorTranslator.FromHtml(VerseHeadingBackgroundColorHex); }
+            set { VerseHeadingBackgroundColorHex = ColorTranslator.ToHtml(value); }
+        }
+
+        [XmlIgnore]
+        public Color VerseLyricsBackground1Color
+        {
+            get { return ColorTranslator.FromHtml(VerseLyricsBackgroundColor1Hex); }
+            set { VerseLyricsBackgroundColor1Hex = ColorTranslator.ToHtml(value); }
+        }
+
+        [XmlIgnore]
+        public Color VerseLyricsBackground2Color
+        {
+            get { return ColorTranslator.FromHtml(VerseLyricsBackgroundColor2Hex); }
+            set { VerseLyricsBackgroundColor2Hex = ColorTranslator.ToHtml(value); }
+        }
+
+        [XmlIgnore]
+        public Color VerseBorderColor
+        {
+            get { return ColorTranslator.FromHtml(VerseBorderColorHex); }
+            set { VerseBorderColorHex = ColorTranslator.ToHtml(value); }
         }
 
 		public override string ToString ()
@@ -263,7 +296,7 @@ namespace OpenChords.Entities
                 pageHeight = System.Windows.Forms.SystemInformation.PrimaryMonitorSize.Height;
                 pageWidth = System.Windows.Forms.SystemInformation.PrimaryMonitorSize.Width;
 
-                titleSize = adjustForLowerResolutions1(13);
+                titleSize = adjustForLowerResolutions1(25);
                 authorSize = adjustForLowerResolutions1(12);
                 contentSize = adjustForLowerResolutions1(15);
                 footerSize = adjustForLowerResolutions1(13);
@@ -298,6 +331,10 @@ namespace OpenChords.Entities
                 OrderColor2 = ColorTranslator.FromHtml("#FFFF80");
                 NoteColor = ColorTranslator.FromHtml("#80FF80");
                 NextPageColor = ColorTranslator.FromHtml("White");
+                VerseHeadingBackgroundColor = ColorTranslator.FromHtml("#490707");
+                VerseLyricsBackground1Color = ColorTranslator.FromHtml("#000000");
+                VerseLyricsBackground2Color = ColorTranslator.FromHtml("#2E2424");
+                VerseBorderColor = ColorTranslator.FromHtml("#4C4848");
 
                 NoteWidth = 20;
 
@@ -317,7 +354,7 @@ namespace OpenChords.Entities
                 pageHeight = 1024;
                 pageWidth = 768;
 
-                titleSize = adjustForLowerResolutions1(18);
+                titleSize = adjustForLowerResolutions1(25);
                 authorSize = adjustForLowerResolutions1(20);
                 contentSize = adjustForLowerResolutions1(20);
                 footerSize = adjustForLowerResolutions1(13);
@@ -351,6 +388,10 @@ namespace OpenChords.Entities
                 OrderColor2 = ColorTranslator.FromHtml("#FFFF80");
                 NoteColor = ColorTranslator.FromHtml("#80FF80");
                 NextPageColor = ColorTranslator.FromHtml("White");
+                VerseHeadingBackgroundColor = ColorTranslator.FromHtml("#490707");
+                VerseLyricsBackground1Color = ColorTranslator.FromHtml("#000000");
+                VerseLyricsBackground2Color = ColorTranslator.FromHtml("#2E2424");
+                VerseBorderColor = ColorTranslator.FromHtml("#4C4848");
 
                 NoteWidth = (int)adjustForLowerResolutions2(564);
                 if (DualColumns.Value == true) NoteWidth = NoteWidth / 2;
@@ -405,8 +446,12 @@ namespace OpenChords.Entities
                 OrderColor1 = Color.Black;
                 OrderColor2 = Color.Gray;
                 NextPageColor = ColorTranslator.FromHtml("White");
+                VerseHeadingBackgroundColor = ColorTranslator.FromHtml("White");
+                VerseLyricsBackground1Color = ColorTranslator.FromHtml("White");
+                VerseLyricsBackground2Color = ColorTranslator.FromHtml("White");
+                VerseBorderColor = ColorTranslator.FromHtml("Black");
 
-                NoteWidth = 150;
+                NoteWidth = 20;
 
                 BoldChords = true;
                 BoldLyrics = false;

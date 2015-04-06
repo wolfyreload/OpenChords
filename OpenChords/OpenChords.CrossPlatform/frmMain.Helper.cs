@@ -45,10 +45,10 @@ namespace OpenChords.CrossPlatform
             //ensureValidSettingsFile(Entities.DisplayAndPrintSettingsType.PrintSettings);
             //ensureValidSettingsFile(Entities.DisplayAndPrintSettingsType.TabletSettings);
 
-            //if (haveNoSongs() && haveNoSets())
-            //{
-            //    DirectoryCopy("InitialData", Settings.ExtAppsAndDir.dataFolder, true);
-            //}
+            if (haveNoSongs() && haveNoSets())
+            {
+                DirectoryCopy("InitialData", Settings.ExtAppsAndDir.dataFolder, true);
+            }
 
             OpenChords.Entities.GlobalVariables.restartApplicationOnExit = false;
             OpenChords.Entities.GlobalVariables.patchApplicationOnExit = false;

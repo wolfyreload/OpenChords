@@ -22,6 +22,11 @@ namespace OpenChords.CrossPlatform
         {
             logger.Info("Starting Openchords");
 
+            //setup styles
+            Eto.Style.Add<Button>("OpenFolder", button =>
+            {
+            });
+
             setup();
 
             this.Icon = Graphics.Icon;
@@ -63,7 +68,7 @@ namespace OpenChords.CrossPlatform
 
             //file menu items
             var menuItemPreferences = new Command { MenuText = "Preferences" };
-            menuItemPreferences.Executed += (s, e) => { throw new NotImplementedException(); };
+            menuItemPreferences.Executed += (s, e) => { new frmPreferences().Show(); };
             var menuItemQuit = new Command { MenuText = "Quit", Shortcut = Application.Instance.CommonModifier | Keys.Q };
             menuItemQuit.Executed += (s, e) => Application.Instance.Quit();
 
