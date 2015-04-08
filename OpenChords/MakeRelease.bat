@@ -1,14 +1,17 @@
 rmdir Staging /Q /S
 rmdir Release /Q /S
 
-mkdir Staging\App
 mkdir Release
 
 call build.bat
 
-xcopy  /Y /E .\OpenChordsLoader\bin\Release\* .\Staging\App 
-xcopy  /Y .\OpenChords\manual\manual.pdf .\Staging\App
-copy /Y .\portable.xml .\Staging\App\settings.xml
+xcopy  /Y /E .\OpenChordsLoader\bin\Release\* .\Staging\LegacyApp\ 
+xcopy  /Y /E .\OpenChords.CrossPlatform.WinForms\bin\Release\* .\Staging\WinformsApp\ 
+xcopy  /Y /E .\OpenChords.CrossPlatform.Wpf\bin\Release\* .\Staging\WpfApp\
+xcopy  /Y /E .\OpenChords.CrossPlatform.Gtk2\bin\Release\* .\Staging\Gtk2App\ 
+
+xcopy  /Y .\OpenChords\manual\manual.pdf .\Staging\LegacyApp\
+copy /Y .\portable.xml .\Staging\LegacyApp\settings.xml
 
 echo cd app >> .\staging\StartOpenChords.bat
 echo start OpenChords.exe >> .\staging\StartOpenChords.bat
