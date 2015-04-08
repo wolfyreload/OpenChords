@@ -14,11 +14,9 @@ namespace OpenChords.CrossPlatform
     public partial class frmMain : Form
     {
         enum ExportOption { All, Set, Song };
-        protected SetListPanel ucSetListPanel = new SetListPanel();
-        protected SongMetadataPanel ucSongMetaDataPanel = new SongMetadataPanel();
-        protected SongListPanel ucSongListPanel = new SongListPanel();
-        private int ScreenWidth;
-        private int ScreenHeight;
+        protected SetListPanel ucSetListPanel;
+        protected SongMetadataPanel ucSongMetaDataPanel;
+        protected SongListPanel ucSongListPanel;
         
         public frmMain()
         {
@@ -35,19 +33,19 @@ namespace OpenChords.CrossPlatform
 
             Title = "OpenChords";
             this.WindowState = Eto.Forms.WindowState.Maximized;
-            ScreenWidth = (int)Screen.DisplayBounds.Width;
-            ScreenHeight = (int)Screen.DisplayBounds.Height;
+
+            ucSetListPanel = new SetListPanel();
+            ucSongMetaDataPanel = new SongMetadataPanel();
+            ucSongListPanel = new SongListPanel();
 
             // main content
             Content = new Panel
             {
-                Width = 1024,
-                Height = 768,
-
                 // Main window
                 Content = new Splitter()
                     {
                         Orientation = SplitterOrientation.Horizontal,
+                        Position = Helpers.getScreenPercentageInPixels(15, this),
                         //Sets and song list
                         Panel1 = new Splitter()
                         {

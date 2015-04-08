@@ -23,17 +23,14 @@ namespace OpenChords.CrossPlatform.SongEditor
         protected RadioButtonList radioListSharpsOrFlats = new RadioButtonList();
         protected TextArea txtLyrics = new TextArea();
         protected TextArea txtNotes = new TextArea();
+        protected Splitter splitterMetadata;
+        protected Splitter splitterSongNotes;
 
         public Song CurrentSong { get; set; }
         public bool SongChanged { get; set; }
-        int ScreenWidth;
-        int ScreenHeight;
 
         public SongMetadataPanel()
         {
-            ScreenWidth = (int)Screen.DisplayBounds.Width;
-            ScreenHeight = (int)Screen.DisplayBounds.Height;
-
             //add a style to the table layout
             Eto.Style.Add<TableLayout>("padded-table", table => {
                 table.Padding = new Padding(10);
@@ -53,9 +50,9 @@ namespace OpenChords.CrossPlatform.SongEditor
                 Panel1 = new GroupBox()
                 {
                     Text = "Song Metadata",
-                    Content = new Splitter()
+                    Content = splitterMetadata = new Splitter()
                     {
-                        Position = Helpers.getScreenPercentageInPixels(60),
+                        Position = Helpers.getScreenPercentageInPixels(60, this),
                         //main metadata
                         Panel1 = new TableLayout()
                         {
@@ -90,9 +87,9 @@ namespace OpenChords.CrossPlatform.SongEditor
                 Panel2 = new Panel()
                 {
                     //song editor and notes
-                    Content = new Splitter()
+                    Content = splitterSongNotes = new Splitter()
                     {
-                        Position = Helpers.getScreenPercentageInPixels(60),
+                        Position = Helpers.getScreenPercentageInPixels(60, this),
                         Orientation = SplitterOrientation.Horizontal,
                         //lyrics editor
                         Panel1 = new GroupBox() { Text = "Chords/Lyrics Editor", Content = txtLyrics },
@@ -120,7 +117,16 @@ namespace OpenChords.CrossPlatform.SongEditor
 			txtNotes.Wrap = false;
             CurrentSong = new Song();
 
+            this.SizeChanged += SongMetadataPanel_SizeChanged;
         }
+
+        void SongMetadataPanel_SizeChanged(object sender, EventArgs e)
+        {
+            splitterSongNotes.Position = Helpers.getScreenPercentageInPixels(80, this);
+            splitterMetadata.Position = Helpers.getScreenPercentageInPixels(80, this);
+        }
+
+  
 
         private bool showConfirmation(string message = "Are you sure?")
         {
