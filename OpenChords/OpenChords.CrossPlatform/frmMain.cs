@@ -7,7 +7,7 @@ using OpenChords.Entities;
 
 namespace OpenChords.CrossPlatform
 {
-    
+
     /// <summary>
     /// Your application's main form
     /// </summary>
@@ -17,7 +17,7 @@ namespace OpenChords.CrossPlatform
         protected SetListPanel ucSetListPanel;
         protected SongMetadataPanel ucSongMetaDataPanel;
         protected SongListPanel ucSongListPanel;
-        
+
         public frmMain()
         {
             logger.Info("Starting Openchords");
@@ -61,8 +61,8 @@ namespace OpenChords.CrossPlatform
                     }
 
             };
-            
-            
+
+
             ucSongListPanel.refreshPanel();
             ucSetListPanel.refreshPanel();
 
@@ -81,9 +81,9 @@ namespace OpenChords.CrossPlatform
             menuItemDeleteSong.Executed += (s, e) => { ucSongMetaDataPanel.DeleteSong(); ucSongListPanel.refreshPanel(); };
             var menuItemAdvancedSearch = new Command { MenuText = "Advanced Search" };
             menuItemAdvancedSearch.Executed += (s, e) => { throw new NotImplementedException(); };
-            var menuItemSongIncreaseKey = new Command {MenuText = "Transpose Up", Shortcut = Application.Instance.CommonModifier | Keys.D0 };
+            var menuItemSongIncreaseKey = new Command { MenuText = "Transpose Up", Shortcut = Application.Instance.CommonModifier | Keys.D0 };
             menuItemSongIncreaseKey.Executed += (s, e) => ucSongMetaDataPanel.TransposeKeyUp();
-            var menuItemSongDecreaseKey = new Command {MenuText = "Transpose Down", Shortcut = Application.Instance.CommonModifier | Keys.D9 };
+            var menuItemSongDecreaseKey = new Command { MenuText = "Transpose Down", Shortcut = Application.Instance.CommonModifier | Keys.D9 };
             menuItemSongDecreaseKey.Executed += (s, e) => ucSongMetaDataPanel.TransposeKeyDown();
             var menuItemSongIncreaseCapo = new Command { MenuText = "Capo Up", Shortcut = Application.Instance.CommonModifier | Keys.D8 };
             menuItemSongIncreaseCapo.Executed += (s, e) => ucSongMetaDataPanel.TransposeCapoUp();
@@ -91,10 +91,15 @@ namespace OpenChords.CrossPlatform
             menuItemSongDecreaseCapo.Executed += (s, e) => ucSongMetaDataPanel.TransposeCapoDown();
             var menuItemSongFixFormating = new Command { MenuText = "Fix Song Formatting", Shortcut = Application.Instance.CommonModifier | Keys.F };
             menuItemSongFixFormating.Executed += (s, e) => ucSongMetaDataPanel.FixFormatting();
-            
+
             var menuItemKey = new ButtonMenuItem { Text = "Song Key", Items = { menuItemSongIncreaseKey, menuItemSongDecreaseKey } };
             var menuItemCapo = new ButtonMenuItem { Text = "Song Capo", Items = { menuItemSongIncreaseCapo, menuItemSongDecreaseCapo } };
 
+            //Sets menu items
+            var commandSaveSet = new Command() { MenuText = "Save Set" };
+            commandSaveSet.Executed += (s, e) => ucSetListPanel.saveSet();
+            var commandRevertSet = new Command() { MenuText = "Revert Set" };
+            commandRevertSet.Executed += (s, e) => ucSetListPanel.revertSet();
 
             //present menu items
             var menuItemPresentSong = new Command { MenuText = "Present Song", Shortcut = Keys.F11 };
@@ -114,10 +119,10 @@ namespace OpenChords.CrossPlatform
             commandExportToTabletSetHtml.Executed += exportToTabletHtml;
             var commandExportToTabletSongHtml = new Command { MenuText = "Current Song", Tag = ExportOption.Song };
             commandExportToTabletSongHtml.Executed += exportToTabletHtml;
-            var commandExportToTabletAllSongsHtml = new Command { MenuText = "All Songs", Tag = ExportOption.All};
+            var commandExportToTabletAllSongsHtml = new Command { MenuText = "All Songs", Tag = ExportOption.All };
             commandExportToTabletAllSongsHtml.Executed += exportToTabletHtml;
             var menuItemExportToTabletHtml = new ButtonMenuItem() { Text = "Export To &Tablet", Items = { commandExportToTabletSetHtml, commandExportToTabletSongHtml, commandExportToTabletAllSongsHtml } };
-            
+
             //about menu
             var menuItemAbout = new Command { MenuText = "About..." };
             menuItemAbout.Executed += (s, e) => MessageBox.Show(this, "About my app...");
@@ -140,6 +145,11 @@ namespace OpenChords.CrossPlatform
                     },
                     new ButtonMenuItem()
                     {
+                        Text = "Se&ts", 
+                        Items = { commandSaveSet, commandRevertSet }
+                    },
+                    new ButtonMenuItem()
+                    {
                         Text = "&Present", 
                         Items = { menuItemPresentSong, menuItemPresentSet }
                     },
@@ -154,7 +164,7 @@ namespace OpenChords.CrossPlatform
             };
 
             ucSongListPanel.Focus();
-            
+
             // events
             this.Closing += frmMain_Closing;
             ucSongListPanel.SongChanged += SelectedSongChanged;
@@ -194,6 +204,7 @@ namespace OpenChords.CrossPlatform
         void frmMain_Closing(object sender, System.ComponentModel.CancelEventArgs e)
         {
             ucSetListPanel.saveSetState();
+            ucSetListPanel.saveSetBeforeClosing();
         }
 
         void SelectedSongChanged(object sender, Entities.Song e)

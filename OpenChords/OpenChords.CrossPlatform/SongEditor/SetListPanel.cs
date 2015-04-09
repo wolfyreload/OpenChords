@@ -71,6 +71,9 @@ namespace OpenChords.CrossPlatform.SongEditor
 
         void cmbSets_SelectedIndexChanged(object sender, EventArgs e)
         {
+            if (SetChanged && showConfirmation("Save changes to set '{0}' before switching to a new set?"))
+                saveSet();
+
             loadSongsInSet();
         }
 
@@ -81,6 +84,7 @@ namespace OpenChords.CrossPlatform.SongEditor
             var selectedSet = sets[cmbSets.SelectedIndex];
             CurrentSet = Set.loadSet(selectedSet);
             refreshSongList();
+            SetChanged = false;
         }
 
         private void refreshSongList()
@@ -180,17 +184,23 @@ namespace OpenChords.CrossPlatform.SongEditor
 
         internal void saveSet()
         {
-            if (cmbSets.SelectedIndex < 0)
-                if (SetChanged)
-                    CurrentSet.saveSet();
-            SetChanged = false;
+            if (cmbSets.SelectedIndex > 0 && SetChanged)
+            {
+                CurrentSet.saveSet();
+                SetChanged = false;
+                MessageBox.Show("Set saved", "", MessageBoxType.Information);
+            }
         }
 
         internal void revertSet()
         {
-            CurrentSet.revertSet();
-            this.refreshSongList();
-            SetChanged = false;
+            if (SetChanged)
+            {
+                CurrentSet.revertSet();
+                this.refreshSongList();
+                SetChanged = false;
+                MessageBox.Show("Set reverted", "", MessageBoxType.Information);
+            }
         }
 
         private bool showConfirmation(string message = "Are you sure?")
@@ -204,6 +214,12 @@ namespace OpenChords.CrossPlatform.SongEditor
         {
             string destination = CurrentSet.ExportToHtml(settings);
             Process.Start(destination);
+        }
+
+        internal void saveSetBeforeClosing()
+        {
+            if (SetChanged && showConfirmation("Save changes to set '{0}' before closing OpenChords?"))
+                saveSet();
         }
     }
 }
