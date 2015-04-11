@@ -97,7 +97,7 @@ namespace OpenChords.CrossPlatform
             menuItemSongIncreaseCapo.Executed += (s, e) => ucSongMetaDataPanel.TransposeCapoUp();
             var menuItemSongDecreaseCapo = new Command { MenuText = "Capo Down", Shortcut = Application.Instance.CommonModifier | Keys.D7 };
             menuItemSongDecreaseCapo.Executed += (s, e) => ucSongMetaDataPanel.TransposeCapoDown();
-            var menuItemSongFixFormating = new Command { MenuText = "Fix Song Formatting", Shortcut = Application.Instance.CommonModifier | Keys.F };
+            var menuItemSongFixFormating = new Command { MenuText = "Auto Format Song", Shortcut = Application.Instance.CommonModifier | Keys.R };
             menuItemSongFixFormating.Executed += (s, e) => ucSongMetaDataPanel.FixFormatting();
 
             var menuItemKey = new ButtonMenuItem { Text = "Song Key", Items = { menuItemSongIncreaseKey, menuItemSongDecreaseKey } };
