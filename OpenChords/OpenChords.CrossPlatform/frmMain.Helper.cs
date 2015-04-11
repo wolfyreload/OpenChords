@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Microsoft.Win32;
+using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
@@ -38,6 +39,8 @@ namespace OpenChords.CrossPlatform
         {
             //ensureValidFileSettingsFile();
 
+            addIeEmulationModeRegistryKey();
+
             var fileSettings = Entities.FileAndFolderSettings.loadSettings();
             Settings.ExtAppsAndDir = new Config.ExtAppsAndDirClass(fileSettings);
 
@@ -52,6 +55,21 @@ namespace OpenChords.CrossPlatform
 
             OpenChords.Entities.GlobalVariables.restartApplicationOnExit = false;
             OpenChords.Entities.GlobalVariables.patchApplicationOnExit = false;
+        }
+
+        private static void addIeEmulationModeRegistryKey()
+        {
+            if (Eto.Forms.Application.Instance.Platform.IsWinForms || Eto.Forms.Application.Instance.Platform.IsWpf)
+            {
+                // Setting
+                RegistryKey registryKeyBase = Registry.CurrentUser;
+                // I have to use CreateSubKey since open key is read only
+                RegistryKey registrySubKey = registryKeyBase.CreateSubKey(@"Software\Microsoft\Internet Explorer\Main\FeatureControl\FEATURE_BROWSER_EMULATION");
+                // Save the value
+                string applicationExecutableName = System.AppDomain.CurrentDomain.FriendlyName;
+                logger.Debug(applicationExecutableName);
+                registrySubKey.SetValue(applicationExecutableName, 11001, RegistryValueKind.DWord);
+            }
         }
 
         private static bool haveNoSets()
