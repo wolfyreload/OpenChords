@@ -19,10 +19,10 @@ namespace OpenChords.CrossPlatform
 
         public frmPreferences()
         {
-            this.Title = "OpenChords Preferences";
+            this.Title = "Preferences";
             this.Icon = Graphics.Icon;
-            Width = 640;
-            Height = 480;
+            Width = 850;
+            Height = 470;
             Content = new TabControl()
             {
                 Pages = 

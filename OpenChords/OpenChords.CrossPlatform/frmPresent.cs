@@ -24,6 +24,7 @@ namespace OpenChords.CrossPlatform
             CurrentSet.addSongToSet(song);
             DisplaySettings = settings;
             MaxIndex = CurrentSet.songList.Count;
+            this.Title = "Present Song";
             buildUI();
         }
 
@@ -32,6 +33,7 @@ namespace OpenChords.CrossPlatform
             CurrentSet = set;
             DisplaySettings = settings;
             MaxIndex = CurrentSet.songList.Count;
+            this.Title = "Present Set";
             buildUI();
         }
 
