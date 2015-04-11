@@ -31,12 +31,6 @@ namespace OpenChords.CrossPlatform.SongEditor
 
         public SongMetadataPanel()
         {
-            //add a style to the table layout
-            Eto.Style.Add<TableLayout>("padded-table", table => {
-                table.Padding = new Padding(10);
-                table.Spacing = new Size(5, 5);
-            });
-
             //add radio button options
             radioListSharpsOrFlats.Items.Add("Flats");
             radioListSharpsOrFlats.Items.Add("Sharps");
@@ -177,19 +171,38 @@ namespace OpenChords.CrossPlatform.SongEditor
 
         private void updateGuiFromSongObject()
         {
-            txtTitle.Text = CurrentSong.title;
-            txtOrder.Text = CurrentSong.presentation;
-            txtAuther.Text = CurrentSong.author;
-            txtCopyright.Text = CurrentSong.copyright;
-            cmbTempo.Text = CurrentSong.tempo;
-            cmbSignature.Text = CurrentSong.time_sig;
-            txtCCLI.Text = CurrentSong.ccli;
-            txtReference.Text = CurrentSong.hymn_number;
-            txtLyrics.Text = CurrentSong.lyrics;
-            txtNotes.Text = CurrentSong.notes;
-            radioListSharpsOrFlats.SelectedIndex = CurrentSong.PreferFlats ? 0 : 1;
-            txtKey.Text = CurrentSong.key;
-            txtCapo.Text = CurrentSong.Capo.ToString();
+            if (CurrentSong != null)
+            {
+                txtTitle.Text = CurrentSong.title;
+                txtOrder.Text = CurrentSong.presentation;
+                txtAuther.Text = CurrentSong.author;
+                txtCopyright.Text = CurrentSong.copyright;
+                cmbTempo.Text = CurrentSong.tempo;
+                cmbSignature.Text = CurrentSong.time_sig;
+                txtCCLI.Text = CurrentSong.ccli;
+                txtReference.Text = CurrentSong.hymn_number;
+                txtLyrics.Text = CurrentSong.lyrics;
+                txtNotes.Text = CurrentSong.notes;
+                radioListSharpsOrFlats.SelectedIndex = CurrentSong.PreferFlats ? 0 : 1;
+                txtKey.Text = CurrentSong.key;
+                txtCapo.Text = CurrentSong.Capo.ToString();
+            }
+            else
+            {
+                txtTitle.Text = "";
+                txtOrder.Text = "";
+                txtAuther.Text = "";
+                txtCopyright.Text = "";
+                cmbTempo.Text = "";
+                cmbSignature.Text = "";
+                txtCCLI.Text = "";
+                txtReference.Text = "";
+                txtLyrics.Text = "";
+                txtNotes.Text = "";
+                radioListSharpsOrFlats.SelectedIndex = 1;
+                txtKey.Text = "";
+                txtCapo.Text = "";
+            }
         }
 
 
@@ -316,6 +329,25 @@ namespace OpenChords.CrossPlatform.SongEditor
             CurrentSong.fixLyricsOrdering();
             CurrentSong.fixNoteOrdering();
             updateGuiFromSongObject();
+        }
+
+        internal void SetReadOnlyMode()
+        {
+            txtTitle.ReadOnly = true;
+            txtOrder.ReadOnly = true;
+            txtAuther.ReadOnly = true;
+            txtCopyright.ReadOnly = true;
+            cmbTempo.ReadOnly = true;
+            cmbSignature.ReadOnly = true;
+            txtCCLI.ReadOnly = true;
+            txtReference.ReadOnly = true;
+            txtLyrics.ReadOnly = true;
+            txtNotes.ReadOnly = true;
+            txtCapo.ReadOnly = true;
+            txtKey.ReadOnly = true;
+            cmbSignature.ReadOnly = true;
+            cmbTempo.ReadOnly = true;
+            radioListSharpsOrFlats.Enabled = false;
         }
     }
 }

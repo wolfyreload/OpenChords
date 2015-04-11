@@ -22,6 +22,14 @@ namespace OpenChords.CrossPlatform
         {
             logger.Info("Starting Openchords");
 
+            //add a style to the table layout
+            Eto.Style.Add<TableLayout>("padded-table", table =>
+            {
+                table.Padding = new Padding(10);
+                table.Spacing = new Size(5, 5);
+            });
+
+
             //setup styles
             Eto.Style.Add<Button>("OpenFolder", button =>
             {
@@ -79,8 +87,8 @@ namespace OpenChords.CrossPlatform
             menuItemSaveSong.Executed += (s, e) => ucSongMetaDataPanel.SaveSong();
             var menuItemDeleteSong = new Command { MenuText = "Delete Song" };
             menuItemDeleteSong.Executed += (s, e) => { ucSongMetaDataPanel.DeleteSong(); ucSongListPanel.refreshPanel(); };
-            var menuItemAdvancedSearch = new Command { MenuText = "Advanced Search" };
-            menuItemAdvancedSearch.Executed += (s, e) => { throw new NotImplementedException(); };
+            var menuItemAdvancedSearch = new Command { MenuText = "Advanced Search", Shortcut = Application.Instance.CommonModifier | Keys.F };
+            menuItemAdvancedSearch.Executed += menuItemAdvancedSearch_Executed;
             var menuItemSongIncreaseKey = new Command { MenuText = "Transpose Up", Shortcut = Application.Instance.CommonModifier | Keys.D0 };
             menuItemSongIncreaseKey.Executed += (s, e) => ucSongMetaDataPanel.TransposeKeyUp();
             var menuItemSongDecreaseKey = new Command { MenuText = "Transpose Down", Shortcut = Application.Instance.CommonModifier | Keys.D9 };
@@ -172,6 +180,13 @@ namespace OpenChords.CrossPlatform
             ucSongListPanel.AddSongToSet += (s, e) => ucSetListPanel.AddSongToSet(e);
 
 
+        }
+
+        void menuItemAdvancedSearch_Executed(object sender, EventArgs e)
+        {
+            var advancedSearchForm = new frmAdvancedSearch();
+            advancedSearchForm.AddSongToSet += (s, e2) => ucSetListPanel.AddSongToSet(e2);
+            advancedSearchForm.Show(); 
         }
 
         private void exportToTabletHtml(object sender, EventArgs e)
