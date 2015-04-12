@@ -130,7 +130,10 @@ namespace OpenChords.CrossPlatform
             var commandExportToTabletAllSongsHtml = new Command { MenuText = "All Songs", Tag = ExportOption.All };
             commandExportToTabletAllSongsHtml.Executed += exportToTabletHtml;
             var menuItemExportToTabletHtml = new ButtonMenuItem() { Text = "Export To &Tablet", Items = { commandExportToTabletSetHtml, commandExportToTabletSongHtml, commandExportToTabletAllSongsHtml } };
-
+            var commandExportCurrentSetToOpenSong = new Command { MenuText = "Current Set", Tag = ExportOption.Set };
+            commandExportCurrentSetToOpenSong.Executed += exportToOpenSong;
+            var menuItemExportToOpenSong = new ButtonMenuItem() { Text = "Export To &OpenSong", Items = { commandExportCurrentSetToOpenSong } };
+            
             //about menu
             var menuItemAbout = new Command { MenuText = "About..." };
             menuItemAbout.Executed += (s, e) => MessageBox.Show(this, "About my app...");
@@ -164,7 +167,7 @@ namespace OpenChords.CrossPlatform
                     new ButtonMenuItem()
                     {
                         Text = "&Export",
-                        Items = { menuItemExportToPrintHtml, menuItemExportToTabletHtml }
+                        Items = { menuItemExportToPrintHtml, menuItemExportToTabletHtml, menuItemExportToOpenSong }
                     }
 				},
                 QuitItem = menuItemQuit,
@@ -187,6 +190,22 @@ namespace OpenChords.CrossPlatform
             var advancedSearchForm = new frmAdvancedSearch();
             advancedSearchForm.AddSongToSet += (s, e2) => ucSetListPanel.AddSongToSet(e2);
             advancedSearchForm.Show(); 
+        }
+
+        private void exportToOpenSong(object sender, EventArgs e)
+        {
+            var option = (ExportOption)((sender as Command).Tag);
+          
+            if (option == ExportOption.All)
+            {
+                throw new NotImplementedException();
+            }
+            else if (option == ExportOption.Set)
+                ucSetListPanel.ExportToOpenSong();
+            else if (option == ExportOption.Song)
+                throw new NotImplementedException();
+          
+            
         }
 
         private void exportToTabletHtml(object sender, EventArgs e)

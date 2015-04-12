@@ -221,5 +221,20 @@ namespace OpenChords.CrossPlatform.SongEditor
             if (SetChanged && showConfirmation("Save changes to set '{0}' before closing OpenChords?"))
                 saveSet();
         }
+
+        internal void ExportToOpenSong()
+        {
+            if (String.IsNullOrEmpty(Settings.ExtAppsAndDir.openSongSetFolder))
+            {
+                MessageBox.Show("Opensong is not configured", "", MessageBoxType.Error);
+                return;
+            }
+
+            CurrentSet.exportSetAndSongsToOpenSong();
+            if (!String.IsNullOrEmpty(Settings.ExtAppsAndDir.openSongApp))
+                Process.Start(Settings.ExtAppsAndDir.openSongApp);
+            else if (!String.IsNullOrEmpty(Settings.ExtAppsAndDir.openSongSetFolder))
+                Process.Start(Settings.ExtAppsAndDir.openSongSetFolder);
+        }
     }
 }
