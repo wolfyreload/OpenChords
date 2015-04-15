@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Media;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -12,10 +13,9 @@ namespace OpenChords.Functions
         private System.Timers.Timer timer;
         private int beatNumber = 1;
         private int beatsPerMeasure = 4;
-        private const int BAR_TONE = 1000;
-        private const int TICK_TONE = 500;
-        private const int BEAT_DURATION = 100;
-
+        private SoundPlayer BAR_TONE;
+        private SoundPlayer TICK_TONE;
+      
         public bool Enabled
         {
             get { return timer.Enabled; }
@@ -27,6 +27,9 @@ namespace OpenChords.Functions
             timer = new System.Timers.Timer();
             // Hook up the Elapsed event for the timer. 
             timer.Elapsed += OnTimedEvent;
+
+            BAR_TONE = new SoundPlayer("./Resources/Tick1.wav");
+            TICK_TONE = new SoundPlayer("./Resources/Tick2.wav");
         }
 
         public void SetSong(Song song)
@@ -46,9 +49,9 @@ namespace OpenChords.Functions
         private void OnTimedEvent(object sender, System.Timers.ElapsedEventArgs e)
         {
             if (beatNumber % beatsPerMeasure == 1)
-                Console.Beep(BAR_TONE, BEAT_DURATION);
+                BAR_TONE.Play();
             else
-                Console.Beep(TICK_TONE, BEAT_DURATION);
+                TICK_TONE.Play();
             beatNumber++;
         }
 
