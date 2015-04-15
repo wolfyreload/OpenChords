@@ -18,6 +18,7 @@ namespace OpenChords.CrossPlatform
         private Song CurrentSong;
         private bool _SongChanged;
         private bool _SettingsChanged;
+        private Functions.Metronome metronome1;
        
 
         public frmPresent(Song song, DisplayAndPrintSettings settings)
@@ -93,6 +94,10 @@ namespace OpenChords.CrossPlatform
             var commandToggleSharpsAndFlats = new Command { MenuText = "Toggle Sharps/Flats", Shortcut = Application.Instance.CommonModifier | Keys.S };
             commandToggleSharpsAndFlats.Executed += (s, e) => { toggleSharpsAndFlats(); };
 
+            //Metronome
+            var commandToggleMetonome = new Command { MenuText = "Toggle Metronome", Shortcut = Application.Instance.CommonModifier | Keys.M };
+            commandToggleMetonome.Executed += commandToggleMetonome_Executed;
+
             //song List
             var menuItemSongList = new ButtonMenuItem() { Text = "Song &List" };
             populateSongListMenu(menuItemSongList);
@@ -112,12 +117,26 @@ namespace OpenChords.CrossPlatform
                     new ButtonMenuItem() { Text = "&Key", Items = {commandSongIncreaseKey, commandSongDecreaseKey, commandSongIncreaseCapo, commandSongDecreaseCapo }},
                     menuItemNavigation,
                     new ButtonMenuItem() { Text = "&Visibility", Items = { commandToggleChords, commandToggleLyrics, commandToggleNotes, commandToggleSharpsAndFlats } },
+                    new ButtonMenuItem() { Text = "Other Options",
+                        Items = 
+                        {
+                            commandToggleMetonome
+                        }
+                    },
                     menuItemSongList,
                     menuItemExit 
                 }
             };
 
+            metronome1 = new OpenChords.Functions.Metronome();
+            
             this.Closing += frmPresent_Closing;
+        }
+
+        void commandToggleMetonome_Executed(object sender, EventArgs e)
+        {
+            metronome1.SetSong(CurrentSong);   
+            metronome1.Enabled = !metronome1.Enabled;
         }
 
         void commandSongDecreaseSize_Executed(object sender, EventArgs e)
@@ -171,6 +190,7 @@ namespace OpenChords.CrossPlatform
 
         void menuItemPreviousSong_Executed(object sender, EventArgs e)
         {
+            metronome1.Enabled = false;
             SaveSongifChanged();
             SongIndex--;
             drawSong();
@@ -178,6 +198,7 @@ namespace OpenChords.CrossPlatform
 
         void menuItemNextSong_Executed(object sender, EventArgs e)
         {
+            metronome1.Enabled = false;
             SaveSongifChanged();
             SongIndex++;
             drawSong();
@@ -188,6 +209,7 @@ namespace OpenChords.CrossPlatform
             SaveSongifChanged();
             if (_SettingsChanged)
                 DisplaySettings.saveSettings();
+            metronome1.Dispose();
         }
 
         private void SaveSongifChanged()

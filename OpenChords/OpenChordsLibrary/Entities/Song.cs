@@ -123,6 +123,7 @@ namespace OpenChords.Entities
         public string copyright { get; set; }
         public string hymn_number { get; set; }
         public string notes { get; set; }
+        public string bbm { get; set; }
 
         [XmlIgnore]
         private string songFileName { get; set; }
@@ -160,6 +161,23 @@ namespace OpenChords.Entities
             }
         }
 
+        [XmlIgnore]
+        public int BeatsPerMinute
+        {
+            get
+            {
+                int value = 100;
+                if (!string.IsNullOrEmpty(bbm))
+                    int.TryParse(bbm, out value);
+                return value;
+            }
+            set
+            {
+                if (value < 0) value = 0;
+                bbm = value.ToString();
+            }
+        }
+
         public Song()
         {
             title = "";
@@ -171,7 +189,7 @@ namespace OpenChords.Entities
             lyrics = "";
             notes = "";
             preferFlats = "false";
-
+            BeatsPerMinute = 100;
             initializeSongStyle(this);
         }
 

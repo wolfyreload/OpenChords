@@ -21,6 +21,7 @@ namespace OpenChords.CrossPlatform.SongEditor
         protected TextBox txtKey = new TextBox();
         protected TextBox txtCapo = new TextBox();
         protected RadioButtonList radioListSharpsOrFlats = new RadioButtonList();
+        protected TextBox txtBpm = new TextBox();
         protected TextArea txtLyrics = new TextArea();
         protected TextArea txtNotes = new TextArea();
         protected Splitter splitterMetadata;
@@ -56,7 +57,7 @@ namespace OpenChords.CrossPlatform.SongEditor
                                 new TableRow(new Label() { Text = "Title" }, new TableCell(txtTitle) { ScaleWidth = true}, new Label() { Text = "Key" }, txtKey),
                                 new TableRow(new Label() { Text = "Order" }, txtOrder, new Label() { Text = "Capo" }, txtCapo),
                                 new TableRow(new Label() { Text = "Author" }, txtAuther, new Label(), radioListSharpsOrFlats ),
-                                new TableRow(new Label() { Text = "Copyright" }, txtCopyright),
+                                new TableRow(new Label() { Text = "Copyright" }, txtCopyright, new Label() {Text = "Bpm"}, txtBpm ),
                                 null,
                             }
                         },
@@ -149,7 +150,7 @@ namespace OpenChords.CrossPlatform.SongEditor
             txtNotes.TextChanged -= fieldTextChanged;
             txtCapo.TextChanged -= fieldTextChanged;
             txtKey.TextChanged -= fieldTextChanged;
-
+            txtBpm.TextChanged -= fieldTextChanged;
             updateGuiFromSongObject();
 
             SongChanged = false;
@@ -167,6 +168,7 @@ namespace OpenChords.CrossPlatform.SongEditor
             txtNotes.TextChanged += fieldTextChanged;
             txtCapo.TextChanged += fieldTextChanged;
             txtKey.TextChanged += fieldTextChanged;
+            txtBpm.TextChanged += fieldTextChanged;
         }
 
         private void updateGuiFromSongObject()
@@ -186,6 +188,7 @@ namespace OpenChords.CrossPlatform.SongEditor
                 radioListSharpsOrFlats.SelectedIndex = CurrentSong.PreferFlats ? 0 : 1;
                 txtKey.Text = CurrentSong.key;
                 txtCapo.Text = CurrentSong.Capo.ToString();
+                txtBpm.Text = CurrentSong.BeatsPerMinute.ToString();
             }
             else
             {
@@ -202,6 +205,7 @@ namespace OpenChords.CrossPlatform.SongEditor
                 radioListSharpsOrFlats.SelectedIndex = 1;
                 txtKey.Text = "";
                 txtCapo.Text = "";
+                txtBpm.Text = "20";
             }
         }
 
@@ -224,6 +228,7 @@ namespace OpenChords.CrossPlatform.SongEditor
             CurrentSong.PreferFlats = (radioListSharpsOrFlats.SelectedIndex == 0);
             CurrentSong.key = txtKey.Text;
             CurrentSong.Capo = capoInt;
+            CurrentSong.BeatsPerMinute = int.Parse(txtBpm.Text);
         }
 
         private void comboSelectedIndexChanged(object sender, EventArgs e)

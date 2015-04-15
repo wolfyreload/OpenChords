@@ -74,6 +74,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Functions\Metronome.cs" />
     <Compile Include="HtmlResources.cs" />
     <Compile Include="Entities\DisplayAndPrintSettings.cs" />
     <Compile Include="Entities\FileSettings.cs" />
