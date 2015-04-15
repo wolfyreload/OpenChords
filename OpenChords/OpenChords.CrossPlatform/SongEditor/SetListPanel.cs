@@ -117,6 +117,7 @@ namespace OpenChords.CrossPlatform.SongEditor
                 saveSet();
             else
                 revertSet();
+            CurrentSet.reloadSet();
             new frmPresent(CurrentSet, DisplayAndPrintSettings.loadSettings(DisplayAndPrintSettingsType.DisplaySettings)).Show();
         }
 

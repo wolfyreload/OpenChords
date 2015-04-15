@@ -134,7 +134,7 @@ namespace OpenChords.CrossPlatform.SongEditor
         public void refreshPanel()
         {
             if (SongChanged)
-                if (showConfirmation("Save changes to {0}?"))
+                if (showConfirmation("Save changes to current song first?"))
 
 
             //disable events
@@ -281,6 +281,11 @@ namespace OpenChords.CrossPlatform.SongEditor
 
         internal void PresentSong()
         {
+            if (SongChanged)
+            {
+                if (showConfirmation("Save changes to {0} before presenting?"))
+                    this.SaveSong();
+            }
             new frmPresent(CurrentSong, DisplayAndPrintSettings.loadSettings(DisplayAndPrintSettingsType.DisplaySettings)).Show();
         }
 
