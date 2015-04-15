@@ -16,6 +16,8 @@ namespace OpenChords.CrossPlatform
         private int SongIndex;
         private int MaxIndex;
         private Song CurrentSong;
+        private bool _SongChanged;
+        private bool _SettingsChanged;
        
 
         public frmPresent(Song song, DisplayAndPrintSettings settings)
@@ -55,30 +57,30 @@ namespace OpenChords.CrossPlatform
             
             // refresh item
             var menuItemRefresh = new Command { MenuText = "Refresh", Shortcut = Application.Instance.CommonModifier | Keys.R };
-            menuItemRefresh.Executed += (s, e) => { drawSong(); };
+            menuItemRefresh.Executed += menuItemRefresh_Executed;
 
             // size items
             var commandSongIncreaseSize = new Command { MenuText = "Increase Font Size", Shortcut = Application.Instance.CommonModifier | Keys.P };
-            commandSongIncreaseSize.Executed += (s, e) => { DisplaySettings.increaseSizes(); drawSong(); };
+            commandSongIncreaseSize.Executed += commandSongIncreaseSize_Executed;
             var commandSongDecreaseSize = new Command { MenuText = "Decrease Font Size", Shortcut = Application.Instance.CommonModifier | Keys.O };
-            commandSongDecreaseSize.Executed += (s, e) => { DisplaySettings.desceaseSizes(); drawSong(); };
+            commandSongDecreaseSize.Executed += commandSongDecreaseSize_Executed;
             
             
             // key items
             var commandSongIncreaseKey = new Command { MenuText = "Transpose Key Up", Shortcut = Application.Instance.CommonModifier | Keys.D0 };
-            commandSongIncreaseKey.Executed += (s, e) => { CurrentSong.transposeKeyUp(); CurrentSong.saveSong(); drawSong(); };
+            commandSongIncreaseKey.Executed += commandSongIncreaseKey_Executed;
             var commandSongDecreaseKey = new Command { MenuText = "Transpose Key Down", Shortcut = Application.Instance.CommonModifier | Keys.D9 };
-            commandSongDecreaseKey.Executed += (s, e) => { CurrentSong.transposeKeyDown(); CurrentSong.saveSong(); drawSong(); };
+            commandSongDecreaseKey.Executed += commandSongDecreaseKey_Executed;
             var commandSongIncreaseCapo = new Command { MenuText = "Capo Up", Shortcut = Application.Instance.CommonModifier | Keys.D8 };
-            commandSongIncreaseCapo.Executed += (s, e) => { CurrentSong.capoUp(); CurrentSong.saveSong(); drawSong(); };
+            commandSongIncreaseCapo.Executed += commandSongIncreaseCapo_Executed;
             var commandSongDecreaseCapo = new Command { MenuText = "Capo Down", Shortcut = Application.Instance.CommonModifier | Keys.D7 };
-            commandSongDecreaseCapo.Executed += (s, e) => { CurrentSong.capoDown(); CurrentSong.saveSong(); drawSong(); };
+            commandSongDecreaseCapo.Executed += commandSongDecreaseCapo_Executed;
 
             // Navigation menu
             var menuItemNextSong = new Command { MenuText = "Next Song", Shortcut = Application.Instance.CommonModifier | Keys.Right };
-            menuItemNextSong.Executed += (s, e) => { SongIndex++; drawSong(); };
+            menuItemNextSong.Executed += menuItemNextSong_Executed;
             var menuItemPreviousSong = new Command { MenuText = "Previous Song", Shortcut = Application.Instance.CommonModifier | Keys.Left };
-            menuItemPreviousSong.Executed += (s, e) => { SongIndex--; drawSong(); };
+            menuItemPreviousSong.Executed += menuItemPreviousSong_Executed;
             var menuItemNavigation = new ButtonMenuItem() { Text = "&Navigation", Items = { menuItemPreviousSong, menuItemNextSong } };
                 
             //visibility menu
@@ -118,15 +120,89 @@ namespace OpenChords.CrossPlatform
             this.Closing += frmPresent_Closing;
         }
 
+        void commandSongDecreaseSize_Executed(object sender, EventArgs e)
+        {
+            DisplaySettings.desceaseSizes();
+            _SettingsChanged = true;
+            drawSong();
+        }
+
+        void commandSongIncreaseSize_Executed(object sender, EventArgs e)
+        {
+            DisplaySettings.increaseSizes();
+            _SettingsChanged = true; 
+            drawSong();
+        }
+
+        void menuItemRefresh_Executed(object sender, EventArgs e)
+        {
+            CurrentSong.revertToSaved();
+            _SongChanged = false;
+            drawSong();
+        }
+
+        void commandSongDecreaseCapo_Executed(object sender, EventArgs e)
+        {
+            CurrentSong.capoDown();
+            _SongChanged = true;
+            drawSong();
+        }
+
+        void commandSongIncreaseCapo_Executed(object sender, EventArgs e)
+        {
+            CurrentSong.capoUp();
+            _SongChanged = true;
+            drawSong();
+        }
+
+        void commandSongDecreaseKey_Executed(object sender, EventArgs e)
+        {
+            CurrentSong.transposeKeyDown();
+            _SongChanged = true;
+            drawSong();
+        }
+
+        void commandSongIncreaseKey_Executed(object sender, EventArgs e)
+        {
+            CurrentSong.transposeKeyUp();
+            _SongChanged = true;
+            drawSong();
+        }
+
+        void menuItemPreviousSong_Executed(object sender, EventArgs e)
+        {
+            SaveSongifChanged();
+            SongIndex--;
+            drawSong();
+        }
+
+        void menuItemNextSong_Executed(object sender, EventArgs e)
+        {
+            SaveSongifChanged();
+            SongIndex++;
+            drawSong();
+        }
+
         void frmPresent_Closing(object sender, System.ComponentModel.CancelEventArgs e)
         {
-            DisplaySettings.saveSettings();
+            SaveSongifChanged();
+            if (_SettingsChanged)
+                DisplaySettings.saveSettings();
+        }
+
+        private void SaveSongifChanged()
+        {
+            if (_SongChanged)
+            {
+                CurrentSong.saveSong();
+                _SongChanged = false;
+            }
         }
 
         private void toggleSharpsAndFlats()
         {
             CurrentSong.ToggleSharpsAndFlats();
-            CurrentSong.saveSong();
+            _SongChanged = true;
             drawSong();
         }
 
@@ -154,18 +230,21 @@ namespace OpenChords.CrossPlatform
         private void toggleChords()
         {
             DisplaySettings.ShowChords = !(DisplaySettings.ShowChords ?? false);
+            _SettingsChanged = true;
             drawSong();
         }
 
         private void toggleLyrics()
         {
             DisplaySettings.ShowLyrics = !(DisplaySettings.ShowLyrics ?? false);
+            _SettingsChanged = true;
             drawSong();
         }
 
         private void toggleNotes()
         {
             DisplaySettings.ShowNotes = !(DisplaySettings.ShowNotes ?? false);
+            _SettingsChanged = true;
             drawSong();
         }
 
@@ -181,8 +260,6 @@ namespace OpenChords.CrossPlatform
             if (SongIndex < 0) SongIndex = 0;
             if (SongIndex >= MaxIndex) SongIndex = MaxIndex - 1;
             CurrentSong = CurrentSet.songList[SongIndex];
-            var currentSongName = CurrentSong.title;
-            CurrentSong = Song.loadSong(currentSongName); //get song off of file system
             string songHtml = CurrentSong.getHtml(DisplaySettings);
             webView.LoadHtml(songHtml);
         }
