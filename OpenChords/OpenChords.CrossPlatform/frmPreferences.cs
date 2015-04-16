@@ -12,17 +12,21 @@ namespace OpenChords.CrossPlatform
     public class frmPreferences : Form
     {
         private GeneralSettingsPreferences generalSettingsPreferences = new Preferences.GeneralSettingsPreferences(FileAndFolderSettings.loadSettings());
-        private DisplayAndPrintPreferences displayPreferences = new Preferences.DisplayAndPrintPreferences(DisplayAndPrintSettings.loadSettings(DisplayAndPrintSettingsType.DisplaySettings));
-        private DisplayAndPrintPreferences printPreferences = new Preferences.DisplayAndPrintPreferences(DisplayAndPrintSettings.loadSettings(DisplayAndPrintSettingsType.PrintSettings));
-        private DisplayAndPrintPreferences tabletPreferences = new Preferences.DisplayAndPrintPreferences(DisplayAndPrintSettings.loadSettings(DisplayAndPrintSettingsType.TabletSettings));
+        private DisplayAndPrintPreferences displayPreferences;
+        private DisplayAndPrintPreferences printPreferences;
+        private DisplayAndPrintPreferences tabletPreferences;
 
 
-        public frmPreferences()
+        public frmPreferences(Song songToPreview)
         {
             this.Title = "Preferences";
             this.Icon = Graphics.Icon;
-            Width = 850;
-            Height = 470;
+            this.WindowState = Eto.Forms.WindowState.Maximized;
+
+            displayPreferences = new Preferences.DisplayAndPrintPreferences(DisplayAndPrintSettings.loadSettings(DisplayAndPrintSettingsType.DisplaySettings), songToPreview);
+            printPreferences = new Preferences.DisplayAndPrintPreferences(DisplayAndPrintSettings.loadSettings(DisplayAndPrintSettingsType.PrintSettings), songToPreview);
+            tabletPreferences = new Preferences.DisplayAndPrintPreferences(DisplayAndPrintSettings.loadSettings(DisplayAndPrintSettingsType.TabletSettings), songToPreview);
+
             Content = new TabControl()
             {
                 Pages = 

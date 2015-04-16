@@ -76,7 +76,7 @@ namespace OpenChords.CrossPlatform
 
             //file menu items
             var menuItemPreferences = new Command { MenuText = "Preferences" };
-            menuItemPreferences.Executed += (s, e) => { new frmPreferences().Show(); };
+            menuItemPreferences.Executed += menuItemPreferences_Executed;
             var menuItemQuit = new Command { MenuText = "Quit", Shortcut = Application.Instance.CommonModifier | Keys.Q };
             menuItemQuit.Executed += (s, e) => Application.Instance.Quit();
 
@@ -183,6 +183,17 @@ namespace OpenChords.CrossPlatform
             ucSongListPanel.AddSongToSet += (s, e) => ucSetListPanel.AddSongToSet(e);
 
 
+        }
+
+        void menuItemPreferences_Executed(object sender, EventArgs e)
+        {
+            Song tempSong = null;
+            if (ucSongMetaDataPanel.CurrentSong.title != string.Empty)
+                tempSong = ucSongMetaDataPanel.CurrentSong;
+            else
+                tempSong = Song.loadSong(Song.listOfAllSongs()[0]);
+
+            new frmPreferences(tempSong).Show();
         }
 
         void menuItemAdvancedSearch_Executed(object sender, EventArgs e)

@@ -8,13 +8,14 @@ namespace OpenChords.CrossPlatform.Preferences
 {
     class FontAndColorPicker : TableRow
     {
+        public enum FontAndColorPickerType { FontAndColor, Color }
         protected Label lblElementName = new Label();
-        protected ComboBox cmbFont = new ComboBox() { AutoComplete = true };
-        protected ComboBox cmbFontSize = new ComboBox() { AutoComplete = true };
+        protected ComboBox cmbFont = new ComboBox() { ReadOnly = true, AutoComplete = true };
+        protected ComboBox cmbFontSize = new ComboBox() { AutoComplete = true, Width = 80 };
         protected ColorPicker colorPicker = new ColorPicker();
-        protected ComboBox cmbFontStyle = new ComboBox() { AutoComplete = true };
-
-        public FontAndColorPicker(string label, Entities.SongElementFormat format, bool useMonospaceFontsOnly = false)
+        protected ComboBox cmbFontStyle = new ComboBox() { ReadOnly = true, AutoComplete = true, Width = 80};
+        public event EventHandler ItemChanged;
+        public FontAndColorPicker(string label, FontAndColorPickerType colorPickerType, bool useMonospaceFontsOnly = false)
         {
 
             //fill dropdownlists
@@ -36,39 +37,67 @@ namespace OpenChords.CrossPlatform.Preferences
             cmbFontStyle.Items.Add("Bold");
             cmbFontStyle.Items.Add("Italic");
 
-
             lblElementName.Text = label;
-            cmbFont.Text = format.FontName;
-            cmbFontSize.Text = format.FontSize.ToString();
-            colorPicker.Value = getColor(format.FontColor);
-            cmbFontStyle.Text = format.FontStyle.ToString();
 
-
-            Cells = new System.Collections.ObjectModel.Collection<TableCell>();
-            Cells.Add(lblElementName);
-            Cells.Add(new TableCell() { Control = cmbFont, ScaleWidth = true });
-            Cells.Add(cmbFontSize);
-            Cells.Add(colorPicker);
-            Cells.Add(cmbFontStyle);
+            if (colorPickerType == FontAndColorPickerType.FontAndColor)
+            {
+                Cells = new System.Collections.ObjectModel.Collection<TableCell>();
+                Cells.Add(lblElementName);
+                Cells.Add(new TableCell() { Control = cmbFont, ScaleWidth = true });
+                Cells.Add(cmbFontSize);
+                Cells.Add(colorPicker);
+                Cells.Add(cmbFontStyle);
+            }
+            else
+            {
+                Cells = new System.Collections.ObjectModel.Collection<TableCell>();
+                Cells.Add(new Label() { Text = label });
+                Cells.Add(new Label());
+                Cells.Add(new Label());
+                Cells.Add(colorPicker);
+                Cells.Add(new Label());
+            
+            }
         }
 
-        public FontAndColorPicker(string label, System.Drawing.Color color)
+        public void setFontFormat(Entities.SongElementFormat format)
         {
+            cmbFont.TextChanged -= ValueChanged;
+            cmbFontSize.TextChanged -= ValueChanged;
+            cmbFontStyle.TextChanged -= ValueChanged;
+            colorPicker.ValueChanged -= ValueChanged;
+            
+            cmbFont.Text = format.FontName;
+            cmbFontSize.Text = format.FontSize.ToString();
+            colorPicker.Value = getEtoColor(format.FontColor);
+            cmbFontStyle.Text = format.FontStyle.ToString();
 
-            lblElementName.Text = label;
-            colorPicker.Value = getColor(color);
-           
+            cmbFont.TextChanged += ValueChanged;
+            cmbFontSize.TextChanged += ValueChanged;
+            cmbFontStyle.TextChanged += ValueChanged;
+            colorPicker.ValueChanged += ValueChanged;
+       
+        }
 
-            Cells = new System.Collections.ObjectModel.Collection<TableCell>();
-            Cells.Add(new Label() { Text = label });
-            Cells.Add(new Label());
-            Cells.Add(new Label());
-            Cells.Add(colorPicker);
-            Cells.Add(new Label());
+        public void setColor(System.Drawing.Color color)
+        {
+            colorPicker.ValueChanged -= ValueChanged;
+            colorPicker.Value = getEtoColor(color);
+            colorPicker.ValueChanged += ValueChanged;
+      
+        }
+
+    
+
+        private void ValueChanged(object sender, EventArgs e)
+        {
+            if (ItemChanged != null)
+                ItemChanged(this, e);
         }
 
         
-        private static Eto.Drawing.Color getColor(System.Drawing.Color color)
+        
+        private static Eto.Drawing.Color getEtoColor(System.Drawing.Color color)
         {
             return Eto.Drawing.Color.FromArgb(color.R, color.G, color.B, color.A);
         }
@@ -77,7 +106,8 @@ namespace OpenChords.CrossPlatform.Preferences
         {
             var colorPickerValue = colorPicker.Value;
             string fontName = cmbFont.Text;
-            float fontSize = float.Parse(cmbFontSize.Text);
+            float fontSize = 1;
+            float.TryParse(cmbFontSize.Text, out fontSize);
             System.Drawing.Color color = System.Drawing.Color.FromArgb((int)colorPickerValue.Rb, (int)colorPickerValue.Gb, (int)colorPickerValue.Bb);
             System.Drawing.FontStyle fontStyle = (System.Drawing.FontStyle)Enum.Parse(typeof(System.Drawing.FontStyle), cmbFontStyle.Text);
             return new Entities.SongElementFormat(fontName, fontSize, fontStyle, color);

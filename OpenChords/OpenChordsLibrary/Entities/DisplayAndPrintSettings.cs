@@ -210,8 +210,13 @@ namespace OpenChords.Entities
 		
 		public void saveSettings()
 		{
-            XmlReaderWriter.writeSettings(SettingsFilePath, this);   
+            saveSettings(SettingsFilePath);
 		}
+
+        public void saveSettings(string path)
+        {
+            XmlReaderWriter.writeSettings(path, this);
+        }
 
         public bool isSettingsFilePresent()
         {
@@ -534,6 +539,10 @@ namespace OpenChords.Entities
         //    info.AddValue("DualColumns", DualColumns);
         //    info.AddValue("ShowNotes", ShowNotes);
         //}
+
+
+
+
 
 
 
