@@ -13,9 +13,12 @@ namespace OpenChords.Functions
         private System.Timers.Timer timer;
         private int beatNumber = 1;
         private int beatsPerMeasure = 4;
-        private SoundPlayer BAR_TONE;
-        private SoundPlayer TICK_TONE;
-      
+        private SoundPlayer SoundPlayerTickTone;
+        private SoundPlayer SoundPlayerBarTone;
+        private const string TICK_TONE = "./Resources/Tick2.wav";
+        private const string BAR_TONE = "./Resources/Tick1.wav";
+
+
         public bool Enabled
         {
             get { return timer.Enabled; }
@@ -28,8 +31,8 @@ namespace OpenChords.Functions
             // Hook up the Elapsed event for the timer. 
             timer.Elapsed += OnTimedEvent;
 
-            BAR_TONE = new SoundPlayer("./Resources/Tick1.wav");
-            TICK_TONE = new SoundPlayer("./Resources/Tick2.wav");
+            SoundPlayerTickTone = new SoundPlayer(TICK_TONE);
+            SoundPlayerBarTone = new SoundPlayer(BAR_TONE);
         }
 
         public void SetSong(Song song)
@@ -49,15 +52,59 @@ namespace OpenChords.Functions
         private void OnTimedEvent(object sender, System.Timers.ElapsedEventArgs e)
         {
             if (beatNumber % beatsPerMeasure == 1)
-                BAR_TONE.Play();
+                playBarTone();
             else
-                TICK_TONE.Play();
+                playTickTone();
             beatNumber++;
+        }
+
+        private void playTickTone()
+        {
+            if (!IsLinux)
+                playSoundInWindows(SoundPlayerTickTone);
+            else
+                playSoundInLinux(TICK_TONE);
+        }
+
+        private void playBarTone()
+        {
+            if (!IsLinux)
+                playSoundInWindows(SoundPlayerBarTone);
+            else
+                playSoundInLinux(BAR_TONE);
+        }
+
+        private void playSoundInWindows(SoundPlayer player)
+        {
+            player.Play();
+        }
+
+        private void playSoundInLinux(string soundToPlay)
+        {
+            System.Diagnostics.Process proc = new System.Diagnostics.Process() 
+            { 
+                EnableRaisingEvents = false,
+                StartInfo = new System.Diagnostics.ProcessStartInfo()
+                {
+                    FileName = "aplay",
+                    Arguments = "-t wav " + soundToPlay
+                }
+            };
+            proc.Start();
         }
 
         public void Dispose()
         {
             timer.Elapsed -= OnTimedEvent;
+        }
+
+        private static bool IsLinux
+        {
+            get
+            {
+                int p = (int)Environment.OSVersion.Platform;
+                return (p == 4) || (p == 6) || (p == 128);
+            }
         }
     }
 }
