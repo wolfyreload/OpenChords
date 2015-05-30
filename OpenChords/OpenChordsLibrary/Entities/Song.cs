@@ -513,7 +513,7 @@ namespace OpenChords.Entities
                 folder = Settings.ExtAppsAndDir.tabletFolder;
             else
                 folder = Settings.ExtAppsAndDir.printFolder;
-            string destination = String.Format("{0}/{1}.html", folder, this.generateLongTitle());
+            string destination = String.Format("{0}/{1}.html", folder, this.generateShortTitle());
             File.WriteAllText(destination, htmlText);
             return destination;
         }
