@@ -49,6 +49,14 @@
   </PropertyGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.Targets" />
   <ItemGroup>
+    <Reference Include="Common.Logging, Version=2.0.0.0, Culture=neutral, PublicKeyToken=af08829b84f0328e, processorArchitecture=MSIL">
+      <HintPath>..\packages\Common.Logging.2.0.0\lib\2.0\Common.Logging.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="NHttp, Version=0.1.7.0, Culture=neutral, PublicKeyToken=156364e4f7b202d9, processorArchitecture=MSIL">
+      <HintPath>..\packages\NHttp.0.1.7.0\lib\net20\NHttp.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="PdfSharp">
       <HintPath>..\packages\PdfSharp.1.32.3057.0\lib\net20\PdfSharp.dll</HintPath>
     </Reference>
@@ -75,6 +83,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Functions\Metronome.cs" />
+    <Compile Include="Functions\WebServer.cs" />
     <Compile Include="HtmlResources.cs" />
     <Compile Include="Entities\DisplayAndPrintSettings.cs" />
     <Compile Include="Entities\FileSettings.cs" />

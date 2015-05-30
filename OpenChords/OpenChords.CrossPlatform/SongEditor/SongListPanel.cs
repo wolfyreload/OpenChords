@@ -54,6 +54,7 @@ namespace OpenChords.CrossPlatform.SongEditor
             if (lbSongs.SelectedIndex < 0) return;
             string songName = lbSongs.SelectedValue.ToString();
             Song selectedSong = Song.loadSong(songName);
+            OpenChords.Functions.WebServer.CurrentSong = selectedSong;
             if (SongChanged != null)
                 SongChanged(this, selectedSong);
         }

@@ -37,6 +37,22 @@ namespace OpenChords.Config
             settings.refresh();
         }
 
+        public bool HttpServerEnabled
+        {
+            get
+            {
+                return settings.HttpServerEnabled;
+            }
+        }
+
+        public int HttpServerPort
+        {
+            get
+            {
+                return settings.HttpServerPort;
+            }
+        }
+
         public String fileManager
         {
             get

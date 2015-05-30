@@ -26,6 +26,7 @@ namespace OpenChords.CrossPlatform
             CurrentSet = new Set();
             CurrentSet.addSongToSet(song);
             DisplaySettings = settings;
+            Functions.WebServer.CurrentDisplayAndPrintSettings = settings;
             MaxIndex = CurrentSet.songList.Count;
             this.Title = "Present Song";
             buildUI();
@@ -35,6 +36,7 @@ namespace OpenChords.CrossPlatform
         {
             CurrentSet = set;
             DisplaySettings = settings;
+            Functions.WebServer.CurrentDisplayAndPrintSettings = settings;
             MaxIndex = CurrentSet.songList.Count;
             this.Title = "Present Set";
             buildUI();
@@ -282,6 +284,7 @@ namespace OpenChords.CrossPlatform
             if (SongIndex < 0) SongIndex = 0;
             if (SongIndex >= MaxIndex) SongIndex = MaxIndex - 1;
             CurrentSong = CurrentSet.songList[SongIndex];
+            OpenChords.Functions.WebServer.CurrentSong = CurrentSong;
             string songHtml = CurrentSong.getHtml(DisplaySettings);
             webView.LoadHtml(songHtml);
         }

@@ -83,6 +83,7 @@ namespace OpenChords.CrossPlatform.SongEditor
             var sets = Set.listOfAllSets();
             var selectedSet = sets[cmbSets.SelectedIndex];
             CurrentSet = Set.loadSet(selectedSet);
+            Functions.WebServer.CurrentSet = CurrentSet;
             refreshSongList();
             SetChanged = false;
         }

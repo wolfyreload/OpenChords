@@ -16,6 +16,8 @@ namespace OpenChords.CrossPlatform.Preferences
         private Button cmdApplicationDataFolder = new Button() { Text = "Open", Style = "OpenFolder" };
         private Button cmdOpenSongExecutablePath = new Button() { Text = "Open", Style = "OpenFolder" };
         private Button cmdOpenSongSongsAndSetsPath = new Button() { Text = "Open", Style = "OpenFolder" };
+        private CheckBox chkHttpServerEnabled = new CheckBox();
+        private TextBox txtHttpServerPort = new TextBox();
         private bool OptionsChanged;
 
         public GeneralSettingsPreferences(Entities.FileAndFolderSettings fileAndFolderSettings)
@@ -30,6 +32,8 @@ namespace OpenChords.CrossPlatform.Preferences
                     new TableRow(new Label() { Text = "OpenChords Data Folder" }, txtApplicationDataFolder ),
                     new TableRow(new Label() { Text = "OpenSong Executable" }, txtOpenSongExecutablePath ),
                     new TableRow(new Label() { Text = "OpenSong Data Folder" }, txtOpenSongDataPath ),
+                    new TableRow(new Label() { Text = "Http Server Enabled" }, chkHttpServerEnabled ),
+                    new TableRow(new Label() { Text = "Http Server Port" }, txtHttpServerPort ),
                     null
                 }
             };
@@ -38,12 +42,21 @@ namespace OpenChords.CrossPlatform.Preferences
             txtApplicationDataFolder.Text = fileAndFolderSettings.ApplicationDataFolder;
             txtOpenSongExecutablePath.Text = fileAndFolderSettings.OpenSongExecutable;
             txtOpenSongDataPath.Text = fileAndFolderSettings.OpenSongSetsAndSongs;
+            chkHttpServerEnabled.Checked = fileAndFolderSettings.HttpServerEnabled;
+            txtHttpServerPort.Text = fileAndFolderSettings.HttpServerPort.ToString();
 
             //events
             chkPortableMode.CheckedChanged += chkPortableMode_CheckedChanged;
             txtApplicationDataFolder.TextChanged += textChanged;
             txtOpenSongDataPath.TextChanged += textChanged;
             txtOpenSongExecutablePath.TextChanged += textChanged;
+            chkHttpServerEnabled.CheckedChanged += checkedChanged;
+            txtHttpServerPort.TextChanged += textChanged;
+        }
+
+        void checkedChanged(object sender, EventArgs e)
+        {
+            OptionsChanged = true;
         }
 
         private void textChanged(object sender, EventArgs e)
@@ -67,6 +80,8 @@ namespace OpenChords.CrossPlatform.Preferences
             fileAndFolderSettings.ApplicationDataFolder = txtApplicationDataFolder.Text;
             fileAndFolderSettings.OpenSongExecutable = txtOpenSongExecutablePath.Text;
             fileAndFolderSettings.OpenSongSetsAndSongs = txtOpenSongDataPath.Text;
+            fileAndFolderSettings.HttpServerEnabled = chkHttpServerEnabled.Checked ?? false;
+            fileAndFolderSettings.HttpServerPort = int.Parse(txtHttpServerPort.Text);
 
             fileAndFolderSettings.saveSettings();
             if (OptionsChanged)

@@ -26,6 +26,8 @@ namespace OpenChords.Entities
         public bool PortableMode { get; set; }
         public string ApplicationDataFolder { get; set; }
         public bool CheckForUpdates { get; set; }
+        public bool HttpServerEnabled { get; set; }
+        public int HttpServerPort { get; set; }
         
         public static FileAndFolderSettings loadSettings()
         {
@@ -71,6 +73,8 @@ namespace OpenChords.Entities
                 PortableMode = false;
                 ApplicationDataFolder = Environment.GetFolderPath(Environment.SpecialFolder.Personal) + "/OpenChords";
                 CheckForUpdates = true;
+                HttpServerPort = 8083;
+                HttpServerEnabled = true;
             }
             else
             {
@@ -79,6 +83,8 @@ namespace OpenChords.Entities
                 PortableMode = false;
                 ApplicationDataFolder = "../Data";
                 CheckForUpdates = true;
+                HttpServerPort = 8083;
+                HttpServerEnabled = true;
             }
         }
         

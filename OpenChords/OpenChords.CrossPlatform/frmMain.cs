@@ -17,6 +17,7 @@ namespace OpenChords.CrossPlatform
         protected SetListPanel ucSetListPanel;
         protected SongMetadataPanel ucSongMetaDataPanel;
         protected SongListPanel ucSongListPanel;
+        private Functions.WebServer webserver;
 
         public frmMain()
         {
@@ -36,6 +37,11 @@ namespace OpenChords.CrossPlatform
             });
 
             setup();
+
+            logger.Info("Starting Openchords web server");
+            if (Settings.ExtAppsAndDir.HttpServerEnabled)
+                webserver = new OpenChords.Functions.WebServer(Settings.ExtAppsAndDir.HttpServerPort);
+
 
             this.Icon = Graphics.Icon;
 
