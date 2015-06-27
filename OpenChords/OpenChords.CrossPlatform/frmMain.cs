@@ -157,6 +157,8 @@ namespace OpenChords.CrossPlatform
             var commandExportCurrentSetToOpenSong = new Command { MenuText = "Current Set", Tag = ExportOption.Set };
             commandExportCurrentSetToOpenSong.Executed += exportToOpenSong;
             var menuItemExportToOpenSong = new ButtonMenuItem() { Text = "Export To &OpenSong", Items = { commandExportCurrentSetToOpenSong } };
+            var menuItemExportSetList = new Command { MenuText = "Export Set List" };
+            menuItemExportSetList.Executed += (s, e) => ucSetListPanel.ExportToTextFile();
             
             //about menu
             var menuItemAbout = new Command { MenuText = "About..." };
@@ -191,7 +193,7 @@ namespace OpenChords.CrossPlatform
                     new ButtonMenuItem()
                     {
                         Text = "&Export",
-                        Items = { menuItemExportToPrintHtml, menuItemExportToTabletHtml, menuItemExportToOpenSong }
+                        Items = { menuItemExportToPrintHtml, menuItemExportToTabletHtml, menuItemExportToOpenSong, menuItemExportSetList }
                     }
 				},
                 QuitItem = menuItemQuit,

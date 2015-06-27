@@ -287,5 +287,16 @@ namespace OpenChords.CrossPlatform.SongEditor
             else
                 System.Diagnostics.Process.Start(fileManager, OpenChords.Settings.ExtAppsAndDir.songsFolder);
         }
+
+        internal void ExportToTextFile()
+        {
+            //get the filemanager for the filesystem
+            string fileManager = OpenChords.Settings.ExtAppsAndDir.fileManager;
+            string filename = null;
+
+            //get the filename
+            filename = Export.ExportToTextFile.exportSetSongList(CurrentSet);
+            System.Diagnostics.Process.Start(filename);
+        }
     }
 }

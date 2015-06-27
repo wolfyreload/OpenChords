@@ -85,6 +85,7 @@
     <Compile Include="..\SolutionInfo.cs">
       <Link>Properties\SolutionInfo.cs</Link>
     </Compile>
+    <Compile Include="Export\ExportToTextFile.cs" />
     <Compile Include="Functions\Metronome.cs" />
     <Compile Include="Functions\WebServer.cs" />
     <Compile Include="HtmlResources.cs" />
