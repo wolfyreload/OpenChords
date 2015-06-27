@@ -293,13 +293,8 @@ namespace OpenChords.CrossPlatform
         void showManual()
         {
             logger.Info("Clicked");
-            string manualHtmlFile = OpenChords.Settings.ExtAppsAndDir.manual;
-
-            if (string.IsNullOrEmpty(manualHtmlFile))
-                return;
-
-            System.Diagnostics.Process.Start(manualHtmlFile);
-         
+            var formManual = new frmHelpDocumentation();
+            formManual.Show();
         }
     }
 }

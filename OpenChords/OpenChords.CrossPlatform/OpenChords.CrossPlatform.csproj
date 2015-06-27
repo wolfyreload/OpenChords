@@ -35,6 +35,7 @@
       <Link>Properties\SolutionInfo.cs</Link>
     </Compile>
     <Compile Include="frmAdvancedSearch.cs" />
+    <Compile Include="frmHelpDocumentation.cs" />
     <Compile Include="frmNewSet.cs" />
     <Compile Include="frmPreferences.cs" />
     <Compile Include="Preferences\FontAndColorPanel.cs" />
