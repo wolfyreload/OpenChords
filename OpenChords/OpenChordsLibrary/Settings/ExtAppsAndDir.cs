@@ -72,7 +72,7 @@ namespace OpenChords.Config
         {
             get
             {
-                var path = settings.CurrentPath + "Manual.pdf";
+                var path = settings.CurrentPath + "Help.html";
                 if (IO.FileFolderFunctions.isFilePresent(path))
                     return path;
                 else

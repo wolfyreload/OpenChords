@@ -161,8 +161,8 @@ namespace OpenChords.CrossPlatform
             menuItemExportSetList.Executed += (s, e) => ucSetListPanel.ExportToTextFile();
             
             //about menu
-            var menuItemAbout = new Command { MenuText = "About..." };
-            menuItemAbout.Executed += (s, e) => MessageBox.Show(this, "About my app...");
+            var menuItemManual = new Command { MenuText = "Manual", Shortcut = Keys.F1 };
+            menuItemManual.Executed += (s, e) => showManual();
 
             // create menu
             Menu = new MenuBar
@@ -194,10 +194,15 @@ namespace OpenChords.CrossPlatform
                     {
                         Text = "&Export",
                         Items = { menuItemExportToPrintHtml, menuItemExportToTabletHtml, menuItemExportToOpenSong, menuItemExportSetList }
+                    },
+                    new ButtonMenuItem()
+                    {
+                        Text = "&Help",
+                        Items = { menuItemManual }
                     }
 				},
                 QuitItem = menuItemQuit,
-                AboutItem = menuItemAbout
+             
             };
 
             ucSongListPanel.Focus();
@@ -283,6 +288,18 @@ namespace OpenChords.CrossPlatform
         {
             ucSongMetaDataPanel.CurrentSong = e;
             ucSongMetaDataPanel.refreshPanel();
+        }
+
+        void showManual()
+        {
+            logger.Info("Clicked");
+            string manualHtmlFile = OpenChords.Settings.ExtAppsAndDir.manual;
+
+            if (string.IsNullOrEmpty(manualHtmlFile))
+                return;
+
+            System.Diagnostics.Process.Start(manualHtmlFile);
+         
         }
     }
 }
