@@ -136,5 +136,23 @@ namespace OpenChords.CrossPlatform.SongEditor
 
         }
 
+
+        public void showSongInExplorer()
+        {
+            if (lbSongs.SelectedIndex < 0) return;
+            string songName = lbSongs.SelectedValue.ToString();
+            Song selectedSong = Song.loadSong(songName);
+            showInExplorer(selectedSong.getFullPath());
+        }
+
+        private void showInExplorer(string songPath)
+        {
+            string fileManager = OpenChords.Settings.ExtAppsAndDir.fileManager;
+
+            if (string.IsNullOrEmpty(fileManager))
+                System.Diagnostics.Process.Start("Explorer", "/select, " + songPath);
+            else
+                System.Diagnostics.Process.Start(fileManager, OpenChords.Settings.ExtAppsAndDir.songsFolder);
+        }
     }
 }

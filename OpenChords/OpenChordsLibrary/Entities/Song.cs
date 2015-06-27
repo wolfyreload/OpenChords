@@ -610,6 +610,11 @@ namespace OpenChords.Entities
             this.transposeKeyDown();
            
         }
+
+        public string getFullPath()
+        {
+            return Settings.ExtAppsAndDir.songsFolder + this.title;
+        }
     }
 
 

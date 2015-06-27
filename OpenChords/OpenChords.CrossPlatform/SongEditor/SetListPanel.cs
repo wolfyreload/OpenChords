@@ -4,6 +4,7 @@ using Eto.Drawing;
 using System.IO;
 using OpenChords.Entities;
 using System.Diagnostics;
+using System.Collections.Generic;
 
 namespace OpenChords.CrossPlatform.SongEditor
 {
@@ -13,7 +14,7 @@ namespace OpenChords.CrossPlatform.SongEditor
         protected ComboBox cmbSets = new ComboBox();
 
         private bool SetChanged;
-        private Set CurrentSet;
+        public Set CurrentSet { get; private set; }
         public event EventHandler<Song> SongChanged;
 
         public SetListPanel()
@@ -130,6 +131,13 @@ namespace OpenChords.CrossPlatform.SongEditor
                 loadSongsInSet();
         }
 
+        internal void changeToSet(Set set)
+        {
+            cmbSets.SelectedValue = set.setName;
+            if (cmbSets.SelectedIndex >= 0)
+                loadSongsInSet();
+        }
+
         public void saveSetState()
         {
             if (cmbSets.SelectedIndex >= 0)
@@ -237,6 +245,47 @@ namespace OpenChords.CrossPlatform.SongEditor
                 Process.Start(Settings.ExtAppsAndDir.openSongApp);
             else if (!String.IsNullOrEmpty(Settings.ExtAppsAndDir.openSongSetFolder))
                 Process.Start(Settings.ExtAppsAndDir.openSongSetFolder);
+        }
+
+
+
+        internal void deleteSet()
+        {
+            if (showConfirmation("Delete set '{0}'?"))
+            {
+                Set.DeleteSet(CurrentSet);
+                refreshPanel();
+                lbSongs.DataStore = new List<string>();
+            }
+        }
+
+        internal void newSet()
+        {
+            var formNewSet = new frmNewSet();
+            formNewSet.ShowModal();
+            if (formNewSet.SetName != "")
+            {
+                Set newSet = Set.NewSet(formNewSet.SetName);
+                refreshPanel();
+                changeToSet(newSet);
+            }
+        }
+
+        public void showSetInExplorer()
+        {
+            var songPath = CurrentSet.getFullPath();
+            showInExplorer(songPath);
+
+        }
+
+        private void showInExplorer(string songPath)
+        {
+            string fileManager = OpenChords.Settings.ExtAppsAndDir.fileManager;
+
+            if (string.IsNullOrEmpty(fileManager))
+                System.Diagnostics.Process.Start("Explorer", "/select, " + songPath);
+            else
+                System.Diagnostics.Process.Start(fileManager, OpenChords.Settings.ExtAppsAndDir.songsFolder);
         }
     }
 }

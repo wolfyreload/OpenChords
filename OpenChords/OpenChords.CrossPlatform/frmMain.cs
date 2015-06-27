@@ -105,15 +105,33 @@ namespace OpenChords.CrossPlatform
             menuItemSongDecreaseCapo.Executed += (s, e) => ucSongMetaDataPanel.TransposeCapoDown();
             var menuItemSongFixFormating = new Command { MenuText = "Auto Format Song", Shortcut = Application.Instance.CommonModifier | Keys.R };
             menuItemSongFixFormating.Executed += (s, e) => ucSongMetaDataPanel.FixFormatting();
+            var menuItemSongRefeshList = new Command { MenuText = "Refresh" };
+            menuItemSongRefeshList.Executed += (s, e) => ucSongListPanel.refreshPanel();
+            var menuItemShowSongInExplorer = new Command { MenuText = "Show In Explorer" };
+            menuItemShowSongInExplorer.Executed += (s, e) => ucSongListPanel.showSongInExplorer();
 
+            var menuItemSongFileOperations = new ButtonMenuItem { Text = "File Operations", Items = { menuItemNewSong, menuItemSaveSong, menuItemDeleteSong, menuItemShowSongInExplorer } };
             var menuItemKey = new ButtonMenuItem { Text = "Song Key", Items = { menuItemSongIncreaseKey, menuItemSongDecreaseKey } };
             var menuItemCapo = new ButtonMenuItem { Text = "Song Capo", Items = { menuItemSongIncreaseCapo, menuItemSongDecreaseCapo } };
 
             //Sets menu items
+            var menuItemSetNew = new Command() { MenuText = "New Set" };
+            menuItemSetNew.Executed += (s, e) => ucSetListPanel.newSet();
             var commandSaveSet = new Command() { MenuText = "Save Set" };
             commandSaveSet.Executed += (s, e) => ucSetListPanel.saveSet();
             var commandRevertSet = new Command() { MenuText = "Revert Set" };
             commandRevertSet.Executed += (s, e) => ucSetListPanel.revertSet();
+            var menuItemSetDelete = new Command() { MenuText = "Delete Set" };
+            menuItemSetDelete.Executed += (s, e) => ucSetListPanel.deleteSet();
+            
+            var menuItemSetRefeshList = new Command { MenuText = "Refresh" };
+            menuItemSetRefeshList.Executed += (s, e) => ucSetListPanel.refreshPanel();
+            var menuItemShowSetInExplorer = new Command { MenuText = "Show In Explorer" };
+            menuItemShowSetInExplorer.Executed += (s, e) => ucSetListPanel.showSetInExplorer();
+
+
+            var menuItemSetFileOperations = new ButtonMenuItem { Text = "File Operations", Items = { menuItemSetNew, commandSaveSet, commandRevertSet, menuItemSetDelete, menuItemShowSetInExplorer } };
+      
 
             //present menu items
             var menuItemPresentSong = new Command { MenuText = "Present Song", Shortcut = Keys.F11 };
@@ -158,12 +176,12 @@ namespace OpenChords.CrossPlatform
                     new ButtonMenuItem()
                     {
                         Text = "&Song", 
-                        Items = { menuItemNewSong, menuItemSaveSong, menuItemDeleteSong, menuItemAdvancedSearch, menuItemKey, menuItemCapo, menuItemSongFixFormating }
+                        Items = { menuItemSongFileOperations, menuItemAdvancedSearch, menuItemKey, menuItemCapo, menuItemSongFixFormating, menuItemSongRefeshList }
                     },
                     new ButtonMenuItem()
                     {
                         Text = "Se&ts", 
-                        Items = { commandSaveSet, commandRevertSet }
+                        Items = { menuItemSetFileOperations, menuItemSetRefeshList }
                     },
                     new ButtonMenuItem()
                     {
@@ -191,6 +209,7 @@ namespace OpenChords.CrossPlatform
 
         }
 
+       
         void menuItemPreferences_Executed(object sender, EventArgs e)
         {
             Song tempSong = null;

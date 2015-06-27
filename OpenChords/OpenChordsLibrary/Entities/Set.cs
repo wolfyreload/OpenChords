@@ -406,5 +406,22 @@ namespace OpenChords.Entities
                 System.Diagnostics.Process.Start(fileManager, pdfPath);
 
         }
+
+        public string getFullPath()
+        {
+            return Settings.ExtAppsAndDir.setsFolder + this.setName;
+        }
+
+        public static Set NewSet(string setName)
+        {
+            var set = new Set() { setName = setName, changeMade = true };
+            set.saveSet();
+            return set;
+        }
+
+        public static void DeleteSet(Set set)
+        {
+            File.Delete(Settings.ExtAppsAndDir.setsFolder + set.setName);
+        }
     }
 }
