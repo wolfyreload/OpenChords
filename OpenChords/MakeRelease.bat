@@ -5,13 +5,24 @@ mkdir Release
 
 call build.bat
 
-xcopy  /Y /E .\OpenChordsLoader\bin\Release\* .\Staging\LegacyApp\ 
-xcopy  /Y /E .\OpenChords.CrossPlatform.WinForms\bin\Release\* .\Staging\WinformsApp\ 
-xcopy  /Y /E .\OpenChords.CrossPlatform.Wpf\bin\Release\* .\Staging\WpfApp\
-xcopy  /Y /E .\OpenChords.CrossPlatform.Gtk2\bin\Release\* .\Staging\Gtk2App\ 
+call Manual\MakeHelpDocument.bat
 
-xcopy  /Y .\OpenChords\manual\manual.pdf .\Staging\LegacyApp\
+:: copy all needed files to run the application
+xcopy  /Y /E .\OpenChordsLoader\bin\Release\*                .\Staging\LegacyApp\ 
+xcopy  /Y /E .\OpenChords.CrossPlatform.Wpf\bin\Release\*    .\Staging\WpfApp\
+xcopy  /Y /E .\OpenChords.CrossPlatform.Gtk2\bin\Release\*   .\Staging\Gtk2App\ 
+
+:: copy the manual
+xcopy  /Y /E .\Manual\Help.html .\Staging\Manual\
+xcopy  /Y /E .\Manual\HelpImages\*.png .\Staging\Manual\HelpImages
+
+:: make settings file for legacy version
 copy /Y .\portable.xml .\Staging\LegacyApp\settings.xml
+
+::Put manual into each folder
+xcopy /Y /E .\Staging\Manual\* .\Staging\LegacyApp\
+xcopy /Y /E .\Staging\Manual\* .\Staging\WpfApp\
+xcopy /Y /E .\Staging\Manual\* .\Staging\Gtk2App\ 
 
 echo cd app >> .\staging\StartOpenChords.bat
 echo start OpenChords.exe >> .\staging\StartOpenChords.bat
