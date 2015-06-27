@@ -167,6 +167,9 @@
     </Content>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="..\SolutionInfo.cs">
+      <Link>Properties\SolutionInfo.cs</Link>
+    </Compile>
     <Compile Include="App\Display.aspx.cs">
       <DependentUpon>Display.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>

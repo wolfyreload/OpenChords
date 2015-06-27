@@ -31,6 +31,9 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Compile Include="..\SolutionInfo.cs">
+      <Link>Properties\SolutionInfo.cs</Link>
+    </Compile>
     <Compile Include="frmAdvancedSearch.cs" />
     <Compile Include="frmPreferences.cs" />
     <Compile Include="Preferences\FontAndColorPanel.cs" />
