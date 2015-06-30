@@ -8,6 +8,7 @@ namespace OpenChords.Entities
 {
     public class SongVerse
     {
+        public string HtmlId { get; set; }
         public string Header { get; private set; }
         public string Notes { get; set; }
         public List<string> Lyrics { get; private set; }
@@ -56,17 +57,17 @@ namespace OpenChords.Entities
             }
         }
 
-        public SongVerse(string header, string lyrics, string notes)
+        public SongVerse(string header, string lyrics, string notes, int index)
         {
-            _SongElement(header, lyrics, notes);
+            _SongElement(header, lyrics, notes, index);
         }
 
         public SongVerse()
         {
-            _SongElement("", "", "");
+            _SongElement("", "", "", 0);
         }
 
-        private void _SongElement(string header, string lyrics, string notes)
+        private void _SongElement(string header, string lyrics, string notes, int index)
         {
             Header = header;
             var split = lyrics.Split(new char[] { '\r', '\n' }, StringSplitOptions.RemoveEmptyEntries).ToList();
@@ -91,11 +92,12 @@ namespace OpenChords.Entities
             Lyrics = newLyrics;
             IsChord = newIsChord;
             Notes = notes;
+            HtmlId = "SongElement" + index;
         }
 
         public SongVerse(string header, string lyrics)
         {
-            _SongElement(header, lyrics, "");
+            _SongElement(header, lyrics, "", 0);
             
         }
 
@@ -150,7 +152,7 @@ namespace OpenChords.Entities
 
                 var lyrics = newLyrics[header];
                 var notes = newNotes[i];
-                var newElement = new SongVerse(header, lyrics, notes);
+                var newElement = new SongVerse(header, lyrics, notes, i+1);
                 elementsInOrder.Add(newElement);   
             }
 

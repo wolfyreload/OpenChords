@@ -42,7 +42,7 @@ namespace OpenChords.Export
             //get song html
             StringBuilder songBuilder = new StringBuilder();
             foreach (var song in _set.songList)
-            {       
+            {
                 songBuilder.AppendFormat("<div class=\"DisplaySongName\">{0}</div>\r\n", song.generateLongTitle());
                 var verses = song.getSongVerses();
                 foreach (var verse in verses)
@@ -59,6 +59,9 @@ namespace OpenChords.Export
             sb.Replace("<%SongBody%>", songBuilder.ToString());
             //set the title
             sb.Replace("<%Title%>", this.Title);
+            //put in the scripts
+            sb.Replace("<%Scripts%>", HtmlResources.scripts);
+            
 
             return sb.ToString();
         }
@@ -104,7 +107,7 @@ namespace OpenChords.Export
         {
             StringBuilder sb = new StringBuilder();
             //add heading line
-            sb.AppendLine("<div class=\"DisplaySongVerse\">");
+            sb.AppendFormat("<div ID=\"{0}\" class=\"DisplaySongVerse\">\r\n", verse.HtmlId);
             sb.AppendFormat("<div class=\"DisplayLineVerseHeading\">{0}</div>\r\n", trimLine(verse.FullHeaderName));
             //add lyrics
             sb.AppendLine("<div class=\"DisplayLineVerseLyrics\">");

@@ -147,6 +147,9 @@
     <Content Include="Resources\BaseSongHtml.html">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
+    <Content Include="Resources\scripts.txt">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
     <Content Include="Resources\stylesheet.css">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
