@@ -235,7 +235,12 @@ namespace OpenChords.CrossPlatform
             for (int i = 0; i < CurrentSet.songList.Count(); i++)
             {
                 var song = CurrentSet.songList[i];
+                int shortcutKeyCode = i + 40; //this maps to the number keys on the keyboard
                 var songCommand = new Command() { Tag = i, MenuText = song.title };
+                if (shortcutKeyCode <= (int)Keys.D9)
+                {
+                    songCommand.Shortcut = Application.Instance.AlternateModifier | (Keys)shortcutKeyCode;
+                }
                 songCommand.Executed += songCommand_execute;
                 menuItemSongList.Items.Add(songCommand);
             }
