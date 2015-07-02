@@ -42,7 +42,7 @@ namespace OpenChords.CrossPlatform.SongEditor
             lbSongs.ContextMenu = menu;
 
 
-            cmbSets.AutoComplete = true;
+            cmbSets.ReadOnly = true;
 
 
             lbSongs.KeyUp += lbSongs_KeyUp;
