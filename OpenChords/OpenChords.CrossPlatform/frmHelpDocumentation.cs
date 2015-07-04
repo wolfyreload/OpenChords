@@ -16,7 +16,7 @@ namespace OpenChords.CrossPlatform
             this.Width=1024;
             this.Height=768;
             this.Icon = Graphics.Icon;
-            this.Title = "OpenChords User Manual";
+            this.Title = "OpenChords Help Documentation";
 
             this.Content =  webView = new WebView();
             string manualHtmlFile = OpenChords.Settings.ExtAppsAndDir.manual;

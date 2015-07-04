@@ -161,7 +161,7 @@ namespace OpenChords.CrossPlatform
             menuItemExportSetList.Executed += (s, e) => ucSetListPanel.ExportToTextFile();
             
             //about menu
-            var menuItemManual = new Command { MenuText = "Manual", Shortcut = Keys.F1 };
+            var menuItemManual = new Command { MenuText = "Help Documentation", Shortcut = Keys.F1 };
             menuItemManual.Executed += (s, e) => showManual();
 
             // create menu
