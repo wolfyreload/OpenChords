@@ -72,7 +72,9 @@ namespace OpenChords.Config
         {
             get
             {
-                var path = settings.CurrentPath + "Help.html";
+                Console.WriteLine(settings.CurrentPath);
+                var path = settings.CurrentPath + "help.html";
+                Console.WriteLine(path);
                 if (IO.FileFolderFunctions.isFilePresent(path))
                     return path;
                 else

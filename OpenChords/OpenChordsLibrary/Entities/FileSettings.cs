@@ -32,7 +32,7 @@ namespace OpenChords.Entities
         public static FileAndFolderSettings loadSettings()
         {
             var settings = IO.XmlReaderWriter.readFileAndFolderSettings();
-            var dir = new DirectoryInfo(@".\");
+            var dir = new DirectoryInfo(@"./");
             settings.CurrentPath = dir.FullName;
             return settings;
         }
