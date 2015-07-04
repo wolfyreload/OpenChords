@@ -82,6 +82,7 @@ Song Metadata
 This is information describing your song.
 
 Title: this is just the name of your song.
+
 Order: This is the order in which you would like the pieces of the song
 to appear
 
@@ -103,13 +104,21 @@ E = Ending
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 Author: Just the author of the song
+
 Key: Song key
+
 Capo: Capo position
+
 Sharps/Flats: whether you prefer using sharps or flats
+
 Bpm: Beats per minute (used for the metronome)
+
 Tempo: Options are very fast, fast medium, slow, very slow
+
 Time Signature: 2/4, 3/4, 4/4 etc
+
 CCli: Christian Copyright Licensing International
+
 Reference: Other reference information e.g. SOF205
 
 Chords/Lyrics Editor
@@ -250,7 +259,7 @@ Tips and tricks
 You can use Ctrl+R to quickly reach this feature. It attempts fix all the formatting in your song and writes a
 template to your notes panel following the order of the song that you chose in the order text field.
 
-### Syncing OpenChords your songs with the rest of your music group
+### Syncing OpenChords songs with the rest of your music group
 
 If you find yourself in the position that your entire music team wants
 to use OpenChords, keeping all the songs in sync can be a bit of a
@@ -260,7 +269,7 @@ OpenChords from your Dropbox. This way you can make sure your whole team
 has the same notes and chords for each song as well as the latest
 version of OpenChords.
 
-Just be careful of the OpenChordsSettings folder. It's preferable to not
+Just be careful of the Settings folder (OpenChordsApplicationData/Settings). It's preferable to not
 sync this folder since it holds your personalized settings, lucky
 Dropbox has a "Selective Sync" feature.
 
