@@ -8,7 +8,7 @@
 
 
 <script>
-	//is element visible
+	//is element completely visible
 	function isElementInViewport (el) {
 		var rect = el.getBoundingClientRect();
 
@@ -17,7 +17,7 @@
 			rect.left >= 0 &&
 			rect.bottom <= (window.innerHeight || document.documentElement.clientHeight) && /*or $(window).height() */
 			rect.right <= (window.innerWidth || document.documentElement.clientWidth) /*or $(window).width() */
-		);
+		);		
 	}
 
 	//Finds y value of given object
@@ -31,41 +31,87 @@
 		}
 	}
 
-
-	function findFirstOffScreenElement() {
+	function getMaxSongElementIndex() {
 		var counter = 1;
-		var firstVisibleElementFound = false;
 		while (true)
 		{
 			var elementToCheck = document.getElementById('SongElement' + counter);
-			if (elementToCheck == null) {
-				return null;
-			}
-			var isVisible = isElementInViewport(elementToCheck);
-			if (isVisible == true) {
-				firstVisibleElementFound = true;
-			}	
-
-			if (firstVisibleElementFound == true && isVisible == false) {
-				return elementToCheck;
-			}
+			if (elementToCheck == null)
+				return counter-1;
 			counter++;
 		}
 	}
+	
+	//check if songelement full visible on the screen
+	function isSongElementCompletelyVisible(index) {
+		var elementToCheck = document.getElementById('SongElement' + index);
+		var isVisible = isElementInViewport(elementToCheck);
+		return isVisible
+	}
 
-	//scroll find object off screen
-	function scrollToNextNotVisibleDiv() {
-		var firstOffScreenElement = findFirstOffScreenElement();
-		if (firstOffScreenElement != null) {
-			window.scroll(0,findPos(firstOffScreenElement));
+	//check if songelement fully invisible
+	function isSongElementCompletelyInvisible(index) {
+		return !isSongElementCompletelyVisible(index);
+	}
+	
+	//index of the first element in the song that is visible on the screen
+	function getFirstVisibleSongElementIndex() {
+		var maxSongElementCount = getMaxSongElementIndex();
+		for (i = 1; i < maxSongElementCount; i++)  
+		{
+			if (isSongElementCompletelyVisible(i))
+				return i;
+		}
+	}
+
+	function findFirstOffScreenElementIndex() {
+		var maxSongElementCount = getMaxSongElementIndex();
+		var indexOfFirstVisibleElement = getFirstVisibleSongElementIndex();
+		for (i = indexOfFirstVisibleElement; i < maxSongElementCount; i++) 
+		{
+			if (isSongElementCompletelyVisible(i) == false)
+				return i;
+		
+		}
+	}
+
+	//scroll to song element in index
+	function scrollToSongElement(index)
+	{
+		window.scroll(0,findPos(document.getElementById('SongElement' + index)));
+	}
+
+	//scroll down by one screen
+	function scrollDown() {
+		var firstOffScreenElementIndex = findFirstOffScreenElementIndex();
+		if (firstOffScreenElementIndex != null) {
+			scrollToSongElement(firstOffScreenElementIndex);
+		}
+	}
+
+	//scroll up by one screen
+	function scrollUp()
+	{
+	    oldFirstVisible = getFirstVisibleSongElementIndex();
+		newCurrentElement = oldFirstVisible;
+		while (newCurrentElement > 1)
+		{
+			newCurrentElement--;
+			scrollToSongElement(newCurrentElement);
+			if (isSongElementCompletelyInvisible(oldFirstVisible)) return;
 		}
 	}
 
 	//add binding to spacebar to run the scrollToNextNotVisibleDiv javascript
 	$(window).keydown(function(e) {
-		if (e.keyCode == 32) //if spacebar
+		if (e.keyCode == 32 || e.keyCode == 40) //if spacebar or down arrow
 		{
-			scrollToNextNotVisibleDiv();
+			scrollDown();
+			e.preventDefault(); //swallow the event
+		}
+		else if (e.keyCode == 38) //if up arrow is pressed
+		{
+			scrollUp();
 			e.preventDefault(); //swallow the event
 		}
 	});
