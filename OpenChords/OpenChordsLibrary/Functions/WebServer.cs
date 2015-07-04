@@ -70,10 +70,10 @@ namespace OpenChords.Functions
         private DisplayAndPrintSettings getDisplaySettingsOption(HttpRequestEventArgs e)
         {
             DisplayAndPrintSettings settings = null;
-            var request = e.Request.Url.Query;
-            if (request.ToLower().Contains("print"))
+            var request = e.Request.Url.ToString();
+            if (request.ToLower().Contains("/print"))
                 settings = DisplayAndPrintSettings.loadSettings(DisplayAndPrintSettingsType.PrintSettings);
-            else if (request.ToLower().Contains("tablet"))
+            else if (request.ToLower().Contains("/tablet"))
                 settings = DisplayAndPrintSettings.loadSettings(DisplayAndPrintSettingsType.TabletSettings);
             else
                 settings = CurrentDisplayAndPrintSettings;
