@@ -53,9 +53,10 @@ namespace OpenChords.CrossPlatform
 
             drawSong();
 
-            webView.KeyUp += webView_KeyUp;
+            if (Platform.IsWpf)
+                webView.KeyDown += webView_KeyDown;
 
-            var menuItemExit = new Command { MenuText = "Exit", Shortcut = Application.Instance.CommonModifier | Keys.Q };
+            var menuItemExit = new Command { MenuText = "Exit", Shortcut = Keys.Escape };
             menuItemExit.Executed += (s, e) => this.Close();
             
             // refresh item
@@ -63,9 +64,9 @@ namespace OpenChords.CrossPlatform
             menuItemRefresh.Executed += menuItemRefresh_Executed;
 
             // size items
-            var commandSongIncreaseSize = new Command { MenuText = "Increase Font Size", Shortcut = Application.Instance.CommonModifier | Keys.P };
+            var commandSongIncreaseSize = new Command { MenuText = "Increase Font Size", Shortcut = Application.Instance.AlternateModifier | Keys.P};
             commandSongIncreaseSize.Executed += commandSongIncreaseSize_Executed;
-            var commandSongDecreaseSize = new Command { MenuText = "Decrease Font Size", Shortcut = Application.Instance.CommonModifier | Keys.O };
+            var commandSongDecreaseSize = new Command { MenuText = "Decrease Font Size", Shortcut = Application.Instance.AlternateModifier | Keys.O };
             commandSongDecreaseSize.Executed += commandSongDecreaseSize_Executed;
             
             
@@ -87,13 +88,13 @@ namespace OpenChords.CrossPlatform
             var menuItemNavigation = new ButtonMenuItem() { Text = "&Navigation", Items = { menuItemPreviousSong, menuItemNextSong } };
                 
             //visibility menu
-            var commandToggleChords = new Command { MenuText = "Toggle Chords", Shortcut = Application.Instance.CommonModifier | Keys.C };
+            var commandToggleChords = new Command { MenuText = "Toggle Chords", Shortcut = Application.Instance.CommonModifier | Keys.Q };
             commandToggleChords.Executed += (s, e) => { toggleChords(); };
             var commandToggleLyrics = new Command { MenuText = "Toggle Lyrics", Shortcut = Application.Instance.CommonModifier | Keys.W };
             commandToggleLyrics.Executed += (s, e) => { toggleLyrics(); };
-            var commandToggleNotes = new Command { MenuText = "Toggle Notes", Shortcut = Application.Instance.CommonModifier | Keys.N };
+            var commandToggleNotes = new Command { MenuText = "Toggle Notes", Shortcut = Application.Instance.CommonModifier | Keys.E };
             commandToggleNotes.Executed += (s, e) => { toggleNotes(); };
-            var commandToggleSharpsAndFlats = new Command { MenuText = "Toggle Sharps/Flats", Shortcut = Application.Instance.CommonModifier | Keys.S };
+            var commandToggleSharpsAndFlats = new Command { MenuText = "Toggle Sharps/Flats" };
             commandToggleSharpsAndFlats.Executed += (s, e) => { toggleSharpsAndFlats(); };
 
             //Metronome
@@ -131,7 +132,6 @@ namespace OpenChords.CrossPlatform
             };
 
             metronome1 = new OpenChords.Functions.Metronome();
-            
             this.Closing += frmPresent_Closing;
         }
 
@@ -277,10 +277,12 @@ namespace OpenChords.CrossPlatform
             drawSong();
         }
 
-        void webView_KeyUp(object sender, KeyEventArgs e)
+        void webView_KeyDown(object sender, KeyEventArgs e)
         {
-            if (e.Key == Keys.Escape)
-                this.Close();
+            //if (e.Key == Keys.Escape)
+            //    this.Close();
+            if (e.Key == Keys.Up || e.Key == Keys.Down) 
+                e.Handled = true;
         }
 
         private void drawSong()

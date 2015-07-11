@@ -239,14 +239,16 @@ Presentation shortcuts
   Ctrl+Left       Go to previous song                              
   Ctrl+Right      Go to next song                                  
   Alt+1..9        Goes to the song 1-9          
-  Ctrl+N          toggle song notes                                
   Alt+L           List of all songs in the set                     
-  Ctrl+O          Decreases font size                              
-  Ctrl+P          Increases font size                              
+  Alt+O           Decreases font size                              
+  Alt+P           Increases font size                              
   Ctrl+0          Increases song key                               
   Crtl+9          Decreases song key                               
   Ctrl+8          Increases capo                                
-  Crtl+7          Decreases capo                                
+  Crtl+7          Decreases capo      
+  Ctrl+Q		  Toggle chords  
+  Ctrl+W	      Toggle lyrics
+  Ctrl+E		  Toggle notes
   Escape          Closes the song presentation window           
   Ctrl+M          Starts/Stops the metronome    
   
