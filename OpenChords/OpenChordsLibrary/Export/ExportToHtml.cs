@@ -14,6 +14,7 @@ namespace OpenChords.Export
         private Set _set;
         public string Filename { get; private set; }
         private string Title { get; set; }
+        private bool _isSet;
 
         public ExportToHtml(Set set, DisplayAndPrintSettings settings)
         {
@@ -21,6 +22,7 @@ namespace OpenChords.Export
             _settings = settings;
             Title = set.setName;
             Filename = set.setName + ".html";
+            _isSet = true;
         }
 
         public ExportToHtml(Song song, DisplayAndPrintSettings settings)
@@ -60,7 +62,10 @@ namespace OpenChords.Export
             //set the title
             sb.Replace("<%Title%>", this.Title);
             //put in the scripts
-            sb.Replace("<%Scripts%>", HtmlResources.scripts);
+            if (_isSet)
+                sb.Replace("<%Scripts%>", "");
+            else
+                sb.Replace("<%Scripts%>", HtmlResources.scripts);
             
 
             return sb.ToString();
