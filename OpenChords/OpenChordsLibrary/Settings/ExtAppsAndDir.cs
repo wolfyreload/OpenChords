@@ -72,7 +72,7 @@ namespace OpenChords.Config
             {
                 string path;
                 path = settings.OpenSongExecutable;
-
+                path = Path.GetFullPath(path);
                 string fixedPath = fixPaths(path);
                 return fixedPath;
 
