@@ -16,7 +16,7 @@ namespace OpenChords.CrossPlatform.SongEditor
         public event EventHandler<Song> SongChanged;
         public event EventHandler<Song> SongDeleting;
         public event EventHandler<Song> AddSongToSet;
-        private string[] _fullSongList;
+        private List<Song> _fullSongList;
 
         public SongListPanel()
         {
@@ -42,7 +42,8 @@ namespace OpenChords.CrossPlatform.SongEditor
             {
                 Items = { commandAddToSet, commandDeleteSong }
             };
-            lbSongs.ContextMenu = menu;            
+            lbSongs.ContextMenu = menu;
+            _fullSongList = new List<Song>();     
             txtSearch.Focus();
         }
 
@@ -80,8 +81,13 @@ namespace OpenChords.CrossPlatform.SongEditor
             lbSongs.MouseDoubleClick -= lbSongs_MouseDoubleClick;
             lbSongs.KeyUp -= lbSongs_KeyUp;
 
-            _fullSongList = Song.listOfAllSongs().ToArray();
-
+            _fullSongList.Clear();
+ 
+            string[] songNameList = Song.listOfAllSongs().ToArray();
+            foreach (var songName in songNameList)
+            {
+                _fullSongList.Add(Song.loadSong(songName));
+            }
             setListItems(_fullSongList);
 
             lbSongs.SelectedIndexChanged += lbSongs_SelectedIndexChanged;
@@ -128,13 +134,13 @@ namespace OpenChords.CrossPlatform.SongEditor
             }
         }
 
-        private void setListItems(string[] stringSongs)
+        private void setListItems(List<Song> songs)
         {
 	
             ListItemCollection listItems = new ListItemCollection();
-            foreach (string stringsong in stringSongs)
+            foreach (Song song in songs)
             {
-                listItems.Add(stringsong);
+                listItems.Add(song.SongFileName);
             }
             lbSongs.DataStore = listItems;
 
@@ -150,9 +156,14 @@ namespace OpenChords.CrossPlatform.SongEditor
             var filteredList = _fullSongList.AsQueryable();
             foreach (string item in searchItems)
             {
-                filteredList = filteredList.Where(c => c.ToUpper().Contains(item));
+                //smart filter
+                filteredList = filteredList.Where(c => c.title.ToUpper().Contains(item) //filter on title
+                                                     || c.author.ToUpper().Contains(item) //filter on author
+                                                     || c.lyrics.ToUpper().Contains(item) //filter on lyrics
+                                                     || c.hymn_number.ToUpper().Contains(item) //filter on reference; 
+                                                     || c.ccli.ToUpper().Contains(item)); //filter on ccli; 
             }
-            setListItems(filteredList.ToArray());
+            setListItems(filteredList.ToList());
 
 			lbSongs.SelectedIndexChanged += lbSongs_SelectedIndexChanged;
 

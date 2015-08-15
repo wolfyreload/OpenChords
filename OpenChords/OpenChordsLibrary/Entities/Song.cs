@@ -111,6 +111,8 @@ namespace OpenChords.Entities
             lyrics = "";
             notes = "";
             preferFlats = "false";
+            hymn_number = "";
+            ccli = "";
             BeatsPerMinute = 100;
         }
 
