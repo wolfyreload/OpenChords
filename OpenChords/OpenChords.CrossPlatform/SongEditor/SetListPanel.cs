@@ -115,6 +115,19 @@ namespace OpenChords.CrossPlatform.SongEditor
 
         internal void PresentSet()
         {
+            if (string.IsNullOrEmpty(CurrentSet.setName))
+            {
+                Helpers.PopupMessages.ShowErrorMessage("Please select a set first");
+                return;
+            }
+
+            if (CurrentSet.getSongSetSize() == 0)
+            {
+                Helpers.PopupMessages.ShowErrorMessage("Please add one or more songs to the set");
+                return;
+            }
+
+
             if (SetChanged && Helpers.PopupMessages.ShowConfirmationMessage("Save changes to set '{0}' before presenting?", CurrentSet.setName))
                 saveSet();
             else
@@ -158,6 +171,11 @@ namespace OpenChords.CrossPlatform.SongEditor
 
         internal void AddSongToSet(Song e)
         {
+            if (string.IsNullOrEmpty(CurrentSet.setName))
+            {
+                Helpers.PopupMessages.ShowErrorMessage("Please select a set first");
+                return;
+            }
             CurrentSet.addSongToSet(e);
             this.refreshSongList();
             SetChanged = true;
@@ -227,23 +245,32 @@ namespace OpenChords.CrossPlatform.SongEditor
 
         internal void ExportToOpenSong()
         {
-            if (String.IsNullOrEmpty(Settings.ExtAppsAndDir.openSongSetFolder))
+            if (!Settings.ExtAppsAndDir.IsOpenSongDataFolderConfigured)
             {
-                Helpers.PopupMessages.ShowErrorMessage("Opensong is not configured");
+                Helpers.PopupMessages.ShowErrorMessage("Opensong data folder is not configured");
                 return;
             }
 
+            //export the results
             CurrentSet.exportSetAndSongsToOpenSong();
-            if (!String.IsNullOrEmpty(Settings.ExtAppsAndDir.openSongApp))
-                Process.Start(Settings.ExtAppsAndDir.openSongApp);
-            else if (!String.IsNullOrEmpty(Settings.ExtAppsAndDir.openSongSetFolder))
-                Process.Start(Settings.ExtAppsAndDir.openSongSetFolder);
+            //open opensong set folder
+            Process.Start(Settings.ExtAppsAndDir.openSongSetFolder);
+
+            //run opensong
+            if (Settings.ExtAppsAndDir.IsOpenSongExecutableConfigured)
+                Process.Start(Settings.ExtAppsAndDir.openSongApp);      
         }
 
 
 
         internal void deleteSet()
         {
+            if (string.IsNullOrEmpty(CurrentSet.setName))
+            {
+                Helpers.PopupMessages.ShowErrorMessage("Please select a set first");
+                return;
+            }
+
             if (Helpers.PopupMessages.ShowConfirmationMessage("Delete set '{0}'?", CurrentSet.setName))
             {
                 Set.DeleteSet(CurrentSet);

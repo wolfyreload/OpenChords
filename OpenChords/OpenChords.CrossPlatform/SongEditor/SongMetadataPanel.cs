@@ -313,8 +313,14 @@ namespace OpenChords.CrossPlatform.SongEditor
         {
             if (SongChanged)
             {
+                updateSongObjectFromGui();
                 if (Helpers.PopupMessages.ShowConfirmationMessage("Save changes to song '{0}' before presenting?", CurrentSong.title))
                     this.SaveSong();
+            }
+            if (CurrentSong == null || CurrentSong.title == "")
+            {
+                Helpers.PopupMessages.ShowErrorMessage("No song selected");
+                return;
             }
             new frmPresent(CurrentSong, DisplayAndPrintSettings.loadSettings(DisplayAndPrintSettingsType.DisplaySettings)).Show();
         }
@@ -358,6 +364,11 @@ namespace OpenChords.CrossPlatform.SongEditor
 
         internal void ExportToHtml(DisplayAndPrintSettings settings)
         {
+            if (CurrentSong.title == "")
+            {
+                Helpers.PopupMessages.ShowErrorMessage("Please select a song");
+                return;
+            }
             string destination = CurrentSong.ExportToHtml(settings);
             Process.Start(destination);
         }

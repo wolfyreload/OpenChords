@@ -97,6 +97,14 @@ namespace OpenChords.Config
             }
         }
 
+        public bool IsOpenSongExecutableConfigured
+        {
+            get
+            {
+                return !string.IsNullOrWhiteSpace(settings.OpenSongExecutable) && File.Exists(openSongApp);
+            }
+        }
+
         public String dataFolder
         {
             get
@@ -198,6 +206,15 @@ namespace OpenChords.Config
 
             }
         }
+
+        public bool IsOpenSongDataFolderConfigured
+        {
+            get
+            {
+                return !string.IsNullOrWhiteSpace(settings.OpenSongSetsAndSongs);
+            }
+        }
+
 
         //external Directories
         public String opensongSongsFolder
