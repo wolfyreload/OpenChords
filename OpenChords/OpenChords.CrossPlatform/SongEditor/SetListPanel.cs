@@ -194,7 +194,7 @@ namespace OpenChords.CrossPlatform.SongEditor
 
         internal void saveSet()
         {
-            if (cmbSets.SelectedIndex > 0 && SetChanged)
+            if (cmbSets.SelectedIndex >= 0 && SetChanged)
             {
                 CurrentSet.saveSet();
                 SetChanged = false;
