@@ -307,12 +307,6 @@ namespace OpenChords.Entities
             this.lyrics = oldSave.lyrics;
             this.presentation = oldSave.presentation;
             this.style = oldSave.style;
-
-            if (this.notes == "")
-            {
-                var notesClass = Note.loadNotes(title);
-                this.notes = notesClass.notes;
-            }
         }
 
         public void transposeKeyUp()

@@ -92,7 +92,6 @@
     <Compile Include="Entities\DisplayAndPrintSettings.cs" />
     <Compile Include="Entities\FileSettings.cs" />
     <Compile Include="Entities\GlobalVariables.cs" />
-    <Compile Include="Entities\Note.cs" />
     <Compile Include="Entities\Set.cs" />
     <Compile Include="Entities\Song.cs" />
     <Compile Include="Entities\SongHtml.cs" />
