@@ -147,6 +147,7 @@ namespace OpenChords.CrossPlatform.SongEditor
             txtCapo.TextChanged -= fieldTextChanged;
             txtKey.TextChanged -= fieldTextChanged;
             txtBpm.TextChanged -= fieldTextChanged;
+            txtOrder.LostFocus -= TxtOrder_LostFocus;
             updateGuiFromSongObject();
 
             SongChanged = false;
@@ -165,6 +166,12 @@ namespace OpenChords.CrossPlatform.SongEditor
             txtCapo.TextChanged += fieldTextChanged;
             txtKey.TextChanged += fieldTextChanged;
             txtBpm.TextChanged += fieldTextChanged;
+            txtOrder.LostFocus += TxtOrder_LostFocus;
+        }
+
+        private void TxtOrder_LostFocus(object sender, EventArgs e)
+        {
+            txtOrder.Text = txtOrder.Text.ToUpper();
         }
 
         private void updateGuiFromSongObject()
@@ -212,7 +219,7 @@ namespace OpenChords.CrossPlatform.SongEditor
             int.TryParse(txtCapo.Text, out capoInt);
 
             CurrentSong.title = txtTitle.Text;
-            CurrentSong.presentation = txtOrder.Text;
+            CurrentSong.presentation = txtOrder.Text.ToUpper();
             CurrentSong.author = txtAuther.Text;
             CurrentSong.copyright = txtCopyright.Text;
             CurrentSong.tempo = (cmbTempo.SelectedIndex != 0) ? cmbTempo.Text : "";
