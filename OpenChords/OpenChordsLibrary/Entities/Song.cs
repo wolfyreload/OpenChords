@@ -126,7 +126,11 @@ namespace OpenChords.Entities
         public string bbm { get; set; }
 
         [XmlIgnore]
-        private string songFileName { get; set; }
+        public string SongFileName { get; set; }
+
+
+        [XmlIgnore]
+        internal string songFilePath { get; set; }
 
         public songStyle style;
 
@@ -198,13 +202,10 @@ namespace OpenChords.Entities
 
         public static Song loadSong(string SongName)
         {
-            if (string.IsNullOrEmpty(SongName)) return new Song();
-            Song song = XmlReaderWriter.readSong(Settings.ExtAppsAndDir.songsFolder + SongName);
-            if (string.IsNullOrEmpty(song.notes))
-                song.notes = Note.loadNotes(SongName).notes;
-
-            song.songFileName = SongName;
-
+            string filename = Settings.ExtAppsAndDir.songsFolder + SongName;
+            if (!File.Exists(filename))
+                throw new Exception(string.Format("Song: {0} does not exist", SongName));
+            Song song = XmlReaderWriter.readSong(filename);
             initializeSongStyle(song);
             return song;
 
@@ -277,28 +278,21 @@ namespace OpenChords.Entities
         {
             if (this.title != "")
             {
-                //remove the notes when saving the song
                 XmlReaderWriter.writeSong(Settings.ExtAppsAndDir.songsFolder + this.title, this);
             }
         }
 
         internal void saveSong(string destination)
         {
-            if (this.title != "")
-            {
-                //remove the notes when saving the song
-                XmlReaderWriter.writeSong(destination, this);
-            }
+            XmlReaderWriter.writeSong(destination, this);
         }
 
         public void deleteSong()
         {
-            if (this.title != "")
+            if (this.songFilePath != "")
             {
-                FileFolderFunctions.deleteFile(Settings.ExtAppsAndDir.songsFolder + this.songFileName);
-                FileFolderFunctions.deleteFile(Settings.ExtAppsAndDir.notesFolder + this.songFileName);
+                FileFolderFunctions.deleteFile(this.songFilePath);
             }
-
         }
 
         public void revertToSaved()
@@ -378,6 +372,17 @@ namespace OpenChords.Entities
                 songTitleLine.Append(" " + this.tempo);
 
             return songTitleLine.ToString();
+        }
+
+        /// <summary>
+        /// returns true if the song exists
+        /// </summary>
+        /// <param name="songName"></param>
+        /// <returns></returns>
+        public static bool Exists(string songName)
+        {
+            string filename = Settings.ExtAppsAndDir.songsFolder + songName;
+            return File.Exists(filename);
         }
 
         /// <summary>

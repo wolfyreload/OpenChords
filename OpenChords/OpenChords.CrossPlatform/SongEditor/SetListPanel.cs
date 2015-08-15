@@ -95,7 +95,7 @@ namespace OpenChords.CrossPlatform.SongEditor
             ListItemCollection items = new ListItemCollection();
             foreach (var song in songs)
             {
-                items.Add(song.title);
+                items.Add(song.SongFileName);
             }
             lbSongs.DataStore = items;
         }

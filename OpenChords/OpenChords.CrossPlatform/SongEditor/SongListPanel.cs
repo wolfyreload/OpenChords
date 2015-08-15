@@ -14,6 +14,7 @@ namespace OpenChords.CrossPlatform.SongEditor
         protected TextBox txtSearch = new TextBox();
 
         public event EventHandler<Song> SongChanged;
+        public event EventHandler<Song> SongDeleting;
         public event EventHandler<Song> AddSongToSet;
         private string[] _fullSongList;
 
@@ -33,13 +34,25 @@ namespace OpenChords.CrossPlatform.SongEditor
 
             var commandAddToSet = new Command() { MenuText = "Add to set", Shortcut = Application.Instance.CommonModifier | Keys.Enter };
             commandAddToSet.Executed += (s, e) => addSongToSet();
+            var commandDeleteSong = new Command() { MenuText = "Delete song", Shortcut = Application.Instance.CommonModifier | Keys.Delete };
+            commandDeleteSong.Executed += (s, e) => deleteSong();
+
 
             var menu = new ContextMenu()
             {
-                Items = { commandAddToSet }
+                Items = { commandAddToSet, commandDeleteSong }
             };
             lbSongs.ContextMenu = menu;            
             txtSearch.Focus();
+        }
+
+        private void deleteSong()
+        {
+            if (lbSongs.SelectedIndex < 0) return;
+            string songName = lbSongs.SelectedValue.ToString();
+            Song selectedSong = Song.loadSong(songName);
+            if (SongDeleting != null)
+                SongDeleting(this, selectedSong);
         }
 
         private void addSongToSet()
@@ -82,7 +95,16 @@ namespace OpenChords.CrossPlatform.SongEditor
         void lbSongs_KeyUp(object sender, KeyEventArgs e)
         {
             if (e.Control && e.Key == Keys.Enter)
+            {
                 addSongToSet();
+                e.Handled = true;
+            }
+            else if (e.Control && e.Key == Keys.Delete)
+            {
+                deleteSong();
+                e.Handled = true;
+            }
+
         }
 
         void lbSongs_MouseDoubleClick(object sender, MouseEventArgs e)

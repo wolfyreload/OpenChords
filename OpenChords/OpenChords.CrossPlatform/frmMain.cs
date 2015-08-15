@@ -90,9 +90,9 @@ namespace OpenChords.CrossPlatform
             var menuItemNewSong = new Command { MenuText = "New Song", Shortcut = Application.Instance.CommonModifier | Keys.N };
             menuItemNewSong.Executed += (s, e) => ucSongMetaDataPanel.NewSong();
             var menuItemSaveSong = new Command { MenuText = "Save Song", Shortcut = Application.Instance.CommonModifier | Keys.S };
-            menuItemSaveSong.Executed += (s, e) => ucSongMetaDataPanel.SaveSong();
+            menuItemSaveSong.Executed += (s, e) => saveCurrentSong();
             var menuItemDeleteSong = new Command { MenuText = "Delete Song" };
-            menuItemDeleteSong.Executed += (s, e) => { ucSongMetaDataPanel.DeleteSong(); ucSongListPanel.refreshPanel(); };
+            menuItemDeleteSong.Executed += (s, e) => { deleteCurrentlySelectedSong(); };
             var menuItemAdvancedSearch = new Command { MenuText = "Advanced Search", Shortcut = Application.Instance.CommonModifier | Keys.F };
             menuItemAdvancedSearch.Executed += menuItemAdvancedSearch_Executed;
             var menuItemSongIncreaseKey = new Command { MenuText = "Transpose Up", Shortcut = Application.Instance.CommonModifier | Keys.D0 };
@@ -212,11 +212,10 @@ namespace OpenChords.CrossPlatform
             ucSongListPanel.SongChanged += SelectedSongChanged;
             ucSetListPanel.SongChanged += SelectedSongChanged;
             ucSongListPanel.AddSongToSet += (s, e) => ucSetListPanel.AddSongToSet(e);
-
+            ucSongListPanel.SongDeleting += (s, e) => deleteCurrentlySelectedSong();
 
         }
 
-       
         void menuItemPreferences_Executed(object sender, EventArgs e)
         {
             Song tempSong = null;
@@ -286,8 +285,28 @@ namespace OpenChords.CrossPlatform
 
         void SelectedSongChanged(object sender, Entities.Song e)
         {
-            ucSongMetaDataPanel.CurrentSong = e;
+            ucSongMetaDataPanel.ChangeToSong(e);
             ucSongMetaDataPanel.refreshPanel();
+        }
+
+        private void deleteCurrentlySelectedSong()
+        {
+            bool songDeleted = ucSongMetaDataPanel.DeleteSong();
+            if (songDeleted)
+            {
+                ucSongListPanel.refreshPanel();
+                ucSetListPanel.refreshPanel();
+            }
+        }
+
+        private void saveCurrentSong()
+        {
+            bool newSongCreated = ucSongMetaDataPanel.SaveSong();
+            if (newSongCreated)
+            {
+                ucSongListPanel.refreshPanel();
+                ucSetListPanel.refreshPanel();
+            }
         }
 
         void showManual()

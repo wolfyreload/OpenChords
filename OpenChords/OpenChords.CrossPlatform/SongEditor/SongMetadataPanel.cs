@@ -27,7 +27,7 @@ namespace OpenChords.CrossPlatform.SongEditor
         protected Splitter splitterMetadata;
         protected Splitter splitterSongNotes;
 
-        public Song CurrentSong { get; set; }
+        public Song CurrentSong { get; private set; }
         public bool SongChanged { get; set; }
 
         public SongMetadataPanel()
@@ -125,7 +125,7 @@ namespace OpenChords.CrossPlatform.SongEditor
 
         private bool showConfirmation(string message = "Are you sure?")
         {
-            message = message.Replace("{0}", CurrentSong.title);
+            message = message.Replace("{0}", CurrentSong.SongFileName);
             DialogResult result = MessageBox.Show(message, "", MessageBoxButtons.YesNo, MessageBoxType.Question);
             return result == DialogResult.Yes;
         }
@@ -133,10 +133,6 @@ namespace OpenChords.CrossPlatform.SongEditor
 
         public void refreshPanel()
         {
-            if (SongChanged)
-                if (showConfirmation("Save changes to current song first?"))
-
-
             //disable events
             txtTitle.TextChanged -= fieldTextChanged;
             txtOrder.TextChanged -= fieldTextChanged;
@@ -255,27 +251,64 @@ namespace OpenChords.CrossPlatform.SongEditor
                 txtTitle.Focus();
         }
 
-        internal void SaveSong()
+        /// <summary>
+        /// returns true if it is a new song
+        /// </summary>
+        /// <returns></returns>
+        internal bool SaveSong()
         {
             if (txtTitle.Text.Trim() == "")
             {
                 MessageBox.Show("Song title cannot be blank", MessageBoxType.Error);
-                return;
+                return false;
             }
 
+            //update the song object with the data in the gui
             updateSongObjectFromGui();
+
+            //Check if there is already a song with the name chosen
+            bool anotherSongWithThisNameAlreadyExists = !string.Equals(CurrentSong.SongFileName, CurrentSong.title, StringComparison.OrdinalIgnoreCase) && Song.Exists(CurrentSong.title);
+            if (anotherSongWithThisNameAlreadyExists)
+            {
+                MessageBox.Show(string.Format("Song '{0}' already exists please choose another name", CurrentSong.title), MessageBoxType.Error);
+                return false;
+            }
+            //if the song name has changed delete the old song and put in the new name
+            bool nameChanged = CurrentSong.SongFileName != CurrentSong.title && CurrentSong.SongFileName != null;
+            if (nameChanged)
+                CurrentSong.deleteSong();
+
+            //save the song
+            CurrentSong.saveSong();
+
+            //notify the user
+            MessageBox.Show(string.Format("Song: '{0}' saved", CurrentSong.title), MessageBoxType.Information);
 
             SongChanged = false;
 
-            CurrentSong.saveSong();
-
+            return CurrentSong.SongFileName != CurrentSong.title;
         }
 
+        internal void ChangeToSong(Song newSong)
+        {
+            if (SongChanged)
+                if (showConfirmation("Save changes to current song '{0}' first?"))
+                    this.SaveSong();
+            CurrentSong = newSong;
+            refreshPanel();
+        }
 
-        internal void DeleteSong()
+        internal bool DeleteSong()
         {
             if (showConfirmation("Are you sure you want to delete song {0}?"))
+            {
                 CurrentSong.deleteSong();
+                return true;
+            }
+            else
+            {
+                return false;
+            }
         }
 
 

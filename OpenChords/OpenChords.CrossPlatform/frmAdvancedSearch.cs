@@ -126,13 +126,11 @@ namespace OpenChords.CrossPlatform
         {
             if (lbSongs.SelectedIndex == -1)
             {
-                ucSongMetadataPanel.CurrentSong = null;
-                ucSongMetadataPanel.refreshPanel();
+                ucSongMetadataPanel.ChangeToSong(null);
                 return;
             }
             ListItem selectedItem = (ListItem)lbSongs.SelectedValue;
-            ucSongMetadataPanel.CurrentSong = (Song)selectedItem.Tag;
-            ucSongMetadataPanel.refreshPanel();
+            ucSongMetadataPanel.ChangeToSong((Song)selectedItem.Tag);
         }
 
         void filter_KeyUp(object sender, KeyEventArgs e)

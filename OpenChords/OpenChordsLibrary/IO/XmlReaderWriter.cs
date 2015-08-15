@@ -52,10 +52,8 @@ namespace OpenChords.IO
                 //"fix" the notes and lyrics so that they display properly
                 song.lyrics = song.lyrics.Replace("\r", "");
                 song.notes = song.notes.Replace("\r", "");
-             
-
-
-
+                song.songFilePath = filename;
+                song.SongFileName = Path.GetFileName(filename);
             }
             catch (Exception Ex)
             {

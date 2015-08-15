@@ -62,7 +62,7 @@ namespace OpenChords.Entities
             setSongs = new List<XmlSetSong>();
             foreach (Song song in songs)
             {
-                XmlSetSong temp = new XmlSetSong(song.title);
+                XmlSetSong temp = new XmlSetSong(song.SongFileName);
                 setSongs.Add(temp);
             }
         }
@@ -319,8 +319,15 @@ namespace OpenChords.Entities
             _songList.Clear();
             foreach (string songName in xmlSetSongCollection.listOfSongNames())
             {
-                Song temp = Song.loadSong(songName);
-                _songList.Add(temp);
+                try
+                {
+                    Song temp = Song.loadSong(songName);
+                    _songList.Add(temp);
+                }
+                catch (Exception ex)
+                {
+                    logger.Error("Error loading song file", ex);
+                }
             }
         }
 
