@@ -28,11 +28,11 @@ namespace OpenChords.CrossPlatform.SongEditor
                     }
             };
 
-            var commandDeleteFromSet = new Command() { MenuText = "delete song from set", Shortcut = Application.Instance.CommonModifier | Keys.Delete };
+            var commandDeleteFromSet = new Command() { MenuText = "Delete song from set", Shortcut = Application.Instance.CommonModifier | Keys.Delete, Image = Graphics.ImageDelete };
             commandDeleteFromSet.Executed += (s, e) => deleteSongFromSet();
-            var commandMoveSongUp = new Command() { MenuText = "move song up", Shortcut = Application.Instance.CommonModifier | Keys.Up };
+            var commandMoveSongUp = new Command() { MenuText = "Move song up", Shortcut = Application.Instance.CommonModifier | Keys.Up, Image = Graphics.ImagMoveUp };
             commandMoveSongUp.Executed += (s, e) => moveSongUp();
-            var commandMoveSongDown = new Command() { MenuText = "move song down", Shortcut = Application.Instance.CommonModifier | Keys.Down };
+            var commandMoveSongDown = new Command() { MenuText = "Move song down", Shortcut = Application.Instance.CommonModifier | Keys.Down, Image = Graphics.ImageMoveDown };
             commandMoveSongDown.Executed += (s, e) => moveSongDown();
 
             var menu = new ContextMenu()

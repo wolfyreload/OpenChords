@@ -94,11 +94,11 @@ namespace OpenChords.CrossPlatform
             };
 
             //file menu items
-            var menuItemQuit = new Command { MenuText = "Close Window", Shortcut = Application.Instance.CommonModifier | Keys.Q };
+            var menuItemQuit = new Command { MenuText = "Close Window", Shortcut = Application.Instance.CommonModifier | Keys.Q, Image = Graphics.ImageExit };
             menuItemQuit.Executed += (s, e) => this.Close();
 
             //present menu items
-            var menuItemPresentSong = new Command { MenuText = "Present Song", Shortcut = Keys.F11 };
+            var menuItemPresentSong = new Command { MenuText = "Present Song", Shortcut = Keys.F11, Image = Graphics.ImagePresentSong };
             menuItemPresentSong.Executed += (s, e) => presentSong();
 
             // create menu
@@ -118,7 +118,7 @@ namespace OpenChords.CrossPlatform
             };
 
             //context menu items
-            var commandAddToSet = new Command() { MenuText = "Add to set", Shortcut = Application.Instance.CommonModifier | Keys.Enter };
+            var commandAddToSet = new Command() { MenuText = "Add to set", Shortcut = Application.Instance.CommonModifier | Keys.Enter, Image = Graphics.ImageAddToSet };
             commandAddToSet.Executed += (s, e) => addSongToSet();
             var menu = new ContextMenu()
             {

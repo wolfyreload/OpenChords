@@ -32,9 +32,9 @@ namespace OpenChords.CrossPlatform.SongEditor
 
             lbSongs.Width = Helpers.getScreenPercentageInPixels(15, this);
 
-            var commandAddToSet = new Command() { MenuText = "Add to set", Shortcut = Application.Instance.CommonModifier | Keys.Enter };
+            var commandAddToSet = new Command() { MenuText = "Add to set", Shortcut = Application.Instance.CommonModifier | Keys.Enter, Image = Graphics.ImageAddToSet };
             commandAddToSet.Executed += (s, e) => addSongToSet();
-            var commandDeleteSong = new Command() { MenuText = "Delete song", Shortcut = Application.Instance.CommonModifier | Keys.Delete };
+            var commandDeleteSong = new Command() { MenuText = "Delete song", Shortcut = Application.Instance.CommonModifier | Keys.Delete, Image = Graphics.ImageDelete };
             commandDeleteSong.Executed += (s, e) => deleteSong();
 
 

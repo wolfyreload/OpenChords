@@ -81,87 +81,86 @@ namespace OpenChords.CrossPlatform
             ucSetListPanel.refreshPanel();
 
             //file menu items
-            var menuItemPreferences = new Command { MenuText = "Preferences" };
+            var menuItemPreferences = new Command { MenuText = "Preferences", Image = Graphics.ImagePreferences };
             menuItemPreferences.Executed += menuItemPreferences_Executed;
-            var menuItemQuit = new Command { MenuText = "Quit", Shortcut = Application.Instance.CommonModifier | Keys.Q };
+            var menuItemQuit = new Command { MenuText = "Quit", Shortcut = Application.Instance.CommonModifier | Keys.Q, Image = Graphics.ImageExit };
             menuItemQuit.Executed += (s, e) => Application.Instance.Quit();
 
             // song menu items
-            var menuItemNewSong = new Command { MenuText = "New Song", Shortcut = Application.Instance.CommonModifier | Keys.N };
+            var menuItemNewSong = new Command { MenuText = "New Song", Shortcut = Application.Instance.CommonModifier | Keys.N, Image=Graphics.ImageNew };
             menuItemNewSong.Executed += (s, e) => ucSongMetaDataPanel.NewSong();
-            var menuItemSaveSong = new Command { MenuText = "Save Song", Shortcut = Application.Instance.CommonModifier | Keys.S };
+            var menuItemSaveSong = new Command { MenuText = "Save Song", Shortcut = Application.Instance.CommonModifier | Keys.S, Image = Graphics.ImageSave };
             menuItemSaveSong.Executed += (s, e) => saveCurrentSong();
-            var menuItemDeleteSong = new Command { MenuText = "Delete Song" };
+            var menuItemDeleteSong = new Command { MenuText = "Delete Song", Image = Graphics.ImageDelete };
             menuItemDeleteSong.Executed += (s, e) => { deleteCurrentlySelectedSong(); };
-            var menuItemAdvancedSearch = new Command { MenuText = "Advanced Search", Shortcut = Application.Instance.CommonModifier | Keys.F };
+            var menuItemAdvancedSearch = new Command { MenuText = "Advanced Search", Shortcut = Application.Instance.CommonModifier | Keys.F, Image = Graphics.ImageSearch };
             menuItemAdvancedSearch.Executed += menuItemAdvancedSearch_Executed;
-            var menuItemSongIncreaseKey = new Command { MenuText = "Transpose Up", Shortcut = Application.Instance.CommonModifier | Keys.D0 };
+            var menuItemSongIncreaseKey = new Command { MenuText = "Transpose Up", Shortcut = Application.Instance.CommonModifier | Keys.D0, Image = Graphics.ImagMoveUp };
             menuItemSongIncreaseKey.Executed += (s, e) => ucSongMetaDataPanel.TransposeKeyUp();
-            var menuItemSongDecreaseKey = new Command { MenuText = "Transpose Down", Shortcut = Application.Instance.CommonModifier | Keys.D9 };
+            var menuItemSongDecreaseKey = new Command { MenuText = "Transpose Down", Shortcut = Application.Instance.CommonModifier | Keys.D9, Image = Graphics.ImageMoveDown };
             menuItemSongDecreaseKey.Executed += (s, e) => ucSongMetaDataPanel.TransposeKeyDown();
-            var menuItemSongIncreaseCapo = new Command { MenuText = "Capo Up", Shortcut = Application.Instance.CommonModifier | Keys.D8 };
+            var menuItemSongIncreaseCapo = new Command { MenuText = "Capo Up", Shortcut = Application.Instance.CommonModifier | Keys.D8, Image = Graphics.ImagMoveUp };
             menuItemSongIncreaseCapo.Executed += (s, e) => ucSongMetaDataPanel.TransposeCapoUp();
-            var menuItemSongDecreaseCapo = new Command { MenuText = "Capo Down", Shortcut = Application.Instance.CommonModifier | Keys.D7 };
+            var menuItemSongDecreaseCapo = new Command { MenuText = "Capo Down", Shortcut = Application.Instance.CommonModifier | Keys.D7, Image = Graphics.ImageMoveDown };
             menuItemSongDecreaseCapo.Executed += (s, e) => ucSongMetaDataPanel.TransposeCapoDown();
-            var menuItemSongFixFormating = new Command { MenuText = "Auto Format Song", Shortcut = Application.Instance.CommonModifier | Keys.R };
+            var menuItemSongFixFormating = new Command { MenuText = "Auto Format Song", Shortcut = Application.Instance.CommonModifier | Keys.R, Image = Graphics.ImageRepairSong };
             menuItemSongFixFormating.Executed += (s, e) => ucSongMetaDataPanel.FixFormatting();
-            var menuItemSongRefeshList = new Command { MenuText = "Refresh" };
+            var menuItemSongRefeshList = new Command { MenuText = "Refresh", Image = Graphics.ImageRefresh };
             menuItemSongRefeshList.Executed += (s, e) => ucSongListPanel.refreshPanel();
-            var menuItemShowSongInExplorer = new Command { MenuText = "Show In Explorer" };
+            var menuItemShowSongInExplorer = new Command { MenuText = "Show In Explorer", Image = Graphics.ImageExplore };
             menuItemShowSongInExplorer.Executed += (s, e) => ucSongListPanel.showSongInExplorer();
 
-            var menuItemSongFileOperations = new ButtonMenuItem { Text = "File Operations", Items = { menuItemNewSong, menuItemSaveSong, menuItemDeleteSong, menuItemShowSongInExplorer } };
-            var menuItemKey = new ButtonMenuItem { Text = "Song Key", Items = { menuItemSongIncreaseKey, menuItemSongDecreaseKey } };
-            var menuItemCapo = new ButtonMenuItem { Text = "Song Capo", Items = { menuItemSongIncreaseCapo, menuItemSongDecreaseCapo } };
+            var menuItemSongFileOperations = new ButtonMenuItem { Text = "File Operations", Items = { menuItemNewSong, menuItemSaveSong, menuItemDeleteSong, menuItemShowSongInExplorer }, Image = Graphics.ImageFileOperations };
+            var menuItemKey = new ButtonMenuItem { Text = "Song Key", Items = { menuItemSongIncreaseKey, menuItemSongDecreaseKey }, Image = Graphics.ImageKey };
+            var menuItemCapo = new ButtonMenuItem { Text = "Song Capo", Items = { menuItemSongIncreaseCapo, menuItemSongDecreaseCapo }, Image = Graphics.ImageCapo };
 
             //Sets menu items
-            var menuItemSetNew = new Command() { MenuText = "New Set" };
+            var menuItemSetNew = new Command() { MenuText = "New Set", Image = Graphics.ImageNew };
             menuItemSetNew.Executed += (s, e) => ucSetListPanel.newSet();
-            var commandSaveSet = new Command() { MenuText = "Save Set" };
+            var commandSaveSet = new Command() { MenuText = "Save Set", Image = Graphics.ImageSave };
             commandSaveSet.Executed += (s, e) => ucSetListPanel.saveSet();
-            var commandRevertSet = new Command() { MenuText = "Revert Set" };
+            var commandRevertSet = new Command() { MenuText = "Revert Set", Image = Graphics.ImageRevert };
             commandRevertSet.Executed += (s, e) => ucSetListPanel.revertSet();
-            var menuItemSetDelete = new Command() { MenuText = "Delete Set" };
+            var menuItemSetDelete = new Command() { MenuText = "Delete Set", Image = Graphics.ImageDelete };
             menuItemSetDelete.Executed += (s, e) => ucSetListPanel.deleteSet();
-            
-            var menuItemSetRefeshList = new Command { MenuText = "Refresh" };
+            var menuItemSetRefeshList = new Command { MenuText = "Refresh", Image = Graphics.ImageRefresh };
             menuItemSetRefeshList.Executed += (s, e) => ucSetListPanel.refreshPanel();
-            var menuItemShowSetInExplorer = new Command { MenuText = "Show In Explorer" };
+            var menuItemShowSetInExplorer = new Command { MenuText = "Show In Explorer", Image = Graphics.ImageExplore };
             menuItemShowSetInExplorer.Executed += (s, e) => ucSetListPanel.showSetInExplorer();
 
 
-            var menuItemSetFileOperations = new ButtonMenuItem { Text = "File Operations", Items = { menuItemSetNew, commandSaveSet, commandRevertSet, menuItemSetDelete, menuItemShowSetInExplorer } };
+            var menuItemSetFileOperations = new ButtonMenuItem { Text = "File Operations", Items = { menuItemSetNew, commandSaveSet, commandRevertSet, menuItemSetDelete, menuItemShowSetInExplorer }, Image = Graphics.ImageFileOperations };
       
 
             //present menu items
-            var menuItemPresentSong = new Command { MenuText = "Present Song", Shortcut = Keys.F11 };
+            var menuItemPresentSong = new Command { MenuText = "Present Song", Shortcut = Keys.F11, Image = Graphics.ImagePresentSong };
             menuItemPresentSong.Executed += (s, e) => ucSongMetaDataPanel.PresentSong();
-            var menuItemPresentSet = new Command { MenuText = "Present Set", Shortcut = Keys.F12 };
+            var menuItemPresentSet = new Command { MenuText = "Present Set", Shortcut = Keys.F12, Image = Graphics.ImagePresentSet };
             menuItemPresentSet.Executed += (s, e) => ucSetListPanel.PresentSet();
 
             //exportMenu
-            var commandExportToPrintSetHtml = new Command { MenuText = "Current Set", Tag = ExportOption.Set };
+            var commandExportToPrintSetHtml = new Command { MenuText = "Current Set", Tag = ExportOption.Set, Image = Graphics.ImageSet };
             commandExportToPrintSetHtml.Executed += exportToPrintHtml;
-            var commandExportToPrintSongHtml = new Command { MenuText = "Current Song", Tag = ExportOption.Song, Shortcut = Application.Instance.CommonModifier | Keys.P };
+            var commandExportToPrintSongHtml = new Command { MenuText = "Current Song", Tag = ExportOption.Song, Shortcut = Application.Instance.CommonModifier | Keys.P, Image = Graphics.ImageSong };
             commandExportToPrintSongHtml.Executed += exportToPrintHtml;
-            var commandExportToPrintAllSongsHtml = new Command { MenuText = "All Songs", Tag = ExportOption.All };
+            var commandExportToPrintAllSongsHtml = new Command { MenuText = "All Songs", Tag = ExportOption.All, Image = Graphics.ImageAll };
             commandExportToPrintAllSongsHtml.Executed += exportToPrintHtml;
-            var menuItemExportToPrintHtml = new ButtonMenuItem() { Text = "Export To &Print", Items = { commandExportToPrintSetHtml, commandExportToPrintSongHtml, commandExportToPrintAllSongsHtml } };
-            var commandExportToTabletSetHtml = new Command { MenuText = "Current Set", Tag = ExportOption.Set };
+            var menuItemExportToPrintHtml = new ButtonMenuItem() { Text = "Export To &Print", Items = { commandExportToPrintSongHtml, commandExportToPrintSetHtml, commandExportToPrintAllSongsHtml }, Image = Graphics.ImagePrint };
+            var commandExportToTabletSetHtml = new Command { MenuText = "Current Set", Tag = ExportOption.Set, Image = Graphics.ImageSet };
             commandExportToTabletSetHtml.Executed += exportToTabletHtml;
-            var commandExportToTabletSongHtml = new Command { MenuText = "Current Song", Tag = ExportOption.Song };
+            var commandExportToTabletSongHtml = new Command { MenuText = "Current Song", Tag = ExportOption.Song, Image = Graphics.ImageSong };
             commandExportToTabletSongHtml.Executed += exportToTabletHtml;
-            var commandExportToTabletAllSongsHtml = new Command { MenuText = "All Songs", Tag = ExportOption.All };
+            var commandExportToTabletAllSongsHtml = new Command { MenuText = "All Songs", Tag = ExportOption.All, Image = Graphics.ImageAll };
             commandExportToTabletAllSongsHtml.Executed += exportToTabletHtml;
-            var menuItemExportToTabletHtml = new ButtonMenuItem() { Text = "Export To &Tablet", Items = { commandExportToTabletSetHtml, commandExportToTabletSongHtml, commandExportToTabletAllSongsHtml } };
-            var commandExportCurrentSetToOpenSong = new Command { MenuText = "Current Set", Tag = ExportOption.Set };
+            var menuItemExportToTabletHtml = new ButtonMenuItem() { Text = "Export To &Tablet", Items = { commandExportToTabletSongHtml, commandExportToTabletSetHtml, commandExportToTabletAllSongsHtml }, Image = Graphics.ImageHtml };
+            var commandExportCurrentSetToOpenSong = new Command { MenuText = "Current Set", Tag = ExportOption.Set, Image = Graphics.ImageSet };
             commandExportCurrentSetToOpenSong.Executed += exportToOpenSong;
-            var menuItemExportToOpenSong = new ButtonMenuItem() { Text = "Export To &OpenSong", Items = { commandExportCurrentSetToOpenSong } };
-            var menuItemExportSetList = new Command { MenuText = "Export Set List" };
+            var menuItemExportToOpenSong = new ButtonMenuItem() { Text = "Export To &OpenSong", Items = { commandExportCurrentSetToOpenSong }, Image = Graphics.ImageOpenSong };
+            var menuItemExportSetList = new Command { MenuText = "Export Set List", Image = Graphics.ImageList };
             menuItemExportSetList.Executed += (s, e) => ucSetListPanel.ExportToTextFile();
             
             //about menu
-            var menuItemManual = new Command { MenuText = "Help Documentation", Shortcut = Keys.F1 };
+            var menuItemManual = new Command { MenuText = "Help Documentation", Shortcut = Keys.F1, Image = Graphics.ImageHelp };
             menuItemManual.Executed += (s, e) => showManual();
 
             // create menu

@@ -56,53 +56,53 @@ namespace OpenChords.CrossPlatform
             if (Platform.IsWpf)
                 webView.KeyDown += webView_KeyDown;
 
-            var menuItemExit = new Command { MenuText = "Exit", Shortcut = Keys.Escape };
+            var menuItemExit = new Command { MenuText = "Exit", Shortcut = Keys.Escape, Image = Graphics.ImageExit };
             menuItemExit.Executed += (s, e) => this.Close();
             
             // refresh item
-            var menuItemRefresh = new Command { MenuText = "Refresh", Shortcut = Application.Instance.CommonModifier | Keys.R };
+            var menuItemRefresh = new Command { MenuText = "Refresh", Shortcut = Application.Instance.CommonModifier | Keys.R, Image = Graphics.ImageRefresh };
             menuItemRefresh.Executed += menuItemRefresh_Executed;
 
             // size items
-            var commandSongIncreaseSize = new Command { MenuText = "Increase Font Size", Shortcut = Application.Instance.AlternateModifier | Keys.P};
+            var commandSongIncreaseSize = new Command { MenuText = "Increase Font Size", Shortcut = Application.Instance.AlternateModifier | Keys.P, Image = Graphics.ImagMoveUp };
             commandSongIncreaseSize.Executed += commandSongIncreaseSize_Executed;
-            var commandSongDecreaseSize = new Command { MenuText = "Decrease Font Size", Shortcut = Application.Instance.AlternateModifier | Keys.O };
+            var commandSongDecreaseSize = new Command { MenuText = "Decrease Font Size", Shortcut = Application.Instance.AlternateModifier | Keys.O, Image = Graphics.ImageMoveDown };
             commandSongDecreaseSize.Executed += commandSongDecreaseSize_Executed;
             
             
             // key items
-            var commandSongIncreaseKey = new Command { MenuText = "Transpose Key Up", Shortcut = Application.Instance.CommonModifier | Keys.D0 };
+            var commandSongIncreaseKey = new Command { MenuText = "Transpose Key Up", Shortcut = Application.Instance.CommonModifier | Keys.D0, Image = Graphics.ImagMoveUp };
             commandSongIncreaseKey.Executed += commandSongIncreaseKey_Executed;
-            var commandSongDecreaseKey = new Command { MenuText = "Transpose Key Down", Shortcut = Application.Instance.CommonModifier | Keys.D9 };
+            var commandSongDecreaseKey = new Command { MenuText = "Transpose Key Down", Shortcut = Application.Instance.CommonModifier | Keys.D9, Image = Graphics.ImageMoveDown };
             commandSongDecreaseKey.Executed += commandSongDecreaseKey_Executed;
-            var commandSongIncreaseCapo = new Command { MenuText = "Capo Up", Shortcut = Application.Instance.CommonModifier | Keys.D8 };
+            var commandSongIncreaseCapo = new Command { MenuText = "Capo Up", Shortcut = Application.Instance.CommonModifier | Keys.D8, Image = Graphics.ImagMoveUp };
             commandSongIncreaseCapo.Executed += commandSongIncreaseCapo_Executed;
-            var commandSongDecreaseCapo = new Command { MenuText = "Capo Down", Shortcut = Application.Instance.CommonModifier | Keys.D7 };
+            var commandSongDecreaseCapo = new Command { MenuText = "Capo Down", Shortcut = Application.Instance.CommonModifier | Keys.D7, Image = Graphics.ImageMoveDown };
             commandSongDecreaseCapo.Executed += commandSongDecreaseCapo_Executed;
 
             // Navigation menu
-            var menuItemNextSong = new Command { MenuText = "Next Song", Shortcut = Application.Instance.CommonModifier | Keys.Right };
+            var menuItemNextSong = new Command { MenuText = "Next Song", Shortcut = Application.Instance.CommonModifier | Keys.Right, Image = Graphics.ImageRight };
             menuItemNextSong.Executed += menuItemNextSong_Executed;
-            var menuItemPreviousSong = new Command { MenuText = "Previous Song", Shortcut = Application.Instance.CommonModifier | Keys.Left };
+            var menuItemPreviousSong = new Command { MenuText = "Previous Song", Shortcut = Application.Instance.CommonModifier | Keys.Left, Image = Graphics.ImageLeft };
             menuItemPreviousSong.Executed += menuItemPreviousSong_Executed;
-            var menuItemNavigation = new ButtonMenuItem() { Text = "&Navigation", Items = { menuItemPreviousSong, menuItemNextSong } };
+            var menuItemNavigation = new ButtonMenuItem() { Text = "&Navigation", Items = { menuItemPreviousSong, menuItemNextSong }, Image = Graphics.ImageNavigation };
                 
             //visibility menu
-            var commandToggleChords = new Command { MenuText = "Toggle Chords", Shortcut = Application.Instance.CommonModifier | Keys.Q };
+            var commandToggleChords = new Command { MenuText = "Toggle Chords", Shortcut = Application.Instance.CommonModifier | Keys.Q, Image = Graphics.ImageChords };
             commandToggleChords.Executed += (s, e) => { toggleChords(); };
-            var commandToggleLyrics = new Command { MenuText = "Toggle Lyrics", Shortcut = Application.Instance.CommonModifier | Keys.W };
+            var commandToggleLyrics = new Command { MenuText = "Toggle Lyrics", Shortcut = Application.Instance.CommonModifier | Keys.W, Image = Graphics.ImageLyrics };
             commandToggleLyrics.Executed += (s, e) => { toggleLyrics(); };
-            var commandToggleNotes = new Command { MenuText = "Toggle Notes", Shortcut = Application.Instance.CommonModifier | Keys.E };
+            var commandToggleNotes = new Command { MenuText = "Toggle Notes", Shortcut = Application.Instance.CommonModifier | Keys.E, Image = Graphics.ImageNotes };
             commandToggleNotes.Executed += (s, e) => { toggleNotes(); };
-            var commandToggleSharpsAndFlats = new Command { MenuText = "Toggle Sharps/Flats" };
+            var commandToggleSharpsAndFlats = new Command { MenuText = "Toggle Sharps/Flats", Image = Graphics.ImageSharps };
             commandToggleSharpsAndFlats.Executed += (s, e) => { toggleSharpsAndFlats(); };
 
             //Metronome
-            var commandToggleMetonome = new Command { MenuText = "Toggle Metronome", Shortcut = Application.Instance.CommonModifier | Keys.M };
+            var commandToggleMetonome = new Command { MenuText = "Toggle Metronome", Shortcut = Application.Instance.CommonModifier | Keys.M, Image = Graphics.ImageMetronome };
             commandToggleMetonome.Executed += commandToggleMetonome_Executed;
 
             //song List
-            var menuItemSongList = new ButtonMenuItem() { Text = "Song &List" };
+            var menuItemSongList = new ButtonMenuItem() { Text = "Song &List", Image = Graphics.ImageList };
             populateSongListMenu(menuItemSongList);
 
             if (MaxIndex == 1)
@@ -116,16 +116,12 @@ namespace OpenChords.CrossPlatform
                 Items = 
                 {
                     menuItemRefresh,
-                    new ButtonMenuItem() { Text = "&Size", Items = { commandSongIncreaseSize, commandSongDecreaseSize }},
-                    new ButtonMenuItem() { Text = "&Key", Items = {commandSongIncreaseKey, commandSongDecreaseKey, commandSongIncreaseCapo, commandSongDecreaseCapo }},
+                    new ButtonMenuItem() { Text = "&Size", Items = { commandSongIncreaseSize, commandSongDecreaseSize }, Image = Graphics.ImageSize},
+                    new ButtonMenuItem() { Text = "&Key", Items = {commandSongIncreaseKey, commandSongDecreaseKey }, Image = Graphics.ImageKey},
+                    new ButtonMenuItem() { Text = "&Capo", Items = { commandSongIncreaseCapo, commandSongDecreaseCapo }, Image = Graphics.ImageCapo},
                     menuItemNavigation,
-                    new ButtonMenuItem() { Text = "&Visibility", Items = { commandToggleChords, commandToggleLyrics, commandToggleNotes, commandToggleSharpsAndFlats } },
-                    new ButtonMenuItem() { Text = "Other Options",
-                        Items = 
-                        {
-                            commandToggleMetonome
-                        }
-                    },
+                    new ButtonMenuItem() { Text = "&Visibility", Items = { commandToggleChords, commandToggleLyrics, commandToggleNotes, commandToggleSharpsAndFlats }, Image = Graphics.ImageVisibility },
+                    new ButtonMenuItem() { Text = "Other Options", Items = { commandToggleMetonome }, Image = Graphics.ImageOtherOptions },
                     menuItemSongList,
                     menuItemExit 
                 }
