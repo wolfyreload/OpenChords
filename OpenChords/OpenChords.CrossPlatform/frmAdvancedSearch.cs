@@ -93,6 +93,30 @@ namespace OpenChords.CrossPlatform
                 }
             };
 
+            //file menu items
+            var menuItemQuit = new Command { MenuText = "Close Window", Shortcut = Application.Instance.CommonModifier | Keys.Q };
+            menuItemQuit.Executed += (s, e) => this.Close();
+
+            //present menu items
+            var menuItemPresentSong = new Command { MenuText = "Present Song", Shortcut = Keys.F11 };
+            menuItemPresentSong.Executed += (s, e) => presentSong();
+
+            // create menu
+            Menu = new MenuBar
+            {
+                Items =
+                {
+					// File submenu
+			        new ButtonMenuItem()
+                    {
+                        Text = "&Present",
+                        Items = { menuItemPresentSong }
+                    },
+                },
+                QuitItem = menuItemQuit,
+
+            };
+
             //context menu items
             var commandAddToSet = new Command() { MenuText = "Add to set", Shortcut = Application.Instance.CommonModifier | Keys.Enter };
             commandAddToSet.Executed += (s, e) => addSongToSet();
@@ -120,6 +144,13 @@ namespace OpenChords.CrossPlatform
             lbSongs.KeyUp += lbSongs_KeyUp;
             loadSongs();
             
+        }
+
+        private void presentSong()
+        {
+            if (lbSongs.SelectedIndex < 0) return;
+            var currentSong = Song.loadSong(lbSongs.SelectedValue.ToString());
+            new frmPresent(currentSong, DisplayAndPrintSettings.loadSettings(DisplayAndPrintSettingsType.DisplaySettings)).Show();
         }
 
         void lsSongs_SelectedIndexChanged(object sender, EventArgs e)
