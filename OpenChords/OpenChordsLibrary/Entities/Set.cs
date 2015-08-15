@@ -509,7 +509,7 @@ namespace OpenChords.Entities
 
         public string getFullPath()
         {
-            return Settings.ExtAppsAndDir.setsFolder + this.setName;
+            return Path.GetFullPath(Settings.ExtAppsAndDir.setsFolder + this.setName);
         }
 
         public static Set NewSet(string setName)
