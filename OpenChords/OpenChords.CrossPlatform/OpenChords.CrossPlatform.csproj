@@ -38,13 +38,14 @@
     <Compile Include="frmHelpDocumentation.cs" />
     <Compile Include="frmNewSet.cs" />
     <Compile Include="frmPreferences.cs" />
+    <Compile Include="Helpers\FormHelper.cs" />
+    <Compile Include="Helpers\PopupMessages.cs" />
     <Compile Include="Preferences\FontAndColorPanel.cs" />
     <Compile Include="Preferences\FontAndColorPicker.cs" />
     <Compile Include="Preferences\GeneralSettingsPreferences.cs" />
     <Compile Include="Graphics.cs" />
     <Compile Include="frmMain.Helper.cs" />
     <Compile Include="frmPresent.cs" />
-    <Compile Include="Helpers.cs" />
     <Compile Include="frmMain.cs" />
     <Compile Include="Preferences\DisplayAndPrintPreferences.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

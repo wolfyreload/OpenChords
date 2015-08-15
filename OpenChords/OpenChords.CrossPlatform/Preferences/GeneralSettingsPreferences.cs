@@ -85,7 +85,7 @@ namespace OpenChords.CrossPlatform.Preferences
 
             fileAndFolderSettings.saveSettings();
             if (OptionsChanged)
-                MessageBox.Show("Changes to general settings will only take effect after restarting OpenChords", "", MessageBoxType.Information);
+                Helpers.PopupMessages.ShowInformationMessage("Changes to general settings will only take effect after restarting OpenChords");
 
         }
     }

@@ -58,7 +58,7 @@ namespace OpenChords.CrossPlatform
 
             Content = splitterSearchSearchResults = new Splitter()
             {
-                Position = Helpers.getScreenPercentageInPixels(20, this),
+                Position = Helpers.FormHelper.getScreenPercentageInPixels(20, this),
                 Panel1 = new TableLayout()
                 {
                     Rows = 

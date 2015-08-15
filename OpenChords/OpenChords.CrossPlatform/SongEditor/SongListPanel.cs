@@ -30,7 +30,7 @@ namespace OpenChords.CrossPlatform.SongEditor
                 }
             };
 
-            lbSongs.Width = Helpers.getScreenPercentageInPixels(15, this);
+            lbSongs.Width = Helpers.FormHelper.getScreenPercentageInPixels(15, this);
 
             var commandAddToSet = new Command() { MenuText = "Add to set", Shortcut = Application.Instance.CommonModifier | Keys.Enter, Image = Graphics.ImageAddToSet };
             commandAddToSet.Executed += (s, e) => addSongToSet();

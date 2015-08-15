@@ -1,13 +1,8 @@
 ﻿using Eto.Forms;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
-namespace OpenChords.CrossPlatform
+namespace OpenChords.CrossPlatform.Helpers
 {
-    public class Helpers
+    public class FormHelper
     {
         private static int DisplayHeight = (int)Screen.PrimaryScreen.Bounds.Height;
         private static int DisplayWidth = (int)Screen.PrimaryScreen.Bounds.Width;

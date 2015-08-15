@@ -72,7 +72,7 @@ namespace OpenChords.CrossPlatform.SongEditor
 
         void cmbSets_SelectedIndexChanged(object sender, EventArgs e)
         {
-            if (SetChanged && showConfirmation("Save changes to set '{0}' before switching to a new set?"))
+            if (SetChanged && Helpers.PopupMessages.ShowConfirmationMessage("Save changes to set '{0}' before switching to a new set?", CurrentSet.setName))
                 saveSet();
 
             loadSongsInSet();
@@ -115,7 +115,7 @@ namespace OpenChords.CrossPlatform.SongEditor
 
         internal void PresentSet()
         {
-            if (SetChanged && showConfirmation("Save changes to set '{0}' before presenting?"))
+            if (SetChanged && Helpers.PopupMessages.ShowConfirmationMessage("Save changes to set '{0}' before presenting?", CurrentSet.setName))
                 saveSet();
             else
                 revertSet();
@@ -147,7 +147,7 @@ namespace OpenChords.CrossPlatform.SongEditor
 
         internal void ExportToHtml()
         {
-            if (SetChanged && showConfirmation("Save changes to set '{0}' before Exporting to html?"))
+            if (SetChanged && Helpers.PopupMessages.ShowConfirmationMessage("Save changes to set '{0}' before Exporting to html?", CurrentSet.setName))
                 saveSet();
             else
                 revertSet();
@@ -198,7 +198,7 @@ namespace OpenChords.CrossPlatform.SongEditor
             {
                 CurrentSet.saveSet();
                 SetChanged = false;
-                MessageBox.Show("Set saved", "", MessageBoxType.Information);
+                Helpers.PopupMessages.ShowInformationMessage("Set '{0}' saved", CurrentSet.setName);
             }
         }
 
@@ -209,15 +209,8 @@ namespace OpenChords.CrossPlatform.SongEditor
                 CurrentSet.revertSet();
                 this.refreshSongList();
                 SetChanged = false;
-                MessageBox.Show("Set reverted", "", MessageBoxType.Information);
+                Helpers.PopupMessages.ShowInformationMessage("Set '{0}' reverted", CurrentSet.setName);
             }
-        }
-
-        private bool showConfirmation(string message = "Are you sure?")
-        {
-            message = message.Replace("{0}", CurrentSet.setName);
-            DialogResult result = MessageBox.Show(message, "", MessageBoxButtons.YesNo, MessageBoxType.Question);
-            return result == DialogResult.Yes;
         }
 
         internal void ExportToHtml(DisplayAndPrintSettings settings)
@@ -228,7 +221,7 @@ namespace OpenChords.CrossPlatform.SongEditor
 
         internal void saveSetBeforeClosing()
         {
-            if (SetChanged && showConfirmation("Save changes to set '{0}' before closing OpenChords?"))
+            if (SetChanged && Helpers.PopupMessages.ShowConfirmationMessage("Save changes to set '{0}' before closing OpenChords?", CurrentSet.setName))
                 saveSet();
         }
 
@@ -236,7 +229,7 @@ namespace OpenChords.CrossPlatform.SongEditor
         {
             if (String.IsNullOrEmpty(Settings.ExtAppsAndDir.openSongSetFolder))
             {
-                MessageBox.Show("Opensong is not configured", "", MessageBoxType.Error);
+                Helpers.PopupMessages.ShowErrorMessage("Opensong is not configured");
                 return;
             }
 
@@ -251,7 +244,7 @@ namespace OpenChords.CrossPlatform.SongEditor
 
         internal void deleteSet()
         {
-            if (showConfirmation("Delete set '{0}'?"))
+            if (Helpers.PopupMessages.ShowConfirmationMessage("Delete set '{0}'?", CurrentSet.setName))
             {
                 Set.DeleteSet(CurrentSet);
                 refreshPanel();
