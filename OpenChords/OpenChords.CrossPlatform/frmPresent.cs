@@ -129,6 +129,7 @@ namespace OpenChords.CrossPlatform
 
             metronome1 = new OpenChords.Functions.Metronome();
             this.Closing += frmPresent_Closing;
+            webView.Focus();
         }
 
         void commandToggleMetonome_Executed(object sender, EventArgs e)

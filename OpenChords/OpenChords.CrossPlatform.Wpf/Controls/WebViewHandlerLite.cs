@@ -1,51 +1,37 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using swc = System.Windows.Controls;
-using swn = System.Windows.Navigation;
-using sw = System.Windows;
-using swf = System.Windows.Forms;
 using Eto.Forms;
-using System.Runtime.InteropServices;
-using Eto.CustomControls;
-using Eto.Drawing;
 using Eto.Wpf.Forms;
+using System.Windows.Controls;
 
 namespace OpenChords.CrossPlatform.Wpf.Controls
 {
     /// <summary>
     /// original control from Eto.Forms shrunk down to exactly whats needed
     /// </summary>
-    public class WebViewHandlerLite : WpfFrameworkElement<swf.Integration.WindowsFormsHost, WebView, WebView.ICallback>, WebView.IHandler
+    public class WebViewHandlerLite : WpfFrameworkElement<WebBrowser, WebView, WebView.ICallback>, WebView.IHandler
     {
-        public swf.WebBrowser Browser { get; private set; }
+        public WebBrowser Browser { get; private set; }
 
         public WebViewHandlerLite()
         {
-            Browser = new swf.WebBrowser
-            {
-                IsWebBrowserContextMenuEnabled = false,
-                WebBrowserShortcutsEnabled = true,
-                AllowWebBrowserDrop = false,
-                ScriptErrorsSuppressed = false
-            };
+            Browser = new WebBrowser();
+            Control = Browser;
+        }
 
-            Control = new swf.Integration.WindowsFormsHost
-            {
-                Child = Browser
-            };
+        public override void Focus()
+        {
+            Browser.Focus();
         }
 
         public string ExecuteScript(string script)
         {
             var fullScript = string.Format("var fn = function() {{ {0} }}; fn();", script);
-            return Convert.ToString(Browser.Document.InvokeScript("eval", new object[] { fullScript }));
+            return Convert.ToString(Browser.InvokeScript("eval", new object[] { fullScript }));
         }
 
         public void LoadHtml(string html, Uri baseUri)
         {
-            this.Browser.DocumentText = html;
+            this.Browser.NavigateToString(html);
         }
         
         void WebView.IHandler.GoBack()
@@ -133,6 +119,7 @@ namespace OpenChords.CrossPlatform.Wpf.Controls
                 throw new NotImplementedException();
             }
         }
+
     }
 }
 

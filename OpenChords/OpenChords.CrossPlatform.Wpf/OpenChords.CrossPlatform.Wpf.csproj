@@ -47,20 +47,16 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\packages\Eto.Platform.Wpf.2.0.7\lib\net45\Eto.Wpf.dll</HintPath>
     </Reference>
-    <Reference Include="Interop.SHDocVw">
-      <HintPath>..\OpenChordsLibrary\Libraries\Interop.SHDocVw.dll</HintPath>
-      <EmbedInteropTypes>True</EmbedInteropTypes>
-    </Reference>
     <Reference Include="log4net">
       <HintPath>..\packages\log4net.2.0.3\lib\net40-full\log4net.dll</HintPath>
     </Reference>
+    <Reference Include="PresentationCore" />
     <Reference Include="PresentationFramework" />
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Windows" />
     <Reference Include="System.Windows.Forms" />
     <Reference Include="WindowsBase" />
-    <Reference Include="WindowsFormsIntegration" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\OpenChords.CrossPlatform\OpenChords.CrossPlatform.csproj">
