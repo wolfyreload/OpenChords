@@ -17,24 +17,110 @@ using System.Linq;
 namespace OpenChords.Entities
 {
 
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("xsd", "2.0.50727.3038")]
+    [System.SerializableAttribute()]
+    [System.Xml.Serialization.XmlTypeAttribute(AnonymousType = true)]
+    public partial class setStyle
+    {
+        public songStyleSongElements title { get; set; }
+        public songStyleSongElements body { get; set; }
+        public songStyleSongElements subtitle { get; set; }
+        public songStyleBackground background { get; set; }
+    }
+
+    [System.SerializableAttribute()]
+    [System.Xml.Serialization.XmlTypeAttribute(AnonymousType = true)]
+    public class songStyleBackground
+    {
+        [System.Xml.Serialization.XmlAttributeAttribute()]
+        public string filename { get; set; }
+    }
+
+    [System.Xml.Serialization.XmlTypeAttribute(AnonymousType = true)]
+    public class songStyleSongElements
+    {
+        [System.Xml.Serialization.XmlAttributeAttribute()]
+        public string align { get; set; }
+
+        [System.Xml.Serialization.XmlAttributeAttribute()]
+        public string bold { get; set; }
+
+        [System.Xml.Serialization.XmlAttributeAttribute()]
+        public string border { get; set; }
+
+        [System.Xml.Serialization.XmlAttributeAttribute()]
+        public string border_color { get; set; }
+
+        [System.Xml.Serialization.XmlAttributeAttribute()]
+        public string color { get; set; }
+
+        [System.Xml.Serialization.XmlAttributeAttribute()]
+        public string fill { get; set; }
+
+        [System.Xml.Serialization.XmlAttributeAttribute()]
+        public string fill_color { get; set; }
+
+        [System.Xml.Serialization.XmlAttributeAttribute()]
+        public string font { get; set; }
+
+        [System.Xml.Serialization.XmlAttributeAttribute()]
+        public string italic { get; set; }
+
+        [System.Xml.Serialization.XmlAttributeAttribute()]
+        public string highlight_chorus { get; set; }
+
+        [System.Xml.Serialization.XmlAttributeAttribute()]
+        public string shadow { get; set; }
+
+        [System.Xml.Serialization.XmlAttributeAttribute()]
+        public string shadow_color { get; set; }
+
+        [System.Xml.Serialization.XmlAttributeAttribute()]
+        public string underline { get; set; }
+
+        [System.Xml.Serialization.XmlAttributeAttribute()]
+        public string valign { get; set; }
+
+        [System.Xml.Serialization.XmlAttributeAttribute()]
+        public string enabled { get; set; }
+
+        [System.Xml.Serialization.XmlAttributeAttribute()]
+        public string auto_scale { get; set; }
+
+        [System.Xml.Serialization.XmlAttributeAttribute()]
+        public string size { get; set; }
+
+        [System.Xml.Serialization.XmlAttributeAttribute()]
+        public string include_verse { get; set; }
+    }
+
+
+
     [Serializable]
     [XmlRoot("slidegroup")]
     public class XmlSetSong
     {
         [XmlAttribute("name")]
-        public string name;
+        public string name { get; set; }
         [XmlAttribute("type")]
-        public string type;
+        public string type { get; set; }
         [XmlAttribute("presentation")]
-        public string presentation;
+        public string presentation { get; set; }
         [XmlAttribute("path")]
-        public string path;
+        public string path { get; set; }
+        [XmlAttribute("transition")]
+        public string transition { get; set; }
+
+        public setStyle style;
+
 
         public XmlSetSong()
         {
             type = "song";
             path = "OpenChords/";
             presentation = "";
+            transition = "0";
+            initializeSetStyle();
         }
 
         public XmlSetSong(string songName)
@@ -42,7 +128,65 @@ namespace OpenChords.Entities
             name = songName;
             type = "song";
             path = "OpenChords/";
-            presentation = "";
+            presentation = Song.loadSong(songName).presentation;
+            transition = "0";
+            initializeSetStyle(songName);
+        }
+
+        private void initializeSetStyle(string songName = null)
+        {
+            //only override style if there is an actual background image
+            if (songName != null && doesBackgroundFileExist(songName))
+            {
+                this.style = new setStyle();
+
+                this.style.title = new songStyleSongElements()
+                {
+                    enabled = "false"
+                };
+
+                this.style.subtitle = new songStyleSongElements()
+                {
+                    enabled = "false"
+                };
+
+                this.style.body = new songStyleSongElements()
+                {
+                    align = "center",
+                    bold = "true",
+                    border = "true",
+                    border_color = "#000000",
+                    color = "#FFFFFF",
+                    fill = "false",
+                    fill_color = "#FF0000",
+                    font = "Helvetica",
+                    highlight_chorus = "true",
+                    italic = "false",
+                    shadow = "true",
+                    shadow_color = "#000000",
+                    size = "72",
+                    underline = "false",
+                    valign = "middle",
+                    enabled = "true",
+                    auto_scale = "true"
+                };
+
+                style.background = new songStyleBackground();
+                style.background.filename = getBackgroundFilename(songName);
+            }
+        }
+
+        private bool doesBackgroundFileExist(string songName)
+        {
+            //check if background fileexists
+            var backgroundFileName = getBackgroundFilename(songName);
+            var destinationBackgroundFile = String.Format("{0}{1}", Settings.ExtAppsAndDir.opensongBackgroundsFolder, backgroundFileName);
+            return File.Exists(destinationBackgroundFile);
+        }
+
+        private string getBackgroundFilename(string songName)
+        {
+            return string.Format("OpenChords/{0}.jpg", songName);
         }
     }
 
@@ -78,60 +222,7 @@ namespace OpenChords.Entities
         }
     }
 
-
-    //public class SongCollection
-    //{
-    //    public void Add(List<Song> songs, XmlSetSong song)
-    //    {
-    //        setSongs.Add(song);
-    //    }
-
-    //    public int LastIndexOf(XmlSetSong song)
-    //    {
-    //        return setSongs.LastIndexOf(song);
-    //    }
-
-    //    public void Remove(string songTitle)
-    //    {
-    //        var song = setSongs.FirstOrDefault(t => t.name == songTitle);
-    //        if (song != null)
-    //            setSongs.Remove(song);
-    //    }
-
-    //    public void Remove(int index)
-    //    {
-    //        setSongs.RemoveAt(index);
-    //    }
-
-    //    public void MoveUp(int index)
-    //    {
-    //        var tempSetSong = setSongs[index];
-    //        //remove the song
-    //        setSongs.RemoveAt(index);
-
-    //        setSongs.Insert(index - 1, tempSetSong);
-    //    }
-
-    //    public void MoveDown(int index)
-    //    {
-    //        var tempSetSong = setSongs[index];
-    //        //remove the song
-    //        setSongs.RemoveAt(index);
-
-    //        setSongs.Insert(index + 1, tempSetSong);
-    //    }
-
-    //    internal List<string> listOfSon0gNames()
-    //    {
-    //        return setSongs.Select(s => s.name).ToList();
-    //    }
-
-    //    internal void Insert(int position, XmlSetSong slide)
-    //    {
-    //        setSongs.Insert(position, slide);
-    //    }
-    //}
-
+    
     /// <summary>
     /// Description of Set
     /// </summary>
@@ -299,7 +390,9 @@ namespace OpenChords.Entities
 
         public void exportSetAndSongsToOpenSong()
         {
-            Export.ExportToOpenSong.exportSetAndSongsToOpenSong(this.Clone());
+            Set setClone = this.Clone();
+            setClone.reloadSet();
+            Export.ExportToOpenSong.exportSetAndSongsToOpenSong(setClone);
         }
 
         private Set Clone()

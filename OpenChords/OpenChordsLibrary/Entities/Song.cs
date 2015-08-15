@@ -24,86 +24,6 @@ using System.IO;
 namespace OpenChords.Entities
 {
 
-
-    /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("xsd", "2.0.50727.3038")]
-    [System.SerializableAttribute()]
-    [System.Xml.Serialization.XmlTypeAttribute(AnonymousType = true)]
-    public partial class songStyle
-    {
-        public songStyleSongElements title { get; set; }
-        public songStyleSongElements body { get; set; }
-        public songStyleSongElements subtitle { get; set; }
-        public songStyleBackground background { get; set; }
-    }
-
-    [System.SerializableAttribute()]
-    [System.Xml.Serialization.XmlTypeAttribute(AnonymousType = true)]
-    public class songStyleBackground
-    {
-        [System.Xml.Serialization.XmlAttributeAttribute()]
-        public string filename { get; set; }
-    }
-
-    [System.Xml.Serialization.XmlTypeAttribute(AnonymousType = true)]
-    public class songStyleSongElements
-    {
-        [System.Xml.Serialization.XmlAttributeAttribute()]
-        public string align { get; set; }
-
-        [System.Xml.Serialization.XmlAttributeAttribute()]
-        public string bold { get; set; }
-
-        [System.Xml.Serialization.XmlAttributeAttribute()]
-        public string border { get; set; }
-
-        [System.Xml.Serialization.XmlAttributeAttribute()]
-        public string border_color { get; set; }
-
-        [System.Xml.Serialization.XmlAttributeAttribute()]
-        public string color { get; set; }
-
-        [System.Xml.Serialization.XmlAttributeAttribute()]
-        public string fill { get; set; }
-
-        [System.Xml.Serialization.XmlAttributeAttribute()]
-        public string fill_color { get; set; }
-
-        [System.Xml.Serialization.XmlAttributeAttribute()]
-        public string font { get; set; }
-
-        [System.Xml.Serialization.XmlAttributeAttribute()]
-        public string italic { get; set; }
-
-        [System.Xml.Serialization.XmlAttributeAttribute()]
-        public string highlight_chorus { get; set; }
-
-        [System.Xml.Serialization.XmlAttributeAttribute()]
-        public string shadow { get; set; }
-
-        [System.Xml.Serialization.XmlAttributeAttribute()]
-        public string shadow_color { get; set; }
-
-        [System.Xml.Serialization.XmlAttributeAttribute()]
-        public string underline { get; set; }
-
-        [System.Xml.Serialization.XmlAttributeAttribute()]
-        public string valign { get; set; }
-
-        [System.Xml.Serialization.XmlAttributeAttribute()]
-        public string enabled { get; set; }
-
-        [System.Xml.Serialization.XmlAttributeAttribute()]
-        public string auto_scale { get; set; }
-
-        [System.Xml.Serialization.XmlAttributeAttribute()]
-        public string size { get; set; }
-
-        [System.Xml.Serialization.XmlAttributeAttribute()]
-        public string include_verse { get; set; }
-    }
-
-
     [System.SerializableAttribute()]
     [XmlRoot("song")]
     public partial class Song
@@ -131,8 +51,6 @@ namespace OpenChords.Entities
 
         [XmlIgnore]
         internal string songFilePath { get; set; }
-
-        public songStyle style;
 
         [XmlIgnore]
         public int Capo
@@ -194,7 +112,6 @@ namespace OpenChords.Entities
             notes = "";
             preferFlats = "false";
             BeatsPerMinute = 100;
-            initializeSongStyle(this);
         }
 
 
@@ -206,7 +123,6 @@ namespace OpenChords.Entities
             if (!File.Exists(filename))
                 throw new Exception(string.Format("Song: {0} does not exist", SongName));
             Song song = XmlReaderWriter.readSong(filename);
-            initializeSongStyle(song);
             return song;
 
         }
@@ -218,60 +134,6 @@ namespace OpenChords.Entities
         public static List<string> listOfAllSongs()
         {
             return IO.FileFolderFunctions.getDirectoryListingAsList(Settings.ExtAppsAndDir.songsFolder);
-        }
-
-        private static void initializeSongStyle(Song song)
-        {
-            //fix song style if empty
-            if (song.style == null)
-                song.style = new songStyle();
-
-            song.style.title = new songStyleSongElements()
-            {
-                align = "center",
-                bold = "true",
-                border = "true",
-                border_color = "#000000",
-                color = "#FFFFFF",
-                fill = "false",
-                fill_color = "#000000",
-                font = "Helvetica",
-                italic = "true",
-                shadow = "true",
-                shadow_color = "#000000",
-                size = "26",
-                underline = "false",
-                valign = "bottom",
-                include_verse = "false",
-                enabled = "true"
-            };
-
-            song.style.body = new songStyleSongElements()
-            {
-                align = "center",
-                bold = "true",
-                border = "true",
-                border_color = "#000000",
-                color = "#FFFFFF",
-                fill = "false",
-                fill_color = "#FF0000",
-                font = "Helvetica",
-                highlight_chorus = "true",
-                italic = "false",
-                shadow = "true",
-                shadow_color = "#000000",
-                size = "34",
-                underline = "false",
-                valign = "middle",
-                enabled = "true",
-                auto_scale = "true"
-            };
-
-            song.style.subtitle = new songStyleSongElements()
-            {
-                enabled = "false"
-            };
-
         }
 
         public void saveSong()
@@ -306,7 +168,6 @@ namespace OpenChords.Entities
             this.key = oldSave.key;
             this.lyrics = oldSave.lyrics;
             this.presentation = oldSave.presentation;
-            this.style = oldSave.style;
         }
 
         public void transposeKeyUp()
@@ -541,36 +402,6 @@ namespace OpenChords.Entities
             pdfPath = Export.ExportToPdf.exportSong(this, settingsType, settingsPath);
             pdfPath = Settings.ExtAppsAndDir.printFolder + pdfPath;
             return pdfPath;
-        }
-
-        /// <summary>
-        /// read and write the OpenSongImageFileName for when we export to OpenSong
-        /// </summary>
-        [XmlIgnore]
-        public string OpenSongImageFileName
-        {
-            get
-            {
-                if (style != null && style.background != null && !String.IsNullOrEmpty(style.background.filename))
-                {
-                    var backgroundFilename = style.background.filename;
-                    return backgroundFilename;
-                }
-                else
-                    return null;
-            }
-            set
-            {
-                if (!string.IsNullOrEmpty(value))
-                {
-                    if (style == null)
-                        style = new songStyle();
-                    style.background = new songStyleBackground();
-                    style.background.filename = value;
-                }
-            }
-
-
         }
 
         public static List<string> TimeSignatureOptions()
