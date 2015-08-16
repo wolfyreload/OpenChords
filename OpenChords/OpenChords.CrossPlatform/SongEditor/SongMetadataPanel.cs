@@ -297,7 +297,7 @@ namespace OpenChords.CrossPlatform.SongEditor
 
         internal bool DeleteSong()
         {
-            if (Helpers.PopupMessages.ShowConfirmationMessage("Are you sure you want to delete song '{0}'?", CurrentSong.title))
+            if (Helpers.PopupMessages.ShowConfirmationMessage("Are you sure you want to delete song '{0}'?", CurrentSong.SongFileName))
             {
                 CurrentSong.deleteSong();
                 return true;
