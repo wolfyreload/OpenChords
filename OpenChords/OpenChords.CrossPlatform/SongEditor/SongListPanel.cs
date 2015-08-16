@@ -160,8 +160,9 @@ namespace OpenChords.CrossPlatform.SongEditor
                 filteredList = filteredList.Where(c => c.title.ToUpper().Contains(item) //filter on title
                                                      || c.author.ToUpper().Contains(item) //filter on author
                                                      || c.lyrics.ToUpper().Contains(item) //filter on lyrics
-                                                     || c.hymn_number.ToUpper().Contains(item) //filter on reference; 
-                                                     || c.ccli.ToUpper().Contains(item)); //filter on ccli; 
+                                                     || c.hymn_number.ToUpper().Contains(item) //filter on reference
+                                                     || c.ccli.ToUpper().Contains(item) //filter on ccli
+                                                     || c.SongFileName.ToUpper().Contains(item)); //filter on filename
             }
             setListItems(filteredList.ToList());
 
