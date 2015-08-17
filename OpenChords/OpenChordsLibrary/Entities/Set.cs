@@ -164,7 +164,7 @@ namespace OpenChords.Entities
                     italic = "false",
                     shadow = "true",
                     shadow_color = "#000000",
-                    size = "72",
+                    size = "48",
                     underline = "false",
                     valign = "middle",
                     enabled = "true",
