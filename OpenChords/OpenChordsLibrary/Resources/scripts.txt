@@ -69,7 +69,8 @@
 	//scroll to song element in index
 	function scrollToSongElement(index)
 	{
-		window.scroll(0,findPos(document.getElementById('SongElement' + index)));
+		var y = findPos(document.getElementById('SongElement' + index)) - 1;
+		window.scroll(0,y);
 	}
 
 	//scroll down by one screen
