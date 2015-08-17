@@ -232,6 +232,21 @@ namespace OpenChords.Entities
         }
 
         /// <summary>
+        /// return just lyric text minus song piece indicators, chords and underscores
+        /// </summary>
+        /// <returns></returns>
+        public string getJustLyrics()
+        {
+            StringBuilder sb = new StringBuilder();
+            foreach (var line in lyrics.Split(new string[] { "\n" }, StringSplitOptions.RemoveEmptyEntries))
+            {
+                if (!line.StartsWith(".") && !line.StartsWith("["))
+                    sb.AppendLine(line.Replace("_", ""));
+            }
+            return sb.ToString();
+        }
+
+        /// <summary>
         /// returns true if the song exists
         /// </summary>
         /// <param name="songName"></param>

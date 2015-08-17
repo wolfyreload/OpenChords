@@ -159,7 +159,7 @@ namespace OpenChords.CrossPlatform.SongEditor
                 //smart filter
                 filteredList = filteredList.Where(c => c.title.ToUpper().Contains(item) //filter on title
                                                      || c.author.ToUpper().Contains(item) //filter on author
-                                                     || c.lyrics.ToUpper().Contains(item) //filter on lyrics
+                                                     || c.getJustLyrics().ToUpper().Contains(item) //filter on lyrics
                                                      || c.hymn_number.ToUpper().Contains(item) //filter on reference
                                                      || c.ccli.ToUpper().Contains(item) //filter on ccli
                                                      || c.SongFileName.ToUpper().Contains(item)); //filter on filename
@@ -169,7 +169,6 @@ namespace OpenChords.CrossPlatform.SongEditor
 			lbSongs.SelectedIndexChanged += lbSongs_SelectedIndexChanged;
 
         }
-
 
         public void showSongInExplorer()
         {
