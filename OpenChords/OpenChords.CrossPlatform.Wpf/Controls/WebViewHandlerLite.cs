@@ -79,7 +79,7 @@ namespace OpenChords.CrossPlatform.Wpf.Controls
 
             set
             {
-                throw new NotImplementedException();
+                Browser.Navigate(value);
             }
         }
 
