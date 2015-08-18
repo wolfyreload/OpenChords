@@ -38,6 +38,8 @@ namespace OpenChords.CrossPlatform
         protected ListBox lbSongs;
         protected SongMetadataPanel ucSongMetadataPanel;
         protected Splitter splitterSearchSearchResults;
+        protected TextBox txtccli;
+        protected TextBox txtReference;
 
         public event EventHandler<Song> AddSongToSet;
 
@@ -76,6 +78,9 @@ namespace OpenChords.CrossPlatform
                                     new TableRow(new Label() { Text = "Key"}, txtKey = new TextBox()),
                                     new TableRow(new Label() { Text = "Lyrics"}, txtLyrics = new TextBox()),
                                     new TableRow(new Label() { Text = "Notes"}, txtNotes = new TextBox()),
+                                    new TableRow(new Label() { Text = "cclr"}, txtccli = new TextBox()),
+                                    new TableRow(new Label() { Text = "reference"}, txtReference = new TextBox()),
+
                                 }
                             }
                         },
@@ -131,13 +136,17 @@ namespace OpenChords.CrossPlatform
             txtKey.TextChanged += Filter_TextChanged;
             txtLyrics.TextChanged += Filter_TextChanged;
             txtNotes.TextChanged += Filter_TextChanged;
+            txtccli.TextChanged += Filter_TextChanged;
+            txtReference.TextChanged += Filter_TextChanged;
 
             txtTitle.KeyUp += filter_KeyUp;
             txtAuthor.KeyUp += filter_KeyUp;
             txtKey.KeyUp += filter_KeyUp;
             txtLyrics.KeyUp += filter_KeyUp;
             txtNotes.KeyUp += filter_KeyUp;
-            
+            txtccli.KeyUp += filter_KeyUp;
+            txtReference.KeyUp += filter_KeyUp;
+
             lbSongs.SelectedIndexChanged += lsSongs_SelectedIndexChanged;
             ucSongMetadataPanel.SetReadOnlyMode();
             
@@ -217,10 +226,13 @@ namespace OpenChords.CrossPlatform
             if (!string.IsNullOrEmpty(txtKey.Text))
                 matches &= isMatch(matchText: txtKey.Text, songElementText: song.key, searchType: SearchType.Exact);
             if (!string.IsNullOrEmpty(txtLyrics.Text))
-                matches &= isMatch(matchText: txtLyrics.Text, songElementText: song.lyrics, searchType: SearchType.AllWords);
+                matches &= isMatch(matchText: txtLyrics.Text, songElementText: song.getJustLyrics(), searchType: SearchType.AllWords);
             if (!string.IsNullOrEmpty(txtNotes.Text))
                 matches &= isMatch(matchText: txtNotes.Text, songElementText: song.notes, searchType: SearchType.AllWords);
-
+            if (!string.IsNullOrEmpty(txtccli.Text))
+                matches &= isMatch(matchText: txtccli.Text, songElementText: song.ccli, searchType: SearchType.Contains);
+            if (!string.IsNullOrEmpty(txtReference.Text))
+                matches &= isMatch(matchText: txtReference.Text, songElementText: song.hymn_number, searchType: SearchType.Contains);
             return matches;
         }
 
