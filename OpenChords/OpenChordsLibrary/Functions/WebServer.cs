@@ -43,14 +43,28 @@ namespace OpenChords.Functions
             {
                 showCurrentSet(e);
             }
-            else
+            else if (request.ToUpper().Contains("SONGNAME"))
             {
-                showCurrentSong(e);
+                showCurrentSongName(e);
             }
-        
+            else
+                showCurrentSong(e);
+
         }
 
-
+        private void showCurrentSongName(HttpRequestEventArgs e)
+        {
+            DisplayAndPrintSettings displayAndPrintSettings = getDisplaySettingsOption(e);
+            using (var writer = new StreamWriter(e.Response.OutputStream))
+            {
+                if (CurrentSong == null)
+                {
+                    writer.Write("No song selected");
+                    return;
+                }
+                writer.Write(CurrentSong.title);
+            }
+        }
 
         private void showCurrentSong(HttpRequestEventArgs e)
         {
@@ -62,7 +76,7 @@ namespace OpenChords.Functions
                     writer.Write("No song selected");
                     return;
                 }
-                var htmlSong = CurrentSong.getHtml(displayAndPrintSettings);
+                var htmlSong = CurrentSong.getHtml(displayAndPrintSettings, enableAutoRefresh: true);
                 writer.Write(htmlSong);
             }
         }

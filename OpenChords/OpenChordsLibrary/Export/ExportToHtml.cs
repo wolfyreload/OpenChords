@@ -34,9 +34,9 @@ namespace OpenChords.Export
             Filename = song.generateShortTitle() + ".html";
         }
 
-        public string GenerateHtml()
+        public string GenerateHtml(bool enableAutoRefresh = false)
         {
-         
+
             //configure the stylesheet
             string baseStylesheet = HtmlResources.stylesheet;
             configureStylesheet(ref baseStylesheet);
@@ -45,6 +45,7 @@ namespace OpenChords.Export
             StringBuilder songBuilder = new StringBuilder();
             foreach (var song in _set.songList)
             {
+                songBuilder.AppendFormat("<input type=\"hidden\" id=\"SongName\" name=\"SongName\" value=\"{0}\">\r\n", song.title);
                 songBuilder.AppendFormat("<div class=\"DisplaySongName\">{0}</div>\r\n", song.generateLongTitle());
                 var verses = song.getSongVerses();
                 foreach (var verse in verses)
@@ -61,14 +62,25 @@ namespace OpenChords.Export
             sb.Replace("<%SongBody%>", songBuilder.ToString());
             //set the title
             sb.Replace("<%Title%>", this.Title);
+
+            handleScripts(sb, enableAutoRefresh);
+
+            return sb.ToString();
+        }
+
+        private void handleScripts(StringBuilder sb, bool enableAutoRefresh)
+        {
+            string scripts = HtmlResources.scripts;
+            if (enableAutoRefresh)
+                scripts = scripts.Replace("<%EnableAutoRefresh%>", "");
+            else
+                scripts = scripts.Replace("<%EnableAutoRefresh%>", "//");
+
             //put in the scripts
             if (_isSet)
                 sb.Replace("<%Scripts%>", "");
             else
-                sb.Replace("<%Scripts%>", HtmlResources.scripts);
-            
-
-            return sb.ToString();
+                sb.Replace("<%Scripts%>", scripts);
         }
 
         private void configureStylesheet(ref string baseStylesheet)

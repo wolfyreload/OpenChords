@@ -374,10 +374,10 @@ namespace OpenChords.Entities
         /// returns the song in html format
         /// </summary>
         /// <returns></returns>
-        public string getHtml(DisplayAndPrintSettings settings)
+        public string getHtml(DisplayAndPrintSettings settings, bool enableAutoRefresh = false)
         {
             Export.ExportToHtml htmlExporter = new Export.ExportToHtml(this, settings);
-            var result = htmlExporter.GenerateHtml();
+            var result = htmlExporter.GenerateHtml(enableAutoRefresh);
             return result;
         }
 
