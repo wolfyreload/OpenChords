@@ -118,41 +118,28 @@
 	}
 
 	//call ajax to url and return text
-	function callAjax(url) {
+	function callAjax(url, callback) {
 			var xmlhttp;
 			var currentHostSongName;
 			// compatible with IE7+, Firefox, Chrome, Opera, Safari
 			xmlhttp = new XMLHttpRequest();
 			xmlhttp.onreadystatechange = function() {
 				if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {
-					currentHostSongName = xmlhttp.responseText;
+					callback(xmlhttp);
 				}
 			}
-			//note doing this synchonously is bad... TODO make this work async
-			xmlhttp.open("GET",getBaseUrl() + url, false);
+			xmlhttp.open("GET",getBaseUrl() + url, true);
 			xmlhttp.send();
 			return currentHostSongName;
 	}
 
-	//get current song name
-	function getCurrentSongName()
+	function compareHostSongAndCurrentSongAsync_Complete(xmlHttpResult) 
 	{
+		//current song name 
 		var currentSongName = document.getElementById('SongName').value;
-		return currentSongName;
-	}
-
-	//get currently displayed song name on host
-	function getHostSongName()
-	{
-		var currentHostSongName = callAjax('/SongName');
-		return currentHostSongName;
-	}
-
-	//get current song name and song name at host. if they are different reload the page
-	function refreshOnSongChange()
-	{
-		var currentSongName = getCurrentSongName();
-		var hostSongName = getHostSongName();
+		//host song name
+		var hostSongName = xmlHttpResult.responseText;
+		//if they are different reload the song
 		if (currentSongName !== hostSongName)
 		{
 			//reload page and scroll to top of page
@@ -161,6 +148,11 @@
 		}
 	}
 
-	//check for song change every x milliseconds
-	<%EnableAutoRefresh%>var timeout = setInterval(refreshOnSongChange, 500);
+	//compare host song and current song asynchonously
+	function compareHostSongAndCurrentSongAsync() {
+		callAjax('/SongName', compareHostSongAndCurrentSongAsync_Complete);
+	}
+
+    //check for song change every x milliseconds
+	<%EnableAutoRefresh%>var timeout = setInterval(compareHostSongAndCurrentSongAsync, 1000);
 </script>
