@@ -90,7 +90,7 @@ namespace OpenChords.Export
             try
             {
                 var filename = Settings.ExtAppsAndDir.openSongSetFolder + set.setName;
-                SettingsReaderWriter.writeSet(filename, set);
+                XmlReaderWriter.writeSet(filename, set);
             }
             catch (Exception Ex)
             {

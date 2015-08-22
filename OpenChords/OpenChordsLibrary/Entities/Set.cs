@@ -360,7 +360,7 @@ namespace OpenChords.Entities
 
         public static Set loadSet(string setName)
         {
-            Set set = SettingsReaderWriter.readSet(Settings.ExtAppsAndDir.setsFolder + setName);
+            Set set = XmlReaderWriter.readSet(Settings.ExtAppsAndDir.setsFolder + setName);
             set.setName = setName;
             set.changeMade = false;
             set.indexOfCurrentSong = set.songList.Count - 1;
@@ -373,7 +373,7 @@ namespace OpenChords.Entities
             if (this.setName != "" && changeMade == true)
             {
                 xmlSetSongCollection = new XmlSetSongCollection(songList);
-                SettingsReaderWriter.writeSet(Settings.ExtAppsAndDir.setsFolder + this.setName, this);
+                XmlReaderWriter.writeSet(Settings.ExtAppsAndDir.setsFolder + this.setName, this);
                 changeMade = false;
             }
         }

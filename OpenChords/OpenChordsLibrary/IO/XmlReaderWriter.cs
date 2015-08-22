@@ -8,74 +8,73 @@ using System.Drawing;
 
 namespace OpenChords.IO
 {
-
-
-
-
-
-
-
-
-
     public static class XmlReaderWriter
     {
         private static readonly log4net.ILog logger = log4net.LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
-    	/// <summary>
+        
+        private static void xmlWriter<T>(string filename, T item)
+        {
+            using (StringWriter stringWriter = new StringWriter())
+            {
+                XmlSerializer serializer = new XmlSerializer(typeof(T));
+                var blankNamespace = new XmlSerializerNamespaces();
+                blankNamespace.Add(string.Empty, string.Empty);
+
+                serializer.Serialize(stringWriter, item, blankNamespace);
+                //"windowsify the output"
+                string xmlString = stringWriter.ToString();
+                xmlString = xmlString.Replace("\r", "");
+                xmlString = xmlString.Replace("\n", "\r\n");
+                File.WriteAllText(filename, xmlString);
+            }
+        }
+
+        private static T xmlReader<T>(string filename)
+        {
+            using (TextReader textReader = new StreamReader(filename))
+            {
+                XmlSerializer deserializer = new XmlSerializer(typeof(T));
+                T item = (T)deserializer.Deserialize(textReader);
+                return item;
+            }
+        }
+
+        /// <summary>
         /// writes the current song to file
         /// </summary>
         /// <param name="filename"></param>
         public static void writeSong(String filename, Song song)
         {
-            //"fix" the lyrics before we save them
-            song.lyrics = song.lyrics.Replace("\r", "");
-            song.lyrics = song.lyrics.Replace("\n", "\r\n");
-
-            XmlSerializer serializer = new XmlSerializer(typeof(Entities.Song));
-            TextWriter textWriter = new StreamWriter(filename);
-            serializer.Serialize(textWriter, song);
-            textWriter.Close();
+            xmlWriter<Song>(filename, song);
         }
-               
+
         /// <summary>
         /// reads in the specified song
         /// </summary>
         /// <param name="filename"></param>
         public static Song readSong(String filename)
         {
-            Song song = new Song();
-            TextReader textReader = new StreamReader(filename);
             try
             {
-                XmlSerializer deserializer = new XmlSerializer(typeof(Entities.Song));
-                song = (Entities.Song)deserializer.Deserialize(textReader);
-
-                //"fix" the notes and lyrics so that they display properly
-                song.lyrics = song.lyrics.Replace("\r", "");
-                song.notes = song.notes.Replace("\r", "");
+                Song song = xmlReader<Song>(filename);
+                song.SongFileName = Path.GetFileName(filename); 
                 song.songFilePath = filename;
-                song.SongFileName = Path.GetFileName(filename);
+                return song;
             }
             catch (Exception Ex)
             {
                 logger.Error("Error reading song", Ex);
             }
-            finally
-            {
-                textReader.Close();
-            }
 
-
-            return song;
+            return new Song();
+           
         }
 
         private static string SETTINGS_LOCAL_FILENAME = "settings.xml";
         private static string SETTINGS_APPDATA_FILENAME = Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData) + "/OpenChords/settings.xml";
 
-        public static void writeFileAndFolderSettings(Entities.FileAndFolderSettings settings)
+        public static void writeFileAndFolderSettings(FileAndFolderSettings settings)
         {
-            
-            XmlSerializer serializer = new XmlSerializer(typeof(Entities.FileAndFolderSettings));
-
             string path = null;
             if (File.Exists(SETTINGS_LOCAL_FILENAME))
                 path = SETTINGS_LOCAL_FILENAME;
@@ -96,10 +95,7 @@ namespace OpenChords.IO
                     File.Delete(SETTINGS_LOCAL_FILENAME);
             }
 
-            TextWriter textWriter = new StreamWriter(path);
-            serializer.Serialize(textWriter, settings);
-            textWriter.Close();
-
+            xmlWriter<FileAndFolderSettings>(path, settings);
         }
 
         /// <summary>
@@ -112,30 +108,20 @@ namespace OpenChords.IO
             Entities.FileAndFolderSettings settings = new OpenChords.Entities.FileAndFolderSettings();
             if (!IO.FileFolderFunctions.isFilePresent(path))
             {
-                XmlSerializer serializer = new XmlSerializer(typeof(Entities.FileAndFolderSettings));
                 new FileInfo(path).Directory.Create(); //create directory if it doesn't exist
-                TextWriter textWriter = new StreamWriter(path);
-                serializer.Serialize(textWriter, settings);
-                textWriter.Close();
+                xmlWriter<FileAndFolderSettings>(path, settings);
             }
             else
             {
-                TextReader textReader = new StreamReader(path);
                 try
                 {
-                    XmlSerializer deserializer = new XmlSerializer(typeof(Entities.FileAndFolderSettings));
-                    settings = (Entities.FileAndFolderSettings)deserializer.Deserialize(textReader);
+                    settings = xmlReader<FileAndFolderSettings>(path);
                 }
                 catch (Exception Ex)
                 {
                     logger.Error("Error reading settings", Ex);
 
                 }
-                finally
-                {
-                    textReader.Close();
-                }
-
             }
 
             return settings;
@@ -158,15 +144,10 @@ namespace OpenChords.IO
 
         public static DisplayAndPrintSettings readSettings(String fileName)
         {
-            TextReader textReader = null;
             DisplayAndPrintSettings settings = null;
             try
             {
-                textReader = new StreamReader(fileName);
-                XmlSerializer deserializer = new XmlSerializer(typeof(DisplayAndPrintSettings));
-                settings = (DisplayAndPrintSettings)deserializer.Deserialize(textReader);
-                fixNulls(settings);
-                textReader.Close();
+                settings = xmlReader<DisplayAndPrintSettings>(fileName);
             }
             catch (Exception ex)
             {
@@ -175,60 +156,46 @@ namespace OpenChords.IO
 
             return settings;
         }
-
-        /// <summary>
-        /// check if color col1 matches color col2
-        /// </summary>
-        /// <param name="col1"></param>
-        /// <param name="col2"></param>
-        /// <returns></returns>
-        private static bool ifColorsMatch(Color col1, Color col2)
-        {
-            return col1.A == col2.A && col1.R == col2.R && col1.G == col2.G && col1.B == col2.B;
-        }
-
-        /// <summary>
-        /// fix null values in the settings files, this is needed for upgrades
-        /// </summary>
-        /// <param name="settings"></param>
-        private static void fixNulls(DisplayAndPrintSettings settings)
-        {
-           
-            //var blankColor = Color.FromArgb(0,0,0,0);
-
-            //if (ifColorsMatch(settings.ChordColor, blankColor))  settings.ChordColor = Color.Black;
-            //if (ifColorsMatch(settings.BackgroundColor, blankColor)) settings.BackgroundColor = Color.White;
-            //if (ifColorsMatch(settings.LyricsColor, blankColor)) settings.LyricsColor = Color.Black;
-            //if (ifColorsMatch(settings.NoteColor, blankColor)) settings.NoteColor = Color.Black;
-            //if (ifColorsMatch(settings.HeadingsColor, blankColor)) settings.HeadingsColor = Color.Black;
-            //if (ifColorsMatch(settings.TitleColor, blankColor)) settings.TitleColor = Color.Black;
-            //if (ifColorsMatch(settings.OrderColor, blankColor)) settings.OrderColor = Color.Black;
-            //if (ifColorsMatch(settings.OrderColor2, blankColor)) settings.OrderColor2 = Color.DarkGray;
-
-
-            //settings.ShowLyrics = settings.ShowLyrics ?? true;
-            //settings.ShowChords = settings.ShowChords ?? true;
-            //settings.ShowGeneralNotes = settings.ShowGeneralNotes ?? false;
-            //settings.ShowNotes = settings.ShowNotes ?? true;
-           
-   
-            //settings.BoldLyrics = settings.BoldLyrics ?? false;
-            //settings.BoldChords = settings.BoldChords ?? true;
-            //settings.BoldHeadings = settings.BoldHeadings ?? true;
-            //settings.BoldNotes = settings.BoldNotes ?? false;
-            //settings.BoldTitle = settings.BoldTitle ?? true;
-         
-
-
-        }
-
+     
         public static void writeSettings(String fileName, DisplayAndPrintSettings settings)
         {
-            XmlSerializer serializer = new XmlSerializer(typeof(DisplayAndPrintSettings));
-            TextWriter textWriter = new StreamWriter(fileName);
-            serializer.Serialize(textWriter, settings);
-            textWriter.Close();
+            xmlWriter<DisplayAndPrintSettings>(fileName, settings);
+        }
 
+        /// <summary>
+        /// reads in the specified song set
+        /// </summary>
+        /// <param name="filename"></param>
+        /// <returns></returns>
+        public static Set readSet(string filename)
+        {
+            Set set = new Set();
+            try
+            {
+                set = xmlReader<Set>(filename);
+            }
+            catch (Exception ex)
+            {
+                logger.Debug("Failed to decode set", ex);
+            }
+            return set;
+        }
+
+        /// <summary>
+        /// writes the supplied song set to disk
+        /// </summary>
+        /// <param name="filename"></param>
+        /// <param name="set"></param>
+        public static void writeSet(string filename, Set set)
+        {
+            try
+            {
+                xmlWriter<Set>(filename, set);
+            }
+            catch (Exception Ex)
+            {
+                logger.Error("Error writing set", Ex);
+            }
         }
 
     }
