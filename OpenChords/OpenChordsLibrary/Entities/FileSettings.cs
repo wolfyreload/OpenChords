@@ -25,7 +25,6 @@ namespace OpenChords.Entities
         public string OpenSongSetsAndSongs { get; set; }
         public bool PortableMode { get; set; }
         public string ApplicationDataFolder { get; set; }
-        public bool CheckForUpdates { get; set; }
         public bool HttpServerEnabled { get; set; }
         public int HttpServerPort { get; set; }
         
@@ -72,9 +71,8 @@ namespace OpenChords.Entities
                 OpenSongSetsAndSongs = "";
                 PortableMode = false;
                 ApplicationDataFolder = Environment.GetFolderPath(Environment.SpecialFolder.Personal) + "/OpenChords";
-                CheckForUpdates = true;
                 HttpServerPort = 8083;
-                HttpServerEnabled = true;
+                HttpServerEnabled = false;
             }
             else
             {
@@ -82,9 +80,8 @@ namespace OpenChords.Entities
                 OpenSongSetsAndSongs = "";
                 PortableMode = false;
                 ApplicationDataFolder = "../Data";
-                CheckForUpdates = true;
                 HttpServerPort = 8083;
-                HttpServerEnabled = true;
+                HttpServerEnabled = false;
             }
         }
         
