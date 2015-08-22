@@ -52,9 +52,6 @@ namespace OpenChords.CrossPlatform
             {
                 DirectoryCopy("InitialData", Settings.ExtAppsAndDir.dataFolder, true);
             }
-
-            OpenChords.Entities.GlobalVariables.restartApplicationOnExit = false;
-            OpenChords.Entities.GlobalVariables.patchApplicationOnExit = false;
         }
 
         private static void addIeEmulationModeRegistryKey()
