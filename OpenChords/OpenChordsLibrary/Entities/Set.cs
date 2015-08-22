@@ -136,7 +136,7 @@ namespace OpenChords.Entities
         private void initializeSetStyle(string songName = null)
         {
             //only override style if there is an actual background image
-            if (songName != null && doesBackgroundFileExist(songName))
+            if (Settings.ExtAppsAndDir.IsOpenSongDataFolderConfigured && songName != null && doesBackgroundFileExist(songName))
             {
                 this.style = new setStyle();
 
