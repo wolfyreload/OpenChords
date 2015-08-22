@@ -57,12 +57,6 @@
       <HintPath>..\packages\NHttp.0.1.7.0\lib\net20\NHttp.dll</HintPath>
       <Private>True</Private>
     </Reference>
-    <Reference Include="PdfSharp">
-      <HintPath>..\packages\PdfSharp.1.32.3057.0\lib\net20\PdfSharp.dll</HintPath>
-    </Reference>
-    <Reference Include="sharpPDF">
-      <HintPath>Libraries\sharpPDF.dll</HintPath>
-    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core">
       <RequiredTargetFramework>3.5</RequiredTargetFramework>
@@ -99,7 +93,6 @@
     <Compile Include="Entities\SongElementFormat.cs" />
     <Compile Include="Export\ExportToHtml.cs" />
     <Compile Include="Export\ExportToOpenSong.cs" />
-    <Compile Include="Export\ExportToPdf.cs" />
     <Compile Include="Export\ExportToRtf.cs" />
     <Compile Include="Functions\FontList.cs" />
     <Compile Include="Functions\ImportSong.cs" />

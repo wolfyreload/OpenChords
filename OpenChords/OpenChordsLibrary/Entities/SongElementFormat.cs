@@ -1,5 +1,4 @@
-﻿using sharpPDF;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Drawing;
 using System.Linq;
@@ -22,38 +21,6 @@ namespace OpenChords.Entities
         {
             get { return ColorTranslator.FromHtml(FontColorHex); }
             set { FontColorHex = ColorTranslator.ToHtml(value); }
-        }
-
-        [XmlIgnore]
-        public pdfColor PdfColor
-        {
-            get
-            {
-                var p = new pdfColor(FontColor.R, FontColor.G, FontColor.B);
-                return p;
-            }
-        }
-
-        [XmlIgnore]
-        public sharpPDF.Enumerators.predefinedFont PdfFont
-        {
-            get
-            {
-                if (FontName == "Courier New" && FontStyle == System.Drawing.FontStyle.Regular)
-                    return sharpPDF.Enumerators.predefinedFont.csCourier;
-                else if (FontName == "Courier New" && FontStyle == System.Drawing.FontStyle.Bold)
-                    return sharpPDF.Enumerators.predefinedFont.csCourierBold;
-                else if (FontName == "Courier New" && FontStyle == System.Drawing.FontStyle.Italic)
-                    return sharpPDF.Enumerators.predefinedFont.csCourierOblique;
-                if (FontName == "Helvetica" && FontStyle == System.Drawing.FontStyle.Regular)
-                    return sharpPDF.Enumerators.predefinedFont.csHelvetica;
-                else if (FontName == "Helvetica" && FontStyle == System.Drawing.FontStyle.Bold)
-                    return sharpPDF.Enumerators.predefinedFont.csHelveticaBold;
-                else if (FontName == "Helvetica" && FontStyle == System.Drawing.FontStyle.Italic)
-                    return sharpPDF.Enumerators.predefinedFont.csHelveticaOblique;
-
-                return sharpPDF.Enumerators.predefinedFont.csTimes;
-            }
         }
 
         private Font _Font;

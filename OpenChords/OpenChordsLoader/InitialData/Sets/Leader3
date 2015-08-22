@@ -1,7 +1,0 @@
-<?xml version="1.0"?>
-<Set xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" name="Leader3">
-  <slide_groups>
-    <slide_group name="Be Thou My Vision" type="song" presentation="" path="OpenChords/" />
-    <slide_group name="The Old Rugged Cross" type="song" presentation="" path="OpenChords/" />
-  </slide_groups>
-</Set>

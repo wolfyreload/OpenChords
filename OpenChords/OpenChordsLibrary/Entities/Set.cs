@@ -465,48 +465,6 @@ namespace OpenChords.Entities
             return destination;
         }
 
-        /// <summary>
-        /// create the pdf and return the path to the pdf
-        /// </summary>
-        /// <param name="settingsType"></param>
-        /// <returns></returns>
-        public string getPdfPath(DisplayAndPrintSettingsType settingsType)
-        {
-            string pdfPath;
-            pdfPath = Export.ExportToPdf.exportSet(this, settingsType);
-            pdfPath = Settings.ExtAppsAndDir.printFolder + pdfPath;
-            return pdfPath;
-        }
-
-        /// <summary>
-        /// create the pdf and return the path to the pdf
-        /// </summary>
-        /// <param name="settingsType"></param>
-        /// <returns></returns>
-        public string getPdfPath(DisplayAndPrintSettingsType settingsType, string settingsPath)
-        {
-            string pdfPath;
-            pdfPath = Export.ExportToPdf.exportSet(this, settingsType, settingsPath);
-            pdfPath = Settings.ExtAppsAndDir.printFolder + pdfPath;
-            return pdfPath;
-        }
-
-
-        public void displayPdf(DisplayAndPrintSettingsType settingsType)
-        {
-
-            var pdfPath = getPdfPath(settingsType);
-
-            //get the filemanager for the filesystem
-            string fileManager = Settings.ExtAppsAndDir.fileManager;
-            //try run the file with the default application
-            if (string.IsNullOrEmpty(fileManager))
-                System.Diagnostics.Process.Start(pdfPath);
-            else
-                System.Diagnostics.Process.Start(fileManager, pdfPath);
-
-        }
-
         public string getFullPath()
         {
             return Path.GetFullPath(Settings.ExtAppsAndDir.setsFolder + this.setName);

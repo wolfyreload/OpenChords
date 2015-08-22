@@ -356,20 +356,6 @@ namespace OpenChords.Entities
             return SongVerse.getSongVerses(this);
         }
 
-        public void displayPdf(DisplayAndPrintSettingsType settingsType)
-        {
-            string pdfPath = getPdfPath(settingsType);
-
-            //get the filemanager for the filesystem
-            string fileManager = Settings.ExtAppsAndDir.fileManager;
-            if (string.IsNullOrEmpty(fileManager))
-                System.Diagnostics.Process.Start(pdfPath);
-            else
-                System.Diagnostics.Process.Start(fileManager, pdfPath);
-
-
-        }
-
         /// <summary>
         /// returns the song in html format
         /// </summary>
@@ -393,32 +379,6 @@ namespace OpenChords.Entities
             string destination = String.Format("{0}/{1}.html", folder, this.generateShortTitle());
             File.WriteAllText(destination, htmlText);
             return destination;
-        }
-
-        /// <summary>
-        /// create the pdf and return the path to the pdf
-        /// </summary>
-        /// <param name="settingsType"></param>
-        /// <returns></returns>
-        public string getPdfPath(DisplayAndPrintSettingsType settingsType)
-        {
-            string pdfPath;
-            pdfPath = Export.ExportToPdf.exportSong(this, settingsType);
-            pdfPath = Settings.ExtAppsAndDir.printFolder + pdfPath;
-            return pdfPath;
-        }
-
-        /// <summary>
-        /// create the pdf and return the path to the pdf
-        /// </summary>
-        /// <param name="settingsType"></param>
-        /// <returns></returns>
-        public string getPdfPath(DisplayAndPrintSettingsType settingsType, string settingsPath)
-        {
-            string pdfPath;
-            pdfPath = Export.ExportToPdf.exportSong(this, settingsType, settingsPath);
-            pdfPath = Settings.ExtAppsAndDir.printFolder + pdfPath;
-            return pdfPath;
         }
 
         public static List<string> TimeSignatureOptions()

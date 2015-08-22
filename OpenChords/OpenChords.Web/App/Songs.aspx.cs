@@ -26,22 +26,6 @@ namespace OpenChords.Web
             }
         }
 
-        private void downloadSong(OpenChords.Entities.Song song)
-        {
-            var settingsPath = OpenChords.Web.App_Code.Global.SettingsFileName;
-            var pdfPath = song.getPdfPath(Entities.DisplayAndPrintSettingsType.TabletSettings, settingsPath);
-
-            Response.ClearContent();
-            Response.Clear();
-
-            Response.ContentType = "application/pdf";
-            Response.AppendHeader("Content-Disposition", "attachment; filename=" + song.title + ".pdf");
-            Response.TransmitFile(pdfPath);
-            Response.Flush();
-
-            Response.End();
-        }
-
         protected void SongList_NewSongSelected(object sender, EventArgs e)
         {
             var songName = SongList.SelectedValue;
@@ -111,12 +95,6 @@ namespace OpenChords.Web
           
             var song = getSongObjectFromGui();
             song.saveSong();
-        }
-
-        protected void imgPdf_Click(object sender, ImageClickEventArgs e)
-        {
-            var song = getSongObjectFromGui();
-            downloadSong(song);
         }
 
         protected void imgCancel_Click(object sender, ImageClickEventArgs e)

@@ -35,7 +35,6 @@
     <asp:Panel ID="pnlButtons" runat="server" CssClass="Inline">
         <asp:ImageButton ID="cmdCancel" runat="server" SkinID="imgCancel" OnClick="cmdCancel_Click" />
         <asp:ImageButton ID="cmdSave" runat="server" SkinID="imgSave" OnClick="cmdSave_Click" />
-        <asp:ImageButton ID="exportToPdf" runat="server" SkinID="imgPdf" OnClick="exportToPdf_Click" />
         <asp:ImageButton ID="imgHtml" runat="server" SkinID="imgHtml" OnClick="imgHtml_Click" />
     </asp:Panel>
 
