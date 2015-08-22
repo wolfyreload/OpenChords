@@ -50,7 +50,7 @@ namespace OpenChords.CrossPlatform
 
             if (haveNoSongs() && haveNoSets())
             {
-                DirectoryCopy("InitialData", Settings.ExtAppsAndDir.dataFolder, true);
+                DirectoryCopy("InitialData", Settings.ExtAppsAndDir.ApplicationDataFolder, true);
             }
         }
 
@@ -71,12 +71,12 @@ namespace OpenChords.CrossPlatform
 
         private static bool haveNoSets()
         {
-            return new System.IO.DirectoryInfo(Settings.ExtAppsAndDir.setsFolder).GetFiles().Length == 0;
+            return new System.IO.DirectoryInfo(Settings.ExtAppsAndDir.SetsFolder).GetFiles().Length == 0;
         }
 
         private static bool haveNoSongs()
         {
-            return new System.IO.DirectoryInfo(Settings.ExtAppsAndDir.songsFolder).GetFiles().Length == 0;
+            return new System.IO.DirectoryInfo(Settings.ExtAppsAndDir.SongsFolder).GetFiles().Length == 0;
         }
 
         private static void DirectoryCopy(string sourceDirName, string destDirName, bool copySubDirs)

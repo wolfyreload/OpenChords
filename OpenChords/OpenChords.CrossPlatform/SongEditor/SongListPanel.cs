@@ -185,7 +185,7 @@ namespace OpenChords.CrossPlatform.SongEditor
             if (string.IsNullOrEmpty(fileManager))
                 System.Diagnostics.Process.Start("Explorer", "/select, " + songPath);
             else
-                System.Diagnostics.Process.Start(fileManager, OpenChords.Settings.ExtAppsAndDir.songsFolder);
+                System.Diagnostics.Process.Start(fileManager, OpenChords.Settings.ExtAppsAndDir.SongsFolder);
         }
     }
 }

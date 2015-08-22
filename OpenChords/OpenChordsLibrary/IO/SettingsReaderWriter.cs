@@ -38,7 +38,7 @@ namespace OpenChords.IO
 		{
             try
             {
-                return FileReaderWriter.readFromFile(Settings.ExtAppsAndDir.sessionSaveState);
+                return FileReaderWriter.readFromFile(Settings.ExtAppsAndDir.SessionSaveState);
             }
             catch
             {
@@ -52,7 +52,7 @@ namespace OpenChords.IO
         /// <param name="state"></param>
 		public static void writeSessionState(string state)
 		{
-			FileReaderWriter.writeToFile(Settings.ExtAppsAndDir.sessionSaveState,state);
+			FileReaderWriter.writeToFile(Settings.ExtAppsAndDir.SessionSaveState,state);
 		}
 	
 

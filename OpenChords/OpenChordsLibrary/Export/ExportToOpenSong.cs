@@ -30,10 +30,10 @@ namespace OpenChords.Export
 
         public static void exportAllSongsToOpenSong()
         {
-            var songNameList = IO.FileFolderFunctions.getDirectoryListingAsList(Settings.ExtAppsAndDir.songsFolder);
+            var songNameList = IO.FileFolderFunctions.getDirectoryListingAsList(Settings.ExtAppsAndDir.SongsFolder);
             
             //clear all the files in the songs folder
-            IO.FileFolderFunctions.clearFolder(Settings.ExtAppsAndDir.opensongSongsFolder);
+            IO.FileFolderFunctions.clearFolder(Settings.ExtAppsAndDir.OpensongSongsFolder);
 
             //copy all the new files accross
             foreach (string songName in songNameList)
@@ -46,7 +46,7 @@ namespace OpenChords.Export
         private static void saveSonginOpenSong(Song song)
         {
             //write song
-            var destinationSongFolder = Settings.ExtAppsAndDir.opensongSongsFolder;
+            var destinationSongFolder = Settings.ExtAppsAndDir.OpensongSongsFolder;
             var destinationFile = destinationSongFolder + song.title;
             song.saveSong(destinationFile);
         }
@@ -57,7 +57,7 @@ namespace OpenChords.Export
         /// <param name="set"></param>
         private static void exportSongListToOpenSong(Set set)
         {
-            string destination =Settings.ExtAppsAndDir.opensongSongsFolder;
+            string destination =Settings.ExtAppsAndDir.OpensongSongsFolder;
 
             foreach (var song in set.songList)
             {
@@ -71,7 +71,7 @@ namespace OpenChords.Export
         /// </summary>
         public static void exportAllSetsToOpenSong()
         {
-            var ListOfSetNames = IO.FileFolderFunctions.getDirectoryListingAsList(Settings.ExtAppsAndDir.setsFolder);
+            var ListOfSetNames = IO.FileFolderFunctions.getDirectoryListingAsList(Settings.ExtAppsAndDir.SetsFolder);
             foreach (string setName in ListOfSetNames)
             {
                 var set = Set.loadSet(setName);
@@ -89,7 +89,7 @@ namespace OpenChords.Export
         {
             try
             {
-                var filename = Settings.ExtAppsAndDir.openSongSetFolder + set.setName;
+                var filename = Settings.ExtAppsAndDir.OpenSongSetFolder + set.setName;
                 XmlReaderWriter.writeSet(filename, set);
             }
             catch (Exception Ex)
@@ -112,7 +112,7 @@ namespace OpenChords.Export
              }
              else
              {
-                 System.Diagnostics.Process.Start(Settings.ExtAppsAndDir.openSongApp);
+                 System.Diagnostics.Process.Start(Settings.ExtAppsAndDir.OpenSongExecutable);
              }
          }
 

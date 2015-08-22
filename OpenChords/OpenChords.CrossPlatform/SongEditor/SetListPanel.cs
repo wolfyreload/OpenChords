@@ -165,7 +165,7 @@ namespace OpenChords.CrossPlatform.SongEditor
             else
                 revertSet();
             string html = CurrentSet.getHtml(DisplayAndPrintSettings.loadSettings(DisplayAndPrintSettingsType.TabletSettings));
-            string fileName = string.Format("{0}/{1}.html", Settings.ExtAppsAndDir.printFolder, CurrentSet.setName);
+            string fileName = string.Format("{0}/{1}.html", Settings.ExtAppsAndDir.PrintFolder, CurrentSet.setName);
             File.WriteAllText(fileName, html);
         }
 
@@ -254,11 +254,11 @@ namespace OpenChords.CrossPlatform.SongEditor
             //export the results
             CurrentSet.exportSetAndSongsToOpenSong();
             //open opensong set folder
-            Process.Start(Settings.ExtAppsAndDir.openSongSetFolder);
+            Process.Start(Settings.ExtAppsAndDir.OpenSongSetFolder);
 
             //run opensong
             if (Settings.ExtAppsAndDir.IsOpenSongExecutableConfigured)
-                Process.Start(Settings.ExtAppsAndDir.openSongApp);      
+                Process.Start(Settings.ExtAppsAndDir.OpenSongExecutable);      
         }
 
 
@@ -305,7 +305,7 @@ namespace OpenChords.CrossPlatform.SongEditor
             if (string.IsNullOrEmpty(fileManager))
                 System.Diagnostics.Process.Start("Explorer", "/select, " + songPath);
             else
-                System.Diagnostics.Process.Start(fileManager, OpenChords.Settings.ExtAppsAndDir.songsFolder);
+                System.Diagnostics.Process.Start(fileManager, OpenChords.Settings.ExtAppsAndDir.SongsFolder);
         }
 
         internal void ExportToTextFile()

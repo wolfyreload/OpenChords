@@ -128,21 +128,21 @@ namespace OpenChords.Entities
 			
 			if (settingsType == DisplayAndPrintSettingsType.DisplaySettings)
 			{
-                settings = XmlReaderWriter.readSettings(Settings.ExtAppsAndDir.displaySettingsFileName);
+                settings = XmlReaderWriter.readSettings(Settings.ExtAppsAndDir.DisplaySettingsFileName);
                 if (settings == null) settings = new DisplayAndPrintSettings(DisplayAndPrintSettingsType.DisplaySettings);
-                settings.SettingsFilePath = Settings.ExtAppsAndDir.displaySettingsFileName;
+                settings.SettingsFilePath = Settings.ExtAppsAndDir.DisplaySettingsFileName;
             }
             else if (settingsType == DisplayAndPrintSettingsType.PrintSettings)
 			{
-                settings = XmlReaderWriter.readSettings(Settings.ExtAppsAndDir.printSettingsFilename);
+                settings = XmlReaderWriter.readSettings(Settings.ExtAppsAndDir.PrintSettingsFilename);
                 if (settings == null) settings = new DisplayAndPrintSettings(DisplayAndPrintSettingsType.PrintSettings);
-                settings.SettingsFilePath = Settings.ExtAppsAndDir.printSettingsFilename;
+                settings.SettingsFilePath = Settings.ExtAppsAndDir.PrintSettingsFilename;
 			}
             else if (settingsType == DisplayAndPrintSettingsType.TabletSettings)
             {
-                settings = XmlReaderWriter.readSettings(Settings.ExtAppsAndDir.tabletSettingsFilename);
+                settings = XmlReaderWriter.readSettings(Settings.ExtAppsAndDir.TabletSettingsFilename);
                 if (settings == null) settings = new DisplayAndPrintSettings(DisplayAndPrintSettingsType.TabletSettings);
-                settings.SettingsFilePath = Settings.ExtAppsAndDir.tabletSettingsFilename;
+                settings.SettingsFilePath = Settings.ExtAppsAndDir.TabletSettingsFilename;
             }
 			
 			return settings;
@@ -246,7 +246,7 @@ namespace OpenChords.Entities
 
             if (settingsType == DisplayAndPrintSettingsType.DisplaySettings)
             {
-                SettingsFilePath = Settings.ExtAppsAndDir.displaySettingsFileName;
+                SettingsFilePath = Settings.ExtAppsAndDir.DisplaySettingsFileName;
                 var pageHeight = System.Windows.Forms.SystemInformation.PrimaryMonitorSize.Height;
                 var pageWidth = System.Windows.Forms.SystemInformation.PrimaryMonitorSize.Width;
 
@@ -286,7 +286,7 @@ namespace OpenChords.Entities
             }
             else if (settingsType == DisplayAndPrintSettingsType.TabletSettings)
             {
-                SettingsFilePath = Settings.ExtAppsAndDir.tabletSettingsFilename;
+                SettingsFilePath = Settings.ExtAppsAndDir.TabletSettingsFilename;
                 var pageHeight = 1024;
                 var pageWidth = 768;
 
@@ -325,7 +325,7 @@ namespace OpenChords.Entities
             }
             else //if (settingsType == DisplayAndPrintSettingsType.PrintSettings)
             {
-                SettingsFilePath = Settings.ExtAppsAndDir.printSettingsFilename;
+                SettingsFilePath = Settings.ExtAppsAndDir.PrintSettingsFilename;
              
                 titleSize = 12;
                 contentSize = 15;

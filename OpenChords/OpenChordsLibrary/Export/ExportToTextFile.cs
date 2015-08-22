@@ -19,7 +19,7 @@ namespace OpenChords.Export
                 sb.Append(string.Format("{0} {1}\r\n", song.generateLongTitle(), song.presentation));
 
             }
-            string filename = String.Format("{0}{1}_{2:yyyy-MM-dd_HHmmss}.txt", Settings.ExtAppsAndDir.printFolder, currentSet.setName, DateTime.Now);
+            string filename = String.Format("{0}{1}_{2:yyyy-MM-dd_HHmmss}.txt", Settings.ExtAppsAndDir.PrintFolder, currentSet.setName, DateTime.Now);
             string setText = sb.ToString();
             File.WriteAllText(filename, setText);
             return filename;

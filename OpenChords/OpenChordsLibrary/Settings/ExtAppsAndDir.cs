@@ -15,26 +15,22 @@ namespace OpenChords.Config
     {
 
         private readonly log4net.ILog logger = log4net.LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
-        public char seperator = System.IO.Path.DirectorySeparatorChar;
+
         private Entities.FileAndFolderSettings settings;
 
-        private string fixPaths(string old)
+        private string fixPaths(string path)
         {
-            return old.Replace('\\', seperator);
+            path = path.Replace("\\", "#Path#");
+            path = path.Replace("/", "#Path#");
+            path = path.Replace("#Path#", Path.DirectorySeparatorChar.ToString());
+            path = Path.GetFullPath(path);
+            return path;
         }
-
-
 
         public ExtAppsAndDirClass(Entities.FileAndFolderSettings settings)
         {
             this.settings = settings;
            
-        }
-
-
-        public void refreshFileAndFolderSettings()
-        {
-            settings.refresh();
         }
 
         public bool HttpServerEnabled
@@ -72,28 +68,32 @@ namespace OpenChords.Config
         {
             get
             {
-                Console.WriteLine(settings.CurrentPath);
-                var path = settings.CurrentPath + "help.html";
-                Console.WriteLine(path);
-                if (IO.FileFolderFunctions.isFilePresent(path))
-                    return path;
-                else
-                    return null;
+                var path = settings.OpenChordsApplicationDirectory + "help.html";
+                return path;
             }
 
         }
 
+        private string getFullPath(string path)
+        {
+            path = Path.GetFullPath(path);
+            path = fixPaths(path);
+            return path;
+        }
+        private string fixPathsAndMakeDirectory(string path)
+        {
+            path = fixPaths(path);
+            if (!System.IO.Directory.Exists(path))
+                System.IO.Directory.CreateDirectory(path);
+            return path;
+        }
+
         //external Apps
-        public String openSongApp
+        public String OpenSongExecutable
         {
             get
             {
-                string path;
-                path = settings.OpenSongExecutable;
-                path = Path.GetFullPath(path);
-                string fixedPath = fixPaths(path);
-                return fixedPath;
-
+                return getFullPath(settings.OpenSongExecutable);
             }
         }
 
@@ -101,38 +101,36 @@ namespace OpenChords.Config
         {
             get
             {
-                return !string.IsNullOrWhiteSpace(settings.OpenSongExecutable) && File.Exists(openSongApp);
+                return !string.IsNullOrWhiteSpace(settings.OpenSongExecutable) && File.Exists(OpenSongExecutable);
             }
         }
 
-        public String dataFolder
+        public String ApplicationDataFolder
         {
             get
             {
                 string path = null;
                 if (Path.IsPathRooted(settings.ApplicationDataFolder))
-                    path = settings.ApplicationDataFolder + "\\";
+                    path = settings.ApplicationDataFolder + Path.DirectorySeparatorChar;
                 else
-                    path = String.Format("{0}{1}\\", settings.CurrentPath, settings.ApplicationDataFolder);
-                string fixedPath = fixPaths(path);
-                if (!System.IO.Directory.Exists(fixedPath))
-                    System.IO.Directory.CreateDirectory(fixedPath);
-                return fixedPath;
+                    path = Path.Combine(settings.OpenChordsApplicationDirectory, settings.ApplicationDataFolder);
+                path = fixPathsAndMakeDirectory(path);
+                return path;
             }
         }
+
+        
 
         /// <summary>
         /// The song folder for OpenChords
         /// </summary>
-        public String songsFolder
+        public String SongsFolder
         {
             get
             {
-                string path = dataFolder + "Songs\\";
-                string fixedPath = fixPaths(path);
-                if (!System.IO.Directory.Exists(fixedPath))
-                    System.IO.Directory.CreateDirectory(fixedPath);
-                return fixedPath;
+                string path = Path.Combine(ApplicationDataFolder, "Songs\\");
+                path = fixPathsAndMakeDirectory(path);
+                return path;
 
             }
         }
@@ -140,72 +138,100 @@ namespace OpenChords.Config
         /// <summary>
         /// The Sets folder for OpenChords
         /// </summary>
-        public String setsFolder
+        public String SetsFolder
         {
             get
             {
-                string path = dataFolder + "Sets\\";
-                string fixedPath = fixPaths(path);
-                if (!System.IO.Directory.Exists(fixedPath))
-                    System.IO.Directory.CreateDirectory(fixedPath);
-                return fixedPath;
+                string path = Path.Combine(ApplicationDataFolder, "Sets\\");
+                path = fixPathsAndMakeDirectory(path);
+                return path;
 
             }
         }
 
-        /// <summary>
-        /// The Notes folder for OpenChords
-        /// </summary>
-        public String notesFolder
+        public String MediaFolder
         {
             get
             {
-                string path = dataFolder + "Notes\\";
-                string fixedPath = fixPaths(path);
-                if (!System.IO.Directory.Exists(fixedPath))
-                    System.IO.Directory.CreateDirectory(fixedPath);
-                return fixedPath;
+                string path = Path.Combine(ApplicationDataFolder, "Media\\");
+                path = fixPathsAndMakeDirectory(path);
+                return path;
 
             }
         }
-        public String mediaFolder
+        public String PrintFolder
         {
             get
             {
-                string path = dataFolder + "Media\\";
-                string fixedPath = fixPaths(path);
-                if (!System.IO.Directory.Exists(fixedPath))
-                    System.IO.Directory.CreateDirectory(fixedPath);
-                return fixedPath;
-
-            }
-        }
-        //public String presentations = ".\\Data\\Present\\";
-        public String printFolder
-        {
-            get
-            {
-                string path = dataFolder + "/Export/Print/";
-                string fixedPath = fixPaths(path);
-                if (!System.IO.Directory.Exists(fixedPath))
-                    System.IO.Directory.CreateDirectory(fixedPath);
-                return fixedPath;
+                string path = Path.Combine(ApplicationDataFolder, "Export/Print/");
+                path = fixPathsAndMakeDirectory(path);
+                return path;
 
             }
         }
 
-        public String tabletFolder
+        public String TabletFolder
         {
             get
             {
-                string path = dataFolder + "/Export/Tablet/";
-                string fixedPath = fixPaths(path);
-                if (!System.IO.Directory.Exists(fixedPath))
-                    System.IO.Directory.CreateDirectory(fixedPath);
-                return fixedPath;
+                string path = Path.Combine(ApplicationDataFolder, "Export/Tablet/");
+                path = fixPathsAndMakeDirectory(path);
+                return path;
 
             }
         }
+
+        public String SettingsFolder
+        {
+            get
+            {
+                string path = Path.Combine(ApplicationDataFolder, "Settings\\");
+                path = fixPathsAndMakeDirectory(path);
+                return path;
+            }
+        }
+
+        //save of last known state
+        public String SessionSaveState
+        {
+            get
+            {
+                string path = Path.Combine(ApplicationDataFolder, "SessionSaveState");
+                path = fixPaths(path);
+                return path;
+            }
+        }
+
+        //print and display settings
+        public String PrintSettingsFilename
+        {
+            get
+            {
+                string path = Path.Combine(SettingsFolder, "PrintSettings.xml");
+                path = fixPaths(path);
+                return path;
+            }
+        }
+        public String DisplaySettingsFileName
+        {
+            get
+            {
+                string path = Path.Combine(SettingsFolder, "DisplaySettings.xml");
+                path = fixPaths(path);
+                return path;
+            }
+        }
+
+        public string TabletSettingsFilename
+        {
+            get
+            {
+                string path = Path.Combine(SettingsFolder, "TabletSettings.xml");
+                path = fixPaths(path);
+                return path;
+            }
+        }
+
 
         public bool IsOpenSongDataFolderConfigured
         {
@@ -217,126 +243,39 @@ namespace OpenChords.Config
 
 
         //external Directories
-        public String opensongSongsFolder
+        public String OpensongSongsFolder
         {
             get
             {
-                string path;
-                var directory = new DirectoryInfo(settings.OpenSongSetsAndSongs);
-                path = directory + "\\Songs\\OpenChords\\";
-                string fixedPath = fixPaths(path);
-                if (!System.IO.Directory.Exists(fixedPath))
-                    System.IO.Directory.CreateDirectory(fixedPath);
-                return fixedPath;
+                string path = Path.GetFullPath(settings.OpenSongSetsAndSongs);
+                path = Path.Combine(path, "Songs\\OpenChords\\");
+                path = fixPathsAndMakeDirectory(path);
+                return path;
 
             }
         }
 
-        public String opensongBackgroundsFolder
+        public String OpensongBackgroundsFolder
         {
             get
             {
-                string path;
-                var directory = new DirectoryInfo(settings.OpenSongSetsAndSongs);
-                path = directory.FullName + "\\Backgrounds\\";
-                string fixedPath = fixPaths(path);
-                if (!System.IO.Directory.Exists(fixedPath))
-                    System.IO.Directory.CreateDirectory(fixedPath);
-                return fixedPath;
-
+                string path = Path.GetFullPath(settings.OpenSongSetsAndSongs);
+                path = Path.Combine(path, "Backgrounds\\");
+                path = fixPathsAndMakeDirectory(path);
+                return path;
             }
         }
-        public String openSongSetFolder
+        public String OpenSongSetFolder
         {
             get
             {
-                string path;
-                var directory = new DirectoryInfo(settings.OpenSongSetsAndSongs);
-                path = directory + "\\Sets\\";
-
-                string fixedPath = fixPaths(path);
-                if (!System.IO.Directory.Exists(fixedPath))
-                    System.IO.Directory.CreateDirectory(fixedPath);
-                return fixedPath;
-
+                string path = Path.GetFullPath(settings.OpenSongSetsAndSongs);
+                path = Path.Combine(path, "Sets\\");
+                path = fixPathsAndMakeDirectory(path);
+                return path;
             }
         }
 
-        //point to directory itself (and not the contents)
-        public String songsDisplay
-        {
-            get
-            {
-                string path;
-                //if (settings.isLocalOpenSong)
-                //    path = AppsFolder + "OpenSong\\OpenSong Data\\Songs";
-                //else
-                path = settings.OpenSongSetsAndSongs + "\\Songs\\OpenChords";
-                string fixedPath = fixPaths(path);
-                if (!System.IO.Directory.Exists(fixedPath))
-                    System.IO.Directory.CreateDirectory(fixedPath);
-                return fixedPath;
-
-            }
-        }
-
-
-        public String settingsFolder
-        {
-            get
-            {
-                string path = dataFolder + "Settings\\";
-                string fixedPath = fixPaths(path);
-                if (!System.IO.Directory.Exists(fixedPath))
-                    System.IO.Directory.CreateDirectory(fixedPath);
-                return fixedPath;
-            }
-        }
-
-        //save of last known state
-        public String sessionSaveState
-        {
-            get
-            {
-                string path = settingsFolder + "SessionSaveState";
-                string fixedPath = fixPaths(path);
-                return fixedPath;
-
-            }
-        }
-
-        //print and display settings
-        public String printSettingsFilename
-        {
-            get
-            {
-                string path = settingsFolder + "PrintSettings.xml";
-                string fixedPath = fixPaths(path);
-                return fixedPath;
-
-            }
-        }
-        public String displaySettingsFileName
-        {
-            get
-            {
-                string path = settingsFolder + "DisplaySettings.xml";
-                string fixedPath = fixPaths(path);
-                return fixedPath;
-
-            }
-        }
-
-        public string tabletSettingsFilename
-        {
-            get
-            {
-                string path = settingsFolder + "TabletSettings.xml";
-                string fixedPath = fixPaths(path);
-                return fixedPath;
-
-            }
-        }
-
+   
     }
 }

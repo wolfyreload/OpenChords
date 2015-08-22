@@ -121,7 +121,7 @@ namespace OpenChords.Entities
 
         public static Song loadSong(string SongName)
         {
-            string filename = Settings.ExtAppsAndDir.songsFolder + SongName;
+            string filename = Settings.ExtAppsAndDir.SongsFolder + SongName;
             if (!File.Exists(filename))
                 throw new Exception(string.Format("Song: {0} does not exist", SongName));
             Song song = XmlReaderWriter.readSong(filename);
@@ -135,14 +135,14 @@ namespace OpenChords.Entities
         /// <returns></returns>
         public static List<string> listOfAllSongs()
         {
-            return IO.FileFolderFunctions.getDirectoryListingAsList(Settings.ExtAppsAndDir.songsFolder);
+            return IO.FileFolderFunctions.getDirectoryListingAsList(Settings.ExtAppsAndDir.SongsFolder);
         }
 
         public void saveSong()
         {
             if (this.title != "")
             {
-                XmlReaderWriter.writeSong(Settings.ExtAppsAndDir.songsFolder + this.title, this);
+                XmlReaderWriter.writeSong(Settings.ExtAppsAndDir.SongsFolder + this.title, this);
             }
         }
 
@@ -253,7 +253,7 @@ namespace OpenChords.Entities
         /// <returns></returns>
         public static bool Exists(string songName)
         {
-            string filename = Settings.ExtAppsAndDir.songsFolder + songName;
+            string filename = Settings.ExtAppsAndDir.SongsFolder + songName;
             return File.Exists(filename);
         }
 
@@ -311,7 +311,7 @@ namespace OpenChords.Entities
         public bool isMp3Available()
         {
 
-            string songName = Settings.ExtAppsAndDir.mediaFolder + this.title;
+            string songName = Settings.ExtAppsAndDir.MediaFolder + this.title;
 
             if (FileFolderFunctions.isFilePresent(songName + ".mp3"))
                 return true;
@@ -332,7 +332,7 @@ namespace OpenChords.Entities
 
         public string getMp3Filename()
         {
-            string songName = Settings.ExtAppsAndDir.mediaFolder + this.title;
+            string songName = Settings.ExtAppsAndDir.MediaFolder + this.title;
 
             if (FileFolderFunctions.isFilePresent(songName + ".mp3"))
                 return songName + ".mp3";
@@ -373,9 +373,9 @@ namespace OpenChords.Entities
             string htmlText = htmlExporter.GenerateHtml();
             string folder = null;
             if (settings.settingsType == DisplayAndPrintSettingsType.TabletSettings)
-                folder = Settings.ExtAppsAndDir.tabletFolder;
+                folder = Settings.ExtAppsAndDir.TabletFolder;
             else
-                folder = Settings.ExtAppsAndDir.printFolder;
+                folder = Settings.ExtAppsAndDir.PrintFolder;
             string destination = String.Format("{0}/{1}.html", folder, this.generateShortTitle());
             File.WriteAllText(destination, htmlText);
             return destination;
@@ -420,7 +420,7 @@ namespace OpenChords.Entities
 
         public string getFullPath()
         {
-            return Settings.ExtAppsAndDir.songsFolder + this.title;
+            return Settings.ExtAppsAndDir.SongsFolder + this.title;
         }
     }
 

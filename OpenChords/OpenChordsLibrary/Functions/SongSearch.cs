@@ -35,7 +35,7 @@ namespace OpenChords.Functions
 		{
 			//load directory list
 			string[] songlist = 
-				FileFolderFunctions.getDirectoryListing(Settings.ExtAppsAndDir.songsFolder);
+				FileFolderFunctions.getDirectoryListing(Settings.ExtAppsAndDir.SongsFolder);
 			
 			//if there is no search
 			if (searchCriteria == "")

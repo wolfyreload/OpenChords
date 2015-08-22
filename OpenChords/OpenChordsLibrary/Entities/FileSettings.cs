@@ -27,12 +27,24 @@ namespace OpenChords.Entities
         public string ApplicationDataFolder { get; set; }
         public bool HttpServerEnabled { get; set; }
         public int HttpServerPort { get; set; }
-        
+
+        [XmlIgnore]
+        public string OpenChordsApplicationDirectory { get; private set; }
+
+        private static string AssemblyDirectory
+        {
+            get
+            {
+                string codeBase = System.Reflection.Assembly.GetExecutingAssembly().CodeBase;
+                UriBuilder uri = new UriBuilder(codeBase);
+                string path = Uri.UnescapeDataString(uri.Path);
+                return Path.GetDirectoryName(path) + Path.DirectorySeparatorChar;
+            }
+        }
+
         public static FileAndFolderSettings loadSettings()
         {
             var settings = IO.XmlReaderWriter.readFileAndFolderSettings();
-            var dir = new DirectoryInfo(@"./");
-            settings.CurrentPath = dir.FullName;
             return settings;
         }
 
@@ -43,28 +55,24 @@ namespace OpenChords.Entities
         public static FileAndFolderSettings loadSettings(string path)
         {        
             var settings = IO.XmlReaderWriter.readFileAndFolderSettings(path);
-            var dir = new DirectoryInfo(path);
-            settings.CurrentFullPath = path;
-            settings.CurrentPath = dir.Parent.FullName + "/";
             return settings;
         }
 
-        [XmlIgnore]
-        public string CurrentPath { get; protected set; }
-
-        [XmlIgnore]
-        public string CurrentFullPath { get; protected set; }
-
+       
         public void saveSettings()
         {
             IO.XmlReaderWriter.writeFileAndFolderSettings(this);
 
         }
 
-        protected FileAndFolderSettings() { }
+        protected FileAndFolderSettings()
+        {
+            OpenChordsApplicationDirectory = AssemblyDirectory;
+        }
 
         public FileAndFolderSettings(FileAndFolderSettingsType type = FileAndFolderSettingsType.Normal)
         {
+            OpenChordsApplicationDirectory = AssemblyDirectory;
             if (type == FileAndFolderSettingsType.Normal)
             {
                 OpenSongExecutable = "";
