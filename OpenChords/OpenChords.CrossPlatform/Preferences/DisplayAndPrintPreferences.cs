@@ -16,9 +16,6 @@ namespace OpenChords.CrossPlatform.Preferences
         private CheckBox chkShowNotes = new CheckBox();
         private CheckBox chkShowLyrics = new CheckBox();
         private CheckBox chkShowChords = new CheckBox();
-        private ComboBox cmbParagraphSpacing = new ComboBox() { AutoComplete = true };
-        private ComboBox cmbContentLineSpacing = new ComboBox() { AutoComplete = true };
-        private ComboBox cmbNoteWidth = new ComboBox() { AutoComplete = true };
         private Splitter splitter1;
         private WebView webPreview = new WebView();
         private Song _currentSong;
@@ -32,14 +29,6 @@ namespace OpenChords.CrossPlatform.Preferences
 
         public DisplayAndPrintPreferences(Entities.DisplayAndPrintSettings displayAndPrintSettings, Song currentSong)
         {
-            //populate comboboxes
-            for (int i = 0; i <= 200; i++)
-            {
-                cmbContentLineSpacing.Items.Add(i.ToString());
-                cmbContentLineSpacing.Items.Add(i.ToString());
-                cmbNoteWidth.Items.Add(i.ToString());
-            }
-
             this._currentSong = currentSong;
             //populate values
             this.displayAndPrintSettings = displayAndPrintSettings;
@@ -159,9 +148,6 @@ namespace OpenChords.CrossPlatform.Preferences
             chkShowChords.Checked = displayAndPrintSettings.ShowChords;
             chkShowLyrics.Checked = displayAndPrintSettings.ShowLyrics;
             chkShowNotes.Checked = displayAndPrintSettings.ShowNotes;
-            cmbParagraphSpacing.Text = displayAndPrintSettings.paragraphSpacing.ToString();
-            cmbContentLineSpacing.Text = displayAndPrintSettings.contentLineSpacing.ToString();
-            cmbNoteWidth.Text = displayAndPrintSettings.NoteWidth.ToString();
             fontAndColorPanel.updateGuiFromSettingsObject(displayAndPrintSettings);
         }
 
@@ -172,10 +158,6 @@ namespace OpenChords.CrossPlatform.Preferences
             displayAndPrintSettings.ShowChords = chkShowChords.Checked ?? false;
             displayAndPrintSettings.ShowLyrics = chkShowLyrics.Checked ?? false;
             displayAndPrintSettings.ShowNotes = chkShowNotes.Checked ?? false;
-            displayAndPrintSettings.paragraphSpacing = int.Parse(cmbParagraphSpacing.Text);
-            displayAndPrintSettings.NoteWidth = int.Parse(cmbNoteWidth.Text);
-            displayAndPrintSettings.contentLineSpacing = int.Parse(cmbContentLineSpacing.Text);
-
         }
 
         public void SavePreferences()

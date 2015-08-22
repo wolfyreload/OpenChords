@@ -93,7 +93,6 @@
     <Compile Include="Entities\SongElementFormat.cs" />
     <Compile Include="Export\ExportToHtml.cs" />
     <Compile Include="Export\ExportToOpenSong.cs" />
-    <Compile Include="Export\ExportToRtf.cs" />
     <Compile Include="Functions\FontList.cs" />
     <Compile Include="Functions\ImportSong.cs" />
     <Compile Include="Functions\SongProcessor.cs" />

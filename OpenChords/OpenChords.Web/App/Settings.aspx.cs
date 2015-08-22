@@ -26,24 +26,10 @@ namespace OpenChords.Web
 
 
             //settings
-            txtWidth.Text = settings.pageWidth.ToString();
-            txtHeight.Text = settings.pageHeight.ToString();
-
-            txtTopMargin.Text = settings.topPageMargin.ToString();
-            txtLeftMargin.Text = settings.leftPageMargin.ToString();
-            txtBottomMargin.Text = settings.bottomPageMargin.ToString();
-            txtRightMargin.Text = settings.rightPageMargin.ToString();
-
-            txtContentLineSpacing.Text = settings.contentLineSpacing.ToString();
-            txtParagraphSpacing.Text = settings.paragraphSpacing.ToString();
-
-            chkDualColumns.Checked = settings.DualColumns.Value;
             chkShowNotes.Checked = settings.ShowNotes.Value;
             chkShowLyrics.Checked = settings.ShowLyrics.Value;
             chkShowChords.Checked = settings.ShowChords.Value;
-            //chkGeneralNotes.Checked = settings.ShowGeneralNotes.Value;
-            txtNoteWidth.Text = settings.NoteWidth.Value.ToString();
-
+       
             txtBackgroundColor.Text = settings.BackgroundColorHex;
             setSettingsToFlowLayout(settings.TitleFormat, flowTitle);
             setSettingsToFlowLayout(settings.Order1Format, flowOrder1);
@@ -57,35 +43,10 @@ namespace OpenChords.Web
         void updateSettingsObject()
         {
             var settings = OpenChords.Entities.DisplayAndPrintSettings.loadSettings(Entities.DisplayAndPrintSettingsType.TabletSettings, App_Code.Global.SettingsFileName);
-
-            //settings
-            settings.pageWidth = getInt(txtWidth.Text);
-            settings.pageHeight = getInt(txtHeight.Text);
-
-            settings.topPageMargin = getInt(txtTopMargin.Text);
-            settings.leftPageMargin = getInt(txtLeftMargin.Text);
-            settings.rightPageMargin = getInt(txtRightMargin.Text);
-            settings.bottomPageMargin = getInt(txtBottomMargin.Text);
-
-            settings.contentLineSpacing = getFloat(txtContentLineSpacing.Text);
-            settings.paragraphSpacing = getFloat(txtParagraphSpacing.Text);
-
-            settings.DualColumns = chkDualColumns.Checked;
             settings.ShowNotes = chkShowNotes.Checked;
             settings.ShowLyrics = chkShowLyrics.Checked;
             settings.ShowChords = chkShowChords.Checked;
-            //settings.ShowGeneralNotes = chkGeneralNotes.Checked;
-            settings.NoteWidth = getInt(txtNoteWidth.Text);
-
             settings.BackgroundColorHex = txtBackgroundColor.Text;
-
-            //settings.TitleFormat = getSettingsFromFlowLayout(flowTitle);
-            //settings.Order1Format = getSettingsFromFlowLayout(flowOrder1);
-            //settings.Order2Format = getSettingsFromFlowLayout(flowOrder2);
-            //settings.HeadingsFormat = getSettingsFromFlowLayout(flowHeadings);
-            //settings.ChordFormat = getSettingsFromFlowLayout(flowChords);
-            //settings.LyricsFormat = getSettingsFromFlowLayout(flowLyrics);
-            //settings.NoteFormat = getSettingsFromFlowLayout(flowNotes);
             settings.saveSettings();
         }
 
