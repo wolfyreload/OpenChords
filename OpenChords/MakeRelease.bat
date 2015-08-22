@@ -17,17 +17,15 @@ xcopy  /Y /E .\Manual\HelpImages\* .\Staging\Manual\HelpImages
 xcopy /Y /E .\Staging\Manual\* .\Staging\WindowsApp\App\
 xcopy /Y /E .\Staging\Manual\* .\Staging\LinuxApp\App\ 
 
-::cleanup files in staging
-pushd Staging
-del /s *.pdb
-del /s *Eto.xml
-del /s *log4net.xml
-del /s *.vshost.exe*
-popd
+::copy the settings files
+xcopy /Y .\settings.xml .\Staging\WindowsApp\App
+xcopy /Y .\settings.xml .\Staging\LinuxApp\App 
 
+::Make zip files for portable version
 7za.exe a -tzip .\Release\OpenChords.Windows.zip .\Staging\WindowsApp\* 
 7za.exe a -tzip .\Release\OpenChords.Linux.zip .\Staging\LinuxApp\* 
 
+::Make Installer
 "C:\Program Files (x86)\Inno Setup 5\ISCC.exe" OpenChords.Setup\OpenChords.Setup.iss 
 move OpenChords.Setup\Output\* .\Release\
 

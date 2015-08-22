@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<settings xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <OpenSongExecutable>../OpenSong/OpenSong.exe</OpenSongExecutable>
+  <OpenSongSetsAndSongs>../OpenSong/OpenSong Data/</OpenSongSetsAndSongs>
+  <PortableMode>true</PortableMode>
+  <ApplicationDataFolder>../Data</ApplicationDataFolder>
+  <CheckForUpdates>true</CheckForUpdates>
+  <HttpServerEnabled>false</HttpServerEnabled>
+  <HttpServerPort>8083</HttpServerPort>
+</settings>
