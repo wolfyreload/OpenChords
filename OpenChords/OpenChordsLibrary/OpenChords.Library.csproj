@@ -100,6 +100,7 @@
     <Compile Include="IO\FileFolderFunctions.cs" />
     <Compile Include="IO\FileReaderWriter.cs" />
     <Compile Include="IO\SettingsReaderWriter.cs" />
+    <Compile Include="IO\StringWriterWithEncoding.cs" />
     <Compile Include="IO\XmlReaderWriter.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Settings.cs" />

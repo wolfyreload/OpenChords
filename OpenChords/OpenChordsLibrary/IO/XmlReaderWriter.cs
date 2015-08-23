@@ -5,6 +5,8 @@ using System.IO;
 using System.Xml.Serialization;
 
 using System.Drawing;
+using System.Xml;
+using System.Text;
 
 namespace OpenChords.IO
 {
@@ -14,7 +16,7 @@ namespace OpenChords.IO
         
         private static void xmlWriter<T>(string filename, T item)
         {
-            using (StringWriter stringWriter = new StringWriter())
+            using (StringWriter stringWriter = new StringWriterWithEncoding(Encoding.UTF8))
             {
                 XmlSerializer serializer = new XmlSerializer(typeof(T));
                 var blankNamespace = new XmlSerializerNamespaces();
