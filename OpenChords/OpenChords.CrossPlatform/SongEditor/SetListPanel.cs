@@ -72,7 +72,7 @@ namespace OpenChords.CrossPlatform.SongEditor
 
         void cmbSets_SelectedIndexChanged(object sender, EventArgs e)
         {
-            if (SetChanged && Helpers.PopupMessages.ShowConfirmationMessage("Save changes to set '{0}' before switching to a new set?", CurrentSet.setName))
+            if (SetChanged && Helpers.PopupMessages.ShowConfirmationMessage(this, "Save changes to set '{0}' before switching to a new set?", CurrentSet.setName))
                 saveSet();
 
             loadSongsInSet();
@@ -117,18 +117,18 @@ namespace OpenChords.CrossPlatform.SongEditor
         {
             if (string.IsNullOrEmpty(CurrentSet.setName))
             {
-                Helpers.PopupMessages.ShowErrorMessage("Please select a set first");
+                Helpers.PopupMessages.ShowErrorMessage(this, "Please select a set first");
                 return;
             }
 
             if (CurrentSet.getSongSetSize() == 0)
             {
-                Helpers.PopupMessages.ShowErrorMessage("Please add one or more songs to the set");
+                Helpers.PopupMessages.ShowErrorMessage(this, "Please add one or more songs to the set");
                 return;
             }
 
 
-            if (SetChanged && Helpers.PopupMessages.ShowConfirmationMessage("Save changes to set '{0}' before presenting?", CurrentSet.setName))
+            if (SetChanged && Helpers.PopupMessages.ShowConfirmationMessage(this, "Save changes to set '{0}' before presenting?", CurrentSet.setName))
                 saveSet();
             else
                 revertSet();
@@ -160,7 +160,7 @@ namespace OpenChords.CrossPlatform.SongEditor
 
         internal void ExportToHtml()
         {
-            if (SetChanged && Helpers.PopupMessages.ShowConfirmationMessage("Save changes to set '{0}' before Exporting to html?", CurrentSet.setName))
+            if (SetChanged && Helpers.PopupMessages.ShowConfirmationMessage(this, "Save changes to set '{0}' before Exporting to html?", CurrentSet.setName))
                 saveSet();
             else
                 revertSet();
@@ -173,7 +173,7 @@ namespace OpenChords.CrossPlatform.SongEditor
         {
             if (string.IsNullOrEmpty(CurrentSet.setName))
             {
-                Helpers.PopupMessages.ShowErrorMessage("Please select a set first");
+                Helpers.PopupMessages.ShowErrorMessage(this, "Please select a set first");
                 return;
             }
             CurrentSet.addSongToSet(e);
@@ -216,7 +216,7 @@ namespace OpenChords.CrossPlatform.SongEditor
             {
                 CurrentSet.saveSet();
                 SetChanged = false;
-                Helpers.PopupMessages.ShowInformationMessage("Set '{0}' saved", CurrentSet.setName);
+                Helpers.PopupMessages.ShowInformationMessage(this, "Set '{0}' saved", CurrentSet.setName);
             }
         }
 
@@ -227,7 +227,7 @@ namespace OpenChords.CrossPlatform.SongEditor
                 CurrentSet.revertSet();
                 this.refreshSongList();
                 SetChanged = false;
-                Helpers.PopupMessages.ShowInformationMessage("Set '{0}' reverted", CurrentSet.setName);
+                Helpers.PopupMessages.ShowInformationMessage(this, "Set '{0}' reverted", CurrentSet.setName);
             }
         }
 
@@ -239,7 +239,7 @@ namespace OpenChords.CrossPlatform.SongEditor
 
         internal void saveSetBeforeClosing()
         {
-            if (SetChanged && Helpers.PopupMessages.ShowConfirmationMessage("Save changes to set '{0}' before closing OpenChords?", CurrentSet.setName))
+            if (SetChanged && Helpers.PopupMessages.ShowConfirmationMessage(this, "Save changes to set '{0}' before closing OpenChords?", CurrentSet.setName))
                 saveSet();
         }
 
@@ -247,7 +247,7 @@ namespace OpenChords.CrossPlatform.SongEditor
         {
             if (!Settings.ExtAppsAndDir.IsOpenSongDataFolderConfigured)
             {
-                Helpers.PopupMessages.ShowErrorMessage("Opensong data folder is not configured");
+                Helpers.PopupMessages.ShowErrorMessage(this, "Opensong data folder is not configured");
                 return;
             }
 
@@ -267,11 +267,11 @@ namespace OpenChords.CrossPlatform.SongEditor
         {
             if (string.IsNullOrEmpty(CurrentSet.setName))
             {
-                Helpers.PopupMessages.ShowErrorMessage("Please select a set first");
+                Helpers.PopupMessages.ShowErrorMessage(this, "Please select a set first");
                 return;
             }
 
-            if (Helpers.PopupMessages.ShowConfirmationMessage("Delete set '{0}'?", CurrentSet.setName))
+            if (Helpers.PopupMessages.ShowConfirmationMessage(this, "Delete set '{0}'?", CurrentSet.setName))
             {
                 Set.DeleteSet(CurrentSet);
                 refreshPanel();

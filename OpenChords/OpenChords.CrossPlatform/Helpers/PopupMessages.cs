@@ -9,22 +9,27 @@ namespace OpenChords.CrossPlatform.Helpers
 {
     public class PopupMessages
     {
-        public static void ShowInformationMessage(string message, params string[] args)
+        public static void ShowInformationMessage(Control parent, string message, params string[] args)
         {
             message = setMessageParams(message, args);
-            MessageBox.Show(message, "", MessageBoxType.Information);
+            MessageBox.Show(parent, message, "", MessageBoxType.Information);
+        }
+
+        public static void ShowErrorMessage(Control parent, string message, params string[] args)
+        {
+            message = setMessageParams(message, args);
+            MessageBox.Show(parent, message, "", MessageBoxType.Error);
         }
 
         public static void ShowErrorMessage(string message, params string[] args)
         {
-            message = setMessageParams(message, args);
-            MessageBox.Show(message, "", MessageBoxType.Error);
+            ShowErrorMessage(null, message, args);
         }
 
-        public static bool ShowConfirmationMessage(string message, params string[] args)
+        public static bool ShowConfirmationMessage(Control parent, string message, params string[] args)
         {
             message = setMessageParams(message, args);
-            return MessageBox.Show(message, "", MessageBoxButtons.YesNo, MessageBoxType.Question, MessageBoxDefaultButton.Yes) == DialogResult.Yes;
+            return MessageBox.Show(parent, message, "", MessageBoxButtons.YesNo, MessageBoxType.Question, MessageBoxDefaultButton.Yes) == DialogResult.Yes;
         }
 
         private static string setMessageParams(string message, string[] args)

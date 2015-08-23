@@ -238,7 +238,7 @@ namespace OpenChords.CrossPlatform.SongEditor
         {
             if (SongChanged)
             {
-                if (Helpers.PopupMessages.ShowConfirmationMessage("Save changes to {0} before creating a new song?", CurrentSong.title))
+                if (Helpers.PopupMessages.ShowConfirmationMessage(this, "Save changes to {0} before creating a new song?", CurrentSong.title))
                     this.SaveSong();
             }
 
@@ -256,7 +256,7 @@ namespace OpenChords.CrossPlatform.SongEditor
         {
             if (txtTitle.Text.Trim() == "")
             {
-                Helpers.PopupMessages.ShowErrorMessage("Song title cannot be blank");
+                Helpers.PopupMessages.ShowErrorMessage(this, "Song title cannot be blank");
                 return false;
             }
 
@@ -267,7 +267,7 @@ namespace OpenChords.CrossPlatform.SongEditor
             bool anotherSongWithThisNameAlreadyExists = !string.Equals(CurrentSong.SongFileName, CurrentSong.title, StringComparison.OrdinalIgnoreCase) && Song.Exists(CurrentSong.title);
             if (anotherSongWithThisNameAlreadyExists)
             {
-                Helpers.PopupMessages.ShowErrorMessage("Song '{0}' already exists please choose another name", CurrentSong.title);
+                Helpers.PopupMessages.ShowErrorMessage(this, "Song '{0}' already exists please choose another name", CurrentSong.title);
                 return false;
             }
             //if the song name has changed delete the old song and put in the new name
@@ -279,7 +279,7 @@ namespace OpenChords.CrossPlatform.SongEditor
             CurrentSong.saveSong();
 
             //notify the user
-            Helpers.PopupMessages.ShowInformationMessage("Song '{0}' saved", CurrentSong.title);
+            Helpers.PopupMessages.ShowInformationMessage(this, "Song '{0}' saved", CurrentSong.title);
 
             SongChanged = false;
 
@@ -289,7 +289,7 @@ namespace OpenChords.CrossPlatform.SongEditor
         internal void ChangeToSong(Song newSong)
         {
             if (SongChanged)
-                if (Helpers.PopupMessages.ShowConfirmationMessage("Save changes to current song '{0}' before changing to another song?", CurrentSong.title))
+                if (Helpers.PopupMessages.ShowConfirmationMessage(this, "Save changes to current song '{0}' before changing to another song?", CurrentSong.title))
                     this.SaveSong();
             CurrentSong = newSong;
             refreshPanel();
@@ -297,7 +297,7 @@ namespace OpenChords.CrossPlatform.SongEditor
 
         internal bool DeleteSong()
         {
-            if (Helpers.PopupMessages.ShowConfirmationMessage("Are you sure you want to delete song '{0}'?", CurrentSong.SongFileName))
+            if (Helpers.PopupMessages.ShowConfirmationMessage(this, "Are you sure you want to delete song '{0}'?", CurrentSong.SongFileName))
             {
                 CurrentSong.deleteSong();
                 return true;
@@ -314,12 +314,12 @@ namespace OpenChords.CrossPlatform.SongEditor
             if (SongChanged)
             {
                 updateSongObjectFromGui();
-                if (Helpers.PopupMessages.ShowConfirmationMessage("Save changes to song '{0}' before presenting?", CurrentSong.title))
+                if (Helpers.PopupMessages.ShowConfirmationMessage(this, "Save changes to song '{0}' before presenting?", CurrentSong.title))
                     this.SaveSong();
             }
             if (CurrentSong == null || CurrentSong.title == "")
             {
-                Helpers.PopupMessages.ShowErrorMessage("No song selected");
+                Helpers.PopupMessages.ShowErrorMessage(this, "No song selected");
                 return;
             }
             new frmPresent(CurrentSong, DisplayAndPrintSettings.loadSettings(DisplayAndPrintSettingsType.DisplaySettings)).Show();
@@ -355,7 +355,7 @@ namespace OpenChords.CrossPlatform.SongEditor
         {
             if (SongChanged)
             {
-                if (Helpers.PopupMessages.ShowConfirmationMessage("Save changes to song '{0}'?", CurrentSong.title))
+                if (Helpers.PopupMessages.ShowConfirmationMessage(this, "Save changes to song '{0}'?", CurrentSong.title))
                     this.SaveSong();
             }
 
@@ -366,7 +366,7 @@ namespace OpenChords.CrossPlatform.SongEditor
         {
             if (CurrentSong.title == "")
             {
-                Helpers.PopupMessages.ShowErrorMessage("Please select a song");
+                Helpers.PopupMessages.ShowErrorMessage(this, "Please select a song");
                 return;
             }
             string destination = CurrentSong.ExportToHtml(settings);
