@@ -151,9 +151,10 @@ namespace OpenChords.Entities
         //load settings file from indicated path
         public static DisplayAndPrintSettings loadSettings(DisplayAndPrintSettingsType settingsType, string path)
         {
-           var settings = XmlReaderWriter.readSettings(path);
-           if (settings == null) settings = new DisplayAndPrintSettings(settingsType, path);
-           settings.SettingsFilePath = path;
+            var settings = XmlReaderWriter.readSettings(path);
+            if (settings == null) settings = new DisplayAndPrintSettings(settingsType, path);
+            settings.SettingsFilePath = path;
+            settings.settingsType = settingsType;
             return settings;
         }
 		
