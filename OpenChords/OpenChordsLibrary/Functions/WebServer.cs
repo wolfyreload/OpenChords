@@ -14,20 +14,36 @@ namespace OpenChords.Functions
 {
     public class WebServer : IDisposable
     {
+        private static readonly log4net.ILog logger = log4net.LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
+
         public static Song CurrentSong { get; set; }
         public static Set CurrentSet { get; set; }
         public static DisplayAndPrintSettings CurrentDisplayAndPrintSettings { get; set; }
+
+        public event EventHandler<string> CannotStartHttpServerEvent;
 
         private HttpServer server;
         public WebServer(int port = 8083)
         {
             var thread = new Thread(() =>
             {
-                server = new HttpServer();
-                server.EndPoint = new System.Net.IPEndPoint(IPAddress.Any, port);
-                server.RequestReceived += server_RequestReceived;
-                server.Start();
+                try
+                {
+                    server = new HttpServer();
+                    server.EndPoint = new System.Net.IPEndPoint(IPAddress.Any, port);
+                    server.RequestReceived += server_RequestReceived;
+                    server.Start();
+                }
+                catch (Exception ex)
+                {
+                    string message = string.Format("Failed to start http server on port: {0}", port);
+
+                    logger.Error(message, ex);
+                    if (CannotStartHttpServerEvent != null)
+                        CannotStartHttpServerEvent(this, message);
+                }             
             });
+
             thread.Name = "OpenChords Web Server";
             thread.Start();
            

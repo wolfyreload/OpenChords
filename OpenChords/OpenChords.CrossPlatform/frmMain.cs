@@ -40,8 +40,10 @@ namespace OpenChords.CrossPlatform
 
             logger.Info("Starting Openchords web server");
             if (Settings.ExtAppsAndDir.HttpServerEnabled)
+            {
                 webserver = new OpenChords.Functions.WebServer(Settings.ExtAppsAndDir.HttpServerPort);
-
+                webserver.CannotStartHttpServerEvent += Webserver_CannotStartHttpServerEvent;
+            }
 
             this.Icon = Graphics.Icon;
 
@@ -213,6 +215,11 @@ namespace OpenChords.CrossPlatform
             ucSongListPanel.AddSongToSet += (s, e) => ucSetListPanel.AddSongToSet(e);
             ucSongListPanel.SongDeleting += (s, e) => deleteCurrentlySelectedSong();
 
+        }
+
+        private void Webserver_CannotStartHttpServerEvent(object sender, string e)
+        {
+            Helpers.PopupMessages.ShowErrorMessage(e);
         }
 
         void menuItemPreferences_Executed(object sender, EventArgs e)
