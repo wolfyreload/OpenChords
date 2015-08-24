@@ -3,6 +3,7 @@
 
 [Setup]
 AppName=OpenChords
+UninstallDisplayName=OpenChords
 AppVersion={#AppVersion}
 DefaultDirName={pf}\OpenChords
 DefaultGroupName=OpenChords
