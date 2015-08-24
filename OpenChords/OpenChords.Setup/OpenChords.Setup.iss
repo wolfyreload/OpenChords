@@ -4,7 +4,7 @@
 [Setup]
 AppName=OpenChords
 UninstallDisplayName=OpenChords
-AppVersion={#AppVersion}
+AppVersion={#AppVersion} Beta
 DefaultDirName={pf}\OpenChords
 DefaultGroupName=OpenChords
 UninstallDisplayIcon={app}\OpenChords.Windows.exe
@@ -18,3 +18,9 @@ Source: "..\OpenChords.CrossPlatform.Wpf\bin\Release\changelog.txt"; DestDir: "{
 
 [Icons]
 Name: "{group}\OpenChords"; Filename: "{app}\OpenChords.Windows.exe"
+
+[CustomMessages]
+LaunchProgram=Launch OpenChords
+
+[Run]
+Filename: {app}\OpenChords.Windows.exe; Description: {cm:LaunchProgram}; Flags: nowait postinstall skipifsilent
