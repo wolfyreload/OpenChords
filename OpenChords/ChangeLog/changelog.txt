@@ -1,6 +1,6 @@
 OpenChords v2.0.0 Beta
 ============================================================================
--Added: UI rewrite with cross-platform support (Windows, Linux and probably OS X in future
+-Added: UI rewrite with cross-platform support (Windows, Linux and probably OS X in future)
 -Improvement: Use system look and feel.
 -Improvement: simplier song searching
 -Improvement: improved look of song presentation screen

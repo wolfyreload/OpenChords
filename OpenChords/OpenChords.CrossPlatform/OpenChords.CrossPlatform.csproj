@@ -72,6 +72,10 @@
     <Reference Include="System.Drawing" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="..\ChangeLog\changelog.txt">
+      <Link>changelog.txt</Link>
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
     <Content Include="InitialData\Sets\Leader1">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
@@ -244,11 +248,6 @@
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <None Include="packages.config" />
-  </ItemGroup>
-  <ItemGroup>
-    <Content Include="changelog.txt">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\OpenChordsLibrary\OpenChords.Library.csproj">
