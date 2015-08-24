@@ -1,24 +1,24 @@
 % OpenChords Help Documentation
 % Author: Michael van Antwerpen
-% Date: 2015-07-04
+% Date: 2015-08-24
 
 Overview
 ========
 
-OpenChords is a song chord chart management and presentation tool for musicians. It allows the user to easily present songs with guitar chords on a computer screen, Its opensource, easy to use, and has a clutter-free interface.
+OpenChords is a song chord chart management and presentation tool for musicians. Allowing one to easily present songs with chords on a computer screen, It is opensource, easy to use, and has a clutter-free interface.
 
 Background
 ==========
 
-Many years ago I was shown a great open-source application called OpenSong, which I
-still use at church for presenting song lyrics to the church congregation. 
-I was also the one responsible for the church file of music and this music needed to be
-refiled after every practice and every Sunday service. I was then inspired to make
-something similar for other musicians. Hence, OpenChords was born.
+OpenChords was built to solve two primary needs: 
 
-I now use OpenChords when I play in church and also when I do recording.
-I've been developing OpenChords in my free time for for the past six years
-years. I hope you enjoy using it as much as I enjoyed making it.
+* Easily transpose the key of a song
+
+* Filing music is tedious and I wanted a fully paperless system for musicians
+
+The closest application I could find was a fantastic piece of presentation software by the name of OpenSong. OpenSong allowed me to easily transpose and make printed sheets of songs. However this didn't solve my filing issue. I was then inspired to make paperless song system for musicians. Hence, OpenChords was born.
+
+Fast forward a few years... My whole band uses OpenChords when we play in church. I use OpenChords whenever I record. I've been developing OpenChords in my free time for for the past six years and it finally works on Linux :). I hope you enjoy using it as much as I enjoyed making it.
 
 If you wish to contact me for suggestions or to report bugs, you can
 email me on <open.chords.app@gmail.com>
@@ -55,12 +55,20 @@ Song List
 This is the list of songs that you have in your song collection.
 If you right click on the song you can use the "Add to set" context menu to add the currently selected song into the currently selected set.
 
-**Tip1**: If you want to search for a song, just start typing the name
-of the song, and the list will be filtered.
+>	**Tip1**: If you want to search for a song, just start typing in the search box. You can use the song name, some lyrics, the name of the author or the song reference. The list of songs will be filtered.
 
-**Tip2**: If you want to get to the song in the file system just click
+>	**Tip2**: If you want to get to the song in the file system just click
 Song >> File Operations >> Explore options and it will open Windows Explorer with that song
 selected.
+
+###Context Menu
+
+Context Menu Item Description
+----------------- -----------
+Add To Set        Adds the currently selected song to the current set
+Delete Song       Deletes the current song (note: this is not reverseable)
+
+###Shortcuts
 
 Shortcut   Description
 --------   ----------------------------
@@ -69,6 +77,16 @@ Ctrl+Enter Add current song to current set
 Sets
 --------
 A set is simply a name for a list of songs. 
+
+###Context Menu
+
+Context Menu Item    Description
+-----------------    -----------
+Move song up         Move the currently selected song up in the set list
+Delete song from set Deletes the current song from the set
+Move song down       Move the currently selected song down in the set list
+
+###Shortcuts
 
 Shortcut   Description
 --------   ----------------------------
@@ -105,7 +123,7 @@ E = Ending
 
 Author: Just the author of the song
 
-Key: Song key
+Key: Current key of the song
 
 Capo: Capo position
 
@@ -135,9 +153,9 @@ Syntax       Line description
 Note Editor
 -----------
 These notes are to remind you how to perform the song while the song is
-being presented in full screen view. e.g. who is introing the song, when does the bass guitarist comes in, who is singing solo parts in the verses. 
+being presented in full screen view. e.g. who is introing the song, when does the bass guitarist come in, who is singing solo parts in the verses.  
 
-Make sure that the notes are in the same order as your presentation order
+>	Note: Make sure that the notes are in the same order as your presentation order
 
 The Settings Screens
 ====================
@@ -145,7 +163,7 @@ The Settings Screens
 General Settings
 ----------------
 
-**Note**: you can use both relative and absolute paths.
+>	**Note**: you can use both relative and absolute paths.
 
 ![](HelpImages/FileAndFolderSettings.png)
 
@@ -177,12 +195,9 @@ These settings are used to tweak how your song will display/print
 
 **Show chords** - whether display chords when you presenting the songs
 
-**Show lyrics** - whether to
-display the lyrics when you presenting the song.
+**Show lyrics** - whether to display the lyrics when you presenting the song.
 
-
-**Show notes** - whether to
-display the song notes when you presenting the song.
+**Show notes** - whether to display the song notes when you presenting the song.
 
 **Fonts and Colors** - choose the Font, Size, Color and Font Style for almost all the elements that are displayed or printed
 
@@ -193,28 +208,27 @@ Song/Set Presentation
 
 ![](HelpImages/SongDisplay.png)
 
+>	**Note:** Song elements are read from left to right to use screen size more efficiently
 
-Menu Items                   Description                             
+>	**Tip1**: You can use the "spacebar" key to move to the next page
+
+>	**Tip2**: you will need to press the Escape key to leave the presentation.
+
+###Menu
+
+Menu Item                    Description                             
 ---------------------------  --------------------------------------- 
 Refresh                      Refresh song with song on filesystem   
 Size                         Increase/Decrease font size                         
-Key        >> Transpose      Increase or decrease song key           
-Key        >> Capo           Increase or decrease song capo         
+Key                          Increase or decrease song key           
+Capo                         Increase or decrease song capo         
 Navigation                   Go to next or previous song            
 Other Options >> Metronome   Toggles the metronome                  
 Song List                    List of all songs in the current set   
 
-**note:** Song elements are read from left to right to use screen size more wisely
-
-**Tip1**: You can use the "spacebar" key to move to the next page
-
-**Tip2**: you will need to press the Escape key to leave the
-presentation.
-
 Hotkeys 
 ========
-There are a couple of shortcuts in OpenChords that will hopefully make
-your life a little easier.
+There are a couple of shortcuts in OpenChords that will hopefully make your life a little easier.
 
  Editor shortcuts
 -----------------
@@ -252,35 +266,18 @@ Presentation shortcuts
   Escape          Closes the song presentation window           
   Ctrl+M          Starts/Stops the metronome    
   
-Appendix
-========
 Tips and tricks
----------------
+================
 ### The Auto Format Song Menu Item
 
-You can use Ctrl+R to quickly reach this feature. It attempts fix all the formatting in your song and writes a
-template to your notes panel following the order of the song that you chose in the order text field.
+You can use Ctrl+R to quickly reach this feature. It attempts fix all the formatting in your song and adjustes the notes in the notes panel following the order of the song that you chose in the order text field.
 
-### Syncing OpenChords songs with the rest of your music group
+### Using OpenChords with multiple people
 
 If you find yourself in the position that your entire music team wants
-to use OpenChords, keeping all the songs in sync can be a bit of a
-mission. I've been using Dropbox for a while now to solve this problem.
-You simply move the OpenChords folder onto your Dropbox and run
-OpenChords from your Dropbox. This way you can make sure your whole team
-has the same notes and chords for each song as well as the latest
-version of OpenChords.
+to use OpenChords, then you will want to use the embedded Http Server. Then you only have one person running OpenChords and everything else just uses a web browser, pointing to the host machine.
 
-Just be careful of the Settings folder (OpenChordsApplicationData/Settings). It's preferable to not
-sync this folder since it holds your personalized settings, lucky
-Dropbox has a "Selective Sync" feature.
-
-Another issue is conflicts... Sadly someone will have to periodically go
-through the OpenChord's data folder and remove conflicting files.
-
-### Embedded Html Server
-
-If some of your team members are using tablets or other devices, the Html server can be quite useful
+e.g. John is running OpenChords and John's laptop's IP address is 10.0.0.16 and he selected port 8083 in the settings screen. In this case Sally will open her browser go to http://10.0.0.16:8083/ and she will see the current song that is on John's machine. Note: that John and Sally must be on the same network. 
 
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 http://{your ip address}:{selected port}/song will render the currently selected song on another device

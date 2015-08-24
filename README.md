@@ -3,14 +3,28 @@ OpenChords
 
 OpenChords is a guitar chord and lyrics management tool for guitarists and other musicians
 
+Background
+----------
+
+OpenChords was built to solve two primary needs: 
+
+* Easily transpose the key of a song
+
+* Filing music is tedious and I wanted a fully paperless system for musicians
+
+
 Features
 --------
-* Display the chords and lyrics of a set of songs or a single song on the computer screen</li>
-* Ability to take notes for each segment of your song</li>
-* Ability to transpose the song key and change font sizes of the songs on the fly</li>
-* Customizability of all the font sizes and background colors in the song display screen</li>
-* Ability to export any of the songs to pdf format</li>
-* Easily export a set of songs to OpenSong (great Opensource software for displaying lyrics over a projector)</li>
-<br>
+
+* Present any song with chords and lyrics in a easy to read high contrast color-theme
+
+* Transpose the song key and change capo of the songs on the fly
+
+* Export your songs to a tablet and print friendly HTML format
+
+* Easily export a set of songs to OpenSong (great Opensource software for displaying lyrics over a projector)
+
+* New Cross-platform UI using eto.forms.
+
 For the latest binary please click <a href="http://sourceforge.net/projects/openchords/files/latest/download?source=files">here</a>
 
