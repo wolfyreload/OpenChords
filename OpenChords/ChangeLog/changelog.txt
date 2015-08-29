@@ -1,3 +1,9 @@
+OpenChords v2.0.1
+============================================================================
+Added: OpenFileDialogs in General Settings
+Added: Song randomizer
+Added: Break song line
+
 OpenChords v2.0.0 Beta
 ============================================================================
 -Added: UI rewrite with cross-platform support (Windows, Linux and probably OS X in future)
