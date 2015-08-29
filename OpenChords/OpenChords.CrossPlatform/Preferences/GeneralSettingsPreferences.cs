@@ -1,6 +1,7 @@
 ﻿using Eto.Forms;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Text;
 
@@ -10,14 +11,14 @@ namespace OpenChords.CrossPlatform.Preferences
     {
         private Entities.FileAndFolderSettings fileAndFolderSettings;
         private CheckBox chkPortableMode = new CheckBox();
-        private TextBox txtApplicationDataFolder = new TextBox();
+        private TextBox txtApplicationDataFolder = new TextBox() { Width = 550 };
         private TextBox txtOpenSongExecutablePath = new TextBox();
         private TextBox txtOpenSongDataPath = new TextBox();
-        private Button cmdApplicationDataFolder = new Button() { Text = "Open", Style = "OpenFolder" };
-        private Button cmdOpenSongExecutablePath = new Button() { Text = "Open", Style = "OpenFolder" };
-        private Button cmdOpenSongSongsAndSetsPath = new Button() { Text = "Open", Style = "OpenFolder" };
+        private Button cmdApplicationDataFolder = new Button() { Text = "", Style = "OpenFolder", Image = Graphics.ImageExplore };
+        private Button cmdOpenSongExecutablePath = new Button() { Text = "", Style = "OpenFolder", Image = Graphics.ImageExplore };
+        private Button cmdOpenSongSongsAndSetsPath = new Button() { Text = "", Style = "OpenFolder", Image = Graphics.ImageExplore };
         private CheckBox chkHttpServerEnabled = new CheckBox();
-        private TextBox txtHttpServerPort = new TextBox();
+        private TextBox txtHttpServerPort = new TextBox() { Width = 50 };
         private bool OptionsChanged;
 
         public GeneralSettingsPreferences(Entities.FileAndFolderSettings fileAndFolderSettings)
@@ -29,9 +30,9 @@ namespace OpenChords.CrossPlatform.Preferences
                 Rows =
                 {
                     new TableRow(new Label() { Text = "Portable Mode" }, chkPortableMode),
-                    new TableRow(new Label() { Text = "OpenChords Data Folder" }, txtApplicationDataFolder ),
-                    new TableRow(new Label() { Text = "OpenSong Executable" }, txtOpenSongExecutablePath ),
-                    new TableRow(new Label() { Text = "OpenSong Data Folder" }, txtOpenSongDataPath ),
+                    new TableRow(new Label() { Text = "OpenChords Data Folder" }, txtApplicationDataFolder, cmdApplicationDataFolder, new Label() ),
+                    new TableRow(new Label() { Text = "OpenSong Executable" }, txtOpenSongExecutablePath, cmdOpenSongExecutablePath, new Label() ),
+                    new TableRow(new Label() { Text = "OpenSong Data Folder" }, txtOpenSongDataPath, cmdOpenSongSongsAndSetsPath, new Label() ),
                     new TableRow(new Label() { Text = "Http Server Enabled" }, chkHttpServerEnabled ),
                     new TableRow(new Label() { Text = "Http Server Port" }, txtHttpServerPort ),
                     null
@@ -52,6 +53,42 @@ namespace OpenChords.CrossPlatform.Preferences
             txtOpenSongExecutablePath.TextChanged += textChanged;
             chkHttpServerEnabled.CheckedChanged += checkedChanged;
             txtHttpServerPort.TextChanged += textChanged;
+            cmdApplicationDataFolder.Click += CmdApplicationDataFolder_Click;
+            cmdOpenSongExecutablePath.Click += CmdOpenSongExecutablePath_Click;
+            cmdOpenSongSongsAndSetsPath.Click += CmdOpenSongSongsAndSetsPath_Click;
+        }
+
+        private void CmdApplicationDataFolder_Click(object sender, EventArgs e)
+        {
+            txtApplicationDataFolder.Text = getFolderPath() ?? "";
+        }
+
+
+        private void CmdOpenSongExecutablePath_Click(object sender, EventArgs e)
+        {
+            FileDialogFilter filter = new FileDialogFilter("OpenSong Executable", "OpenSong.exe", "OpenSong");
+            List<FileDialogFilter> filters = new List<FileDialogFilter>() { filter };
+            using (var openFileDialog = new OpenFileDialog() { Filters=filters })
+            {
+                if (openFileDialog.ShowDialog(this) == DialogResult.Ok)
+                    txtOpenSongExecutablePath.Text = openFileDialog.FileName;
+            }
+        }
+
+        private void CmdOpenSongSongsAndSetsPath_Click(object sender, EventArgs e)
+        {
+            txtOpenSongDataPath.Text = getFolderPath() ?? "";
+        }
+
+        private string getFolderPath()
+        {
+            using (var folderDialog = new SelectFolderDialog())
+            {
+                if (folderDialog.ShowDialog(this) == DialogResult.Ok)
+                    return folderDialog.Directory;
+                else
+                    return null;
+            }
         }
 
         void checkedChanged(object sender, EventArgs e)

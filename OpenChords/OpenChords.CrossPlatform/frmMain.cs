@@ -34,6 +34,8 @@ namespace OpenChords.CrossPlatform
             //setup styles
             Eto.Style.Add<Button>("OpenFolder", button =>
             {
+                button.Width = 24;
+                button.Height = 24;
             });
 
             setup();
