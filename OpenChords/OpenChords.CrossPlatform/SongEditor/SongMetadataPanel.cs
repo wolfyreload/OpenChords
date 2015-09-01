@@ -4,6 +4,7 @@ using Eto.Drawing;
 using System.IO;
 using OpenChords.Entities;
 using System.Diagnostics;
+using OpenChords.Functions;
 
 namespace OpenChords.CrossPlatform.SongEditor
 {
@@ -157,6 +158,17 @@ namespace OpenChords.CrossPlatform.SongEditor
             txtKey.TextChanged += fieldTextChanged;
             txtBpm.TextChanged += fieldTextChanged;
             txtOrder.LostFocus += TxtOrder_LostFocus;
+        }
+
+        internal void SplitSongLine()
+        {
+            if (txtLyrics.Selection.Start == 0 || txtLyrics.Selection.Length() > 0) return;
+            int splitPosition = txtLyrics.Selection.Start;
+            string lyrics = txtLyrics.Text;
+            int newPosition = SongProcessor.BreakSongLine(ref lyrics, splitPosition);
+            txtLyrics.Text = lyrics;
+            txtLyrics.CaretIndex = newPosition;
+
         }
 
         private void TxtOrder_LostFocus(object sender, EventArgs e)

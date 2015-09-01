@@ -490,85 +490,108 @@ namespace OpenChords.Functions
   
         }
 
-
-        /// <summary>
-        /// split a lyrics line in two while preserving the 
-        /// positions of the chords in the line above
-        /// returns a new caret position
-        /// </summary>
-        /// <param name="splitPosition"></param>
-        public static int BreakSongLine(RichTextBox richTextBox, int splitPosition)
-        {
-            int PADDING = 60;
-            try
-            {
-                //get the 2 lines that need to be split
-                int lyricsRowIndex = richTextBox.GetLineFromCharIndex(splitPosition);
-                int chordsRowIndex = lyricsRowIndex - 1;
-                string lyricsRow = richTextBox.Lines[lyricsRowIndex];
-                string chordsRow = richTextBox.Lines[chordsRowIndex];
-
-
-                if (lyricsRow.Length == 0 || lyricsRow[0] != ' ')
-                    return splitPosition; //return if lyrics line is not selected
-
-                //get the position of the split
-                var y = splitPosition - (richTextBox.GetFirstCharIndexFromLine(chordsRowIndex) + chordsRow.Length);
-
-                //construct all the pieces
-                var newLyricsRow = " " + lyricsRow.Substring(y - 1).PadRight(PADDING);
-                var newChordsRow = "." + chordsRow.Substring(y - 1).PadRight(PADDING);
-                var oldLyricsRow = " " + lyricsRow.Substring(1, y - 2).PadRight(PADDING);
-                var oldChordsRow = "." + chordsRow.Substring(1, y - 2).PadRight(PADDING);
-
-                //construct the output string
-                string outputSegment = oldChordsRow + "\n" + oldLyricsRow + "\n" + newChordsRow + "\n" + newLyricsRow;
- 
-                //rebuild richtextbox
-                var start = richTextBox.GetFirstCharIndexFromLine(chordsRowIndex);
-                var end = richTextBox.GetFirstCharIndexFromLine(lyricsRowIndex + 1) - 1;
-                richTextBox.Select(start, end - start);
-                richTextBox.SelectedText = outputSegment;
-                
-                //fix carot position
-                var endOfSelection = richTextBox.GetLineFromCharIndex(richTextBox.SelectionStart + richTextBox.SelectionLength);
-                splitPosition = richTextBox.GetFirstCharIndexFromLine(endOfSelection) + 1;
-
-            }
-            catch (Exception ex)
-            {
-                logger.Error("Error breaking song line", ex);
-                return splitPosition;
-            }
-
-            return splitPosition;
-
-
-        }
-
-
 		/// <summary>
 		/// split a lyrics line in two while preserving the 
 		/// positions of the chords in the line above
 		/// returns a new caret position
 		/// </summary>
 		/// <param name="splitPosition"></param>
-		public static int BreakSongLine(Song song, int splitPosition)
+		public static int BreakSongLine(ref string lyrics, int splitPosition)
         {
             //split each line of the song into an array entry
             //use a list instead
             List<String> lyricLines =
-                new List<string>(multiLineToStringArray(song.lyrics, true));
-            
-            int lineLength = -1;
-
-            int rowIndex = -1;
-            int columnIndex = -1;
+                new List<string>(multiLineToStringArray(lyrics, false));
 
             //calculate the row and col of the caret position of the split
+            int rowIndex, columnIndex;
+            getRowAndColumnIndexOfSplitPosition(splitPosition, lyricLines, out rowIndex, out columnIndex);
+
+            //do nothing if cant split 
+            if (rowIndex <= 0 || columnIndex <= 0) return splitPosition;
+
+            //do nothing if verse line
+            if (lyricLines[rowIndex].StartsWith("[")) return splitPosition;
+
+            //do nothing if chord line
+            if (lyricLines[rowIndex].StartsWith(".")) return splitPosition;
+
+
+            int chordRowIndex = rowIndex - 1;
+            int lyricRowIndex = rowIndex;
+            bool isChordRowAboveCurrentRow = lyricLines[chordRowIndex].StartsWith(".");
+
+            splitLine(lyricLines, lyricRowIndex, columnIndex);
+            if (isChordRowAboveCurrentRow)
+                splitLine(lyricLines, chordRowIndex, columnIndex);
+            
+            //put all the lyrics together again
+            StringBuilder buildLyrics = new StringBuilder();
             for (int i = 0; i < lyricLines.Count; i++)
             {
-                lineLength = lyricLines[i].Length + 2; //cater for the /r/n
+                buildLyrics.Append(lyricLines[i] + "\n");
+            }
+            lyrics = buildLyrics.ToString();
+
+            //determine the new caret position
+            int pos = getNewCarrotPosition(lyricLines, rowIndex, isChordRowAboveCurrentRow);
+
+            return pos;
+        }
+
+        private static int getNewCarrotPosition(List<string> lyricLines, int rowIndex, bool isChordRowAboveCurrentRow)
+        {
+            int pos = 0;
+            int row = 0;
+            if (isChordRowAboveCurrentRow)
+                row = rowIndex + 2;
+            else
+                row = rowIndex + 1;
+            for (int i = 0; i < row; i++)
+            {
+                pos += lyricLines[i].Length + 1;
+            }
+            pos += 1; //move over to the next line
+            return pos;
+        }
+
+        /// <summary>
+        /// split lyricsLines at rowIndex and split at columnIndex
+        /// </summary>
+        /// <param name="lyricLines"></param>
+        /// <param name="rowIndex"></param>
+        /// <param name="columnIndex"></param>
+        private static void splitLine(List<string> lyricLines, int rowIndex, int columnIndex)
+        {
+            lyricLines[rowIndex]
+                = lyricLines[rowIndex].PadRight(columnIndex+1);
+
+            //create new lines
+            String newLyricLine;
+            bool isChordsRow = lyricLines[rowIndex].StartsWith(".");
+            if (isChordsRow)
+                newLyricLine = "." + lyricLines[rowIndex].Substring(columnIndex);
+            else
+                newLyricLine = " " + lyricLines[rowIndex].Substring(columnIndex);
+
+            //delete the remaining text on old line
+            lyricLines[rowIndex] = lyricLines[rowIndex].Remove(columnIndex);
+
+            //insert the new lines
+            if (isChordsRow)
+                lyricLines.Insert(rowIndex + 2, newLyricLine);
+            else
+                lyricLines.Insert(rowIndex + 1, newLyricLine);
+        }
+
+        private static int getRowAndColumnIndexOfSplitPosition(int splitPosition, List<string> lyricLines, out int rowIndex, out int columnIndex)
+        {
+            int lineLength = -1;
+            rowIndex = -1;
+            columnIndex = -1;
+            for (int i = 0; i < lyricLines.Count; i++)
+            {
+                lineLength = lyricLines[i].Length + 1; //cater for the \n
                 if (splitPosition - lineLength > 0)
                 {
                     splitPosition -= lineLength;
@@ -581,54 +604,7 @@ namespace OpenChords.Functions
                 }
             }
 
-            if (rowIndex > 0 && columnIndex > 0)
-            {
-                int chordRowIndex = rowIndex - 1;
-                int lyricRowIndex = rowIndex;
-
-                int chordRowLength = lyricLines[chordRowIndex].Length;
-                int lyricRowLength = lyricLines[lyricRowIndex].Length;
-
-                //pad the rows
-                lyricLines[chordRowIndex]
-                    = lyricLines[chordRowIndex].PadRight(lyricRowLength);
-                lyricLines[lyricRowIndex]
-                    = lyricLines[lyricRowIndex].PadRight(chordRowLength);
-
-                //create new lines
-                String newChordLine
-                    = "." + lyricLines[chordRowIndex].Substring(columnIndex);
-                String newLyricLine
-                    = " " + lyricLines[lyricRowIndex].Substring(columnIndex);
-
-                //delete the remaining text
-                lyricLines[chordRowIndex] = lyricLines[chordRowIndex].Remove(columnIndex);
-                lyricLines[lyricRowIndex] = lyricLines[lyricRowIndex].Remove(columnIndex);
-
-                //insert the new lines
-                lyricLines.Insert(lyricRowIndex + 1, newLyricLine);
-                lyricLines.Insert(lyricRowIndex + 1, newChordLine);
-
-            }
-
-            StringBuilder buildLyrics = new StringBuilder();
-            for (int i = 0; i < lyricLines.Count; i++)
-            {
-                buildLyrics.AppendLine(lyricLines[i]);
-            }
-
-            song.lyrics = buildLyrics.ToString();
-            
-            //determine the new caret position
-            int pos = 0;
-            int row = rowIndex + 2;
-            for (int i = 0; i < row; i++)
-            {
-            	pos += lyricLines[i].Length + 2;
-            }
-            pos += 1; //move over to the next line
-            
-            return pos;
+            return splitPosition;
         }
 
 

@@ -107,6 +107,7 @@
     <Compile Include="Settings\Enumerations.cs" />
     <Compile Include="Settings\ExtAppsAndDir.cs" />
     <Compile Include="Tests\FileAndFolderPathTests.cs" />
+    <Compile Include="Tests\StringSplitTests.cs" />
   </ItemGroup>
   <ItemGroup>
     <BootstrapperPackage Include="Microsoft.Net.Client.3.5">

@@ -109,6 +109,9 @@ namespace OpenChords.CrossPlatform
             menuItemSongDecreaseCapo.Executed += (s, e) => ucSongMetaDataPanel.TransposeCapoDown();
             var menuItemSongFixFormating = new Command { MenuText = "Auto Format Song", Shortcut = Application.Instance.CommonModifier | Keys.R, Image = Graphics.ImageRepairSong };
             menuItemSongFixFormating.Executed += (s, e) => ucSongMetaDataPanel.FixFormatting();
+            var menuItemSongBreakLine = new Command { MenuText = "Break Song Line", Shortcut = Application.Instance.CommonModifier | Keys.T, Image = Graphics.ImageSplitLine };
+            menuItemSongBreakLine.Executed += (s, e) => ucSongMetaDataPanel.SplitSongLine();
+
             var menuItemSongRefeshList = new Command { MenuText = "Refresh", Image = Graphics.ImageRefresh };
             menuItemSongRefeshList.Executed += (s, e) => ucSongListPanel.refreshPanel();
             var menuItemShowSongInExplorer = new Command { MenuText = "Show In Explorer", Image = Graphics.ImageExplore };
@@ -181,7 +184,7 @@ namespace OpenChords.CrossPlatform
                     new ButtonMenuItem()
                     {
                         Text = "&Song", 
-                        Items = { menuItemSongFileOperations, menuItemAdvancedSearch, menuItemKey, menuItemCapo, menuItemSongFixFormating, menuItemSongRefeshList }
+                        Items = { menuItemSongFileOperations, menuItemAdvancedSearch, menuItemKey, menuItemCapo, menuItemSongFixFormating, menuItemSongBreakLine, menuItemSongRefeshList }
                     },
                     new ButtonMenuItem()
                     {
