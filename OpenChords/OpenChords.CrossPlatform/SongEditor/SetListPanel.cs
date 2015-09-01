@@ -34,10 +34,12 @@ namespace OpenChords.CrossPlatform.SongEditor
             commandMoveSongUp.Executed += (s, e) => moveSongUp();
             var commandMoveSongDown = new Command() { MenuText = "Move song down", Shortcut = Application.Instance.CommonModifier | Keys.Down, Image = Graphics.ImageMoveDown };
             commandMoveSongDown.Executed += (s, e) => moveSongDown();
+            var commandSelectRandomSong = new Command { MenuText = "Select random song", Shortcut = Application.Instance.CommonModifier | Keys.M, Image = Graphics.ImageRandom };
+            commandSelectRandomSong.Executed += (s, e) => selectRandomSong();
 
             var menu = new ContextMenu()
             {
-                Items = { commandMoveSongUp, commandDeleteFromSet, commandMoveSongDown }
+                Items = { commandMoveSongUp, commandDeleteFromSet, commandMoveSongDown, commandSelectRandomSong}
             };
             lbSongs.ContextMenu = menu;
 
@@ -49,15 +51,36 @@ namespace OpenChords.CrossPlatform.SongEditor
             CurrentSet = new Set();
         }
 
+        private void selectRandomSong()
+        {
+            var rand = new Random();
+            var selectedIndex = rand.Next(lbSongs.Items.Count);
+            lbSongs.SelectedIndex = selectedIndex;
+        }
+
         void lbSongs_KeyUp(object sender, KeyEventArgs e)
         {
             if (e.Control && e.Key == Keys.Delete)
+            {
                 deleteSongFromSet();
+                e.Handled = true;
+            }
             else if (e.Control && e.Key == Keys.Up)
+            {
                 moveSongUp();
+                e.Handled = true;
+            }
             else if (e.Control && e.Key == Keys.Down)
+            {
                 moveSongDown();
-            e.Handled = true;
+                e.Handled = true;
+            }
+            else if (e.Control && e.Key == Keys.M)
+            {
+                selectRandomSong();
+                e.Handled = true;
+            }
+            
         }
 
 

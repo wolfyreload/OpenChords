@@ -36,11 +36,13 @@ namespace OpenChords.CrossPlatform.SongEditor
             commandAddToSet.Executed += (s, e) => addSongToSet();
             var commandDeleteSong = new Command() { MenuText = "Delete song", Shortcut = Application.Instance.CommonModifier | Keys.Delete, Image = Graphics.ImageDelete };
             commandDeleteSong.Executed += (s, e) => deleteSong();
+            var menuItemSongRandom = new Command { MenuText = "Select random song", Shortcut = Application.Instance.CommonModifier | Keys.M, Image = Graphics.ImageRandom };
+            menuItemSongRandom.Executed += (s, e) => selectRandomSong();
 
 
             var menu = new ContextMenu()
             {
-                Items = { commandAddToSet, commandDeleteSong }
+                Items = { commandAddToSet, commandDeleteSong, menuItemSongRandom }
             };
             lbSongs.ContextMenu = menu;
             _fullSongList = new List<Song>();     
@@ -110,7 +112,11 @@ namespace OpenChords.CrossPlatform.SongEditor
                 deleteSong();
                 e.Handled = true;
             }
-
+            else if (e.Control && e.Key == Keys.M)
+            {
+                selectRandomSong();
+                e.Handled = true;
+            }
         }
 
         void lbSongs_MouseDoubleClick(object sender, MouseEventArgs e)
@@ -168,6 +174,13 @@ namespace OpenChords.CrossPlatform.SongEditor
 
 			lbSongs.SelectedIndexChanged += lbSongs_SelectedIndexChanged;
 
+        }
+
+        internal void selectRandomSong()
+        {
+            var rand = new Random();
+            var selectedIndex = rand.Next(lbSongs.Items.Count);
+            lbSongs.SelectedIndex = selectedIndex;
         }
 
         public void showSongInExplorer()

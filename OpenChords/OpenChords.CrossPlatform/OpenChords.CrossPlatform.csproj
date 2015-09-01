@@ -172,6 +172,9 @@
     <Content Include="Resources\Print.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
+    <Content Include="Resources\Random.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
     <Content Include="Resources\RepairSong.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>

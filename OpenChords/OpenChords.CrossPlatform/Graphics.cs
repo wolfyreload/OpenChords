@@ -63,6 +63,7 @@ namespace OpenChords.CrossPlatform
         public static Image ImageOtherOptions { get { return getBitmap("Resources/OtherOptions.png"); } }
         public static Image ImageSize { get { return getBitmap("Resources/Size.png"); } }
         public static Image ImageVisibility { get { return getBitmap("Resources/Visibility.png"); } }
+        public static Image ImageRandom { get { return getBitmap("Resources/Random.png"); } }
 
 
 
