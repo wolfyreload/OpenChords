@@ -1,4 +1,5 @@
-﻿using System;
+﻿using OpenChords.Functions;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -131,9 +132,12 @@ namespace OpenChords.Entities
             string[] splitParameters2 = { " " };
             string[] presentationOrder = song.presentation.Split(splitParameters2, StringSplitOptions.RemoveEmptyEntries);
             List<SongVerse> elementsInOrder = new List<SongVerse>();
-            
+
+            //split lyrics lines on pipe character
+            var splitLyics = splitLyricsOnPipeCharacter(song.lyrics);
+
             //split the song lyrics up
-            var newLyrics = splitLyricsIntoPieces(song.lyrics);
+            var newLyrics = splitLyricsIntoPieces(splitLyics);
 
             //split the notes up
             var newNotes = splitNotesIntoPieces(song.notes);
@@ -157,6 +161,22 @@ namespace OpenChords.Entities
             }
 
             return elementsInOrder;
+        }
+
+        private static string splitLyricsOnPipeCharacter(string lyrics)
+        {
+            int pipeIndex = -1;
+            do
+            {
+                pipeIndex = lyrics.IndexOf("|");
+                if (pipeIndex > 0)
+                {
+                    lyrics = lyrics.Remove(pipeIndex, 1).Insert(pipeIndex, " "); //remove the pipe
+                    SongProcessor.BreakSongLine(ref lyrics, pipeIndex+1); //break song line in pipe position
+                }
+            } while (pipeIndex > 0);
+
+            return lyrics;
         }
 
         private static List<string> splitNotesIntoPieces(string notes)
