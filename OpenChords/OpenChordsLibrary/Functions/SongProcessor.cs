@@ -10,7 +10,6 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 using System.Linq;
-
 using OpenChords.Entities;
 using System.Windows.Forms;
 using System.Text.RegularExpressions;
@@ -23,60 +22,6 @@ namespace OpenChords.Functions
 	public static class SongProcessor
 	{
         private static readonly log4net.ILog logger = log4net.LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
-		/// <summary>
-		/// splits the lyrics into a verseHeader string[]
-		/// and a verse contents string[]
-		/// determine which lines are chords and which lines are lyrics
-		/// </summary>
-		/// <param name="song"></param>
-		/// <param name="verseHeader"></param>
-		/// <param name="verse"></param>
-		public static void lyricsProcessor(string lyrics, out string[] verseHeader, out List<string[]> verseContents, out List<bool[]> isChord)
-		{
-			string[] splitParameters = {"["};
-			string[] tempVerses = lyrics.Split(splitParameters,StringSplitOptions.RemoveEmptyEntries);
-			
-			verseContents = new List<string[]>();
-			isChord = new List<bool[]>();
-			
-			
-			List<string> tempVerseHeaders = new List<string>();
-			string[] tempContents;
-			
-			foreach (string verse in tempVerses)
-			{
-				int endOfHeaderIndex = verse.IndexOf("]");
-				if (endOfHeaderIndex >= 0)
-				{
-					string header = verse.Substring(0, endOfHeaderIndex);
-					string content = verse.Substring(endOfHeaderIndex+1);
-					
-					tempVerseHeaders.Add(header);
-					tempContents = multiLineToStringArray(content, true);
-					
-					List<bool> tempIsChord = new List<bool>();
-					List<string> tempContent2 = new List<string>();
-					for (int j = 0; j < tempContents.Length; j++)
-					{
-						if (tempContents[j].Length > 0)
-						{
-							string test = tempContents[j].Substring(0,1);
-							if (test == ".")
-								tempIsChord.Add(true);
-							else
-								tempIsChord.Add(false);
-							
-							tempContent2.Add(tempContents[j].Substring(1));
-						}
-					}
-					isChord.Add(tempIsChord.ToArray());
-					verseContents.Add(tempContent2.ToArray());
-				}
-				
-			}
-			
-			verseHeader = tempVerseHeaders.ToArray();
-		}
 		
 		/// <summary>
 		/// convert a multiline string into a string array
@@ -140,40 +85,34 @@ namespace OpenChords.Functions
 		/// <returns></returns>
 		public static void transposeKeyUp(Song song)
 		{
-			string[] verseHeader;
-			List<string[]> verseContents;
-			List<bool[]> isChord;
-			
-			lyricsProcessor(song.lyrics, out verseHeader, out verseContents, out isChord);
-			
-			//transpose the chords
-			for (int i = 0; i < verseContents.Count; i++)
-			{
-				string[] currentVerse = verseContents[i];
-				for (int j = 0; j < currentVerse.Length; j++)
-				{
-					if (isChord[i][j])
-                        currentVerse[j] = tranposeLine(currentVerse[j], song.PreferFlats);
-				}
-				
-			}
-			
-			StringBuilder lyrics = new StringBuilder();
-			//rewrite the lyrics
-			for (int i = 0; i < verseHeader.Length; i++)
-			{
-				lyrics.AppendLine("[" + verseHeader[i] + "]");
-				for (int j = 0; j < verseContents[i].Length; j++)
-				{
-					if (isChord[i][j])
-						lyrics.AppendLine("." + verseContents[i][j].TrimEnd());
-					else
-                        lyrics.AppendLine(" " + verseContents[i][j].TrimEnd());
-					
-				}
-				lyrics.AppendLine();
-			}
-			
+	        var songVerses = SongVerse.getSongVersesNoOrder(song);
+
+            //transpose each chord line
+            foreach (var songVerse in songVerses)
+            {
+                for (int i = 0; i < songVerse.VerseLinesCount; i++)
+                {
+                    var isChord = songVerse.IsChord[i];
+                    if (isChord)
+                        songVerse.Lyrics[i] = tranposeLine(songVerse.Lyrics[i], song.PreferFlats);
+                }
+            }
+
+            //rewrite the lyrics
+            StringBuilder lyrics = new StringBuilder();
+            foreach (var songVerse in songVerses)
+            {
+                lyrics.AppendFormat("[{0}]\n", songVerse.Header);
+                for (int i = 0; i < songVerse.VerseLinesCount; i++)
+                {
+                    var isChord = songVerse.IsChord[i];
+                    if (isChord)
+                        lyrics.AppendFormat(".{0}\n", songVerse.Lyrics[i].TrimEnd());
+                    else
+                        lyrics.AppendFormat(" {0}\n", songVerse.Lyrics[i].TrimEnd());
+                }
+                lyrics.Append("\n");
+            }
 			song.lyrics = lyrics.ToString();
 		}
 		
@@ -326,155 +265,130 @@ namespace OpenChords.Functions
 		/// </summary>
 		/// <param name="song"></param>
 		public static void fixFormatting(Song song)
-		{
-			string[] verseHeader;
-			List<string[]> verseContents;
-			List<bool[]> isChord;
+        {
+            //check if one or more lines has lines that dont start with [, ' ' or .
+            rebuildLyricsIfNeeded(song);
 
+            //get song in split form
+            var verses = SongVerse.getSongVersesNoOrder(song);
+
+            //fix headers, chord and lyric indicators and rebuild the lyrics string
+            var tempLyrics = new StringBuilder();
+            for (int i = 0; i < verses.Count; i++)
+            {
+                var verse = verses[i];
+                verse.Header = fixHeader(verse.Header);
+                tempLyrics.AppendFormat("[{0}]\n", verse.Header);
+                for (int j = 0; j < verse.VerseLinesCount; j++)
+                {
+                    verse.IsChord[j] = checkIfChordsLine(verse.Lyrics[j]);
+                    if (verse.IsChord[j])
+                        tempLyrics.AppendFormat(".{0}\n", verse.Lyrics[j].TrimEnd());
+                    else
+                        tempLyrics.AppendFormat(" {0}\n", verse.Lyrics[j].TrimEnd());
+                }
+                tempLyrics.Append("\n");
+            }
+            song.lyrics = tempLyrics.ToString();
+
+            //format the notes
+            song.notes = formatNotes(song);
+
+            //get rid of trailing spaces
+            song.title = song.title.TrimEnd();
+            song.author = song.author.TrimEnd();
+            song.key = song.key.TrimEnd();
+        }
+
+        private static string formatNotes(Song song)
+        {
+            StringBuilder tempNotes = new StringBuilder();
+            bool noteHeadersPresent = song.notes.Contains("[");
+            if (noteHeadersPresent) return fixNoteIndenting(song.notes);
+
+            string[] sep = { " " };
+            string[] splitOrder = song.presentation.Split(sep, StringSplitOptions.RemoveEmptyEntries);
+            foreach (string element in splitOrder)
+            {
+                tempNotes.AppendFormat("[{0}]\n", element);
+                tempNotes.Append(" \n");
+                tempNotes.Append("\n");
+            }
+            if (!string.IsNullOrWhiteSpace(song.notes))
+            {
+                tempNotes.AppendFormat("[O]\n{0}", song.notes);
+                return fixNoteIndenting(tempNotes.ToString());
+            }
+            else
+                return tempNotes.ToString();
+        }
+
+        private static string fixNoteIndenting(string notes)
+        {
+            //indent notes if needed
+            string[] splitNotes = multiLineToStringArray(notes, true);
+            StringBuilder tempNotes2 = new StringBuilder();
+            for (int i = 0; i < splitNotes.Length; i++)
+            {
+                char char1 = splitNotes[i][0];
+                if (char1 != '[' && char1 != ' ')
+                    splitNotes[i] = " " + splitNotes[i];
+                tempNotes2.Append(splitNotes[i] + "\n");
+            }
+            return tempNotes2.ToString();
+        }
+
+        private static string fixHeader(string header)
+        {
+            header = header.ToUpper();
+
+            //fix naming
+            header = header.Replace(" ", "");
+            header = header.Replace(":", "");
+            header = header.Replace("-", "");
+            header = header.Replace("VERSE", "V");
+            header = header.Replace("PRECHORUS", "P");
+            header = header.Replace("CHORUS", "C");
+            header = header.Replace("BRIDGE", "B");
+            header = header.Replace("INTRO", "I");
+            header = header.Replace("INTERLUDE", "I");
+            header = header.Replace("TAG", "T");
+            header = header.Replace("ENDING", "E");
+            header = header.Replace("END", "E");
+            return header;
+        }
+
+        private static StringBuilder rebuildLyricsIfNeeded(Song song)
+        {
             song.lyrics = song.lyrics.Replace("\t", "   ");
+
             string[] splitLyrics = multiLineToStringArray(song.lyrics, true);
-			bool rebuildNeeded = false;
-			for (int i = 0; i < splitLyrics.Length; i++)
-			{
-				//check for unexpected characters
+            bool rebuildNeeded = false;
+            for (int i = 0; i < splitLyrics.Length; i++)
+            {
+                //check for unexpected characters
                 if (!splitLyrics[i].StartsWith(".") && !splitLyrics[i].StartsWith(" ") && !splitLyrics[i].StartsWith("["))
-				{
-					rebuildNeeded = true;
-					break;
-				}
-			}
-			
-			StringBuilder tempLyrics = new StringBuilder();
-			if (rebuildNeeded)
-			{
-				for (int i = 0; i < splitLyrics.Length; i++)
-				{
+                {
+                    rebuildNeeded = true;
+                    break;
+                }
+            }
+
+            StringBuilder tempLyrics = new StringBuilder();
+            if (rebuildNeeded)
+            {
+                for (int i = 0; i < splitLyrics.Length; i++)
+                {
                     if (!splitLyrics[i].StartsWith(".") && !splitLyrics[i].StartsWith(" ") && !splitLyrics[i].StartsWith("["))
                         tempLyrics.AppendLine(" " + splitLyrics[i]);
                     else
                         tempLyrics.AppendLine(splitLyrics[i]);
-				}
-				song.lyrics = tempLyrics.ToString();
-			}
-			
-			lyricsProcessor(song.lyrics, out verseHeader, out verseContents, out isChord);
-			
-			//fix headers
-			for (int i = 0; i < verseHeader.Length; i++)
-			{
-				verseHeader[i] = verseHeader[i].ToUpper();
+                }
+                song.lyrics = tempLyrics.ToString();
+            }
 
-				//readd the removed blacket
-				verseHeader[i] = "[" + verseHeader[i];
-				
-				//fix naming
-				verseHeader[i] = verseHeader[i].Replace("VERSE", "V");
-				verseHeader[i] = verseHeader[i].Replace("PRECHORUS", "P");
-				verseHeader[i] = verseHeader[i].Replace("PRE-CHORUS", "P");
-				verseHeader[i] = verseHeader[i].Replace("PRE CHORUS", "P");
-				verseHeader[i] = verseHeader[i].Replace("CHORUS", "C");
-				verseHeader[i] = verseHeader[i].Replace("BRIDGE", "B");
-				verseHeader[i] = verseHeader[i].Replace("INTRO", "I");
-				verseHeader[i] = verseHeader[i].Replace("INTERLUDE", "I");
-				verseHeader[i] = verseHeader[i].Replace("TAG", "T");
-				verseHeader[i] = verseHeader[i].Replace("ENDING", "E");
-				verseHeader[i] = verseHeader[i].Replace("END", "E");
-				verseHeader[i] = verseHeader[i].Replace(":", "");
-				verseHeader[i] = verseHeader[i].Replace(" ", "");
-
-				//insert the "]" if it is not present
-				if (verseHeader[i].IndexOf(']') == -1)
-				{
-					verseHeader[i] = verseHeader[i].TrimEnd().TrimStart();
-					verseHeader[i] = verseHeader[i] + "]";
-				}
-			}
-			
-			//fix chord and lyric indicators
-			for (int i = 0; i < isChord.Count; i++)
-			{
-				for (int j = 0; j < isChord[i].Length; j++)
-				{
-                    var isChordLine = checkIfChordsLine(verseContents[i][j]);
-                    isChord[i][j] = isChordLine;
-				}
-			}
-			
-			//buffer verses
-			for (int i = 0; i < verseContents.Count; i++)
-			{
-				for (int j = 0; j < verseContents[i].Length; j++)
-				{
-					verseContents[i][j] = verseContents[i][j].TrimEnd();
-					verseContents[i][j] = verseContents[i][j].PadRight(55);
-				}
-			}
-			
-			//rebuild the lyrics
-			tempLyrics = new StringBuilder();
-			for (int i = 0; i < verseHeader.Length; i++)
-			{
-				tempLyrics.AppendLine(verseHeader[i]);
-				for (int j = 0; j < verseContents[i].Length; j++)
-				{
-					if (isChord[i][j])
-                        tempLyrics.Append("." + verseContents[i][j] + "\n");
-					else
-                        tempLyrics.Append(" " + verseContents[i][j] + "\n");
-				}
-                tempLyrics.Append("\n");
-			}
-			
-			//assign rebuilt lyrics back to the song
-			song.lyrics = tempLyrics.ToString();
-
-			//generate the note headers if none are present
-			bool noteHeadersPresent = song.notes.Contains("[");
-			if (!noteHeadersPresent)
-			{
-				string[] sep = {" "};
-				string[] splitOrder = song.presentation.Split(sep, StringSplitOptions.RemoveEmptyEntries);
-				StringBuilder tempNotes = new StringBuilder();
-				foreach (string element in splitOrder)
-				{
-					tempNotes.AppendLine("[" + element + "]");
-					tempNotes.AppendLine(" ");
-					tempNotes.AppendLine("");
-				}
-				
-				//add general notes header
-				tempNotes.AppendLine("[G]");
-				tempNotes.AppendLine(" ");
-								
-				song.notes = tempNotes.ToString() + song.notes;
-			}
-			
-			//indent notes if needed
-			string[] splitNotes = multiLineToStringArray(song.notes, true);
-			StringBuilder tempNotes2 = new StringBuilder();
-			for (int i = 0; i < splitNotes.Length; i++)
-			{
-				char char1 = splitNotes[i][0];
-				if (char1 != '[' && char1 != ' ')
-					splitNotes[i] = " " + splitNotes[i];
-
-
-                tempNotes2.Append(splitNotes[i] + "\n");
-			}
-			
-			//update the notes field in the song
-			song.notes = tempNotes2.ToString();
-			
-			//get rid of trailing spaces
-			song.title = song.title.TrimEnd();
-			song.author = song.author.TrimEnd();
-			song.key = song.key.TrimEnd();
-			song.presentation = song.presentation;
-			
-			
-
-			
-		}
+            return tempLyrics;
+        }
 
         private static bool checkIfChordsLine(string line)
         {
@@ -615,7 +529,7 @@ namespace OpenChords.Functions
         public static void fixNoteOrdering(Song song)
         {
             //add a General Note tab
-            var orderTemp = song.presentation + " G";
+            var orderTemp = song.presentation;
 
             //split all the notes into verses
             var verses = new List<string>(song.notes.Split(new char[] { '[' }, StringSplitOptions.RemoveEmptyEntries));
@@ -710,7 +624,7 @@ namespace OpenChords.Functions
                 //if there is no matching verse add one
                 if (!matchFound)
                 {
-                    var newVerse = "[" + verse + "]\r\n.\r\n";
+                    var newVerse = "[" + verse + "]\n.\n";
                     newVerses.Add(newVerse);
                 }
             }

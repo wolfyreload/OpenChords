@@ -10,7 +10,7 @@ namespace OpenChords.Entities
     public class SongVerse
     {
         public string HtmlId { get; set; }
-        public string Header { get; private set; }
+        public string Header { get; set; }
         public string Notes { get; set; }
         public List<string> Lyrics { get; private set; }
         public List<bool> IsChord { get; private set; }
@@ -54,7 +54,7 @@ namespace OpenChords.Entities
             get
             {
                 var count = Lyrics.Count();
-                return count + 1;
+                return count;
             }
         }
 
@@ -163,6 +163,28 @@ namespace OpenChords.Entities
             return elementsInOrder;
         }
 
+        public static List<SongVerse> getSongVersesNoOrder(Song song)
+        {
+            List<SongVerse> songElements = new List<SongVerse>();
+
+            //split lyrics lines on pipe character
+            var splitLyics = splitLyricsOnPipeCharacter(song.lyrics);
+
+            //split the song lyrics up
+            List<Tuple <string, string>> songSegments = splitLyricsIntoSegmentsNoOrder(splitLyics);
+
+            //put all the elements in order of the song presentation
+            foreach (Tuple<string,string> songSegment in songSegments)
+            {
+                var header = songSegment.Item1;
+                var lyrics = songSegment.Item2;
+                var newElement = new SongVerse(header, lyrics, "", songElements.Count() + 1);
+                songElements.Add(newElement);
+            }
+
+            return songElements;
+        }
+
         private static string splitLyricsOnPipeCharacter(string lyrics)
         {
             int pipeIndex = -1;
@@ -217,11 +239,11 @@ namespace OpenChords.Entities
             return result;
         }
 
-        private static Dictionary<string, string> splitLyricsIntoPieces(string lyrics)
+        private static List<Tuple<string, string>> splitLyricsIntoSegmentsNoOrder(string lyrics)
         {
             string[] splitParameters = { "[" };
             string[] tempVerses = lyrics.Split(splitParameters, StringSplitOptions.RemoveEmptyEntries);
-            Dictionary<string, string> newLyrics = new Dictionary<string, string>();
+            List<Tuple<string, string>> newLyrics = new List<Tuple<string, string>>();
             for (int i = 0; i < tempVerses.Count(); i++)
             {
                 var verse = tempVerses[i];
@@ -230,13 +252,28 @@ namespace OpenChords.Entities
                 if (endOfHeaderIndex >= 0)
                 {
                     string header = verse.Substring(0, endOfHeaderIndex);
-                    //ensure that there is only one of every chord piece
-                    if (!newLyrics.ContainsKey(header))
-                        newLyrics[header] = verse.Substring(endOfHeaderIndex + 1);
+                    verse = verse.Substring(endOfHeaderIndex + 1);
+                    newLyrics.Add(new Tuple<string, string>(header, verse));
                 }
             }
 
             return newLyrics;
+        }
+
+        private static Dictionary<string, string> splitLyricsIntoPieces(string lyrics)
+        {
+            List<Tuple<string, string>> tuppleLyrics = splitLyricsIntoSegmentsNoOrder(lyrics);
+            Dictionary<string, string> lyricsDictionary = new Dictionary<string, string>();
+            for (int i = 0; i < tuppleLyrics.Count(); i++)
+            {
+                var header = tuppleLyrics[i].Item1;
+                var verse = tuppleLyrics[i].Item2;
+                
+                //ensure that there is only one of every chord piece
+                if (!lyricsDictionary.ContainsKey(header))
+                    lyricsDictionary[header] = verse;
+            }
+            return lyricsDictionary;
         }
 
 
