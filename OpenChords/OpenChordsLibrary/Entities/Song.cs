@@ -138,12 +138,15 @@ namespace OpenChords.Entities
             return IO.FileFolderFunctions.getDirectoryListingAsList(Settings.ExtAppsAndDir.SongsFolder);
         }
 
-        public void saveSong()
+        /// <summary>
+        /// returns true if new song
+        /// </summary>
+        /// <returns></returns>
+        public bool saveSong()
         {
-            if (this.title != "")
-            {
-                XmlReaderWriter.writeSong(Settings.ExtAppsAndDir.SongsFolder + this.title, this);
-            }
+            if (this.title == "")
+                throw new Exception("Song title cannot be blank");
+            return XmlReaderWriter.writeSong(Settings.ExtAppsAndDir.SongsFolder + this.title, this);
         }
 
         internal void saveSong(string destination)

@@ -45,9 +45,13 @@ namespace OpenChords.IO
         /// writes the current song to file
         /// </summary>
         /// <param name="filename"></param>
-        public static void writeSong(String filename, Song song)
+        public static bool writeSong(String filename, Song song)
         {
+            bool isNewSong = !File.Exists(filename);
             xmlWriter<Song>(filename, song);
+            song.SongFileName = Path.GetFileName(filename);
+            song.songFilePath = filename;
+            return isNewSong;
         }
 
         /// <summary>

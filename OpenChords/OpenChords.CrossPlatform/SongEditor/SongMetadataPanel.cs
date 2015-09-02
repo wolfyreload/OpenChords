@@ -288,14 +288,14 @@ namespace OpenChords.CrossPlatform.SongEditor
                 CurrentSong.deleteSong();
 
             //save the song
-            CurrentSong.saveSong();
+            bool isNewSong = CurrentSong.saveSong();
 
             //notify the user
             Helpers.PopupMessages.ShowInformationMessage(this, "Song '{0}' saved", CurrentSong.title);
 
             SongChanged = false;
 
-            return CurrentSong.SongFileName != CurrentSong.title;
+            return isNewSong;
         }
 
         internal void ChangeToSong(Song newSong)
