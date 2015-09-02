@@ -291,6 +291,10 @@ namespace OpenChords.Entities
                 fixNoteOrdering();
                 fixLyricsOrdering();
             }
+            else if (string.IsNullOrWhiteSpace(this.presentation))
+            {
+                this.presentation = Functions.ImportSong.importPresentationList(this.lyrics);
+            }
 
             SongProcessor.fixFormatting(this);
         }
@@ -303,7 +307,6 @@ namespace OpenChords.Entities
         public void fixLyricsOrdering()
         {
             SongProcessor.fixLyricsOrdering(this);
-            SongProcessor.fixFormatting(this);
         }
 
 
