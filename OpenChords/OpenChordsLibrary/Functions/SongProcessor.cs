@@ -289,7 +289,7 @@ namespace OpenChords.Functions
                 }
                 tempLyrics.Append("\n");
             }
-            song.lyrics = tempLyrics.ToString();
+            song.lyrics = tempLyrics.ToString().Trim();
 
             //format the notes
             song.notes = formatNotes(song);
