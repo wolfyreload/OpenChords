@@ -53,7 +53,6 @@
       <HintPath>..\packages\Common.Logging.2.0.0\lib\2.0\Common.Logging.dll</HintPath>
       <Private>True</Private>
     </Reference>
-    <Reference Include="Microsoft.VisualStudio.QualityTools.UnitTestFramework, Version=10.1.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL" />
     <Reference Include="NHttp, Version=0.1.7.0, Culture=neutral, PublicKeyToken=156364e4f7b202d9, processorArchitecture=MSIL">
       <HintPath>..\packages\NHttp.0.1.7.0\lib\net20\NHttp.dll</HintPath>
       <Private>True</Private>
@@ -106,8 +105,6 @@
     <Compile Include="Settings.cs" />
     <Compile Include="Settings\Enumerations.cs" />
     <Compile Include="Settings\ExtAppsAndDir.cs" />
-    <Compile Include="Tests\FileAndFolderPathTests.cs" />
-    <Compile Include="Tests\StringSplitTests.cs" />
   </ItemGroup>
   <ItemGroup>
     <BootstrapperPackage Include="Microsoft.Net.Client.3.5">
