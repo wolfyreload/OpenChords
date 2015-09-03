@@ -43,8 +43,6 @@ namespace OpenChords.CrossPlatform
         public static Image ImagePreferences { get { return getBitmap("Resources/Preferences.png"); } }
         public static Image ImageRefresh { get { return getBitmap("Resources/Reload.png"); } }
         public static Image ImageRepairSong { get { return getBitmap("Resources/RepairSong.png"); } }
-        public static Image ImageSplitLine { get { return getBitmap("Resources/SplitLine.png"); } }
-
         public static Image ImageRevert { get { return getBitmap("Resources/Revert.png"); } }
         public static Image ImageSave { get { return getBitmap("Resources/Save.png"); } }
         public static Image ImageKey { get { return getBitmap("Resources/Key.png"); } }

@@ -193,9 +193,6 @@
     <Content Include="Resources\Song.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="Resources\SplitLine.png">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
     <Content Include="Resources\Up.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
