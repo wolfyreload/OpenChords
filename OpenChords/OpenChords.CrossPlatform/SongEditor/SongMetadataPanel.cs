@@ -233,7 +233,9 @@ namespace OpenChords.CrossPlatform.SongEditor
             CurrentSong.PreferFlats = (radioListSharpsOrFlats.SelectedIndex == 0);
             CurrentSong.key = txtKey.Text;
             CurrentSong.Capo = capoInt;
-            CurrentSong.BeatsPerMinute = int.Parse(txtBpm.Text);
+            int tempBpm = 100;
+            if (int.TryParse(txtBpm.Text, out tempBpm))
+                CurrentSong.BeatsPerMinute = tempBpm;
         }
 
         private void comboSelectedIndexChanged(object sender, EventArgs e)
