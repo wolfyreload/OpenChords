@@ -5,6 +5,7 @@ Added: Song randomizer
 Added: Break song line
 Added: Break long song lines with pipe character
 Fixed: Removed extra blank pages when printing
+Fixed: Some chords were not getting detected properly as chords (e.g. D/F)
 
 OpenChords v2.0.0 Beta
 ============================================================================

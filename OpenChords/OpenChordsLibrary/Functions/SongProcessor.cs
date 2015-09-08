@@ -281,7 +281,7 @@ namespace OpenChords.Functions
                 tempLyrics.AppendFormat("[{0}]\n", verse.Header);
                 for (int j = 0; j < verse.VerseLinesCount; j++)
                 {
-                    verse.IsChord[j] = checkIfChordsLine(verse.Lyrics[j]);
+                    verse.IsChord[j] = CheckIfChordsLine(verse.Lyrics[j]);
                     if (verse.IsChord[j])
                         tempLyrics.AppendFormat(".{0}\n", verse.Lyrics[j].TrimEnd());
                     else
@@ -401,12 +401,12 @@ namespace OpenChords.Functions
             return tempLyrics;
         }
 
-        private static bool checkIfChordsLine(string line)
+        public static bool CheckIfChordsLine(string line)
         {
-            var regexPattern = @"\s+([CDEFGAB])(#|##|b|bb)?(m|maj|maj7|min|m7|m9|2|7|9|11|13|sus4|sus2|5|aug)?/?\s+";
+            var regexPattern = @"\b([CDEFGAB])(#|##|b|bb)?(m|maj|maj7|min|m7|m9|2|7|9|11|13|sus4|sus2|5|aug)?/?\b";
             
-            var appearsToBeChords = Regex.IsMatch(" " + line + " ", regexPattern);
-            var appearsToBeWords = Regex.IsMatch(" " + line + " ", @"\s+[a-zA-z]{5,20}\s+");
+            var appearsToBeChords = Regex.IsMatch(string.Format(" {0} ", line), regexPattern);
+            var appearsToBeWords = Regex.IsMatch(string.Format(" {0} ", line), @"\s+[a-zA-z]{5,20}\s+");
 
             if (appearsToBeWords) 
                 return false;
