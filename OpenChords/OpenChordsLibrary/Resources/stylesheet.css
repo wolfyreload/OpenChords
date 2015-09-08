@@ -57,6 +57,13 @@ body {
 
 }
 
+@media print { 
+	body
+	{ 
+		padding-bottom: 0px;
+	}
+}
+
 .DisplaySongVerse {
     padding: 5px;
     margin-bottom: 20px;

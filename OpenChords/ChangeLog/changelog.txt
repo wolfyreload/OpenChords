@@ -4,6 +4,7 @@ Added: OpenFileDialogs in General Settings
 Added: Song randomizer
 Added: Break song line
 Added: Break long song lines with pipe character
+Fixed: Removed extra blank pages when printing
 
 OpenChords v2.0.0 Beta
 ============================================================================
