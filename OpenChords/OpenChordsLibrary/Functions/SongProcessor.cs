@@ -288,6 +288,8 @@ namespace OpenChords.Functions
                         tempLyrics.AppendFormat(" {0}\n", verse.Lyrics[j].TrimEnd());
                 }
                 tempLyrics.Append("\n");
+                replaceMsWordQuotes(tempLyrics);
+
             }
             song.lyrics = tempLyrics.ToString().Trim();
 
@@ -298,6 +300,15 @@ namespace OpenChords.Functions
             song.title = song.title.TrimEnd();
             song.author = song.author.TrimEnd();
             song.key = song.key.TrimEnd();
+        }
+
+        //replace msword quotes as they don't render properly
+        private static void replaceMsWordQuotes(StringBuilder tempLyrics)
+        {
+            tempLyrics.Replace("’", "'");
+            tempLyrics.Replace("‘", "'"); 
+            tempLyrics.Replace("“", "\""); 
+            tempLyrics.Replace("”", "\""); 
         }
 
         private static string formatNotes(Song song)
