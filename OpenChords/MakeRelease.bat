@@ -21,9 +21,11 @@ xcopy /Y /E .\Staging\Manual\* .\Staging\LinuxApp\OpenChords\App\
 xcopy /Y .\settings.xml .\Staging\WindowsApp\OpenChords\App
 xcopy /Y .\settings.xml .\Staging\LinuxApp\OpenChords\App 
 
-::Make zip files for portable version
-7za.exe a -tzip .\Release\OpenChords.Windows.zip .\Staging\WindowsApp\* 
-7za.exe a -tzip .\Release\OpenChords.Linux.zip .\Staging\LinuxApp\* 
+::Make 7zip files for portable version
+7za.exe a -tzip .\Release\OpenChords.Windows.Portable.zip .\Staging\WindowsApp\* -mx9
+7za.exe a -tzip .\Release\OpenChords.Linux.Portable.zip .\Staging\LinuxApp\* -mx9
+7za.exe a -t7z .\Release\OpenChords.Windows.Portable.7z .\Staging\WindowsApp\* -mx9 -ms=on -m0=lzma
+7za.exe a -t7z .\Release\OpenChords.Linux.Portable.7z .\Staging\LinuxApp\* -mx9 -ms=on -m0=lzma
 
 ::Make Installer
 "C:\Program Files (x86)\Inno Setup 5\ISCC.exe" OpenChords.Setup\OpenChords.Setup.iss 
