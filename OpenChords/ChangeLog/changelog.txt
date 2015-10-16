@@ -1,3 +1,9 @@
+OpenChords v2.0.2
+============================================================================
+Fixed: double pipes || now get ignored
+Fixed: pipes no longer split chords in half
+Improvement: Can now switch between vertical and horizontal song presentation   
+
 OpenChords v2.0.1
 ============================================================================
 Added: OpenFileDialogs in General Settings
@@ -9,12 +15,12 @@ Fixed: Some chords were not getting detected properly as chords (e.g. D/F)
 
 OpenChords v2.0.0 Beta
 ============================================================================
--Added: UI rewrite with cross-platform support (Windows, Linux and probably OS X in future)
--Improvement: Use system look and feel.
--Improvement: simplier song searching
--Improvement: improved look of song presentation screen
--Improvement: Faster load times
--Improvement: Settings screen simpified
--Added: Metronome for keeping perfect timing
--Depreciation: Removed pdf support in favor of Html  
--Depreciation: By upgrading to .Net 4.5 Windows XP is no longer supported
+Added: UI rewrite with cross-platform support (Windows, Linux and probably OS X in future)
+Improvement: Use system look and feel.
+Improvement: simplier song searching
+Improvement: improved look of song presentation screen
+Improvement: Faster load times
+Improvement: Settings screen simpified
+Added: Metronome for keeping perfect timing
+Depreciation: Removed pdf support in favor of Html  
+Depreciation: By upgrading to .Net 4.5 Windows XP is no longer supported
