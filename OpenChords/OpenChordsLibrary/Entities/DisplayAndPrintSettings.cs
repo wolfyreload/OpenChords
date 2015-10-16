@@ -52,6 +52,8 @@ namespace OpenChords.Entities
         public bool? ShowChords  {get; set;}
         public bool? ShowLyrics  {get; set;}
           
+        public string SongOrientation { get; set; }
+
         public string BackgroundColorHex { get; set; }
         public string VerseHeadingBackgroundColorHex { get; set; }
         public string VerseLyricsBackgroundColor1Hex { get; set; }

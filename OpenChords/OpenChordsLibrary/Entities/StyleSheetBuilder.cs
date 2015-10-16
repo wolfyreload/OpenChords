@@ -31,7 +31,17 @@ namespace OpenChords.Entities
 
             configureStylesheetBackgrounColors(sb);
 
+            configureStylesheetOrientation(sb);
+
             return sb.ToString();
+        }
+
+        private void configureStylesheetOrientation(StringBuilder sb)
+        {
+            if (_settings.SongOrientation == null || _settings.SongOrientation == "Horizontal")
+                sb.Replace("<%SongOrientation%>", "inline-block");
+            else
+                sb.Replace("<%SongOrientation%>", "table");
         }
 
         private void configureStylesheetBackgrounColors(StringBuilder sb)
