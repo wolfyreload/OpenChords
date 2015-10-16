@@ -187,6 +187,10 @@ namespace OpenChords.Entities
 
         private static string splitLyricsOnPipeCharacter(string lyrics)
         {
+            //replace the double pipe characters so we dont split on them
+            lyrics = lyrics.Replace("||", "###DOUBLEPIPE###");
+
+            //iterate through all the pipe characters and split the lyrics lines on them
             int pipeIndex = -1;
             do
             {
@@ -197,6 +201,9 @@ namespace OpenChords.Entities
                     SongProcessor.BreakSongLine(ref lyrics, pipeIndex+1); //break song line in pipe position
                 }
             } while (pipeIndex > 0);
+
+            //restore the double pipes
+            lyrics = lyrics.Replace("###DOUBLEPIPE###", "||");
 
             return lyrics;
         }
