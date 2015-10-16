@@ -38,9 +38,9 @@ namespace OpenChords.Export
         {
 
             //configure the stylesheet
-            string baseStylesheet = HtmlResources.stylesheet;
-            configureStylesheet(ref baseStylesheet);
+            string styleSheet = new StyleSheetBuilder(_settings).GetStyleSheet();
 
+       
             //get song html
             StringBuilder songBuilder = new StringBuilder();
             foreach (var song in _set.songList)
@@ -57,7 +57,7 @@ namespace OpenChords.Export
 
             //add stylesheet
             StringBuilder sb = new StringBuilder(HtmlResources.BaseSongHtml);
-            sb.Replace("<%StyleSheet%>", baseStylesheet);
+            sb.Replace("<%StyleSheet%>", styleSheet);
             //add song body
             sb.Replace("<%SongBody%>", songBuilder.ToString());
             //set the title
@@ -83,38 +83,7 @@ namespace OpenChords.Export
                 sb.Replace("<%Scripts%>", scripts);
         }
 
-        private void configureStylesheet(ref string baseStylesheet)
-        {
-            StringBuilder sb = new StringBuilder(baseStylesheet);
-            configureStylesheetFonts(sb, _settings.HeadingsFormat, "Heading");
-            configureStylesheetFonts(sb, _settings.ChordFormat, "Chord");
-            configureStylesheetFonts(sb, _settings.LyricsFormat, "Lyric");
-            configureStylesheetFonts(sb, _settings.NoteFormat, "Note");
-            configureStylesheetFonts(sb, _settings.TitleFormat, "Title");
-            
-            configureStylesheetBackgrounColors(sb);
-         
-            baseStylesheet = sb.ToString();
-        }
-
-        private void configureStylesheetBackgrounColors(StringBuilder sb)
-        {
-            sb.Replace("<%BackgroundColor%>", _settings.BackgroundColorHex);
-            sb.Replace("<%VerseBorderColor%>", _settings.VerseBorderColorHex);
-            sb.Replace("<%HeadingBackgroundColor%>", _settings.VerseHeadingBackgroundColorHex);
-            sb.Replace("<%VerseBackgroundColor1%>", _settings.VerseLyricsBackgroundColor1Hex);
-            sb.Replace("<%VerseBackgroundColor2%>", _settings.VerseLyricsBackgroundColor2Hex);
-        
-        }
-
-        private void configureStylesheetFonts(StringBuilder sb, Entities.SongElementFormat format, string elementName)
-        {
-            sb.Replace(string.Format("<%{0}FontSize%>", elementName), format.FontSize.ToString());
-            sb.Replace(string.Format("<%{0}Weight%>", elementName), format.FontStyle.ToString());
-            sb.Replace(string.Format("<%{0}Font%>", elementName), format.FontName);
-            sb.Replace(string.Format("<%{0}Color%>", elementName), format.FontColorHex);
-        }
-
+       
         private string trimLine(string line)
         {
             return line.TrimEnd().Replace(" ", "&nbsp;");
