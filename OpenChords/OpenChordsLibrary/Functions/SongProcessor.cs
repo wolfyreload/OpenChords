@@ -446,9 +446,9 @@ namespace OpenChords.Functions
             int lyricRowIndex = rowIndex;
             bool isChordRowAboveCurrentRow = lyricLines[chordRowIndex].StartsWith(".");
 
-            splitLine(lyricLines, lyricRowIndex, columnIndex);
+            splitLyricLine(lyricLines, lyricRowIndex, columnIndex);
             if (isChordRowAboveCurrentRow)
-                splitLine(lyricLines, chordRowIndex, columnIndex);
+                splitChordLine(lyricLines, chordRowIndex, columnIndex);
             
             //put all the lyrics together again
             StringBuilder buildLyrics = new StringBuilder();
@@ -486,27 +486,58 @@ namespace OpenChords.Functions
         /// <param name="lyricLines"></param>
         /// <param name="rowIndex"></param>
         /// <param name="columnIndex"></param>
-        private static void splitLine(List<string> lyricLines, int rowIndex, int columnIndex)
+        private static void splitLyricLine(List<string> lyricLines, int rowIndex, int columnIndex)
         {
-            lyricLines[rowIndex]
-                = lyricLines[rowIndex].PadRight(columnIndex+1);
+            //buffer the row encase its too narrow
+            lyricLines[rowIndex] = lyricLines[rowIndex].PadRight(columnIndex + 1);
 
             //create new lines
-            String newLyricLine;
-            bool isChordsRow = lyricLines[rowIndex].StartsWith(".");
-            if (isChordsRow)
-                newLyricLine = "." + lyricLines[rowIndex].Substring(columnIndex);
-            else
-                newLyricLine = " " + lyricLines[rowIndex].Substring(columnIndex);
+            String newLyricLine = " " + lyricLines[rowIndex].Substring(columnIndex);
 
             //delete the remaining text on old line
             lyricLines[rowIndex] = lyricLines[rowIndex].Remove(columnIndex);
 
             //insert the new lines
-            if (isChordsRow)
-                lyricLines.Insert(rowIndex + 2, newLyricLine);
-            else
-                lyricLines.Insert(rowIndex + 1, newLyricLine);
+            lyricLines.Insert(rowIndex + 1, newLyricLine);
+        }
+
+        /// <summary>
+        /// split chord line at rowIndex and split at column index
+        /// </summary>
+        /// <param name="lyricLines"></param>
+        /// <param name="chordRowIndex"></param>
+        /// <param name="columnIndex"></param>
+        private static void splitChordLine(List<string> lyricLines, int rowIndex, int columnIndex)
+        {
+            var currentLine = lyricLines[rowIndex];
+
+            //buffer the row encase its too narrow
+            currentLine = currentLine.PadRight(columnIndex + 1);
+
+            //move column index if slicing chord in half
+            columnIndex = moveIndexUntilNotSlicingChordInHalf(ref currentLine, columnIndex);
+
+            //create new lines
+            String newLyricLine = "." + currentLine.Substring(columnIndex);
+     
+            //delete the remaining text on old line
+            lyricLines[rowIndex] = currentLine.Remove(columnIndex);
+
+            //insert the new lines
+            lyricLines.Insert(rowIndex + 2, newLyricLine);
+        }
+
+        private static int moveIndexUntilNotSlicingChordInHalf(ref string currentLine, int columnIndex)
+        {
+            int bufferSize = 0;
+            while (columnIndex < currentLine.Length && currentLine[columnIndex] != ' ')
+            {
+                columnIndex++;
+                bufferSize++;
+            }
+            //buffer the line with the number of extra characters moved so we dont move the chord that follows
+            currentLine = currentLine.Insert(columnIndex, "".PadRight(bufferSize));
+            return columnIndex;
         }
 
         private static int getRowAndColumnIndexOfSplitPosition(int splitPosition, List<string> lyricLines, out int rowIndex, out int columnIndex)
