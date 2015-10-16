@@ -2,7 +2,8 @@ OpenChords v2.0.2
 ============================================================================
 Fixed: double pipes || which are used in OpenSong to split a song piece into multiple slides now get ignored
 Fixed: pipes (character used to split song pieces) no longer slices chords in half
-Improvement: Can now switch between vertical and horizontal song presentation   
+Improvement: Can now switch between vertical and horizontal song presentation 
+Fixed: Song key and capo not updating in editor if its changed in presentation mode  
 
 OpenChords v2.0.1
 ============================================================================

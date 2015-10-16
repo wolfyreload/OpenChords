@@ -336,7 +336,16 @@ namespace OpenChords.CrossPlatform.SongEditor
                 Helpers.PopupMessages.ShowErrorMessage(this, "No song selected");
                 return;
             }
-            new frmPresent(CurrentSong, DisplayAndPrintSettings.loadSettings(DisplayAndPrintSettingsType.DisplaySettings)).Show();
+            var frmPresent = new frmPresent(CurrentSong, DisplayAndPrintSettings.loadSettings(DisplayAndPrintSettingsType.DisplaySettings));
+            frmPresent.Closing += FrmPresent_Closing;
+            frmPresent.Show();
+        }
+
+        private void FrmPresent_Closing(object sender, System.ComponentModel.CancelEventArgs e)
+        {
+            ((frmPresent)sender).Closing -= FrmPresent_Closing;
+            updateGuiFromSongObject();
+            SongChanged = false;
         }
 
         internal void TransposeKeyUp()
