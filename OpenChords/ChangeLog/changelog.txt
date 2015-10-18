@@ -1,3 +1,7 @@
+OpenChords v2.0.3
+============================================================================
+Fixed: Capo field doesn't show in presentation if key isn't filled in
+
 OpenChords v2.0.2
 ============================================================================
 Fixed: double pipes || which are used in OpenSong to split a song piece into multiple slides now get ignored

@@ -215,23 +215,37 @@ namespace OpenChords.Entities
             StringBuilder songTitleLine = new StringBuilder(this.title.Trim() + " ");
 
             //fill in key and capo
-            if (!string.IsNullOrEmpty(this.key))
-            {
-                songTitleLine.Append("(Key - " + this.key.Trim());
-
-                if (this.Capo != 0)
-                {
-                    songTitleLine.Append(" Capo - " + this.Capo);
-                }
-
-                songTitleLine.Append(")");
-            }
+            fillInKeyAndCapoText(songTitleLine);
             if (!string.IsNullOrEmpty(this.time_sig))
                 songTitleLine.Append(" " + this.time_sig);
             if (!string.IsNullOrEmpty(this.tempo))
                 songTitleLine.Append(" " + this.tempo);
 
             return songTitleLine.ToString();
+        }
+
+        private void fillInKeyAndCapoText(StringBuilder songTitleLine)
+        {
+            //if nothing to do
+            if (string.IsNullOrEmpty(this.key) && this.Capo == 0)
+                return;
+
+            StringBuilder sb = new StringBuilder();
+            sb.Append("(");
+            //if key is not blank filled it in
+            if (!string.IsNullOrEmpty(this.key))
+            {
+                sb.Append("Key - " + this.key.Trim());
+            }
+            //if capo is filled in
+            if (this.Capo != 0)
+            {
+                if (sb.Length > 1) //that is, if key has been filled in add extra space
+                    sb.Append(" ");
+                sb.Append("Capo - " + this.Capo);
+            }
+            sb.Append(")");
+            songTitleLine.Append(sb.ToString());
         }
 
         /// <summary>
