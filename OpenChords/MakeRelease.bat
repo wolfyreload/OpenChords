@@ -26,6 +26,9 @@ xcopy /Y .\settings.xml .\Staging\LinuxApp\OpenChords\App
 7za.exe a -t7z .\Release\OpenChords.Windows.Portable.7z .\Staging\WindowsApp\* -mx9 -ms=on -m0=lzma
 7za.exe a -t7z .\Release\OpenChords.Linux.Portable.7z .\Staging\LinuxApp\* -mx9 -ms=on -m0=lzma
 
+::Copy readme file for sourceforge
+copy /Y .\ChangeLog\changelog.txt .\Release\README.txt 
+
 ::Make Installer
 "C:\Program Files (x86)\Inno Setup 5\ISCC.exe" OpenChords.Setup\OpenChords.Setup.iss 
 move OpenChords.Setup\Output\* .\Release\
