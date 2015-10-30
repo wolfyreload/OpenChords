@@ -403,7 +403,7 @@ namespace OpenChords.Functions
 
         public static bool CheckIfChordsLine(string line)
         {
-            var regexPattern = @"\b([CDEFGAB])(#|##|b|bb)?(m|maj|maj7|min|m7|m9|2|7|9|11|13|sus4|sus2|5|aug)?/?\b";
+            var regexPattern = @"\b([CDEFGAB])(#|##|b|bb)?(m|maj|maj7|maj9|maj11|maj13|min|m7|m9|m11|m13|m6|madd9|m6add9|mmaj7|mmaj9|m7b5|7sus4|add9|6add9|dim|dim7|2|7|9|11|13|sus4|sus2|5|aug)?/?\b";
             
             var appearsToBeChords = Regex.IsMatch(string.Format(" {0} ", line), regexPattern);
             var appearsToBeWords = Regex.IsMatch(string.Format(" {0} ", line), @"\s+[a-zA-z]{5,20}\s+");
