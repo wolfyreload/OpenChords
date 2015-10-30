@@ -60,16 +60,18 @@ namespace OpenChords.CrossPlatform.Preferences
 
         private void CmdApplicationDataFolder_Click(object sender, EventArgs e)
         {
-            txtApplicationDataFolder.Text = getFolderPath() ?? "";
+            var path = getFolderPath();
+            if (path != null)
+                txtApplicationDataFolder.Text = path;
         }
 
 
         private void CmdOpenSongExecutablePath_Click(object sender, EventArgs e)
         {
             FileDialogFilter filter = new FileDialogFilter("OpenSong Executable", "OpenSong.exe", "OpenSong");
-            List<FileDialogFilter> filters = new List<FileDialogFilter>() { filter };
-            using (var openFileDialog = new OpenFileDialog() { Filters=filters })
+            using (var openFileDialog = new OpenFileDialog())
             {
+                openFileDialog.Filters.Add(filter);
                 if (openFileDialog.ShowDialog(this) == DialogResult.Ok)
                     txtOpenSongExecutablePath.Text = openFileDialog.FileName;
             }
@@ -77,7 +79,9 @@ namespace OpenChords.CrossPlatform.Preferences
 
         private void CmdOpenSongSongsAndSetsPath_Click(object sender, EventArgs e)
         {
-            txtOpenSongDataPath.Text = getFolderPath() ?? "";
+            var path = getFolderPath();
+            if (path != null)
+                txtOpenSongDataPath.Text = path;
         }
 
         private string getFolderPath()

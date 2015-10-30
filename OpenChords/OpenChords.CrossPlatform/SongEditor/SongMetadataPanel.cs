@@ -41,7 +41,7 @@ namespace OpenChords.CrossPlatform.SongEditor
             this.Content = new Splitter()
             {
                 Position = 150,
-                Orientation = SplitterOrientation.Vertical,
+                Orientation = Orientation.Vertical,
                 //metadata
                 Panel1 = new GroupBox()
                 {
@@ -86,7 +86,7 @@ namespace OpenChords.CrossPlatform.SongEditor
                     Content = splitterSongNotes = new Splitter()
                     {
                         Position = Helpers.FormHelper.getScreenPercentageInPixels(60, this),
-                        Orientation = SplitterOrientation.Horizontal,
+                        Orientation = Orientation.Horizontal,
                         //lyrics editor
                         Panel1 = new GroupBox() { Text = "Chords/Lyrics Editor", Content = txtLyrics },
                         //notes editor

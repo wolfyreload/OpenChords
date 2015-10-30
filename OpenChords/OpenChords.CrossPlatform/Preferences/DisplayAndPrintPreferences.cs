@@ -25,7 +25,7 @@ namespace OpenChords.CrossPlatform.Preferences
         private Button cmdRevertSettings = new Button() { Text = "Revert", ToolTip = "Revert settings to previous saved state" };
         private Button cmdResetSettings = new Button() { Text = "Reset", ToolTip = "Reset settings to default" };
 
-        List<FileDialogFilter> FILTERS = new List<FileDialogFilter>() {new FileDialogFilter("Openchords settings file", new string[] { ".oc" })};
+        FileDialogFilter FILTER = new FileDialogFilter("Openchords settings file", new string[] { ".oc" } );
         
 
         public DisplayAndPrintPreferences(Entities.DisplayAndPrintSettings displayAndPrintSettings, Song currentSong)
@@ -101,22 +101,28 @@ namespace OpenChords.CrossPlatform.Preferences
 
         void cmdBackupSettings_Click(object sender, EventArgs e)
         {
-            var fileDialog = new SaveFileDialog() { Filters = FILTERS, FileName = displayAndPrintSettings.settingsType.ToString() };
-            if (fileDialog.ShowDialog(this) == DialogResult.Ok)
+            using (var fileDialog = new OpenFileDialog() { FileName = displayAndPrintSettings.settingsType.ToString() })
             {
-                displayAndPrintSettings.saveSettings(fileDialog.FileName);
+                fileDialog.Filters.Add(FILTER);
+                if (fileDialog.ShowDialog(this) == DialogResult.Ok)
+                {
+                    displayAndPrintSettings.saveSettings(fileDialog.FileName);
+                }
             }
 
         }
 
         void cmdRestoreSettings_Click(object sender, EventArgs e)
         {
-            var fileDialog = new OpenFileDialog() { Filters = FILTERS, FileName = displayAndPrintSettings.settingsType.ToString() };
-            if (fileDialog.ShowDialog(this) == DialogResult.Ok)
+            using (var fileDialog = new OpenFileDialog() { FileName = displayAndPrintSettings.settingsType.ToString() })
             {
-                displayAndPrintSettings = DisplayAndPrintSettings.loadSettings(displayAndPrintSettings.settingsType, fileDialog.FileName);
-                updateGuiFromSettingsObject(displayAndPrintSettings);
-                updatePreview();
+                fileDialog.Filters.Add(FILTER);
+                if (fileDialog.ShowDialog(this) == DialogResult.Ok)
+                {
+                    displayAndPrintSettings = DisplayAndPrintSettings.loadSettings(displayAndPrintSettings.settingsType, fileDialog.FileName);
+                    updateGuiFromSettingsObject(displayAndPrintSettings);
+                    updatePreview();
+                }
             }
         }
 

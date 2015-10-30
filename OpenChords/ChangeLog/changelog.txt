@@ -1,3 +1,7 @@
+OpenChords v2.0.4
+============================================================================
+Improvement: Upgrade to Eto.Forms 2.1.0-build0350
+
 OpenChords v2.0.3
 ============================================================================
 Fixed: Capo field doesn't show in presentation if key isn't filled in

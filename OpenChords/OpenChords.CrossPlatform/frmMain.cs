@@ -62,12 +62,12 @@ namespace OpenChords.CrossPlatform
                 // Main window
                 Content = new Splitter()
                     {
-                        Orientation = SplitterOrientation.Horizontal,
+                        Orientation = Orientation.Horizontal,
                         Position = Helpers.FormHelper.getScreenPercentageInPixels(15, this),
                         //Sets and song list
                         Panel1 = new Splitter()
                         {
-                            Orientation = SplitterOrientation.Vertical,
+                            Orientation = Orientation.Vertical,
                             //sets
                             Panel1 = new GroupBox() { Text = "Sets", Content = ucSetListPanel },
                             //song list
