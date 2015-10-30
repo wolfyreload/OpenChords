@@ -313,7 +313,7 @@ namespace OpenChords.CrossPlatform
             if (newSongCreated)
             {
                 ucSongListPanel.refreshPanel();
-                ucSetListPanel.refreshPanel();
+                ucSetListPanel.refreshSongList();
             }
         }
 

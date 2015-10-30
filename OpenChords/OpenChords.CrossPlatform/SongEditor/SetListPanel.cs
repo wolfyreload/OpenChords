@@ -112,7 +112,7 @@ namespace OpenChords.CrossPlatform.SongEditor
             SetChanged = false;
         }
 
-        private void refreshSongList()
+        public void refreshSongList()
         {
             var songs = CurrentSet.songList;
             ListItemCollection items = new ListItemCollection();

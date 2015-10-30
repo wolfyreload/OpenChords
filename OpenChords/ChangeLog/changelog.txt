@@ -1,6 +1,7 @@
 OpenChords v2.0.3
 ============================================================================
 Fixed: Capo field doesn't show in presentation if key isn't filled in
+Fixed: Selected set is reset when adding a new song
 
 OpenChords v2.0.2
 ============================================================================
