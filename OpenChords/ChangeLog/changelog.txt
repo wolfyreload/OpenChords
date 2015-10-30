@@ -3,6 +3,7 @@ OpenChords v2.0.3
 Fixed: Capo field doesn't show in presentation if key isn't filled in
 Fixed: Selected set is reset when adding a new song
 Improvement: More chords detected as chords
+Improvement: Add OpenSong integration instructions to manual
 
 OpenChords v2.0.2
 ============================================================================

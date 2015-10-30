@@ -10,8 +10,7 @@ xcopy  /Y /E .\OpenChords.CrossPlatform.Wpf\bin\Release\*    .\Staging\WindowsAp
 xcopy  /Y /E .\OpenChords.CrossPlatform.Gtk2\bin\Release\*   .\Staging\LinuxApp\OpenChords\App\ 
 
 :: copy the manual
-xcopy  /Y /E .\Manual\Help.html .\Staging\Manual\
-xcopy  /Y /E .\Manual\HelpImages\* .\Staging\Manual\HelpImages
+xcopy  /Y .\Manual\Help.html .\Staging\Manual\
 
 ::Put manual into each folder
 xcopy /Y /E .\Staging\Manual\* .\Staging\WindowsApp\OpenChords\App\

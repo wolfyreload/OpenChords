@@ -1,6 +1,6 @@
 % OpenChords Help Documentation
 % Author: Michael van Antwerpen
-% Date: 2015-08-24
+% Date: 2015-10-30
 
 Overview
 ========
@@ -26,7 +26,7 @@ email me on <open.chords.app@gmail.com>
 Editor Screen
 =============
 
-![](HelpImages/EditorScreen.png)
+![](media/EditorScreen.png)
 
 Menu
 ---------------
@@ -165,7 +165,7 @@ General Settings
 
 >	**Note**: you can use both relative and absolute paths.
 
-![](HelpImages/FileAndFolderSettings.png)
+![](media/FileAndFolderSettings.png)
 
 **Portable Mode** - if this is checked, OpenChords will store its settings file in the same folder where OpenChords is running from "settings.xml". Portable mode is useful if you want to run OpenChords from a flash drive
 
@@ -191,7 +191,7 @@ Display/Print/Tablet Settings
 -----------------------------
 These settings are used to tweak how your song will display/print
 
-![](HelpImages/DisplaySettings.png)
+![](media/DisplaySettings.png)
 
 **Show chords** - whether display chords when you presenting the songs
 
@@ -206,7 +206,7 @@ These settings are used to tweak how your song will display/print
 Song/Set Presentation
 =================
 
-![](HelpImages/SongDisplay.png)
+![](media/SongDisplay.png)
 
 >	**Note:** Song elements are read from left to right to use screen size more efficiently
 
@@ -268,11 +268,14 @@ Presentation shortcuts
   
 Tips and tricks
 ================
-### The Auto Format Song Menu Item
+
+The Auto Format Song Menu Item
+------------------------------
 
 You can use Ctrl+R to quickly reach this feature. It attempts fix all the formatting in your song and adjustes the notes in the notes panel following the order of the song that you chose in the order text field.
 
-### Using OpenChords with multiple people
+Using OpenChords with multiple people
+-------------------------------------
 
 If you find yourself in the position that your entire music team wants
 to use OpenChords, then you will want to use the embedded Http Server. Then you only have one person running OpenChords and everything else just uses a web browser, pointing to the host machine.
@@ -285,3 +288,45 @@ http://{your ip address}:{selected port}/set will render the currently selected 
 http://{your ip address}:{selected port}/song/print will render the currently selected song using your selected print settings
 http://{your ip address}:{selected port}/song/tablet will render the currently selected song on another device using your selected tablet settings
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+Integration with OpenSong
+-------------------------
+
+OpenChords has been built to work well with OpenSong, which is an excellent church projection software. 
+
+These are the steps you need to follow to be able to export songs and sets into OpenSong:
+
+1. Open preferences via File >> Preferences
+
+2. Set the location of your **OpenSong.exe** executable and the path to your **OpenSong data folder**
+
+	> OpenSong is typically located in c:/program files (x86)/OpenSong/OpenSong.exe
+	
+	> OpenSong Data Folder is typically located in c:/users/%Your User Name%/OpenSong
+
+	![](media/OpenSong-Integration.png)
+	
+3. Restart OpenChords
+
+4. Select Export >> Export To OpenSong >> Export Current Set and your set will be exported to OpenSong and then OpenSong will be opened
+
+5. Find your set in OpenSong and present your set. 
+
+6. If you want to have images for each of your songs, you will need to make a **.jpg** (not a jpeg) file with the exact same name as the song you exporting (note: filenames are case sensitive). For clarity, please see the filesystem diagram below
+
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
++-- Backgrounds
+|   +--OpenChords
+|      +--Be Thou My Vision.jpg
+|      +--The Old Rugged Cross.jpg
++-- Sets
+|	+--Leader 1
++-- Songs
+|   +--OpenChords
+|      +--Be Thou My Vision
+|      +--The Old Rugged Cross
+|      +--And Can It Be
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+>	In this example we have Exported Set "Leader 1" which has 3 songs "Be Thou My Vision", "The Old Rugged Cross" and "And Can It Be".  
+>	The song "And Can It Be" will NOT have pre set background image because there is no corresponding "And Can It Be.jpg" file.
