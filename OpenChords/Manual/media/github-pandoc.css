@@ -80,12 +80,12 @@ body {
 .figure
 {
     margin: auto 0;
-    text-align: center;
+    text-align: left;
 }
 
 .caption
 {
-	text-align: center;
+	text-align: left;
     margin-bottom: 17px;
     margin-top: 0px;
 }

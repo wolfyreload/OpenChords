@@ -4,6 +4,7 @@ Improvement: Upgrade to Eto.Forms 2.1.0-build0350
 Improvement: Added help text for when the http server is enabled to help users use this feature
 Fixed: spacing issues in preference screens
 Improvement: Disallow invalid port numbers in preferences
+Improvement: Make "Using OpenChords with Tablets and Cellphones" documentation more user friendly
 
 OpenChords v2.0.3
 ============================================================================

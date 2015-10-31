@@ -274,14 +274,35 @@ The Auto Format Song Menu Item
 
 You can use Ctrl+R to quickly reach this feature. It attempts fix all the formatting in your song and adjustes the notes in the notes panel following the order of the song that you chose in the order text field.
 
-Using OpenChords with multiple people
--------------------------------------
+Using OpenChords with Tablets and Cellphones
+--------------------------------------------
 
-If you find yourself in the position that your entire music team wants
-to use OpenChords, then you will want to use the embedded Http Server. Then you only have one person running OpenChords and everything else just uses a web browser, pointing to the host machine.
+OpenChords has a small embedded http server to accomplish this task.
 
-e.g. John is running OpenChords and John's laptop's IP address is 10.0.0.16 and he selected port 8083 in the settings screen. In this case Sally will open her browser go to http://10.0.0.16:8083/ and she will see the current song that is on John's machine. Note: that John and Sally must be on the same network. 
+These are the steps you need to follow to be able to Use the embedded http server:
 
+1. Open preferences via File >> Preferences
+
+2. Enable the **Http Server** and set the **Http Server Port**
+
+	> Acceptable ports are in the range of 1024-65535
+	
+	![](media/Http-Server.png)
+
+3. Restart OpenChords
+
+4. You might get a firewall warning. **Allow Access** for private (or domain/public if you wish) networks
+	
+	![](media/Firewall-Warning.png)
+	
+5. Connect to the OpenChords from another device using the address in the **http examples** text box
+
+	> in this sample you would connect to **http://192.168.0.4:8083/song**
+	
+	> Note: the device you connecting to OpenChords needs to be on the same network
+
+6. You can select the display settings to use and display the current set if you wish. See below for examples
+	
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 http://{your ip address}:{selected port}/song will render the currently selected song on another device
 http://{your ip address}:{selected port}/set will render the currently selected set on another device
