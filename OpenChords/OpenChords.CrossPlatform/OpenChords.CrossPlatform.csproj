@@ -76,6 +76,10 @@
       <Link>changelog.txt</Link>
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
+    <Content Include="..\Manual\help.html">
+      <Link>help.html</Link>
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
     <Content Include="InitialData\Sets\Leader1">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
@@ -266,4 +270,8 @@
     </PropertyGroup>
     <Error Condition="!Exists('$(SolutionDir)\.nuget\NuGet.targets')" Text="$([System.String]::Format('$(ErrorText)', '$(SolutionDir)\.nuget\NuGet.targets'))" />
   </Target>
+  <PropertyGroup>
+    <PreBuildEvent>$(SolutionDir)Manual\MakeHelpDocument.bat
+</PreBuildEvent>
+  </PropertyGroup>
 </Project>
