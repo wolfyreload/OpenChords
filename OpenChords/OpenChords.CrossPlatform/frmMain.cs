@@ -63,7 +63,7 @@ namespace OpenChords.CrossPlatform
                 Content = new Splitter()
                     {
                         Orientation = Orientation.Horizontal,
-                        Position = Helpers.FormHelper.getScreenPercentageInPixels(15, this),
+                        Position = Helpers.FormHelper.getScreenPercentageInPixels(25, this),
                         //Sets and song list
                         Panel1 = new Splitter()
                         {
@@ -97,8 +97,6 @@ namespace OpenChords.CrossPlatform
             menuItemSaveSong.Executed += (s, e) => saveCurrentSong();
             var menuItemDeleteSong = new Command { MenuText = "Delete Song", Image = Graphics.ImageDelete };
             menuItemDeleteSong.Executed += (s, e) => { deleteCurrentlySelectedSong(); };
-            var menuItemAdvancedSearch = new Command { MenuText = "Advanced Search", Shortcut = Application.Instance.CommonModifier | Keys.F, Image = Graphics.ImageSearch };
-            menuItemAdvancedSearch.Executed += menuItemAdvancedSearch_Executed;
             var menuItemSongIncreaseKey = new Command { MenuText = "Transpose Up", Shortcut = Application.Instance.CommonModifier | Keys.D0, Image = Graphics.ImagMoveUp };
             menuItemSongIncreaseKey.Executed += (s, e) => ucSongMetaDataPanel.TransposeKeyUp();
             var menuItemSongDecreaseKey = new Command { MenuText = "Transpose Down", Shortcut = Application.Instance.CommonModifier | Keys.D9, Image = Graphics.ImageMoveDown };
@@ -181,7 +179,7 @@ namespace OpenChords.CrossPlatform
                     new ButtonMenuItem()
                     {
                         Text = "&Song", 
-                        Items = { menuItemSongFileOperations, menuItemAdvancedSearch, menuItemKey, menuItemCapo, menuItemSongFixFormating, menuItemSongRefeshList }
+                        Items = { menuItemSongFileOperations, menuItemKey, menuItemCapo, menuItemSongFixFormating, menuItemSongRefeshList }
                     },
                     new ButtonMenuItem()
                     {
@@ -233,13 +231,6 @@ namespace OpenChords.CrossPlatform
                 tempSong = Song.loadSong(Song.listOfAllSongs()[0]);
 
             new frmPreferences(tempSong).Show();
-        }
-
-        void menuItemAdvancedSearch_Executed(object sender, EventArgs e)
-        {
-            var advancedSearchForm = new frmAdvancedSearch();
-            advancedSearchForm.AddSongToSet += (s, e2) => ucSetListPanel.AddSongToSet(e2);
-            advancedSearchForm.Show(); 
         }
 
         private void exportToOpenSong(object sender, EventArgs e)
