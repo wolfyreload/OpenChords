@@ -243,21 +243,16 @@ namespace OpenChords.Entities
             bool BoldNotes;
             bool BoldOrder1;
             bool BoldOrder2;
-            Color NextPageColor;
-            bool BoldNextPage;
-            float nextPageSize;
-
+       
             if (settingsType == DisplayAndPrintSettingsType.DisplaySettings)
             {
                 SettingsFilePath = Settings.ExtAppsAndDir.DisplaySettingsFileName;
                 var pageHeight = System.Windows.Forms.SystemInformation.PrimaryMonitorSize.Height;
-                var pageWidth = System.Windows.Forms.SystemInformation.PrimaryMonitorSize.Width;
-
+          
                 titleSize = adjustForLowerResolutions1(25, pageHeight);
                 contentSize = adjustForLowerResolutions1(15, pageHeight);
                 notesSize = adjustForLowerResolutions1(14, pageHeight);
                 orderSize = adjustForLowerResolutions1(13, pageHeight);
-                nextPageSize = adjustForLowerResolutions1(15, pageHeight);
             
                 ShowNotes = true;
                 ShowChords = true;
@@ -271,7 +266,6 @@ namespace OpenChords.Entities
                 OrderColor1 = ColorTranslator.FromHtml("#FF8040");
                 OrderColor2 = ColorTranslator.FromHtml("#FFFF80");
                 NoteColor = ColorTranslator.FromHtml("#80FF80");
-                NextPageColor = ColorTranslator.FromHtml("White");
                 VerseHeadingBackgroundColor = ColorTranslator.FromHtml("#490707");
                 VerseLyricsBackground1Color = ColorTranslator.FromHtml("#000000");
                 VerseLyricsBackground2Color = ColorTranslator.FromHtml("#2E2424");
@@ -284,20 +278,17 @@ namespace OpenChords.Entities
                 BoldTitle = true;
                 BoldOrder1 = true;
                 BoldOrder2 = true;
-                BoldNextPage = true;
-
+       
             }
             else if (settingsType == DisplayAndPrintSettingsType.TabletSettings)
             {
                 SettingsFilePath = Settings.ExtAppsAndDir.TabletSettingsFilename;
                 var pageHeight = 1024;
-                var pageWidth = 768;
-
+          
                 titleSize = adjustForLowerResolutions1(25, pageHeight);
                 contentSize = adjustForLowerResolutions1(20, pageHeight);
                 notesSize = adjustForLowerResolutions1(18, pageHeight);
                 orderSize = adjustForLowerResolutions1(18, pageHeight);
-                nextPageSize = adjustForLowerResolutions1(20, pageHeight);
                                 
                 ShowNotes = true;
                 ShowChords = true;
@@ -311,7 +302,6 @@ namespace OpenChords.Entities
                 OrderColor1 = ColorTranslator.FromHtml("#FF8040");
                 OrderColor2 = ColorTranslator.FromHtml("#FFFF80");
                 NoteColor = ColorTranslator.FromHtml("#80FF80");
-                NextPageColor = ColorTranslator.FromHtml("White");
                 VerseHeadingBackgroundColor = ColorTranslator.FromHtml("#490707");
                 VerseLyricsBackground1Color = ColorTranslator.FromHtml("#000000");
                 VerseLyricsBackground2Color = ColorTranslator.FromHtml("#2E2424");
@@ -324,7 +314,6 @@ namespace OpenChords.Entities
                 BoldTitle = true;
                 BoldOrder1 = true;
                 BoldOrder2 = true;
-                BoldNextPage = true;
             }
             else //if (settingsType == DisplayAndPrintSettingsType.PrintSettings)
             {
@@ -332,8 +321,7 @@ namespace OpenChords.Entities
              
                 titleSize = 12;
                 contentSize = 15;
-                nextPageSize = 15;
-
+       
                 notesSize = 13;
                 orderSize = 12;
 
@@ -349,7 +337,6 @@ namespace OpenChords.Entities
                 TitleColor = Color.Black;
                 OrderColor1 = Color.Black;
                 OrderColor2 = Color.Gray;
-                NextPageColor = ColorTranslator.FromHtml("White");
                 VerseHeadingBackgroundColor = ColorTranslator.FromHtml("White");
                 VerseLyricsBackground1Color = ColorTranslator.FromHtml("White");
                 VerseLyricsBackground2Color = ColorTranslator.FromHtml("White");
@@ -362,8 +349,7 @@ namespace OpenChords.Entities
                 BoldTitle = true;
                 BoldOrder1 = true;
                 BoldOrder2 = true;
-                BoldNextPage = true;
-
+       
 
             }
             
