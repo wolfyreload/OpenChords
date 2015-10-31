@@ -60,9 +60,35 @@ namespace OpenChords.CrossPlatform.Preferences
             chkHttpServerEnabled.CheckedChanged += ChkHttpServerEnabled_CheckedChanged;
             txtHttpServerPort.TextChanged += textChanged;
             txtHttpServerPort.TextChanged += TxtHttpServerPort_TextChanged;
+            txtHttpServerPort.LostFocus += TxtHttpServerPort_LostFocus;
             cmdApplicationDataFolder.Click += CmdApplicationDataFolder_Click;
             cmdOpenSongExecutablePath.Click += CmdOpenSongExecutablePath_Click;
             cmdOpenSongSongsAndSetsPath.Click += CmdOpenSongSongsAndSetsPath_Click;
+        }
+
+        private void TxtHttpServerPort_LostFocus(object sender, EventArgs e)
+        {
+            bool portSetCorrectly = false;
+            int port = 0;
+            //check if port is valid
+            if (portSetCorrectly = int.TryParse(txtHttpServerPort.Text, out port))
+            {
+                if (port >= 1024 && port <= 65535)
+                {
+                    portSetCorrectly = true;
+                }
+                else
+                {
+                    Helpers.PopupMessages.ShowErrorMessage("Server port must be between 1024 and 65535");
+                    portSetCorrectly = false;
+                }
+            }
+            //reset the port
+            if (portSetCorrectly)
+                txtHttpServerPort.Text = port.ToString();
+            else
+                txtHttpServerPort.Text = "8083";
+
         }
 
         private void TxtHttpServerPort_TextChanged(object sender, EventArgs e)
