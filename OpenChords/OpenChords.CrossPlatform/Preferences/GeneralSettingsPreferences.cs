@@ -29,6 +29,7 @@ namespace OpenChords.CrossPlatform.Preferences
 
             Content = new TableLayout()
             {
+                Style = "padded-table",
                 Rows =
                 {
                     new TableRow(new Label() { Text = "Portable Mode" }, chkPortableMode),

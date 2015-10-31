@@ -50,6 +50,7 @@ namespace OpenChords.CrossPlatform.Preferences
                             Text = "Visibility",
                             Content = new TableLayout()
                             {
+                                Style = "padded-table",
                                 Rows = 
                                 {
                                     new TableRow() { Cells = { new Label() { Text = "Show Chords" }, chkShowChords }},
@@ -70,6 +71,7 @@ namespace OpenChords.CrossPlatform.Preferences
                             Text = "Backup/Restore Settings",
                             Content = new TableLayout() 
                             {
+                                Style = "padded-table",
                                 Rows = 
                                 { 
                                     new TableRow() { Cells = { cmdBackupSettings, cmdRestoreSettings, cmdRevertSettings, cmdResetSettings, null }}

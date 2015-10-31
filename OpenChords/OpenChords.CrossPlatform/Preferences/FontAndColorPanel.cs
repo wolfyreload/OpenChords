@@ -41,6 +41,7 @@ namespace OpenChords.CrossPlatform.Preferences
 
             Content = new TableLayout()
             {
+                Style = "padded-table",
                 Rows = 
                 {
                     new TableRow() 
