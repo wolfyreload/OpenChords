@@ -1,6 +1,7 @@
 OpenChords v2.0.4
 ============================================================================
 Improvement: Upgrade to Eto.Forms 2.1.0-build0350
+Improvement: Added help text for when the http server is enabled to help users use this feature
 
 OpenChords v2.0.3
 ============================================================================
