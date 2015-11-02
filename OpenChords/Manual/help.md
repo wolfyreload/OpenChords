@@ -5,7 +5,7 @@
 Overview
 ========
 
-OpenChords is a song chord chart management and presentation tool for musicians. Allowing one to easily present songs with chords on a computer screen, It is opensource, easy to use, and has a clutter-free interface.
+OpenChords is a song chords management and presentation tool for musicians. Allowing one to easily present songs with chords on a computer screen. It is opensource, easy to use, and has a clutter-free interface.
 
 Background
 ==========
@@ -14,19 +14,21 @@ OpenChords was built to solve two primary needs:
 
 * Easily transpose the key of a song
 
-* Filing music is tedious and I wanted a fully paperless system for musicians
+* I wanted a fully paperless system because filing music is tedious 
 
-The closest application I could find was a fantastic piece of presentation software by the name of OpenSong. OpenSong allowed me to easily transpose and make printed sheets of songs. However this didn't solve my filing issue. I was then inspired to make paperless song system for musicians. Hence, OpenChords was born.
+The closest application I could find is the fantastic presentation software by the name of OpenSong. OpenSong allowed me to easily transpose and make printed sheets of songs. However this didn't solve my filing issue. I was then inspired to make paperless song system for musicians. Hence, OpenChords was born.
 
-Fast forward a few years... My whole band uses OpenChords when we play in church. I use OpenChords whenever I record. I've been developing OpenChords in my free time for for the past six years and it finally works on Linux :). I hope you enjoy using it as much as I enjoyed making it.
+Fast forward a few years... My whole band uses OpenChords when we play in church. I use OpenChords whenever I record. I've been developing OpenChords in my free time for for the past six years. It finally works on Linux :). I hope you enjoy using it as much as I enjoyed making it.
 
 If you wish to contact me for suggestions or to report bugs, you can
-email me on <open.chords.app@gmail.com>
+email me at <open.chords.app@gmail.com>
 
 Editor Screen
 =============
 
 ![](media/EditorScreen.png)
+
+This is the opening screen for OpenChords and this is where you will be adding and editing songs and adding these songs to sets.
 
 Menu
 ---------------
@@ -57,16 +59,15 @@ If you right click on the song you can use the "Add to set" context menu to add 
 
 >	**Tip1**: If you want to search for a song, just start typing in the search box. You can use the song name, some lyrics, the name of the author or the song reference. The list of songs will be filtered.
 
->	**Tip2**: If you want to get to the song in the file system just click
-Song >> File Operations >> Explore options and it will open Windows Explorer with that song
-selected.
+>	**Tip2**: If you want to see the song in the file system just click	Song >> File Operations >> Explore options and it will open Windows Explorer with that song	selected.
 
 ###Context Menu
 
-Context Menu Item Description
------------------ -----------
-Add To Set        Adds the currently selected song to the current set
-Delete Song       Deletes the current song (note: this is not reverseable)
+Context Menu Item   Description
+-----------------   -----------
+Add To Set          Adds the currently selected song to the current set
+Delete Song         Deletes the current song (note: this is not reverseable)
+Select random song  Picks a random song in the list 
 
 ###Shortcuts
 
@@ -76,7 +77,8 @@ Ctrl+Enter Add current song to current set
 
 Sets
 --------
-A set is simply a name for a list of songs. 
+
+A set is simply a name for a list of songs. I usually have a set per worship leader  
 
 ###Context Menu
 
@@ -115,11 +117,10 @@ P = Pre-Chorus
 B = Bridge
 V = Verse
 E = Ending
-
-*You can use any other letters and number combinations but only the
-*ones above will get converted to more user friendly names when you
-*choose to present the song(s)
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+> Note: You can use any other letters and number combinations but only the
+> ones above will get converted to more user friendly names when you
+> choose to present the song(s)
 
 Author: Just the author of the song
 
@@ -199,6 +200,8 @@ These settings are used to tweak how your song will display/print
 
 **Show notes** - whether to display the song notes when you presenting the song.
 
+**Song Orientation** - Either horisontal or vertical
+
 **Fonts and Colors** - choose the Font, Size, Color and Font Style for almost all the elements that are displayed or printed
 
 **Backup/Restore Settings** - here you can backup your current settings to a file, restore backed up settings or reset your display settings back to default
@@ -208,7 +211,7 @@ Song/Set Presentation
 
 ![](media/SongDisplay.png)
 
->	**Note:** Song elements are read from left to right to use screen size more efficiently
+>	**Note:** Song elements are read from left to right if you using **horisontal screen orientation** otherwize the song elements will be from top to bottom
 
 >	**Tip1**: You can use the "spacebar" key to move to the next page
 
@@ -250,6 +253,8 @@ Presentation shortcuts
 ----------------------
   Shortcut        Description
   ---------       -----------------------------------------------
+  Up			  Go to previous page
+  Down/Space      Go to next page
   Ctrl+Left       Go to previous song                              
   Ctrl+Right      Go to next song                                  
   Alt+1..9        Goes to the song 1-9          
@@ -272,14 +277,22 @@ Tips and tricks
 The Auto Format Song Menu Item
 ------------------------------
 
-You can use Ctrl+R to quickly reach this feature. It attempts fix all the formatting in your song and adjustes the notes in the notes panel following the order of the song that you chose in the order text field.
+This feature attempts to transform the song that you entered in a presentable format. That is, it guesses what lines are chord lines and what lines are lyric lines etc. It also adjusts the notes in the notes panel to following the order of the song that you chose in the order text field.
+
+You want to use this feature when:
+
+1. Changing the song presentation order so the song notes get adjusted
+
+2. Adding a new song so you dont have to manually identitify which rows are chords
+
+> **Note:** You can use Ctrl+R to quickly reach this feature.
 
 Using OpenChords with Tablets and Cellphones
 --------------------------------------------
 
 OpenChords has a small embedded http server to accomplish this task.
 
-These are the steps you need to follow to be able to Use the embedded http server:
+These are the steps you need to follow to use the embedded http server:
 
 1. Open preferences via File >> Preferences
 
