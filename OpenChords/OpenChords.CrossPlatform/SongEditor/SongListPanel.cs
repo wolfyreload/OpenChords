@@ -157,8 +157,8 @@ namespace OpenChords.CrossPlatform.SongEditor
             {
                 _fullSongList.Add(Song.loadSong(songName));
             }
-            setListItems(_fullSongList);
-
+            filterSongs();
+       
             gridSongs.SelectionChanged += lbSongs_SelectedIndexChanged;
             txtSearch.TextChanged += txtSearch_TextChanged;
             txtSearch.KeyUp += txtSearch_KeyUp;
@@ -215,9 +215,17 @@ namespace OpenChords.CrossPlatform.SongEditor
 
         void txtSearch_TextChanged(object sender, EventArgs e)
         {
-			gridSongs.SelectionChanged -= lbSongs_SelectedIndexChanged;
+            gridSongs.SelectionChanged -= lbSongs_SelectedIndexChanged;
 
-			string search = txtSearch.Text.ToUpper();
+            filterSongs();
+
+            gridSongs.SelectionChanged += lbSongs_SelectedIndexChanged;
+
+        }
+
+        private void filterSongs()
+        {
+            string search = txtSearch.Text.ToUpper();
             string[] searchItems = search.Split(new char[] { ' ' }, StringSplitOptions.RemoveEmptyEntries);
             var filteredList = _fullSongList.AsQueryable();
             foreach (string item in searchItems)
@@ -231,9 +239,6 @@ namespace OpenChords.CrossPlatform.SongEditor
                                                      || c.SongFileName.ToUpper().Contains(item)); //filter on filename
             }
             setListItems(filteredList.ToList());
-
-			gridSongs.SelectionChanged += lbSongs_SelectedIndexChanged;
-
         }
 
         internal void selectRandomSong()
