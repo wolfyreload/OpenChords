@@ -29,7 +29,7 @@ namespace OpenChords.Entities
     public partial class Song
     {
         private static readonly log4net.ILog logger = log4net.LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
-
+    
         public string title { get; set; }
         public string author { get; set; }
         public string presentation { get; set; }
@@ -100,6 +100,8 @@ namespace OpenChords.Entities
             }
         }
 
+        private string _justLyrics;
+
         public Song()
         {
             title = "";
@@ -144,6 +146,8 @@ namespace OpenChords.Entities
         /// <returns></returns>
         public bool saveSong()
         {
+            //make sure the "Just Lyrics" are recreated
+            _justLyrics = null;
             if (this.title == "")
                 throw new Exception("Song title cannot be blank");
             return XmlReaderWriter.writeSong(Settings.ExtAppsAndDir.SongsFolder + this.title, this);
@@ -254,22 +258,25 @@ namespace OpenChords.Entities
         /// <returns></returns>
         public string getJustLyrics()
         {
-            StringBuilder sb = new StringBuilder();
-            foreach (var line in lyrics.Split(new string[] { "\n" }, StringSplitOptions.RemoveEmptyEntries))
+            if (_justLyrics == null)
             {
-                if (!line.StartsWith(".") && !line.StartsWith("["))
-                    sb.AppendLine(line.Replace("_", ""));
+                StringBuilder sb = new StringBuilder();
+                foreach (var line in lyrics.Split(new string[] { "\n" }, StringSplitOptions.RemoveEmptyEntries))
+                {
+                    if (!line.StartsWith(".") && !line.StartsWith("["))
+                        sb.AppendLine(line.Replace("_", ""));
+                }
+
+                //strip out all the non-alpha numerics
+                char[] charArrayToCleanup = sb.ToString().ToCharArray();
+
+                charArrayToCleanup = Array.FindAll<char>(charArrayToCleanup, (c => char.IsLetterOrDigit(c)));
+                _justLyrics = new string(charArrayToCleanup).ToUpper();
             }
-
-            //strip out all the non-alpha numerics
-            char[] charArrayToCleanup = sb.ToString().ToCharArray();
-
-            charArrayToCleanup = Array.FindAll<char>(charArrayToCleanup, (c => (char.IsLetterOrDigit(c)
-                                              || char.IsWhiteSpace(c)
-                                              || c == '-')));
-            
-            return new string(charArrayToCleanup); ;
+            return _justLyrics;
         }
+
+
 
         /// <summary>
         /// returns true if the song exists

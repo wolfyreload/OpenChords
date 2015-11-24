@@ -226,14 +226,14 @@ namespace OpenChords.CrossPlatform.SongEditor
         private void filterSongs()
         {
             string search = txtSearch.Text.ToUpper();
-            string[] searchItems = GetAllPhrasesSearchItems(search);
+            string[] searchItems = getAllPhrasesSearchItems(search);
             var filteredList = _fullSongList.AsQueryable();
             foreach (string item in searchItems)
             {
                 //smart filter
                 filteredList = filteredList.Where(c => c.title.ToUpper().Contains(item) //filter on title
                                                      || c.author.ToUpper().Contains(item) //filter on author
-                                                     || c.getJustLyrics().ToUpper().Contains(item) //filter on lyrics
+                                                     || c.getJustLyrics().Contains(item) //filter on lyrics
                                                      || c.hymn_number.ToUpper().Contains(item) //filter on reference
                                                      || c.ccli.ToUpper().Contains(item) //filter on ccli
                                                      || c.SongFileName.ToUpper().Contains(item)); //filter on filename
@@ -242,7 +242,7 @@ namespace OpenChords.CrossPlatform.SongEditor
         }
 
         //split search string into search phrases
-        private static string[] GetAllPhrasesSearchItems(string search)
+        private static string[] getAllPhrasesSearchItems(string search)
         {
             List<string> results = new List<string>();
 
@@ -254,8 +254,8 @@ namespace OpenChords.CrossPlatform.SongEditor
                 //if we have a space between the words then its a phrase
                 if (phrase.Trim().Contains('"'))
                 {
-                    //remove the quotes and add the phrase
-                    results.Add(phrase.Replace("\"", ""));
+                    string justCharsAndDigits = new string(phrase.ToCharArray().Where(c => char.IsLetterOrDigit(c)).ToArray());
+                    results.Add(justCharsAndDigits);
                 }
                 else //we need to split on spaces because its not a quoted phrase
                 {

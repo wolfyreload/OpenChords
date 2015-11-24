@@ -10,6 +10,7 @@ Improvement: Add song counter to set list
 Improvement: Add song counter to songs list
 Fixed: Song filter not re-applied when refreshing song list
 Improvement: Allow filtering on phrase in addition to single word searching
+Improvement: Make searching more responsive
 
 OpenChords v2.0.3
 ============================================================================
