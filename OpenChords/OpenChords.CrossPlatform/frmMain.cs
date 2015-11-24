@@ -69,7 +69,7 @@ namespace OpenChords.CrossPlatform
                         {
                             Orientation = Orientation.Vertical,
                             //sets
-                            Panel1 = new GroupBox() { Text = "Sets", Content = ucSetListPanel },
+                            Panel1 = ucSetListPanel,
                             //song list
                             Panel2 = new GroupBox() { Text = "Songs", Content = ucSongListPanel },
                         },

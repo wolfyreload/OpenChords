@@ -12,6 +12,7 @@ namespace OpenChords.CrossPlatform.SongEditor
     {
         protected ListBox lbSongs = new ListBox();
         protected ComboBox cmbSets = new ComboBox();
+        protected GroupBox gbSets;
 
         private bool SetChanged;
         public Set CurrentSet { get; private set; }
@@ -19,13 +20,16 @@ namespace OpenChords.CrossPlatform.SongEditor
 
         public SetListPanel()
         {
-            Content = new TableLayout()
+            Content = gbSets = new GroupBox()
             {
-                Rows = 
+                Text = "Sets",
+                Content = new TableLayout()
+                {
+                    Rows =
                     {   cmbSets,
                         lbSongs,
-                        
                     }
+                }
             };
 
             var commandDeleteFromSet = new Command() { MenuText = "Delete song from set", Shortcut = Application.Instance.CommonModifier | Keys.Delete, Image = Graphics.ImageDelete };
@@ -120,6 +124,13 @@ namespace OpenChords.CrossPlatform.SongEditor
             {
                 items.Add(song.SongFileName);
             }
+            
+            //update the number of songs in set
+            if (items.Count > 0)
+                gbSets.Text = string.Format("Sets ({0})", items.Count);
+            else
+                gbSets.Text = "Sets";
+
             lbSongs.DataStore = items;
         }
 

@@ -5,7 +5,8 @@ Improvement: Added help text for when the http server is enabled to help users u
 Fixed: spacing issues in preference screens
 Improvement: Disallow invalid port numbers in preferences
 Improvement: Make "Using OpenChords with Tablets and Cellphones" documentation more user friendly
-Improvement: Add sortable grid to song list view and remove the advanced search screen as its no longer necessary 
+Improvement: Add sortable grid to song list view and remove the advanced search screen as its no longer necessary
+Improvement: Add song counter to set list 
 
 OpenChords v2.0.3
 ============================================================================
