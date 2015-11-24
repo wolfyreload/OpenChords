@@ -7,6 +7,7 @@ Improvement: Disallow invalid port numbers in preferences
 Improvement: Make "Using OpenChords with Tablets and Cellphones" documentation more user friendly
 Improvement: Add sortable grid to song list view and remove the advanced search screen as its no longer necessary
 Improvement: Add song counter to set list 
+Improvement: Add song counter to songs list
 
 OpenChords v2.0.3
 ============================================================================

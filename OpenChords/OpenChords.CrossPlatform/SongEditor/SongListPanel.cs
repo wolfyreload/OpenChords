@@ -12,6 +12,7 @@ namespace OpenChords.CrossPlatform.SongEditor
     {
         protected GridView gridSongs = new GridView();
         protected TextBox txtSearch = new TextBox();
+        protected GroupBox gbSongs;
 
         public event EventHandler<Song> SongChanged;
         public event EventHandler<Song> SongDeleting;
@@ -23,12 +24,16 @@ namespace OpenChords.CrossPlatform.SongEditor
         public SongListPanel()
         {
             txtSearch.PlaceholderText = "search for a song";
-            Content = new TableLayout()
+            Content = gbSongs = new GroupBox()
             {
-                Rows = 
+                Text = "Songs",
+                Content = new TableLayout()
                 {
-                    new TableRow(gridSongs) { ScaleHeight = true },
-                    txtSearch,
+                    Rows =
+                    {
+                        new TableRow(gridSongs) { ScaleHeight = true },
+                        txtSearch,
+                    }
                 }
             };
 
@@ -205,6 +210,7 @@ namespace OpenChords.CrossPlatform.SongEditor
         private void setListItems(List<Song> songs)
         {
             gridSongs.DataStore = songs;
+            gbSongs.Text = string.Format("Songs ({0})", songs.Count);
         }
 
         void txtSearch_TextChanged(object sender, EventArgs e)

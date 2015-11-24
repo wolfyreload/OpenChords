@@ -71,7 +71,7 @@ namespace OpenChords.CrossPlatform
                             //sets
                             Panel1 = ucSetListPanel,
                             //song list
-                            Panel2 = new GroupBox() { Text = "Songs", Content = ucSongListPanel },
+                            Panel2 = ucSongListPanel,
                         },
                         //song editor and song metadata
                         Panel2 = ucSongMetaDataPanel
