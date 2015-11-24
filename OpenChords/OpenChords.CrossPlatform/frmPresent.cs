@@ -19,7 +19,7 @@ namespace OpenChords.CrossPlatform
         private bool _SongChanged;
         private bool _SettingsChanged;
         private Functions.Metronome metronome1;
-       
+        protected ButtonMenuItem menuItemSongList;
 
         public frmPresent(Song song, DisplayAndPrintSettings settings)
         {
@@ -50,8 +50,6 @@ namespace OpenChords.CrossPlatform
             this.WindowStyle = Eto.Forms.WindowStyle.None;
             Content = webView;
             this.Icon = Graphics.Icon;
-
-            drawSong();
 
             if (Platform.IsWpf)
                 webView.KeyDown += webView_KeyDown;
@@ -102,7 +100,7 @@ namespace OpenChords.CrossPlatform
             commandToggleMetonome.Executed += commandToggleMetonome_Executed;
 
             //song List
-            var menuItemSongList = new ButtonMenuItem() { Text = "Song &List", Image = Graphics.ImageList };
+            menuItemSongList = new ButtonMenuItem() { Text = "Song &List", Image = Graphics.ImageList };
             populateSongListMenu(menuItemSongList);
 
             if (MaxIndex == 1)
@@ -130,6 +128,8 @@ namespace OpenChords.CrossPlatform
             metronome1 = new OpenChords.Functions.Metronome();
             this.Closing += frmPresent_Closing;
             webView.Focus();
+
+            drawSong();
         }
 
         void commandToggleMetonome_Executed(object sender, EventArgs e)
@@ -291,6 +291,10 @@ namespace OpenChords.CrossPlatform
             OpenChords.Functions.WebServer.CurrentSong = CurrentSong;
             string songHtml = CurrentSong.getHtml(DisplaySettings);
             webView.LoadHtml(songHtml);
+
+            //update song position
+            if (MaxIndex > 1)
+                menuItemSongList.Text = string.Format("Song &List ({0}/{1})", SongIndex + 1, MaxIndex); 
         }
      }
 }
