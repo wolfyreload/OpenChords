@@ -260,7 +260,15 @@ namespace OpenChords.Entities
                 if (!line.StartsWith(".") && !line.StartsWith("["))
                     sb.AppendLine(line.Replace("_", ""));
             }
-            return sb.ToString();
+
+            //strip out all the non-alpha numerics
+            char[] charArrayToCleanup = sb.ToString().ToCharArray();
+
+            charArrayToCleanup = Array.FindAll<char>(charArrayToCleanup, (c => (char.IsLetterOrDigit(c)
+                                              || char.IsWhiteSpace(c)
+                                              || c == '-')));
+            
+            return new string(charArrayToCleanup); ;
         }
 
         /// <summary>

@@ -226,7 +226,7 @@ namespace OpenChords.CrossPlatform.SongEditor
         private void filterSongs()
         {
             string search = txtSearch.Text.ToUpper();
-            string[] searchItems = search.Split(new char[] { ' ' }, StringSplitOptions.RemoveEmptyEntries);
+            string[] searchItems = GetAllPhrasesSearchItems(search);
             var filteredList = _fullSongList.AsQueryable();
             foreach (string item in searchItems)
             {
@@ -239,6 +239,32 @@ namespace OpenChords.CrossPlatform.SongEditor
                                                      || c.SongFileName.ToUpper().Contains(item)); //filter on filename
             }
             setListItems(filteredList.ToList());
+        }
+
+        //split search string into search phrases
+        private static string[] GetAllPhrasesSearchItems(string search)
+        {
+            List<string> results = new List<string>();
+
+            //first let us split the out all the terms between quotes using regex
+            string[] phrases = System.Text.RegularExpressions.Regex.Split(search, "(\".*?\")");
+
+            foreach (string phrase in phrases)
+            {
+                //if we have a space between the words then its a phrase
+                if (phrase.Trim().Contains('"'))
+                {
+                    //remove the quotes and add the phrase
+                    results.Add(phrase.Replace("\"", ""));
+                }
+                else //we need to split on spaces because its not a quoted phrase
+                {
+                    string[] searchWords = phrase.Split(new char[] { ' ' }, StringSplitOptions.RemoveEmptyEntries);
+                    results.AddRange(searchWords);
+                }
+            }
+
+            return results.ToArray();
         }
 
         internal void selectRandomSong()
