@@ -91,10 +91,16 @@ namespace OpenChords.CrossPlatform.SongEditor
         void lbSongs_SelectedIndexChanged(object sender, EventArgs e)
         {
             if (lbSongs.SelectedIndex < 0) return;
-            var songName = lbSongs.SelectedValue.ToString();
-            var song = Song.loadSong(songName);
+            Song song = getSelectedSong();
             if (SongChanged != null)
                 SongChanged(this, song);
+        }
+
+        private Song getSelectedSong()
+        {
+            var songName = lbSongs.SelectedValue.ToString();
+            var song = Song.loadSong(songName);
+            return song;
         }
 
         void cmbSets_SelectedIndexChanged(object sender, EventArgs e)
@@ -167,7 +173,19 @@ namespace OpenChords.CrossPlatform.SongEditor
             else
                 revertSet();
             CurrentSet.reloadSet();
-            new frmPresent(CurrentSet, DisplayAndPrintSettings.loadSettings(DisplayAndPrintSettingsType.DisplaySettings)).Show();
+            var frmPresent = new frmPresent(CurrentSet, DisplayAndPrintSettings.loadSettings(DisplayAndPrintSettingsType.DisplaySettings));
+            frmPresent.Closing += FrmPresent_Closing;
+            frmPresent.Show();
+        }
+
+        private void FrmPresent_Closing(object sender, System.ComponentModel.CancelEventArgs e)
+        {
+            if (lbSongs.SelectedIndex < 0) return;
+            Song song = getSelectedSong();
+            if (SongChanged != null)
+            {
+                SongChanged(this, song);
+            }
         }
 
         private void loadSetState()
