@@ -1,4 +1,4 @@
-#define MainBinaryLocation  "..\OpenChords.CrossPlatform.Wpf\bin\Release\OpenChords.Windows.exe"
+#define MainBinaryLocation  "..\OpenChords.CrossPlatform.Executable\bin\Release\OpenChords.exe"
 #define AppVersion      GetFileVersion(MainBinaryLocation)
 
 [Setup]
@@ -7,20 +7,20 @@ UninstallDisplayName=OpenChords
 AppVersion={#AppVersion} Beta
 DefaultDirName={pf}\OpenChords
 DefaultGroupName=OpenChords
-UninstallDisplayIcon={app}\OpenChords.Windows.exe
+UninstallDisplayIcon={app}\OpenChords.exe
 Compression=lzma2
 SolidCompression=yes
 OutputBaseFilename=OpenChords.Installer.{#AppVersion}
 
 [Files]
-Source: "..\OpenChords.CrossPlatform.Wpf\bin\Release\*"; DestDir: "{app}"; Flags: ignoreversion recursesubdirs 
-Source: "..\OpenChords.CrossPlatform.Wpf\bin\Release\changelog.txt"; DestDir: "{app}"; Flags: isreadme ignoreversion
+Source: "..\OpenChords.CrossPlatform.Executable\bin\Release\*"; DestDir: "{app}"; Flags: ignoreversion recursesubdirs 
+Source: "..\OpenChords.CrossPlatform.Executable\bin\Release\changelog.txt"; DestDir: "{app}"; Flags: isreadme ignoreversion
 
 [Icons]
-Name: "{group}\OpenChords"; Filename: "{app}\OpenChords.Windows.exe"
+Name: "{group}\OpenChords"; Filename: "{app}\OpenChords.exe"
 
 [CustomMessages]
 LaunchProgram=Launch OpenChords
 
 [Run]
-Filename: {app}\OpenChords.Windows.exe; Description: {cm:LaunchProgram}; Flags: nowait postinstall skipifsilent
+Filename: {app}\OpenChords.exe; Description: {cm:LaunchProgram}; Flags: nowait postinstall skipifsilent

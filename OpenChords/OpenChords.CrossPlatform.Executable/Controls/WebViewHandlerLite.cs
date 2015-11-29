@@ -3,7 +3,7 @@ using Eto.Forms;
 using Eto.Wpf.Forms;
 using System.Windows.Controls;
 
-namespace OpenChords.CrossPlatform.Wpf.Controls
+namespace OpenChords.CrossPlatform.Executable.Controls
 {
     /// <summary>
     /// original control from Eto.Forms shrunk down to exactly whats needed
