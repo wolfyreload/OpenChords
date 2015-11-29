@@ -180,7 +180,7 @@ namespace OpenChords.CrossPlatform.SongEditor
             else
                 revertSet();
             CurrentSet.reloadSet();
-            var frmPresent = new frmPresent(CurrentSet, DisplayAndPrintSettings.loadSettings(DisplayAndPrintSettingsType.DisplaySettings));
+            var frmPresent = new frmPresent(CurrentSet, DisplayAndPrintSettings.loadSettings(DisplayAndPrintSettingsType.DisplaySettings), lbSongs.SelectedIndex);
             frmPresent.Closing += FrmPresent_Closing;
             frmPresent.Show();
         }

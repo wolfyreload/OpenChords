@@ -35,10 +35,11 @@ namespace OpenChords.CrossPlatform
             buildUI();
         }
 
-        public frmPresent(Set set, DisplayAndPrintSettings settings)
+        public frmPresent(Set set, DisplayAndPrintSettings settings, int startingSongIndex = 0)
         {
             CurrentSet = set;
             DisplaySettings = settings;
+            SongIndex = startingSongIndex;
             Functions.WebServer.CurrentDisplayAndPrintSettings = settings;
             MaxIndex = CurrentSet.songList.Count;
             this.Title = "Present Set";

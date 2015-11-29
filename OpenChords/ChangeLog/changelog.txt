@@ -16,6 +16,7 @@ Fixed: Changing a song while presenting not updating in set list
 Improvement: Add back double-click to add a new song to set
 Improvement: Make shortcut keys customizable
 Improvement: Remove the need to restart OpenChords after changing settings
+Improvement: Start presenting set on currently selected song in set list
 
 OpenChords v2.0.3
 ============================================================================
