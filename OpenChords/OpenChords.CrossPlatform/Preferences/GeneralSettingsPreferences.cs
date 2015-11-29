@@ -119,10 +119,7 @@ namespace OpenChords.CrossPlatform.Preferences
                     if (!ipaddress.ToString().Contains(":")) //only show ip version 4 addresses
                         sb.AppendLine(string.Format("http://{0}:{1}/song", ipaddress, txtHttpServerPort.Text));
                 }
-                if (OptionsChanged)
-                    sb.AppendLine("after restarting OpenChords");
-
-
+                
                 txtInterfaceHelp.ReadOnly = false;
                 txtInterfaceHelp.Text = sb.ToString().Trim();
                 txtInterfaceHelp.ReadOnly = true;
@@ -202,9 +199,6 @@ namespace OpenChords.CrossPlatform.Preferences
             fileAndFolderSettings.HttpServerPort = int.Parse(txtHttpServerPort.Text);
 
             fileAndFolderSettings.saveSettings();
-            if (OptionsChanged)
-                Helpers.PopupMessages.ShowInformationMessage(this, "Changes to general settings will only take effect after restarting OpenChords");
-
         }
     }
 }

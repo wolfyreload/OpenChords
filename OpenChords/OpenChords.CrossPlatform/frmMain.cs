@@ -25,7 +25,7 @@ namespace OpenChords.CrossPlatform
         {
             logger.Info("Starting Openchords");
 
-            
+
             //add a style to the table layout
             Eto.Style.Add<TableLayout>("padded-table", table =>
             {
@@ -40,15 +40,16 @@ namespace OpenChords.CrossPlatform
                 button.Width = 24;
                 button.Height = 24;
             });
+            refreshForm();
 
-            setup();
+        }
 
-            logger.Info("Starting Openchords web server");
-            if (Settings.ExtAppsAndDir.HttpServerEnabled)
-            {
-                webserver = new OpenChords.Functions.WebServer(Settings.ExtAppsAndDir.HttpServerPort);
-                webserver.CannotStartHttpServerEvent += Webserver_CannotStartHttpServerEvent;
-            }
+        private void refreshForm()
+        {
+            initialSetup();
+
+            
+            setupHttpServer();
 
             shortcutKeys = Entities.ShortcutSettings.LoadSettings();
 
@@ -67,22 +68,22 @@ namespace OpenChords.CrossPlatform
             {
                 // Main window
                 Content = new Splitter()
+                {
+                    Orientation = Orientation.Horizontal,
+                    Position = Helpers.FormHelper.getScreenPercentageInPixels(25, this),
+                    //Sets and song list
+                    Panel1 = new Splitter()
                     {
-                        Orientation = Orientation.Horizontal,
-                        Position = Helpers.FormHelper.getScreenPercentageInPixels(25, this),
-                        //Sets and song list
-                        Panel1 = new Splitter()
-                        {
-                            Orientation = Orientation.Vertical,
-                            //sets
-                            Panel1 = ucSetListPanel,
-                            //song list
-                            Panel2 = ucSongListPanel,
-                        },
-                        //song editor and song metadata
-                        Panel2 = ucSongMetaDataPanel
+                        Orientation = Orientation.Vertical,
+                        //sets
+                        Panel1 = ucSetListPanel,
+                        //song list
+                        Panel2 = ucSongListPanel,
+                    },
+                    //song editor and song metadata
+                    Panel2 = ucSongMetaDataPanel
 
-                    }
+                }
 
             };
 
@@ -101,7 +102,7 @@ namespace OpenChords.CrossPlatform
             menuItemNewSong.Executed += (s, e) => ucSongMetaDataPanel.NewSong();
             var menuItemSaveSong = MenuHelper.GetCommand("Save Song", Graphics.ImageSave, shortcutKeys.SaveSong);
             menuItemSaveSong.Executed += (s, e) => saveCurrentSong();
-            var menuItemDeleteSong = MenuHelper.GetCommand("Delete Song", Graphics.ImageDelete );
+            var menuItemDeleteSong = MenuHelper.GetCommand("Delete Song", Graphics.ImageDelete);
             menuItemDeleteSong.Executed += (s, e) => { deleteCurrentlySelectedSong(); };
             var menuItemSongIncreaseKey = MenuHelper.GetCommand("Transpose Up", Graphics.ImagMoveUp, shortcutKeys.TransposeUp);
             menuItemSongIncreaseKey.Executed += (s, e) => ucSongMetaDataPanel.TransposeKeyUp();
@@ -138,7 +139,7 @@ namespace OpenChords.CrossPlatform
 
 
             var menuItemSetFileOperations = new ButtonMenuItem { Text = "File Operations", Items = { menuItemSetNew, commandSaveSet, commandRevertSet, menuItemSetDelete, menuItemShowSetInExplorer }, Image = Graphics.ImageFileOperations };
-      
+
 
             //present menu items
             var menuItemPresentSong = MenuHelper.GetCommand("Present Song", Graphics.ImagePresentSong, shortcutKeys.PresentSong);
@@ -166,7 +167,7 @@ namespace OpenChords.CrossPlatform
             var menuItemExportToOpenSong = new ButtonMenuItem() { Text = "Export To &OpenSong", Items = { commandExportCurrentSetToOpenSong }, Image = Graphics.ImageOpenSong };
             var menuItemExportSetList = MenuHelper.GetCommand("Export Set List", Graphics.ImageList);
             menuItemExportSetList.Executed += (s, e) => ucSetListPanel.ExportToTextFile();
-            
+
             //about menu
             var menuItemManual = MenuHelper.GetCommand("Help Documentation", Graphics.ImageHelp, shortcutKeys.ShowHelp);
             menuItemManual.Executed += (s, e) => showManual();
@@ -175,26 +176,26 @@ namespace OpenChords.CrossPlatform
             Menu = new MenuBar
             {
                 Items =
-				{
+                {
 					// File submenu
-					new ButtonMenuItem 
-                    { 
-                        Text = "&File", 
+					new ButtonMenuItem
+                    {
+                        Text = "&File",
                         Items = { menuItemPreferences }
                     },
                     new ButtonMenuItem()
                     {
-                        Text = "&Song", 
+                        Text = "&Song",
                         Items = { menuItemSongFileOperations, menuItemKey, menuItemCapo, menuItemSongFixFormating, menuItemSongRefeshList }
                     },
                     new ButtonMenuItem()
                     {
-                        Text = "Se&ts", 
+                        Text = "Se&ts",
                         Items = { menuItemSetFileOperations, menuItemSetRefeshList }
                     },
                     new ButtonMenuItem()
                     {
-                        Text = "&Present", 
+                        Text = "&Present",
                         Items = { menuItemPresentSong, menuItemPresentSet }
                     },
                     new ButtonMenuItem()
@@ -207,9 +208,9 @@ namespace OpenChords.CrossPlatform
                         Text = "&Help",
                         Items = { menuItemManual }
                     }
-				},
+                },
                 QuitItem = menuItemQuit,
-             
+
             };
 
             ucSongListPanel.Focus();
@@ -220,7 +221,25 @@ namespace OpenChords.CrossPlatform
             ucSetListPanel.SongChanged += SelectedSongChanged;
             ucSongListPanel.AddSongToSet += (s, e) => ucSetListPanel.AddSongToSet(e);
             ucSongListPanel.SongDeleting += (s, e) => deleteCurrentlySelectedSong();
+        }
 
+        private void setupHttpServer()
+        {
+            if (Settings.ExtAppsAndDir.HttpServerEnabled)
+            {
+                logger.Info("Starting Openchords web server");
+
+                if (webserver != null)
+                    webserver.Dispose();
+
+                webserver = new OpenChords.Functions.WebServer(Settings.ExtAppsAndDir.HttpServerPort);
+                webserver.CannotStartHttpServerEvent += Webserver_CannotStartHttpServerEvent;
+            }
+            else
+            {
+                if (webserver != null)
+                    webserver.Dispose();
+            }
         }
 
         private void Webserver_CannotStartHttpServerEvent(object sender, string e)
@@ -236,7 +255,8 @@ namespace OpenChords.CrossPlatform
             else
                 tempSong = Song.loadSong(Song.listOfAllSongs()[0]);
 
-            new frmPreferences(tempSong).Show();
+            new frmPreferences(tempSong).ShowModal(this);
+            refreshForm();
         }
 
         private void exportToOpenSong(object sender, EventArgs e)

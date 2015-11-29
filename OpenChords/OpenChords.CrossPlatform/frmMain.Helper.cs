@@ -35,7 +35,7 @@ namespace OpenChords.CrossPlatform
 
 
         //make the settings files if they dont exist
-        private static void setup()
+        private static void initialSetup()
         {
             //ensureValidFileSettingsFile();
 

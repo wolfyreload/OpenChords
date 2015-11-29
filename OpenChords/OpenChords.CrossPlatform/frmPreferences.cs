@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace OpenChords.CrossPlatform
 {
-    public class frmPreferences : Form
+    public class frmPreferences : Dialog
     {
         private GeneralSettingsPreferences generalSettingsPreferences = new Preferences.GeneralSettingsPreferences(FileAndFolderSettings.loadSettings());
         private DisplayAndPrintPreferences displayPreferences;
