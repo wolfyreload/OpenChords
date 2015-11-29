@@ -22,7 +22,8 @@ namespace OpenChords.CrossPlatform
         {
             this.Title = "Preferences";
             this.Icon = Graphics.Icon;
-            this.WindowState = Eto.Forms.WindowState.Maximized;
+            this.Width = 1024;
+            this.Height = 768;
 
             displayPreferences = new Preferences.DisplayAndPrintPreferences(DisplayAndPrintSettings.loadSettings(DisplayAndPrintSettingsType.DisplaySettings), songToPreview);
             printPreferences = new Preferences.DisplayAndPrintPreferences(DisplayAndPrintSettings.loadSettings(DisplayAndPrintSettingsType.PrintSettings), songToPreview);
