@@ -257,6 +257,7 @@ namespace OpenChords.CrossPlatform
             else
                 tempSong = Song.loadSong(Song.listOfAllSongs()[0]);
 
+            ucSetListPanel.saveSetState();
             new frmPreferences(tempSong).ShowModal(this);
             refreshForm();
         }
