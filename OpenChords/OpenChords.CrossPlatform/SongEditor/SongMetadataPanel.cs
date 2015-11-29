@@ -48,7 +48,7 @@ namespace OpenChords.CrossPlatform.SongEditor
                     Text = "Song Metadata",
                     Content = splitterMetadata = new Splitter()
                     {
-                        Position = Helpers.FormHelper.getScreenPercentageInPixels(60, this),
+                        Position = Helpers.FormHelper.getScreenXPercentageInPixels(60, this),
                         //main metadata
                         Panel1 = new TableLayout()
                         {
@@ -85,7 +85,7 @@ namespace OpenChords.CrossPlatform.SongEditor
                     //song editor and notes
                     Content = splitterSongNotes = new Splitter()
                     {
-                        Position = Helpers.FormHelper.getScreenPercentageInPixels(60, this),
+                        Position = Helpers.FormHelper.getScreenXPercentageInPixels(60, this),
                         Orientation = Orientation.Horizontal,
                         //lyrics editor
                         Panel1 = new GroupBox() { Text = "Chords/Lyrics Editor", Content = txtLyrics },
@@ -118,8 +118,8 @@ namespace OpenChords.CrossPlatform.SongEditor
 
         void SongMetadataPanel_SizeChanged(object sender, EventArgs e)
         {
-            splitterSongNotes.Position = Helpers.FormHelper.getScreenPercentageInPixels(80, this);
-            splitterMetadata.Position = Helpers.FormHelper.getScreenPercentageInPixels(80, this);
+            splitterSongNotes.Position = Helpers.FormHelper.getScreenXPercentageInPixels(80, this);
+            splitterMetadata.Position = Helpers.FormHelper.getScreenXPercentageInPixels(80, this);
         }
 
         public void refreshPanel()

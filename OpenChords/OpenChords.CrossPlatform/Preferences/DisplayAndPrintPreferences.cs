@@ -39,7 +39,7 @@ namespace OpenChords.CrossPlatform.Preferences
 
             Content = splitter1 = new Splitter()
             {
-                Position = Helpers.FormHelper.getScreenPercentageInPixels(30),
+                Position = Helpers.FormHelper.getScreenXPercentageInPixels(30),
                 Panel1 = new TableLayout()
                 {
 
