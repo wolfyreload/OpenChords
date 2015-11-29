@@ -71,6 +71,7 @@ namespace OpenChords.CrossPlatform.SongEditor
             _fullSongList = new List<Song>();     
             txtSearch.Focus();
             gridSongs.ColumnHeaderClick += GridSongs_ColumnHeaderClick;
+            gridSongs.MouseDoubleClick += GridSongs_MouseDoubleClick;
 
         }
 
@@ -131,6 +132,11 @@ namespace OpenChords.CrossPlatform.SongEditor
             if (gridSongs.SelectedItem == null) return;
             if (AddSongToSet != null)
                 AddSongToSet(this, (Song)gridSongs.SelectedItem);
+        }
+
+        private void GridSongs_MouseDoubleClick(object sender, MouseEventArgs e)
+        {
+            addSongToSet();
         }
 
         void lbSongs_SelectedIndexChanged(object sender, EventArgs e)

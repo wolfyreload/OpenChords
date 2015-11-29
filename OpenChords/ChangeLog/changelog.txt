@@ -13,6 +13,7 @@ Improvement: Allow filtering on phrase in addition to single word searching
 Improvement: Make searching more responsive
 Improvement: Show current song position when presenting a set
 Fixed: Changing a song while presenting not updating in set list
+Improvement: Add back double-click to add a new song to set
 
 OpenChords v2.0.3
 ============================================================================
