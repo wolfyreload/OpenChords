@@ -14,6 +14,7 @@ Improvement: Make searching more responsive
 Improvement: Show current song position when presenting a set
 Fixed: Changing a song while presenting not updating in set list
 Improvement: Add back double-click to add a new song to set
+Improvement: Make shortcut keys customizable
 
 OpenChords v2.0.3
 ============================================================================

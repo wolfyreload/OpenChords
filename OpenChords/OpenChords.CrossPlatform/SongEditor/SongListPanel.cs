@@ -5,6 +5,7 @@ using System.IO;
 using OpenChords.Entities;
 using System.Collections.Generic;
 using System.Linq;
+using OpenChords.CrossPlatform.Helpers;
 
 namespace OpenChords.CrossPlatform.SongEditor
 {
@@ -20,9 +21,13 @@ namespace OpenChords.CrossPlatform.SongEditor
         private List<Song> _fullSongList;
         private string _orderByColumn;
         private bool _isAscendingOrder = true;
+        private ShortcutSettings shortcutKeys;
+
 
         public SongListPanel()
         {
+            shortcutKeys = Entities.ShortcutSettings.LoadSettings();
+
             txtSearch.PlaceholderText = "search for a song";
             Content = gbSongs = new GroupBox()
             {
@@ -37,11 +42,11 @@ namespace OpenChords.CrossPlatform.SongEditor
                 }
             };
 
-            var commandAddToSet = new Command() { MenuText = "Add to set", Shortcut = Application.Instance.CommonModifier | Keys.Enter, Image = Graphics.ImageAddToSet };
+            var commandAddToSet = MenuHelper.GetCommand("Add to set", Graphics.ImageAddToSet, shortcutKeys.AddSongToSet);
             commandAddToSet.Executed += (s, e) => addSongToSet();
-            var commandDeleteSong = new Command() { MenuText = "Delete song", Shortcut = Application.Instance.CommonModifier | Keys.Delete, Image = Graphics.ImageDelete };
+            var commandDeleteSong = MenuHelper.GetCommand("Delete song", Graphics.ImageDelete, shortcutKeys.DeleteSong);
             commandDeleteSong.Executed += (s, e) => deleteSong();
-            var menuItemSongRandom = new Command { MenuText = "Select random song", Shortcut = Application.Instance.CommonModifier | Keys.M, Image = Graphics.ImageRandom };
+            var menuItemSongRandom = MenuHelper.GetCommand("Select random song", Graphics.ImageRandom, shortcutKeys.SelectRandomSong);
             menuItemSongRandom.Executed += (s, e) => selectRandomSong();
 
             //setup the gridview
@@ -175,17 +180,17 @@ namespace OpenChords.CrossPlatform.SongEditor
 
         void lbSongs_KeyUp(object sender, KeyEventArgs e)
         {
-            if (e.Control && e.Key == Keys.Enter)
+            if (MenuHelper.CompareShortcuts(e, shortcutKeys.AddSongToSet))
             {
                 addSongToSet();
                 e.Handled = true;
             }
-            else if (e.Control && e.Key == Keys.Delete)
+            else if (MenuHelper.CompareShortcuts(e, shortcutKeys.DeleteSong))
             {
                 deleteSong();
                 e.Handled = true;
             }
-            else if (e.Control && e.Key == Keys.M)
+            else if (MenuHelper.CompareShortcuts(e, shortcutKeys.SelectRandomSong))
             {
                 selectRandomSong();
                 e.Handled = true;

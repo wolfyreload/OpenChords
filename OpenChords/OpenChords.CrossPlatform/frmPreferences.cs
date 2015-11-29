@@ -15,6 +15,7 @@ namespace OpenChords.CrossPlatform
         private DisplayAndPrintPreferences displayPreferences;
         private DisplayAndPrintPreferences printPreferences;
         private DisplayAndPrintPreferences tabletPreferences;
+        private ShortcutSettingsPreferences shortcutPreferences;
 
 
         public frmPreferences(Song songToPreview)
@@ -26,6 +27,7 @@ namespace OpenChords.CrossPlatform
             displayPreferences = new Preferences.DisplayAndPrintPreferences(DisplayAndPrintSettings.loadSettings(DisplayAndPrintSettingsType.DisplaySettings), songToPreview);
             printPreferences = new Preferences.DisplayAndPrintPreferences(DisplayAndPrintSettings.loadSettings(DisplayAndPrintSettingsType.PrintSettings), songToPreview);
             tabletPreferences = new Preferences.DisplayAndPrintPreferences(DisplayAndPrintSettings.loadSettings(DisplayAndPrintSettingsType.TabletSettings), songToPreview);
+            shortcutPreferences = new ShortcutSettingsPreferences(Entities.ShortcutSettings.LoadSettings());
 
             Content = new TabControl()
             {
@@ -34,7 +36,8 @@ namespace OpenChords.CrossPlatform
                      new TabPage() { Text = "General Settings", Content = generalSettingsPreferences },
                      new TabPage() { Text = "Display Settings", Content = displayPreferences },
                      new TabPage() { Text = "Print Settings", Content = printPreferences },
-                     new TabPage() { Text = "Tablet Settings", Content = tabletPreferences }
+                     new TabPage() { Text = "Tablet Settings", Content = tabletPreferences },
+                     new TabPage() { Text = "Shortcut Settings", Content = shortcutPreferences }
                  }
             };
 
@@ -47,6 +50,7 @@ namespace OpenChords.CrossPlatform
             displayPreferences.SavePreferences();
             printPreferences.SavePreferences();
             tabletPreferences.SavePreferences();
+            shortcutPreferences.SavePreferences();
         }
     }
 }

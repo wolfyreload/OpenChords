@@ -204,5 +204,31 @@ namespace OpenChords.IO
             }
         }
 
+
+        public static ShortcutSettings ReadShortcutSettings(string filename)
+        {
+            try
+            {
+                return xmlReader<ShortcutSettings>(filename);
+            }
+            catch (Exception Ex)
+            {
+                logger.Error("Error reading shortcut settings file", Ex);
+                return new ShortcutSettings();
+            }
+        }
+
+        public static void WriteShortcutSettings(string filename, ShortcutSettings settings)
+        {
+            try
+            {
+                xmlWriter<ShortcutSettings>(filename, settings);
+            }
+            catch (Exception Ex)
+            {
+                logger.Error("Error writing shortcut settings file", Ex);
+            }
+        }
+
     }
 }

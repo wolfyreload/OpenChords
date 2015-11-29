@@ -5,6 +5,7 @@ using System.IO;
 using OpenChords.Entities;
 using System.Diagnostics;
 using System.Collections.Generic;
+using OpenChords.CrossPlatform.Helpers;
 
 namespace OpenChords.CrossPlatform.SongEditor
 {
@@ -18,8 +19,13 @@ namespace OpenChords.CrossPlatform.SongEditor
         public Set CurrentSet { get; private set; }
         public event EventHandler<Song> SongChanged;
 
+        private ShortcutSettings shortcutKeys;
+
+
         public SetListPanel()
         {
+            shortcutKeys = Entities.ShortcutSettings.LoadSettings();
+
             Content = gbSets = new GroupBox()
             {
                 Text = "Sets",
@@ -32,20 +38,21 @@ namespace OpenChords.CrossPlatform.SongEditor
                 }
             };
 
-            var commandDeleteFromSet = new Command() { MenuText = "Delete song from set", Shortcut = Application.Instance.CommonModifier | Keys.Delete, Image = Graphics.ImageDelete };
+            var commandDeleteFromSet = MenuHelper.GetCommand("Delete song from set", Graphics.ImageDelete, shortcutKeys.DeleteSong);
             commandDeleteFromSet.Executed += (s, e) => deleteSongFromSet();
-            var commandMoveSongUp = new Command() { MenuText = "Move song up", Shortcut = Application.Instance.CommonModifier | Keys.Up, Image = Graphics.ImagMoveUp };
+            var commandMoveSongUp = MenuHelper.GetCommand("Move song up", Graphics.ImagMoveUp, shortcutKeys.MoveSongUpInSet);
             commandMoveSongUp.Executed += (s, e) => moveSongUp();
-            var commandMoveSongDown = new Command() { MenuText = "Move song down", Shortcut = Application.Instance.CommonModifier | Keys.Down, Image = Graphics.ImageMoveDown };
+            var commandMoveSongDown = MenuHelper.GetCommand("Move song down", Graphics.ImageMoveDown, shortcutKeys.MoveSongDownInSet);
             commandMoveSongDown.Executed += (s, e) => moveSongDown();
-            var commandSelectRandomSong = new Command { MenuText = "Select random song", Shortcut = Application.Instance.CommonModifier | Keys.M, Image = Graphics.ImageRandom };
+            var commandSelectRandomSong = MenuHelper.GetCommand("Select random song", Graphics.ImageRandom, shortcutKeys.SelectRandomSong);
             commandSelectRandomSong.Executed += (s, e) => selectRandomSong();
 
             var menu = new ContextMenu()
             {
                 Items = { commandMoveSongUp, commandDeleteFromSet, commandMoveSongDown, commandSelectRandomSong}
             };
-            lbSongs.ContextMenu = menu;
+        
+        lbSongs.ContextMenu = menu;
 
 
             cmbSets.ReadOnly = true;
@@ -64,22 +71,22 @@ namespace OpenChords.CrossPlatform.SongEditor
 
         void lbSongs_KeyUp(object sender, KeyEventArgs e)
         {
-            if (e.Control && e.Key == Keys.Delete)
+            if (MenuHelper.CompareShortcuts(e, shortcutKeys.DeleteSong))
             {
                 deleteSongFromSet();
                 e.Handled = true;
             }
-            else if (e.Control && e.Key == Keys.Up)
+            else if (MenuHelper.CompareShortcuts(e, shortcutKeys.MoveSongUpInSet))
             {
                 moveSongUp();
                 e.Handled = true;
             }
-            else if (e.Control && e.Key == Keys.Down)
+            else if (MenuHelper.CompareShortcuts(e, shortcutKeys.MoveSongDownInSet))
             {
                 moveSongDown();
                 e.Handled = true;
             }
-            else if (e.Control && e.Key == Keys.M)
+            else if (MenuHelper.CompareShortcuts(e, shortcutKeys.SelectRandomSong))
             {
                 selectRandomSong();
                 e.Handled = true;

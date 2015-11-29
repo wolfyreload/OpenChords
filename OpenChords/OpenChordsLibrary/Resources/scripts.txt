@@ -98,15 +98,19 @@
 	document.addEventListener("keydown", keyDownInWindow, false);
 	function keyDownInWindow(e) {
 		if (e.keyCode == 32 || e.keyCode == 40) //if spacebar or down arrow
-				{
-					scrollDown();
-					e.preventDefault(); //swallow the event
-				}
-				else if (e.keyCode == 38) //if up arrow is pressed
-				{
-					scrollUp();
-					e.preventDefault(); //swallow the event
-				}
+		{
+			scrollDown();
+			e.preventDefault(); //swallow the event
+		}
+		else if (e.keyCode == 38) //if up arrow is pressed
+		{
+			scrollUp();
+			e.preventDefault(); //swallow the event
+		}
+		else if (e.keyCode == 116) //swallow f5 key presses
+		{
+			e.preventDefault(); //swallow the event
+		}
 	}
 
 	function getBaseUrl() {

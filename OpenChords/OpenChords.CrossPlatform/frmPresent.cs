@@ -1,4 +1,5 @@
 ﻿using Eto.Forms;
+using OpenChords.CrossPlatform.Helpers;
 using OpenChords.Entities;
 using System;
 using System.Collections.Generic;
@@ -20,6 +21,8 @@ namespace OpenChords.CrossPlatform
         private bool _SettingsChanged;
         private Functions.Metronome metronome1;
         protected ButtonMenuItem menuItemSongList;
+    
+        private ShortcutSettings shortcutKeys;
 
         public frmPresent(Song song, DisplayAndPrintSettings settings)
         {
@@ -44,6 +47,8 @@ namespace OpenChords.CrossPlatform
 
         private void buildUI()
         {
+            shortcutKeys = Entities.ShortcutSettings.LoadSettings();
+
             Width = 500;
             Height = 500;
             WindowState = Eto.Forms.WindowState.Maximized;
@@ -51,52 +56,49 @@ namespace OpenChords.CrossPlatform
             Content = webView;
             this.Icon = Graphics.Icon;
 
-            if (Platform.IsWpf)
-                webView.KeyDown += webView_KeyDown;
-
-            var menuItemExit = new Command { MenuText = "Exit", Shortcut = Keys.Escape, Image = Graphics.ImageExit };
+            var menuItemExit = MenuHelper.GetCommand("Exit", Graphics.ImageExit,  shortcutKeys.ExitPresentation);
             menuItemExit.Executed += (s, e) => this.Close();
             
             // refresh item
-            var menuItemRefresh = new Command { MenuText = "Refresh", Shortcut = Application.Instance.CommonModifier | Keys.R, Image = Graphics.ImageRefresh };
+            var menuItemRefresh = MenuHelper.GetCommand("Refresh", Graphics.ImageRefresh, shortcutKeys.RefreshPresentation);
             menuItemRefresh.Executed += menuItemRefresh_Executed;
 
             // size items
-            var commandSongIncreaseSize = new Command { MenuText = "Increase Font Size", Shortcut = Application.Instance.AlternateModifier | Keys.P, Image = Graphics.ImagMoveUp };
+            var commandSongIncreaseSize = MenuHelper.GetCommand("Increase Font Size", Graphics.ImagMoveUp, shortcutKeys.IncreaseFontSize);
             commandSongIncreaseSize.Executed += commandSongIncreaseSize_Executed;
-            var commandSongDecreaseSize = new Command { MenuText = "Decrease Font Size", Shortcut = Application.Instance.AlternateModifier | Keys.O, Image = Graphics.ImageMoveDown };
+            var commandSongDecreaseSize = MenuHelper.GetCommand("Decrease Font Size", Graphics.ImageMoveDown, shortcutKeys.DecreaseFontSize);
             commandSongDecreaseSize.Executed += commandSongDecreaseSize_Executed;
             
             
             // key items
-            var commandSongIncreaseKey = new Command { MenuText = "Transpose Key Up", Shortcut = Application.Instance.CommonModifier | Keys.D0, Image = Graphics.ImagMoveUp };
+            var commandSongIncreaseKey = MenuHelper.GetCommand("Transpose Key Up", Graphics.ImagMoveUp, shortcutKeys.TransposeUp);
             commandSongIncreaseKey.Executed += commandSongIncreaseKey_Executed;
-            var commandSongDecreaseKey = new Command { MenuText = "Transpose Key Down", Shortcut = Application.Instance.CommonModifier | Keys.D9, Image = Graphics.ImageMoveDown };
+            var commandSongDecreaseKey = MenuHelper.GetCommand("Transpose Key Down", Graphics.ImageMoveDown, shortcutKeys.TransposeDown);
             commandSongDecreaseKey.Executed += commandSongDecreaseKey_Executed;
-            var commandSongIncreaseCapo = new Command { MenuText = "Capo Up", Shortcut = Application.Instance.CommonModifier | Keys.D8, Image = Graphics.ImagMoveUp };
+            var commandSongIncreaseCapo = MenuHelper.GetCommand("Capo Up", Graphics.ImagMoveUp, shortcutKeys.CapoUp);
             commandSongIncreaseCapo.Executed += commandSongIncreaseCapo_Executed;
-            var commandSongDecreaseCapo = new Command { MenuText = "Capo Down", Shortcut = Application.Instance.CommonModifier | Keys.D7, Image = Graphics.ImageMoveDown };
+            var commandSongDecreaseCapo = MenuHelper.GetCommand("Capo Down", Graphics.ImageMoveDown, shortcutKeys.CapoDown);
             commandSongDecreaseCapo.Executed += commandSongDecreaseCapo_Executed;
 
             // Navigation menu
-            var menuItemNextSong = new Command { MenuText = "Next Song", Shortcut = Application.Instance.CommonModifier | Keys.Right, Image = Graphics.ImageRight };
+            var menuItemNextSong = MenuHelper.GetCommand("Next Song", Graphics.ImageRight, shortcutKeys.GoToNextSong);
             menuItemNextSong.Executed += menuItemNextSong_Executed;
-            var menuItemPreviousSong = new Command { MenuText = "Previous Song", Shortcut = Application.Instance.CommonModifier | Keys.Left, Image = Graphics.ImageLeft };
+            var menuItemPreviousSong = MenuHelper.GetCommand("Previous Song", Graphics.ImageLeft, shortcutKeys.GoToPreviousSong);
             menuItemPreviousSong.Executed += menuItemPreviousSong_Executed;
             var menuItemNavigation = new ButtonMenuItem() { Text = "&Navigation", Items = { menuItemPreviousSong, menuItemNextSong }, Image = Graphics.ImageNavigation };
-                
+
             //visibility menu
-            var commandToggleChords = new Command { MenuText = "Toggle Chords", Shortcut = Application.Instance.CommonModifier | Keys.Q, Image = Graphics.ImageChords };
+            var commandToggleChords = MenuHelper.GetCommand("Toggle Chords", Graphics.ImageChords, shortcutKeys.ToggleChords);
             commandToggleChords.Executed += (s, e) => { toggleChords(); };
-            var commandToggleLyrics = new Command { MenuText = "Toggle Lyrics", Shortcut = Application.Instance.CommonModifier | Keys.W, Image = Graphics.ImageLyrics };
+            var commandToggleLyrics = MenuHelper.GetCommand("Toggle Lyrics", Graphics.ImageLyrics, shortcutKeys.ToggleLyrics);
             commandToggleLyrics.Executed += (s, e) => { toggleLyrics(); };
-            var commandToggleNotes = new Command { MenuText = "Toggle Notes", Shortcut = Application.Instance.CommonModifier | Keys.E, Image = Graphics.ImageNotes };
+            var commandToggleNotes = MenuHelper.GetCommand("Toggle Notes", Graphics.ImageNotes, shortcutKeys.ToggleNotes);
             commandToggleNotes.Executed += (s, e) => { toggleNotes(); };
-            var commandToggleSharpsAndFlats = new Command { MenuText = "Toggle Sharps/Flats", Image = Graphics.ImageSharps };
+            var commandToggleSharpsAndFlats = MenuHelper.GetCommand("Toggle Sharps/Flats", Graphics.ImageSharps);
             commandToggleSharpsAndFlats.Executed += (s, e) => { toggleSharpsAndFlats(); };
 
             //Metronome
-            var commandToggleMetonome = new Command { MenuText = "Toggle Metronome", Shortcut = Application.Instance.CommonModifier | Keys.M, Image = Graphics.ImageMetronome };
+            var commandToggleMetonome = MenuHelper.GetCommand("Toggle Metronome", Graphics.ImageMetronome, shortcutKeys.ToggleMetronome);
             commandToggleMetonome.Executed += commandToggleMetonome_Executed;
 
             //song List
@@ -272,14 +274,6 @@ namespace OpenChords.CrossPlatform
             DisplaySettings.ShowNotes = !(DisplaySettings.ShowNotes ?? false);
             _SettingsChanged = true;
             drawSong();
-        }
-
-        void webView_KeyDown(object sender, KeyEventArgs e)
-        {
-            //if (e.Key == Keys.Escape)
-            //    this.Close();
-            if (e.Key == Keys.Up || e.Key == Keys.Down) 
-                e.Handled = true;
         }
 
         private void drawSong()
