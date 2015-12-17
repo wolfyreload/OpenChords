@@ -312,12 +312,11 @@ namespace OpenChords.CrossPlatform.SongEditor
 
             //export the results
             CurrentSet.exportSetAndSongsToOpenSong();
-            //open opensong set folder
-            Process.Start(Settings.ExtAppsAndDir.OpenSongSetFolder);
 
-            //run opensong
-            if (Settings.ExtAppsAndDir.IsOpenSongExecutableConfigured)
-                Process.Start(Settings.ExtAppsAndDir.OpenSongExecutable);      
+            //launch OpenSong
+            OpenChords.Export.ExportToOpenSong.launchOpenSong();
+
+
         }
 
 

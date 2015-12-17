@@ -18,6 +18,7 @@ Improvement: Make shortcut keys customizable
 Improvement: Remove the need to restart OpenChords after changing settings
 Improvement: Start presenting set on currently selected song in set list
 Improvement: Changed export set list to csv for easier readability
+Fixed: Prevent multiple instances of OpenSong opening when exporting to OpenSong
 
 
 OpenChords v2.0.3

@@ -102,19 +102,19 @@ namespace OpenChords.Export
         /// <summary>
         /// start opensong if it is not already open
         /// </summary>
-         public static void launchOpenSong()
-         {
-             //first check that opensong is not already running
-             Process[] pname = Process.GetProcessesByName("OpenSong");
-             if (pname.Count() > 0) //opensong is not already open
-             {
-                  MessageBox.Show("OpenSong is already open");
-             }
-             else
-             {
-                 System.Diagnostics.Process.Start(Settings.ExtAppsAndDir.OpenSongExecutable);
-             }
-         }
+        public static void launchOpenSong()
+        {
+            //first check that opensong is not already running
+            Process[] pname = Process.GetProcessesByName("OpenSong");
+            if (pname.Count() > 0) //opensong is not already open
+            {
+                MessageBox.Show("There is already an instance of OpenSong open");
+            }
+            else
+            {
+                System.Diagnostics.Process.Start(Settings.ExtAppsAndDir.OpenSongExecutable);
+            }
+        }
 
 
 
