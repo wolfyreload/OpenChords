@@ -22,6 +22,7 @@ namespace OpenChords.Entities
         public ShortcutKey CapoDown { get; set; }
         public ShortcutKey AutoFormatSong { get; set; }
         public ShortcutKey PrintSongHtml { get; set; }
+        public ShortcutKey ExportSetToOpenSong { get; set; }
         public ShortcutKey ShowHelp { get; set; }
         public ShortcutKey RefreshSongList { get; set; }
         public ShortcutKey RefreshSetList { get; set; }
@@ -56,6 +57,7 @@ namespace OpenChords.Entities
             CapoDown = new ShortcutKey("D7", UseControl: true);
             AutoFormatSong = new ShortcutKey("R", UseControl: true);
             PrintSongHtml = new ShortcutKey("P", UseControl: true);
+            ExportSetToOpenSong = new ShortcutKey("O", UseControl: true);
             ShowHelp = new ShortcutKey("F1");
             RefreshSongList = new ShortcutKey("F5");
             RefreshSetList = new ShortcutKey("F5", UseControl: true);

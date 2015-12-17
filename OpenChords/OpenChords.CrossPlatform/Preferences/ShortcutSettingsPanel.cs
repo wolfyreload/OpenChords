@@ -40,6 +40,7 @@ namespace OpenChords.CrossPlatform.Preferences
                         new ShortcutKeyPicker("Delete Song", shortcutSettings.DeleteSong ),
                         new ShortcutKeyPicker("Auto Format Song", shortcutSettings.AutoFormatSong ),
                         new ShortcutKeyPicker("Print Song Html", shortcutSettings.PrintSongHtml ),
+                        new ShortcutKeyPicker("Export Set To OpenSong", shortcutSettings.ExportSetToOpenSong ),
                         new ShortcutKeyPicker("Add Song To Set", shortcutSettings.AddSongToSet ),
                         new ShortcutKeyPicker("Select Random Song", shortcutSettings.SelectRandomSong ),
                         new ShortcutKeyPicker("Refresh Song List", shortcutSettings.RefreshSongList ),

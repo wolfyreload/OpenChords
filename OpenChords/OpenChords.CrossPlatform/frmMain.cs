@@ -164,7 +164,7 @@ namespace OpenChords.CrossPlatform
             var commandExportToTabletAllSongsHtml = MenuHelper.GetCommand("All Songs", Graphics.ImageAll, Tag: ExportOption.All);
             commandExportToTabletAllSongsHtml.Executed += exportToTabletHtml;
             var menuItemExportToTabletHtml = new ButtonMenuItem() { Text = "Export To &Tablet", Items = { commandExportToTabletSongHtml, commandExportToTabletSetHtml, commandExportToTabletAllSongsHtml }, Image = Graphics.ImageHtml };
-            var commandExportCurrentSetToOpenSong = MenuHelper.GetCommand("Current Set", Graphics.ImageSet, Tag: ExportOption.Set);
+            var commandExportCurrentSetToOpenSong = MenuHelper.GetCommand("Current Set", Graphics.ImageOpenSong, shortcutKeys.ExportSetToOpenSong, Tag: ExportOption.Set);
             commandExportCurrentSetToOpenSong.Executed += exportToOpenSong;
             var menuItemExportToOpenSong = new ButtonMenuItem() { Text = "Export To &OpenSong", Items = { commandExportCurrentSetToOpenSong }, Image = Graphics.ImageOpenSong };
             var menuItemExportSetList = MenuHelper.GetCommand("Export Set List", Graphics.ImageList);
