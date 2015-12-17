@@ -148,9 +148,10 @@ namespace OpenChords.CrossPlatform.SongEditor
         {
             if (gridSongs.SelectedItem == null) return;
             Song selectedSong = (Song)gridSongs.SelectedItem;
-            OpenChords.Functions.WebServer.CurrentSong = selectedSong;
+            Song songFromFileSystem = Song.loadSong(selectedSong.SongFileName);
+            OpenChords.Functions.WebServer.CurrentSong = songFromFileSystem;
             if (SongChanged != null)
-                SongChanged(this, selectedSong);
+                SongChanged(this, songFromFileSystem);
         }
 
         public void refreshPanel()

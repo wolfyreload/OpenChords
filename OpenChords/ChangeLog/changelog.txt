@@ -12,7 +12,7 @@ Fixed: Song filter not re-applied when refreshing song list
 Improvement: Allow filtering on phrase in addition to single word searching
 Improvement: Make searching more responsive
 Improvement: Show current song position when presenting a set
-Fixed: Changing a song while presenting not updating in set list
+Fixed: Changing a song while presenting not updating in set list or song list
 Improvement: Add back double-click to add a new song to set
 Improvement: Make shortcut keys customizable
 Improvement: Remove the need to restart OpenChords after changing settings
