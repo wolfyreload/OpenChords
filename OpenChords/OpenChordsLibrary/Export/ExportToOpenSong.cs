@@ -112,7 +112,10 @@ namespace OpenChords.Export
             }
             else
             {
-                System.Diagnostics.Process.Start(Settings.ExtAppsAndDir.OpenSongExecutable);
+                if (Settings.ExtAppsAndDir.IsOpenSongExecutableConfigured)
+                    System.Diagnostics.Process.Start(Settings.ExtAppsAndDir.OpenSongExecutable);
+                if (Settings.ExtAppsAndDir.IsOpenSongDataFolderConfigured)
+                    System.Diagnostics.Process.Start(Settings.ExtAppsAndDir.OpenSongSetFolder);
             }
         }
 
