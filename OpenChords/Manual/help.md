@@ -49,7 +49,7 @@ Present >> Present Song           Present the currently selected song in fullscr
 Present >> Present Set            Present the currently selected set in fullscreen mode
 Export  >> Export to print        Export to html using the print display settings
 Export  >> Export to tablet       Export to html using the tablet display settings
-Export  >> Export to openSong     Export songs to be used in OpenSong
+Export  >> Export to OpenSong     Export songs to be used in OpenSong
 Export  >> Export set list        Exports the current set to a text file for easy printing
 
 Song List
@@ -96,6 +96,7 @@ Del        Remove current song from set
 Ctrl+Up    Move song up in the set list
 Ctrl+Down  Move song down in the set list
 F12        Present current set
+Ctrl+O     Export current set to OpenSong
 
 Song Metadata
 -------------
@@ -205,6 +206,15 @@ These settings are used to tweak how your song will display/print
 **Fonts and Colors** - choose the Font, Size, Color and Font Style for almost all the elements that are displayed or printed
 
 **Backup/Restore Settings** - here you can backup your current settings to a file, restore backed up settings or reset your display settings back to default
+
+Shortcut Settings
+-----------------------------
+Customize keyboard shortcuts
+
+![](media/ShortcutSettings.png)
+
+>	**Note:** Not all shortcut keys will work e.g. using Ctrl+O in presentation screen will open the new window dialogue box.
+
 
 Song/Set Presentation
 =================
