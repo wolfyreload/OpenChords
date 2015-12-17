@@ -1,6 +1,6 @@
 % OpenChords Help Documentation
 % Author: Michael van Antwerpen
-% Date: 2015-10-30
+% Date: 2015-12-17
 
 Overview
 ========
@@ -14,7 +14,7 @@ OpenChords was built to solve two primary needs:
 
 * Easily transpose the key of a song
 
-* I wanted a fully paperless system because filing music is tedious 
+* I wanted a fully paperless system because filing music is tedious
 
 The closest application I could find is the fantastic presentation software by the name of OpenSong. OpenSong allowed me to easily transpose and make printed sheets of songs. However this didn't solve my filing issue. I was then inspired to make paperless song system for musicians. Hence, OpenChords was born.
 
@@ -34,7 +34,7 @@ Menu
 ---------------
 
 Menu Items                        Description                                                       
-------------------------------    ----------------------------------------------------------------- 
+------------------------------    -----------------------------------------------------------------
 File    >> Preferences            Change application settings and configure display options         
 File    >> Quite                  Exit OpenChords                                                   
 Song    >> File Operations        Create/Delete/Save/Revert a song                                  
@@ -43,7 +43,7 @@ Song    >> Song Key               Increase or decrease song key
 Song    >> Capo                   Increase or decrease song capo
 Song    >> Auto Format Song       Tries to format the song in the OpenChords format
 Song    >> Refresh                Refreshes the songs list
-Set     >> File Operations        Create/Delete/Save/Revert a set 
+Set     >> File Operations        Create/Delete/Save/Revert a set
 Set     >> Refresh                Refreshes the sets list
 Present >> Present Song           Present the currently selected song in fullscreen mode
 Present >> Present Set            Present the currently selected set in fullscreen mode
@@ -67,7 +67,7 @@ Context Menu Item   Description
 -----------------   -----------
 Add To Set          Adds the currently selected song to the current set
 Delete Song         Deletes the current song (note: this is not reverseable)
-Select random song  Picks a random song in the list 
+Select random song  Picks a random song in the list
 
 ###Shortcuts
 
@@ -155,7 +155,7 @@ Syntax       Line description
 Note Editor
 -----------
 These notes are to remind you how to perform the song while the song is
-being presented in full screen view. e.g. who is introing the song, when does the bass guitarist come in, who is singing solo parts in the verses.  
+being presented in full screen view. e.g. who is performing the song intro, when does the bass guitarist come in, who is singing solo parts in the verses.  
 
 >	Note: Make sure that the notes are in the same order as your presentation order
 
@@ -179,12 +179,12 @@ its songs, sets, display settings and exported files.
 **Opensong Songs and Sets Folder** - The path that OpenSong stores its
 Songs, Sets, Backgrounds and settings. usually "c:\{userfolder}\My Documents\OpenSong"
 
-**Http Server Enabled** - If this is enabled an embedded http server. note: you might get a firewall warning if this setting is enabled 
+**Http Server Enabled** - If this is enabled an embedded http server. note: you might get a firewall warning if this setting is enabled
 
-**Http Server Port** - The port on which the enbedded http server listens (default 8083)  
+**Http Server Port** - The port on which the embedded http server listens (default 8083)  
 
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-e.g. 
+e.g.
 http://{your ip address}:{selected port}/song will render the currently selected song on another device
 http://{your ip address}:{selected port}/set will render the currently selected set on another device
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -201,7 +201,7 @@ These settings are used to tweak how your song will display/print
 
 **Show notes** - whether to display the song notes when you presenting the song.
 
-**Song Orientation** - Either horisontal or vertical
+**Song Orientation** - Either horizontal or vertical
 
 **Fonts and Colors** - choose the Font, Size, Color and Font Style for almost all the elements that are displayed or printed
 
@@ -221,7 +221,7 @@ Song/Set Presentation
 
 ![](media/SongDisplay.png)
 
->	**Note:** Song elements are read from left to right if you using **horisontal screen orientation** otherwize the song elements will be from top to bottom
+>	**Note:** Song elements are read from left to right if you using **horizontal screen orientation** otherwise the song elements will be from top to bottom
 
 >	**Tip1**: You can use the "spacebar" key to move to the next page
 
@@ -230,7 +230,7 @@ Song/Set Presentation
 ###Menu
 
 Menu Item                    Description                             
----------------------------  --------------------------------------- 
+---------------------------  ---------------------------------------
 Refresh                      Refresh song with song on filesystem   
 Size                         Increase/Decrease font size                         
 Key                          Increase or decrease song key           
@@ -239,7 +239,7 @@ Navigation                   Go to next or previous song
 Other Options >> Metronome   Toggles the metronome                  
 Song List                    List of all songs in the current set   
 
-Hotkeys 
+Hotkeys
 ========
 There are a couple of shortcuts in OpenChords that will hopefully make your life a little easier.
 
@@ -263,7 +263,7 @@ Presentation shortcuts
 ----------------------
   Shortcut        Description
   ---------       -----------------------------------------------
-  Up			  Go to previous page
+  Up              Go to previous page
   Down/Space      Go to next page
   Ctrl+Left       Go to previous song                              
   Ctrl+Right      Go to next song                                  
@@ -275,12 +275,12 @@ Presentation shortcuts
   Crtl+9          Decreases song key                               
   Ctrl+8          Increases capo                                
   Crtl+7          Decreases capo      
-  Ctrl+Q		  Toggle chords  
-  Ctrl+W	      Toggle lyrics
-  Ctrl+E		  Toggle notes
+  Ctrl+Q          Toggle chords  
+  Ctrl+W          Toggle lyrics
+  Ctrl+E          Toggle notes
   Escape          Closes the song presentation window           
   Ctrl+M          Starts/Stops the metronome    
-  
+
 Tips and tricks
 ================
 
@@ -293,7 +293,7 @@ You want to use this feature when:
 
 1. Changing the song presentation order so the song notes get adjusted
 
-2. Adding a new song so you dont have to manually identitify which rows are chords
+2. Adding a new song so you don't have to manually identify which rows are chords
 
 > **Note:** You can use Ctrl+R to quickly reach this feature.
 
@@ -309,23 +309,23 @@ These are the steps you need to follow to use the embedded http server:
 2. Enable the **Http Server** and set the **Http Server Port**
 
 	> Acceptable ports are in the range of 1024-65535
-	
+
 	![](media/Http-Server.png)
 
 3. Restart OpenChords
 
 4. You might get a firewall warning. **Allow Access** for private (or domain/public if you wish) networks
-	
+
 	![](media/Firewall-Warning.png)
-	
+
 5. Connect to the OpenChords from another device using the address in the **http examples** text box
 
 	> in this sample you would connect to **http://192.168.0.4:8083/song**
-	
+
 	> Note: the device you connecting to OpenChords needs to be on the same network
 
 6. You can select the display settings to use and display the current set if you wish. See below for examples
-	
+
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 http://{your ip address}:{selected port}/song will render the currently selected song on another device
 http://{your ip address}:{selected port}/set will render the currently selected set on another device
@@ -336,7 +336,7 @@ http://{your ip address}:{selected port}/song/tablet will render the currently s
 Integration with OpenSong
 -------------------------
 
-OpenChords has been built to work well with OpenSong, which is an excellent church projection software. 
+OpenChords has been built to work well with OpenSong, which is an excellent church projection software.
 
 These are the steps you need to follow to be able to export songs and sets into OpenSong:
 
@@ -345,16 +345,16 @@ These are the steps you need to follow to be able to export songs and sets into 
 2. Set the location of your **OpenSong.exe** executable and the path to your **OpenSong data folder**
 
 	> OpenSong is typically located in c:/program files (x86)/OpenSong/OpenSong.exe
-	
+
 	> OpenSong Data Folder is typically located in c:/users/%Your User Name%/OpenSong
 
 	![](media/OpenSong-Integration.png)
-	
+
 3. Restart OpenChords
 
 4. Select Export >> Export To OpenSong >> Export Current Set and your set will be exported to OpenSong and then OpenSong will be opened
 
-5. Find your set in OpenSong and present your set. 
+5. Find your set in OpenSong and present your set.
 
 6. If you want to have images for each of your songs, you will need to make a **.jpg** (not a jpeg) file with the exact same name as the song you exporting (note: filenames are case sensitive). For clarity, please see the filesystem diagram below
 
