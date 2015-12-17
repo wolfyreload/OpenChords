@@ -17,6 +17,8 @@ Improvement: Add back double-click to add a new song to set
 Improvement: Make shortcut keys customizable
 Improvement: Remove the need to restart OpenChords after changing settings
 Improvement: Start presenting set on currently selected song in set list
+Improvement: Changed export set list to csv for easier readability
+
 
 OpenChords v2.0.3
 ============================================================================

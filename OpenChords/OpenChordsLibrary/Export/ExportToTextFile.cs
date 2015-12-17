@@ -14,12 +14,12 @@ namespace OpenChords.Export
         {
             StringBuilder sb = new StringBuilder();
             sb.Append(currentSet.setName + "\r\n\r\n");
+            sb.AppendFormat("{0}\t{1}\t{2}\r\n", "Song Title", "Key & Capo", "Order");
             foreach (Song song in currentSet.songList)
             {
-                sb.Append(string.Format("{0} {1}\r\n", song.generateLongTitle(), song.presentation));
-
+                sb.AppendFormat("{0}\t{1}\t{2}\r\n", song.title, song.getKeyAndCapo(), song.presentation);
             }
-            string filename = String.Format("{0}{1}_{2:yyyy-MM-dd_HHmmss}.txt", Settings.ExtAppsAndDir.PrintFolder, currentSet.setName, DateTime.Now);
+            string filename = String.Format("{0}{1}_{2:yyyy-MM-dd_HHmmss}.csv", Settings.ExtAppsAndDir.PrintFolder, currentSet.setName, DateTime.Now);
             string setText = sb.ToString();
             File.WriteAllText(filename, setText);
             return filename;
