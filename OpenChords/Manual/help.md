@@ -213,8 +213,22 @@ Customize keyboard shortcuts
 
 ![](media/ShortcutSettings.png)
 
->	**Note:** Not all shortcut keys will work e.g. using Ctrl+O in presentation screen will open the new window dialogue box.
+The following shortcut keys will not work because they are already used in IE (even though they are disabled):
 
+*  Ctrl+A
+*  Ctrl+F
+*  Ctrl+L
+*  Ctrl+N
+*  Ctrl+O
+*  Ctrl+P
+
+The following shortcut keys will not work because they are not recognised in Eto.Forms:
+
+*  OemPlus
+*  OemMinus
+*  Punctiation marks
+*  Square brackets
+*  Slash and backslash
 
 Song/Set Presentation
 =================

@@ -2,6 +2,7 @@
 using Eto.Forms;
 using Eto.Wpf.Forms;
 using System.Windows.Controls;
+using System.Windows.Input;
 
 namespace OpenChords.CrossPlatform.Executable.Controls
 {
@@ -15,9 +16,26 @@ namespace OpenChords.CrossPlatform.Executable.Controls
         public WebViewHandlerLite()
         {
             Browser = new WebBrowser();
+            Browser.PreviewKeyDown += Browser_ShortcutKeyPressed2;
             Control = Browser;
         }
 
+        //block shortcut keys I dont want
+        private void Browser_ShortcutKeyPressed2(object sender, System.Windows.Input.KeyEventArgs e)
+        {
+            if (e.Key == Key.A //select all
+                || e.Key == Key.F //find
+                || e.Key == Key.L //change url
+                || e.Key == Key.N //new window
+                || e.Key == Key.O //open url
+                || e.Key == Key.P //print
+                || e.Key == Key.OemPlus //key not recognised in Eto.Forms
+                || e.Key == Key.OemMinus //key not recognised in Eto.Forms
+                )
+                e.Handled = true;
+        }
+
+   
         public override void Focus()
         {
             Browser.Focus();
