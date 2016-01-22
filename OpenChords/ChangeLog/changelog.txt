@@ -1,6 +1,7 @@
 OpenChords v2.0.5
 ============================================================================
 Improvement: Disabled some keyboard shortcuts as they interfere with user experience during presentation mode
+Improvement: Upgrade all 3rd party packages to latest version
 
 OpenChords v2.0.4
 ============================================================================
