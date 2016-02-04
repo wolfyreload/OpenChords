@@ -35,6 +35,11 @@ namespace OpenChords.CrossPlatform.Preferences
             this.displayAndPrintSettings = displayAndPrintSettings;
 
             fontAndColorPanel = new FontAndColorPanel(displayAndPrintSettings);
+
+            cmbSongOrientation.Items.Add("Horizontal");
+            cmbSongOrientation.Items.Add("Vertical");
+
+
             updateGuiFromSettingsObject(this.displayAndPrintSettings);
 
             Content = splitter1 = new Splitter()
@@ -83,9 +88,6 @@ namespace OpenChords.CrossPlatform.Preferences
                 },
                 Panel2 = new GroupBox() { Text = "Preview", Content = webPreview }
             };
-
-            cmbSongOrientation.Items.Add("Horizontal");
-            cmbSongOrientation.Items.Add("Vertical");
 
             updatePreview();
             chkShowChords.CheckedChanged += FieldChanged;
