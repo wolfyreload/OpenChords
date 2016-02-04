@@ -52,7 +52,7 @@ namespace OpenChords.CrossPlatform.SongEditor
                 Items = { commandMoveSongUp, commandDeleteFromSet, commandMoveSongDown, commandSelectRandomSong}
             };
         
-        lbSongs.ContextMenu = menu;
+            lbSongs.ContextMenu = menu;
 
 
             cmbSets.ReadOnly = true;
@@ -60,6 +60,9 @@ namespace OpenChords.CrossPlatform.SongEditor
 
             lbSongs.KeyUp += lbSongs_KeyUp;
             CurrentSet = new Set();
+
+            cmbSets.Font = Helpers.FontHelper.GetFont(UserInterfaceSettings.Instance.TextboxFormat);
+            lbSongs.Font = Helpers.FontHelper.GetFont(UserInterfaceSettings.Instance.TextboxFormat);
         }
 
         private void selectRandomSong()

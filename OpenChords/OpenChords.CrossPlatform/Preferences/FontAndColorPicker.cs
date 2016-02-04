@@ -8,7 +8,7 @@ namespace OpenChords.CrossPlatform.Preferences
 {
     class FontAndColorPicker : TableRow
     {
-        public enum FontAndColorPickerType { FontAndColor, Color }
+        public enum FontAndColorPickerType { FontAndColor, Color, Font }
         protected Label lblElementName = new Label();
         protected ComboBox cmbFont = new ComboBox() { ReadOnly = true, AutoComplete = true };
         protected ComboBox cmbFontSize = new ComboBox() { AutoComplete = true, Width = 40 };
@@ -49,7 +49,7 @@ namespace OpenChords.CrossPlatform.Preferences
                 Cells.Add(cmbFontStyle);
                 Cells.Add(new Label());
             }
-            else
+            else if (colorPickerType == FontAndColorPickerType.Color)
             {
                 Cells = new System.Collections.ObjectModel.Collection<TableCell>();
                 Cells.Add(new Label() { Text = label });
@@ -58,6 +58,14 @@ namespace OpenChords.CrossPlatform.Preferences
                 Cells.Add(colorPicker);
                 Cells.Add(new Label());
             
+            }
+            else if (colorPickerType == FontAndColorPickerType.Font)
+            {
+                Cells = new System.Collections.ObjectModel.Collection<TableCell>();
+                Cells.Add(new Label() { Text = label });
+                Cells.Add(new TableCell() { Control = cmbFont, ScaleWidth = true });
+                Cells.Add(cmbFontSize);
+           
             }
         }
 

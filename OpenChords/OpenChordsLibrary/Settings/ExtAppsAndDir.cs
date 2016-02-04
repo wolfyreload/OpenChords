@@ -232,6 +232,15 @@ namespace OpenChords.Config
             }
         }
 
+        public string UserInterfaceSettingsFileName
+        {
+            get
+            {
+                string path = Path.Combine(SettingsFolder, "UserInterfaceSettings.xml");
+                path = fixPaths(path);
+                return path;
+            }
+        }
 
         public bool IsOpenSongDataFolderConfigured
         {

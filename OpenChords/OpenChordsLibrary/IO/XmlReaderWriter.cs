@@ -168,6 +168,26 @@ namespace OpenChords.IO
             xmlWriter<DisplayAndPrintSettings>(fileName, settings);
         }
 
+        public static UserInterfaceSettings readUserInterfaceSettings(String fileName)
+        {
+            UserInterfaceSettings settings = null;
+            try
+            {
+                settings = xmlReader<UserInterfaceSettings>(fileName);
+            }
+            catch (Exception ex)
+            {
+                logger.Error("Error reading settings", ex);
+            }
+
+            return settings;
+        }
+
+        public static void writeUserInterfaceSettings(String fileName, UserInterfaceSettings settings)
+        {
+            xmlWriter<UserInterfaceSettings>(fileName, settings);
+        }
+
         /// <summary>
         /// reads in the specified song set
         /// </summary>

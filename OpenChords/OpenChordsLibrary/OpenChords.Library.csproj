@@ -86,6 +86,7 @@
     </Compile>
     <Compile Include="Entities\ShortcutSettings.cs" />
     <Compile Include="Entities\StyleSheetBuilder.cs" />
+    <Compile Include="Entities\UserInterfaceSettings.cs" />
     <Compile Include="Export\ExportToTextFile.cs" />
     <Compile Include="Functions\Metronome.cs" />
     <Compile Include="Functions\WebServer.cs" />

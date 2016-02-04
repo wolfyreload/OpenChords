@@ -53,7 +53,7 @@ namespace OpenChords.CrossPlatform.SongEditor
                         Panel1 = new TableLayout()
                         {
                             Style = "padded-table",
-                            Rows = 
+                            Rows =
                             {
                                 new TableRow(new Label() { Text = "Title" }, new TableCell(txtTitle) { ScaleWidth = true}, new Label() { Text = "Key" }, txtKey),
                                 new TableRow(new Label() { Text = "Order" }, txtOrder, new Label() { Text = "Capo" }, txtCapo),
@@ -66,17 +66,17 @@ namespace OpenChords.CrossPlatform.SongEditor
                         Panel2 = new TableLayout()
                         {
                             Style = "padded-table",
-                            Rows = 
+                            Rows =
                             {
                                 new TableRow(new Label() { Text = "Tempo" }, cmbTempo),
                                 new TableRow(new Label() { Text = "Signature" }, cmbSignature),
                                 new TableRow(new Label() { Text = "ccli" }, txtCCLI),
                                 new TableRow(new Label() { Text = "Reference" }, txtReference),
                                 null,
-                        
+
                             }
                         }
-                        
+
                     }
                 },
                 //lyrics and notes
@@ -104,17 +104,35 @@ namespace OpenChords.CrossPlatform.SongEditor
             {
                 cmbTempo.Items.Add(tempo);
             }
-                
+
 
             //set font size for notes and lyrics
-            txtLyrics.Font = new Font(FontFamilies.Monospace, 16);
-            txtNotes.Font = new Font(FontFamilies.Monospace, 16);
-			txtLyrics.Wrap = false;
-			txtNotes.Wrap = false;
+            setUserInterfaceFonts();
             CurrentSong = new Song();
 
             this.SizeChanged += SongMetadataPanel_SizeChanged;
         }
+
+        private void setUserInterfaceFonts()
+        {
+            txtLyrics.Font = Helpers.FontHelper.GetFont(UserInterfaceSettings.Instance.LyricsFormat);
+            txtNotes.Font = Helpers.FontHelper.GetFont(UserInterfaceSettings.Instance.NoteFormat);
+            txtTitle.Font = Helpers.FontHelper.GetFont(UserInterfaceSettings.Instance.TextboxFormat);
+            txtAuther.Font = Helpers.FontHelper.GetFont(UserInterfaceSettings.Instance.TextboxFormat);
+            txtOrder.Font = Helpers.FontHelper.GetFont(UserInterfaceSettings.Instance.TextboxFormat);
+            txtCopyright.Font = Helpers.FontHelper.GetFont(UserInterfaceSettings.Instance.TextboxFormat);
+            txtKey.Font = Helpers.FontHelper.GetFont(UserInterfaceSettings.Instance.TextboxFormat);
+            txtCapo.Font = Helpers.FontHelper.GetFont(UserInterfaceSettings.Instance.TextboxFormat);
+            txtBpm.Font = Helpers.FontHelper.GetFont(UserInterfaceSettings.Instance.TextboxFormat);
+            cmbSignature.Font = Helpers.FontHelper.GetFont(UserInterfaceSettings.Instance.TextboxFormat);
+            cmbTempo.Font = Helpers.FontHelper.GetFont(UserInterfaceSettings.Instance.TextboxFormat);
+            txtCCLI.Font = Helpers.FontHelper.GetFont(UserInterfaceSettings.Instance.TextboxFormat);
+            txtReference.Font = Helpers.FontHelper.GetFont(UserInterfaceSettings.Instance.TextboxFormat);
+            txtLyrics.Wrap = false;
+            txtNotes.Wrap = false;
+        }
+
+        
 
         void SongMetadataPanel_SizeChanged(object sender, EventArgs e)
         {

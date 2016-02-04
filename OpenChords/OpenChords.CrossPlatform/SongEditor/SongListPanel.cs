@@ -78,6 +78,7 @@ namespace OpenChords.CrossPlatform.SongEditor
             gridSongs.ColumnHeaderClick += GridSongs_ColumnHeaderClick;
             gridSongs.MouseDoubleClick += GridSongs_MouseDoubleClick;
 
+            txtSearch.Font = Helpers.FontHelper.GetFont(UserInterfaceSettings.Instance.TextboxFormat);
         }
 
         private void GridSongs_ColumnHeaderClick(object sender, GridColumnEventArgs e)
