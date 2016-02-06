@@ -24,6 +24,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution 
 		ChangeLog\changelog.txt = ChangeLog\changelog.txt
 		Manual\help.md = Manual\help.md
 		SolutionInfo.cs = SolutionInfo.cs
+		OpenChords.Setup\OpenChords.Setup.iss = OpenChords.Setup\OpenChords.Setup.iss
 	EndProjectSection
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OpenChords.Tests", "OpenChords.Tests\OpenChords.Tests.csproj", "{EA3C7C27-B707-4FD9-BF2B-BF5FB711E0C3}"

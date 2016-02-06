@@ -4,7 +4,7 @@
 [Setup]
 AppName=OpenChords
 UninstallDisplayName=OpenChords
-AppVersion={#AppVersion} Beta
+AppVersion={#AppVersion}
 DefaultDirName={pf}\OpenChords
 DefaultGroupName=OpenChords
 UninstallDisplayIcon={app}\OpenChords.exe
