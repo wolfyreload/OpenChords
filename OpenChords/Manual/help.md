@@ -1,6 +1,6 @@
 % OpenChords Help Documentation
 % Author: Michael van Antwerpen
-% Date: 2015-12-17
+% Date: 2016-02-06
 
 Overview
 ========
@@ -229,6 +229,18 @@ The following shortcut keys will not work because they are not recognised in Eto
 *  Punctiation marks
 *  Square brackets
 *  Slash and backslash
+
+User Interface Settings
+-----------------------------
+These settings allow you to change the fonts and font sizes used in the lyric/notes editor screens
+
+![](media/UserInterfaceSettings.png)
+
+**Lyrics** - change the font and font size of the "Chords/Lyrics Editor"
+
+**Notes** - change the font and font size of the "Notes Editor"
+
+**Textboxes** - change the font and font size of all the "Song Metadata" textboxes and search boxes
 
 Song/Set Presentation
 =================
