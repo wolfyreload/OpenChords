@@ -17,8 +17,23 @@ namespace OpenChords.CrossPlatform.Executable.Controls
         {
             Browser = new WebBrowser();
             Browser.PreviewKeyDown += Browser_ShortcutKeyPressed2;
+            Browser.LoadCompleted += Browser_LoadCompleted;
             Control = Browser;
+
         }
+
+        /// <summary>
+        /// disable context menu
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void Browser_LoadCompleted(object sender, System.Windows.Navigation.NavigationEventArgs e)
+        {
+            var document = Browser.Document as mshtml.HTMLDocumentEvents2_Event;
+            document.oncontextmenu += obj => false;
+        }
+
+
 
         //block shortcut keys I dont want
         private void Browser_ShortcutKeyPressed2(object sender, System.Windows.Input.KeyEventArgs e)
