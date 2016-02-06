@@ -2,6 +2,7 @@ OpenChords v2.1.0
 ============================================================================
 Improvement: Disable context menu in presentation screen in Windows
 Improvement: Add "User Interface Settings" section to the help documentation
+Improvement: Added basic instructions for using OpenChords for Linux users
 
 OpenChords v2.0.5
 ============================================================================
