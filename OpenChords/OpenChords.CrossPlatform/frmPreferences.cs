@@ -39,7 +39,11 @@ namespace OpenChords.CrossPlatform
             Content = tabControl;
 
             tabControl.SelectedIndexChanged += TabControl_SelectedIndexChanged;
-            loadSelectedTab(tabControl);
+
+            //TabControl_SelectedIndexChanged runs without initial invocation add exception for windows system
+            if (Eto.Platform.Instance.IsWpf)   
+                loadSelectedTab(tabControl);
+
             this.Closing += frmPreferences_Closing;
         }
 
