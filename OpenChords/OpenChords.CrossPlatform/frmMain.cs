@@ -309,6 +309,10 @@ namespace OpenChords.CrossPlatform
         {
             ucSetListPanel.saveSetState();
             ucSetListPanel.saveSetBeforeClosing();
+
+            //shutdown the webserver if one is running
+            if (webserver != null)
+                webserver.Dispose();
         }
 
         void SelectedSongChanged(object sender, Entities.Song e)
