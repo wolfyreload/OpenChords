@@ -11,51 +11,91 @@ namespace OpenChords.CrossPlatform
 {
     public class frmPreferences : Form
     {
-        private GeneralSettingsPreferences generalSettingsPreferences = new Preferences.GeneralSettingsPreferences(FileAndFolderSettings.loadSettings());
-        private DisplayAndPrintPreferences displayPreferences;
-        private DisplayAndPrintPreferences printPreferences;
-        private DisplayAndPrintPreferences tabletPreferences;
-        private ShortcutSettingsPreferences shortcutPreferences;
-        private UserInterfacePreferences userInterfacePreferences;
+        private Song _songToPreview;
 
         public frmPreferences(Song songToPreview)
         {
+            _songToPreview = songToPreview;
+
             this.Title = "Preferences";
             this.Icon = Graphics.Icon;
             this.Width = 1024;
             this.Height = 768;
 
-            displayPreferences = new Preferences.DisplayAndPrintPreferences(DisplayAndPrintSettings.loadSettings(DisplayAndPrintSettingsType.DisplaySettings), songToPreview);
-            printPreferences = new Preferences.DisplayAndPrintPreferences(DisplayAndPrintSettings.loadSettings(DisplayAndPrintSettingsType.PrintSettings), songToPreview);
-            tabletPreferences = new Preferences.DisplayAndPrintPreferences(DisplayAndPrintSettings.loadSettings(DisplayAndPrintSettingsType.TabletSettings), songToPreview);
-            shortcutPreferences = new ShortcutSettingsPreferences(Entities.ShortcutSettings.LoadSettings());
-            userInterfacePreferences = new UserInterfacePreferences();
-
-            Content = new TabControl()
+            var tabControl = new TabControl()
             {
-                Pages = 
+                Pages =
                  {
-                     new TabPage() { Text = "General Settings", Content = generalSettingsPreferences },
-                     new TabPage() { Text = "Display Settings", Content = displayPreferences },
-                     new TabPage() { Text = "Print Settings", Content = printPreferences },
-                     new TabPage() { Text = "Tablet Settings", Content = tabletPreferences },
-                     new TabPage() { Text = "Shortcut Settings", Content = shortcutPreferences },
-                     new TabPage() { Text = "User Interface Settings", Content = userInterfacePreferences }
+                     new TabPage() { Text = "General Settings" },
+                     new TabPage() { Text = "Display Settings" },
+                     new TabPage() { Text = "Print Settings" },
+                     new TabPage() { Text = "Tablet Settings" },
+                     new TabPage() { Text = "Shortcut Settings" },
+                     new TabPage() { Text = "User Interface Settings" }
 
                  }
             };
 
+            Content = tabControl;
+
+            tabControl.SelectedIndexChanged += TabControl_SelectedIndexChanged;
+            loadSelectedTab(tabControl);
             this.Closing += frmPreferences_Closing;
+        }
+
+        private void TabControl_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            loadSelectedTab(sender as TabControl);
+        }
+
+        private void loadSelectedTab(TabControl tabControl)
+        {
+            var selectedTabPage = tabControl.SelectedPage;
+            var selectedTabControl = tabControl.SelectedPage.Content;
+
+            //if the control is already loaded we have nothing that we need to do
+            if (selectedTabControl != null) return;
+
+            //load the tab
+            switch (selectedTabPage.Text)
+            {
+                case "General Settings":
+                    selectedTabPage.Content = new Preferences.GeneralSettingsPreferences(FileAndFolderSettings.loadSettings());
+                    break;
+                case "Display Settings":
+                    selectedTabPage.Content = new Preferences.DisplayAndPrintPreferences(DisplayAndPrintSettings.loadSettings(DisplayAndPrintSettingsType.DisplaySettings), _songToPreview);
+                    break;
+                case "Print Settings":
+                    selectedTabPage.Content = new Preferences.DisplayAndPrintPreferences(DisplayAndPrintSettings.loadSettings(DisplayAndPrintSettingsType.PrintSettings), _songToPreview);
+                    break;
+                case "Tablet Settings":
+                    selectedTabPage.Content = new Preferences.DisplayAndPrintPreferences(DisplayAndPrintSettings.loadSettings(DisplayAndPrintSettingsType.TabletSettings), _songToPreview);
+                    break;
+                case "Shortcut Settings":
+                    selectedTabPage.Content = new ShortcutSettingsPreferences(Entities.ShortcutSettings.LoadSettings());
+                    break;
+                case "User Interface Settings":
+                    selectedTabPage.Content = new UserInterfacePreferences();
+                    break;
+            }
         }
 
         void frmPreferences_Closing(object sender, System.ComponentModel.CancelEventArgs e)
         {
-            generalSettingsPreferences.SavePreferences();
-            displayPreferences.SavePreferences();
-            printPreferences.SavePreferences();
-            tabletPreferences.SavePreferences();
-            shortcutPreferences.SavePreferences();
-            userInterfacePreferences.SavePreferences();
+            var tabControl = this.Content as TabControl;
+            foreach (var control in tabControl.Pages)
+            {
+                var content = control.Content;
+
+                if (content is DisplayAndPrintPreferences)
+                    (content as DisplayAndPrintPreferences).SavePreferences();
+                else if (content is GeneralSettingsPreferences)
+                    (content as GeneralSettingsPreferences).SavePreferences();
+                else if (content is ShortcutSettingsPreferences)
+                    (content as ShortcutSettingsPreferences).SavePreferences();
+                else if (content is UserInterfacePreferences)
+                    (content as UserInterfacePreferences).SavePreferences();
+            }
         }
     }
 }

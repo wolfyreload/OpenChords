@@ -3,6 +3,7 @@ OpenChords v2.1.1
 Fixed: SessionSaveState getting saved outside of the settings folder
 Fixed: When http server is active OpenChords does not close property
 Fixed: OpenChords preference screen not resizable
+Fixed: Preference screen opens very slowly
 
 OpenChords v2.1.0
 ============================================================================
