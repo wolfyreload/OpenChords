@@ -196,7 +196,7 @@ namespace OpenChords.Config
         {
             get
             {
-                string path = Path.Combine(ApplicationDataFolder, "SessionSaveState");
+                string path = Path.Combine(SettingsFolder, "SessionSaveState");
                 path = fixPaths(path);
                 return path;
             }

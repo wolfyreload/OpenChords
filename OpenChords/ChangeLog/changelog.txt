@@ -1,3 +1,7 @@
+OpenChords v2.1.1
+============================================================================
+Fixed: SessionSaveState getting saved outside of the settings folder
+
 OpenChords v2.1.0
 ============================================================================
 Improvement: Disable context menu in presentation screen in Windows
