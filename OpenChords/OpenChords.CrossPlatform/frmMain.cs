@@ -251,14 +251,37 @@ namespace OpenChords.CrossPlatform
 
         void menuItemPreferences_Executed(object sender, EventArgs e)
         {
+            //check if there is already a preference screen open
+            var windowList = Application.Instance.Windows;
+            foreach (var window in windowList)
+            {
+                if (window.Title == "Preferences")
+                {
+                    window.Focus();
+                    return;
+                }
+            }
+
+            //get a song to use in the display/print/tablet settings preview
             Song tempSong = null;
             if (ucSongMetaDataPanel.CurrentSong.title != string.Empty)
                 tempSong = ucSongMetaDataPanel.CurrentSong;
             else
                 tempSong = Song.loadSong(Song.listOfAllSongs()[0]);
 
+            //make sure that the set list is saved
             ucSetListPanel.saveSetState();
-            new frmPreferences(tempSong).ShowModal(this);
+
+            //load preferences
+            var formPreferences = new frmPreferences(tempSong);
+            formPreferences.Show();
+
+            //handle when preferences screen is closed
+            formPreferences.Closing += FormPreferences_Closing;
+        }
+
+        private void FormPreferences_Closing(object sender, System.ComponentModel.CancelEventArgs e)
+        {
             refreshForm();
         }
 
