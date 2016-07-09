@@ -73,11 +73,28 @@
 		window.scroll(0,y);
 	}
 
+	//paint all elements with different css
+	function paintAllElementsWithCss() {
+		
+		var maxSongElementCount = getMaxSongElementIndex();
+		for (i = 1; i <= maxSongElementCount; i++) 
+		{
+			var element = document.getElementById("SongElement" + i);
+		
+			if (isSongElementCompletelyVisible(i))
+				element.setAttribute("class", "DisplaySongVerse");
+			else
+				element.setAttribute("class", "DisplaySongVerseOffPage");
+		}
+	
+	}
+
 	//scroll down by one screen
 	function scrollDown() {
 		var firstOffScreenElementIndex = findFirstOffScreenElementIndex();
 		if (firstOffScreenElementIndex != null) {
 			scrollToSongElement(firstOffScreenElementIndex);
+			paintAllElementsWithCss();
 		}
 	}
 
@@ -90,8 +107,13 @@
 		{
 			newCurrentElement--;
 			scrollToSongElement(newCurrentElement);
+			paintAllElementsWithCss();
 			if (isSongElementCompletelyInvisible(oldFirstVisible)) return;
 		}
+	}
+
+	window.onload = function() {
+		paintAllElementsWithCss();
 	}
 
 	//add keyboard binding

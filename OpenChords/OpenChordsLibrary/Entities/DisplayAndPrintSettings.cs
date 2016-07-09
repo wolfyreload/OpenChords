@@ -56,6 +56,7 @@ namespace OpenChords.Entities
 
         public string BackgroundColorHex { get; set; }
         public string VerseHeadingBackgroundColorHex { get; set; }
+        public string PartialVerseHeadingBackgroundColorHex { get; set; }
         public string VerseLyricsBackgroundColor1Hex { get; set; }
         public string VerseLyricsBackgroundColor2Hex { get; set; }
         public string VerseBorderColorHex { get; set; }
@@ -101,6 +102,14 @@ namespace OpenChords.Entities
             get { return ColorTranslator.FromHtml(VerseHeadingBackgroundColorHex); }
             set { VerseHeadingBackgroundColorHex = ColorTranslator.ToHtml(value); }
         }
+        
+        [XmlIgnore]
+        public Color PartialVerseHeadingBackgroundColor
+        {
+            get { return ColorTranslator.FromHtml(PartialVerseHeadingBackgroundColorHex); }
+            set { PartialVerseHeadingBackgroundColorHex = ColorTranslator.ToHtml(value); }
+        }
+
 
         [XmlIgnore]
         public Color VerseLyricsBackground1Color
@@ -267,6 +276,7 @@ namespace OpenChords.Entities
                 OrderColor2 = ColorTranslator.FromHtml("#FFFF80");
                 NoteColor = ColorTranslator.FromHtml("#80FF80");
                 VerseHeadingBackgroundColor = ColorTranslator.FromHtml("#490707");
+                PartialVerseHeadingBackgroundColor = ColorTranslator.FromHtml("#125003");
                 VerseLyricsBackground1Color = ColorTranslator.FromHtml("#000000");
                 VerseLyricsBackground2Color = ColorTranslator.FromHtml("#2E2424");
                 VerseBorderColor = ColorTranslator.FromHtml("#4C4848");
@@ -303,6 +313,7 @@ namespace OpenChords.Entities
                 OrderColor2 = ColorTranslator.FromHtml("#FFFF80");
                 NoteColor = ColorTranslator.FromHtml("#80FF80");
                 VerseHeadingBackgroundColor = ColorTranslator.FromHtml("#490707");
+                PartialVerseHeadingBackgroundColor = ColorTranslator.FromHtml("#490707");
                 VerseLyricsBackground1Color = ColorTranslator.FromHtml("#000000");
                 VerseLyricsBackground2Color = ColorTranslator.FromHtml("#2E2424");
                 VerseBorderColor = ColorTranslator.FromHtml("#4C4848");
@@ -338,6 +349,7 @@ namespace OpenChords.Entities
                 OrderColor1 = Color.Black;
                 OrderColor2 = Color.Gray;
                 VerseHeadingBackgroundColor = ColorTranslator.FromHtml("White");
+                PartialVerseHeadingBackgroundColor = ColorTranslator.FromHtml("White");
                 VerseLyricsBackground1Color = ColorTranslator.FromHtml("White");
                 VerseLyricsBackground2Color = ColorTranslator.FromHtml("White");
                 VerseBorderColor = ColorTranslator.FromHtml("Black");

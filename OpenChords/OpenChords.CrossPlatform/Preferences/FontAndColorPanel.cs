@@ -17,6 +17,7 @@ namespace OpenChords.CrossPlatform.Preferences
         private FontAndColorPicker notesColorPicker;
         private FontAndColorPicker backgroundColor;
         private FontAndColorPicker verseHeadingBackgroundColor;
+        private FontAndColorPicker paritalVerseHeadingBackgroundColor;
         private FontAndColorPicker verseLyricsBackgroundColor1;
         private FontAndColorPicker verseLyricsBackgroundColor2;
         private FontAndColorPicker verseLyricsBorderColor;
@@ -33,6 +34,7 @@ namespace OpenChords.CrossPlatform.Preferences
             notesColorPicker = new FontAndColorPicker("Notes", FontAndColorPicker.FontAndColorPickerType.FontAndColor);
             backgroundColor = new FontAndColorPicker("Background Color", FontAndColorPicker.FontAndColorPickerType.Color);
             verseHeadingBackgroundColor = new FontAndColorPicker("Verse Heading Background Color", FontAndColorPicker.FontAndColorPickerType.Color);
+            paritalVerseHeadingBackgroundColor = new FontAndColorPicker("Partial Heading Background Color", FontAndColorPicker.FontAndColorPickerType.Color);
             verseLyricsBackgroundColor1 = new FontAndColorPicker("Verse Background Color 1", FontAndColorPicker.FontAndColorPickerType.Color);
             verseLyricsBackgroundColor2 = new FontAndColorPicker("Verse Background Color 2", FontAndColorPicker.FontAndColorPickerType.Color);
             verseLyricsBorderColor = new FontAndColorPicker("Verse Border Color", FontAndColorPicker.FontAndColorPickerType.Color);
@@ -62,6 +64,7 @@ namespace OpenChords.CrossPlatform.Preferences
                     notesColorPicker,
                     backgroundColor,
                     verseHeadingBackgroundColor,
+                    paritalVerseHeadingBackgroundColor,
                     verseLyricsBackgroundColor1,
                     verseLyricsBackgroundColor2,
                     verseLyricsBorderColor,
@@ -76,6 +79,7 @@ namespace OpenChords.CrossPlatform.Preferences
             notesColorPicker.ItemChanged += ColorPicker_ItemChanged;
             backgroundColor.ItemChanged += ColorPicker_ItemChanged;
             verseHeadingBackgroundColor.ItemChanged += ColorPicker_ItemChanged;
+            paritalVerseHeadingBackgroundColor.ItemChanged += ColorPicker_ItemChanged;
             verseLyricsBackgroundColor1.ItemChanged += ColorPicker_ItemChanged;
             verseLyricsBackgroundColor2.ItemChanged += ColorPicker_ItemChanged;
             verseLyricsBorderColor.ItemChanged += ColorPicker_ItemChanged;
@@ -96,6 +100,7 @@ namespace OpenChords.CrossPlatform.Preferences
             displayAndPrintSettings.NoteFormat = notesColorPicker.GetSongElementFormat();
             displayAndPrintSettings.BackgroundColor = backgroundColor.getColor();
             displayAndPrintSettings.VerseHeadingBackgroundColor = verseHeadingBackgroundColor.getColor();
+            displayAndPrintSettings.PartialVerseHeadingBackgroundColor = paritalVerseHeadingBackgroundColor.getColor();
             displayAndPrintSettings.VerseLyricsBackground1Color = verseLyricsBackgroundColor1.getColor();
             displayAndPrintSettings.VerseLyricsBackground2Color = verseLyricsBackgroundColor2.getColor();
             displayAndPrintSettings.VerseBorderColor = verseLyricsBorderColor.getColor();
@@ -113,6 +118,7 @@ namespace OpenChords.CrossPlatform.Preferences
             notesColorPicker.setFontFormat(displayAndPrintSettings.NoteFormat);
             backgroundColor.setColor(displayAndPrintSettings.BackgroundColor);
             verseHeadingBackgroundColor.setColor(displayAndPrintSettings.VerseHeadingBackgroundColor);
+            paritalVerseHeadingBackgroundColor.setColor(displayAndPrintSettings.PartialVerseHeadingBackgroundColor);
             verseLyricsBackgroundColor1.setColor(displayAndPrintSettings.VerseLyricsBackground1Color);
             verseLyricsBackgroundColor2.setColor(displayAndPrintSettings.VerseLyricsBackground2Color);
             verseLyricsBorderColor.setColor(displayAndPrintSettings.VerseBorderColor);

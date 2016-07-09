@@ -83,6 +83,25 @@ body {
     vertical-align: top;
 }
 
+.DisplaySongVerseOffPage {
+    padding: 5px;
+    margin-bottom: 20px;
+    break-inside: avoid-column; 
+    -webkit-column-break-inside: avoid;
+    border: 2px solid <%VerseBorderColor%>;
+    border-radius: 7px;
+    margin-right: 10px;
+    background: -webkit-gradient(linear, left top, left bottom, color-stop(0%, <%PartialHeadingBackgroundColor%>), color-stop(15%, <%VerseBackgroundColor2%>), color-stop(100%, <%VerseBackgroundColor1%>));
+	background: <%VerseBackgroundColor2%>; /* Old browsers */
+    background: -moz-linear-gradient(top,  <%PartialHeadingBackgroundColor%> 0%, <%VerseBackgroundColor1%> 15%, <%VerseBackgroundColor2%> 100%); /* FF3.6+ */
+    background: -o-linear-gradient(top,  <%PartialHeadingBackgroundColor%> 0%,<%VerseBackgroundColor1%> 15%, <%VerseBackgroundColor2%> 100%); /* Opera 11.10+ */
+    background: -ms-linear-gradient(top,  <%PartialHeadingBackgroundColor%> 0%,<%VerseBackgroundColor1%> 15%, <%VerseBackgroundColor2%> 100%); /* IE10+ */
+    background: linear-gradient(to bottom,  <%PartialHeadingBackgroundColor%> 0%,<%VerseBackgroundColor1%> 15%, <%VerseBackgroundColor2%> 100%); /* W3C */
+    filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='<%VerseBackgroundColor1%>', endColorstr='<%VerseBackgroundColor2%>',GradientType=0 ); /* IE6-9 */
+    display: <%SongOrientation%>;
+    vertical-align: top;
+}
+
 .DisplaySongName {
     -webkit-column-break-inside: avoid;
     font-size: <%TitleFontSize%>px;

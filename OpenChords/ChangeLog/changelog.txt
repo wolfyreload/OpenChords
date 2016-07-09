@@ -6,6 +6,7 @@ Fixed: OpenChords preference screen not resizable
 Fixed: Preference screen opens very slowly
 Fixed: Preference screen crashes OpenChords on Linux systems
 Fixed: Preference screen widen controls so font sizes are visible on Linux systems
+Improvement: Add "Partial Heading Background Color" to easily see if a song piece is not completely on the screen
 
 OpenChords v2.1.0
 ============================================================================

@@ -51,7 +51,7 @@ namespace OpenChords.Entities
             sb.Replace("<%HeadingBackgroundColor%>", _settings.VerseHeadingBackgroundColorHex);
             sb.Replace("<%VerseBackgroundColor1%>", _settings.VerseLyricsBackgroundColor1Hex);
             sb.Replace("<%VerseBackgroundColor2%>", _settings.VerseLyricsBackgroundColor2Hex);
-
+            sb.Replace("<%PartialHeadingBackgroundColor%>", _settings.PartialVerseHeadingBackgroundColorHex);
         }
 
         internal string GetStyleSheet()
