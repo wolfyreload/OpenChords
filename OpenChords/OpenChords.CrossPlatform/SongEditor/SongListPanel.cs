@@ -36,8 +36,8 @@ namespace OpenChords.CrossPlatform.SongEditor
                 {
                     Rows =
                     {
-                        new TableRow(gridSongs) { ScaleHeight = true },
                         txtSearch,
+                        new TableRow(gridSongs) { ScaleHeight = true },
                     }
                 }
             };
@@ -74,7 +74,6 @@ namespace OpenChords.CrossPlatform.SongEditor
             };
             gridSongs.ContextMenu = menu;
             _fullSongList = new List<Song>();     
-            txtSearch.Focus();
             gridSongs.ColumnHeaderClick += GridSongs_ColumnHeaderClick;
             gridSongs.MouseDoubleClick += GridSongs_MouseDoubleClick;
 
