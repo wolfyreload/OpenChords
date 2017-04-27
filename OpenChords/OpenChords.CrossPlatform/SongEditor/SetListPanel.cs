@@ -246,9 +246,12 @@ namespace OpenChords.CrossPlatform.SongEditor
         private void deleteSongFromSet()
         {
             if (lbSongs.SelectedIndex < 0) return;
+            var oldIndex = lbSongs.SelectedIndex;
             CurrentSet.removeSongFromSet(lbSongs.SelectedIndex);
             this.refreshSongList();
-            lbSongs.SelectedIndex = CurrentSet.indexOfCurrentSong;
+            if (oldIndex > CurrentSet.songList.Count - 1)
+                oldIndex = CurrentSet.songList.Count - 1;
+            lbSongs.SelectedIndex = oldIndex;
             SetChanged = true;
         }
 
