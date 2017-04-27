@@ -11,9 +11,9 @@ namespace OpenChords.CrossPlatform.Preferences
         public enum FontAndColorPickerType { FontAndColor, Color, Font }
         protected Label lblElementName = new Label();
         protected ComboBox cmbFont = new ComboBox() { ReadOnly = true, AutoComplete = true };
-        protected ComboBox cmbFontSize = new ComboBox() { AutoComplete = true, Width = 50 };
+        protected ComboBox cmbFontSize = new ComboBox() { AutoComplete = true, Width = 60 };
         protected ColorPicker colorPicker = new ColorPicker();
-        protected ComboBox cmbFontStyle = new ComboBox() { ReadOnly = true, AutoComplete = true, Width = 65};
+        protected ComboBox cmbFontStyle = new ComboBox() { ReadOnly = true, AutoComplete = true, Width = 75};
         public event EventHandler ItemChanged;
         public FontAndColorPicker(string label, FontAndColorPickerType colorPickerType, bool useMonospaceFontsOnly = false)
         {
