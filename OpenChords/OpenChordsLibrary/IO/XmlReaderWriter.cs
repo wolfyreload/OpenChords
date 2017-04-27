@@ -173,6 +173,8 @@ namespace OpenChords.IO
             UserInterfaceSettings settings = null;
             try
             {
+                if (!File.Exists(fileName))
+                    writeUserInterfaceSettings(fileName, new UserInterfaceSettings());
                 settings = xmlReader<UserInterfaceSettings>(fileName);
             }
             catch (Exception ex)
@@ -229,6 +231,8 @@ namespace OpenChords.IO
         {
             try
             {
+                if (!File.Exists(filename))
+                    WriteShortcutSettings(filename, new ShortcutSettings());
                 return xmlReader<ShortcutSettings>(filename);
             }
             catch (Exception Ex)
