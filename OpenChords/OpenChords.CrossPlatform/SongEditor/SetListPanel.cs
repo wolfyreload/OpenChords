@@ -101,6 +101,7 @@ namespace OpenChords.CrossPlatform.SongEditor
         void lbSongs_SelectedIndexChanged(object sender, EventArgs e)
         {
             if (lbSongs.SelectedIndex < 0) return;
+            CurrentSet.indexOfCurrentSong = lbSongs.SelectedIndex;
             Song song = getSelectedSong();
             if (SongChanged != null)
                 SongChanged(this, song);
@@ -238,7 +239,8 @@ namespace OpenChords.CrossPlatform.SongEditor
                 Helpers.PopupMessages.ShowErrorMessage(this, "Please select a set first");
                 return;
             }
-            CurrentSet.addSongToSet(e);
+            int positionToAddSong = CurrentSet.indexOfCurrentSong + 1;
+            CurrentSet.addSongToSet(positionToAddSong, e);
             this.refreshSongList();
             SetChanged = true;
         }
