@@ -87,8 +87,6 @@ namespace OpenChords.CrossPlatform.SongEditor
 
         private void GridSongs_ColumnHeaderClick(object sender, GridColumnEventArgs e)
         {
-            var gridSongList = (List<Song>)gridSongs.DataStore;
-        
             //determine sort order
             if (e.Column.HeaderText == _orderByColumn)
                 _isAscendingOrder = !_isAscendingOrder;
@@ -96,25 +94,7 @@ namespace OpenChords.CrossPlatform.SongEditor
                 _isAscendingOrder = true;
             _orderByColumn = e.Column.HeaderText;
 
-
-            //find the column that was clicked
-            Func<Song, string> columnOrderFuction = null;
-            if (_orderByColumn == "Title")
-                columnOrderFuction = s => s.title;
-            else if (_orderByColumn == "Sub-Folder")
-                columnOrderFuction = s => s.SongSubFolder;
-            else if (_orderByColumn == "Reference")
-                columnOrderFuction = s => padNumericPortion(s.hymn_number);
-            else if (_orderByColumn == "Author")
-                columnOrderFuction = s => s.author;
-            
-            //sort the grid
-            if (_isAscendingOrder)
-                gridSongList = gridSongList.OrderBy(columnOrderFuction).ToList();
-            else
-                gridSongList = gridSongList.OrderByDescending(columnOrderFuction).ToList();
-
-            gridSongs.DataStore = gridSongList;
+            filterAndSortSongs();
         }
 
         //pad any numbers in the string so we can sort by them
@@ -175,7 +155,7 @@ namespace OpenChords.CrossPlatform.SongEditor
             {
                 _fullSongList.Add(Song.loadSong(songName));
             }
-            filterSongs();
+            filterAndSortSongs();
        
             gridSongs.SelectionChanged += lbSongs_SelectedIndexChanged;
             txtSearch.TextChanged += txtSearch_TextChanged;
@@ -235,13 +215,13 @@ namespace OpenChords.CrossPlatform.SongEditor
         {
             gridSongs.SelectionChanged -= lbSongs_SelectedIndexChanged;
 
-            filterSongs();
+            filterAndSortSongs();
 
             gridSongs.SelectionChanged += lbSongs_SelectedIndexChanged;
 
         }
 
-        private void filterSongs()
+        private void filterAndSortSongs()
         {
             string search = txtSearch.Text.ToUpper();
             string[] searchItems = getAllPhrasesSearchItems(search);
@@ -257,7 +237,35 @@ namespace OpenChords.CrossPlatform.SongEditor
                                                      || c.SongFileName.ToUpper().Contains(item) //filter on filename
                                                      || c.SongSubFolder.ToUpper().Contains(item)); //filter on sub folder
             }
+
+            //sort the songs
+            filteredList = sortSongs(filteredList);
+
             setListItems(filteredList.ToList());
+        }
+
+        private IQueryable<Song> sortSongs(IQueryable<Song> filteredList)
+        {
+            _orderByColumn = _orderByColumn ?? "Title";
+            
+            //find the column that was clicked
+            Func<Song, string> columnOrderFuction = null;
+            if (_orderByColumn == "Title")
+                columnOrderFuction = s => s.title;
+            else if (_orderByColumn == "Sub-Folder")
+                columnOrderFuction = s => s.SongSubFolder;
+            else if (_orderByColumn == "Reference")
+                columnOrderFuction = s => padNumericPortion(s.hymn_number);
+            else if (_orderByColumn == "Author")
+                columnOrderFuction = s => s.author;
+
+            //sort the grid
+            if (_isAscendingOrder)
+                filteredList = filteredList.OrderBy(columnOrderFuction).AsQueryable();
+            else
+                filteredList = filteredList.OrderByDescending(columnOrderFuction).AsQueryable();
+
+            return filteredList;
         }
 
         //split search string into search phrases
