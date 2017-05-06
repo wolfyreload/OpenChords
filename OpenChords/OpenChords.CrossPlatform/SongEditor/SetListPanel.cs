@@ -109,8 +109,8 @@ namespace OpenChords.CrossPlatform.SongEditor
 
         private Song getSelectedSong()
         {
-            var songName = lbSongs.SelectedValue.ToString();
-            var song = Song.loadSong(songName);
+            Song song = CurrentSet.songList[CurrentSet.indexOfCurrentSong];
+            song.revertToSaved();
             return song;
         }
 

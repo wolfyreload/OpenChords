@@ -12,6 +12,7 @@ namespace OpenChords.CrossPlatform.SongEditor
     {
         //controls
         protected TextBox txtTitle = new TextBox();
+        protected TextBox txtSubFolder = new TextBox();
         protected TextBox txtOrder = new TextBox();
         protected TextBox txtAuther = new TextBox();
         protected TextBox txtCopyright = new TextBox();
@@ -56,9 +57,10 @@ namespace OpenChords.CrossPlatform.SongEditor
                             Rows =
                             {
                                 new TableRow(new Label() { Text = "Title" }, new TableCell(txtTitle) { ScaleWidth = true}, new Label() { Text = "Key" }, txtKey),
-                                new TableRow(new Label() { Text = "Order" }, txtOrder, new Label() { Text = "Capo" }, txtCapo),
-                                new TableRow(new Label() { Text = "Author" }, txtAuther, new Label(), radioListSharpsOrFlats ),
-                                new TableRow(new Label() { Text = "Copyright" }, txtCopyright, new Label() {Text = "Bpm"}, txtBpm ),
+                                new TableRow(new Label() { Text = "Sub-Folder" }, txtSubFolder, new Label() { Text = "Capo" }, txtCapo),
+                                new TableRow(new Label() { Text = "Order" }, txtOrder, new Label(), radioListSharpsOrFlats ),
+                                new TableRow(new Label() { Text = "Author" }, txtAuther, new Label() {Text = "Bpm"}, txtBpm ),
+                                new TableRow(new Label() { Text = "Copyright" }, txtCopyright),
                                 null,
                             }
                         },
@@ -118,6 +120,7 @@ namespace OpenChords.CrossPlatform.SongEditor
             txtLyrics.Font = Helpers.FontHelper.GetFont(UserInterfaceSettings.Instance.LyricsFormat);
             txtNotes.Font = Helpers.FontHelper.GetFont(UserInterfaceSettings.Instance.NoteFormat);
             txtTitle.Font = Helpers.FontHelper.GetFont(UserInterfaceSettings.Instance.TextboxFormat);
+            txtSubFolder.Font = Helpers.FontHelper.GetFont(UserInterfaceSettings.Instance.TextboxFormat);
             txtAuther.Font = Helpers.FontHelper.GetFont(UserInterfaceSettings.Instance.TextboxFormat);
             txtOrder.Font = Helpers.FontHelper.GetFont(UserInterfaceSettings.Instance.TextboxFormat);
             txtCopyright.Font = Helpers.FontHelper.GetFont(UserInterfaceSettings.Instance.TextboxFormat);
@@ -144,6 +147,7 @@ namespace OpenChords.CrossPlatform.SongEditor
         {
             //disable events
             txtTitle.TextChanged -= fieldTextChanged;
+            txtSubFolder.TextChanged -= fieldTextChanged;
             txtOrder.TextChanged -= fieldTextChanged;
             txtAuther.TextChanged -= fieldTextChanged;
             txtCopyright.TextChanged -= fieldTextChanged;
@@ -163,6 +167,7 @@ namespace OpenChords.CrossPlatform.SongEditor
 
             //events
             txtTitle.TextChanged += fieldTextChanged;
+            txtSubFolder.TextChanged += fieldTextChanged;
             txtOrder.TextChanged += fieldTextChanged;
             txtAuther.TextChanged += fieldTextChanged;
             txtCopyright.TextChanged += fieldTextChanged;
@@ -212,6 +217,7 @@ namespace OpenChords.CrossPlatform.SongEditor
                 txtKey.Text = CurrentSong.key;
                 txtCapo.Text = CurrentSong.Capo.ToString();
                 txtBpm.Text = CurrentSong.BeatsPerMinute.ToString();
+                txtSubFolder.Text = CurrentSong.SongSubFolder;
             }
             else
             {
@@ -228,6 +234,7 @@ namespace OpenChords.CrossPlatform.SongEditor
                 radioListSharpsOrFlats.SelectedIndex = 1;
                 txtKey.Text = "";
                 txtCapo.Text = "";
+                txtSubFolder.Text = "";
                 txtBpm.Text = "20";
             }
         }
@@ -251,6 +258,7 @@ namespace OpenChords.CrossPlatform.SongEditor
             CurrentSong.PreferFlats = (radioListSharpsOrFlats.SelectedIndex == 0);
             CurrentSong.key = txtKey.Text;
             CurrentSong.Capo = capoInt;
+            CurrentSong.SongSubFolder = txtSubFolder.Text;
             int tempBpm = 100;
             if (int.TryParse(txtBpm.Text, out tempBpm))
                 CurrentSong.BeatsPerMinute = tempBpm;
@@ -302,12 +310,9 @@ namespace OpenChords.CrossPlatform.SongEditor
                 Helpers.PopupMessages.ShowErrorMessage(this, "Song '{0}' already exists please choose another name", CurrentSong.title);
                 return false;
             }
-            //if the song name has changed delete the old song and put in the new name
-            bool nameChanged = CurrentSong.SongFileName != CurrentSong.title && CurrentSong.SongFileName != null;
-            if (nameChanged)
-                CurrentSong.deleteSong();
 
             //save the song
+            CurrentSong.deleteSong();
             bool isNewSong = CurrentSong.saveSong();
 
             //notify the user

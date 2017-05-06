@@ -53,6 +53,10 @@ namespace OpenChords.Entities
         internal string songFilePath { get; set; }
 
         [XmlIgnore]
+        public string SongSubFolder { get; set; }
+
+
+        [XmlIgnore]
         public int Capo
         {
             get
@@ -126,7 +130,7 @@ namespace OpenChords.Entities
             string filename = Settings.ExtAppsAndDir.SongsFolder + SongName;
             if (!File.Exists(filename))
                 throw new Exception(string.Format("Song: {0} does not exist", SongName));
-            Song song = XmlReaderWriter.readSong(filename);
+            Song song = XmlReaderWriter.readSong(Settings.ExtAppsAndDir.SongsFolder, SongName);
             return song;
 
         }
@@ -150,7 +154,7 @@ namespace OpenChords.Entities
             _justLyrics = null;
             if (this.title == "")
                 throw new Exception("Song title cannot be blank");
-            return XmlReaderWriter.writeSong(Settings.ExtAppsAndDir.SongsFolder + this.title, this);
+            return XmlReaderWriter.writeSong(Settings.ExtAppsAndDir.SongsFolder, this);
         }
 
         internal void saveSong(string destination)
@@ -168,7 +172,7 @@ namespace OpenChords.Entities
 
         public void revertToSaved()
         {
-            Song oldSave = loadSong(title);
+            Song oldSave = loadSong(Path.Combine(SongSubFolder, title));
             this.title = oldSave.title;
             this.notes = oldSave.notes;
             this.author = oldSave.author;
@@ -177,6 +181,7 @@ namespace OpenChords.Entities
             this.key = oldSave.key;
             this.lyrics = oldSave.lyrics;
             this.presentation = oldSave.presentation;
+            this.SongSubFolder = oldSave.SongSubFolder;
         }
 
         public void transposeKeyUp()
@@ -410,10 +415,11 @@ namespace OpenChords.Entities
             string htmlText = htmlExporter.GenerateHtml();
             string folder = null;
             if (settings.settingsType == DisplayAndPrintSettingsType.TabletSettings)
-                folder = Settings.ExtAppsAndDir.TabletFolder;
+                folder = Path.Combine(Settings.ExtAppsAndDir.TabletFolder, SongSubFolder);
             else
-                folder = Settings.ExtAppsAndDir.PrintFolder;
+                folder = Path.Combine(Settings.ExtAppsAndDir.PrintFolder, SongSubFolder);
             string destination = String.Format("{0}/{1}.html", folder, this.generateShortTitle());
+            new FileInfo(destination).Directory.Create();
             File.WriteAllText(destination, htmlText);
             return destination;
         }

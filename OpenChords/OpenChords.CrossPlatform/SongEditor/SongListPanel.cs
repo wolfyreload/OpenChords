@@ -59,6 +59,11 @@ namespace OpenChords.CrossPlatform.SongEditor
             });
             gridSongs.Columns.Add(new GridColumn
             {
+                DataCell = new TextBoxCell { Binding = Binding.Property<Song, string>(r => r.SongSubFolder) },
+                HeaderText = "Sub-Folder",
+            });
+            gridSongs.Columns.Add(new GridColumn
+            {
                 DataCell = new TextBoxCell { Binding = Binding.Property<Song, string>(r => r.hymn_number) },
                 HeaderText = "Reference",
             });
@@ -96,11 +101,13 @@ namespace OpenChords.CrossPlatform.SongEditor
             Func<Song, string> columnOrderFuction = null;
             if (_orderByColumn == "Title")
                 columnOrderFuction = s => s.title;
+            else if (_orderByColumn == "Sub-Folder")
+                columnOrderFuction = s => s.SongSubFolder;
             else if (_orderByColumn == "Reference")
                 columnOrderFuction = s => padNumericPortion(s.hymn_number);
             else if (_orderByColumn == "Author")
                 columnOrderFuction = s => s.author;
-
+            
             //sort the grid
             if (_isAscendingOrder)
                 gridSongList = gridSongList.OrderBy(columnOrderFuction).ToList();
@@ -148,10 +155,9 @@ namespace OpenChords.CrossPlatform.SongEditor
         {
             if (gridSongs.SelectedItem == null) return;
             Song selectedSong = (Song)gridSongs.SelectedItem;
-            Song songFromFileSystem = Song.loadSong(selectedSong.SongFileName);
-            OpenChords.Functions.WebServer.CurrentSong = songFromFileSystem;
+            OpenChords.Functions.WebServer.CurrentSong = selectedSong;
             if (SongChanged != null)
-                SongChanged(this, songFromFileSystem);
+                SongChanged(this, selectedSong);
         }
 
         public void refreshPanel()
@@ -248,7 +254,8 @@ namespace OpenChords.CrossPlatform.SongEditor
                                                      || c.getJustLyrics().Contains(item) //filter on lyrics
                                                      || c.hymn_number.ToUpper().Contains(item) //filter on reference
                                                      || c.ccli.ToUpper().Contains(item) //filter on ccli
-                                                     || c.SongFileName.ToUpper().Contains(item)); //filter on filename
+                                                     || c.SongFileName.ToUpper().Contains(item) //filter on filename
+                                                     || c.SongSubFolder.ToUpper().Contains(item)); //filter on sub folder
             }
             setListItems(filteredList.ToList());
         }

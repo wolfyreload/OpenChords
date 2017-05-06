@@ -110,6 +110,8 @@ namespace OpenChords.Entities
         public string path { get; set; }
         [XmlAttribute("transition")]
         public string transition { get; set; }
+        [XmlAttribute("openchords-sub-folder")]
+        public string OpenChordsSubFolder { get; set; }
 
         public setStyle style;
 
@@ -120,17 +122,20 @@ namespace OpenChords.Entities
             path = "OpenChords/";
             presentation = "";
             transition = "0";
+            OpenChordsSubFolder = "";
             initializeSetStyle();
         }
 
-        public XmlSetSong(string songName)
+        public XmlSetSong(Song song)
         {
-            name = songName;
+            name = song.title;
             type = "song";
-            path = "OpenChords/";
-            presentation = Song.loadSong(songName).presentation;
+            path = Path.Combine("OpenChords", song.SongSubFolder) + Path.DirectorySeparatorChar;
+            OpenChordsSubFolder = song.SongSubFolder;
+            presentation = song.presentation;
             transition = "0";
-            initializeSetStyle(songName);
+            string songLongName = Path.Combine(song.SongSubFolder, song.title);
+            initializeSetStyle(songLongName);
         }
 
         private void initializeSetStyle(string songName = null)
@@ -206,7 +211,7 @@ namespace OpenChords.Entities
             setSongs = new List<XmlSetSong>();
             foreach (Song song in songs)
             {
-                XmlSetSong temp = new XmlSetSong(song.SongFileName);
+                XmlSetSong temp = new XmlSetSong(song);
                 setSongs.Add(temp);
             }
         }
@@ -218,7 +223,7 @@ namespace OpenChords.Entities
 
         internal List<string> listOfSongNames()
         {
-            return setSongs.Select(s => s.name).ToList();
+            return setSongs.Select(s => Path.Combine(s.OpenChordsSubFolder, s.name)).ToList();
         }
     }
 

@@ -58,13 +58,15 @@ namespace OpenChords.IO
 		public static List<string> getDirectoryListingAsList (string path)
 		{
 			System.IO.DirectoryInfo dir = new System.IO.DirectoryInfo (path);
-			System.IO.FileInfo[] allFiles = dir.GetFiles ("*");
+			System.IO.FileInfo[] allFiles = dir.GetFiles ("*", System.IO.SearchOption.AllDirectories);
 			
 			//int size = allFiles.GetLength(0);
 			List<string> list = new List<string> ();
 			
 			for (int i = 0; i < allFiles.Length; i++) {
-				list.Add (allFiles [i].Name);
+                string songWithFullPath = allFiles[i].FullName;
+                string songNameWithSubFolder = songWithFullPath.Replace(path, "");
+                list.Add (songNameWithSubFolder);
 			}
 			
 			return list;

@@ -27,6 +27,7 @@ namespace OpenChords.IO
                 string xmlString = stringWriter.ToString();
                 xmlString = xmlString.Replace("\r", "");
                 xmlString = xmlString.Replace("\n", "\r\n");
+                new FileInfo(filename).Directory.Create(); //create subfolder if doesn't exist
                 File.WriteAllText(filename, xmlString);
             }
         }
@@ -44,13 +45,14 @@ namespace OpenChords.IO
         /// <summary>
         /// writes the current song to file
         /// </summary>
-        /// <param name="filename"></param>
-        public static bool writeSong(String filename, Song song)
+        /// <param name="basePath"></param>
+        public static bool writeSong(String basePath, Song song)
         {
-            bool isNewSong = !File.Exists(filename);
-            xmlWriter<Song>(filename, song);
-            song.SongFileName = Path.GetFileName(filename);
-            song.songFilePath = filename;
+            string fullSongFileName = Path.Combine(basePath, song.SongSubFolder, song.title);
+            bool isNewSong = !File.Exists(fullSongFileName);
+            xmlWriter<Song>(fullSongFileName, song);
+            song.SongFileName = song.title;
+            song.songFilePath = basePath;
             return isNewSong;
         }
 
@@ -58,13 +60,18 @@ namespace OpenChords.IO
         /// reads in the specified song
         /// </summary>
         /// <param name="filename"></param>
-        public static Song readSong(String filename)
+        public static Song readSong(String baseSongFolder, String songName)
         {
             try
             {
-                Song song = xmlReader<Song>(filename);
-                song.SongFileName = Path.GetFileName(filename); 
-                song.songFilePath = filename;
+                string fileName = Path.GetFileName(songName);
+                string fullPath = Path.Combine(baseSongFolder, songName);
+                Song song = xmlReader<Song>(fullPath);
+                song.SongFileName = fileName;
+                song.songFilePath = fullPath;
+                song.SongSubFolder = songName.Replace("\\", "/").Replace("/" + fileName, "");
+                if (song.SongSubFolder == songName)
+                    song.SongSubFolder = "";
                 return song;
             }
             catch (Exception Ex)

@@ -47,8 +47,7 @@ namespace OpenChords.Export
         {
             //write song
             var destinationSongFolder = Settings.ExtAppsAndDir.OpensongSongsFolder;
-            var destinationFile = destinationSongFolder + song.title;
-            song.saveSong(destinationFile);
+            song.saveSong(destinationSongFolder);
         }
 
         /// <summary>
