@@ -285,6 +285,14 @@ namespace OpenChords.Config
             }
         }
 
+        public bool PreferFlats
+        {
+            get
+            {
+                return settings.PreferFlats;
+            }
+        }
+
    
     }
 }

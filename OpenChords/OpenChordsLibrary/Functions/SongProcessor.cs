@@ -86,7 +86,7 @@ namespace OpenChords.Functions
 		public static void transposeKeyUp(Song song)
 		{
 	        var songVerses = SongVerse.getSongVersesNoOrder(song);
-
+            bool preferFlats = Settings.GlobalApplicationSettings.PreferFlats;
             //transpose each chord line
             foreach (var songVerse in songVerses)
             {
@@ -94,7 +94,7 @@ namespace OpenChords.Functions
                 {
                     var isChord = songVerse.IsChord[i];
                     if (isChord)
-                        songVerse.Lyrics[i] = tranposeLine(songVerse.Lyrics[i], song.PreferFlats);
+                        songVerse.Lyrics[i] = tranposeLine(songVerse.Lyrics[i], preferFlats);
                 }
             }
 
@@ -168,13 +168,13 @@ namespace OpenChords.Functions
             return buildLine.ToString();
 
 		}
-		
-		/// <summary>
-		/// transposes the key of a single chord of the song up by semi-tone
-		/// </summary>
-		/// <param name="line">this is a chord in one of the lines of the song</param>
-		/// <returns></returns>
-		public static string transposeChord(string chord, bool preferFlats)
+
+        /// <summary>
+        /// transposes the key of a single chord of the song up by semi-tone
+        /// </summary>
+        /// <param name="line">this is a chord in one of the lines of the song</param>
+        /// <returns></returns>
+        public static string transposeChord(string chord, bool preferFlats)
 		{
 			int size = chord.Length;
 

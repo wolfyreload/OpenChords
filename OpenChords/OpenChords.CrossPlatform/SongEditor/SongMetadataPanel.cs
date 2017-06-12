@@ -22,7 +22,6 @@ namespace OpenChords.CrossPlatform.SongEditor
         protected TextBox txtReference = new TextBox();
         protected TextBox txtKey = new TextBox();
         protected TextBox txtCapo = new TextBox();
-        protected RadioButtonList radioListSharpsOrFlats = new RadioButtonList();
         protected TextBox txtBpm = new TextBox();
         protected TextArea txtLyrics = new TextArea();
         protected TextArea txtNotes = new TextArea();
@@ -34,10 +33,7 @@ namespace OpenChords.CrossPlatform.SongEditor
 
         public SongMetadataPanel()
         {
-            //add radio button options
-            radioListSharpsOrFlats.Items.Add("Flats");
-            radioListSharpsOrFlats.Items.Add("Sharps");
-
+     
             //build ui
             this.Content = new Splitter()
             {
@@ -58,8 +54,8 @@ namespace OpenChords.CrossPlatform.SongEditor
                             {
                                 new TableRow(new Label() { Text = "Title" }, new TableCell(txtTitle) { ScaleWidth = true}, new Label() { Text = "Key" }, txtKey),
                                 new TableRow(new Label() { Text = "Sub-Folder" }, txtSubFolder, new Label() { Text = "Capo" }, txtCapo),
-                                new TableRow(new Label() { Text = "Order" }, txtOrder, new Label(), radioListSharpsOrFlats ),
-                                new TableRow(new Label() { Text = "Author" }, txtAuther, new Label() {Text = "Bpm"}, txtBpm ),
+                                new TableRow(new Label() { Text = "Order" }, txtOrder, new Label() {Text = "Bpm"}, txtBpm ),
+                                new TableRow(new Label() { Text = "Author" }, txtAuther ),
                                 new TableRow(new Label() { Text = "Copyright" }, txtCopyright),
                                 null,
                             }
@@ -213,7 +209,6 @@ namespace OpenChords.CrossPlatform.SongEditor
                 txtReference.Text = CurrentSong.hymn_number;
                 txtLyrics.Text = CurrentSong.lyrics;
                 txtNotes.Text = CurrentSong.notes;
-                radioListSharpsOrFlats.SelectedIndex = CurrentSong.PreferFlats ? 0 : 1;
                 txtKey.Text = CurrentSong.key;
                 txtCapo.Text = CurrentSong.Capo.ToString();
                 txtBpm.Text = CurrentSong.BeatsPerMinute.ToString();
@@ -231,7 +226,6 @@ namespace OpenChords.CrossPlatform.SongEditor
                 txtReference.Text = "";
                 txtLyrics.Text = "";
                 txtNotes.Text = "";
-                radioListSharpsOrFlats.SelectedIndex = 1;
                 txtKey.Text = "";
                 txtCapo.Text = "";
                 txtSubFolder.Text = "";
@@ -255,7 +249,6 @@ namespace OpenChords.CrossPlatform.SongEditor
             CurrentSong.hymn_number = txtReference.Text;
             CurrentSong.lyrics = txtLyrics.Text;
             CurrentSong.notes = txtNotes.Text;
-            CurrentSong.PreferFlats = (radioListSharpsOrFlats.SelectedIndex == 0);
             CurrentSong.key = txtKey.Text;
             CurrentSong.Capo = capoInt;
             CurrentSong.SongSubFolder = txtSubFolder.Text;
@@ -444,7 +437,6 @@ namespace OpenChords.CrossPlatform.SongEditor
             txtKey.ReadOnly = true;
             cmbSignature.ReadOnly = true;
             cmbTempo.ReadOnly = true;
-            radioListSharpsOrFlats.Enabled = false;
         }
     }
 }

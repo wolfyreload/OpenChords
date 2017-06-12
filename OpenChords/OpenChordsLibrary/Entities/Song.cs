@@ -37,7 +37,6 @@ namespace OpenChords.Entities
         public string key { get; set; }
         public string lyrics { get; set; }
         public string ccli { get; set; }
-        public string preferFlats { get; set; }
         public string tempo { get; set; }
         public string time_sig { get; set; }
         public string copyright { get; set; }
@@ -71,22 +70,7 @@ namespace OpenChords.Entities
             }
         }
 
-        [XmlIgnore]
-        public bool PreferFlats
-        {
-            get
-            {
-                var value = false;
-                if (!string.IsNullOrEmpty(preferFlats))
-                    bool.TryParse(preferFlats, out value);
-                return value;
-            }
-            set
-            {
-                preferFlats = value.ToString();
-            }
-        }
-
+    
         [XmlIgnore]
         public int BeatsPerMinute
         {
@@ -116,7 +100,6 @@ namespace OpenChords.Entities
 
             lyrics = "";
             notes = "";
-            preferFlats = "false";
             hymn_number = "";
             ccli = "";
             BeatsPerMinute = 100;
@@ -187,7 +170,7 @@ namespace OpenChords.Entities
         public void transposeKeyUp()
         {
             SongProcessor.transposeKeyUp(this);
-            this.key = SongProcessor.transposeChord(this.key, this.PreferFlats).TrimEnd();
+            this.key = SongProcessor.transposeChord(this.key, Settings.GlobalApplicationSettings.PreferFlats).TrimEnd();
         }
 
         public void transposeKeyDown()
@@ -448,18 +431,6 @@ namespace OpenChords.Entities
             return options;
         }
 
-
-
-
-
-
-        public void ToggleSharpsAndFlats()
-        {
-            this.PreferFlats = !this.PreferFlats;
-            this.transposeKeyUp();
-            this.transposeKeyDown();
-           
-        }
 
         public string getFullPath()
         {

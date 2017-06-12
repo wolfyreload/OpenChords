@@ -95,9 +95,7 @@ namespace OpenChords.CrossPlatform
             commandToggleLyrics.Executed += (s, e) => { toggleLyrics(); };
             var commandToggleNotes = MenuHelper.GetCommand("Toggle Notes", Graphics.ImageNotes, shortcutKeys.ToggleNotes);
             commandToggleNotes.Executed += (s, e) => { toggleNotes(); };
-            var commandToggleSharpsAndFlats = MenuHelper.GetCommand("Toggle Sharps/Flats", Graphics.ImageSharps);
-            commandToggleSharpsAndFlats.Executed += (s, e) => { toggleSharpsAndFlats(); };
-
+      
             //Metronome
             var commandToggleMetonome = MenuHelper.GetCommand("Toggle Metronome", Graphics.ImageMetronome, shortcutKeys.ToggleMetronome);
             commandToggleMetonome.Executed += commandToggleMetonome_Executed;
@@ -121,7 +119,7 @@ namespace OpenChords.CrossPlatform
                     new ButtonMenuItem() { Text = "&Key", Items = {commandSongIncreaseKey, commandSongDecreaseKey }, Image = Graphics.ImageKey},
                     new ButtonMenuItem() { Text = "&Capo", Items = { commandSongIncreaseCapo, commandSongDecreaseCapo }, Image = Graphics.ImageCapo},
                     menuItemNavigation,
-                    new ButtonMenuItem() { Text = "&Visibility", Items = { commandToggleChords, commandToggleLyrics, commandToggleNotes, commandToggleSharpsAndFlats }, Image = Graphics.ImageVisibility },
+                    new ButtonMenuItem() { Text = "&Visibility", Items = { commandToggleChords, commandToggleLyrics, commandToggleNotes }, Image = Graphics.ImageVisibility },
                     new ButtonMenuItem() { Text = "Other Options", Items = { commandToggleMetonome }, Image = Graphics.ImageOtherOptions },
                     menuItemSongList,
                     menuItemExit 
@@ -221,13 +219,6 @@ namespace OpenChords.CrossPlatform
                 CurrentSong.saveSong();
                 _SongChanged = false;
             }
-        }
-
-        private void toggleSharpsAndFlats()
-        {
-            CurrentSong.ToggleSharpsAndFlats();
-            _SongChanged = true;
-            drawSong();
         }
 
         private void populateSongListMenu(ButtonMenuItem menuItemSongList)

@@ -21,10 +21,15 @@ namespace OpenChords.CrossPlatform.Preferences
         private CheckBox chkHttpServerEnabled = new CheckBox();
         private TextBox txtHttpServerPort = new TextBox() { Width = 50 };
         private TextArea txtInterfaceHelp = new TextArea() { Height = 100 };
+        protected RadioButtonList radioListSharpsOrFlats = new RadioButtonList();
         private bool OptionsChanged;
 
         public GeneralSettingsPreferences(Entities.FileAndFolderSettings fileAndFolderSettings)
         {
+            //add radio button options
+            radioListSharpsOrFlats.Items.Add("Flats");
+            radioListSharpsOrFlats.Items.Add("Sharps");
+
             this.fileAndFolderSettings = fileAndFolderSettings;
 
             Content = new TableLayout()
@@ -39,6 +44,8 @@ namespace OpenChords.CrossPlatform.Preferences
                     new TableRow(new Label() { Text = "Http Server Enabled" }, chkHttpServerEnabled ),
                     new TableRow(new Label() { Text = "Http Server Port" }, txtHttpServerPort ),
                     new TableRow(new Label() { Text = "Http Examples" }, txtInterfaceHelp),
+                    new TableRow(new Label() { Text = "Sharp/Flat Key Preference" }, radioListSharpsOrFlats),
+
                     null
                 }
             };
@@ -49,6 +56,7 @@ namespace OpenChords.CrossPlatform.Preferences
             txtOpenSongDataPath.Text = fileAndFolderSettings.OpenSongSetsAndSongs;
             chkHttpServerEnabled.Checked = fileAndFolderSettings.HttpServerEnabled;
             txtHttpServerPort.Text = fileAndFolderSettings.HttpServerPort.ToString();
+            radioListSharpsOrFlats.SelectedIndex = fileAndFolderSettings.PreferFlats ? 0 : 1;
             setHelpOnInterfaces(chkHttpServerEnabled.Checked ?? false);
 
             //events
@@ -64,6 +72,7 @@ namespace OpenChords.CrossPlatform.Preferences
             cmdApplicationDataFolder.Click += CmdApplicationDataFolder_Click;
             cmdOpenSongExecutablePath.Click += CmdOpenSongExecutablePath_Click;
             cmdOpenSongSongsAndSetsPath.Click += CmdOpenSongSongsAndSetsPath_Click;
+            radioListSharpsOrFlats.SelectedIndexChanged += textChanged;
         }
 
         private void TxtHttpServerPort_LostFocus(object sender, EventArgs e)
@@ -197,6 +206,7 @@ namespace OpenChords.CrossPlatform.Preferences
             fileAndFolderSettings.OpenSongSetsAndSongs = txtOpenSongDataPath.Text;
             fileAndFolderSettings.HttpServerEnabled = chkHttpServerEnabled.Checked ?? false;
             fileAndFolderSettings.HttpServerPort = int.Parse(txtHttpServerPort.Text);
+            fileAndFolderSettings.PreferFlats = radioListSharpsOrFlats.SelectedIndex == 0;
 
             fileAndFolderSettings.saveSettings();
         }

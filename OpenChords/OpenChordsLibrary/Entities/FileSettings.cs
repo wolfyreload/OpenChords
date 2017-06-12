@@ -27,6 +27,7 @@ namespace OpenChords.Entities
         public string ApplicationDataFolder { get; set; }
         public bool HttpServerEnabled { get; set; }
         public int HttpServerPort { get; set; }
+        public bool PreferFlats { get; set; }
 
         [XmlIgnore]
         public string OpenChordsApplicationDirectory { get; private set; }
@@ -81,6 +82,7 @@ namespace OpenChords.Entities
                 ApplicationDataFolder = Environment.GetFolderPath(Environment.SpecialFolder.Personal) + "/OpenChords";
                 HttpServerPort = 8083;
                 HttpServerEnabled = false;
+                PreferFlats = false;
             }
             else
             {
@@ -90,6 +92,7 @@ namespace OpenChords.Entities
                 ApplicationDataFolder = "../Data";
                 HttpServerPort = 8083;
                 HttpServerEnabled = false;
+                PreferFlats = false;
             }
         }
         
