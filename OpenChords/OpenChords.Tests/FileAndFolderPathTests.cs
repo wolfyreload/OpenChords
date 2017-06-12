@@ -19,19 +19,19 @@ namespace OpenChords.Tests
             settings.ApplicationDataFolder = @"c:\OpenChords";
             settings.OpenSongSetsAndSongs = "../OpenSong";
             Settings.setup(settings);
-            Assert.AreEqual(Settings.ExtAppsAndDir.SongsFolder, @"c:\OpenChords\Songs\");
-            Assert.AreEqual(Settings.ExtAppsAndDir.SetsFolder, @"c:\OpenChords\Sets\");
-            Assert.AreEqual(Settings.ExtAppsAndDir.MediaFolder, @"c:\OpenChords\Media\");
-            Assert.AreEqual(Settings.ExtAppsAndDir.PrintFolder, @"c:\OpenChords\Export\Print\");
-            Assert.AreEqual(Settings.ExtAppsAndDir.TabletFolder, @"c:\OpenChords\Export\Tablet\");
+            Assert.AreEqual(Settings.GlobalApplicationSettings.SongsFolder, @"c:\OpenChords\Songs\");
+            Assert.AreEqual(Settings.GlobalApplicationSettings.SetsFolder, @"c:\OpenChords\Sets\");
+            Assert.AreEqual(Settings.GlobalApplicationSettings.MediaFolder, @"c:\OpenChords\Media\");
+            Assert.AreEqual(Settings.GlobalApplicationSettings.PrintFolder, @"c:\OpenChords\Export\Print\");
+            Assert.AreEqual(Settings.GlobalApplicationSettings.TabletFolder, @"c:\OpenChords\Export\Tablet\");
             var applicationDirectory = settings.OpenChordsApplicationDirectory;
             string expectedOpenSong_SongPath = Path.GetFullPath(Path.Combine(applicationDirectory, settings.OpenSongSetsAndSongs + "/Songs/OpenChords/"));
             string expectedOpenSong_BackgroundsPath = Path.GetFullPath(Path.Combine(applicationDirectory, settings.OpenSongSetsAndSongs + "/Backgrounds/"));
             string expectedOpenSong_Sets = Path.GetFullPath(Path.Combine(applicationDirectory, settings.OpenSongSetsAndSongs + "/Sets/"));
 
-            Assert.AreEqual(Settings.ExtAppsAndDir.OpensongSongsFolder, expectedOpenSong_SongPath);
-            Assert.AreEqual(Settings.ExtAppsAndDir.OpenSongSetFolder, expectedOpenSong_Sets);
-            Assert.AreEqual(Settings.ExtAppsAndDir.OpensongBackgroundsFolder, expectedOpenSong_BackgroundsPath);
+            Assert.AreEqual(Settings.GlobalApplicationSettings.OpensongSongsFolder, expectedOpenSong_SongPath);
+            Assert.AreEqual(Settings.GlobalApplicationSettings.OpenSongSetFolder, expectedOpenSong_Sets);
+            Assert.AreEqual(Settings.GlobalApplicationSettings.OpensongBackgroundsFolder, expectedOpenSong_BackgroundsPath);
         }
 
         private string getFullPath(FileAndFolderSettings settings, string part1, string part2)
@@ -59,15 +59,15 @@ namespace OpenChords.Tests
             string expectedOpenSong_Sets = getFullPath(settings, settings.OpenSongSetsAndSongs, "/Sets/");
             string expectedOpenSong_SongPath = getFullPath(settings, settings.OpenSongSetsAndSongs, "/Songs/OpenChords/");
 
-            Assert.AreEqual(Settings.ExtAppsAndDir.SongsFolder, expectedSongPath);
-            Assert.AreEqual(Settings.ExtAppsAndDir.SetsFolder, expectedSetsPath);
-            Assert.AreEqual(Settings.ExtAppsAndDir.MediaFolder, expectedMediaPath);
-            Assert.AreEqual(Settings.ExtAppsAndDir.PrintFolder, expectedPrintPath);
-            Assert.AreEqual(Settings.ExtAppsAndDir.TabletFolder, expectedTabletPath);
+            Assert.AreEqual(Settings.GlobalApplicationSettings.SongsFolder, expectedSongPath);
+            Assert.AreEqual(Settings.GlobalApplicationSettings.SetsFolder, expectedSetsPath);
+            Assert.AreEqual(Settings.GlobalApplicationSettings.MediaFolder, expectedMediaPath);
+            Assert.AreEqual(Settings.GlobalApplicationSettings.PrintFolder, expectedPrintPath);
+            Assert.AreEqual(Settings.GlobalApplicationSettings.TabletFolder, expectedTabletPath);
 
-            Assert.AreEqual(Settings.ExtAppsAndDir.OpensongSongsFolder, expectedOpenSong_SongPath);
-            Assert.AreEqual(Settings.ExtAppsAndDir.OpenSongSetFolder, expectedOpenSong_Sets);
-            Assert.AreEqual(Settings.ExtAppsAndDir.OpensongBackgroundsFolder, expectedOpenSong_BackgroundsPath);
+            Assert.AreEqual(Settings.GlobalApplicationSettings.OpensongSongsFolder, expectedOpenSong_SongPath);
+            Assert.AreEqual(Settings.GlobalApplicationSettings.OpenSongSetFolder, expectedOpenSong_Sets);
+            Assert.AreEqual(Settings.GlobalApplicationSettings.OpensongBackgroundsFolder, expectedOpenSong_BackgroundsPath);
         }
     }
 }

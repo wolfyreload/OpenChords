@@ -228,7 +228,7 @@ namespace OpenChords.CrossPlatform.SongEditor
             else
                 revertSet();
             string html = CurrentSet.getHtml(DisplayAndPrintSettings.loadSettings(DisplayAndPrintSettingsType.TabletSettings));
-            string fileName = string.Format("{0}/{1}.html", Settings.ExtAppsAndDir.PrintFolder, CurrentSet.setName);
+            string fileName = string.Format("{0}/{1}.html", Settings.GlobalApplicationSettings.PrintFolder, CurrentSet.setName);
             File.WriteAllText(fileName, html);
         }
 
@@ -312,7 +312,7 @@ namespace OpenChords.CrossPlatform.SongEditor
 
         internal void ExportToOpenSong()
         {
-            if (!Settings.ExtAppsAndDir.IsOpenSongDataFolderConfigured)
+            if (!Settings.GlobalApplicationSettings.IsOpenSongDataFolderConfigured)
             {
                 Helpers.PopupMessages.ShowErrorMessage(this, "Opensong data folder is not configured");
                 return;
@@ -366,18 +366,18 @@ namespace OpenChords.CrossPlatform.SongEditor
 
         private void showInExplorer(string songPath)
         {
-            string fileManager = OpenChords.Settings.ExtAppsAndDir.fileManager;
+            string fileManager = OpenChords.Settings.GlobalApplicationSettings.fileManager;
 
             if (string.IsNullOrEmpty(fileManager))
                 System.Diagnostics.Process.Start("Explorer", "/select, " + songPath);
             else
-                System.Diagnostics.Process.Start(fileManager, OpenChords.Settings.ExtAppsAndDir.SongsFolder);
+                System.Diagnostics.Process.Start(fileManager, OpenChords.Settings.GlobalApplicationSettings.SongsFolder);
         }
 
         internal void ExportToTextFile()
         {
             //get the filemanager for the filesystem
-            string fileManager = OpenChords.Settings.ExtAppsAndDir.fileManager;
+            string fileManager = OpenChords.Settings.GlobalApplicationSettings.fileManager;
             string filename = null;
 
             //get the filename

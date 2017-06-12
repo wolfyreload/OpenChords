@@ -25,7 +25,7 @@ namespace OpenChords.Web.App_Code
                 {
                     settingsFileName = HttpContext.Current.Request.Cookies["settingsFileName"].Value;
                 }
-                return OpenChords.Settings.ExtAppsAndDir.SettingsFolder + settingsFileName;
+                return OpenChords.Settings.GlobalApplicationSettings.SettingsFolder + settingsFileName;
             }
         }
 

@@ -19,7 +19,7 @@ namespace OpenChords.CrossPlatform
             this.Title = "OpenChords Help Documentation";
 
             this.Content =  webView = new WebView();
-            string manualHtmlFile = OpenChords.Settings.ExtAppsAndDir.manual;
+            string manualHtmlFile = OpenChords.Settings.GlobalApplicationSettings.manual;
             //var uri = new Uri(manualHtmlFile);
             webView.Url = new Uri(manualHtmlFile);
         }

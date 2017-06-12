@@ -19,7 +19,7 @@ namespace OpenChords.Export
             {
                 sb.AppendFormat("{0}\t{1}\t{2}\r\n", song.title, song.getKeyAndCapo(), song.presentation);
             }
-            string filename = String.Format("{0}{1}_{2:yyyy-MM-dd_HHmmss}.csv", Settings.ExtAppsAndDir.PrintFolder, currentSet.setName, DateTime.Now);
+            string filename = String.Format("{0}{1}_{2:yyyy-MM-dd_HHmmss}.csv", Settings.GlobalApplicationSettings.PrintFolder, currentSet.setName, DateTime.Now);
             string setText = sb.ToString();
             File.WriteAllText(filename, setText);
             return filename;

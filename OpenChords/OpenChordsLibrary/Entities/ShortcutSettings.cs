@@ -42,7 +42,7 @@ namespace OpenChords.Entities
         public ShortcutKey ToggleNotes { get; set; }
         public ShortcutKey ToggleMetronome { get; set; }
 
-        private static readonly string SettingsPath = Path.Combine(Settings.ExtAppsAndDir.SettingsFolder, "Shortcuts.xml");
+        private static readonly string SettingsPath = Path.Combine(Settings.GlobalApplicationSettings.SettingsFolder, "Shortcuts.xml");
 
         public ShortcutSettings()
         {

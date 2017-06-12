@@ -227,14 +227,14 @@ namespace OpenChords.CrossPlatform
 
         private void setupHttpServer()
         {
-            if (Settings.ExtAppsAndDir.HttpServerEnabled)
+            if (Settings.GlobalApplicationSettings.HttpServerEnabled)
             {
                 logger.Info("Starting Openchords web server");
 
                 if (webserver != null)
                     webserver.Dispose();
 
-                webserver = new OpenChords.Functions.WebServer(Settings.ExtAppsAndDir.HttpServerPort);
+                webserver = new OpenChords.Functions.WebServer(Settings.GlobalApplicationSettings.HttpServerPort);
                 webserver.CannotStartHttpServerEvent += Webserver_CannotStartHttpServerEvent;
             }
             else

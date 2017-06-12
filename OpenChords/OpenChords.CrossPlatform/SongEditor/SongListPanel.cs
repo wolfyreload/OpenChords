@@ -310,12 +310,12 @@ namespace OpenChords.CrossPlatform.SongEditor
 
         private void showInExplorer(string songPath)
         {
-            string fileManager = OpenChords.Settings.ExtAppsAndDir.fileManager;
+            string fileManager = OpenChords.Settings.GlobalApplicationSettings.fileManager;
 
             if (string.IsNullOrEmpty(fileManager))
                 System.Diagnostics.Process.Start("Explorer", string.Format("/select, \"{0}\"", songPath));
             else
-                System.Diagnostics.Process.Start(fileManager, OpenChords.Settings.ExtAppsAndDir.SongsFolder);
+                System.Diagnostics.Process.Start(fileManager, OpenChords.Settings.GlobalApplicationSettings.SongsFolder);
         }
     }
 }

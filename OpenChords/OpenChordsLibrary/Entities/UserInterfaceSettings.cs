@@ -39,14 +39,14 @@ namespace OpenChords.Entities
         //load settings file from indicated path
         public static UserInterfaceSettings loadSettings()
         {
-            var settings = XmlReaderWriter.readUserInterfaceSettings(Settings.ExtAppsAndDir.UserInterfaceSettingsFileName);
+            var settings = XmlReaderWriter.readUserInterfaceSettings(Settings.GlobalApplicationSettings.UserInterfaceSettingsFileName);
             if (settings == null) settings = new UserInterfaceSettings();
             return settings;
         }
 
         public void saveSettings()
         {
-            XmlReaderWriter.writeUserInterfaceSettings(Settings.ExtAppsAndDir.UserInterfaceSettingsFileName, this);
+            XmlReaderWriter.writeUserInterfaceSettings(Settings.GlobalApplicationSettings.UserInterfaceSettingsFileName, this);
         }
 
     }

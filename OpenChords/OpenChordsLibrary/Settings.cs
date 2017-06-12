@@ -14,16 +14,24 @@ namespace OpenChords
             _fileAndFolderSettings = new Config.ExtAppsAndDirClass(settings);
         }
 
-        public static OpenChords.Config.ExtAppsAndDirClass ExtAppsAndDir
+
+
+        public static OpenChords.Config.ExtAppsAndDirClass GlobalApplicationSettings
         {
             get
             {
                 return _fileAndFolderSettings;
             }
-            set
+            private set
             {
                 _fileAndFolderSettings = value;
             }
+        }
+
+        public static void initialize()
+        {
+            _fileAndFolderSettings = new Config.ExtAppsAndDirClass(Entities.FileAndFolderSettings.loadSettings());
+
         }
     }
 }

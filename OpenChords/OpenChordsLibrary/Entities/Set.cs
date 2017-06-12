@@ -141,7 +141,7 @@ namespace OpenChords.Entities
         private void initializeSetStyle(string songName = null)
         {
             //only override style if there is an actual background image
-            if (Settings.ExtAppsAndDir.IsOpenSongDataFolderConfigured && songName != null && doesBackgroundFileExist(songName))
+            if (Settings.GlobalApplicationSettings.IsOpenSongDataFolderConfigured && songName != null && doesBackgroundFileExist(songName))
             {
                 this.style = new setStyle();
 
@@ -185,7 +185,7 @@ namespace OpenChords.Entities
         {
             //check if background fileexists
             var backgroundFileName = getBackgroundFilename(songName);
-            var destinationBackgroundFile = String.Format("{0}{1}", Settings.ExtAppsAndDir.OpensongBackgroundsFolder, backgroundFileName);
+            var destinationBackgroundFile = String.Format("{0}{1}", Settings.GlobalApplicationSettings.OpensongBackgroundsFolder, backgroundFileName);
             return File.Exists(destinationBackgroundFile);
         }
 
@@ -360,12 +360,12 @@ namespace OpenChords.Entities
         /// <returns></returns>
         public static List<string> listOfAllSets()
         {
-            return IO.FileFolderFunctions.getDirectoryListingAsList(Settings.ExtAppsAndDir.SetsFolder);
+            return IO.FileFolderFunctions.getDirectoryListingAsList(Settings.GlobalApplicationSettings.SetsFolder);
         }
 
         public static Set loadSet(string setName)
         {
-            Set set = XmlReaderWriter.readSet(Settings.ExtAppsAndDir.SetsFolder + setName);
+            Set set = XmlReaderWriter.readSet(Settings.GlobalApplicationSettings.SetsFolder + setName);
             set.setName = setName;
             set.changeMade = false;
             set.indexOfCurrentSong = set.songList.Count - 1;
@@ -378,7 +378,7 @@ namespace OpenChords.Entities
             if (this.setName != "" && changeMade == true)
             {
                 xmlSetSongCollection = new XmlSetSongCollection(songList);
-                XmlReaderWriter.writeSet(Settings.ExtAppsAndDir.SetsFolder + this.setName, this);
+                XmlReaderWriter.writeSet(Settings.GlobalApplicationSettings.SetsFolder + this.setName, this);
                 changeMade = false;
             }
         }
@@ -462,9 +462,9 @@ namespace OpenChords.Entities
             string htmlText = htmlExporter.GenerateHtml();
             string folder = null;
             if (settings.settingsType == DisplayAndPrintSettingsType.TabletSettings)
-                folder = Settings.ExtAppsAndDir.TabletFolder;
+                folder = Settings.GlobalApplicationSettings.TabletFolder;
             else
-                folder = Settings.ExtAppsAndDir.PrintFolder;
+                folder = Settings.GlobalApplicationSettings.PrintFolder;
             string destination = String.Format("{0}/{1}.html", folder, this.setName);
             File.WriteAllText(destination, htmlText);
             return destination;
@@ -472,7 +472,7 @@ namespace OpenChords.Entities
 
         public string getFullPath()
         {
-            return Path.GetFullPath(Settings.ExtAppsAndDir.SetsFolder + this.setName);
+            return Path.GetFullPath(Settings.GlobalApplicationSettings.SetsFolder + this.setName);
         }
 
         public static Set NewSet(string setName)
@@ -484,7 +484,7 @@ namespace OpenChords.Entities
 
         public static void DeleteSet(Set set)
         {
-            File.Delete(Settings.ExtAppsAndDir.SetsFolder + set.setName);
+            File.Delete(Settings.GlobalApplicationSettings.SetsFolder + set.setName);
         }
     }
 }
