@@ -131,6 +131,8 @@ namespace OpenChords.CrossPlatform
             webView.Focus();
 
             drawSong();
+
+            this.Topmost = true;
         }
 
         void commandToggleMetonome_Executed(object sender, EventArgs e)
