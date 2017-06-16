@@ -14,6 +14,8 @@
 <html>
 <head>
     <script>
+        var previousPages = [];
+
         function scrollSmoothTo(to, duration) {
             if (duration <= 0) return;
             var currentPosition = Math.max(window.pageYOffset, document.documentElement.scrollTop, document.body.scrollTop); 
@@ -21,8 +23,8 @@
             var perTick = difference / duration * 10;
 
             //we want to repaint the screen after we are done scrolling
-            if (currentPosition >= to - 20) {
-                window.scroll(0, to);
+            if (currentPosition === to - perTick || currentPosition === to + perTick) {
+                window.scroll(0, to-1);
                 paintAllElementsWithCss();
                 return;
             }
@@ -92,7 +94,7 @@
          //scroll to song element in index
          function smoothScrollToElement(index) {
              var yPos = document.getElementById('SongElement' + index).offsetTop;
-             scrollSmoothTo(yPos, 600);
+             scrollSmoothTo(yPos, 400);
          }
 
          //scroll to element
@@ -121,6 +123,10 @@
          //scroll down by one screen
          function scrollDown() {
              var firstOffScreenElementIndex = findFirstOffScreenElementIndex();
+             var firstElementIndex = getFirstVisibleSongElementIndex();
+             if (firstElementIndex != null) {
+                 previousPages.push(firstElementIndex);
+             }
              if (firstOffScreenElementIndex != null) {
                  smoothScrollToElement(firstOffScreenElementIndex);
              }
@@ -128,14 +134,11 @@
 
          //scroll up by one screen
          function scrollUp() {
-             oldFirstVisible = getFirstVisibleSongElementIndex();
-             newCurrentElement = oldFirstVisible;
-             while (newCurrentElement > 1) {
-                 newCurrentElement--;
-                 scrollToElement(newCurrentElement);
-                 paintAllElementsWithCss();
-                 if (isSongElementCompletelyInvisible(oldFirstVisible)) return;
-             }
+             var previousPageIndex = previousPages.pop();
+             if (previousPageIndex != null)
+                 smoothScrollToElement(previousPageIndex)
+             else 
+                 smoothScrollToElement(1) //scroll to top of page
          }
 
          window.onload = function () {
