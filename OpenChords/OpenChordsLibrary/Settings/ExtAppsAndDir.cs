@@ -293,6 +293,6 @@ namespace OpenChords.Config
             }
         }
 
-   
+        public Entities.FileAndFolderSettings.KeyNotationLanguageType KeyNotationLanguage { get { return settings.KeyNotationLanguage; } set { settings.KeyNotationLanguage = value; } }
     }
 }

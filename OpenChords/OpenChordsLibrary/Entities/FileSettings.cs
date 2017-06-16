@@ -19,6 +19,12 @@ namespace OpenChords.Entities
             Normal
         }
 
+        public enum KeyNotationLanguageType
+        {
+            English,
+            German
+        };
+
         private static readonly log4net.ILog logger = log4net.LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
 
         public string OpenSongExecutable { get; set; }
@@ -28,6 +34,8 @@ namespace OpenChords.Entities
         public bool HttpServerEnabled { get; set; }
         public int HttpServerPort { get; set; }
         public bool PreferFlats { get; set; }
+        public KeyNotationLanguageType KeyNotationLanguage { get; set; }
+
 
         [XmlIgnore]
         public string OpenChordsApplicationDirectory { get; private set; }
@@ -83,6 +91,7 @@ namespace OpenChords.Entities
                 HttpServerPort = 8083;
                 HttpServerEnabled = false;
                 PreferFlats = false;
+                KeyNotationLanguage = KeyNotationLanguageType.English;
             }
             else
             {
@@ -93,6 +102,7 @@ namespace OpenChords.Entities
                 HttpServerPort = 8083;
                 HttpServerEnabled = false;
                 PreferFlats = false;
+                KeyNotationLanguage = KeyNotationLanguageType.German;
             }
         }
         

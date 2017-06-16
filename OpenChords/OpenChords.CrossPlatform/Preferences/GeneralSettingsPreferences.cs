@@ -5,6 +5,7 @@ using System.IO;
 using System.Linq;
 using System.Net;
 using System.Text;
+using static OpenChords.Entities.FileAndFolderSettings;
 
 namespace OpenChords.CrossPlatform.Preferences
 {
@@ -22,6 +23,7 @@ namespace OpenChords.CrossPlatform.Preferences
         private TextBox txtHttpServerPort = new TextBox() { Width = 50 };
         private TextArea txtInterfaceHelp = new TextArea() { Height = 100 };
         protected RadioButtonList radioListSharpsOrFlats = new RadioButtonList();
+        private DropDown ddlKeyNotationLanguage = new DropDown();
         private bool OptionsChanged;
 
         public GeneralSettingsPreferences(Entities.FileAndFolderSettings fileAndFolderSettings)
@@ -29,6 +31,9 @@ namespace OpenChords.CrossPlatform.Preferences
             //add radio button options
             radioListSharpsOrFlats.Items.Add("Flats");
             radioListSharpsOrFlats.Items.Add("Sharps");
+
+            ddlKeyNotationLanguage.Items.Add("English");
+            ddlKeyNotationLanguage.Items.Add("German");
 
             this.fileAndFolderSettings = fileAndFolderSettings;
 
@@ -45,7 +50,7 @@ namespace OpenChords.CrossPlatform.Preferences
                     new TableRow(new Label() { Text = "Http Server Port" }, txtHttpServerPort ),
                     new TableRow(new Label() { Text = "Http Examples" }, txtInterfaceHelp),
                     new TableRow(new Label() { Text = "Sharp/Flat Key Preference" }, radioListSharpsOrFlats),
-
+                    new TableRow(new Label() { Text = "Key Notation Language" }, ddlKeyNotationLanguage),
                     null
                 }
             };
@@ -58,6 +63,7 @@ namespace OpenChords.CrossPlatform.Preferences
             txtHttpServerPort.Text = fileAndFolderSettings.HttpServerPort.ToString();
             radioListSharpsOrFlats.SelectedIndex = fileAndFolderSettings.PreferFlats ? 0 : 1;
             setHelpOnInterfaces(chkHttpServerEnabled.Checked ?? false);
+            ddlKeyNotationLanguage.SelectedIndex = (fileAndFolderSettings.KeyNotationLanguage == KeyNotationLanguageType.English) ? 0 : 1;
 
             //events
             chkPortableMode.CheckedChanged += chkPortableMode_CheckedChanged;
@@ -73,6 +79,7 @@ namespace OpenChords.CrossPlatform.Preferences
             cmdOpenSongExecutablePath.Click += CmdOpenSongExecutablePath_Click;
             cmdOpenSongSongsAndSetsPath.Click += CmdOpenSongSongsAndSetsPath_Click;
             radioListSharpsOrFlats.SelectedIndexChanged += textChanged;
+            ddlKeyNotationLanguage.SelectedIndexChanged += textChanged;
         }
 
         private void TxtHttpServerPort_LostFocus(object sender, EventArgs e)
@@ -207,6 +214,7 @@ namespace OpenChords.CrossPlatform.Preferences
             fileAndFolderSettings.HttpServerEnabled = chkHttpServerEnabled.Checked ?? false;
             fileAndFolderSettings.HttpServerPort = int.Parse(txtHttpServerPort.Text);
             fileAndFolderSettings.PreferFlats = radioListSharpsOrFlats.SelectedIndex == 0;
+            fileAndFolderSettings.KeyNotationLanguage = (ddlKeyNotationLanguage.SelectedIndex == 0) ? KeyNotationLanguageType.English : KeyNotationLanguageType.German;
 
             fileAndFolderSettings.saveSettings();
         }

@@ -14,6 +14,7 @@ namespace OpenChords.Tests
         {
             Assert.IsTrue(SongProcessor.CheckIfChordsLine("D/F"));
             Assert.IsTrue(SongProcessor.CheckIfChordsLine(" A/G  D/F#  Dm7/F"));
+            Assert.IsTrue(SongProcessor.CheckIfChordsLine("H"));
             Assert.IsFalse(SongProcessor.CheckIfChordsLine("A New Commandment"));
         }
 

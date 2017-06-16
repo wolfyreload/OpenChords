@@ -177,64 +177,28 @@ namespace OpenChords.Functions
         public static string transposeChord(string chord, bool preferFlats)
 		{
 			int size = chord.Length;
+            List<Tuple<string, string>> fromFlatsToSharps = null;
+            List<Tuple<string, string>> transposeTuple = null;
 
-            //fix flats breaking
-            String[] fromFlatsArray = { 
-                "Bb",
-				"Ab",
-				"Gb",
-				"Eb",
-				"Db"};
+            if (Settings.GlobalApplicationSettings.KeyNotationLanguage == FileAndFolderSettings.KeyNotationLanguageType.English)
+                getEnglishKeyNotation(out fromFlatsToSharps, out transposeTuple);
+            else if (Settings.GlobalApplicationSettings.KeyNotationLanguage == FileAndFolderSettings.KeyNotationLanguageType.German)
+                getGermanKeyNotation(out fromFlatsToSharps, out transposeTuple);
+            else
+                throw new ArgumentException("Invalid chord language notation");
 
-            String[] toFlatsArray = {   
-				"A#",
-				"G#",
-				"F#",
-				"D#",
-				"C#"};
-
-			String[] fromSharpsArray = { "A#",
-				"A",
-				"G#",
-				"G",
-				"F#",
-				"F",
-				"E",
-				"D#",
-				"D",
-				"C#",
-				"C",
-				"B",
-				"*#*"};
-
-			String[] toSharpsArray = {   "*#*",
-				"A#",
-				"A",
-				"G#",
-				"G",
-				"F#",
-				"F",
-				"E",
-				"D#",
-				"D",
-				"C#",
-				"C",
-				"B"};
-            
             //if we have flats get rid of them
             if (chord.Contains("b"))
-                for (int i = 0; i < fromFlatsArray.Length; i++)
-                    chord = chord.Replace(fromFlatsArray[i], toFlatsArray[i]);
-            
-            
+                for (int i = 0; i < fromFlatsToSharps.Count; i++)
+                    chord = chord.Replace(fromFlatsToSharps[i].Item1, fromFlatsToSharps[i].Item2);
 
-                for (int i = 0; i < fromSharpsArray.Length; i++)
-                    chord = chord.Replace(fromSharpsArray[i], toSharpsArray[i]);
+                for (int i = 0; i < transposeTuple.Count; i++)
+                    chord = chord.Replace(transposeTuple[i].Item1, transposeTuple[i].Item2);
             
             //if we prefer flats
             if (preferFlats)
-                for (int i = 0; i < fromFlatsArray.Length; i++)
-                    chord = chord.Replace(toFlatsArray[i], fromFlatsArray[i]);
+                for (int i = 0; i < fromFlatsToSharps.Count; i++)
+                    chord = chord.Replace(fromFlatsToSharps[i].Item2, fromFlatsToSharps[i].Item1);
 			
 
 			//make sure that there are the same number
@@ -246,8 +210,69 @@ namespace OpenChords.Functions
 
 			return chord;
 		}
-		
-		public static string orderFormat(string order)
+
+        private static void getEnglishKeyNotation(out List<Tuple<string, string>> fromFlatsToSharps, out List<Tuple<string, string>> transposeTuple)
+        {
+            //from Flats to Sharps
+            fromFlatsToSharps = new List<Tuple<string, string>>()
+                {
+                    new Tuple<string, string>("Bb", "A#"),
+                    new Tuple<string, string>("Ab", "G#"),
+                    new Tuple<string, string>("Gb", "F#"),
+                    new Tuple<string, string>("Eb", "A#"),
+                    new Tuple<string, string>("Bb", "C#"),
+                };
+
+            //transpose tuple
+            transposeTuple = new List<Tuple<string, string>>()
+                {
+                    new Tuple<string, string>("A#", "*#*"),
+                    new Tuple<string, string>("A", "A#"),
+                    new Tuple<string, string>("G#", "A"),
+                    new Tuple<string, string>("G", "G#"),
+                    new Tuple<string, string>("F#", "G"),
+                    new Tuple<string, string>("F", "F#"),
+                    new Tuple<string, string>("E", "F"),
+                    new Tuple<string, string>("D#", "E"),
+                    new Tuple<string, string>("D", "D#"),
+                    new Tuple<string, string>("C#", "D"),
+                    new Tuple<string, string>("C", "C#"),
+                    new Tuple<string, string>("B", "C"),
+                    new Tuple<string, string>("*#*", "B"),
+                };
+        }
+
+        private static void getGermanKeyNotation(out List<Tuple<string, string>> fromFlatsToSharps, out List<Tuple<string, string>> transposeTuple)
+        {
+            //from Flats to Sharps
+            fromFlatsToSharps = new List<Tuple<string, string>>()
+            {
+                new Tuple<string, string>("Ab", "G#"),
+                new Tuple<string, string>("Gb", "F#"),
+                new Tuple<string, string>("Eb", "A#"),
+                new Tuple<string, string>("Bb", "C#"),
+            };
+
+            //transpose tuple
+            transposeTuple = new List<Tuple<string, string>>()
+            {
+                new Tuple<string, string>("B", "*#*"),
+                new Tuple<string, string>("A", "B"),
+                new Tuple<string, string>("G#", "A"),
+                new Tuple<string, string>("G", "G#"),
+                new Tuple<string, string>("F#", "G"),
+                new Tuple<string, string>("F", "F#"),
+                new Tuple<string, string>("E", "F"),
+                new Tuple<string, string>("D#", "E"),
+                new Tuple<string, string>("D", "D#"),
+                new Tuple<string, string>("C#", "D"),
+                new Tuple<string, string>("C", "C#"),
+                new Tuple<string, string>("H", "C"),
+                new Tuple<string, string>("*#*", "H"),
+            };
+        }
+
+        public static string orderFormat(string order)
 		{
 			string[] sep = {" "};
 			string[] orderlist = order.Split(sep,StringSplitOptions.RemoveEmptyEntries);
@@ -403,7 +428,7 @@ namespace OpenChords.Functions
 
         public static bool CheckIfChordsLine(string line)
         {
-            var regexPattern = @"\b([CDEFGAB])(#|##|b|bb)?(m|maj|maj7|maj9|maj11|maj13|min|m7|m9|m11|m13|m6|madd9|m6add9|mmaj7|mmaj9|m7b5|7sus4|add9|6add9|dim|dim7|2|7|9|11|13|sus4|sus2|5|aug)?/?\b";
+            var regexPattern = @"\b([CDEFGABH])(#|##|b|bb)?(m|maj|maj7|maj9|maj11|maj13|min|m7|m9|m11|m13|m6|madd9|m6add9|mmaj7|mmaj9|m7b5|7sus4|add9|6add9|dim|dim7|2|7|9|11|13|sus4|sus2|5|aug)?/?\b";
             
             var appearsToBeChords = Regex.IsMatch(string.Format(" {0} ", line), regexPattern);
             var appearsToBeWords = Regex.IsMatch(string.Format(" {0} ", line), @"\s+[a-zA-z]{5,20}\s+");

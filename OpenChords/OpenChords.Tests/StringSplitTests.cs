@@ -61,5 +61,91 @@ namespace OpenChords.Tests
             Assert.AreEqual(25, carrotPositionAfter);
         }
 
+        [TestMethod]
+        public void TestEnglishNotesTranspose()
+        {
+            Settings.initialize();
+            Entities.Song song = new Entities.Song()
+            {
+                lyrics =
+                @"[V]
+.A
+.A#
+.B
+.C
+.C#
+.D
+.D#
+.E
+.F
+.F#
+.G
+.G#",
+                presentation = "V"
+            };
+            SongProcessor.transposeKeyUp(song);
+            string expectedOutput =
+            @"[V]
+.A#
+.B
+.C
+.C#
+.D
+.D#
+.E
+.F
+.F#
+.G
+.G#
+.A";
+            expectedOutput = expectedOutput.Replace("\r\n", "\n");
+            StringAssert.Equals(song.lyrics, expectedOutput);
+        }
+
+        [TestMethod]
+        public void TestGermanNotesTranspose()
+        {
+
+            Settings.initialize();
+            Settings.GlobalApplicationSettings.KeyNotationLanguage = Entities.FileAndFolderSettings.KeyNotationLanguageType.German;
+            Entities.Song song = new Entities.Song()
+            {
+                lyrics =
+                @"[V]
+.A
+.B
+.H
+.C
+.C#
+.D
+.D#
+.E
+.F
+.F#
+.G
+.G#",
+                presentation = "V"
+            };
+
+            SongProcessor.transposeKeyUp(song);
+            string expectedOutput =
+            @"[V]
+.B
+.H
+.C
+.C#
+.D
+.D#
+.E
+.F
+.F#
+.G
+.G#
+.A";
+            expectedOutput = expectedOutput.Replace("\r\n", "\n");
+            StringAssert.Equals(song.lyrics, expectedOutput);
+        }
     }
+
+
 }
