@@ -360,18 +360,8 @@ namespace OpenChords.CrossPlatform.SongEditor
         public void showSetInExplorer()
         {
             var songPath = CurrentSet.getFullPath();
-            showInExplorer(songPath);
+            UiHelper.ShowInFileManager(songPath);
 
-        }
-
-        private void showInExplorer(string songPath)
-        {
-            string fileManager = OpenChords.Settings.GlobalApplicationSettings.fileManager;
-
-            if (string.IsNullOrEmpty(fileManager))
-                System.Diagnostics.Process.Start("Explorer", "/select, " + songPath);
-            else
-                System.Diagnostics.Process.Start(fileManager, OpenChords.Settings.GlobalApplicationSettings.SongsFolder);
         }
 
         internal void ExportToTextFile()

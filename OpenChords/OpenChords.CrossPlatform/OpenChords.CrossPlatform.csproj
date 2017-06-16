@@ -37,6 +37,7 @@
     <Compile Include="frmHelpDocumentation.cs" />
     <Compile Include="frmNewSet.cs" />
     <Compile Include="frmPreferences.cs" />
+    <Compile Include="UiHelper.cs" />
     <Compile Include="Helpers\FontHelper.cs" />
     <Compile Include="Helpers\FormHelper.cs" />
     <Compile Include="Helpers\MenuHelper.cs" />

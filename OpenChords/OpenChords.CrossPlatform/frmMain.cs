@@ -321,6 +321,10 @@ namespace OpenChords.CrossPlatform
                 {
                     Song.loadSong(song).ExportToHtml(settings);
                 }
+                if (settings.settingsType == DisplayAndPrintSettingsType.PrintSettings)
+                    UiHelper.ShowInFileManager(Settings.GlobalApplicationSettings.PrintFolder);
+                else if (settings.settingsType == DisplayAndPrintSettingsType.TabletSettings)
+                    UiHelper.ShowInFileManager(Settings.GlobalApplicationSettings.TabletFolder);
             }
             else if (option == ExportOption.Set)
                 ucSetListPanel.ExportToHtml(settings);

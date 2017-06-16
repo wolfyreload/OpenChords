@@ -59,8 +59,14 @@ namespace OpenChords.Config
                     return fixPaths("/usr/bin/nautilus");
                 else if (IO.FileFolderFunctions.isFilePresent(fixPaths("/usr/bin/thunar")))
                     return fixPaths("/usr/bin/thunar");
+                else if (IO.FileFolderFunctions.isFilePresent(fixPaths("/usr/bin/nemo")))
+                    return fixPaths("/usr/bin/nemo");
+                else if (IO.FileFolderFunctions.isFilePresent(fixPaths(@"C:\Windows\explorer.exe")))
+                    return fixPaths(@"C:\Windows\explorer.exe");
+                else if (IO.FileFolderFunctions.isFilePresent(fixPaths("/usr/bin/dolphin")))
+                    return fixPaths("/usr/bin/dolphin");
                 else
-                    return null;
+                    throw new Exception("Cannot find file manager on system");
             }
         }
 

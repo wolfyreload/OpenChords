@@ -305,17 +305,7 @@ namespace OpenChords.CrossPlatform.SongEditor
         {
             if (gridSongs.SelectedItem == null) return;
             Song selectedSong = (Song)gridSongs.SelectedItem;
-            showInExplorer(selectedSong.getFullPath());
-        }
-
-        private void showInExplorer(string songPath)
-        {
-            string fileManager = OpenChords.Settings.GlobalApplicationSettings.fileManager;
-
-            if (string.IsNullOrEmpty(fileManager))
-                System.Diagnostics.Process.Start("Explorer", string.Format("/select, \"{0}\"", songPath));
-            else
-                System.Diagnostics.Process.Start(fileManager, OpenChords.Settings.GlobalApplicationSettings.SongsFolder);
+            UiHelper.ShowInFileManager(selectedSong.getFullPath());
         }
     }
 }
