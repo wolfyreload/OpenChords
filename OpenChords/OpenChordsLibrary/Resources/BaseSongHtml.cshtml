@@ -1,0 +1,410 @@
+﻿@using RazorEngine.Templating
+@using OpenChords.Entities
+@inherits TemplateBase<OpenChords.Export.ExportToHtml.SetViewModel>
+
+@{
+    var songOrientationSetting = Model.Settings.SongOrientation;
+    string songOrientation = (songOrientationSetting == null || songOrientationSetting == "Horizontal") ? "inline-block" : "table";
+
+    List<Song> songs = Model.Set.songList;
+    int counter = 0;
+}
+
+<!DOCTYPE html>
+<html>
+<head>
+    <script>
+        function scrollSmoothTo(to, duration) {
+            if (duration <= 0) return;
+            var currentPosition = Math.max(window.pageYOffset, document.documentElement.scrollTop, document.body.scrollTop); 
+            var difference = to - currentPosition;
+            var perTick = difference / duration * 10;
+
+            //we want to repaint the screen after we are done scrolling
+            if (currentPosition >= to - 20) {
+                window.scroll(0, to);
+                paintAllElementsWithCss();
+                return;
+            }
+
+            setTimeout(function () {
+                var newPosition = currentPosition + perTick;
+                window.scroll(0, newPosition);
+
+                scrollSmoothTo(to, duration - 10);
+            }, 10);
+        }
+
+
+         //is element completely visible
+         function isElementInViewport(el) {
+             var rect = el.getBoundingClientRect();
+
+             return (
+                 rect.top >= 0 &&
+                 rect.left >= 0 &&
+                 rect.bottom <= (window.innerHeight || document.documentElement.clientHeight) && /*or $(window).height() */
+                 rect.right <= (window.innerWidth || document.documentElement.clientWidth) /*or $(window).width() */
+             );
+        }
+
+         function getMaxSongElementIndex() {
+             var counter = 1;
+             while (true) {
+                 var elementToCheck = document.getElementById('SongElement' + counter);
+                 if (elementToCheck == null)
+                     return counter - 1;
+                 counter++;
+             }
+         }
+
+         //check if songelement full visible on the screen
+         function isSongElementCompletelyVisible(index) {
+             var elementToCheck = document.getElementById('SongElement' + index);
+             var isVisible = isElementInViewport(elementToCheck);
+             return isVisible
+         }
+
+         //check if songelement fully invisible
+         function isSongElementCompletelyInvisible(index) {
+             return !isSongElementCompletelyVisible(index);
+         }
+
+         //index of the first element in the song that is visible on the screen
+         function getFirstVisibleSongElementIndex() {
+             var maxSongElementCount = getMaxSongElementIndex();
+             for (i = 1; i <= maxSongElementCount; i++) {
+                 if (isSongElementCompletelyVisible(i))
+                     return i;
+             }
+         }
+
+         function findFirstOffScreenElementIndex() {
+             var maxSongElementCount = getMaxSongElementIndex();
+             var indexOfFirstVisibleElement = getFirstVisibleSongElementIndex();
+             for (i = indexOfFirstVisibleElement; i <= maxSongElementCount; i++) {
+                 if (isSongElementCompletelyVisible(i) == false)
+                     return i;
+
+             }
+         }
+
+         //scroll to song element in index
+         function smoothScrollToElement(index) {
+             var yPos = document.getElementById('SongElement' + index).offsetTop;
+             scrollSmoothTo(yPos, 600);
+         }
+
+         //scroll to element
+         function scrollToElement(index) {
+             var yPos = document.getElementById('SongElement' + index).offsetTop;
+             window.scroll(0, yPos);
+         }
+
+         //paint all elements with different css
+         function paintAllElementsWithCss() {
+
+             var maxSongElementCount = getMaxSongElementIndex();
+             for (i = 1; i <= maxSongElementCount; i++) {
+                 var element = document.getElementById("SongElement" + i);
+
+                 if (element.className != "DisplaySongName") {
+                     if (isSongElementCompletelyVisible(i))
+                         element.setAttribute("class", "DisplaySongVerse");
+                     else
+                         element.setAttribute("class", "DisplaySongVerseOffPage");
+                 }
+             }
+
+         }
+
+         //scroll down by one screen
+         function scrollDown() {
+             var firstOffScreenElementIndex = findFirstOffScreenElementIndex();
+             if (firstOffScreenElementIndex != null) {
+                 smoothScrollToElement(firstOffScreenElementIndex);
+             }
+         }
+
+         //scroll up by one screen
+         function scrollUp() {
+             oldFirstVisible = getFirstVisibleSongElementIndex();
+             newCurrentElement = oldFirstVisible;
+             while (newCurrentElement > 1) {
+                 newCurrentElement--;
+                 scrollToElement(newCurrentElement);
+                 paintAllElementsWithCss();
+                 if (isSongElementCompletelyInvisible(oldFirstVisible)) return;
+             }
+         }
+
+         window.onload = function () {
+             paintAllElementsWithCss();
+         }
+
+         //add keyboard binding
+         document.addEventListener("keydown", keyDownInWindow, false);
+         function keyDownInWindow(e) {
+             if (e.keyCode == 32 || e.keyCode == 40) //if spacebar or down arrow
+             {
+                 scrollDown();
+                 e.preventDefault(); //swallow the event
+             }
+             else if (e.keyCode == 38) //if up arrow is pressed
+             {
+                 scrollUp();
+                 e.preventDefault(); //swallow the event
+             }
+             else if (e.keyCode == 116) //swallow f5 key presses
+             {
+                 e.preventDefault(); //swallow the event
+             }
+         }
+
+         function getBaseUrl() {
+             var pathArray = location.href.split('/');
+             var protocol = pathArray[0];
+             var host = pathArray[2];
+             var url = protocol + '//' + host;
+             return url
+         }
+
+         //call ajax to url and return text
+         function callAjax(url, callback) {
+             var xmlhttp;
+             var currentHostSongName;
+             // compatible with IE7+, Firefox, Chrome, Opera, Safari
+             xmlhttp = new XMLHttpRequest();
+             xmlhttp.onreadystatechange = function () {
+                 if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {
+                     callback(xmlhttp);
+                 }
+             }
+             xmlhttp.open("GET", getBaseUrl() + url, true);
+             xmlhttp.send();
+             return currentHostSongName;
+         }
+
+         function compareHostSongAndCurrentSongAsync_Complete(xmlHttpResult) {
+             //current song name
+             var currentSongName = document.getElementById('SongName').value;
+             //host song name
+             var hostSongName = xmlHttpResult.responseText;
+             //if they are different reload the song
+             if (currentSongName !== hostSongName) {
+                 //reload page and scroll to top of page
+                 location.reload(true);
+                 document.body.scrollTop = document.documentElement.scrollTop = 0;
+             }
+         }
+
+         //compare host song and current song asynchonously
+         function compareHostSongAndCurrentSongAsync() {
+             callAjax('/SongName', compareHostSongAndCurrentSongAsync_Complete);
+         }
+
+     @(Model.EnableAutoRefresh ? @"
+     //check for song change every x milliseconds
+     var timeout = setInterval(compareHostSongAndCurrentSongAsync, 1000);" : "")
+    </script>
+    <style>
+html, body, div, span, applet, object, iframe,
+h1, h2, h3, h4, h5, h6, p, blockquote, pre,
+a, abbr, acronym, address, big, cite, code,
+del, dfn, em, img, ins, kbd, q, s, samp,
+small, strike, strong, sub, sup, tt, var,
+b, u, i, center,
+dl, dt, dd, ol, ul, li,
+fieldset, form, label, legend,
+table, caption, tbody, tfoot, thead, tr, th, td,
+article, aside, canvas, details, embed,
+figure, figcaption, footer, header, hgroup,
+menu, nav, output, ruby, section, summary,
+time, mark, audio, video {
+    margin: 0;
+    padding: 0;
+    border: 0;
+    font-size: 100%;
+    font: inherit;
+    vertical-align: baseline;
+}
+/* HTML5 display-role reset for older browsers */
+article, aside, details, figcaption, figure,
+footer, header, hgroup, menu, nav, section {
+    display: block;
+}
+
+body {
+    line-height: 1;
+}
+
+ol, ul {
+    list-style: none;
+}
+
+blockquote, q {
+    quotes: none;
+}
+
+    blockquote:before, blockquote:after,
+    q:before, q:after {
+        content: '';
+        content: none;
+    }
+
+table {
+    border-collapse: collapse;
+    border-spacing: 0;
+}
+
+body {
+    background-color: @Model.Settings.BackgroundColorHex;
+    padding-bottom: 1080px;
+}
+
+@@media print {
+    body {
+        padding-bottom: 0px;
+    }
+}
+
+.DisplaySongVerse {
+    padding: 5px;
+    margin-bottom: 20px;
+    break-inside: avoid-column;
+    -webkit-column-break-inside: avoid;
+    border: 2px solid @Model.Settings.VerseBorderColorHex;
+    border-radius: 7px;
+    margin-right: 10px;
+    background: -webkit-gradient(linear, left top, left bottom, color-stop(0%, @Model.Settings.VerseHeadingBackgroundColorHex), color-stop(15%, @Model.Settings.VerseLyricsBackgroundColor2Hex), color-stop(100%, @Model.Settings.VerseLyricsBackgroundColor1Hex));
+    background: @Model.Settings.VerseLyricsBackgroundColor2Hex; /* Old browsers */
+    background: -moz-linear-gradient(top,@Model.Settings.VerseHeadingBackgroundColorHex 0%, @Model.Settings.VerseLyricsBackgroundColor1Hex 15%, @Model.Settings.VerseLyricsBackgroundColor2Hex 100%); /* FF3.6+ */
+    background: -o-linear-gradient(top,@Model.Settings.VerseHeadingBackgroundColorHex 0%,@Model.Settings.VerseLyricsBackgroundColor1Hex 15%, @Model.Settings.VerseLyricsBackgroundColor2Hex 100%); /* Opera 11.10+ */
+    background: -ms-linear-gradient(top,@Model.Settings.VerseHeadingBackgroundColorHex 0%,@Model.Settings.VerseLyricsBackgroundColor1Hex 15%, @Model.Settings.VerseLyricsBackgroundColor2Hex 100%); /* IE10+ */
+    background: linear-gradient(to bottom,@Model.Settings.VerseHeadingBackgroundColorHex 0%,@Model.Settings.VerseLyricsBackgroundColor1Hex 15%, @Model.Settings.VerseLyricsBackgroundColor2Hex 100%); /* W3C */
+    filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='@Model.Settings.VerseLyricsBackgroundColor1Hex', endColorstr='@Model.Settings.VerseLyricsBackgroundColor2Hex',GradientType=0 ); /* IE6-9 */
+    display: @songOrientation;
+    vertical-align: top;
+}
+
+.DisplaySongVerseOffPage {
+    padding: 5px;
+    margin-bottom: 20px;
+    break-inside: avoid-column;
+    -webkit-column-break-inside: avoid;
+    border: 2px solid @Model.Settings.VerseBorderColorHex;
+    border-radius: 7px;
+    margin-right: 10px;
+    background: -webkit-gradient(linear, left top, left bottom, color-stop(0%, @Model.Settings.PartialVerseHeadingBackgroundColorHex), color-stop(15%, @Model.Settings.VerseLyricsBackgroundColor2Hex), color-stop(100%, @Model.Settings.VerseLyricsBackgroundColor1Hex));
+    background: @Model.Settings.VerseLyricsBackgroundColor2Hex; /* Old browsers */
+    background: -moz-linear-gradient(top,@Model.Settings.PartialVerseHeadingBackgroundColorHex 0%, @Model.Settings.VerseLyricsBackgroundColor1Hex 15%, @Model.Settings.VerseLyricsBackgroundColor2Hex 100%); /* FF3.6+ */
+    background: -o-linear-gradient(top,@Model.Settings.PartialVerseHeadingBackgroundColorHex 0%,@Model.Settings.VerseLyricsBackgroundColor1Hex 15%, @Model.Settings.VerseLyricsBackgroundColor2Hex 100%); /* Opera 11.10+ */
+    background: -ms-linear-gradient(top,@Model.Settings.PartialVerseHeadingBackgroundColorHex 0%,@Model.Settings.VerseLyricsBackgroundColor1Hex 15%, @Model.Settings.VerseLyricsBackgroundColor2Hex 100%); /* IE10+ */
+    background: linear-gradient(to bottom,@Model.Settings.PartialVerseHeadingBackgroundColorHex 0%,@Model.Settings.VerseLyricsBackgroundColor1Hex 15%, @Model.Settings.VerseLyricsBackgroundColor2Hex 100%); /* W3C */
+    filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='@Model.Settings.VerseLyricsBackgroundColor1Hex', endColorstr='@Model.Settings.VerseLyricsBackgroundColor2Hex',GradientType=0 ); /* IE6-9 */
+    display: @songOrientation;
+    vertical-align: top;
+}
+
+.DisplaySongName {
+    -webkit-column-break-inside: avoid;
+    font-size: @(Model.Settings.TitleFormat.FontSize + "px");
+    font-weight: @Model.Settings.TitleFormat.FontStyle;
+    font-family: "@Model.Settings.TitleFormat.FontName", Courier, monospace;
+    color: @Model.Settings.TitleFormat.FontColorHex;
+    width: 100%;
+}
+
+.DisplaySongOrder {
+    font: bold 36px;
+    color: #FF8040;
+}
+
+.DisplayLineVerseHeading {
+    font-size: @(Model.Settings.HeadingsFormat.FontSize + "px");
+    font-weight: @Model.Settings.HeadingsFormat.FontStyle;
+    font-family: "@Model.Settings.HeadingsFormat.FontName", Courier, monospace;
+    color: @Model.Settings.HeadingsFormat.FontColorHex;
+    line-height: 110%;
+}
+
+.DisplayLineVerseLyrics {
+    display: inline-block;
+}
+
+.DisplayLineChord {
+    font-size: @(Model.Settings.ChordFormat.FontSize + "px");
+    font-weight: @Model.Settings.ChordFormat.FontStyle;
+    font-family: "@Model.Settings.ChordFormat.FontName", Courier, monospace;
+    color: @Model.Settings.ChordFormat.FontColorHex;
+}
+
+.DisplayLineLyrics {
+    font-size: @(Model.Settings.LyricsFormat.FontSize + "px");
+    font-weight: @Model.Settings.LyricsFormat.FontStyle;
+    font-family: "@Model.Settings.LyricsFormat.FontName", Courier, monospace;
+    color: @Model.Settings.LyricsFormat.FontColorHex;
+}
+
+.DisplayLineVerseNotes {
+    margin-left: auto;
+    margin-right: 0px;
+    display: inline-block;
+    vertical-align: top;
+    font-size: @(Model.Settings.NoteFormat.FontSize + "px");
+    font-weight: @Model.Settings.NoteFormat.FontStyle;
+    font-family: "@Model.Settings.NoteFormat.FontName", Courier, monospace;
+    color: @Model.Settings.NoteFormat.FontColorHex;
+}
+
+.DisplayBody body {
+    background-color: black;
+    font-family: "HelveticaNeue-Light", "Helvetica Neue Light", "Helvetica Neue", Helvetica, Arial, "Lucida Grande", sans-serif;
+}
+    </style>
+
+    <meta charset="utf-8">
+    <title>@Model.Title</title>
+</head>
+<body>
+
+    @for (int i = 0; i < songs.Count; i++)
+    {
+        var song = songs[i];
+        var verses = song.getSongVerses();
+        counter++;
+        <div ID="@("SongElement" + counter)" class="DisplaySongName">@song.generateLongTitle()</div>
+
+        foreach (var verse in verses)
+        {
+            counter++;
+            <div ID="@("SongElement" + counter)" class="DisplaySongVerse">
+                <div class="DisplayLineVerseHeading">@verse.FullHeaderName</div>
+                <div class="DisplayLineVerseLyrics">
+                    @for (int j = 0; j < verse.Lyrics.Count; j++)
+                    {
+                        string printFriendlyLyricLine = verse.Lyrics[j].TrimEnd().Replace(" ", "&nbsp;");
+                        if (verse.IsChord[j] && (Model.Settings.ShowChords ?? false))
+                        {
+                            <p class="DisplayLineChord">@Raw(printFriendlyLyricLine)</p>
+                        }
+                        else if (!verse.IsChord[j] && (Model.Settings.ShowLyrics ?? false))
+                        {
+                            <p class="DisplayLineLyrics">@Raw(printFriendlyLyricLine)</p>
+                        }
+                    }
+                </div>
+                @if (Model.Settings.ShowNotes ?? false)
+                {
+                    <div class="DisplayLineVerseNotes">
+                        @Raw(verse.Notes.TrimEnd().Replace("\r\n", "<br>"))
+                    </div>
+                }
+            </div>
+
+
+        }
+    }
+
+</body>
+</html>

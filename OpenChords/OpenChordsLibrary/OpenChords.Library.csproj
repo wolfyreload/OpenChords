@@ -35,7 +35,7 @@
     <Optimize>false</Optimize>
     <CheckForOverflowUnderflow>True</CheckForOverflowUnderflow>
     <DefineConstants>DEBUG;TRACE</DefineConstants>
-    <OutputPath>bin\Debug\</OutputPath>
+    <OutputPath>bin\</OutputPath>
     <Prefer32Bit>false</Prefer32Bit>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)' == 'Release' ">
@@ -65,6 +65,9 @@
       <HintPath>..\packages\NHttp.0.1.9.0\lib\net20\NHttp.dll</HintPath>
       <Private>True</Private>
     </Reference>
+    <Reference Include="RazorEngine, Version=3.9.3.0, Culture=neutral, PublicKeyToken=9ee697374c7e744a, processorArchitecture=MSIL">
+      <HintPath>..\packages\RazorEngine.3.9.3\lib\net45\RazorEngine.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core">
       <RequiredTargetFramework>3.5</RequiredTargetFramework>
@@ -74,6 +77,9 @@
       <RequiredTargetFramework>3.5</RequiredTargetFramework>
     </Reference>
     <Reference Include="System.Drawing" />
+    <Reference Include="System.Web.Razor, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.Razor.3.0.0\lib\net45\System.Web.Razor.dll</HintPath>
+    </Reference>
     <Reference Include="System.Windows.Forms" />
     <Reference Include="System.Xml" />
     <Reference Include="System.Xml.Linq">
@@ -85,7 +91,6 @@
       <Link>Properties\SolutionInfo.cs</Link>
     </Compile>
     <Compile Include="Entities\ShortcutSettings.cs" />
-    <Compile Include="Entities\StyleSheetBuilder.cs" />
     <Compile Include="Entities\UserInterfaceSettings.cs" />
     <Compile Include="Export\ExportToTextFile.cs" />
     <Compile Include="Functions\Metronome.cs" />
@@ -95,7 +100,6 @@
     <Compile Include="Entities\FileSettings.cs" />
     <Compile Include="Entities\Set.cs" />
     <Compile Include="Entities\Song.cs" />
-    <Compile Include="Entities\SongHtml.cs" />
     <Compile Include="Entities\SongVerse.cs" />
     <Compile Include="Entities\SongElementFormat.cs" />
     <Compile Include="Export\ExportToHtml.cs" />
@@ -138,17 +142,12 @@
     <None Include="packages.config">
       <SubType>Designer</SubType>
     </None>
+    <None Include="Web.config" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Resources\BaseSongHtml.html">
+    <None Include="Resources\BaseSongHtml.cshtml">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Resources\scripts.txt">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Resources\stylesheet.css">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
+    </None>
     <Content Include="Resources\Tick1.wav">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>

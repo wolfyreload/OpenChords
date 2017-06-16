@@ -10,24 +10,9 @@
         {
             get
             {
-                return File.ReadAllText("./Resources/BaseSongHtml.html");
+                return File.ReadAllText("./Resources/BaseSongHtml.cshtml");
             }
         }
-
-        internal static string stylesheet
-        {
-            get
-            {
-                return File.ReadAllText("./Resources/stylesheet.css");
-            }
-        }
-
-        internal static string scripts
-        {
-            get
-            {
-                return File.ReadAllText("./Resources/scripts.txt");
-            }
-        }
+        
     }
 }

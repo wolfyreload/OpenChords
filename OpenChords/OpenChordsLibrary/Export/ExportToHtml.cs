@@ -1,4 +1,6 @@
 ﻿using OpenChords.Entities;
+using RazorEngine;
+using RazorEngine.Templating;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,6 +11,14 @@ namespace OpenChords.Export
     public class ExportToHtml
     {
         private static readonly log4net.ILog logger = log4net.LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
+
+        public class SetViewModel
+        {
+            public DisplayAndPrintSettings Settings { get; set; }
+            public Set Set { get; set; }
+            public bool EnableAutoRefresh { get; internal set; }
+            public string Title { get; internal set; }
+        }
 
         private DisplayAndPrintSettings _settings;
         private Set _set;
@@ -36,94 +46,18 @@ namespace OpenChords.Export
 
         public string GenerateHtml(bool enableAutoRefresh = false)
         {
-
-            //configure the stylesheet
-            string styleSheet = new StyleSheetBuilder(_settings).GetStyleSheet();
-
-       
-            //get song html
-            StringBuilder songBuilder = new StringBuilder();
-            foreach (var song in _set.songList)
+            SetViewModel model = new SetViewModel()
             {
-                songBuilder.AppendFormat("<input type=\"hidden\" id=\"SongName\" name=\"SongName\" value=\"{0}\">\r\n", song.title);
-                songBuilder.AppendFormat("<div class=\"DisplaySongName\">{0}</div>\r\n", song.generateLongTitle());
-                var verses = song.getSongVerses();
-                foreach (var verse in verses)
-                {
-                    var htmlString = getHtmlFromVerse(verse);
-                    songBuilder.AppendLine(htmlString);
-                }
-            }
+                Settings = _settings,
+                Set = _set,
+                EnableAutoRefresh = enableAutoRefresh,
+                Title = Title
+            };
 
-            //add stylesheet
-            StringBuilder sb = new StringBuilder(HtmlResources.BaseSongHtml);
-            sb.Replace("<%StyleSheet%>", styleSheet);
-            //add song body
-            sb.Replace("<%SongBody%>", songBuilder.ToString());
-            //set the title
-            sb.Replace("<%Title%>", this.Title);
-
-            handleScripts(sb, enableAutoRefresh);
-
-            return sb.ToString();
+            var result = Engine.Razor.RunCompile(HtmlResources.BaseSongHtml, "BaseSongHtml", typeof(SetViewModel), model);
+         
+            return result;
         }
-
-        private void handleScripts(StringBuilder sb, bool enableAutoRefresh)
-        {
-            string scripts = HtmlResources.scripts;
-            if (enableAutoRefresh)
-                scripts = scripts.Replace("<%EnableAutoRefresh%>", "");
-            else
-                scripts = scripts.Replace("<%EnableAutoRefresh%>", "//");
-
-            //put in the scripts
-            if (_isSet)
-                sb.Replace("<%Scripts%>", "");
-            else
-                sb.Replace("<%Scripts%>", scripts);
-        }
-
-       
-        private string trimLine(string line)
-        {
-            return line.TrimEnd().Replace(" ", "&nbsp;");
-        }
-
-        private string getHtmlFromVerse(SongVerse verse)
-        {
-            StringBuilder sb = new StringBuilder();
-            //add heading line
-            sb.AppendFormat("<div ID=\"{0}\" class=\"DisplaySongVerse\">\r\n", verse.HtmlId);
-            sb.AppendFormat("<div class=\"DisplayLineVerseHeading\">{0}</div>\r\n", trimLine(verse.FullHeaderName));
-            //add lyrics
-            sb.AppendLine("<div class=\"DisplayLineVerseLyrics\">");
-            for (int i = 0; i < verse.Lyrics.Count(); i++)
-            {
-                if (verse.IsChord[i] && (_settings.ShowChords ?? false))
-                {
-                    sb.AppendFormat("<p class=\"DisplayLineChord\">{0}</p>\r\n", trimLine(verse.Lyrics[i]));
-                }
-                else if (!verse.IsChord[i] && (_settings.ShowLyrics ?? false))
-                {
-                    sb.AppendFormat("<p class=\"DisplayLineLyrics\">{0}</p>\r\n", trimLine(verse.Lyrics[i]));
-                }
-            }
-            sb.AppendLine("</div>");
-
-            //addNotes
-            if (_settings.ShowNotes ?? false)
-            {
-                sb.AppendLine("<div class=\"DisplayLineVerseNotes\">");
-                sb.AppendLine(verse.Notes.Replace("\r\n", "<br/>").TrimEnd().Replace(" ", "&nbsp;"));
-                sb.AppendLine("</div>");
-            }
-            sb.AppendLine("</div>");
-
-            return sb.ToString();
-        }
-
-
-
-
+        
     }
 }
