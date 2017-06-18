@@ -1,3 +1,16 @@
+OpenChords v2.3.0
+============================================================================
+Fixed: Font size settings editor to look better on Linux systems
+Fixed: Keep song sort order when searching for songs
+Fixed: Other minor bug fixes
+Fixed: #8 Export All Songs to Tablet and Printer needs to open the file manager where the songs were exported
+Improvement: Moved song search box to top of the grid so its more visible
+Improvement: Allow user to add songs at any point in the set
+Improvement: Changed song rendering to use RazorEngine instead of a custom template
+Improvement: #10 Move sharp/flat key preferences per song to General Settings
+Feature: #5 Add subfolder support to the OpenChordsData/Songs folder
+Feature: #9 Add dropdownlist for switching between English and German Key Notation
+
 OpenChords v2.2.0
 ============================================================================
 Fixed: SessionSaveState getting saved outside of the settings folder
