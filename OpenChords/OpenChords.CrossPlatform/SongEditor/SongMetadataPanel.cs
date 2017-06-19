@@ -374,6 +374,7 @@ namespace OpenChords.CrossPlatform.SongEditor
 
         internal void TransposeKeyUp()
         {
+            updateSongObjectFromGui();
             CurrentSong.transposeKeyUp();
             updateGuiFromSongObject();
 
@@ -381,6 +382,7 @@ namespace OpenChords.CrossPlatform.SongEditor
 
         internal void TransposeKeyDown()
         {
+            updateSongObjectFromGui();
             CurrentSong.transposeKeyDown();
             updateGuiFromSongObject();
 
@@ -388,12 +390,14 @@ namespace OpenChords.CrossPlatform.SongEditor
 
         internal void TransposeCapoUp()
         {
+            updateSongObjectFromGui();
             CurrentSong.capoUp();
             updateGuiFromSongObject();
         }
 
         internal void TransposeCapoDown()
         {
+            updateSongObjectFromGui();
             CurrentSong.capoDown();
             updateGuiFromSongObject();
         }
