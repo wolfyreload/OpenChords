@@ -1,3 +1,10 @@
+OpenChords v2.3.1
+============================================================================
+Fixed: bug in transposer when when working with flats
+Fixed: when reverting a song it isn't getting reflected in the song list panel
+Fixed: Bug when changing a song in a set is not reflecting in the song list
+Fixed: Bug when transposing I loose any changes I have made in the UI before saving the song
+
 OpenChords v2.3.0
 ============================================================================
 Fixed: Font size settings editor to look better on Linux systems
