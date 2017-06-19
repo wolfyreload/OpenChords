@@ -219,8 +219,8 @@ namespace OpenChords.Functions
                     new Tuple<string, string>("Bb", "A#"),
                     new Tuple<string, string>("Ab", "G#"),
                     new Tuple<string, string>("Gb", "F#"),
-                    new Tuple<string, string>("Eb", "A#"),
-                    new Tuple<string, string>("Bb", "C#"),
+                    new Tuple<string, string>("Eb", "D#"),
+                    new Tuple<string, string>("Db", "C#"),
                 };
 
             //transpose tuple
@@ -249,8 +249,8 @@ namespace OpenChords.Functions
             {
                 new Tuple<string, string>("Ab", "G#"),
                 new Tuple<string, string>("Gb", "F#"),
-                new Tuple<string, string>("Eb", "A#"),
-                new Tuple<string, string>("Bb", "C#"),
+                new Tuple<string, string>("Eb", "D#"),
+                new Tuple<string, string>("Db", "C#"),
             };
 
             //transpose tuple
