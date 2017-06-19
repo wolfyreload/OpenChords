@@ -112,6 +112,8 @@ namespace OpenChords.Entities
 
         public static Song loadSong(string SongName)
         {
+            if (!_dictionaryOfAllSongs.ContainsKey(SongName))
+                _dictionaryOfAllSongs[SongName] = loadSongFromFileSystem(SongName);
             return _dictionaryOfAllSongs[SongName];    
         }
 
@@ -121,7 +123,7 @@ namespace OpenChords.Entities
             var allSongNames = IO.FileFolderFunctions.getDirectoryListingAsList(Settings.GlobalApplicationSettings.SongsFolder);
             foreach (string songName in allSongNames)
             {
-                _dictionaryOfAllSongs.Add(songName, loadSongFromFileSystem(songName));
+                _dictionaryOfAllSongs[songName] = loadSongFromFileSystem(songName);
             }
         }
 
@@ -159,6 +161,7 @@ namespace OpenChords.Entities
 
         internal void saveSong(string destination)
         {
+            _dictionaryOfAllSongs[this.SongSubFolder + @"\" + this.title] = this;
             XmlReaderWriter.writeSong(destination, this);
         }
 
@@ -166,6 +169,7 @@ namespace OpenChords.Entities
         {
             if (this.songFilePath != "")
             {
+                _dictionaryOfAllSongs.Remove(this.SongSubFolder + @"\" + this.title);
                 FileFolderFunctions.deleteFile(this.songFilePath);
             }
         }

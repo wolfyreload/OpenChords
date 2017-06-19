@@ -117,7 +117,7 @@ namespace OpenChords.CrossPlatform
             var menuItemSongFixFormating = MenuHelper.GetCommand("Auto Format Song", Graphics.ImageRepairSong, shortcutKeys.AutoFormatSong);
             menuItemSongFixFormating.Executed += (s, e) => ucSongMetaDataPanel.FixFormatting();
             var menuItemSongRefeshList = MenuHelper.GetCommand("Refresh", Graphics.ImageRefresh, shortcutKeys.RefreshSongList);
-            menuItemSongRefeshList.Executed += (s, e) => ucSongListPanel.refreshPanel();
+            menuItemSongRefeshList.Executed += (s, e) => refreshSongList();
             var menuItemShowSongInExplorer = MenuHelper.GetCommand("Show In Explorer", Graphics.ImageExplore);
             menuItemShowSongInExplorer.Executed += (s, e) => ucSongListPanel.showSongInExplorer();
 
@@ -223,6 +223,12 @@ namespace OpenChords.CrossPlatform
             ucSetListPanel.SongChanged += SelectedSongChanged;
             ucSongListPanel.AddSongToSet += (s, e) => ucSetListPanel.AddSongToSet(e);
             ucSongListPanel.SongDeleting += (s, e) => deleteCurrentlySelectedSong();
+        }
+
+        private void refreshSongList()
+        {
+            Entities.Song.ReloadAllSongs();
+            ucSongListPanel.refreshPanel();
         }
 
         private void setupHttpServer()

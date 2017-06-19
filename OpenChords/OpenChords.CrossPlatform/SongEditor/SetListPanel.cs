@@ -110,7 +110,6 @@ namespace OpenChords.CrossPlatform.SongEditor
         private Song getSelectedSong()
         {
             Song song = CurrentSet.songList[CurrentSet.indexOfCurrentSong];
-            song.revertToSaved();
             return song;
         }
 
