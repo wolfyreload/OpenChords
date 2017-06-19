@@ -205,12 +205,6 @@ namespace OpenChords.CrossPlatform.SongEditor
             }
         }
 
-        private void setListItems(List<Song> songs)
-        {
-            gridSongs.DataStore = songs;
-            gbSongs.Text = string.Format("Songs ({0})", songs.Count);
-        }
-
         void txtSearch_TextChanged(object sender, EventArgs e)
         {
             gridSongs.SelectionChanged -= lbSongs_SelectedIndexChanged;
@@ -241,7 +235,11 @@ namespace OpenChords.CrossPlatform.SongEditor
             //sort the songs
             filteredList = sortSongs(filteredList);
 
-            setListItems(filteredList.ToList());
+            //assign the songs to the grid
+            gridSongs.DataStore = filteredList;
+
+            //count the number of songs available when filtered
+            gbSongs.Text = string.Format("Songs ({0})", filteredList.Count());
         }
 
         private IQueryable<Song> sortSongs(IQueryable<Song> filteredList)

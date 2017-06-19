@@ -319,8 +319,16 @@ namespace OpenChords.CrossPlatform.SongEditor
         internal void ChangeToSong(Song newSong)
         {
             if (SongChanged)
+            {
                 if (Helpers.PopupMessages.ShowConfirmationMessage(this, "Save changes to current song '{0}' before changing to another song?", CurrentSong.title))
-                    this.SaveSong();
+                {
+                    this.SaveSong(); //save the song if we want the changes if the user clicks Yes
+                }
+                else
+                {
+                    CurrentSong.revertToSaved(); //otherwise we want to revert the song to its original state
+                }
+            }
             CurrentSong = newSong;
             refreshPanel();
         }
