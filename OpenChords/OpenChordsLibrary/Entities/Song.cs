@@ -30,6 +30,8 @@ namespace OpenChords.Entities
     {
         private static readonly log4net.ILog logger = log4net.LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
     
+        private static Dictionary<string, Song> _dictionaryOfAllSongs;
+
         public string title { get; set; }
         public string author { get; set; }
         public string presentation { get; set; }
@@ -110,6 +112,21 @@ namespace OpenChords.Entities
 
         public static Song loadSong(string SongName)
         {
+            return _dictionaryOfAllSongs[SongName];    
+        }
+
+        public static void ReloadAllSongs()
+        {
+            _dictionaryOfAllSongs = new Dictionary<string, Song>();
+            var allSongNames = IO.FileFolderFunctions.getDirectoryListingAsList(Settings.GlobalApplicationSettings.SongsFolder);
+            foreach (string songName in allSongNames)
+            {
+                _dictionaryOfAllSongs.Add(songName, loadSongFromFileSystem(songName));
+            }
+        }
+
+        private static Song loadSongFromFileSystem(string SongName)
+        {
             string filename = Settings.GlobalApplicationSettings.SongsFolder + SongName;
             if (!File.Exists(filename))
                 throw new Exception(string.Format("Song: {0} does not exist", SongName));
@@ -155,7 +172,7 @@ namespace OpenChords.Entities
 
         public void revertToSaved()
         {
-            Song oldSave = loadSong(Path.Combine(SongSubFolder, title));
+            Song oldSave = loadSongFromFileSystem(Path.Combine(SongSubFolder, title));
             this.title = oldSave.title;
             this.notes = oldSave.notes;
             this.author = oldSave.author;

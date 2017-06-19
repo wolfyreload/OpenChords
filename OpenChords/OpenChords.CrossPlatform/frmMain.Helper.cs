@@ -42,6 +42,8 @@ namespace OpenChords.CrossPlatform
             addIeEmulationModeRegistryKey();
 
             Settings.initialize();
+
+            Entities.Song.ReloadAllSongs();
           
             //ensureValidSettingsFile(Entities.DisplayAndPrintSettingsType.DisplaySettings);
             //ensureValidSettingsFile(Entities.DisplayAndPrintSettingsType.PrintSettings);
