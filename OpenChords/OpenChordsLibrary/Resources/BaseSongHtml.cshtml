@@ -13,6 +13,7 @@
 <!DOCTYPE html>
 <html>
 <head>
+    <meta name="viewport" content="width=device-width, initial-scale=2">
     <script>
         var previousPages = [];
 
@@ -376,6 +377,7 @@ body {
         var song = songs[i];
         var verses = song.getSongVerses();
         counter++;
+        <input id="SongName" type="hidden" value="@song.title" />
         <div ID="@("SongElement" + counter)" class="DisplaySongName">@song.generateLongTitle()</div>
 
         foreach (var verse in verses)
