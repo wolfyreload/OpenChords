@@ -263,7 +263,7 @@ namespace OpenChords.Config
             get
             {
                 string path = Path.GetFullPath(settings.OpenSongSetsAndSongs);
-                path = Path.Combine(path, "Songs\\OpenChords\\");
+                path = Path.Combine(path, "Songs");
                 path = fixPathsAndMakeDirectory(path);
                 return path;
 
@@ -300,5 +300,6 @@ namespace OpenChords.Config
         }
 
         public Entities.FileAndFolderSettings.KeyNotationLanguageType KeyNotationLanguage { get { return settings.KeyNotationLanguage; } set { settings.KeyNotationLanguage = value; } }
+        public string ExportToOpenSongSubFolder { get { return settings.ExportToOpenSongSubFolder; } }
     }
 }

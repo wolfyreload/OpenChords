@@ -46,7 +46,7 @@ namespace OpenChords.Export
         private static void saveSonginOpenSong(Song song)
         {
             //write song
-            var destinationSongFolder = Settings.GlobalApplicationSettings.OpensongSongsFolder;
+            var destinationSongFolder = Path.Combine(Settings.GlobalApplicationSettings.OpensongSongsFolder, Settings.GlobalApplicationSettings.ExportToOpenSongSubFolder);
             song.saveSong(destinationSongFolder);
         }
 
@@ -88,6 +88,11 @@ namespace OpenChords.Export
         {
             try
             {
+                foreach (var setSong in set.xmlSetSongCollection.setSongs)
+                {
+                    if (setSong.path == @"\") setSong.path = "";
+                    setSong.path = Path.Combine(Settings.GlobalApplicationSettings.ExportToOpenSongSubFolder, setSong.path) + Path.DirectorySeparatorChar;
+                }
                 var filename = Settings.GlobalApplicationSettings.OpenSongSetFolder + set.setName;
                 XmlReaderWriter.writeSet(filename, set);
             }

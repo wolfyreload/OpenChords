@@ -16,6 +16,7 @@ namespace OpenChords.CrossPlatform.Preferences
         private TextBox txtApplicationDataFolder = new TextBox() { Width = 550 };
         private TextBox txtOpenSongExecutablePath = new TextBox();
         private TextBox txtOpenSongDataPath = new TextBox();
+        private TextBox txtExportToOpenSongSubFolder = new TextBox();
         private Button cmdApplicationDataFolder = new Button() { Text = "", Style = "OpenFolder", Image = Graphics.ImageExplore };
         private Button cmdOpenSongExecutablePath = new Button() { Text = "", Style = "OpenFolder", Image = Graphics.ImageExplore };
         private Button cmdOpenSongSongsAndSetsPath = new Button() { Text = "", Style = "OpenFolder", Image = Graphics.ImageExplore };
@@ -46,6 +47,7 @@ namespace OpenChords.CrossPlatform.Preferences
                     new TableRow(new Label() { Text = "OpenChords Data Folder" }, txtApplicationDataFolder, cmdApplicationDataFolder, new Label() ),
                     new TableRow(new Label() { Text = "OpenSong Executable" }, txtOpenSongExecutablePath, cmdOpenSongExecutablePath, new Label() ),
                     new TableRow(new Label() { Text = "OpenSong Data Folder" }, txtOpenSongDataPath, cmdOpenSongSongsAndSetsPath, new Label() ),
+                    new TableRow(new Label() { Text = "Export To OpenSong SubFolder" }, txtExportToOpenSongSubFolder ),
                     new TableRow(new Label() { Text = "Http Server Enabled" }, chkHttpServerEnabled ),
                     new TableRow(new Label() { Text = "Http Server Port" }, txtHttpServerPort ),
                     new TableRow(new Label() { Text = "Http Examples" }, txtInterfaceHelp),
@@ -59,6 +61,7 @@ namespace OpenChords.CrossPlatform.Preferences
             txtApplicationDataFolder.Text = fileAndFolderSettings.ApplicationDataFolder;
             txtOpenSongExecutablePath.Text = fileAndFolderSettings.OpenSongExecutable;
             txtOpenSongDataPath.Text = fileAndFolderSettings.OpenSongSetsAndSongs;
+            txtExportToOpenSongSubFolder.Text = fileAndFolderSettings.ExportToOpenSongSubFolder;
             chkHttpServerEnabled.Checked = fileAndFolderSettings.HttpServerEnabled;
             txtHttpServerPort.Text = fileAndFolderSettings.HttpServerPort.ToString();
             radioListSharpsOrFlats.SelectedIndex = fileAndFolderSettings.PreferFlats ? 0 : 1;
@@ -70,6 +73,7 @@ namespace OpenChords.CrossPlatform.Preferences
             txtApplicationDataFolder.TextChanged += textChanged;
             txtOpenSongDataPath.TextChanged += textChanged;
             txtOpenSongExecutablePath.TextChanged += textChanged;
+            txtExportToOpenSongSubFolder.TextChanged += textChanged;
             chkHttpServerEnabled.CheckedChanged += checkedChanged;
             chkHttpServerEnabled.CheckedChanged += ChkHttpServerEnabled_CheckedChanged;
             txtHttpServerPort.TextChanged += textChanged;
@@ -78,6 +82,7 @@ namespace OpenChords.CrossPlatform.Preferences
             cmdApplicationDataFolder.Click += CmdApplicationDataFolder_Click;
             cmdOpenSongExecutablePath.Click += CmdOpenSongExecutablePath_Click;
             cmdOpenSongSongsAndSetsPath.Click += CmdOpenSongSongsAndSetsPath_Click;
+
             radioListSharpsOrFlats.SelectedIndexChanged += textChanged;
             ddlKeyNotationLanguage.SelectedIndexChanged += textChanged;
         }
@@ -215,6 +220,7 @@ namespace OpenChords.CrossPlatform.Preferences
             fileAndFolderSettings.HttpServerPort = int.Parse(txtHttpServerPort.Text);
             fileAndFolderSettings.PreferFlats = radioListSharpsOrFlats.SelectedIndex == 0;
             fileAndFolderSettings.KeyNotationLanguage = (ddlKeyNotationLanguage.SelectedIndex == 0) ? KeyNotationLanguageType.English : KeyNotationLanguageType.German;
+            fileAndFolderSettings.ExportToOpenSongSubFolder = txtExportToOpenSongSubFolder.Text;
 
             fileAndFolderSettings.saveSettings();
         }

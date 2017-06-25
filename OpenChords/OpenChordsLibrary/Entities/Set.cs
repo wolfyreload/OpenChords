@@ -119,7 +119,7 @@ namespace OpenChords.Entities
         public XmlSetSong()
         {
             type = "song";
-            path = "OpenChords/";
+            path = "";
             presentation = "";
             transition = "0";
             OpenChordsSubFolder = "";
@@ -130,8 +130,8 @@ namespace OpenChords.Entities
         {
             name = song.title;
             type = "song";
-            path = Path.Combine("OpenChords", song.SongSubFolder) + Path.DirectorySeparatorChar;
-            OpenChordsSubFolder = song.SongSubFolder;
+            path = song.SongSubFolder + Path.DirectorySeparatorChar;
+            OpenChordsSubFolder = song.SongSubFolder + Path.DirectorySeparatorChar;
             presentation = song.presentation;
             transition = "0";
             string songLongName = Path.Combine(song.SongSubFolder, song.title);
@@ -404,7 +404,6 @@ namespace OpenChords.Entities
         public void exportSetAndSongsToOpenSong()
         {
             Set setClone = this.Clone();
-            setClone.reloadSet();
             Export.ExportToOpenSong.exportSetAndSongsToOpenSong(setClone);
         }
 

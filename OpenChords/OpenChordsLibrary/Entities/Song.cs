@@ -112,6 +112,7 @@ namespace OpenChords.Entities
             notes = "";
             hymn_number = "";
             ccli = "";
+            SongSubFolder = "";
             BeatsPerMinute = 100;
         }
 

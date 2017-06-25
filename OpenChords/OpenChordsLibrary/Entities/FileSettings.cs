@@ -34,6 +34,7 @@ namespace OpenChords.Entities
         public bool HttpServerEnabled { get; set; }
         public int HttpServerPort { get; set; }
         public bool PreferFlats { get; set; }
+        public string ExportToOpenSongSubFolder { get; set; }
         public KeyNotationLanguageType KeyNotationLanguage { get; set; }
 
 
@@ -54,6 +55,8 @@ namespace OpenChords.Entities
         public static FileAndFolderSettings loadSettings()
         {
             var settings = IO.XmlReaderWriter.readFileAndFolderSettings();
+            if (settings.ExportToOpenSongSubFolder == null)
+                settings.ExportToOpenSongSubFolder = "OpenChords";
             return settings;
         }
 
@@ -84,28 +87,24 @@ namespace OpenChords.Entities
             OpenChordsApplicationDirectory = AssemblyDirectory;
             if (type == FileAndFolderSettingsType.Normal)
             {
-                OpenSongExecutable = "";
-                OpenSongSetsAndSongs = "";
                 PortableMode = false;
                 ApplicationDataFolder = Environment.GetFolderPath(Environment.SpecialFolder.Personal) + "/OpenChords";
-                HttpServerPort = 8083;
-                HttpServerEnabled = false;
-                PreferFlats = false;
-                KeyNotationLanguage = KeyNotationLanguageType.English;
             }
             else
             {
-                OpenSongExecutable = "";
-                OpenSongSetsAndSongs = "";
-                PortableMode = false;
+                PortableMode = true;
                 ApplicationDataFolder = "../Data";
-                HttpServerPort = 8083;
-                HttpServerEnabled = false;
-                PreferFlats = false;
-                KeyNotationLanguage = KeyNotationLanguageType.English;
             }
+
+            OpenSongExecutable = "";
+            OpenSongSetsAndSongs = "";
+            HttpServerPort = 8083;
+            HttpServerEnabled = false;
+            PreferFlats = false;
+            KeyNotationLanguage = KeyNotationLanguageType.English;
+            ExportToOpenSongSubFolder = "OpenChords";
         }
-        
+
         /// <summary>
         /// gets a fresh version of the current settings and returns the settings
         /// </summary>
