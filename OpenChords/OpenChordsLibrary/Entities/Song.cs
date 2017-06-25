@@ -46,6 +46,14 @@ namespace OpenChords.Entities
         public string notes { get; set; }
         public string bbm { get; set; }
 
+        /// <summary>
+        /// What this does is serializes ANY tags that are not supported by OpenChords
+        /// this is for the people that that try and point OpenChords to OpenSongs data folders
+        /// previously the extra tags would just be deleted
+        /// </summary>
+        [XmlAnyElement]
+        public System.Xml.XmlElement[] Unsupported { get; set; }
+
         [XmlIgnore]
         public string SongFileName { get; set; }
 

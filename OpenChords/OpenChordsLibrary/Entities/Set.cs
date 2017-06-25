@@ -247,6 +247,14 @@ namespace OpenChords.Entities
         [XmlIgnore]
         public bool changeMade { get; set; }
 
+        /// <summary>
+        /// What this does is serializes ANY tags that are not supported by OpenChords
+        /// this is for the people that that try and point OpenChords to OpenSongs data folders
+        /// previously the extra tags would just be deleted
+        /// </summary>
+        [XmlAnyElement]
+        public System.Xml.XmlElement[] Unsupported { get; set; }
+
         private List<Song> _songList = null;
         [XmlIgnore]
         public List<Song> songList
