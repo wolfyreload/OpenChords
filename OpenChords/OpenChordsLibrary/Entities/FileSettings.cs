@@ -102,7 +102,7 @@ namespace OpenChords.Entities
                 HttpServerPort = 8083;
                 HttpServerEnabled = false;
                 PreferFlats = false;
-                KeyNotationLanguage = KeyNotationLanguageType.German;
+                KeyNotationLanguage = KeyNotationLanguageType.English;
             }
         }
         
