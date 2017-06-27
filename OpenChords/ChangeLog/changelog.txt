@@ -1,3 +1,10 @@
+OpenChords v2.3.2
+============================================================================
+Fixed: Application crash when saving a new song
+Fixed: Song no longer autorefreshing when viewing song externally on tablet
+Improvement: Adjust OpenChords to work better with the OpenSong File Format Specification v1.5.1
+Fixed: Changed default chord notation to English rather than German
+
 OpenChords v2.3.1
 ============================================================================
 Fixed: bug in transposer when when working with flats
