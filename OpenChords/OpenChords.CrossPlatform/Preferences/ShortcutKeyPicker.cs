@@ -5,10 +5,11 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using OpenChords.Entities;
+using System.Collections.ObjectModel;
 
 namespace OpenChords.CrossPlatform.Preferences
 {
-    class ShortcutKeyPicker : TableRow
+    class ShortcutKeyPicker : Collection<TableCell>
     {
         protected CheckBox chkUseControl = new CheckBox();
         protected CheckBox chkUseAlt = new CheckBox();
@@ -25,15 +26,14 @@ namespace OpenChords.CrossPlatform.Preferences
 
             txtShortcutKey.KeyDown += TxtShortcutKey_KeyDown;
 
-            Cells = new System.Collections.ObjectModel.Collection<TableCell>();
-            Cells.Add(new Label() { Text = title });
-            Cells.Add(new Label() { Text = "Control" });
-            Cells.Add(chkUseControl);
-            Cells.Add(new Label() { Text = "Alt" });
-            Cells.Add(chkUseAlt);
-            Cells.Add(new Label() { Text = "Shortcut Key" });
-            Cells.Add(txtShortcutKey);
-            Cells.Add(new Label());
+            this.Add(new Label() { Text = title });
+            this.Add(new Label() { Text = "Control" });
+            this.Add(chkUseControl);
+            this.Add(new Label() { Text = "Alt" });
+            this.Add(chkUseAlt);
+            this.Add(new Label() { Text = "Shortcut Key" });
+            this.Add(txtShortcutKey);
+            this.Add(new Label());
         }
 
         private void TxtShortcutKey_KeyDown(object sender, KeyEventArgs e)

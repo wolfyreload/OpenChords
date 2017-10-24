@@ -57,17 +57,17 @@ namespace OpenChords.CrossPlatform.Preferences
                             new Label() { Text = "Style"} 
                         } 
                     },
-                    titleColorPicker,
-                    headingsColorPicker,
-                    chordsColorPicker,
-                    lyricsColorPicker,
-                    notesColorPicker,
-                    backgroundColor,
-                    verseHeadingBackgroundColor,
-                    paritalVerseHeadingBackgroundColor,
-                    verseLyricsBackgroundColor1,
-                    verseLyricsBackgroundColor2,
-                    verseLyricsBorderColor,
+                    new TableRow(titleColorPicker),
+                    new TableRow(headingsColorPicker),
+                    new TableRow(chordsColorPicker),
+                    new TableRow(lyricsColorPicker),
+                    new TableRow(notesColorPicker),
+                    new TableRow(backgroundColor),
+                    new TableRow(verseHeadingBackgroundColor),
+                    new TableRow(paritalVerseHeadingBackgroundColor),
+                    new TableRow(verseLyricsBackgroundColor1),
+                    new TableRow(verseLyricsBackgroundColor2),
+                    new TableRow(verseLyricsBorderColor),
                     null
                 }
             };

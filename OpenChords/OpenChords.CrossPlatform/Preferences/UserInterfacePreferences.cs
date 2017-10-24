@@ -39,9 +39,9 @@ namespace OpenChords.CrossPlatform.Preferences
                             new Label() { Text = "Size" },
                         }
                     },
-                    lyricsColorPicker,
-                    notesColorPicker,
-                    textboxColorPicker,
+                    new TableRow(lyricsColorPicker),
+                    new TableRow(notesColorPicker),
+                    new TableRow(textboxColorPicker),
                     null
                 }
             };

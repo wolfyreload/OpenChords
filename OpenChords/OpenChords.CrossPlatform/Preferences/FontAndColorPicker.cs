@@ -1,12 +1,13 @@
 ﻿using Eto.Forms;
 using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 
 namespace OpenChords.CrossPlatform.Preferences
 {
-    class FontAndColorPicker : TableRow
+    class FontAndColorPicker : Collection<TableCell>
     {
         public enum FontAndColorPickerType { FontAndColor, Color, Font }
         protected Label lblElementName = new Label();
@@ -38,33 +39,29 @@ namespace OpenChords.CrossPlatform.Preferences
             cmbFontStyle.Items.Add("Italic");
 
             lblElementName.Text = label;
-
+            
             if (colorPickerType == FontAndColorPickerType.FontAndColor)
             {
-                Cells = new System.Collections.ObjectModel.Collection<TableCell>();
-                Cells.Add(lblElementName);
-                Cells.Add(new TableCell() { Control = cmbFont, ScaleWidth = true });
-                Cells.Add(cmbFontSize);
-                Cells.Add(colorPicker);
-                Cells.Add(cmbFontStyle);
-                Cells.Add(new Label());
+                this.Add(lblElementName);
+                this.Add(new TableCell() { Control = cmbFont, ScaleWidth = true });
+                this.Add(cmbFontSize);
+                this.Add(colorPicker);
+                this.Add(cmbFontStyle);
+                this.Add(new Label());
             }
             else if (colorPickerType == FontAndColorPickerType.Color)
             {
-                Cells = new System.Collections.ObjectModel.Collection<TableCell>();
-                Cells.Add(new Label() { Text = label });
-                Cells.Add(new Label());
-                Cells.Add(new Label());
-                Cells.Add(colorPicker);
-                Cells.Add(new Label());
-            
+                this.Add(new Label() { Text = label });
+                this.Add(new Label());
+                this.Add(new Label());
+                this.Add(colorPicker);
+                this.Add(new Label());
             }
             else if (colorPickerType == FontAndColorPickerType.Font)
             {
-                Cells = new System.Collections.ObjectModel.Collection<TableCell>();
-                Cells.Add(new Label() { Text = label });
-                Cells.Add(new TableCell() { Control = cmbFont, ScaleWidth = true });
-                Cells.Add(cmbFontSize);
+                this.Add(new Label() { Text = label });
+                this.Add(new TableCell() { Control = cmbFont, ScaleWidth = true });
+                this.Add(cmbFontSize);
            
             }
         }
