@@ -203,6 +203,10 @@ namespace OpenChords.CrossPlatform.SongEditor
                 gridSongs.SelectRow(0);
                 gridSongs.Focus();
             }
+            else if (e.Key == Keys.Enter)
+            {
+                filterAndSortSongs(fullTextSearch: true);
+            }
         }
 
         void txtSearch_TextChanged(object sender, EventArgs e)
@@ -215,22 +219,38 @@ namespace OpenChords.CrossPlatform.SongEditor
 
         }
 
-        private void filterAndSortSongs()
+        private void filterAndSortSongs(bool fullTextSearch = false)
         {
             string search = txtSearch.Text.ToUpper();
             string[] searchItems = getAllPhrasesSearchItems(search);
             var filteredList = _fullSongList.AsQueryable();
             foreach (string item in searchItems)
             {
-                //smart filter
-                filteredList = filteredList.Where(c => c.title.ToUpper().Contains(item) //filter on title
-                                                     || c.author.ToUpper().Contains(item) //filter on author
-                                                     || c.getJustLyrics().Contains(item) //filter on lyrics
-                                                     || c.hymn_number.ToUpper().Contains(item) //filter on reference
-                                                     || c.ccli.ToUpper().Contains(item) //filter on ccli
-                                                     || c.SongFileName.ToUpper().Contains(item) //filter on filename
-                                                     || c.SongSubFolder.ToUpper().Contains(item)); //filter on sub folder
+                //if we using a full text search we search on lyrics
+                if (fullTextSearch)
+                {
+                    filteredList = filteredList.Where(c => c.title.ToUpper().Contains(item) //filter on title
+                                               || c.author.ToUpper().Contains(item) //filter on author
+                                               || c.hymn_number.ToUpper().Contains(item) //filter on reference
+                                               || c.ccli.ToUpper().Contains(item) //filter on ccli
+                                               || c.SongFileName.ToUpper().Contains(item) //filter on filename
+                                               || c.SongSubFolder.ToUpper().Contains(item) //filter on sub folder
+                                               || c.getJustLyrics().Contains(item)); //filter on lyrics
+
+                }
+                else
+                {
+                    filteredList = filteredList.Where(c => c.title.ToUpper().Contains(item) //filter on title
+                                              || c.author.ToUpper().Contains(item) //filter on author
+                                              || c.hymn_number.ToUpper().Contains(item) //filter on reference
+                                              || c.ccli.ToUpper().Contains(item) //filter on ccli
+                                              || c.SongFileName.ToUpper().Contains(item) //filter on filename
+                                              || c.SongSubFolder.ToUpper().Contains(item)); //filter on sub folder
+    
+                }
             }
+
+            
 
             //sort the songs
             filteredList = sortSongs(filteredList);
