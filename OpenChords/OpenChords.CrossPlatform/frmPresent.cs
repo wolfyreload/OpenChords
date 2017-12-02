@@ -132,7 +132,7 @@ namespace OpenChords.CrossPlatform
 
             drawSong();
 
-            this.Topmost = true;
+            this.Topmost = Settings.GlobalApplicationSettings.ForceAlwaysOnTopWhenPresenting;
         }
 
         void commandToggleMetonome_Executed(object sender, EventArgs e)

@@ -24,6 +24,7 @@ namespace OpenChords.CrossPlatform.Preferences
         private TextArea txtInterfaceHelp = new TextArea() { Height = 100 };
         protected RadioButtonList radioListSharpsOrFlats = new RadioButtonList();
         private DropDown ddlKeyNotationLanguage = new DropDown();
+        private CheckBox chkForceTopmostWindow = new CheckBox();
         private bool OptionsChanged;
 
         public GeneralSettingsPreferences(Entities.FileAndFolderSettings fileAndFolderSettings)
@@ -51,6 +52,7 @@ namespace OpenChords.CrossPlatform.Preferences
                     new TableRow(new Label() { Text = "Http Examples" }, txtInterfaceHelp),
                     new TableRow(new Label() { Text = "Sharp/Flat Key Preference" }, radioListSharpsOrFlats),
                     new TableRow(new Label() { Text = "Key Notation Language" }, ddlKeyNotationLanguage),
+                    new TableRow(new Label() { Text = "Force Always On Top When Presenting" }, chkForceTopmostWindow),
                     null
                 }
             };
@@ -64,6 +66,7 @@ namespace OpenChords.CrossPlatform.Preferences
             radioListSharpsOrFlats.SelectedIndex = fileAndFolderSettings.PreferFlats ? 0 : 1;
             setHelpOnInterfaces(chkHttpServerEnabled.Checked ?? false);
             ddlKeyNotationLanguage.SelectedIndex = (fileAndFolderSettings.KeyNotationLanguage == KeyNotationLanguageType.English) ? 0 : 1;
+            chkForceTopmostWindow.Checked = fileAndFolderSettings.ForceAlwaysOnTopWhenPresenting;
 
             //events
             chkPortableMode.CheckedChanged += chkPortableMode_CheckedChanged;
@@ -80,6 +83,7 @@ namespace OpenChords.CrossPlatform.Preferences
             cmdOpenSongSongsAndSetsPath.Click += CmdOpenSongSongsAndSetsPath_Click;
             radioListSharpsOrFlats.SelectedIndexChanged += textChanged;
             ddlKeyNotationLanguage.SelectedIndexChanged += textChanged;
+            chkForceTopmostWindow.CheckedChanged += checkedChanged;
         }
 
         private void TxtHttpServerPort_LostFocus(object sender, EventArgs e)
@@ -215,6 +219,7 @@ namespace OpenChords.CrossPlatform.Preferences
             fileAndFolderSettings.HttpServerPort = int.Parse(txtHttpServerPort.Text);
             fileAndFolderSettings.PreferFlats = radioListSharpsOrFlats.SelectedIndex == 0;
             fileAndFolderSettings.KeyNotationLanguage = (ddlKeyNotationLanguage.SelectedIndex == 0) ? KeyNotationLanguageType.English : KeyNotationLanguageType.German;
+            fileAndFolderSettings.ForceAlwaysOnTopWhenPresenting = chkForceTopmostWindow.Checked ?? false;
 
             fileAndFolderSettings.saveSettings();
         }

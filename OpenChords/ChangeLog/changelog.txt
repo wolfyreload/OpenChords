@@ -3,6 +3,7 @@ OpenChords v2.3.3
 Improvement: Only do a full lyrics search if the user presses the Enter key when searching for songs
 Improvement: upgrade all nuget packages to latest versions
 Improvement: Replace GridView for SongList with original ListBox to for a massive performance boost 
+Improvement: Add new General Setting option "Force Always On Top When Presenting"
 
 OpenChords v2.3.2
 ============================================================================

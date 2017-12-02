@@ -51,6 +51,8 @@ namespace OpenChords.Entities
             }
         }
 
+        public bool ForceAlwaysOnTopWhenPresenting { get; set; }
+
         public static FileAndFolderSettings loadSettings()
         {
             var settings = IO.XmlReaderWriter.readFileAndFolderSettings();
