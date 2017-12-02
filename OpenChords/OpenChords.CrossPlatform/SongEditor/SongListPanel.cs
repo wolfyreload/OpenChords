@@ -11,7 +11,7 @@ namespace OpenChords.CrossPlatform.SongEditor
 {
     public class SongListPanel : Panel
     {
-        protected GridView gridSongs = new GridView();
+        protected ListBox gridSongs = new ListBox();
         protected TextBox txtSearch = new TextBox();
         protected GroupBox gbSongs;
 
@@ -50,53 +50,17 @@ namespace OpenChords.CrossPlatform.SongEditor
             menuItemSongRandom.Executed += (s, e) => selectRandomSong();
 
             //setup the gridview
-            gridSongs.Columns.Add(new GridColumn
-            {
-                DataCell = new TextBoxCell { Binding = Binding.Property<Song, string>(r => r.title) },
-                HeaderText = "Title",
-                AutoSize = false,
-                Width = 350
-            });
-            gridSongs.Columns.Add(new GridColumn
-            {
-                DataCell = new TextBoxCell { Binding = Binding.Property<Song, string>(r => r.SongSubFolder) },
-                HeaderText = "Sub-Folder",
-            });
-            gridSongs.Columns.Add(new GridColumn
-            {
-                DataCell = new TextBoxCell { Binding = Binding.Property<Song, string>(r => r.hymn_number) },
-                HeaderText = "Reference",
-            });
-            gridSongs.Columns.Add(new GridColumn
-            {
-                DataCell = new TextBoxCell { Binding = Binding.Property<Song, string>(r => r.author) },
-                HeaderText = "Author",
-            });
-
             var menu = new ContextMenu()
             {
                 Items = { commandAddToSet, commandDeleteSong, menuItemSongRandom }
             };
             gridSongs.ContextMenu = menu;
             _fullSongList = new List<Song>();     
-            gridSongs.ColumnHeaderClick += GridSongs_ColumnHeaderClick;
             gridSongs.MouseDoubleClick += GridSongs_MouseDoubleClick;
 
             txtSearch.Font = Helpers.FontHelper.GetFont(UserInterfaceSettings.Instance.TextboxFormat);
         }
-
-        private void GridSongs_ColumnHeaderClick(object sender, GridColumnEventArgs e)
-        {
-            //determine sort order
-            if (e.Column.HeaderText == _orderByColumn)
-                _isAscendingOrder = !_isAscendingOrder;
-            else
-                _isAscendingOrder = true;
-            _orderByColumn = e.Column.HeaderText;
-
-            filterAndSortSongs();
-        }
-
+        
         //pad any numbers in the string so we can sort by them
         private string padNumericPortion(string stringText)
         {
@@ -113,17 +77,24 @@ namespace OpenChords.CrossPlatform.SongEditor
 
         private void deleteSong()
         {
-            if (gridSongs.SelectedItem == null) return;
-            Song selectedSong = (Song)gridSongs.SelectedItem;
+            if (gridSongs.SelectedIndex < 0) return;
+            Song selectedSong = getSelectedSong(gridSongs);
             if (SongDeleting != null)
                 SongDeleting(this, selectedSong);
         }
 
+        private Song getSelectedSong(ListBox grid)
+        {
+            string songName = grid.SelectedKey;
+            return _fullSongList.First(s => s.SongFileName == songName);
+        }
+
         private void addSongToSet()
         {
-            if (gridSongs.SelectedItem == null) return;
+            if (gridSongs.SelectedIndex < 0) return;
+            Song selectedSong = getSelectedSong(gridSongs);
             if (AddSongToSet != null)
-                AddSongToSet(this, (Song)gridSongs.SelectedItem);
+                AddSongToSet(this, selectedSong);
         }
 
         private void GridSongs_MouseDoubleClick(object sender, MouseEventArgs e)
@@ -133,8 +104,8 @@ namespace OpenChords.CrossPlatform.SongEditor
 
         void lbSongs_SelectedIndexChanged(object sender, EventArgs e)
         {
-            if (gridSongs.SelectedItem == null) return;
-            Song selectedSong = (Song)gridSongs.SelectedItem;
+            if (gridSongs.SelectedIndex < 0) return;
+            Song selectedSong = getSelectedSong(gridSongs);
             OpenChords.Functions.WebServer.CurrentSong = selectedSong;
             if (SongChanged != null)
                 SongChanged(this, selectedSong);
@@ -142,11 +113,11 @@ namespace OpenChords.CrossPlatform.SongEditor
 
         public void refreshPanel()
         {
-            gridSongs.SelectionChanged -= lbSongs_SelectedIndexChanged;
             txtSearch.TextChanged -= txtSearch_TextChanged;
             txtSearch.KeyUp -= txtSearch_KeyUp;
             gridSongs.MouseDoubleClick -= lbSongs_MouseDoubleClick;
             gridSongs.KeyUp -= lbSongs_KeyUp;
+            gridSongs.SelectedIndexChanged -= lbSongs_SelectedIndexChanged;
 
             _fullSongList.Clear();
  
@@ -157,12 +128,11 @@ namespace OpenChords.CrossPlatform.SongEditor
             }
             filterAndSortSongs();
        
-            gridSongs.SelectionChanged += lbSongs_SelectedIndexChanged;
             txtSearch.TextChanged += txtSearch_TextChanged;
             txtSearch.KeyUp += txtSearch_KeyUp;
             gridSongs.MouseDoubleClick += lbSongs_MouseDoubleClick;
             gridSongs.KeyUp += lbSongs_KeyUp;
-          
+            gridSongs.SelectedIndexChanged += lbSongs_SelectedIndexChanged;   
         }
 
         void lbSongs_KeyUp(object sender, KeyEventArgs e)
@@ -195,12 +165,12 @@ namespace OpenChords.CrossPlatform.SongEditor
         {
             if (e.Key == Keys.Up)
             {
-                gridSongs.SelectRow(gridSongs.DataStore.Count() - 1);
+                gridSongs.SelectedIndex = gridSongs.DataStore.Count() - 1;
                 gridSongs.Focus();
             }
             else if (e.Key == Keys.Down)
             {
-                gridSongs.SelectRow(0);
+                gridSongs.SelectedIndex = 0;
                 gridSongs.Focus();
             }
             else if (e.Key == Keys.Enter)
@@ -211,12 +181,7 @@ namespace OpenChords.CrossPlatform.SongEditor
 
         void txtSearch_TextChanged(object sender, EventArgs e)
         {
-            gridSongs.SelectionChanged -= lbSongs_SelectedIndexChanged;
-
             filterAndSortSongs();
-
-            gridSongs.SelectionChanged += lbSongs_SelectedIndexChanged;
-
         }
 
         private void filterAndSortSongs(bool fullTextSearch = false)
@@ -256,7 +221,12 @@ namespace OpenChords.CrossPlatform.SongEditor
             filteredList = sortSongs(filteredList);
 
             //assign the songs to the grid
-            gridSongs.DataStore = filteredList;
+            ListItemCollection items = new ListItemCollection();
+            foreach (var filteredItem in filteredList)
+            {
+                items.Add(filteredItem.SongFileName);
+            }
+            gridSongs.DataStore = items;
 
             //count the number of songs available when filtered
             gbSongs.Text = string.Format("Songs ({0})", filteredList.Count());
@@ -316,13 +286,13 @@ namespace OpenChords.CrossPlatform.SongEditor
         {
             var rand = new Random();
             var selectedIndex = rand.Next(gridSongs.DataStore.Count());
-            gridSongs.SelectRow(selectedIndex);
+            gridSongs.SelectedIndex = selectedIndex;
         }
 
         public void showSongInExplorer()
         {
-            if (gridSongs.SelectedItem == null) return;
-            Song selectedSong = (Song)gridSongs.SelectedItem;
+            if (gridSongs.SelectedIndex < 0) return;
+            Song selectedSong = getSelectedSong(gridSongs); ;
             UiHelper.ShowInFileManager(selectedSong.getFullPath());
         }
     }
