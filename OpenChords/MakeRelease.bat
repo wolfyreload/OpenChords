@@ -17,7 +17,8 @@ xcopy /Y .\settings.xml .\Staging\OpenChords\App
 copy /Y .\ChangeLog\changelog.txt .\Release\README.txt 
 
 ::Make Installer
-"C:\Program Files (x86)\Inno Setup 5\ISCC.exe" OpenChords.Setup\OpenChords.Setup.iss 
+SET InnoPath="packages\Tools.InnoSetup.5.5.9\tools\ISCC.exe"
+%InnoPath% OpenChords.Setup\OpenChords.Setup.iss 
 move OpenChords.Setup\Output\* .\Release\
 
 
