@@ -28,55 +28,28 @@ namespace OpenChords.CrossPlatform.SongEditor
         protected Splitter splitterMetadata;
         protected Splitter splitterSongNotes;
 
+        protected Button cmdShowExtraMetadata = new Button() { Text = "Toggle Metadata", Height = 20 };
+        protected Button cmdShowNormalMetadata = new Button() { Text = "Toggle Metadata", Height = 20 };
+
+        private bool showNormalMetadata = true;
+        private TableLayout normalMetadataPanel1;
+        private TableLayout normalMetadataPanel2;
+        private TableLayout additionalMetadataPanel1;
+        private TableLayout additionalMetadataPanel2;
+
         public Song CurrentSong { get; private set; }
         public bool SongChanged { get; set; }
 
         public SongMetadataPanel()
         {
-     
+
             //build ui
             this.Content = new Splitter()
             {
-                Position = 150,
+                Position = 160,
                 Orientation = Orientation.Vertical,
                 //metadata
-                Panel1 = new GroupBox()
-                {
-                    Text = "Song Metadata",
-                    Content = splitterMetadata = new Splitter()
-                    {
-                        Position = Helpers.FormHelper.getScreenXPercentageInPixels(60, this),
-                        //main metadata
-                        Panel1 = new TableLayout()
-                        {
-                            Style = "padded-table",
-                            Rows =
-                            {
-                                new TableRow(new Label() { Text = "Title" }, new TableCell(txtTitle) { ScaleWidth = true}, new Label() { Text = "Key" }, txtKey),
-                                new TableRow(new Label() { Text = "Sub-Folder" }, txtSubFolder, new Label() { Text = "Capo" }, txtCapo),
-                                new TableRow(new Label() { Text = "Order" }, txtOrder, new Label() {Text = "Bpm"}, txtBpm ),
-                                new TableRow(new Label() { Text = "Author" }, txtAuther ),
-                                new TableRow(new Label() { Text = "Copyright" }, txtCopyright),
-                                null,
-                            }
-                        },
-                        //extra metadata
-                        Panel2 = new TableLayout()
-                        {
-                            Style = "padded-table",
-                            Rows =
-                            {
-                                new TableRow(new Label() { Text = "Tempo" }, cmbTempo),
-                                new TableRow(new Label() { Text = "Signature" }, cmbSignature),
-                                new TableRow(new Label() { Text = "ccli" }, txtCCLI),
-                                new TableRow(new Label() { Text = "Reference" }, txtReference),
-                                null,
-
-                            }
-                        }
-
-                    }
-                },
+                Panel1 = buildMetadataPanel(),
                 //lyrics and notes
                 Panel2 = new Panel()
                 {
@@ -109,6 +82,86 @@ namespace OpenChords.CrossPlatform.SongEditor
             CurrentSong = new Song();
 
             this.SizeChanged += SongMetadataPanel_SizeChanged;
+            cmdShowExtraMetadata.Click += cmdToggleMetadata_Click;
+            cmdShowNormalMetadata.Click += cmdToggleMetadata_Click;
+        }
+
+        private Panel buildMetadataPanel()
+        {
+            normalMetadataPanel1 = new TableLayout()
+            {
+                Style = "padded-table",
+                Rows =
+                {
+                    new TableRow(new Label() { Text = "Title" }, txtTitle),
+                    new TableRow(new Label() { Text = "Order" }, txtOrder),
+                    new TableRow(new Label() { Text = "Author" }, txtAuther),
+                    null,
+                }
+            };
+            normalMetadataPanel2 = new TableLayout()
+            {
+                Style = "padded-table",
+                Rows =
+                {
+                    new TableRow(new Label() { Text = "Key" }, txtKey),
+                    new TableRow(new Label() { Text = "Capo" }, txtCapo),
+                    new TableRow(new Label() { Text = "Reference" }, txtReference),
+                    new TableRow(new Label() { Height = 20 },  cmdShowExtraMetadata),
+                    null,
+                }
+            };
+            additionalMetadataPanel1 = new TableLayout()
+            {
+                Style = "padded-table",
+                Rows =
+                {
+                    new TableRow(new Label() { Text = "Sub-Folder" }, txtSubFolder),
+                    new TableRow(new Label() { Text = "Copyright" }, txtCopyright),
+                    new TableRow(new Label() { Text = "ccli" }, txtCCLI),
+                    null,
+
+                }
+            };
+            additionalMetadataPanel2 = new TableLayout()
+            {
+                Style = "padded-table",
+                Rows =
+                {
+                    new TableRow(new Label() { Text = "Bpm"}, txtBpm ),
+                    new TableRow(new Label() { Text = "Signature" }, cmbSignature),
+                    new TableRow(new Label() { Text = "Tempo" }, cmbTempo),
+                    new TableRow(new Label() { Height = 20 }, cmdShowNormalMetadata),
+                    null,
+                }
+            };
+
+            var groupBox = new GroupBox()
+            {
+                Text = "Song Metadata",
+                Content = splitterMetadata = new Splitter()
+                {
+                    Panel1 = normalMetadataPanel1,
+                    Panel2 = normalMetadataPanel2
+                }
+            };
+            
+            return groupBox;
+        }
+
+        private void cmdToggleMetadata_Click(object sender, EventArgs e)
+        {
+            showNormalMetadata = !showNormalMetadata;
+            if (showNormalMetadata)
+            {
+                splitterMetadata.Panel1 = normalMetadataPanel1;
+                splitterMetadata.Panel2 = normalMetadataPanel2;
+            }
+            else
+            {
+                splitterMetadata.Panel1 = additionalMetadataPanel1;
+                splitterMetadata.Panel2 = additionalMetadataPanel2;
+            };
         }
 
         private void setUserInterfaceFonts()
