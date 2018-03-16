@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 14
-VisualStudioVersion = 14.0.23107.0
+# Visual Studio 15
+VisualStudioVersion = 15.0.27130.2010
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "_OpenChords.Web", "OpenChords.Web\_OpenChords.Web.csproj", "{8CA35AD8-1BC8-4667-B8F6-A0D22C87C51F}"
 EndProject
@@ -23,13 +23,11 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution 
 		App.config = App.config
 		ChangeLog\changelog.txt = ChangeLog\changelog.txt
 		Manual\help.md = Manual\help.md
-		SolutionInfo.cs = SolutionInfo.cs
 		OpenChords.Setup\OpenChords.Setup.iss = OpenChords.Setup\OpenChords.Setup.iss
+		SolutionInfo.cs = SolutionInfo.cs
 	EndProjectSection
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OpenChords.Tests", "OpenChords.Tests\OpenChords.Tests.csproj", "{EA3C7C27-B707-4FD9-BF2B-BF5FB711E0C3}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OpenChords.CrossPlatform.Mac", "OpenChords.CrossPlatform.Mac\OpenChords.CrossPlatform.Mac.csproj", "{F223BF36-AB3C-400E-80F6-08FB1ABE4549}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -94,21 +92,12 @@ Global
 		{EA3C7C27-B707-4FD9-BF2B-BF5FB711E0C3}.Release|Mixed Platforms.Build.0 = Release|Any CPU
 		{EA3C7C27-B707-4FD9-BF2B-BF5FB711E0C3}.Release|x86.ActiveCfg = Release|Any CPU
 		{EA3C7C27-B707-4FD9-BF2B-BF5FB711E0C3}.Release|x86.Build.0 = Release|Any CPU
-		{F223BF36-AB3C-400E-80F6-08FB1ABE4549}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{F223BF36-AB3C-400E-80F6-08FB1ABE4549}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{F223BF36-AB3C-400E-80F6-08FB1ABE4549}.Debug|Mixed Platforms.ActiveCfg = Debug|x86
-		{F223BF36-AB3C-400E-80F6-08FB1ABE4549}.Debug|Mixed Platforms.Build.0 = Debug|x86
-		{F223BF36-AB3C-400E-80F6-08FB1ABE4549}.Debug|x86.ActiveCfg = Debug|x86
-		{F223BF36-AB3C-400E-80F6-08FB1ABE4549}.Debug|x86.Build.0 = Debug|x86
-		{F223BF36-AB3C-400E-80F6-08FB1ABE4549}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{F223BF36-AB3C-400E-80F6-08FB1ABE4549}.Release|Any CPU.Build.0 = Release|Any CPU
-		{F223BF36-AB3C-400E-80F6-08FB1ABE4549}.Release|Mixed Platforms.ActiveCfg = Release|x86
-		{F223BF36-AB3C-400E-80F6-08FB1ABE4549}.Release|Mixed Platforms.Build.0 = Release|x86
-		{F223BF36-AB3C-400E-80F6-08FB1ABE4549}.Release|x86.ActiveCfg = Release|x86
-		{F223BF36-AB3C-400E-80F6-08FB1ABE4549}.Release|x86.Build.0 = Release|x86
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {9009C68B-41DB-4047-9069-EB86499EF9ED}
 	EndGlobalSection
 	GlobalSection(MonoDevelopProperties) = preSolution
 		StartupItem = OpenChords.CrossPlatform.Gtk2\OpenChords.CrossPlatform.Gtk2.csproj

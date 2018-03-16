@@ -1,116 +1,124 @@
-OpenChords v2.3.3
-============================================================================
-Improvement: Make command line build more seamless 
-Improvement: Only do a full lyrics search if the user presses the Enter key when searching for songs
-Improvement: upgrade all nuget packages to latest versions
-Improvement: Replace GridView for SongList with original ListBox to for a massive performance boost 
-Improvement: Add new General Setting option "Force Always On Top When Presenting"
+# OpenChords v2.4.0 #
 
-OpenChords v2.3.2
-============================================================================
-Fixed: Application crash when saving a new song
-Fixed: Song no longer autorefreshing when viewing song externally on tablet
-Improvement: Adjust OpenChords to work better with the OpenSong File Format Specification v1.5.1
-Fixed: Changed default chord notation to English rather than German
+* Improvement: Upgrade Microsoft.AspNet.Razor to v3.2.4
+* Improvement: Upgrade Microsoft.CSharp to v4.4.1
+* Improvement: Upgrade Eto.Forms to v3.4.1
+* Improvement: Remove unused Mac implementation files
+* Improvement: converted release notes to markdown format
 
-OpenChords v2.3.1
-============================================================================
-Fixed: bug in transposer when when working with flats
-Fixed: when reverting a song it isn't getting reflected in the song list panel
-Fixed: Bug when changing a song in a set is not reflecting in the song list
-Fixed: Bug when transposing I loose any changes I have made in the UI before saving the song
+# OpenChords v2.3.3 #
 
-OpenChords v2.3.0
-============================================================================
-Fixed: Font size settings editor to look better on Linux systems
-Fixed: Keep song sort order when searching for songs
-Fixed: Other minor bug fixes
-Fixed: #8 Export All Songs to Tablet and Printer needs to open the file manager where the songs were exported
-Improvement: Moved song search box to top of the grid so its more visible
-Improvement: Allow user to add songs at any point in the set
-Improvement: Changed song rendering to use RazorEngine instead of a custom template
-Improvement: #10 Move sharp/flat key preferences per song to General Settings
-Feature: #5 Add subfolder support to the OpenChordsData/Songs folder
-Feature: #9 Add dropdownlist for switching between English and German Key Notation
+* Improvement: Make command line build more seamless 
+* Improvement: Only do a full lyrics search if the user presses the Enter key when searching for songs
+* Improvement: upgrade all nuget packages to latest versions
+* Improvement: Replace GridView for SongList with original ListBox to for a massive performance boost 
+* Improvement: Add new General Setting option "Force Always On Top When Presenting"
 
-OpenChords v2.2.0
-============================================================================
-Fixed: SessionSaveState getting saved outside of the settings folder
-Fixed: When http server is active OpenChords does not close property
-Fixed: OpenChords preference screen not resizable
-Fixed: Preference screen opens very slowly
-Fixed: Preference screen crashes OpenChords on Linux systems
-Fixed: Preference screen widen controls so font sizes are visible on Linux systems
-Improvement: Add "Partial Heading Background Color" to easily see if a song piece is not completely on the screen
+# OpenChords v2.3.2 #
 
-OpenChords v2.1.0
-============================================================================
-Improvement: Disable context menu in presentation screen in Windows
-Improvement: Add "User Interface Settings" section to the help documentation
-Improvement: Added basic instructions for using OpenChords for Linux users
+* Fixed: Application crash when saving a new song
+* Fixed: Song no longer autorefreshing when viewing song externally on tablet
+* Improvement: Adjust OpenChords to work better with the OpenSong File Format Specification v1.5.1
+* Fixed: Changed default chord notation to English rather than German
 
-OpenChords v2.0.5
-============================================================================
-Improvement: Disabled some keyboard shortcuts as they interfere with user experience during presentation mode
-Improvement: Upgrade all 3rd party packages to latest version
-Improvement: Allow changing font and font size in song editor and notes fields
-Fixed: Song orientation defaulting to Vertical on linux systems
+# OpenChords v2.3.1 # 
 
-OpenChords v2.0.4
-============================================================================
-Improvement: Upgrade to Eto.Forms 2.1.0-build0350
-Improvement: Added help text for when the http server is enabled to help users use this feature
-Fixed: spacing issues in preference screens
-Improvement: Disallow invalid port numbers in preferences
-Improvement: Make "Using OpenChords with Tablets and Cellphones" documentation more user friendly
-Improvement: Add sortable grid to song list view and remove the advanced search screen as its no longer necessary
-Improvement: Add song counter to set list 
-Improvement: Add song counter to songs list
-Fixed: Song filter not re-applied when refreshing song list
-Improvement: Allow filtering on phrase in addition to single word searching
-Improvement: Make searching more responsive
-Improvement: Show current song position when presenting a set
-Fixed: Changing a song while presenting not updating in set list or song list
-Improvement: Add back double-click to add a new song to set
-Improvement: Make shortcut keys customizable
-Improvement: Remove the need to restart OpenChords after changing settings
-Improvement: Start presenting set on currently selected song in set list
-Improvement: Changed export set list to csv for easier readability
-Fixed: Prevent multiple instances of OpenSong opening when exporting to OpenSong
-Improvement: Add shortcut for exporting to OpenSong (Ctrl+O)
+* Fixed: bug in transposer when when working with flats
+* Fixed: when reverting a song it isn't getting reflected in the song list panel
+* Fixed: Bug when changing a song in a set is not reflecting in the song list
+* Fixed: Bug when transposing I loose any changes I have made in the UI before saving the song
+
+# OpenChords v2.3.0 #
+
+* Fixed: Font size settings editor to look better on Linux systems
+* Fixed: Keep song sort order when searching for songs
+* Fixed: Other minor bug fixes
+* Fixed: #8 Export All Songs to Tablet and Printer needs to open the file manager where the songs were exported
+* Improvement: Moved song search box to top of the grid so its more visible
+* Improvement: Allow user to add songs at any point in the set
+* Improvement: Changed song rendering to use RazorEngine instead of a custom template
+* Improvement: #10 Move sharp/flat key preferences per song to General Settings
+* Feature: #5 Add subfolder support to the OpenChordsData/Songs folder
+* Feature: #9 Add dropdownlist for switching between English and German Key Notation
+
+# OpenChords v2.2.0 #
+
+* Fixed: SessionSaveState getting saved outside of the settings folder
+* Fixed: When http server is active OpenChords does not close property
+* Fixed: OpenChords preference screen not resizable
+* Fixed: Preference screen opens very slowly
+* Fixed: Preference screen crashes OpenChords on Linux systems
+* Fixed: Preference screen widen controls so font sizes are visible on Linux systems
+* Improvement: Add "Partial Heading Background Color" to easily see if a song piece is not completely on the screen
+
+# OpenChords v2.1.0 #
+
+* Improvement: Disable context menu in presentation screen in Windows
+* Improvement: Add "User Interface Settings" section to the help documentation
+* Improvement: Added basic instructions for using OpenChords for Linux users
+
+# OpenChords v2.0.5 # 
+
+* Improvement: Disabled some keyboard shortcuts as they interfere with user experience during presentation mode
+* Improvement: Upgrade all 3rd party packages to latest version
+* Improvement: Allow changing font and font size in song editor and notes fields
+* Fixed: Song orientation defaulting to Vertical on linux systems
+
+# OpenChords v2.0.4 #
+
+* Improvement: Upgrade to Eto.Forms 2.1.0-build0350
+* Improvement: Added help text for when the http server is enabled to help users use this feature
+* Fixed: spacing issues in preference screens
+* Improvement: Disallow invalid port numbers in preferences
+* Improvement: Make "Using OpenChords with Tablets and Cellphones" documentation more user friendly
+* Improvement: Add sortable grid to song list view and remove the advanced search screen as its no longer necessary
+* Improvement: Add song counter to set list 
+* Improvement: Add song counter to songs list
+* Fixed: Song filter not re-applied when refreshing song list
+* Improvement: Allow filtering on phrase in addition to single word searching
+* Improvement: Make searching more responsive
+* Improvement: Show current song position when presenting a set
+* Fixed: Changing a song while presenting not updating in set list or song list
+* Improvement: Add back double-click to add a new song to set
+* Improvement: Make shortcut keys customizable
+* Improvement: Remove the need to restart OpenChords after changing settings
+* Improvement: Start presenting set on currently selected song in set list
+* Improvement: Changed export set list to csv for easier readability
+* Fixed: Prevent multiple instances of OpenSong opening when exporting to OpenSong
+* Improvement: Add shortcut for exporting to OpenSong (Ctrl+O)
 
 
-OpenChords v2.0.3
-============================================================================
-Fixed: Capo field doesn't show in presentation if key isn't filled in
-Fixed: Selected set is reset when adding a new song
-Improvement: More chords detected as chords
-Improvement: Add OpenSong integration instructions to manual
+# OpenChords v2.0.3 #
 
-OpenChords v2.0.2
-============================================================================
-Fixed: double pipes || which are used in OpenSong to split a song piece into multiple slides now get ignored
-Fixed: pipes (character used to split song pieces) no longer slices chords in half
-Improvement: Can now switch between vertical and horizontal song presentation 
-Fixed: Song key and capo not updating in editor if its changed in presentation mode  
+* Fixed: Capo field doesn't show in presentation if key isn't filled in
+* Fixed: Selected set is reset when adding a new song
+* Improvement: More chords detected as chords
+* Improvement: Add OpenSong integration instructions to manual
 
-OpenChords v2.0.1
-============================================================================
-Added: OpenFileDialogs in General Settings
-Added: Song randomizer
-Added: Break song line
-Added: Break long song lines with pipe character
-Fixed: Removed extra blank pages when printing
-Fixed: Some chords were not getting detected properly as chords (e.g. D/F)
+# OpenChords v2.0.2 #
 
-OpenChords v2.0.0 Beta
-============================================================================
-Added: UI rewrite with cross-platform support (Windows, Linux and probably OS X in future)
-Improvement: Use system look and feel.
-Improvement: simplier song searching
-Improvement: improved look of song presentation screen
-Improvement: Faster load times
-Improvement: Settings screen simpified
-Added: Metronome for keeping perfect timing
-Depreciation: Removed pdf support in favor of Html  
-Depreciation: By upgrading to .Net 4.5 Windows XP is no longer supported
+* Fixed: double pipes || which are used in OpenSong to split a song piece into multiple slides now get ignored
+* Fixed: pipes (character used to split song pieces) no longer slices chords in half
+* Improvement: Can now switch between vertical and horizontal song presentation 
+* Fixed: Song key and capo not updating in editor if its changed in presentation mode  
+
+# OpenChords v2.0.1 #
+
+* Added: OpenFileDialogs in General Settings
+* Added: Song randomizer
+* Added: Break song line
+* Added: Break long song lines with pipe character
+* Fixed: Removed extra blank pages when printing
+* Fixed: Some chords were not getting detected properly as chords (e.g. D/F)
+
+# OpenChords v2.0.0 Beta #
+
+* Added: UI rewrite with cross-platform support (Windows, Linux and probably OS X in future)
+* Improvement: Use system look and feel.
+* Improvement: simplier song searching
+* Improvement: improved look of song presentation screen
+* Improvement: Faster load times
+* Improvement: Settings screen simpified
+* Added: Metronome for keeping perfect timing
+* Depreciation: Removed pdf support in favor of Html  
+* Depreciation: By upgrading to .Net 4.5 Windows XP is no longer supported
