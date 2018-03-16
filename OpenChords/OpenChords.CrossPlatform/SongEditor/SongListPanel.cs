@@ -61,20 +61,6 @@ namespace OpenChords.CrossPlatform.SongEditor
             txtSearch.Font = Helpers.FontHelper.GetFont(UserInterfaceSettings.Instance.TextboxFormat);
         }
         
-        //pad any numbers in the string so we can sort by them
-        private string padNumericPortion(string stringText)
-        {
-            if (stringText == null) return stringText;
-
-            var match = System.Text.RegularExpressions.Regex.Match(stringText, @"(\d+)");
-            var numberText = match.Value;
-            int temp;
-            if (int.TryParse(numberText, out temp))
-                return int.Parse(numberText).ToString("D6");
-            else
-                return stringText;
-        }
-
         private void deleteSong()
         {
             if (gridSongs.SelectedIndex < 0) return;
@@ -195,6 +181,7 @@ namespace OpenChords.CrossPlatform.SongEditor
                 if (fullTextSearch)
                 {
                     filteredList = filteredList.Where(c => c.title.ToUpper().Contains(item) //filter on title
+                                               || c.aka.ToUpper().Contains(item) //filter on alternative title
                                                || c.author.ToUpper().Contains(item) //filter on author
                                                || c.hymn_number.ToUpper().Contains(item) //filter on reference
                                                || c.ccli.ToUpper().Contains(item) //filter on ccli
@@ -206,6 +193,7 @@ namespace OpenChords.CrossPlatform.SongEditor
                 else
                 {
                     filteredList = filteredList.Where(c => c.title.ToUpper().Contains(item) //filter on title
+                                              || c.aka.ToUpper().Contains(item) //filter on alternative title
                                               || c.author.ToUpper().Contains(item) //filter on author
                                               || c.hymn_number.ToUpper().Contains(item) //filter on reference
                                               || c.ccli.ToUpper().Contains(item) //filter on ccli
@@ -214,11 +202,6 @@ namespace OpenChords.CrossPlatform.SongEditor
     
                 }
             }
-
-            
-
-            //sort the songs
-            filteredList = sortSongs(filteredList);
 
             //assign the songs to the grid
             ListItemCollection items = new ListItemCollection();
@@ -230,30 +213,6 @@ namespace OpenChords.CrossPlatform.SongEditor
 
             //count the number of songs available when filtered
             gbSongs.Text = string.Format("Songs ({0})", filteredList.Count());
-        }
-
-        private IQueryable<Song> sortSongs(IQueryable<Song> filteredList)
-        {
-            _orderByColumn = _orderByColumn ?? "Title";
-            
-            //find the column that was clicked
-            Func<Song, string> columnOrderFuction = null;
-            if (_orderByColumn == "Title")
-                columnOrderFuction = s => s.title;
-            else if (_orderByColumn == "Sub-Folder")
-                columnOrderFuction = s => s.SongSubFolder;
-            else if (_orderByColumn == "Reference")
-                columnOrderFuction = s => padNumericPortion(s.hymn_number);
-            else if (_orderByColumn == "Author")
-                columnOrderFuction = s => s.author;
-
-            //sort the grid
-            if (_isAscendingOrder)
-                filteredList = filteredList.OrderBy(columnOrderFuction).AsQueryable();
-            else
-                filteredList = filteredList.OrderByDescending(columnOrderFuction).AsQueryable();
-
-            return filteredList;
         }
 
         //split search string into search phrases

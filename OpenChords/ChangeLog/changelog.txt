@@ -4,7 +4,9 @@
 * Improvement: Upgrade Microsoft.CSharp to v4.4.1
 * Improvement: Upgrade Eto.Forms to v3.4.1
 * Improvement: Remove unused Mac implementation files
-* Improvement: converted release notes to markdown format
+* Improvement: Converted release notes to markdown format
+* Improvement: Handle display resolutions down to 1024x768
+* Improvement: Add new field to editor Alternative Title or AKA (Also Known As)
 
 # OpenChords v2.3.3 #
 

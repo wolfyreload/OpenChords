@@ -12,6 +12,7 @@ namespace OpenChords.CrossPlatform.SongEditor
     {
         //controls
         protected TextBox txtTitle = new TextBox();
+        protected TextBox txtAlternativeTitle = new TextBox();
         protected TextBox txtSubFolder = new TextBox();
         protected TextBox txtOrder = new TextBox();
         protected TextBox txtAuther = new TextBox();
@@ -94,8 +95,8 @@ namespace OpenChords.CrossPlatform.SongEditor
                 Rows =
                 {
                     new TableRow(new Label() { Text = "Title" }, txtTitle),
-                    new TableRow(new Label() { Text = "Order" }, txtOrder),
                     new TableRow(new Label() { Text = "Author" }, txtAuther),
+                    new TableRow(new Label() { Text = "Order" }, txtOrder),
                     null,
                 }
             };
@@ -116,6 +117,7 @@ namespace OpenChords.CrossPlatform.SongEditor
                 Style = "padded-table",
                 Rows =
                 {
+                    new TableRow(new Label() { Text = "Alternative Title" }, txtAlternativeTitle),
                     new TableRow(new Label() { Text = "Sub-Folder" }, txtSubFolder),
                     new TableRow(new Label() { Text = "Copyright" }, txtCopyright),
                     new TableRow(new Label() { Text = "ccli" }, txtCCLI),
@@ -169,6 +171,7 @@ namespace OpenChords.CrossPlatform.SongEditor
             txtLyrics.Font = Helpers.FontHelper.GetFont(UserInterfaceSettings.Instance.LyricsFormat);
             txtNotes.Font = Helpers.FontHelper.GetFont(UserInterfaceSettings.Instance.NoteFormat);
             txtTitle.Font = Helpers.FontHelper.GetFont(UserInterfaceSettings.Instance.TextboxFormat);
+            txtAlternativeTitle.Font = Helpers.FontHelper.GetFont(UserInterfaceSettings.Instance.TextboxFormat);
             txtSubFolder.Font = Helpers.FontHelper.GetFont(UserInterfaceSettings.Instance.TextboxFormat);
             txtAuther.Font = Helpers.FontHelper.GetFont(UserInterfaceSettings.Instance.TextboxFormat);
             txtOrder.Font = Helpers.FontHelper.GetFont(UserInterfaceSettings.Instance.TextboxFormat);
@@ -196,6 +199,7 @@ namespace OpenChords.CrossPlatform.SongEditor
         {
             //disable events
             txtTitle.TextChanged -= fieldTextChanged;
+            txtAlternativeTitle.TextChanged -= fieldTextChanged;
             txtSubFolder.TextChanged -= fieldTextChanged;
             txtOrder.TextChanged -= fieldTextChanged;
             txtAuther.TextChanged -= fieldTextChanged;
@@ -216,6 +220,7 @@ namespace OpenChords.CrossPlatform.SongEditor
 
             //events
             txtTitle.TextChanged += fieldTextChanged;
+            txtAlternativeTitle.TextChanged += fieldTextChanged;
             txtSubFolder.TextChanged += fieldTextChanged;
             txtOrder.TextChanged += fieldTextChanged;
             txtAuther.TextChanged += fieldTextChanged;
@@ -253,6 +258,7 @@ namespace OpenChords.CrossPlatform.SongEditor
             if (CurrentSong != null)
             {
                 txtTitle.Text = CurrentSong.title;
+                txtAlternativeTitle.Text = CurrentSong.aka;
                 txtOrder.Text = CurrentSong.presentation;
                 txtAuther.Text = CurrentSong.author;
                 txtCopyright.Text = CurrentSong.copyright;
@@ -270,6 +276,7 @@ namespace OpenChords.CrossPlatform.SongEditor
             else
             {
                 txtTitle.Text = "";
+                txtAlternativeTitle.Text = "";
                 txtOrder.Text = "";
                 txtAuther.Text = "";
                 txtCopyright.Text = "";
@@ -293,6 +300,7 @@ namespace OpenChords.CrossPlatform.SongEditor
             int.TryParse(txtCapo.Text, out capoInt);
 
             CurrentSong.title = txtTitle.Text;
+            CurrentSong.aka = txtAlternativeTitle.Text;
             CurrentSong.presentation = txtOrder.Text.ToUpper();
             CurrentSong.author = txtAuther.Text;
             CurrentSong.copyright = txtCopyright.Text;
@@ -484,24 +492,6 @@ namespace OpenChords.CrossPlatform.SongEditor
             CurrentSong.fixLyricsOrdering();
             CurrentSong.fixNoteOrdering();
             updateGuiFromSongObject();
-        }
-
-        internal void SetReadOnlyMode()
-        {
-            txtTitle.ReadOnly = true;
-            txtOrder.ReadOnly = true;
-            txtAuther.ReadOnly = true;
-            txtCopyright.ReadOnly = true;
-            cmbTempo.ReadOnly = true;
-            cmbSignature.ReadOnly = true;
-            txtCCLI.ReadOnly = true;
-            txtReference.ReadOnly = true;
-            txtLyrics.ReadOnly = true;
-            txtNotes.ReadOnly = true;
-            txtCapo.ReadOnly = true;
-            txtKey.ReadOnly = true;
-            cmbSignature.ReadOnly = true;
-            cmbTempo.ReadOnly = true;
         }
     }
 }

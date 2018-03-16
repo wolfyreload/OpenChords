@@ -33,6 +33,7 @@ namespace OpenChords.Entities
         private static Dictionary<string, Song> _dictionaryOfAllSongs;
 
         public string title { get; set; }
+        public string aka;
         public string author { get; set; }
         public string presentation { get; set; }
         public string capo { get; set; }
@@ -103,6 +104,7 @@ namespace OpenChords.Entities
         public Song()
         {
             title = "";
+            aka = "";
             author = "";
             key = "";
             capo = "0";
