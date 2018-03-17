@@ -89,6 +89,7 @@
       <Link>Properties\SolutionInfo.cs</Link>
     </Compile>
     <Compile Include="Entities\ShortcutSettings.cs" />
+    <Compile Include="Entities\SongMetaDataLayout.cs" />
     <Compile Include="Entities\UserInterfaceSettings.cs" />
     <Compile Include="Export\ExportToTextFile.cs" />
     <Compile Include="Functions\Metronome.cs" />

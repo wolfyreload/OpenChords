@@ -21,6 +21,7 @@ namespace OpenChords.CrossPlatform
             this.Icon = Graphics.Icon;
             this.Width = 1024;
             this.Height = 768;
+            this.WindowState = WindowState.Maximized;
 
             var tabControl = new TabControl()
             {

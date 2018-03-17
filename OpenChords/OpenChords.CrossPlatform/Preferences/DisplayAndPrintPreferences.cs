@@ -13,6 +13,7 @@ namespace OpenChords.CrossPlatform.Preferences
         private Entities.DisplayAndPrintSettings displayAndPrintSettings;
 
         private FontAndColorPanel fontAndColorPanel;
+        private SongMetadataTemplatesPanel songMetadataTemplatesPanel;
         private CheckBox chkShowNotes = new CheckBox();
         private CheckBox chkShowLyrics = new CheckBox();
         private CheckBox chkShowChords = new CheckBox();
@@ -26,7 +27,6 @@ namespace OpenChords.CrossPlatform.Preferences
         private Button cmdResetSettings = new Button() { Text = "Reset", ToolTip = "Reset settings to default" };
 
         FileFilter FILTER = new FileFilter("Openchords settings file", new string[] { ".oc" } );
-        
 
         public DisplayAndPrintPreferences(Entities.DisplayAndPrintSettings displayAndPrintSettings, Song currentSong)
         {
@@ -34,7 +34,9 @@ namespace OpenChords.CrossPlatform.Preferences
             //populate values
             this.displayAndPrintSettings = displayAndPrintSettings;
 
-            fontAndColorPanel = new FontAndColorPanel(displayAndPrintSettings);
+            fontAndColorPanel = new FontAndColorPanel();
+
+            songMetadataTemplatesPanel = new SongMetadataTemplatesPanel();
 
             cmbSongOrientation.Items.Add("Horizontal");
             cmbSongOrientation.Items.Add("Vertical");
@@ -50,13 +52,13 @@ namespace OpenChords.CrossPlatform.Preferences
 
                     Rows =
                     {
-                        new GroupBox() 
-                        { 
+                        new GroupBox()
+                        {
                             Text = "Visibility",
                             Content = new TableLayout()
                             {
                                 Style = "padded-table",
-                                Rows = 
+                                Rows =
                                 {
                                     new TableRow() { Cells = { new Label() { Text = "Show Chords" }, chkShowChords }},
                                     new TableRow() { Cells = { new Label() { Text = "Show Lyrics" }, chkShowLyrics }},
@@ -73,12 +75,17 @@ namespace OpenChords.CrossPlatform.Preferences
                         },
                         new GroupBox()
                         {
+                            Text = "Song Metadata Templates",
+                            Content = songMetadataTemplatesPanel
+                        },
+                        new GroupBox()
+                        {
                             Text = "Backup/Restore Settings",
-                            Content = new TableLayout() 
+                            Content = new TableLayout()
                             {
                                 Style = "padded-table",
-                                Rows = 
-                                { 
+                                Rows =
+                                {
                                     new TableRow() { Cells = { cmdBackupSettings, cmdRestoreSettings, cmdRevertSettings, cmdResetSettings, null }}
                                 }
                             }
@@ -94,6 +101,7 @@ namespace OpenChords.CrossPlatform.Preferences
             chkShowLyrics.CheckedChanged += FieldChanged;
             chkShowNotes.CheckedChanged += FieldChanged;
             fontAndColorPanel.ItemChanged += FieldChanged;
+            songMetadataTemplatesPanel.ItemChanged += FieldChanged;
             cmbSongOrientation.SelectedIndexChanged += FieldChanged;
 
             cmdBackupSettings.Click += cmdBackupSettings_Click;
@@ -101,7 +109,6 @@ namespace OpenChords.CrossPlatform.Preferences
             cmdRevertSettings.Click += cmdRevertSettings_Click;
             cmdResetSettings.Click += cmdResetSettings_Click;
         }
-
 
         void cmdBackupSettings_Click(object sender, EventArgs e)
         {
@@ -168,15 +175,18 @@ namespace OpenChords.CrossPlatform.Preferences
             else
                 cmbSongOrientation.SelectedIndex = 1;
             fontAndColorPanel.updateGuiFromSettingsObject(displayAndPrintSettings);
+            songMetadataTemplatesPanel.updateGuiFromSettingsObject(displayAndPrintSettings);
         }
 
         public void updateSettingsObjectFromGui()
         {
             fontAndColorPanel.UpdateColorAndFontPreferences();
+            songMetadataTemplatesPanel.UpdateMetadataTemplates();
 
             displayAndPrintSettings.ShowChords = chkShowChords.Checked ?? false;
             displayAndPrintSettings.ShowLyrics = chkShowLyrics.Checked ?? false;
             displayAndPrintSettings.ShowNotes = chkShowNotes.Checked ?? false;
+
             if (cmbSongOrientation.SelectedIndex == 0)
                 displayAndPrintSettings.SongOrientation = "Horizontal";
             else

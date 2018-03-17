@@ -161,6 +161,19 @@ namespace OpenChords.IO
             try
             {
                 settings = xmlReader<DisplayAndPrintSettings>(fileName);
+                
+                // Check if parts of the file is null and fill in those settings with the defaults
+                if (settings.nullsInFile())
+                {
+                    var type = settings.settingsType;
+                    var newSettings = new DisplayAndPrintSettings(type);
+                    if (settings.SongMetaDataLayoutTop == null)
+                        settings.SongMetaDataLayoutTop = newSettings.SongMetaDataLayoutTop;
+                    if (settings.SongMetaDataLayoutMiddle == null)
+                        settings.SongMetaDataLayoutMiddle = newSettings.SongMetaDataLayoutMiddle;
+                    if (settings.SongMetaDataLayoutBottom == null)
+                        settings.SongMetaDataLayoutBottom = newSettings.SongMetaDataLayoutBottom;
+                }
             }
             catch (Exception ex)
             {

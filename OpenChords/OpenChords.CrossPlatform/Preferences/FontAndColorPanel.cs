@@ -24,9 +24,8 @@ namespace OpenChords.CrossPlatform.Preferences
         public event EventHandler ItemChanged;
 
 
-        public FontAndColorPanel(Entities.DisplayAndPrintSettings displayAndPrintSettings)
+        public FontAndColorPanel()
         {
-            this.displayAndPrintSettings = displayAndPrintSettings;
             titleColorPicker = new FontAndColorPicker("Title", FontAndColorPicker.FontAndColorPickerType.FontAndColor);
             headingsColorPicker = new FontAndColorPicker("Headings", FontAndColorPicker.FontAndColorPickerType.FontAndColor);
             chordsColorPicker = new FontAndColorPicker("Chords", FontAndColorPicker.FontAndColorPickerType.FontAndColor, true);
@@ -38,8 +37,6 @@ namespace OpenChords.CrossPlatform.Preferences
             verseLyricsBackgroundColor1 = new FontAndColorPicker("Verse Background Color 1", FontAndColorPicker.FontAndColorPickerType.Color);
             verseLyricsBackgroundColor2 = new FontAndColorPicker("Verse Background Color 2", FontAndColorPicker.FontAndColorPickerType.Color);
             verseLyricsBorderColor = new FontAndColorPicker("Verse Border Color", FontAndColorPicker.FontAndColorPickerType.Color);
-
-            updateGuiFromSettingsObject(displayAndPrintSettings);
 
             Content = new TableLayout()
             {

@@ -68,7 +68,10 @@ namespace OpenChords.Entities
         public SongElementFormat Order1Format { get; set; }
         public SongElementFormat Order2Format { get; set; }
         public SongElementFormat NoteFormat { get; set; }
-   
+        public SongMetaDataLayout SongMetaDataLayoutTop { get; set; }
+        public SongMetaDataLayout SongMetaDataLayoutMiddle { get; set; }
+        public SongMetaDataLayout SongMetaDataLayoutBottom { get; set; }
+
         /// <summary>
         /// we check for nulls to determine if we need to refresh the settings file
         /// </summary>
@@ -84,6 +87,9 @@ namespace OpenChords.Entities
             if (TitleFormat == null || ChordFormat == null || LyricsFormat == null ||
                 HeadingsFormat == null || Order1Format == null || Order2Format == null ||
                 NoteFormat == null)
+                return true;
+
+            if (SongMetaDataLayoutTop == null || SongMetaDataLayoutMiddle == null || SongMetaDataLayoutBottom == null)
                 return true;
 
             return false;
@@ -372,6 +378,12 @@ namespace OpenChords.Entities
             Order1Format = new SongElementFormat("Courier New", orderSize, OrderColor1, BoldOrder1);
             Order2Format = new SongElementFormat("Courier New", orderSize, OrderColor2, BoldOrder2);
             NoteFormat = new SongElementFormat("Courier New", notesSize, NoteColor, BoldNotes);
+
+            SongMetaDataLayoutTop = new SongMetaDataLayout("{{title}}", "(Key-{{key}} Capo-{{capo}})", "{{order}}");
+            SongMetaDataLayoutMiddle = new SongMetaDataLayout("{{author}}", "", "{{reference}}");
+            SongMetaDataLayoutBottom = new SongMetaDataLayout();
+
+
         }
 
     }

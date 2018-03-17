@@ -7,6 +7,7 @@
 * Improvement: Converted release notes to markdown format
 * Improvement: Handle display resolutions down to 1024x768
 * Improvement: Add new field to editor Alternative Title or AKA (Also Known As)
+* Imrpovement: Allow user to customize what song metadata fields are visible in display and print song
 * Fixed: Backup display and print settings not working
 
 
