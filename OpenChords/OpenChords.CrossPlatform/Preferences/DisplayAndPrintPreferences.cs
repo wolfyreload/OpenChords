@@ -26,7 +26,7 @@ namespace OpenChords.CrossPlatform.Preferences
         private Button cmdRevertSettings = new Button() { Text = "Revert", ToolTip = "Revert settings to previous saved state" };
         private Button cmdResetSettings = new Button() { Text = "Reset", ToolTip = "Reset settings to default" };
 
-        FileFilter FILTER = new FileFilter("Openchords settings file", new string[] { ".oc" } );
+        FileDialogFilter FILTER = new FileDialogFilter("Openchords settings file", new string[] { ".oc" } );
 
         public DisplayAndPrintPreferences(Entities.DisplayAndPrintSettings displayAndPrintSettings, Song currentSong)
         {

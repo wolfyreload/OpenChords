@@ -143,6 +143,7 @@ namespace OpenChords.CrossPlatform.SongEditor
                 Text = "Song Metadata",
                 Content = splitterMetadata = new Splitter()
                 {
+                    Position = Helpers.FormHelper.getScreenXPercentageInPixels(60, this),
                     Panel1 = normalMetadataPanel1,
                     Panel2 = normalMetadataPanel2
                 }

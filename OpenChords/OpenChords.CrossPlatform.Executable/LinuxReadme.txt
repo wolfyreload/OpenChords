@@ -8,7 +8,7 @@ To run OpenChords you'll need to first run the following (for Ubuntu based distr
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 # script to install mono
 sudo apt-get update
-sudo apt-get install mono-complete
+sudo apt-get install mono-complete gtk-sharp2
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 Then to run OpenChords you'll need to run:

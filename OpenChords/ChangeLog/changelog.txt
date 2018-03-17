@@ -2,7 +2,6 @@
 
 * Improvement: Upgrade Microsoft.AspNet.Razor to v3.2.4
 * Improvement: Upgrade Microsoft.CSharp to v4.4.1
-* Improvement: Upgrade Eto.Forms to v3.4.1
 * Improvement: Remove unused Mac implementation files
 * Improvement: Converted release notes to markdown format
 * Improvement: Handle display resolutions down to 1024x768

@@ -70,7 +70,7 @@ namespace OpenChords.CrossPlatform
                 Content = new Splitter()
                 {
                     Orientation = Orientation.Horizontal,
-                    Position = Helpers.FormHelper.getScreenXPercentageInPixels(25, this),
+                    Position = Helpers.FormHelper.getScreenXPercentageInPixels(15, this),
                     //Sets and song list
                     Panel1 = new Splitter()
                     {
