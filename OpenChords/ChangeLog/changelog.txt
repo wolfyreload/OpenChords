@@ -7,6 +7,8 @@
 * Improvement: Converted release notes to markdown format
 * Improvement: Handle display resolutions down to 1024x768
 * Improvement: Add new field to editor Alternative Title or AKA (Also Known As)
+* Fixed: Backup display and print settings not working
+
 
 # OpenChords v2.3.3 #
 

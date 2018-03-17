@@ -25,7 +25,7 @@ namespace OpenChords.CrossPlatform.Preferences
         private Button cmdRevertSettings = new Button() { Text = "Revert", ToolTip = "Revert settings to previous saved state" };
         private Button cmdResetSettings = new Button() { Text = "Reset", ToolTip = "Reset settings to default" };
 
-        FileDialogFilter FILTER = new FileDialogFilter("Openchords settings file", new string[] { ".oc" } );
+        FileFilter FILTER = new FileFilter("Openchords settings file", new string[] { ".oc" } );
         
 
         public DisplayAndPrintPreferences(Entities.DisplayAndPrintSettings displayAndPrintSettings, Song currentSong)
@@ -105,7 +105,7 @@ namespace OpenChords.CrossPlatform.Preferences
 
         void cmdBackupSettings_Click(object sender, EventArgs e)
         {
-            using (var fileDialog = new OpenFileDialog() { FileName = displayAndPrintSettings.settingsType.ToString() })
+            using (var fileDialog = new SaveFileDialog() { FileName = displayAndPrintSettings.settingsType.ToString() })
             {
                 fileDialog.Filters.Add(FILTER);
                 if (fileDialog.ShowDialog(this) == DialogResult.Ok)
