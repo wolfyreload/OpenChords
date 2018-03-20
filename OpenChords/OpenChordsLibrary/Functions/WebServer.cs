@@ -103,10 +103,11 @@ namespace OpenChords.Functions
             var request = e.Request.Url.ToString();
             if (request.ToLower().Contains("/print"))
                 settings = DisplayAndPrintSettings.loadSettings(DisplayAndPrintSettingsType.PrintSettings);
-            else if (request.ToLower().Contains("/tablet"))
-                settings = DisplayAndPrintSettings.loadSettings(DisplayAndPrintSettingsType.TabletSettings);
+            else if (request.ToLower().Contains("/display"))
+                settings = DisplayAndPrintSettings.loadSettings(DisplayAndPrintSettingsType.DisplaySettings);
             else
-                settings = CurrentDisplayAndPrintSettings;
+                settings = DisplayAndPrintSettings.loadSettings(DisplayAndPrintSettingsType.TabletSettings);
+            
             return settings;
         }
 

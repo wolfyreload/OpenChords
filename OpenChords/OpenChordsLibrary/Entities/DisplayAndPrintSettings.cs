@@ -379,8 +379,8 @@ namespace OpenChords.Entities
             Order2Format = new SongElementFormat("Courier New", orderSize, OrderColor2, BoldOrder2);
             NoteFormat = new SongElementFormat("Courier New", notesSize, NoteColor, BoldNotes);
 
-            SongMetaDataLayoutTop = new SongMetaDataLayout("{{title}}", "(Key-{{key}} Capo-{{capo}})", "{{order}}");
-            SongMetaDataLayoutMiddle = new SongMetaDataLayout("{{author}}", "", "{{reference}}");
+            SongMetaDataLayoutTop = new SongMetaDataLayout("{{title}}", "Key-{{key}}", "{{order}}");
+            SongMetaDataLayoutMiddle = new SongMetaDataLayout("{{author}}", "Capo-{{capo}}", "{{reference}}");
             SongMetaDataLayoutBottom = new SongMetaDataLayout();
 
 
