@@ -12,6 +12,16 @@ namespace OpenChords.Entities
         public string MiddleMetadata { get; set; }
         public string RightMetadata { get; set; }
 
+        public bool HasMetaData
+        {
+            get
+            {
+                return !string.IsNullOrWhiteSpace(LeftMetadata)
+                    || !string.IsNullOrWhiteSpace(MiddleMetadata)
+                    || !string.IsNullOrWhiteSpace(RightMetadata);
+            }
+        }
+
         public SongMetaDataLayout()
         {
             this.LeftMetadata = "";

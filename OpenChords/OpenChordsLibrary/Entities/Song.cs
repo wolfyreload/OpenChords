@@ -99,6 +99,14 @@ namespace OpenChords.Entities
             }
         }
 
+        [XmlIgnore]
+        public SongMetaDataLayout SongMetaDataLayoutTop { get; set; }
+        [XmlIgnore]
+        public SongMetaDataLayout SongMetaDataLayoutMiddle { get; set; }
+        [XmlIgnore]
+        public SongMetaDataLayout SongMetaDataLayoutBottom { get; set; }
+
+
         private string _justLyrics;
 
         public Song()

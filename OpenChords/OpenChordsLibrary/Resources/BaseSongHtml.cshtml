@@ -9,10 +9,6 @@
     List<Song> songs = Model.Set.songList;
     int counter = 0;
 
-    bool topRowHasMetaData =    !string.IsNullOrWhiteSpace(Model.SongMetaDataLayoutTop.LeftMetadata)    || !string.IsNullOrWhiteSpace(Model.SongMetaDataLayoutTop.MiddleMetadata)    || !string.IsNullOrWhiteSpace(Model.SongMetaDataLayoutTop.RightMetadata);
-    bool middleRowHasMetaData = !string.IsNullOrWhiteSpace(Model.SongMetaDataLayoutMiddle.LeftMetadata) || !string.IsNullOrWhiteSpace(Model.SongMetaDataLayoutMiddle.MiddleMetadata) || !string.IsNullOrWhiteSpace(Model.SongMetaDataLayoutMiddle.RightMetadata);
-    bool bottomRowHasMetaData = !string.IsNullOrWhiteSpace(Model.SongMetaDataLayoutBottom.LeftMetadata) || !string.IsNullOrWhiteSpace(Model.SongMetaDataLayoutBottom.MiddleMetadata) || !string.IsNullOrWhiteSpace(Model.SongMetaDataLayoutBottom.RightMetadata);
-
 }
 
 <!DOCTYPE html>
@@ -366,22 +362,28 @@ body {
     font-family: "HelveticaNeue-Light", "Helvetica Neue Light", "Helvetica Neue", Helvetica, Arial, "Lucida Grande", sans-serif;
 }
 
+.header-top-row, .header-middle-row, .header-bottom-row {
+    width: 100%;
+}
+
 .title-left, .title-center, .title-right {
     display: inline-block;
-    width: 32.5%;
-    white-space: nowrap;
+    vertical-align: top;
 }
 
 .title-left {
     text-align: left;
+    width: 42.5%
 }
 
 .title-center {
     text-align: center;
+    width: 12%
 }
 
 .title-right {
     text-align: right;
+    width: 42.5%
 }
     </style>
 
@@ -394,33 +396,38 @@ body {
     {
         var song = songs[i];
         var verses = song.getSongVerses();
+        bool topRowHasMetaData = song.SongMetaDataLayoutTop.HasMetaData;
+        bool middleRowHasMetaData = song.SongMetaDataLayoutMiddle.HasMetaData;
+        bool bottomRowHasMetaData = song.SongMetaDataLayoutBottom.HasMetaData;
+
         counter++;
+
         <input id="SongName" type="hidden" value="@song.title" />
         <div ID="@("SongElement" + counter)" class="DisplaySongName">
             @if (topRowHasMetaData)
-            {
-            <div class="title-top-row">
-                <div class="title-left">@Model.SongMetaDataLayoutTop.LeftMetadata</div>
-                <div class="title-center">@Model.SongMetaDataLayoutTop.MiddleMetadata</div>
-                <div class="title-right">@Model.SongMetaDataLayoutTop.RightMetadata</div>
-            </div>
+                {
+                <div class="header-top-row">
+                    <div class="title-left">@song.SongMetaDataLayoutTop.LeftMetadata</div>
+                    <div class="title-center">@song.SongMetaDataLayoutTop.MiddleMetadata</div>
+                    <div class="title-right">@song.SongMetaDataLayoutTop.RightMetadata</div>
+                </div>
             }
 
             @if (middleRowHasMetaData)
             {
-            <div class="title-middle-row">
-                <div class="title-left">@Model.SongMetaDataLayoutMiddle.LeftMetadata</div>
-                <div class="title-center">@Model.SongMetaDataLayoutMiddle.MiddleMetadata</div>
-                <div class="title-right">@Model.SongMetaDataLayoutMiddle.RightMetadata</div>
+            <div class="header-middle-row">
+                <div class="title-left">@song.SongMetaDataLayoutMiddle.LeftMetadata</div>
+                <div class="title-center">@song.SongMetaDataLayoutMiddle.MiddleMetadata</div>
+                <div class="title-right">@song.SongMetaDataLayoutMiddle.RightMetadata</div>
             </div>
             }
 
             @if (bottomRowHasMetaData)
             {
-            <div class="title-bottom-row">
-                <div class="title-left">@Model.SongMetaDataLayoutBottom.LeftMetadata</div>
-                <div class="title-center">@Model.SongMetaDataLayoutBottom.MiddleMetadata</div>
-                <div class="title-right">@Model.SongMetaDataLayoutBottom.RightMetadata</div>
+            <div class="header-bottom-row">
+                <div class="title-left">@song.SongMetaDataLayoutBottom.LeftMetadata</div>
+                <div class="title-center">@song.SongMetaDataLayoutBottom.MiddleMetadata</div>
+                <div class="title-right">@song.SongMetaDataLayoutBottom.RightMetadata</div>
             </div>
             }
         </div>

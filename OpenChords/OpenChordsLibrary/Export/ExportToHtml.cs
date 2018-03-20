@@ -18,10 +18,7 @@ namespace OpenChords.Export
             public Set Set { get; set; }
             public bool EnableAutoRefresh { get; internal set; }
             public string Title { get; internal set; }
-            public SongMetaDataLayout SongMetaDataLayoutTop { get; set; }
-            public SongMetaDataLayout SongMetaDataLayoutMiddle { get; set; }
-            public SongMetaDataLayout SongMetaDataLayoutBottom { get; set; }
-
+            
         }
 
 
@@ -57,34 +54,34 @@ namespace OpenChords.Export
                 Set = _set,
                 EnableAutoRefresh = enableAutoRefresh,
                 Title = Title,
-                SongMetaDataLayoutTop = new SongMetaDataLayout(),
-                SongMetaDataLayoutMiddle = new SongMetaDataLayout(),
-                SongMetaDataLayoutBottom = new SongMetaDataLayout()
             };
-            fillinSongMetaData(model);
+            fillInSongsMetaData(model);
         
             var result = Engine.Razor.RunCompile(HtmlResources.BaseSongHtml, "BaseSongHtml", typeof(SetViewModel), model);
          
             return result;
         }
 
-        private void fillinSongMetaData(SetViewModel model)
+        private void fillInSongsMetaData(SetViewModel model)
         {
             var settings = model.Settings;
             foreach (var song in model.Set.songList)
             {
-                model.SongMetaDataLayoutTop.LeftMetadata = completeTemplate(song, settings.SongMetaDataLayoutTop.LeftMetadata);
-                model.SongMetaDataLayoutTop.MiddleMetadata = completeTemplate(song, settings.SongMetaDataLayoutTop.MiddleMetadata);
-                model.SongMetaDataLayoutTop.RightMetadata = completeTemplate(song, settings.SongMetaDataLayoutTop.RightMetadata);
-                model.SongMetaDataLayoutMiddle.LeftMetadata = completeTemplate(song, settings.SongMetaDataLayoutMiddle.LeftMetadata);
-                model.SongMetaDataLayoutMiddle.MiddleMetadata = completeTemplate(song, settings.SongMetaDataLayoutMiddle.MiddleMetadata);
-                model.SongMetaDataLayoutMiddle.RightMetadata = completeTemplate(song, settings.SongMetaDataLayoutMiddle.RightMetadata);
-                model.SongMetaDataLayoutBottom.LeftMetadata = completeTemplate(song, settings.SongMetaDataLayoutBottom.LeftMetadata);
-                model.SongMetaDataLayoutBottom.MiddleMetadata = completeTemplate(song, settings.SongMetaDataLayoutBottom.MiddleMetadata);
-                model.SongMetaDataLayoutBottom.RightMetadata = completeTemplate(song, settings.SongMetaDataLayoutBottom.RightMetadata);
+                song.SongMetaDataLayoutTop = completeTemplate(song, settings.SongMetaDataLayoutTop);
+                song.SongMetaDataLayoutMiddle = completeTemplate(song, settings.SongMetaDataLayoutMiddle);
+                song.SongMetaDataLayoutBottom = completeTemplate(song, settings.SongMetaDataLayoutBottom);
             }
         }
-        
+
+        private SongMetaDataLayout completeTemplate(Song song, SongMetaDataLayout template)
+        {
+            string left = completeTemplate(song, template.LeftMetadata);
+            string middle = completeTemplate(song, template.MiddleMetadata);
+            string right = completeTemplate(song, template.RightMetadata);
+            var layout = new SongMetaDataLayout(left, middle, right);
+            return layout;
+        }
+
         private static string completeTemplate(Song song, string template)
         {
             template = template.Replace("{{title}}", song.title);
