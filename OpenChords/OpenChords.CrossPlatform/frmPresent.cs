@@ -13,7 +13,6 @@ namespace OpenChords.CrossPlatform
     {
         private Set CurrentSet;
         private DisplayAndPrintSettings DisplaySettings;
-        private WebView webView = new WebView();
         private int SongIndex;
         private int MaxIndex;
         private Song CurrentSong;
@@ -21,7 +20,14 @@ namespace OpenChords.CrossPlatform
         private bool _SettingsChanged;
         private Functions.Metronome metronome1;
         protected ButtonMenuItem menuItemSongList;
-    
+
+        private WebView webView = new WebView();
+        protected Button cmdMenu = new Button();
+        protected Button cmdPreviousPage = new Button() { Text = "↑" };
+        protected Button cmdNextPage = new Button() { Text = "↓" };
+        protected Button cmdPreviousSong = new Button() { Text = "←" }; 
+        protected Button cmdNextSong = new Button() { Text = "→" };
+
         private ShortcutSettings shortcutKeys;
 
         public frmPresent(Song song, DisplayAndPrintSettings settings)
@@ -54,12 +60,27 @@ namespace OpenChords.CrossPlatform
             Height = 500;
             WindowState = Eto.Forms.WindowState.Maximized;
             this.WindowStyle = Eto.Forms.WindowStyle.None;
-            Content = webView;
+
+            if (Settings.GlobalApplicationSettings.TouchScreenMode)
+            {
+                Splitter touchScreenUI = buildTouchscreenUI();
+                Content = touchScreenUI;
+            }
+            else
+            {
+                Content = webView;
+            }
+
+            cmdPreviousSong.Click += menuItemPreviousSong_Executed;
+            cmdNextSong.Click += menuItemNextSong_Executed;
+            cmdPreviousPage.Click += cmdPreviousPage_Click;
+            cmdNextPage.Click += cmdNextPage_Click;
+
             this.Icon = Graphics.Icon;
 
-            var menuItemExit = MenuHelper.GetCommand("Exit", Graphics.ImageExit,  shortcutKeys.ExitPresentation);
+            var menuItemExit = MenuHelper.GetCommand("Exit", Graphics.ImageExit, shortcutKeys.ExitPresentation);
             menuItemExit.Executed += (s, e) => this.Close();
-            
+
             // refresh item
             var menuItemRefresh = MenuHelper.GetCommand("Refresh", Graphics.ImageRefresh, shortcutKeys.RefreshPresentation);
             menuItemRefresh.Executed += menuItemRefresh_Executed;
@@ -69,8 +90,8 @@ namespace OpenChords.CrossPlatform
             commandSongIncreaseSize.Executed += commandSongIncreaseSize_Executed;
             var commandSongDecreaseSize = MenuHelper.GetCommand("Decrease Font Size", Graphics.ImageMoveDown, shortcutKeys.DecreaseFontSize);
             commandSongDecreaseSize.Executed += commandSongDecreaseSize_Executed;
-            
-            
+
+
             // key items
             var commandSongIncreaseKey = MenuHelper.GetCommand("Transpose Key Up", Graphics.ImagMoveUp, shortcutKeys.TransposeUp);
             commandSongIncreaseKey.Executed += commandSongIncreaseKey_Executed;
@@ -95,7 +116,7 @@ namespace OpenChords.CrossPlatform
             commandToggleLyrics.Executed += (s, e) => { toggleLyrics(); };
             var commandToggleNotes = MenuHelper.GetCommand("Toggle Notes", Graphics.ImageNotes, shortcutKeys.ToggleNotes);
             commandToggleNotes.Executed += (s, e) => { toggleNotes(); };
-      
+
             //Metronome
             var commandToggleMetonome = MenuHelper.GetCommand("Toggle Metronome", Graphics.ImageMetronome, shortcutKeys.ToggleMetronome);
             commandToggleMetonome.Executed += commandToggleMetonome_Executed;
@@ -112,7 +133,7 @@ namespace OpenChords.CrossPlatform
 
             Menu = new MenuBar()
             {
-                Items = 
+                Items =
                 {
                     menuItemRefresh,
                     new ButtonMenuItem() { Text = "&Size", Items = { commandSongIncreaseSize, commandSongDecreaseSize }, Image = Graphics.ImageSize},
@@ -122,7 +143,7 @@ namespace OpenChords.CrossPlatform
                     new ButtonMenuItem() { Text = "&Visibility", Items = { commandToggleChords, commandToggleLyrics, commandToggleNotes }, Image = Graphics.ImageVisibility },
                     new ButtonMenuItem() { Text = "Other Options", Items = { commandToggleMetonome }, Image = Graphics.ImageOtherOptions },
                     menuItemSongList,
-                    menuItemExit 
+                    menuItemExit
                 }
             };
 
@@ -133,6 +154,39 @@ namespace OpenChords.CrossPlatform
             drawSong();
 
             this.Topmost = Settings.GlobalApplicationSettings.ForceAlwaysOnTopWhenPresenting;
+        }
+
+        private Splitter buildTouchscreenUI()
+        {
+            var splitterView2 = new Splitter()
+            {
+                FixedPanel = SplitterFixedPanel.Panel1,
+                RelativePosition = 20,
+                Orientation = Orientation.Vertical,
+                Panel1 = cmdPreviousPage,
+                Panel2 = new Splitter()
+                {
+                    FixedPanel = SplitterFixedPanel.Panel2,
+                    RelativePosition = 20,
+                    Orientation = Orientation.Vertical,
+                    Panel1 = webView,
+                    Panel2 = cmdNextPage
+                }
+            };
+            var splitterView1 = new Splitter()
+            {
+                FixedPanel = SplitterFixedPanel.Panel1,
+                RelativePosition = 20,
+                Panel1 = cmdPreviousSong,
+                Panel2 = new Splitter()
+                {
+                    RelativePosition = 20,
+                    FixedPanel = SplitterFixedPanel.Panel2,
+                    Panel1 = splitterView2,
+                    Panel2 = cmdNextSong
+                }
+            };
+            return splitterView1;
         }
 
         void commandToggleMetonome_Executed(object sender, EventArgs e)
@@ -204,6 +258,16 @@ namespace OpenChords.CrossPlatform
             SaveSongifChanged();
             SongIndex++;
             drawSong();
+        }
+
+        private void cmdNextPage_Click(object sender, EventArgs e)
+        {
+            webView.ExecuteScript("scrollDown()");
+        }
+
+        private void cmdPreviousPage_Click(object sender, EventArgs e)
+        {
+            webView.ExecuteScript("scrollUp()");
         }
 
         void frmPresent_Closing(object sender, System.ComponentModel.CancelEventArgs e)

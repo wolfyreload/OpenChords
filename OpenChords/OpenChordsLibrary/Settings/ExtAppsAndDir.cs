@@ -302,5 +302,7 @@ namespace OpenChords.Config
         public Entities.FileAndFolderSettings.KeyNotationLanguageType KeyNotationLanguage { get { return settings.KeyNotationLanguage; } set { settings.KeyNotationLanguage = value; } }
 
         public bool ForceAlwaysOnTopWhenPresenting { get { return settings.ForceAlwaysOnTopWhenPresenting; } }
+
+        public bool TouchScreenMode { get { return settings.TouchScreenModeEnabled; } }
     }
 }

@@ -25,6 +25,7 @@ namespace OpenChords.CrossPlatform.Preferences
         protected RadioButtonList radioListSharpsOrFlats = new RadioButtonList();
         private DropDown ddlKeyNotationLanguage = new DropDown();
         private CheckBox chkForceTopmostWindow = new CheckBox();
+        private CheckBox chkTouchScreenMode = new CheckBox();
         private bool OptionsChanged;
 
         public GeneralSettingsPreferences(Entities.FileAndFolderSettings fileAndFolderSettings)
@@ -53,6 +54,7 @@ namespace OpenChords.CrossPlatform.Preferences
                     new TableRow(new Label() { Text = "Sharp/Flat Key Preference" }, radioListSharpsOrFlats),
                     new TableRow(new Label() { Text = "Key Notation Language" }, ddlKeyNotationLanguage),
                     new TableRow(new Label() { Text = "Force Always On Top When Presenting" }, chkForceTopmostWindow),
+                    new TableRow(new Label() { Text = "Touch Screen Mode" }, chkTouchScreenMode),
                     null
                 }
             };
@@ -67,6 +69,7 @@ namespace OpenChords.CrossPlatform.Preferences
             setHelpOnInterfaces(chkHttpServerEnabled.Checked ?? false);
             ddlKeyNotationLanguage.SelectedIndex = (fileAndFolderSettings.KeyNotationLanguage == KeyNotationLanguageType.English) ? 0 : 1;
             chkForceTopmostWindow.Checked = fileAndFolderSettings.ForceAlwaysOnTopWhenPresenting;
+            chkTouchScreenMode.Checked = fileAndFolderSettings.TouchScreenModeEnabled;
 
             //events
             chkPortableMode.CheckedChanged += chkPortableMode_CheckedChanged;
@@ -84,6 +87,7 @@ namespace OpenChords.CrossPlatform.Preferences
             radioListSharpsOrFlats.SelectedIndexChanged += textChanged;
             ddlKeyNotationLanguage.SelectedIndexChanged += textChanged;
             chkForceTopmostWindow.CheckedChanged += checkedChanged;
+            chkTouchScreenMode.CheckedChanged += checkedChanged;
         }
 
         private void TxtHttpServerPort_LostFocus(object sender, EventArgs e)
@@ -220,7 +224,7 @@ namespace OpenChords.CrossPlatform.Preferences
             fileAndFolderSettings.PreferFlats = radioListSharpsOrFlats.SelectedIndex == 0;
             fileAndFolderSettings.KeyNotationLanguage = (ddlKeyNotationLanguage.SelectedIndex == 0) ? KeyNotationLanguageType.English : KeyNotationLanguageType.German;
             fileAndFolderSettings.ForceAlwaysOnTopWhenPresenting = chkForceTopmostWindow.Checked ?? false;
-
+            fileAndFolderSettings.TouchScreenModeEnabled = chkTouchScreenMode.Checked ?? false;
             fileAndFolderSettings.saveSettings();
         }
     }

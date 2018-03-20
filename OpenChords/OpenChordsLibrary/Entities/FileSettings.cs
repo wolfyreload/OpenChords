@@ -52,6 +52,7 @@ namespace OpenChords.Entities
         }
 
         public bool ForceAlwaysOnTopWhenPresenting { get; set; }
+        public bool TouchScreenModeEnabled { get; set; }
 
         public static FileAndFolderSettings loadSettings()
         {

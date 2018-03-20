@@ -8,7 +8,7 @@
 * Improvement: Add new field to editor Alternative Title or AKA (Also Known As)
 * Imrpovement: Allow user to customize what song metadata fields are visible in display and print song
 * Fixed: Backup display and print settings not working
-
+* Feature: Add new option under "General Settings" called "Touch Screen Mode" which adds navigation buttons to presentation screen
 
 # OpenChords v2.3.3 #
 

@@ -87,11 +87,6 @@ namespace OpenChords.CrossPlatform.Executable.Controls
             throw new NotImplementedException();
         }
 
-        string WebView.IHandler.ExecuteScript(string script)
-        {
-            throw new NotImplementedException();
-        }
-
         void WebView.IHandler.ShowPrintDialog()
         {
             throw new NotImplementedException();
