@@ -395,7 +395,7 @@ body {
     @for (int i = 0; i < songs.Count; i++)
     {
         var song = songs[i];
-        var verses = song.getSongVerses();
+        var verses = song.getSongVerses(Model.Settings.DisplayEachSongSectionOnce);
         bool topRowHasMetaData = song.SongMetaDataLayoutTop.HasMetaData;
         bool middleRowHasMetaData = song.SongMetaDataLayoutMiddle.HasMetaData;
         bool bottomRowHasMetaData = song.SongMetaDataLayoutBottom.HasMetaData;

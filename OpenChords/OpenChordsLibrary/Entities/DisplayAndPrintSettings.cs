@@ -72,6 +72,8 @@ namespace OpenChords.Entities
         public SongMetaDataLayout SongMetaDataLayoutMiddle { get; set; }
         public SongMetaDataLayout SongMetaDataLayoutBottom { get; set; }
 
+        public bool DisplayEachSongSectionOnce { get; set; }
+
         /// <summary>
         /// we check for nulls to determine if we need to refresh the settings file
         /// </summary>
@@ -383,7 +385,7 @@ namespace OpenChords.Entities
             SongMetaDataLayoutMiddle = new SongMetaDataLayout("{{author}}", "Capo-{{capo}}", "{{reference}}");
             SongMetaDataLayoutBottom = new SongMetaDataLayout();
 
-
+            DisplayEachSongSectionOnce = false;
         }
 
     }

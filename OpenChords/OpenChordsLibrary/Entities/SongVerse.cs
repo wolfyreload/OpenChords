@@ -127,10 +127,17 @@ namespace OpenChords.Entities
         /// </summary>
         /// <param name="song"></param>
         /// <returns></returns>
-        public static List<SongVerse> getSongVerses(Song song)
+        public static List<SongVerse> getSongVerses(Song song, bool displayEachSongSectionOnce)
         {
             string[] splitParameters2 = { " " };
             string[] presentationOrder = song.presentation.Split(splitParameters2, StringSplitOptions.RemoveEmptyEntries);
+
+            // Remove duplicate song sections (tipically choruses and interludes)
+            if (displayEachSongSectionOnce)
+            {
+                presentationOrder = new HashSet<string>(presentationOrder).ToArray();
+            }
+
             List<SongVerse> elementsInOrder = new List<SongVerse>();
 
             //split lyrics lines on pipe character

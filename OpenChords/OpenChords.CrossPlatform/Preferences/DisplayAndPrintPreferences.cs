@@ -17,6 +17,7 @@ namespace OpenChords.CrossPlatform.Preferences
         private CheckBox chkShowNotes = new CheckBox();
         private CheckBox chkShowLyrics = new CheckBox();
         private CheckBox chkShowChords = new CheckBox();
+        private CheckBox chkDisplayEachSongSectionOnce = new CheckBox();
         private ComboBox cmbSongOrientation = new ComboBox() { AutoComplete = false, ReadOnly = true };
         private Splitter splitter1;
         private WebView webPreview = new WebView();
@@ -63,6 +64,7 @@ namespace OpenChords.CrossPlatform.Preferences
                                     new TableRow() { Cells = { new Label() { Text = "Show Chords" }, chkShowChords }},
                                     new TableRow() { Cells = { new Label() { Text = "Show Lyrics" }, chkShowLyrics }},
                                     new TableRow() { Cells = { new Label() { Text = "Show Notes" }, chkShowNotes }},
+                                    new TableRow() { Cells = { new Label() { Text = "Display Each Song Section Once" }, chkDisplayEachSongSectionOnce }},
                                     new TableRow() { Cells = { new Label() { Text = "Song Orientation" }, cmbSongOrientation, null }},
                                     null,
                                 }
@@ -100,6 +102,7 @@ namespace OpenChords.CrossPlatform.Preferences
             chkShowChords.CheckedChanged += FieldChanged;
             chkShowLyrics.CheckedChanged += FieldChanged;
             chkShowNotes.CheckedChanged += FieldChanged;
+            chkDisplayEachSongSectionOnce.CheckedChanged += FieldChanged;
             fontAndColorPanel.ItemChanged += FieldChanged;
             songMetadataTemplatesPanel.ItemChanged += FieldChanged;
             cmbSongOrientation.SelectedIndexChanged += FieldChanged;
@@ -170,6 +173,7 @@ namespace OpenChords.CrossPlatform.Preferences
             chkShowChords.Checked = displayAndPrintSettings.ShowChords;
             chkShowLyrics.Checked = displayAndPrintSettings.ShowLyrics;
             chkShowNotes.Checked = displayAndPrintSettings.ShowNotes;
+            chkDisplayEachSongSectionOnce.Checked = displayAndPrintSettings.DisplayEachSongSectionOnce;
             if (displayAndPrintSettings.SongOrientation == null || displayAndPrintSettings.SongOrientation == "Horizontal")
                 cmbSongOrientation.SelectedIndex = 0;
             else
@@ -186,6 +190,7 @@ namespace OpenChords.CrossPlatform.Preferences
             displayAndPrintSettings.ShowChords = chkShowChords.Checked ?? false;
             displayAndPrintSettings.ShowLyrics = chkShowLyrics.Checked ?? false;
             displayAndPrintSettings.ShowNotes = chkShowNotes.Checked ?? false;
+            displayAndPrintSettings.DisplayEachSongSectionOnce = chkDisplayEachSongSectionOnce.Checked ?? false;
 
             if (cmbSongOrientation.SelectedIndex == 0)
                 displayAndPrintSettings.SongOrientation = "Horizontal";

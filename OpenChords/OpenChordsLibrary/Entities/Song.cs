@@ -415,9 +415,9 @@ namespace OpenChords.Entities
 
         }
 
-        public List<SongVerse> getSongVerses()
+        public List<SongVerse> getSongVerses(bool displayEachSongSectionOnce)
         {
-            return SongVerse.getSongVerses(this);
+            return SongVerse.getSongVerses(this, displayEachSongSectionOnce);
         }
 
         /// <summary>
