@@ -19,8 +19,6 @@ namespace OpenChords.CrossPlatform.SongEditor
         public event EventHandler<Song> SongDeleting;
         public event EventHandler<Song> AddSongToSet;
         private List<Song> _fullSongList;
-        private string _orderByColumn;
-        private bool _isAscendingOrder = true;
         private ShortcutSettings shortcutKeys;
 
 

@@ -26,7 +26,6 @@ namespace OpenChords.CrossPlatform.Preferences
         private DropDown ddlKeyNotationLanguage = new DropDown();
         private CheckBox chkForceTopmostWindow = new CheckBox();
         private CheckBox chkTouchScreenMode = new CheckBox();
-        private bool OptionsChanged;
 
         public GeneralSettingsPreferences(Entities.FileAndFolderSettings fileAndFolderSettings)
         {
@@ -73,21 +72,12 @@ namespace OpenChords.CrossPlatform.Preferences
 
             //events
             chkPortableMode.CheckedChanged += chkPortableMode_CheckedChanged;
-            txtApplicationDataFolder.TextChanged += textChanged;
-            txtOpenSongDataPath.TextChanged += textChanged;
-            txtOpenSongExecutablePath.TextChanged += textChanged;
-            chkHttpServerEnabled.CheckedChanged += checkedChanged;
             chkHttpServerEnabled.CheckedChanged += ChkHttpServerEnabled_CheckedChanged;
-            txtHttpServerPort.TextChanged += textChanged;
             txtHttpServerPort.TextChanged += TxtHttpServerPort_TextChanged;
             txtHttpServerPort.LostFocus += TxtHttpServerPort_LostFocus;
             cmdApplicationDataFolder.Click += CmdApplicationDataFolder_Click;
             cmdOpenSongExecutablePath.Click += CmdOpenSongExecutablePath_Click;
             cmdOpenSongSongsAndSetsPath.Click += CmdOpenSongSongsAndSetsPath_Click;
-            radioListSharpsOrFlats.SelectedIndexChanged += textChanged;
-            ddlKeyNotationLanguage.SelectedIndexChanged += textChanged;
-            chkForceTopmostWindow.CheckedChanged += checkedChanged;
-            chkTouchScreenMode.CheckedChanged += checkedChanged;
         }
 
         private void TxtHttpServerPort_LostFocus(object sender, EventArgs e)
@@ -193,24 +183,12 @@ namespace OpenChords.CrossPlatform.Preferences
             }
         }
 
-        void checkedChanged(object sender, EventArgs e)
-        {
-            OptionsChanged = true;
-        }
-
-        private void textChanged(object sender, EventArgs e)
-        {
-            OptionsChanged = true;
-        }
-
         void chkPortableMode_CheckedChanged(object sender, EventArgs e)
         {
             if (chkPortableMode.Checked ?? false)
                 txtApplicationDataFolder.Text = "Data";
             else
                 txtApplicationDataFolder.Text = Environment.GetFolderPath(Environment.SpecialFolder.Personal).Replace("\\", "/") + "/OpenChords/";
-
-            OptionsChanged = true;
         }
 
         internal void SavePreferences()

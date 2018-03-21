@@ -26,15 +26,13 @@ namespace OpenChords.Export
         private Set _set;
         public string Filename { get; private set; }
         private string Title { get; set; }
-        private bool _isSet;
-
+    
         public ExportToHtml(Set set, DisplayAndPrintSettings settings)
         {
             _set = set;
             _settings = settings;
             Title = set.setName;
             Filename = set.setName + ".html";
-            _isSet = true;
         }
 
         public ExportToHtml(Song song, DisplayAndPrintSettings settings)
