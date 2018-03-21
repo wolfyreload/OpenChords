@@ -3,20 +3,13 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
 VisualStudioVersion = 15.0.27130.2010
 MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OpenChords.CrossPlatform.Executable", "OpenChords.CrossPlatform.Executable\OpenChords.CrossPlatform.Executable.csproj", "{18D0B5D1-0BFA-4C08-A15D-3A490DBC3573}"
+EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "_OpenChords.Web", "OpenChords.Web\_OpenChords.Web.csproj", "{8CA35AD8-1BC8-4667-B8F6-A0D22C87C51F}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OpenChords.Library", "OpenChordsLibrary\OpenChords.Library.csproj", "{C23EB2CC-3ACA-4A91-B598-FE584168CCD6}"
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = ".nuget", ".nuget", "{CB1D0BC4-23A2-464E-BBB1-8986C5BE9F7B}"
-	ProjectSection(SolutionItems) = preProject
-		.nuget\NuGet.Config = .nuget\NuGet.Config
-		.nuget\NuGet.exe = .nuget\NuGet.exe
-		.nuget\NuGet.targets = .nuget\NuGet.targets
-	EndProjectSection
-EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OpenChords.CrossPlatform", "OpenChords.CrossPlatform\OpenChords.CrossPlatform.csproj", "{FFB154D9-5196-422C-B1C9-1ABF71CCCBDC}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OpenChords.CrossPlatform.Executable", "OpenChords.CrossPlatform.Executable\OpenChords.CrossPlatform.Executable.csproj", "{18D0B5D1-0BFA-4C08-A15D-3A490DBC3573}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{A23C341B-417A-4E91-88BA-FD5785B7002E}"
 	ProjectSection(SolutionItems) = preProject
