@@ -10,6 +10,7 @@
 * Improvement: Add new option in Display and Print Settings "Display Each Song Section Once" to save paper and screen space
 * Fixed: Backup display and print settings not working
 * Feature: Add new option under "General Settings" called "Touch Screen Mode" which adds navigation buttons to presentation screen
+* Improvement: Update user manual
 
 
 # OpenChords v2.3.3 #
