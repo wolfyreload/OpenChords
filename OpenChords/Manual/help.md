@@ -60,11 +60,11 @@ If you right click on the song you can use the "Add to set" context menu to add 
 
 ### Song List Context Menu ###
 
-| Context Menu Item  | Description                                                 |
-|--------------------|-------------------------------------------------------------|
-| Add To Set         | Adds the currently selected song to the current set         |
-| Delete Song        | Deletes the current song (note: this is not reverseable)    |
-| Select random song | Picks a random song in the list                             |
+| Context Menu Item  | Description                                                  |
+|--------------------|--------------------------------------------------------------|
+| Add To Set         | Adds the currently selected song to the current set          |
+| Delete Song        | Deletes the current song (**Note:** this is not reverseable) |
+| Select random song | Picks a random song in the list                              |
 
 ## Sets ##
 
@@ -104,7 +104,7 @@ V = Verse
 E = Ending
 ```
 
-> Note: You can use any other letters and number combinations but only the
+> **Note:** You can use any other letters and number combinations but only the
 ones above will get converted to more user friendly names when you
 choose to present the song(s)
 
@@ -170,7 +170,7 @@ its songs, sets, display settings and exported files.
 **Opensong Songs and Sets Folder** - The path that OpenSong stores its
 Songs, Sets, Backgrounds and settings. usually "c:/{userfolder}/My Documents/OpenSong"
 
-**Http Server Enabled** - If this is enabled an embedded http server. note: you might get a firewall warning if this setting is enabled
+**Http Server Enabled** - If this is enabled an embedded http server. **Note:** you might get a firewall warning if this setting is enabled
 
 **Http Server Port** - The port on which the embedded http server listens (default 8083)
 
@@ -214,10 +214,13 @@ These settings are used to tweak how your song will display/print
 | {{key}}                | {{capo}}               | {{author}}             |
 | {{order}}              | {{ccli}}               | {{tempo}}              |
 | {{time-signature}}     | {{bpm}}                | {{copyright}}          |
+| {{smart-title}}        |                        |                        |
+
+**Note:** the format for {{smart-title}} is the original song title formatting which was {{title}} (Key - {{Key}} Capo - {{Capo}}) {{time-signature}} {{tempo}}  
 
 **Backup/Restore Settings** - Here you can backup your current settings to a file, restore backed up settings or reset your display settings back to default
 
-**Tip1:** Make sure you select the same font and size for Chords and lyrics otherwise chords may not match up with your lyrics
+**Tip:** Make sure you select the same font and size for Chords and lyrics otherwise chords may not match up with your lyrics
 
 ## Shortcut Settings ##
 
@@ -342,15 +345,15 @@ These are the steps you need to follow to use the embedded http server:
 * Connect to the OpenChords from another device using the address in the **http examples** text box
 
 > In this sample you would connect to <http://192.168.0.4:8083/song>
-> Note: the device you connecting to OpenChords needs to be on the same network
+> **Note:** the device you connecting running OpenChords and the device connecting to OpenChords needs to be on the same network
 
 * You can select the display settings to use and display the current set if you wish. See below for examples
 
 ```text
-http://{your ip address}:{selected port}/song will render the currently selected song on another device
-http://{your ip address}:{selected port}/set will render the currently selected set on another device
+http://{your ip address}:{selected port}/song will render the currently selected song on another device using your current tablet settings
+http://{your ip address}:{selected port}/set will render the currently selected set on another device using your current tablet settings
 http://{your ip address}:{selected port}/song/print will render the currently selected song using your selected print settings
-http://{your ip address}:{selected port}/song/tablet will render the currently selected song on another device using your selected tablet settings
+http://{your ip address}:{selected port}/song/display will render the currently selected song on another device using your selected current display settings
 ```
 
 ## Integration with OpenSong ##
@@ -375,7 +378,7 @@ These are the steps you need to follow to be able to export songs and sets into 
 
 * Find your set in OpenSong and present your set.
 
-* If you want to have images for each of your songs, you will need to make a **.jpg** (not a jpeg) file with the exact same name as the song you exporting (note: filenames are case sensitive). For clarity, please see the file system diagram below
+* If you want to have images for each of your songs, you will need to make a **.jpg** (no other extension will work it must be jpg) file with the exact same name as the song you exporting (**Note:** filenames are case sensitive). For clarity, please see the file system diagram below
 
 ```text
 +-- Backgrounds
