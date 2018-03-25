@@ -29,8 +29,8 @@ namespace OpenChords.CrossPlatform.SongEditor
         protected Splitter splitterMetadata;
         protected Splitter splitterSongNotes;
 
-        protected Button cmdShowExtraMetadata = new Button() { Text = "Toggle Metadata", Height = 20 };
-        protected Button cmdShowNormalMetadata = new Button() { Text = "Toggle Metadata", Height = 20 };
+        protected Button cmdShowExtraMetadata = new Button() { Text = "Toggle Metadata"};
+        protected Button cmdShowNormalMetadata = new Button() { Text = "Toggle Metadata"};
 
         private bool showNormalMetadata = true;
         private TableLayout normalMetadataPanel1;
