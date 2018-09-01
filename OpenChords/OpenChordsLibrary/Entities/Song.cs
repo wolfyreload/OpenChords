@@ -58,6 +58,18 @@ namespace OpenChords.Entities
         [XmlIgnore]
         public string SongFileName { get; set; }
 
+        [XmlIgnore]
+        public string SongTitleIncludingSubFolder
+        {
+            get
+            {
+                if (SongSubFolder == "")
+                    return title;
+                else
+                    return SongSubFolder + "/" + title;
+            }
+        }
+
 
         [XmlIgnore]
         internal string songFilePath { get; set; }

@@ -29,8 +29,8 @@ namespace OpenChords.CrossPlatform.SongEditor
         protected Splitter splitterMetadata;
         protected Splitter splitterSongNotes;
 
-        protected Button cmdShowExtraMetadata = new Button() { Text = "Toggle Metadata"};
-        protected Button cmdShowNormalMetadata = new Button() { Text = "Toggle Metadata"};
+        protected Button cmdShowExtraMetadata = new Button() { Text = "Toggle Metadata" };
+        protected Button cmdShowNormalMetadata = new Button() { Text = "Toggle Metadata" };
 
         private bool showNormalMetadata = true;
         private TableLayout normalMetadataPanel1;
@@ -148,7 +148,7 @@ namespace OpenChords.CrossPlatform.SongEditor
                     Panel2 = normalMetadataPanel2
                 }
             };
-            
+
             return groupBox;
         }
 
@@ -188,7 +188,7 @@ namespace OpenChords.CrossPlatform.SongEditor
             txtNotes.Wrap = false;
         }
 
-        
+
 
         void SongMetadataPanel_SizeChanged(object sender, EventArgs e)
         {
@@ -355,23 +355,27 @@ namespace OpenChords.CrossPlatform.SongEditor
                 return false;
             }
 
+            bool isSongRename = !string.Equals(CurrentSong.SongSubFolder, txtSubFolder.Text, StringComparison.InvariantCultureIgnoreCase)
+                                || !string.Equals(CurrentSong.title, txtTitle.Text, StringComparison.InvariantCultureIgnoreCase);
+            
             //update the song object with the data in the gui
             updateSongObjectFromGui();
 
             //Check if there is already a song with the name chosen
-            bool anotherSongWithThisNameAlreadyExists = !string.Equals(CurrentSong.SongFileName, CurrentSong.title, StringComparison.OrdinalIgnoreCase) && Song.Exists(CurrentSong.title);
-            if (anotherSongWithThisNameAlreadyExists)
+            bool songExists = Song.Exists(CurrentSong.SongTitleIncludingSubFolder);
+            if (songExists && isSongRename)
             {
-                Helpers.PopupMessages.ShowErrorMessage(this, "Song '{0}' already exists please choose another name", CurrentSong.title);
+                Helpers.PopupMessages.ShowErrorMessage(this, "Song '{0}' already exists please choose another name", CurrentSong.SongTitleIncludingSubFolder);
                 return false;
             }
 
             //save the song
-            CurrentSong.deleteSong();
+            if (isSongRename)
+                CurrentSong.deleteSong();
             bool isNewSong = CurrentSong.saveSong();
 
             //notify the user
-            Helpers.PopupMessages.ShowInformationMessage(this, "Song '{0}' saved", CurrentSong.title);
+            Helpers.PopupMessages.ShowInformationMessage(this, "Song '{0}' saved", CurrentSong.SongTitleIncludingSubFolder);
 
             SongChanged = false;
 

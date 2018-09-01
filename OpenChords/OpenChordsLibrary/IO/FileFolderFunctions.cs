@@ -8,7 +8,7 @@
  */
 using System;
 using System.Collections.Generic;
-
+using System.Linq;
 
 namespace OpenChords.IO
 {
@@ -60,7 +60,6 @@ namespace OpenChords.IO
 			System.IO.DirectoryInfo dir = new System.IO.DirectoryInfo (path);
 			System.IO.FileInfo[] allFiles = dir.GetFiles ("*", System.IO.SearchOption.AllDirectories);
 			
-			//int size = allFiles.GetLength(0);
 			List<string> list = new List<string> ();
 			
 			for (int i = 0; i < allFiles.Length; i++) {
@@ -68,6 +67,9 @@ namespace OpenChords.IO
                 string songNameWithSubFolder = songWithFullPath.Replace(path, "");
                 list.Add (songNameWithSubFolder);
 			}
+
+            // Sort the list alphabetically
+            list = list.OrderBy(s => s).ToList();
 			
 			return list;
 		}

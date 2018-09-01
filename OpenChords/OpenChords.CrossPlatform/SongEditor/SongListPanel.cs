@@ -70,8 +70,8 @@ namespace OpenChords.CrossPlatform.SongEditor
         private Song getSelectedSong(ListBox grid)
         {
             string songName = grid.SelectedKey;
-            return _fullSongList.First(s => s.SongFileName == songName);
-        }
+                return _fullSongList.First(s => s.SongTitleIncludingSubFolder == songName);
+          }
 
         private void addSongToSet()
         {
@@ -183,7 +183,6 @@ namespace OpenChords.CrossPlatform.SongEditor
                                                || c.author.ToUpper().Contains(item) //filter on author
                                                || c.hymn_number.ToUpper().Contains(item) //filter on reference
                                                || c.ccli.ToUpper().Contains(item) //filter on ccli
-                                               || c.SongFileName.ToUpper().Contains(item) //filter on filename
                                                || c.SongSubFolder.ToUpper().Contains(item) //filter on sub folder
                                                || c.getJustLyrics().Contains(item)); //filter on lyrics
 
@@ -195,7 +194,6 @@ namespace OpenChords.CrossPlatform.SongEditor
                                               || c.author.ToUpper().Contains(item) //filter on author
                                               || c.hymn_number.ToUpper().Contains(item) //filter on reference
                                               || c.ccli.ToUpper().Contains(item) //filter on ccli
-                                              || c.SongFileName.ToUpper().Contains(item) //filter on filename
                                               || c.SongSubFolder.ToUpper().Contains(item)); //filter on sub folder
     
                 }
@@ -205,7 +203,7 @@ namespace OpenChords.CrossPlatform.SongEditor
             ListItemCollection items = new ListItemCollection();
             foreach (var filteredItem in filteredList)
             {
-                items.Add(filteredItem.SongFileName);
+                items.Add(filteredItem.SongTitleIncludingSubFolder);
             }
             gridSongs.DataStore = items;
 

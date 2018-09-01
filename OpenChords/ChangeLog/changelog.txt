@@ -1,6 +1,7 @@
 # OpenChords v2.4.1 #
 
 * Improvement: Add option to export all song meta data to tab seperated text file
+* Improvement: Add Song Subfolder name in Song List Panel and Set List Panel
 
 # OpenChords v2.4.0 #
 

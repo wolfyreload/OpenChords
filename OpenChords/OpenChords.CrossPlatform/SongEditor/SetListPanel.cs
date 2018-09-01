@@ -138,7 +138,7 @@ namespace OpenChords.CrossPlatform.SongEditor
             ListItemCollection items = new ListItemCollection();
             foreach (var song in songs)
             {
-                items.Add(song.SongFileName);
+                items.Add(song.SongTitleIncludingSubFolder);
             }
             
             //update the number of songs in set
