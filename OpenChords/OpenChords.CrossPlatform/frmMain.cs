@@ -167,9 +167,12 @@ namespace OpenChords.CrossPlatform
             var commandExportCurrentSetToOpenSong = MenuHelper.GetCommand("Current Set", Graphics.ImageOpenSong, shortcutKeys.ExportSetToOpenSong, Tag: ExportOption.Set);
             commandExportCurrentSetToOpenSong.Executed += exportToOpenSong;
             var menuItemExportToOpenSong = new ButtonMenuItem() { Text = "Export To &OpenSong", Items = { commandExportCurrentSetToOpenSong }, Image = Graphics.ImageOpenSong };
-            var menuItemExportSetList = MenuHelper.GetCommand("Export Set List", Graphics.ImageList);
+            var menuItemExportSetList = MenuHelper.GetCommand("Export Set Metadata To List", Graphics.ImageList);
             menuItemExportSetList.Executed += (s, e) => ucSetListPanel.ExportToTextFile();
-
+            var menuItemExportSongList = MenuHelper.GetCommand("Export Song Metadata To List", Graphics.ImageList);
+            menuItemExportSongList.Executed += (s, e) => ucSongListPanel.ExportToTextFile();
+            var menuItemExportList = new ButtonMenuItem() { Text = "Export To &List", Items = { menuItemExportSetList, menuItemExportSongList }, Image = Graphics.ImagePrint };
+     
             //about menu
             var menuItemManual = MenuHelper.GetCommand("Help Documentation", Graphics.ImageHelp, shortcutKeys.ShowHelp);
             menuItemManual.Executed += (s, e) => showManual();
@@ -203,7 +206,7 @@ namespace OpenChords.CrossPlatform
                     new ButtonMenuItem()
                     {
                         Text = "&Export",
-                        Items = { menuItemExportToPrintHtml, menuItemExportToTabletHtml, menuItemExportToOpenSong, menuItemExportSetList }
+                        Items = { menuItemExportToPrintHtml, menuItemExportToTabletHtml, menuItemExportToOpenSong, menuItemExportList }
                     },
                     new ButtonMenuItem()
                     {

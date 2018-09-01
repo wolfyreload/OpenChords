@@ -252,5 +252,16 @@ namespace OpenChords.CrossPlatform.SongEditor
             Song selectedSong = getSelectedSong(gridSongs); ;
             UiHelper.ShowInFileManager(selectedSong.getFullPath());
         }
+
+        internal void ExportToTextFile()
+        {
+            //get the filemanager for the filesystem
+            string fileManager = OpenChords.Settings.GlobalApplicationSettings.fileManager;
+            string filename = null;
+
+            //get the filename
+            filename = Export.ExportToTextFile.exportSongList(_fullSongList);
+            System.Diagnostics.Process.Start(filename);
+        }
     }
 }

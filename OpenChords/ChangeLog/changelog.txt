@@ -1,3 +1,7 @@
+# OpenChords v2.4.1 #
+
+* Improvement: Add option to export all song meta data to tab seperated text file
+
 # OpenChords v2.4.0 #
 
 * Improvement: Upgrade Microsoft.AspNet.Razor to v3.2.4
