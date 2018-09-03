@@ -10,8 +10,6 @@
     <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
     <SolutionDir Condition="$(SolutionDir) == '' Or $(SolutionDir) == '*Undefined*'">..\</SolutionDir>
     <RestorePackages>true</RestorePackages>
-    <ProductVersion>12.0.0</ProductVersion>
-    <SchemaVersion>2.0</SchemaVersion>
     <NuGetPackageImportStamp>
     </NuGetPackageImportStamp>
   </PropertyGroup>
@@ -89,6 +87,10 @@
       <Project>{FFB154D9-5196-422C-B1C9-1ABF71CCCBDC}</Project>
       <Name>OpenChords.CrossPlatform</Name>
     </ProjectReference>
+    <ProjectReference Include="..\OpenChordsLibrary\OpenChords.Library.csproj">
+      <Project>{c23eb2cc-3aca-4a91-b598-fe584168ccd6}</Project>
+      <Name>OpenChords.Library</Name>
+    </ProjectReference>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="..\SolutionInfo.cs">
@@ -112,4 +114,4 @@
     </Content>
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
- </Project>
+</Project>
