@@ -83,7 +83,11 @@ namespace OpenChords.CrossPlatform.SongEditor
 
         private void GridSongs_MouseDoubleClick(object sender, MouseEventArgs e)
         {
-            addSongToSet();
+            int startOfScrollbar = gridSongs.Location.X + gridSongs.Size.Width - 20;
+            int locationOfMouseClick = (int)e.Location.X;
+
+            if (locationOfMouseClick <= startOfScrollbar)
+                addSongToSet();
         }
 
         void lbSongs_SelectedIndexChanged(object sender, EventArgs e)
@@ -99,7 +103,6 @@ namespace OpenChords.CrossPlatform.SongEditor
         {
             txtSearch.TextChanged -= txtSearch_TextChanged;
             txtSearch.KeyUp -= txtSearch_KeyUp;
-            gridSongs.MouseDoubleClick -= lbSongs_MouseDoubleClick;
             gridSongs.KeyUp -= lbSongs_KeyUp;
             gridSongs.SelectedIndexChanged -= lbSongs_SelectedIndexChanged;
 
@@ -114,7 +117,6 @@ namespace OpenChords.CrossPlatform.SongEditor
        
             txtSearch.TextChanged += txtSearch_TextChanged;
             txtSearch.KeyUp += txtSearch_KeyUp;
-            gridSongs.MouseDoubleClick += lbSongs_MouseDoubleClick;
             gridSongs.KeyUp += lbSongs_KeyUp;
             gridSongs.SelectedIndexChanged += lbSongs_SelectedIndexChanged;   
         }
@@ -136,13 +138,6 @@ namespace OpenChords.CrossPlatform.SongEditor
                 selectRandomSong();
                 e.Handled = true;
             }
-        }
-
-        void lbSongs_MouseDoubleClick(object sender, MouseEventArgs e)
-        {
-            //disable double click to add song because its too easy to double click by accident
-            //if (e.Buttons == MouseButtons.Primary)
-            //    addSongToSet();
         }
 
         void txtSearch_KeyUp(object sender, KeyEventArgs e)

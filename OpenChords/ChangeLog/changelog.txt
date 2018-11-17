@@ -2,6 +2,7 @@
 
 * Improvement: Add option to export all song meta data to tab seperated text file
 * Improvement: Add Song Subfolder name in Song List Panel and Set List Panel
+* Fixed: When you double click on the scrollbar of the Song List it adds the selected song to the set
 
 # OpenChords v2.4.0 #
 
