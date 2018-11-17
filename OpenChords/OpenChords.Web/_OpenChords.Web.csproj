@@ -66,7 +66,7 @@
   <ItemGroup>
     <Content Include="App\Display.aspx" />
     <Content Include="App_Themes\Default\Display.css">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <Content Include="App_Themes\Default\Display.css" />
     <Content Include="App_Themes\Default\Images\About.png">
