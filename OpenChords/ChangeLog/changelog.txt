@@ -4,6 +4,7 @@
 * Improvement: Add Song Subfolder name in Song List Panel and Set List Panel
 * Fixed: When you double click on the scrollbar of the Song List it adds the selected song to the set
 * Improvement: Increase build speed by changing all content project items to only copy to build if newer
+* Fixed: Bug when creating a new song and immediately renaming the song it creates a new song instead
 
 # OpenChords v2.4.0 #
 

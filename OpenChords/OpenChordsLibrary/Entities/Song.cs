@@ -191,7 +191,6 @@ namespace OpenChords.Entities
 
         internal void saveSong(string destination)
         {
-            _dictionaryOfAllSongs[this.SongSubFolder + @"\" + this.title] = this;
             XmlReaderWriter.writeSong(destination, this);
         }
 

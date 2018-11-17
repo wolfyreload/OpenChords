@@ -53,6 +53,7 @@ namespace OpenChords.IO
             xmlWriter<Song>(fullSongFileName, song);
             song.SongFileName = song.title;
             song.songFilePath = basePath;
+            song.songFilePath = fullSongFileName;
             return isNewSong;
         }
 

@@ -355,27 +355,30 @@ namespace OpenChords.CrossPlatform.SongEditor
                 return false;
             }
 
-            bool isSongRename = !string.Equals(CurrentSong.SongSubFolder, txtSubFolder.Text, StringComparison.InvariantCultureIgnoreCase)
-                                || !string.Equals(CurrentSong.title, txtTitle.Text, StringComparison.InvariantCultureIgnoreCase);
+            string originalSongName = (string.IsNullOrWhiteSpace(CurrentSong.SongSubFolder)) 
+                                        ? CurrentSong.title : $"{CurrentSong.SongSubFolder}/{CurrentSong.title}";
+            string newSongName = (string.IsNullOrWhiteSpace(txtSubFolder.Text))
+                                    ? txtTitle.Text : $"{txtSubFolder.Text}/{txtTitle.Text}";
+            bool wasSongNameChanged = !string.Equals(originalSongName, newSongName, StringComparison.InvariantCultureIgnoreCase);
             
-            //update the song object with the data in the gui
-            updateSongObjectFromGui();
-
             //Check if there is already a song with the name chosen
-            bool songExists = Song.Exists(CurrentSong.SongTitleIncludingSubFolder);
-            if (songExists && isSongRename)
+            bool doesSongExist = Song.Exists(newSongName);
+            if (doesSongExist && wasSongNameChanged)
             {
-                Helpers.PopupMessages.ShowErrorMessage(this, "Song '{0}' already exists please choose another name", CurrentSong.SongTitleIncludingSubFolder);
+                Helpers.PopupMessages.ShowErrorMessage(this, $"Song '{newSongName}' already exists please choose another name");
                 return false;
             }
 
-            //save the song
-            if (isSongRename)
+            // If the song is a rename delete the old song
+            if (wasSongNameChanged)
                 CurrentSong.deleteSong();
+
+            // Save the song and 
+            updateSongObjectFromGui();
             bool isNewSong = CurrentSong.saveSong();
 
             //notify the user
-            Helpers.PopupMessages.ShowInformationMessage(this, "Song '{0}' saved", CurrentSong.SongTitleIncludingSubFolder);
+            Helpers.PopupMessages.ShowInformationMessage(this, $"Song '{CurrentSong.SongTitleIncludingSubFolder}' saved");
 
             SongChanged = false;
 
