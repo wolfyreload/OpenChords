@@ -1,3 +1,7 @@
+# OpenChords v2.4.2 #
+
+* Improvement: Improve song scrolling to work with tablet swipe up and swipe down
+
 # OpenChords v2.4.1 #
 
 * Improvement: Add option to export all song meta data to tab seperated text file
