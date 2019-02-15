@@ -92,7 +92,9 @@ namespace OpenChords.Functions
                     writer.Write("No song selected");
                     return;
                 }
-                var htmlSong = CurrentSong.getHtml(displayAndPrintSettings, enableAutoRefresh: true);
+                bool noCapo = e.Request.Url.ToString().ToUpper().Contains("NOCAPO");
+                string htmlSong = CurrentSong.getHtml(displayAndPrintSettings, enableAutoRefresh: true, noCapo: noCapo);
+
                 writer.Write(htmlSong);
             }
         }

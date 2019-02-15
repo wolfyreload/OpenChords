@@ -435,9 +435,19 @@ namespace OpenChords.Entities
         /// returns the song in html format
         /// </summary>
         /// <returns></returns>
-        public string getHtml(DisplayAndPrintSettings settings, bool enableAutoRefresh = false)
+        public string getHtml(DisplayAndPrintSettings settings, bool enableAutoRefresh = false, bool noCapo = false)
         {
-            Export.ExportToHtml htmlExporter = new Export.ExportToHtml(this, settings);
+
+            var songClone = (Song)this.MemberwiseClone();
+
+            // Sometimes we want to capo removed from the song (e.g. for the bass guitarist or pianst)
+            if (noCapo && songClone.Capo > 0)
+            {
+                while (songClone.Capo > 0)
+                    songClone.capoDown();
+            }
+
+            Export.ExportToHtml htmlExporter = new Export.ExportToHtml(songClone, settings);
             var result = htmlExporter.GenerateHtml(enableAutoRefresh);
             return result;
         }
