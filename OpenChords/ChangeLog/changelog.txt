@@ -1,6 +1,7 @@
 # OpenChords v2.4.2 #
 
 * Improvement: Improve song scrolling to work with tablet swipe up and swipe down
+* Improvement: When working with tablet always scroll to the top of the page when changing songs
 
 # OpenChords v2.4.1 #
 

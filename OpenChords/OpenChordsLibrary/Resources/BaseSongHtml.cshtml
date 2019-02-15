@@ -198,8 +198,8 @@
              //if they are different reload the song
              if (currentSongName !== hostSongName) {
                  //reload page and scroll to top of page
+                 window.scroll(0, 0);
                  location.reload(true);
-                 document.body.scrollTop = document.documentElement.scrollTop = 0;
              }
          }
 
