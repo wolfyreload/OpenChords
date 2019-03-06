@@ -123,7 +123,8 @@ namespace OpenChords.Functions
                     writer.Write("No set selected");
                     return;
                 }
-                var htmlSet = CurrentSet.getHtml(displayAndPrintSettings);
+                bool noCapo = e.Request.Url.ToString().ToUpper().Contains("NOCAPO");
+                var htmlSet = CurrentSet.getHtml(displayAndPrintSettings, noCapo: noCapo);
                 writer.Write(htmlSet);
             }
         }

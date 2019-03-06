@@ -452,6 +452,11 @@ namespace OpenChords.Entities
             return result;
         }
 
+        internal Song Clone()
+        {
+            return (Song)this.MemberwiseClone();
+        }
+
         public string ExportToHtml(DisplayAndPrintSettings settings)
         {
             Export.ExportToHtml htmlExporter = new Export.ExportToHtml(this, settings);

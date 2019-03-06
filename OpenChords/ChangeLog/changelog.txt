@@ -3,6 +3,7 @@
 * Improvement: Improve song scrolling to work with tablet swipe up and swipe down
 * Improvement: When working with tablet always scroll to the top of the page when changing songs
 * Improvement: Add option of no capo to disable the capo when pulling songs from web server
+* Improvement: Add option of no capo to disable the capo when pulling a set from web server
 
 # OpenChords v2.4.1 #
 
