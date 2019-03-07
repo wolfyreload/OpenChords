@@ -184,11 +184,11 @@ namespace OpenChords.CrossPlatform.SongEditor
                 revertSet();
             CurrentSet.reloadSet();
             var frmPresent = new frmPresent(CurrentSet, DisplayAndPrintSettings.loadSettings(DisplayAndPrintSettingsType.DisplaySettings), lbSongs.SelectedIndex);
-            frmPresent.Closing += FrmPresent_Closing;
+            saveCurrentSongInSet();
             frmPresent.Show();
         }
 
-        private void FrmPresent_Closing(object sender, System.ComponentModel.CancelEventArgs e)
+        private void saveCurrentSongInSet()
         {
             if (lbSongs.SelectedIndex < 0) return;
             Song song = getSelectedSong();
