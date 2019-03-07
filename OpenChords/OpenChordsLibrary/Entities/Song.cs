@@ -357,7 +357,7 @@ namespace OpenChords.Entities
         {
             if (!this.lyrics.Contains("["))
             {
-                var importedLyrics = Functions.ImportSong.importLyrics(this.lyrics);
+                var importedLyrics = Functions.ImportSong.ImportLyrics(this.lyrics);
                 this.lyrics = importedLyrics;
                 this.presentation = Functions.ImportSong.importPresentationList(importedLyrics);
                 fixNoteOrdering();
@@ -365,7 +365,12 @@ namespace OpenChords.Entities
             }
             else if (string.IsNullOrWhiteSpace(this.presentation))
             {
+                var importedLyrics = Functions.ImportSong.FixSongNameSections(this.lyrics);
+                this.lyrics = importedLyrics;
                 this.presentation = Functions.ImportSong.importPresentationList(this.lyrics);
+                fixNoteOrdering();
+                fixLyricsOrdering();
+
             }
 
             SongProcessor.fixFormatting(this);

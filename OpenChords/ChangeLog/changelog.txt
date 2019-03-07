@@ -5,6 +5,7 @@
 * Improvement: Add option of no capo to disable the capo when pulling songs from web server
 * Improvement: Add option of no capo to disable the capo when pulling a set from web server
 * Fixed: When a song is changed in the set and you present, the presentation screen opens before the save screen
+* Fixed: Issue in song importer if the song has square tags for verses and choruses e.g. [Chorus 1] or [Verse 1]
 
 # OpenChords v2.4.1 #
 

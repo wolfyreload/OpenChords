@@ -10,9 +10,9 @@ namespace OpenChords.Functions
     public class ImportSong
     {
         private static readonly log4net.ILog logger = log4net.LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
-        public static string importLyrics(string lyrics)
+        public static string ImportLyrics(string lyrics)
         {
-            string lyricsWithNamedSongSections = findNamedSongSections(lyrics);
+            string lyricsWithNamedSongSections = FixSongNameSections(lyrics);
 
             //if there dont appear to be any verses try and find them
             string withMissingVerses = findMissingVerses(lyricsWithNamedSongSections);
@@ -20,7 +20,7 @@ namespace OpenChords.Functions
             return withMissingVerses;
         }
 
-        private static string findNamedSongSections(string lyrics)
+        public static string FixSongNameSections(string lyrics)
         {
             var lyricsContent = SongProcessor.multiLineToStringArray(lyrics, removeEmptyEntries: false);
 
@@ -32,15 +32,19 @@ namespace OpenChords.Functions
                 if (line.Contains((char)65533))
                     line = line.Replace((char)65533, "'"[0]);
 
-                line = regexReplaceFix(line, @"CHORUS\s?(\d*)\s*:?", "[C$1] ");
-                line = regexReplaceFix(line, @"BRIDGE\s?(\d*)\s*:?", "[B$1] ");
-                line = regexReplaceFix(line, @"INTRO\s?(\d*)\s*:?", "[I$1] ");
-                line = regexReplaceFix(line, @"Interlude\s?(\d*)\s*:?", "[I$1] ");
-                line = regexReplaceFix(line, @"Verse\s?(\d*)\s*:?", @"[V$1] ");
-                line = regexReplaceFix(line, @"Refrain\s?(\d*)\s*:?", @"[R$1] ");
-                line = regexReplaceFix(line, @"Ending\s?(\d*)\s*:?", @"[E$1] ");
-                line = regexReplaceFix(line, @"Outro\s?(\d*)\s*:?", @"[E$1] ");
-                sbLyrics.Append(line + "\n");
+                line = regexReplaceFix(line, @"\[?CHORUS\s?(\d*)\]?\s*:?", "[C$1] ");
+                line = regexReplaceFix(line, @"\[?BRIDGE\s?(\d*)\]?\s*:?", "[B$1] ");
+                line = regexReplaceFix(line, @"\[?INTRO\s?(\d*)\]?\s*:?", "[I$1] ");
+                line = regexReplaceFix(line, @"\[?Interlude\s?(\d*)\]?\s*:?", "[I$1] ");
+                line = regexReplaceFix(line, @"\[?Verse\s?(\d*)\]?\s*:?", "[V$1] ");
+                line = regexReplaceFix(line, @"\[?Refrain\s?(\d*)\]?\s*:?", "[R$1] ");
+                line = regexReplaceFix(line, @"\[?Ending\s?(\d*)\]?\s*:?", "[E$1] ");
+                line = regexReplaceFix(line, @"\[?Tag\s?(\d*)\]?\s*:?", "[T$1] ");
+                line = regexReplaceFix(line, @"\[?Outro\s?(\d*)\]?\s*:?", "[E$1] ");
+                if (!line.Contains("["))
+                    sbLyrics.Append(line + "\n");
+                else
+                    sbLyrics.Append(line);
             }
 
             return sbLyrics.ToString();
