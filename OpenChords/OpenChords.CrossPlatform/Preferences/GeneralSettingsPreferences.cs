@@ -26,6 +26,7 @@ namespace OpenChords.CrossPlatform.Preferences
         private DropDown ddlKeyNotationLanguage = new DropDown();
         private CheckBox chkForceTopmostWindow = new CheckBox();
         private CheckBox chkTouchScreenMode = new CheckBox();
+        private CheckBox chkWindowedMode = new CheckBox();
 
         public GeneralSettingsPreferences(Entities.FileAndFolderSettings fileAndFolderSettings)
         {
@@ -54,6 +55,8 @@ namespace OpenChords.CrossPlatform.Preferences
                     new TableRow(new Label() { Text = "Key Notation Language" }, ddlKeyNotationLanguage),
                     new TableRow(new Label() { Text = "Force Always On Top When Presenting" }, chkForceTopmostWindow),
                     new TableRow(new Label() { Text = "Touch Screen Mode" }, chkTouchScreenMode),
+                    new TableRow(new Label() { Text = "Windowed Mode" }, chkWindowedMode),
+
                     null
                 }
             };
@@ -69,6 +72,7 @@ namespace OpenChords.CrossPlatform.Preferences
             ddlKeyNotationLanguage.SelectedIndex = (fileAndFolderSettings.KeyNotationLanguage == KeyNotationLanguageType.English) ? 0 : 1;
             chkForceTopmostWindow.Checked = fileAndFolderSettings.ForceAlwaysOnTopWhenPresenting;
             chkTouchScreenMode.Checked = fileAndFolderSettings.TouchScreenModeEnabled;
+            chkWindowedMode.Checked = fileAndFolderSettings.WindowedMode;
 
             //events
             chkPortableMode.CheckedChanged += chkPortableMode_CheckedChanged;
@@ -78,6 +82,7 @@ namespace OpenChords.CrossPlatform.Preferences
             cmdApplicationDataFolder.Click += CmdApplicationDataFolder_Click;
             cmdOpenSongExecutablePath.Click += CmdOpenSongExecutablePath_Click;
             cmdOpenSongSongsAndSetsPath.Click += CmdOpenSongSongsAndSetsPath_Click;
+            chkWindowedMode.CheckedChanged += chkPortableMode_CheckedChanged;
         }
 
         private void TxtHttpServerPort_LostFocus(object sender, EventArgs e)
@@ -203,6 +208,7 @@ namespace OpenChords.CrossPlatform.Preferences
             fileAndFolderSettings.KeyNotationLanguage = (ddlKeyNotationLanguage.SelectedIndex == 0) ? KeyNotationLanguageType.English : KeyNotationLanguageType.German;
             fileAndFolderSettings.ForceAlwaysOnTopWhenPresenting = chkForceTopmostWindow.Checked ?? false;
             fileAndFolderSettings.TouchScreenModeEnabled = chkTouchScreenMode.Checked ?? false;
+            fileAndFolderSettings.WindowedMode = chkWindowedMode.Checked ?? false;
             fileAndFolderSettings.saveSettings();
         }
     }

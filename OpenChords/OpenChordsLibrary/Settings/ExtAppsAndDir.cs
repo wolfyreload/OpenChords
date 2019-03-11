@@ -304,5 +304,7 @@ namespace OpenChords.Config
         public bool ForceAlwaysOnTopWhenPresenting { get { return settings.ForceAlwaysOnTopWhenPresenting; } }
 
         public bool TouchScreenMode { get { return settings.TouchScreenModeEnabled; } }
+
+        public bool WindowedMode { get { return settings.WindowedMode; } }
     }
 }

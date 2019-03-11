@@ -59,7 +59,9 @@ namespace OpenChords.CrossPlatform
             Width = 500;
             Height = 500;
             WindowState = Eto.Forms.WindowState.Maximized;
-            this.WindowStyle = Eto.Forms.WindowStyle.None;
+
+            if (!Settings.GlobalApplicationSettings.WindowedMode)
+                this.WindowStyle = Eto.Forms.WindowStyle.None;
 
             if (Settings.GlobalApplicationSettings.TouchScreenMode)
             {
