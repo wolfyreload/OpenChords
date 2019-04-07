@@ -23,10 +23,7 @@ namespace OpenChords.IO
                 blankNamespace.Add(string.Empty, string.Empty);
 
                 serializer.Serialize(stringWriter, item, blankNamespace);
-                //"windowsify the output"
                 string xmlString = stringWriter.ToString();
-                xmlString = xmlString.Replace("\r", "");
-                xmlString = xmlString.Replace("\n", "\r\n");
                 new FileInfo(filename).Directory.Create(); //create subfolder if doesn't exist
                 File.WriteAllText(filename, xmlString);
             }
@@ -54,6 +51,15 @@ namespace OpenChords.IO
             song.SongFileName = song.title;
             song.songFilePath = basePath;
             song.songFilePath = fullSongFileName;
+
+            //"windowsify the lyrics and notes"
+            song.lyrics = song.lyrics.Replace("\r", "");
+            song.lyrics = song.lyrics.Replace("\n", "\r\n");
+            song.lyrics = song.lyrics.Replace("\t", "      ");
+            song.notes = song.notes.Replace("\r", "");
+            song.notes = song.notes.Replace("\n", "\r\n");
+            song.notes = song.notes.Replace("\t", "      ");
+
             return isNewSong;
         }
 
