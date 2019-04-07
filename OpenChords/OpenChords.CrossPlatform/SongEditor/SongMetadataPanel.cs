@@ -236,6 +236,28 @@ namespace OpenChords.CrossPlatform.SongEditor
             txtKey.TextChanged += fieldTextChanged;
             txtBpm.TextChanged += fieldTextChanged;
             txtOrder.LostFocus += TxtOrder_LostFocus;
+
+            // Disable the tab key in our text areas
+            txtLyrics.KeyDown += fieldKeyDown;
+            txtNotes.KeyDown += fieldKeyDown;
+            
+            txtLyrics.TextChanged += TxtLyrics_TextChanged;
+        }
+
+        private void TxtLyrics_TextChanged(object sender, EventArgs e)
+        {
+            // If we paste a song with Tabs in it replace the tabs with the default 4 spaces
+            if (txtLyrics.Text.Contains("\t"))
+            {
+                txtLyrics.Text = txtLyrics.Text.Replace("\t", "    ");
+            }
+        }
+
+        private void fieldKeyDown(object sender, KeyEventArgs e)
+        {
+            // Disable the tab key
+            if (e.Key == Keys.Tab)
+                e.Handled = true;
         }
 
         internal void SplitSongLine()
