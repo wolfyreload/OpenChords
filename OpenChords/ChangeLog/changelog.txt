@@ -5,6 +5,7 @@
 * Fixed: Pasteing a song with Linux line endings doesn't render correctly until reloading the songs list
 * Fixed: When changing song Key all listening devices should refresh current song
 * Improvement: Add option of prefer flats to show flats instead on sharps from web server
+* Fixed: Web server doesn't change song when clicking on a song from the Set list
 
 # OpenChords v2.4.2 #
 

@@ -103,6 +103,7 @@ namespace OpenChords.CrossPlatform.SongEditor
             if (lbSongs.SelectedIndex < 0) return;
             CurrentSet.indexOfCurrentSong = lbSongs.SelectedIndex;
             Song song = getSelectedSong();
+            OpenChords.Functions.WebServer.CurrentSong = song;
             if (SongChanged != null)
                 SongChanged(this, song);
         }
