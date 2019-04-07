@@ -78,7 +78,7 @@ namespace OpenChords.Functions
                     writer.Write("No song selected");
                     return;
                 }
-                writer.Write(CurrentSong.title);
+                writer.Write(CurrentSong.title+CurrentSong.key??"");
             }
         }
 

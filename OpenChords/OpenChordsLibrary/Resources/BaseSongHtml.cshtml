@@ -450,7 +450,7 @@ body {
 
         counter++;
 
-        <input id="SongName" type="hidden" value="@song.title" />
+        <input id="SongName" type="hidden" value="@(song.title+song.key??"")" />
         <div ID="@("SongElement" + counter)" class="DisplaySongName">
             @if (topRowHasMetaData)
                 {
