@@ -457,23 +457,30 @@ namespace OpenChords.Entities
         /// returns the set in html format
         /// </summary>
         /// <returns></returns>
-        public string getHtml(DisplayAndPrintSettings settings, bool noCapo = false)
+        public string getHtml(DisplayAndPrintSettings settings, bool noCapo = false, bool preferFlats = false)
         {
             var setClone = this.Clone();
-            if (noCapo)
+            
+            for (int i=0; i<setClone.songList.Count; i++)
             {
-                for (int i=0; i<setClone.songList.Count; i++)
+                var songClone = setClone.songList[i].Clone();
+
+                // force flats to show
+                if (preferFlats)
                 {
-                    // Sometimes we want to capo removed from the song (e.g. for the bass guitarist or pianst)
-                    var songClone = setClone.songList[i].Clone();
-                    if (songClone.Capo > 0)
-                    {
-                        while (songClone.Capo > 0)
-                            songClone.capoDown();
-                    }
-                    setClone.songList[i] = songClone;
+                    songClone.capoUp();
+                    songClone.capoDown(preferFlats);
                 }
+
+                // Sometimes we want to capo removed from the song (e.g. for the bass guitarist or pianst)
+                if (noCapo && songClone.Capo > 0)
+                {
+                    while (songClone.Capo > 0)
+                        songClone.capoDown(preferFlats);
+                }
+                setClone.songList[i] = songClone;
             }
+            
 
             Export.ExportToHtml htmlExporter = new Export.ExportToHtml(setClone, settings);
             var result = htmlExporter.GenerateHtml();

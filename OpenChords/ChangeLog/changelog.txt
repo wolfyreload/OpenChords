@@ -4,6 +4,7 @@
 * Improvement: Song section detector now detects "Instrumental" as a music interlude
 * Fixed: Pasteing a song with Linux line endings doesn't render correctly until reloading the songs list
 * Fixed: When changing song Key all listening devices should refresh current song
+* Improvement: Add option of prefer flats to show flats instead on sharps from web server
 
 # OpenChords v2.4.2 #
 

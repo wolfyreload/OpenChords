@@ -93,7 +93,9 @@ namespace OpenChords.Functions
                     return;
                 }
                 bool noCapo = e.Request.Url.ToString().ToUpper().Contains("NOCAPO");
-                string htmlSong = CurrentSong.getHtml(displayAndPrintSettings, enableAutoRefresh: true, noCapo: noCapo);
+                bool flats = e.Request.Url.ToString().ToUpper().Contains("FLATS");
+
+                string htmlSong = CurrentSong.getHtml(displayAndPrintSettings, enableAutoRefresh: true, noCapo: noCapo, preferFlats: flats);
 
                 writer.Write(htmlSong);
             }
@@ -124,7 +126,9 @@ namespace OpenChords.Functions
                     return;
                 }
                 bool noCapo = e.Request.Url.ToString().ToUpper().Contains("NOCAPO");
-                var htmlSet = CurrentSet.getHtml(displayAndPrintSettings, noCapo: noCapo);
+                bool flats = e.Request.Url.ToString().ToUpper().Contains("FLATS");
+
+                var htmlSet = CurrentSet.getHtml(displayAndPrintSettings, noCapo: noCapo, preferFlats: flats);
                 writer.Write(htmlSet);
             }
         }

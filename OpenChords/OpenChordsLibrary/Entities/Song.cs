@@ -217,10 +217,11 @@ namespace OpenChords.Entities
             this.SongSubFolder = oldSave.SongSubFolder;
         }
 
-        public void transposeKeyUp()
+        public void transposeKeyUp(bool? preferFlats = null)
         {
-            SongProcessor.transposeKeyUp(this);
-            this.key = SongProcessor.transposeChord(this.key, Settings.GlobalApplicationSettings.PreferFlats).TrimEnd();
+            preferFlats = preferFlats ?? Settings.GlobalApplicationSettings.PreferFlats;
+            SongProcessor.transposeKeyUp(this, preferFlats);
+            this.key = SongProcessor.transposeChord(this.key, preferFlats.Value).TrimEnd();
         }
 
         public void transposeKeyDown()
@@ -240,9 +241,9 @@ namespace OpenChords.Entities
 
         }
 
-        public void capoDown()
+        public void capoDown(bool? preferFlats = null)
         {
-            SongProcessor.transposeKeyUp(this);
+            SongProcessor.transposeKeyUp(this, preferFlats);
             int tempcapo = 12 + this.Capo - 1;
             this.Capo = tempcapo % 12;
         }
@@ -440,16 +441,23 @@ namespace OpenChords.Entities
         /// returns the song in html format
         /// </summary>
         /// <returns></returns>
-        public string getHtml(DisplayAndPrintSettings settings, bool enableAutoRefresh = false, bool noCapo = false)
+        public string getHtml(DisplayAndPrintSettings settings, bool enableAutoRefresh = false, bool noCapo = false, bool preferFlats = false)
         {
 
             var songClone = (Song)this.MemberwiseClone();
+
+            // force flats to show
+            if (preferFlats)
+            {
+                songClone.capoUp();
+                songClone.capoDown(preferFlats);
+            }
 
             // Sometimes we want to capo removed from the song (e.g. for the bass guitarist or pianst)
             if (noCapo && songClone.Capo > 0)
             {
                 while (songClone.Capo > 0)
-                    songClone.capoDown();
+                    songClone.capoDown(preferFlats);
             }
 
             Export.ExportToHtml htmlExporter = new Export.ExportToHtml(songClone, settings);

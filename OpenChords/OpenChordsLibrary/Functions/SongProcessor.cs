@@ -83,10 +83,10 @@ namespace OpenChords.Functions
 		/// </summary>
 		/// <param name="song"></param>
 		/// <returns></returns>
-		public static void transposeKeyUp(Song song)
+		public static void transposeKeyUp(Song song, bool? preferFlats = null)
 		{
 	        var songVerses = SongVerse.getSongVersesNoOrder(song);
-            bool preferFlats = Settings.GlobalApplicationSettings.PreferFlats;
+            preferFlats = preferFlats ?? Settings.GlobalApplicationSettings.PreferFlats;
             //transpose each chord line
             foreach (var songVerse in songVerses)
             {
@@ -94,7 +94,7 @@ namespace OpenChords.Functions
                 {
                     var isChord = songVerse.IsChord[i];
                     if (isChord)
-                        songVerse.Lyrics[i] = tranposeLine(songVerse.Lyrics[i], preferFlats);
+                        songVerse.Lyrics[i] = tranposeLine(songVerse.Lyrics[i], preferFlats.Value);
                 }
             }
 
