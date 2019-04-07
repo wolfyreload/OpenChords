@@ -6,6 +6,7 @@
 * Fixed: When changing song Key all listening devices should refresh current song
 * Improvement: Add option of prefer flats to show flats instead on sharps from web server
 * Fixed: Web server doesn't change song when clicking on a song from the Set list
+* Improvement: Change export to list functionality to use xlsx rather than csv
 
 # OpenChords v2.4.2 #
 
