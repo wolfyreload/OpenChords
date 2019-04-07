@@ -1,6 +1,7 @@
 # OpenChords v2.4.3 #
 
 * Fixed: Disabled tabs in the lyrics and notes editor because they do not always render as expected
+* Improvement: Song section detector now detects "Instrumental" as a music interlude
 
 # OpenChords v2.4.2 #
 
