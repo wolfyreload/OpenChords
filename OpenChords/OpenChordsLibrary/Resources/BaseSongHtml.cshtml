@@ -4,6 +4,7 @@
 
 @{
     var songOrientationSetting = Model.Settings.SongOrientation;
+    bool isTablet = Model.Settings.settingsType == DisplayAndPrintSettingsType.TabletSettings;
     string songOrientation = (songOrientationSetting == null || songOrientationSetting == "Horizontal") ? "inline-block" : "table";
 
     List<Song> songs = Model.Set.songList;
@@ -433,13 +434,49 @@ body {
     text-align: right;
     width: 42.5%
 }
+
+.button {
+    background-color: @Model.Settings.ChordFormat.FontColorHex;
+    border: 1px solid green;
+    color: white;
+    padding: 61px 0px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    cursor: pointer;
+    width: 65px;
+    display: block;
+    font-size: 2em;
+}
+
+
+.btn-group .button:hover {
+    background-color: #3e8e41;
+}
+
+.tablet-navigation-up {
+    position: fixed;
+    right: 2px;
+    top: 2px;
+}
+
+.tablet-navigation-down {
+    position: fixed;
+    right: 2px;
+    bottom: 2px;
+}
+
+.songBody {
+    padding-right: @(isTablet ? "45px" : "0px");
+}
     </style>
 
     <meta charset="utf-8">
     <title>@Model.Title</title>
 </head>
 <body id="body">
-
+    <div class="songBody">
     @for (int i = 0; i < songs.Count; i++)
     {
         var song = songs[i];
@@ -509,6 +546,16 @@ body {
 
 
         }
+    }
+    </div>
+    @if (isTablet)
+    {
+        <div class="tablet-navigation-up">
+            <button class="button" ontouchstart="scrollUp()" onclick="scrollUp();">&uarr;</button>
+        </div>
+        <div class="tablet-navigation-down">
+            <button class="button" ontouchstart="scrollDown()" onclick="scrollDown();">&darr;</button>
+        </div>
     }
 
     <script type="text/javascript">

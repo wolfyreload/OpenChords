@@ -1,3 +1,7 @@
+# OpenChords v2.4.4 #
+
+* Improvement: Add navigation buttons for Tablet mode
+
 # OpenChords v2.4.3 #
 
 * Fixed: Disabled tabs in the lyrics and notes editor because they do not always render as expected
