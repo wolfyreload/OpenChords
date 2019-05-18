@@ -4,6 +4,7 @@ using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.IO;
+using System.IO.Compression;
 using System.Linq;
 using System.Net;
 using System.Text;
@@ -85,7 +86,9 @@ namespace OpenChords.Functions
         private void showCurrentSong(HttpRequestEventArgs e)
         {
             DisplayAndPrintSettings displayAndPrintSettings = getDisplaySettingsOption(e);
-            using (var writer = new StreamWriter(e.Response.OutputStream))
+            e.Response.Headers.Add("Content-Encoding", "gzip");
+            using (var zipWriter = new GZipStream(e.Response.OutputStream, CompressionMode.Compress))
+            using (var writer = new StreamWriter(zipWriter))
             {
                 if (CurrentSong == null)
                 {
@@ -118,7 +121,9 @@ namespace OpenChords.Functions
         private void showCurrentSet(HttpRequestEventArgs e)
         {
             DisplayAndPrintSettings displayAndPrintSettings = getDisplaySettingsOption(e);
-            using (var writer = new StreamWriter(e.Response.OutputStream))
+            e.Response.Headers.Add("Content-Encoding", "gzip");
+            using (var zipWriter = new GZipStream(e.Response.OutputStream, CompressionMode.Compress))
+            using (var writer = new StreamWriter(zipWriter))
             {
                 if (CurrentSet == null)
                 {
