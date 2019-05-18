@@ -2,6 +2,7 @@
 
 * Improvement: Add navigation buttons for Tablet mode
 * Fixed: Removed swipe scroll as it didn't work correctly
+* Fixed: Improve song spacing in Export to Tablet >> Current Set option
 
 # OpenChords v2.4.3 #
 
