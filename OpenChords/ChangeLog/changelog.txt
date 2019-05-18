@@ -1,6 +1,7 @@
 # OpenChords v2.4.4 #
 
 * Improvement: Add navigation buttons for Tablet mode
+* Fixed: Removed swipe scroll as it didn't work correctly
 
 # OpenChords v2.4.3 #
 
