@@ -476,36 +476,8 @@ body {
                 <div class="title-right">@song.SongMetaDataLayoutBottom.RightMetadata</div>
             </div>
             }
-            @if (verses.Count() > 0)
-            {
-                var verse = verses[0];
-                <div class="DisplaySongVerse">
-                    <div class="DisplayLineVerseHeading">@verse.FullHeaderName</div>
-                    <div class="DisplayLineVerseLyrics">
-                    @for (int j = 0; j < verse.Lyrics.Count; j++)
-                    {
-                        string printFriendlyLyricLine = verse.Lyrics[j].TrimEnd().Replace(" ", "&nbsp;");
-                        if (verse.IsChord[j] && (Model.Settings.ShowChords ?? false))
-                        {
-                            <p class="DisplayLineChord">@Raw(printFriendlyLyricLine)</p>
-                        }
-                        else if (!verse.IsChord[j] && (Model.Settings.ShowLyrics ?? false))
-                        {
-                            <p class="DisplayLineLyrics">@Raw(printFriendlyLyricLine)</p>
-                        }
-                    }
-                    </div>
-                    @if (Model.Settings.ShowNotes ?? false)
-                    {
-                        <div class="DisplayLineVerseNotes">
-                            @Raw(verse.Notes.TrimEnd().Replace("\r\n", "<br>"))
-                        </div>
-                    }
-                </div>    
-            } 
-
         </div>
-        for (int v=1;v<verses.Count(); v++)
+        for (int v=0;v<verses.Count(); v++)
         {
             counter++;
             var verse = verses[v];

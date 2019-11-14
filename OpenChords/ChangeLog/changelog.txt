@@ -4,6 +4,7 @@
 * Fixed: Removed swipe scroll as it didn't work correctly
 * Fixed: Improve song spacing in Export to Tablet >> Current Set option
 * Improvement: Change encoding to gzip for embedded web server to improve performance
+* Fixed: First line in song viewer displays multiple song elements again
 
 # OpenChords v2.4.3 #
 
