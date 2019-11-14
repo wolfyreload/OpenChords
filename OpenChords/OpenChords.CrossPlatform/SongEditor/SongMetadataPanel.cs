@@ -377,6 +377,18 @@ namespace OpenChords.CrossPlatform.SongEditor
                 return false;
             }
 
+            if (txtTitle.Text.Contains("\\"))
+            {
+                Helpers.PopupMessages.ShowErrorMessage(this, "Song title cannot contain '\\' character");
+                return false;
+            }
+
+            if (txtTitle.Text.Contains("/"))
+            {
+                Helpers.PopupMessages.ShowErrorMessage(this, "Song title cannot contain '/' character");
+                return false;
+            }
+
             string originalSongName = (string.IsNullOrWhiteSpace(CurrentSong.SongSubFolder)) 
                                         ? CurrentSong.title : $"{CurrentSong.SongSubFolder}/{CurrentSong.title}";
             string newSongName = (string.IsNullOrWhiteSpace(txtSubFolder.Text))
