@@ -3,6 +3,7 @@
 * Fixed: Upgraded project dependencies to latest versions
 * Fixed: Upgraded build dependencies such as cake, inno.tools and visual studio to latest version
 * Improvement: Replace depreciated package EPPlus with NPOI for exporting song list to xlsx format
+* Fixed: Minor build improvements
 
 # OpenChords v2.4.4 #
 

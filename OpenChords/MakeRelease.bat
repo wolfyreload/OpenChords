@@ -10,8 +10,10 @@ xcopy  /Y /E .\OpenChords.CrossPlatform.Executable\bin\Release\*    .\Staging\Op
 xcopy /Y .\settings.xml .\Staging\OpenChords\App
 
 ::Make 7zip files for portable version
-7za.exe a -tzip .\Release\OpenChords.Portable.zip .\Staging\* -mx9
-7za.exe a -t7z .\Release\OpenChords.Portable.7z .\Staging\* -mx9 -ms=on -m0=lzma
+git describe --tags > version.txt
+set /p gitVersion=<version.txt
+7za.exe a -tzip .\Release\OpenChords.Portable.%gitVersion%.zip .\Staging\* -mx9
+7za.exe a -t7z .\Release\OpenChords.Portable.%gitVersion%.7z .\Staging\* -mx9 -ms=on -m0=lzma
 
 ::Copy readme file for sourceforge
 copy /Y .\ChangeLog\changelog.txt .\Release\README.txt 

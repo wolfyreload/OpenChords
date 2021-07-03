@@ -116,3 +116,4 @@ OpenChords/Manual/help.html
 OpenChords/.vs/
 OpenChords/OpenChords.Web/Data/Settings/
 tools/
+/OpenChords/version.txt
