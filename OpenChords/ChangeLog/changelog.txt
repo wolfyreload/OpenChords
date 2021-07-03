@@ -1,3 +1,7 @@
+# OpenChords v2.4.5 #
+
+* Fixed: Upgraded project dependencies to latest versions
+
 # OpenChords v2.4.4 #
 
 * Improvement: Add navigation buttons for Tablet mode
