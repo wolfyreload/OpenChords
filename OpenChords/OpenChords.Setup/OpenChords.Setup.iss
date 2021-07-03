@@ -5,7 +5,7 @@
 AppName=OpenChords
 UninstallDisplayName=OpenChords
 AppVersion={#AppVersion}
-DefaultDirName={pf}\OpenChords
+DefaultDirName={commonpf}\OpenChords
 DefaultGroupName=OpenChords
 UninstallDisplayIcon={app}\OpenChords.exe
 Compression=lzma2
