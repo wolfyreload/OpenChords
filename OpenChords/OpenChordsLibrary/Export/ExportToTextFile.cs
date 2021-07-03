@@ -1,4 +1,6 @@
-﻿using OfficeOpenXml;
+﻿using NPOI.SS.UserModel;
+using NPOI.SS.Util;
+using NPOI.XSSF.UserModel;
 using OpenChords.Entities;
 using System;
 using System.Collections.Generic;
@@ -28,46 +30,53 @@ namespace OpenChords.Export
 
         private static void exportListToFile(List<Song> listOfSongs, string nameOfFile, string setName = null)
         {
-            using (ExcelPackage excelPackage = new ExcelPackage())
+            IWorkbook workbook = new XSSFWorkbook();
+            var worksheet = workbook.CreateSheet("SongList");
+
+            // Set the width of columns
+            worksheet.SetColumnWidth(0, 25 * 256);
+            worksheet.SetColumnWidth(1, 40 * 256);
+            worksheet.SetColumnWidth(2, 40 * 256);
+            worksheet.SetColumnWidth(3, 11 * 256);
+            worksheet.SetColumnWidth(4, 11 * 256);
+            worksheet.SetColumnWidth(5, 11 * 256);
+            worksheet.SetColumnWidth(6, 40 * 256);
+            worksheet.SetColumnWidth(7, 11 * 256);
+
+            // Headings
+            IRow headingRow = worksheet.CreateRow(0);
+            if (!string.IsNullOrWhiteSpace(setName))
             {
-                ExcelWorksheet worksheet = excelPackage.Workbook.Worksheets.Add("SongList");
+                headingRow.CreateCell(0).SetCellValue(setName);
+            }
+            headingRow.CreateCell(1).SetCellValue("Sub Folder");
+            headingRow.CreateCell(2).SetCellValue("Song Title");
+            headingRow.CreateCell(3).SetCellValue("Alternative Title");
+            headingRow.CreateCell(4).SetCellValue("Reference");
+            headingRow.CreateCell(5).SetCellValue("Key & Capo");
+            headingRow.CreateCell(6).SetCellValue("Order");
+            headingRow.CreateCell(7).SetCellValue("CCLI");
+            
 
-                // Name
-                if (!string.IsNullOrWhiteSpace(setName))
-                {
-                    worksheet.Cells["A1"].Value = setName;
-                    worksheet.Row(1).Style.Font.Size = 14;
-                    worksheet.Row(1).Style.Font.Bold = true;
-                }
+            // Song content
+            int contentRow = 1;
+            foreach (Song song in listOfSongs)
+            {
+                var songContentRow = worksheet.CreateRow(contentRow);
+                songContentRow.CreateCell(1).SetCellValue(song.SongSubFolder);
+                songContentRow.CreateCell(2).SetCellValue(song.title);
+                songContentRow.CreateCell(3).SetCellValue(song.aka);
+                songContentRow.CreateCell(4).SetCellValue(song.hymn_number);
+                songContentRow.CreateCell(5).SetCellValue(song.getKeyAndCapo());
+                songContentRow.CreateCell(6).SetCellValue(song.presentation);
+                songContentRow.CreateCell(7).SetCellValue(song.ccli);
+                contentRow++;
+            }
 
-                // Headings
-                worksheet.Cells["A3"].Value = "Song Title";
-                worksheet.Cells["B3"].Value = "Alternative Title";
-                worksheet.Cells["C3"].Value = "Reference";
-                worksheet.Cells["D3"].Value = "Key & Capo";
-                worksheet.Cells["E3"].Value = "Order";
-                worksheet.Cells["F3"].Value = "Sub Folder";
-                worksheet.Cells["G3"].Value = "CCLI";
-                worksheet.Row(3).Style.Font.Bold = true;
-
-                // Song content
-                int startRow = 4;
-                foreach (Song song in listOfSongs)
-                {
-                    worksheet.Cells[startRow, 1].Value = song.title;
-                    worksheet.Cells[startRow, 2].Value = song.aka;
-                    worksheet.Cells[startRow, 3].Value = song.hymn_number;
-                    worksheet.Cells[startRow, 4].Value = song.getKeyAndCapo();
-                    worksheet.Cells[startRow, 5].Value = song.presentation;
-                    worksheet.Cells[startRow, 6].Value = song.SongSubFolder;
-                    worksheet.Cells[startRow, 7].Value = song.ccli;
-
-                    startRow++;
-                }
-
-                worksheet.Cells[worksheet.Dimension.Address].AutoFitColumns();
-
-                excelPackage.SaveAs(new FileInfo(nameOfFile));
+            using (FileStream streamWriter = File.Create(nameOfFile))
+            {
+                workbook.Write(streamWriter);
+                streamWriter.Close();
             }
         }
     }
