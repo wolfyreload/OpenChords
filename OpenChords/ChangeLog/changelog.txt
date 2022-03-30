@@ -2,6 +2,7 @@
 
 * Improvement: Removed assumptions that I is for intro, P is for Prechorus etc
 * Fixed: Bump SharpZipLib from 1.2.0 to 1.3.3 in /OpenChords/OpenChordsLibrary
+* Fixed: Auto formatting converting parts of word to a tag e.g. "bending" converted to B[E] and "Stagger" converted to S[T]ger
 
 # OpenChords v2.4.5 #
 

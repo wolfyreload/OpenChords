@@ -32,16 +32,31 @@ namespace OpenChords.Functions
                 if (line.Contains((char)65533))
                     line = line.Replace((char)65533, "'"[0]);
 
-                line = regexReplaceFix(line, @"\[?CHORUS\s?(\d*)\]?\s*:?", "[C$1] ");
-                line = regexReplaceFix(line, @"\[?BRIDGE\s?(\d*)\]?\s*:?", "[B$1] ");
-                line = regexReplaceFix(line, @"\[?INTRO\s?(\d*)\]?\s*:?", "[I$1] ");
-                line = regexReplaceFix(line, @"\[?Interlude\s?(\d*)\]?\s*:?", "[I$1] ");
-                line = regexReplaceFix(line, @"\[?Instrumental\s?(\d*)\]?\s*:?", "[I$1] ");
-                line = regexReplaceFix(line, @"\[?Verse\s?(\d*)\]?\s*:?", "[V$1] ");
-                line = regexReplaceFix(line, @"\[?Refrain\s?(\d*)\]?\s*:?", "[R$1] ");
-                line = regexReplaceFix(line, @"\[?Ending\s?(\d*)\]?\s*:?", "[E$1] ");
-                line = regexReplaceFix(line, @"\[?Tag\s?(\d*)\]?\s*:?", "[T$1] ");
-                line = regexReplaceFix(line, @"\[?Outro\s?(\d*)\]?\s*:?", "[E$1] ");
+                // shorten [CHORUS1] to [C1]
+                // [VERSE 3] to [V3]
+                line = regexReplaceFix(line, @"\[CHORUS\s?(\d*)\]:?", "[C$1] ");
+                line = regexReplaceFix(line, @"\[BRIDGE\s?(\d*)\]:?", "[B$1] ");
+                line = regexReplaceFix(line, @"\[INTRO\s?(\d*)\]:?", "[I$1] ");
+                line = regexReplaceFix(line, @"\[Interlude\s?(\d*)\]:?", "[I$1] ");
+                line = regexReplaceFix(line, @"\[Instrumental\s?(\d*)\]:?", "[I$1] ");
+                line = regexReplaceFix(line, @"\[Verse\s?(\d*)\]:?", "[V$1] ");
+                line = regexReplaceFix(line, @"\[Refrain\s?(\d*)\]:?", "[R$1] ");
+                line = regexReplaceFix(line, @"\[Ending\s?(\d*)\]:?", "[E$1] ");
+                line = regexReplaceFix(line, @"\[Tag\s?(\d*)\]:?", "[T$1] ");
+                line = regexReplaceFix(line, @"\[Outro\s?(\d*)\]:?", "[E$1] ");
+
+                // if there is a CHORUS 1 or a VERSE 2 etc on a line with nothing else then change to a tag
+                line = regexReplaceFix(line, @"^\s?CHORUS\s?(\d*)\s*$:?", "[C$1] ");
+                line = regexReplaceFix(line, @"^\s?BRIDGE\s?(\d*)\s*$:?", "[B$1] ");
+                line = regexReplaceFix(line, @"^\s?INTRO\s?(\d*)\s*$:?", "[I$1] ");
+                line = regexReplaceFix(line, @"^\s?Interlude\s?(\d*)\s*$:?", "[I$1] ");
+                line = regexReplaceFix(line, @"^\s?Verse\s?(\d*)\s*$:?", "[V$1] ");
+                line = regexReplaceFix(line, @"^\s?Refrain\s?(\d*)\s*$:?", "[R$1] ");
+                line = regexReplaceFix(line, @"^\s?End\s?(\d*)\s*$:?", "[E$1] ");
+                line = regexReplaceFix(line, @"^\s?Ending\s?(\d*)\s*$:?", "[E$1] ");
+                line = regexReplaceFix(line, @"^\s?Tag\s?(\d*)\s*$:?", "[T$1] ");
+                line = regexReplaceFix(line, @"^\s?Outro\s?(\d*)\s*$:?", "[E$1] ");
+
                 if (!line.Contains("["))
                     sbLyrics.Append(line + "\n");
                 else
