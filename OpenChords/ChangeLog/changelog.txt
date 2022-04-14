@@ -1,3 +1,7 @@
+# OpenChords v2.4.7 #
+
+* Reverted: Removed assumptions that I is for intro, P is for Prechorus etc
+
 # OpenChords v2.4.6 #
 
 * Improvement: Removed assumptions that I is for intro, P is for Prechorus etc
