@@ -36,7 +36,7 @@ namespace OpenChords.Tests
             int expectedVersesCount = import2ExpectedResult.Count(c => c == '[');
             int actualVersesCount = imported2Result.Count(c => c == '[');
             Assert.AreEqual(expectedVersesCount, actualVersesCount);
-            Assert.AreEqual("V1 V2 V3 V4 C", import2Song.presentation.Trim());
+            Assert.AreEqual("V1 V2 V3 V4 C S1 T", import2Song.presentation.Trim());
         }
 
         [TestMethod]
@@ -45,7 +45,7 @@ namespace OpenChords.Tests
             string input = TestResources.Import3Input;
             var import3Song = new Song() { lyrics = input };
             import3Song.fixFormatting();
-            Assert.AreEqual("V1 C V2 C V3 C V4 C", import3Song.presentation.Trim());
+            Assert.AreEqual("V1 C V2 C V3 C V4 C S T", import3Song.presentation.Trim());
         }
 
 

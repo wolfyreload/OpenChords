@@ -44,6 +44,7 @@ namespace OpenChords.Functions
                 line = regexReplaceFix(line, @"\[Ending\s?(\d*)\]:?", "[E$1] ");
                 line = regexReplaceFix(line, @"\[Tag\s?(\d*)\]:?", "[T$1] ");
                 line = regexReplaceFix(line, @"\[Outro\s?(\d*)\]:?", "[E$1] ");
+                line = regexReplaceFix(line, @"\[Solo\s?(\d*)\]:?", "[S$1] ");
 
                 // if there is a CHORUS 1 or a VERSE 2 etc on a line with nothing else then change to a tag
                 line = regexReplaceFix(line, @"^\s?CHORUS\s?(\d*)\s*$:?", "[C$1] ");
@@ -56,6 +57,7 @@ namespace OpenChords.Functions
                 line = regexReplaceFix(line, @"^\s?Ending\s?(\d*)\s*$:?", "[E$1] ");
                 line = regexReplaceFix(line, @"^\s?Tag\s?(\d*)\s*$:?", "[T$1] ");
                 line = regexReplaceFix(line, @"^\s?Outro\s?(\d*)\s*$:?", "[E$1] ");
+                line = regexReplaceFix(line, @"^\s?Solo\s?(\d*)\s*$:?", "[S$1] ");
 
                 if (!line.Contains("["))
                     sbLyrics.Append(line + "\n");

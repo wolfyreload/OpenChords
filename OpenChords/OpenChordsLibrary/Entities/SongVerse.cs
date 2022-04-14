@@ -111,14 +111,16 @@ namespace OpenChords.Entities
         {
             get
             {
-            StringBuilder oldHeader = new StringBuilder(Header);
-            oldHeader.Replace("V", "Verse ");
-            oldHeader.Replace("C", "Chorus ");
-            oldHeader.Replace("E", "Ending ");
-            oldHeader.Replace("I", "Interlude ");
-            oldHeader.Replace("B", "Bridge ");
-            oldHeader.Replace("P", "Pre-Chorus ");
-            return oldHeader.ToString();
+                StringBuilder oldHeader = new StringBuilder(Header);
+                oldHeader.Replace("V", "Verse ");
+                oldHeader.Replace("C", "Chorus ");
+                oldHeader.Replace("E", "Ending ");
+                oldHeader.Replace("I", "Intro ");
+                oldHeader.Replace("B", "Bridge ");
+                oldHeader.Replace("P", "Pre-Chorus ");
+                oldHeader.Replace("S", "Solo ");
+                oldHeader.Replace("T", "Tag ");
+                return oldHeader.ToString();
             }
         }
 

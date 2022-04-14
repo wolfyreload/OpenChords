@@ -1,6 +1,7 @@
 # OpenChords v2.4.7 #
 
 * Reverted: Removed assumptions that I is for intro, P is for Prechorus etc
+* Improvement: Added "S" for "Solo" and changed "I" to be "Intro" in headings
 
 # OpenChords v2.4.6 #
 
