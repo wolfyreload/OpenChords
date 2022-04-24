@@ -1,3 +1,7 @@
+# OpenChords v2.4.8 #
+
+* Fixed: Upgrade to .net 4.8 as 4.5 is no longer supported
+
 # OpenChords v2.4.7 #
 
 * Reverted: Removed assumptions that I is for intro, P is for Prechorus etc

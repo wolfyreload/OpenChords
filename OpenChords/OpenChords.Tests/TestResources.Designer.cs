@@ -19,7 +19,7 @@ namespace OpenChords.Tests {
     // class via a tool like ResGen or Visual Studio.
     // To add or remove a member, edit your .ResX file then rerun ResGen
     // with the /str option, or rebuild your VS project.
-    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Resources.Tools.StronglyTypedResourceBuilder", "15.0.0.0")]
+    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Resources.Tools.StronglyTypedResourceBuilder", "17.0.0.0")]
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
     [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
     internal class TestResources {
@@ -119,7 +119,7 @@ namespace OpenChords.Tests {
         ///  D        D7       G       D
         ///I once was lost but now I&apos;m found,
         ///    Bm        A     G   D
-        ///was blind but now I see.
+        ///was blind but stagger now I see.
         ///
         ///     D          D7        G        D
         ///Twas grace that taught my heart to fear,
@@ -128,7 +128,7 @@ namespace OpenChords.Tests {
         ///    D        D7       G       D
         ///How precious did that grace appear
         ///    Bm     A       G      D
-        ///the hour I first belie [rest of string was truncated]&quot;;.
+        ///the hour I fir [rest of string was truncated]&quot;;.
         /// </summary>
         internal static string Import2Input {
             get {
@@ -177,16 +177,18 @@ namespace OpenChords.Tests {
         ///Twas grace that taught my heart to fear,
         ///    Bm       E       A      A7
         ///and grace my fears relieved;
-        ///    D        D7       G       D
-        ///How precious did that grace appear
-        ///    Bm     A       G      D
-        ///the hour I first believed!
         ///
         ///[CHORUS]
         /// My chains are gone
         ///
         ///[Verse 3]
-        ///        D     [rest of string was truncated]&quot;;.
+        ///        D    D7       G
+        ///Through many dangers, toils,
+        ///    D        Bm     E     A    A7
+        ///and snares I have already come;
+        ///
+        ///[CHORUS]
+        /// My  [rest of string was truncated]&quot;;.
         /// </summary>
         internal static string Import3Input {
             get {
