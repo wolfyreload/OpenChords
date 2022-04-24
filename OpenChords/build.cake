@@ -19,7 +19,7 @@ Task("Build")
     MSBuild(solutionName, settings =>
         settings.SetConfiguration(configuration)
             .SetVerbosity(Verbosity.Minimal)
-            .UseToolVersion(MSBuildToolVersion.VS2019)
+            .UseToolVersion(MSBuildToolVersion.VS2022)
     );
 });
 

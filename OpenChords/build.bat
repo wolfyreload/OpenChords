@@ -3,7 +3,8 @@ rmdir /Q /S OpenChords.CrossPlatform.Executable\Bin\Release
 rmdir /Q /S OpenChords.CrossPlatform.Executable\Bin\Release
 
 ::build application
-powershell -File build.ps1
+dotnet tool restore
+dotnet cake
 
 ::cleanup pdb and xml files
 del /S OpenChords.CrossPlatform.Executable\Bin\Release\*.pdb
