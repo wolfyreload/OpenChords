@@ -7,7 +7,7 @@ call build.bat
 xcopy  /Y /E .\OpenChords.CrossPlatform.Executable\bin\Release\*    .\Staging\OpenChords\App\
 
 ::copy the settings files
-xcopy /Y .\settings.xml .\Staging\OpenChords\App
+xcopy /Y .\settings.xml .\Staging\OpenChords\App\
 
 ::Make 7zip files for portable version
 git describe --tags > version.txt
@@ -19,7 +19,7 @@ set /p gitVersion=<version.txt
 copy /Y .\ChangeLog\changelog.txt .\Release\README.txt 
 
 ::Make Installer
-SET InnoPath="packages\Tools.InnoSetup.6.2.0\tools\ISCC.exe"
+SET InnoPath="packages\Tools.InnoSetup.6.4.3\tools\ISCC.exe"
 %InnoPath% OpenChords.Setup\OpenChords.Setup.iss 
 move OpenChords.Setup\Output\* .\Release\
 
