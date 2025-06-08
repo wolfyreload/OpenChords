@@ -389,12 +389,12 @@ namespace OpenChords.CrossPlatform.SongEditor
                 return false;
             }
 
-            string originalSongName = (string.IsNullOrWhiteSpace(CurrentSong.SongSubFolder)) 
+            string originalSongName = (string.IsNullOrWhiteSpace(CurrentSong.SongSubFolder))
                                         ? CurrentSong.title : $"{CurrentSong.SongSubFolder}/{CurrentSong.title}";
             string newSongName = (string.IsNullOrWhiteSpace(txtSubFolder.Text))
                                     ? txtTitle.Text : $"{txtSubFolder.Text}/{txtTitle.Text}";
             bool wasSongNameChanged = !string.Equals(originalSongName, newSongName, StringComparison.InvariantCultureIgnoreCase);
-            
+
             //Check if there is already a song with the name chosen
             bool doesSongExist = Song.Exists(newSongName);
             if (doesSongExist && wasSongNameChanged)
@@ -407,15 +407,21 @@ namespace OpenChords.CrossPlatform.SongEditor
             if (wasSongNameChanged)
                 CurrentSong.deleteSong();
 
-            // Save the song and 
-            updateSongObjectFromGui();
-            bool isNewSong = CurrentSong.saveSong();
+            bool isNewSong = SaveSongInternal();
 
             //notify the user
             Helpers.PopupMessages.ShowInformationMessage(this, $"Song '{CurrentSong.SongTitleIncludingSubFolder}' saved");
 
             SongChanged = false;
 
+            return isNewSong;
+        }
+
+        public bool SaveSongInternal()
+        {
+            // Save the song and 
+            updateSongObjectFromGui();
+            bool isNewSong = CurrentSong.saveSong();
             return isNewSong;
         }
 
@@ -432,6 +438,11 @@ namespace OpenChords.CrossPlatform.SongEditor
                     CurrentSong.revertToSaved(); //otherwise we want to revert the song to its original state
                 }
             }
+            ChangeToSongWithoutSave(newSong);
+        }
+
+        public void ChangeToSongWithoutSave(Song newSong)
+        {
             CurrentSong = newSong;
             refreshPanel();
         }

@@ -120,8 +120,10 @@ namespace OpenChords.CrossPlatform
             menuItemSongRefeshList.Executed += (s, e) => refreshSongList();
             var menuItemShowSongInExplorer = MenuHelper.GetCommand("Show In Explorer", Graphics.ImageExplore);
             menuItemShowSongInExplorer.Executed += (s, e) => ucSongListPanel.showSongInExplorer();
+            var menuItemAutoFormatAllSongs = MenuHelper.GetCommand("Auto Format All Songs", Graphics.ImageRepairSong);
+            menuItemAutoFormatAllSongs.Executed += (s, e) => FixFormattingAllSongs();
 
-            var menuItemSongFileOperations = new ButtonMenuItem { Text = "File Operations", Items = { menuItemNewSong, menuItemSaveSong, menuItemDeleteSong, menuItemShowSongInExplorer }, Image = Graphics.ImageFileOperations };
+            var menuItemSongFileOperations = new ButtonMenuItem { Text = "File Operations", Items = { menuItemNewSong, menuItemSaveSong, menuItemDeleteSong, menuItemShowSongInExplorer, menuItemAutoFormatAllSongs }, Image = Graphics.ImageFileOperations };
             var menuItemKey = new ButtonMenuItem { Text = "Song Key", Items = { menuItemSongIncreaseKey, menuItemSongDecreaseKey }, Image = Graphics.ImageKey };
             var menuItemCapo = new ButtonMenuItem { Text = "Song Capo", Items = { menuItemSongIncreaseCapo, menuItemSongDecreaseCapo }, Image = Graphics.ImageCapo };
 
@@ -376,6 +378,21 @@ namespace OpenChords.CrossPlatform
                 ucSetListPanel.refreshSongList();
             }
         }
+
+        private void FixFormattingAllSongs()
+        {
+            var originalSong = ucSongMetaDataPanel.CurrentSong;
+            foreach (var songString in Song.listOfAllSongs())
+            {
+                var song = Song.loadSong(songString);
+                ucSongMetaDataPanel.ChangeToSongWithoutSave(song);
+                ucSongMetaDataPanel.FixFormatting();
+                ucSongMetaDataPanel.SaveSongInternal();
+            }
+            ucSongMetaDataPanel.ChangeToSongWithoutSave(originalSong);
+            PopupMessages.ShowInformationMessage(this, "Auto formatted all songs");
+        }
+
 
         void showManual()
         {
