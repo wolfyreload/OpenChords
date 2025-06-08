@@ -1,3 +1,11 @@
+# OpenChords v2.4.9 #
+
+* Fixed: Song/Set export to xlsx was failing
+* Improvement: Upgrade to .net framework 4.8.1
+* Improvement: Upgraded depreciated nuget packages
+* Fixed: Build scripts were broken
+* Feature: Add button to auto format all songs
+
 # OpenChords v2.4.8 #
 
 * Fixed: Upgrade to .net 4.8 as 4.5 is no longer supported
